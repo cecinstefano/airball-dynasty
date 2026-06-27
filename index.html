@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Airball Dynasty League</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --purple-deep: #2D0A4E;
+    --purple-mid: #4B1A7A;
+    --purple-light: #6B2FA0;
+    --orange: #F97316;
+    --orange-dark: #EA6A08;
+    --black: #0A0A0A;
+    --white: #FFFFFF;
+    --gray-bg: #F1F1F5;
+    --gray-card: #FAFAFA;
+    --gray-border: #E2E2E8;
+    --gray-text: #6B6B7B;
+    --gray-dark: #1A1A2E;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--gray-bg);
+    color: var(--black);
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, .oswald { font-family: 'Oswald', sans-serif; }
+
+  /* TOP BAR */
+  .topbar {
+    background: var(--black);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 38px;
+    border-bottom: 1px solid #1f1f2e;
+  }
+  .topbar-links { display: flex; gap: 0; }
+  .topbar-link {
+    color: #aaa;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 0 14px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+    background: none;
+    transition: color 0.2s, background 0.2s;
+    font-family: 'Oswald', sans-serif;
+    border-right: 1px solid #222;
+  }
+  .topbar-link:first-child { border-left: 1px solid #222; }
+  .topbar-link:hover, .topbar-link.active { color: var(--orange); background: #111; }
+  .topbar-right { color: #555; font-size: 11px; display: flex; align-items: center; gap: 8px; }
+  .topbar-season { color: var(--orange); font-weight: 700; font-family: 'Oswald', sans-serif; letter-spacing: 1px; }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, var(--purple-deep) 0%, #1a0635 40%, var(--purple-deep) 100%);
+    padding: 0 24px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    border-bottom: 2px solid var(--orange);
+  }
+  .header-left { display: flex; align-items: center; gap: 12px; }
+  .menu-btn {
+    display: flex; flex-direction: column; gap: 4px;
+    cursor: pointer; padding: 6px; border: none; background: none;
+  }
+  .menu-btn span {
+    display: block; width: 22px; height: 2px;
+    background: white; border-radius: 2px; transition: 0.2s;
+  }
+  .menu-label { color: #aaa; font-size: 10px; letter-spacing: 2px; font-weight: 600; font-family: 'Oswald', sans-serif; }
+
+  .logo-area { display: flex; align-items: center; gap: 10px; }
+  .logo-icon {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, var(--orange) 0%, var(--orange-dark) 50%, #c45a00 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; border: 2px solid rgba(255,255,255,0.2);
+    box-shadow: 0 0 12px rgba(249,115,22,0.4);
+    overflow: hidden;
+  }
+  .logo-img { width: 100%; height: 100%; object-fit: cover; }
+  .logo-text { line-height: 1; }
+  .logo-top { font-family: 'Oswald', sans-serif; font-size: 10px; font-weight: 400; color: #aaa; letter-spacing: 3px; text-transform: uppercase; }
+  .logo-main { font-family: 'Oswald', sans-serif; font-size: 22px; font-weight: 700; color: var(--orange); letter-spacing: 1px; line-height: 1; }
+  .logo-sub { font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 500; color: #c084fc; letter-spacing: 4px; text-transform: uppercase; }
+
+  .header-right { display: flex; align-items: center; gap: 16px; }
+  .search-box {
+    display: flex; align-items: center;
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px; padding: 8px 14px; gap: 8px;
+    transition: border 0.2s;
+  }
+  .search-box:focus-within { border-color: var(--orange); }
+  .search-box input {
+    background: none; border: none; outline: none;
+    color: white; font-size: 13px; width: 220px;
+  }
+  .search-box input::placeholder { color: rgba(255,255,255,0.35); }
+  .user-area { display: flex; align-items: center; gap: 8px; }
+  .user-avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple-light), var(--orange));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: white; font-family: 'Oswald', sans-serif;
+    border: 2px solid var(--orange);
+  }
+  .user-name { color: white; font-size: 13px; font-weight: 500; }
+  .user-greeting { color: #aaa; font-size: 11px; }
+
+  /* MATCHUPS STRIP */
+  .matchups-strip {
+    background: var(--gray-dark);
+    padding: 0 24px;
+    border-bottom: 1px solid #2a2a3e;
+  }
+  .matchups-scroll {
+    display: flex; gap: 0; overflow-x: auto; padding: 0;
+    scrollbar-width: none;
+  }
+  .matchups-scroll::-webkit-scrollbar { display: none; }
+
+  .week-card {
+    min-width: 130px; padding: 14px 16px;
+    border-right: 1px solid #2a2a3e;
+    display: flex; flex-direction: column; justify-content: center; gap: 8px;
+  }
+  .week-label { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; color: var(--orange); }
+  .week-btn {
+    background: var(--orange); color: white; border: none;
+    font-family: 'Oswald', sans-serif; font-size: 11px; font-weight: 600;
+    letter-spacing: 1px; padding: 5px 10px; border-radius: 4px; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .week-btn:hover { background: var(--orange-dark); }
+
+  .matchup-card {
+    min-width: 200px; padding: 10px 16px;
+    border-right: 1px solid #2a2a3e; cursor: pointer;
+    transition: background 0.2s;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .matchup-card:hover { background: rgba(249,115,22,0.05); }
+
+  .matchup-time {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .matchup-when { color: #888; font-size: 10px; font-weight: 600; letter-spacing: 1px; font-family: 'Oswald', sans-serif; }
+  .badge-preview { background: #2a2a3e; color: #aaa; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 3px; letter-spacing: 1px; }
+  .badge-live { background: #ef4444; color: white; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 3px; letter-spacing: 1px; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+  .matchup-teams {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  }
+  .team-mini { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+  .team-mini-icon {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: white; font-family: 'Oswald', sans-serif;
+  }
+  .team-mini-name { font-size: 9px; color: #999; text-align: center; font-weight: 600; max-width: 60px; line-height: 1.2; }
+  .vs-score { text-align: center; }
+  .score-display { font-family: 'Oswald', sans-serif; font-size: 16px; font-weight: 700; color: white; }
+  .score-period { font-size: 9px; color: var(--orange); font-weight: 600; }
+
+  /* MAIN CONTENT */
+  .main-wrap { max-width: 1280px; margin: 0 auto; padding: 24px 16px; }
+
+  .content-grid {
+    display: grid; grid-template-columns: 1fr 320px;
+    gap: 24px;
+  }
+
+  /* NEWS AREA */
+  .news-grid {
+    display: grid; grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .featured-card {
+    grid-row: 1 / 3; grid-column: 1 / 2;
+    border-radius: 16px; overflow: hidden; position: relative;
+    min-height: 400px; cursor: pointer;
+    background: linear-gradient(135deg, var(--purple-deep) 0%, #0f0520 100%);
+  }
+  .featured-bg {
+    position: absolute; inset: 0;
+    background: 
+      radial-gradient(ellipse at 70% 30%, rgba(249,115,22,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(107,47,160,0.3) 0%, transparent 50%),
+      linear-gradient(135deg, #1a0635 0%, #0a0015 100%);
+  }
+  .court-lines {
+    position: absolute; inset: 0; opacity: 0.06;
+    background-image: 
+      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.5) 40px, rgba(255,255,255,0.5) 41px),
+      repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(255,255,255,0.3) 80px, rgba(255,255,255,0.3) 81px);
+  }
+  .ball-deco {
+    position: absolute; right: -40px; top: -40px;
+    width: 220px; height: 220px; border-radius: 50%;
+    border: 3px solid rgba(249,115,22,0.2);
+    box-shadow: inset 0 0 60px rgba(249,115,22,0.1);
+  }
+  .ball-deco::after {
+    content: ''; position: absolute; inset: 20px; border-radius: 50%;
+    border: 2px solid rgba(249,115,22,0.15);
+  }
+  .featured-content {
+    position: relative; z-index: 2; height: 100%;
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 28px;
+  }
+  .featured-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--orange); color: white;
+    font-family: 'Oswald', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 2px;
+    padding: 4px 12px; border-radius: 4px; width: fit-content; margin-bottom: 12px;
+  }
+  .featured-title {
+    font-family: 'Oswald', sans-serif; font-size: 28px; font-weight: 700;
+    color: white; line-height: 1.2; margin-bottom: 16px;
+  }
+  .featured-bullets { display: flex; flex-direction: column; gap: 6px; }
+  .featured-bullet {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: rgba(255,255,255,0.75);
+  }
+  .featured-bullet::before {
+    content: ''; width: 4px; height: 4px; border-radius: 50%;
+    background: var(--orange); flex-shrink: 0;
+  }
+  .featured-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .featured-mvp { display: flex; align-items: center; gap: 8px; }
+  .mvp-icon { font-size: 18px; }
+  .mvp-label { color: rgba(255,255,255,0.5); font-size: 11px; }
+  .mvp-name { color: var(--orange); font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 14px; }
+  .featured-time { color: rgba(255,255,255,0.4); font-size: 11px; }
+
+  .side-news {
+    border-radius: 12px; overflow: hidden; position: relative;
+    min-height: 190px; cursor: pointer;
+  }
+  .side-news-bg {
+    position: absolute; inset: 0;
+  }
+  .side-news-content {
+    position: relative; z-index: 2; padding: 20px;
+    height: 100%; display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .news-cat {
+    font-family: 'Oswald', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    padding: 3px 8px; border-radius: 3px; display: inline-block; width: fit-content; margin-bottom: 8px;
+  }
+  .cat-rules { background: #7c3aed; color: white; }
+  .cat-market { background: #059669; color: white; }
+  .cat-perf { background: #2563eb; color: white; }
+  .cat-analysis { background: var(--orange); color: white; }
+  .cat-interview { background: #dc2626; color: white; }
+  .cat-draft { background: #d97706; color: white; }
+  .cat-featured { background: var(--orange); color: white; }
+
+  .side-news-title {
+    font-family: 'Oswald', sans-serif; font-size: 15px; font-weight: 700;
+    color: white; line-height: 1.3; margin-bottom: 4px;
+  }
+  .side-news-desc { font-size: 11px; color: rgba(255,255,255,0.7); }
+
+  /* SIDEBAR */
+  .sidebar { display: flex; flex-direction: column; gap: 16px; }
+
+  .sidebar-card {
+    background: white; border-radius: 14px; overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .sidebar-card-header {
+    background: linear-gradient(135deg, var(--purple-deep), var(--purple-mid));
+    padding: 14px 18px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .sidebar-card-title {
+    font-family: 'Oswald', sans-serif; font-size: 14px; font-weight: 600;
+    color: white; letter-spacing: 0.5px;
+  }
+  .sidebar-card-season { color: var(--orange); font-size: 11px; font-family: 'Oswald', sans-serif; font-weight: 600; }
+  .sidebar-card-body { padding: 0; }
+
+  /* STANDINGS TABLE */
+  .standings-table { width: 100%; border-collapse: collapse; }
+  .standings-table th {
+    padding: 8px 14px; font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    color: var(--gray-text); text-transform: uppercase; text-align: center;
+    border-bottom: 1px solid var(--gray-border); background: #fafafa;
+  }
+  .standings-table th:first-child { text-align: left; }
+  .standings-table td { padding: 9px 14px; font-size: 12px; border-bottom: 1px solid #f0f0f4; text-align: center; }
+  .standings-table td:first-child { text-align: left; }
+  .standings-table tr:last-child td { border-bottom: none; }
+  .standings-table tr:hover td { background: #f8f4ff; }
+  .standings-table tr.top3 td { background: #fdf8ff; }
+
+  .rank-num { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 13px; color: var(--gray-text); width: 16px; }
+  .rank-num.gold { color: #f59e0b; }
+  .rank-num.silver { color: #94a3b8; }
+  .rank-num.bronze { color: #cd7c2f; }
+  .team-cell { display: flex; align-items: center; gap: 8px; }
+  .team-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .team-name-small { font-weight: 600; font-size: 12px; }
+  .win { color: #059669; font-weight: 700; }
+  .loss { color: #dc2626; font-weight: 700; }
+  .pf { color: var(--purple-mid); font-weight: 600; font-size: 11px; }
+
+  /* POWER RANKINGS */
+  .power-list { padding: 8px 0; }
+  .power-item {
+    display: flex; align-items: center; gap: 10px; padding: 10px 18px;
+    border-bottom: 1px solid #f0f0f4; transition: background 0.15s; cursor: pointer;
+  }
+  .power-item:last-child { border-bottom: none; }
+  .power-item:hover { background: #f8f4ff; }
+  .power-rank { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; color: #e5e7eb; width: 24px; }
+  .power-info { flex: 1; }
+  .power-name { font-weight: 600; font-size: 13px; }
+  .power-trend { font-size: 11px; margin-top: 1px; }
+  .trend-up { color: #059669; }
+  .trend-down { color: #dc2626; }
+  .trend-same { color: #94a3b8; }
+  .power-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: white; font-family: 'Oswald', sans-serif; }
+
+  .sidebar-link-row {
+    padding: 12px 18px; border-top: 1px solid #f0f0f4;
+    display: flex; justify-content: flex-end;
+  }
+  .sidebar-link {
+    color: var(--purple-light); font-size: 12px; font-weight: 600;
+    cursor: pointer; display: flex; align-items: center; gap: 4px; text-decoration: none;
+    font-family: 'Oswald', sans-serif; letter-spacing: 0.5px; transition: color 0.2s;
+  }
+  .sidebar-link:hover { color: var(--orange); }
+
+  /* NEWS FEED */
+  .section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin: 28px 0 16px; padding-bottom: 12px;
+    border-bottom: 2px solid var(--gray-border);
+  }
+  .section-title {
+    font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; color: var(--purple-deep);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title::before {
+    content: ''; width: 4px; height: 24px; background: var(--orange); border-radius: 2px;
+  }
+  .section-more { color: var(--purple-light); font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'Oswald', sans-serif; letter-spacing: 0.5px; }
+  .section-more:hover { color: var(--orange); }
+
+  .news-feed { display: flex; flex-direction: column; gap: 0; }
+  .feed-item {
+    display: flex; gap: 16px; padding: 18px 0;
+    border-bottom: 1px solid var(--gray-border); cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .feed-item:last-child { border-bottom: none; }
+  .feed-item:hover { transform: translateX(4px); }
+  .feed-thumb {
+    width: 100px; height: 72px; border-radius: 10px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; overflow: hidden;
+  }
+  .feed-content { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+  .feed-top { display: flex; flex-direction: column; gap: 4px; }
+  .feed-title { font-family: 'Oswald', sans-serif; font-size: 16px; font-weight: 600; color: var(--black); line-height: 1.3; }
+  .feed-title:hover { color: var(--purple-mid); }
+  .feed-desc { font-size: 12px; color: var(--gray-text); line-height: 1.5; }
+  .feed-meta { display: flex; align-items: center; gap: 8px; }
+  .feed-time { font-size: 11px; color: #aaa; }
+
+  /* VIDEOS */
+  .videos-card {
+    background: white; border-radius: 14px; overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-top: 0;
+  }
+  .video-item {
+    display: flex; align-items: center; gap: 12px; padding: 12px 18px;
+    border-bottom: 1px solid #f0f0f4; cursor: pointer; transition: background 0.15s;
+  }
+  .video-item:last-child { border-bottom: none; }
+  .video-item:hover { background: #f8f4ff; }
+  .video-thumb {
+    width: 60px; height: 40px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; flex-shrink: 0;
+  }
+  .play-icon {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center;
+    font-size: 9px; color: var(--purple-deep); padding-left: 2px;
+  }
+  .video-info { flex: 1; }
+  .video-title { font-size: 12px; font-weight: 600; line-height: 1.3; }
+  .video-dur { font-size: 10px; color: var(--gray-text); margin-top: 2px; }
+
+  /* PAGE SECTIONS */
+  .page-section { display: none; }
+  .page-section.active { display: block; }
+
+  .page-hero {
+    background: linear-gradient(135deg, var(--purple-deep) 0%, #1a0635 100%);
+    border-radius: 16px; padding: 40px; margin-bottom: 24px; color: white;
+    position: relative; overflow: hidden;
+  }
+  .page-hero::after {
+    content: ''; position: absolute; right: -60px; top: -60px;
+    width: 300px; height: 300px; border-radius: 50%;
+    border: 2px solid rgba(249,115,22,0.1);
+  }
+  .page-hero-title { font-family: 'Oswald', sans-serif; font-size: 36px; font-weight: 700; margin-bottom: 8px; }
+  .page-hero-sub { color: rgba(255,255,255,0.6); font-size: 14px; }
+
+  .teams-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .team-card {
+    background: white; border-radius: 14px; padding: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-left: 4px solid var(--purple-mid); transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .team-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+  .team-card-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .team-card-icon { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: white; font-family: 'Oswald', sans-serif; }
+  .team-card-name { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; }
+  .team-card-gm { font-size: 12px; color: var(--gray-text); }
+  .team-stats { display: flex; gap: 16px; }
+  .team-stat { text-align: center; }
+  .team-stat-val { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; }
+  .team-stat-label { font-size: 10px; color: var(--gray-text); font-weight: 600; letter-spacing: 1px; }
+  .status-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; letter-spacing: 1px; margin-top: 12px; }
+  .status-contender { background: #d1fae5; color: #065f46; }
+  .status-hunt { background: #fef3c7; color: #92400e; }
+  .status-rebuild { background: #fee2e2; color: #991b1b; }
+
+  .rules-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+  .rule-card { background: white; border-radius: 14px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .rule-icon { font-size: 28px; margin-bottom: 12px; }
+  .rule-title { font-family: 'Oswald', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--purple-deep); }
+  .rule-desc { font-size: 13px; color: var(--gray-text); line-height: 1.6; }
+
+  .calendar-list { display: flex; flex-direction: column; gap: 12px; }
+  .cal-item { background: white; border-radius: 12px; padding: 18px 22px; display: flex; align-items: center; gap: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .cal-date { width: 56px; height: 56px; border-radius: 10px; background: linear-gradient(135deg, var(--purple-mid), var(--purple-deep)); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; flex-shrink: 0; }
+  .cal-day { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; line-height: 1; }
+  .cal-month { font-size: 9px; letter-spacing: 1px; font-weight: 600; color: var(--orange); }
+  .cal-info { flex: 1; }
+  .cal-name { font-family: 'Oswald', sans-serif; font-size: 16px; font-weight: 700; }
+  .cal-desc { font-size: 12px; color: var(--gray-text); margin-top: 2px; }
+  .cal-status { padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 700; }
+  .cal-done { background: #d1fae5; color: #065f46; }
+  .cal-next { background: #fef3c7; color: #92400e; }
+  .cal-future { background: #ede9fe; color: #5b21b6; }
+
+  .hof-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+  .hof-card { background: linear-gradient(135deg, var(--purple-deep), #1a0635); border-radius: 14px; padding: 24px; color: white; text-align: center; }
+  .hof-trophy { font-size: 36px; margin-bottom: 12px; }
+  .hof-year { font-family: 'Oswald', sans-serif; font-size: 12px; color: var(--orange); letter-spacing: 2px; }
+  .hof-title { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; margin: 4px 0; }
+  .hof-sub { font-size: 12px; color: rgba(255,255,255,0.6); }
+
+  .trades-grid { display: flex; flex-direction: column; gap: 16px; }
+  .trade-card { background: white; border-radius: 14px; padding: 22px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trade-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .trade-week { font-family: 'Oswald', sans-serif; font-size: 12px; color: var(--gray-text); letter-spacing: 1px; }
+  .trade-status { padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; }
+  .trade-approved { background: #d1fae5; color: #065f46; }
+  .trade-pending { background: #fef3c7; color: #92400e; }
+  .trade-body { display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: center; }
+  .trade-side { background: #f8f4ff; border-radius: 10px; padding: 14px; }
+  .trade-team-name { font-family: 'Oswald', sans-serif; font-size: 14px; font-weight: 700; color: var(--purple-deep); margin-bottom: 8px; }
+  .trade-receives-label { font-size: 10px; color: var(--gray-text); letter-spacing: 1px; margin-bottom: 6px; font-weight: 600; }
+  .trade-player { font-size: 12px; color: #333; padding: 3px 0; border-bottom: 1px solid #e8e4f4; }
+  .trade-player:last-child { border-bottom: none; }
+  .trade-arrow { font-size: 24px; color: var(--orange); }
+  .trade-analysis { margin-top: 14px; padding-top: 14px; border-top: 1px solid #f0f0f4; font-size: 12px; color: var(--gray-text); line-height: 1.6; }
+  .trade-analysis strong { color: var(--purple-deep); }
+
+  .draft-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .draft-order-card { background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .draft-order-list { padding: 0; }
+  .draft-pick { display: flex; align-items: center; gap: 12px; padding: 12px 18px; border-bottom: 1px solid #f0f0f4; }
+  .draft-pick:last-child { border-bottom: none; }
+  .pick-num { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; color: #e5e7eb; width: 28px; }
+  .pick-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: white; font-family: 'Oswald', sans-serif; }
+  .pick-info { flex: 1; }
+  .pick-team { font-weight: 600; font-size: 13px; }
+  .pick-gm { font-size: 11px; color: var(--gray-text); }
+  .pick-badge { font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 700; }
+  .pick-lottery { background: #fef3c7; color: #92400e; }
+  .pick-orig { background: #ede9fe; color: #5b21b6; }
+
+  /* FOOTER */
+  .footer {
+    background: var(--black); color: #555; text-align: center;
+    padding: 24px; font-size: 11px; margin-top: 48px; letter-spacing: 0.5px;
+  }
+  .footer strong { color: var(--orange); font-family: 'Oswald', sans-serif; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .content-grid { grid-template-columns: 1fr; }
+    .news-grid { grid-template-columns: 1fr; }
+    .featured-card { grid-row: auto; grid-column: auto; min-height: 300px; }
+    .search-box { display: none; }
+    .logo-main { font-size: 17px; }
+    .logo-sub { font-size: 10px; letter-spacing: 2px; }
+    .user-name { display: none; }
+    .topbar-links { gap: 0; }
+    .topbar-link { padding: 0 8px; font-size: 10px; }
+    .draft-grid { grid-template-columns: 1fr; }
+    .main-wrap { padding: 16px 10px; }
+    .header { padding: 0 12px; height: 60px; }
+  }
+  @media (max-width: 600px) {
+    .teams-grid { grid-template-columns: 1fr; }
+    .rules-grid { grid-template-columns: 1fr; }
+    .hof-grid { grid-template-columns: 1fr 1fr; }
+    .trade-body { grid-template-columns: 1fr; }
+    .trade-arrow { display: none; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useRef } = React;
+
+// ==================== DATA ====================
+const MATCHUPS = [
+  { day: 'SEX', time: '20:30', status: 'PRÉVIA', home: 'SuperSonics', away: 'Canalhas do Bem', scoreH: 0, scoreA: 0, period: 'Sem. 8', colorH: '#7c3aed', colorA: '#059669' },
+  { day: 'SEX', time: '21:15', status: 'AO VIVO', home: 'Ironclads', away: 'Popovich', scoreH: 35, scoreA: 42, period: 'Q2 • 06:42', colorH: '#2563eb', colorA: '#dc2626' },
+  { day: 'SÁB', time: '18:00', status: 'PRÉVIA', home: 'Ghost of Goat', away: 'Paysandu', scoreH: 0, scoreA: 0, period: 'Sem. 8', colorH: '#d97706', colorA: '#0891b2' },
+  { day: 'SÁB', time: '20:00', status: 'PRÉVIA', home: "Splash Bro's", away: 'Nets Nebulosos', scoreH: 0, scoreA: 0, period: 'Sem. 8', colorH: '#0284c7', colorA: '#1d4ed8' },
+  { day: 'DOM', time: '17:00', status: 'PRÉVIA', home: 'Lakers Nation', away: 'Triplo Duplo', scoreH: 0, scoreA: 0, period: 'Sem. 8', colorH: '#7e22ce', colorA: '#15803d' },
+];
+
+const STANDINGS = [
+  { pos: 1, name: 'SuperSonics', w: 6, l: 2, pf: 9120, color: '#7c3aed', init: 'SS' },
+  { pos: 2, name: 'Ironclads', w: 6, l: 2, pf: 8945, color: '#2563eb', init: 'IC' },
+  { pos: 3, name: 'Ghost of Goat', w: 5, l: 3, pf: 9011, color: '#d97706', init: 'GG' },
+  { pos: 4, name: "Splash Bro's", w: 5, l: 3, pf: 8802, color: '#0284c7', init: 'SB' },
+  { pos: 5, name: 'Lakers Nation', w: 4, l: 4, pf: 8720, color: '#7e22ce', init: 'LN' },
+  { pos: 6, name: 'Popovich', w: 4, l: 4, pf: 8654, color: '#dc2626', init: 'PO' },
+  { pos: 7, name: 'Canalhas do Bem', w: 3, l: 5, pf: 8501, color: '#059669', init: 'CB' },
+  { pos: 8, name: 'Nets Nebulosos', w: 2, l: 6, pf: 8350, color: '#1d4ed8', init: 'NN' },
+];
+
+const POWER_RANKINGS = [
+  { rank: 1, name: 'SuperSonics', trend: '↑2', type: 'up', color: '#7c3aed', init: 'SS' },
+  { rank: 2, name: 'Ironclads', trend: '—', type: 'same', color: '#2563eb', init: 'IC' },
+  { rank: 3, name: 'Ghost of Goat', trend: '↑1', type: 'up', color: '#d97706', init: 'GG' },
+  { rank: 4, name: "Splash Bro's", trend: '↓1', type: 'down', color: '#0284c7', init: 'SB' },
+  { rank: 5, name: 'Lakers Nation', trend: '↑3', type: 'up', color: '#7e22ce', init: 'LN' },
+];
+
+const NEWS_FEED = [
+  { cat: 'DESEMPENHO', catClass: 'cat-perf', time: 'Há 31 minutos', title: 'Jayson Tatum explode na semana e lidera pontuação da liga', desc: 'Ala do SuperSonics teve média de 38.7 pontos, 8.2 rebotes e 6.1 assistências na semana.', bg: 'linear-gradient(135deg, #1e3a5f, #0f2040)', emoji: '🔥' },
+  { cat: 'ANÁLISE', catClass: 'cat-analysis', time: 'Há 2 horas', title: 'Quais times ainda podem brigar pelo título?', desc: 'Analisamos o cenário da liga e os caminhos até o troféu Larry Ball.', bg: 'linear-gradient(135deg, #2d1b69, #0f0a20)', emoji: '🏆' },
+  { cat: 'ENTREVISTA', catClass: 'cat-interview', time: 'Há 4 horas', title: '"Nosso objetivo é o bicampeonato", diz técnico do Ironclads', desc: 'Treinador fala sobre o início da temporada e a expectativa para o playoff.', bg: 'linear-gradient(135deg, #7f1d1d, #450a0a)', emoji: '🎙️' },
+  { cat: 'DRAFT', catClass: 'cat-draft', time: 'Ontem', title: 'Jovens que podem virar steal na próxima temporada', desc: 'Lista traz nomes promissores que podem mudar o futuro das franquias.', bg: 'linear-gradient(135deg, #78350f, #451a03)', emoji: '⭐' },
+];
+
+const VIDEOS = [
+  { title: 'Top 10 jogadas da Semana 7', dur: '1:25', bg: 'linear-gradient(135deg, #7c3aed, #4b1a7a)' },
+  { title: 'Melhores Buzzer Beaters', dur: '2:08', bg: 'linear-gradient(135deg, #F97316, #c45a00)' },
+  { title: 'Entrevista com Ray Allen Jr.', dur: '1:46', bg: 'linear-gradient(135deg, #2563eb, #1e40af)' },
+];
+
+const TEAMS_DATA = [
+  { name: 'SuperSonics', gm: 'Stéfano', w: 6, l: 2, pf: 9120, status: 'Contender', statusClass: 'status-contender', color: '#7c3aed', init: 'SS' },
+  { name: 'Canalhas do Bem', gm: 'Caio', w: 3, l: 5, pf: 8501, status: 'Playoff Hunt', statusClass: 'status-hunt', color: '#059669', init: 'CB' },
+  { name: 'Ironclads', gm: 'Hiago', w: 6, l: 2, pf: 8945, status: 'Contender', statusClass: 'status-contender', color: '#2563eb', init: 'IC' },
+  { name: 'Ghost of Goat', gm: 'Marcos', w: 5, l: 3, pf: 9011, status: 'Contender', statusClass: 'status-contender', color: '#d97706', init: 'GG' },
+  { name: "Splash Bro's", gm: 'Rafael', w: 5, l: 3, pf: 8802, status: 'Playoff Hunt', statusClass: 'status-hunt', color: '#0284c7', init: 'SB' },
+  { name: 'Lakers Nation', gm: 'Guilherme', w: 4, l: 4, pf: 8720, status: 'Playoff Hunt', statusClass: 'status-hunt', color: '#7e22ce', init: 'LN' },
+  { name: 'Popovich', gm: 'André', w: 4, l: 4, pf: 8654, status: 'Playoff Hunt', statusClass: 'status-hunt', color: '#dc2626', init: 'PO' },
+  { name: 'Nets Nebulosos', gm: 'Felipe', w: 2, l: 6, pf: 8350, status: 'Rebuild', statusClass: 'status-rebuild', color: '#1d4ed8', init: 'NN' },
+];
+
+const RULES_DATA = [
+  { icon: '📋', title: 'Formato da Liga', desc: '10 times, temporada regular de 14 semanas, confrontos head-to-head. Os 6 melhores avançam aos playoffs.' },
+  { icon: '📊', title: 'Sistema de Pontuação', desc: 'Pontuação por categoria estatística. Pontos, rebotes, assistências, tocos, roubos, 3pts e eficiência de arremesso.' },
+  { icon: '👥', title: 'Rosters', desc: '15 jogadores por time: 2 armadores, 2 alas-armadores, 2 alas, 2 ala-pivôs, 2 pivôs, 5 banco e 1 IR.' },
+  { icon: '🔒', title: 'Keepers', desc: '3 keepers permitidos por temporada. Custo: a pick da rodada onde o jogador foi selecionado -1.' },
+  { icon: '🔄', title: 'Trades', desc: 'Período de trade aberto até a deadline. Veto por comissão em caso de desequilíbrio flagrante.' },
+  { icon: '📉', title: 'Regra Anti-Tanking', desc: 'Times com 5+ derrotas seguidas recebem pontos bonus de desempenho para manter competitividade.' },
+  { icon: '🏆', title: 'Playoffs', desc: 'Top 6 da temporada regular. Semifinais na Sem. 15, Final na Sem. 16 e 17 (best of 3).' },
+  { icon: '⚠️', title: 'Punições', desc: 'Waiver não cumprido: -50 pontos. Infração de regra: suspensão de rodada. Tanking deliberado: eliminação.' },
+];
+
+const CALENDAR_DATA = [
+  { day: '14', month: 'FEV', name: 'Draft Night', desc: 'Draft de Snake, 15 rodadas, 90s/pick', status: 'REALIZADO', cls: 'cal-done' },
+  { day: '01', month: 'MAR', name: 'Início da Temporada', desc: 'Semana 1 começa — que o melhor vença!', status: 'REALIZADO', cls: 'cal-done' },
+  { day: '20', month: 'MAI', name: 'Trade Deadline', desc: 'Última data para trades nesta temporada', status: 'EM BREVE', cls: 'cal-next' },
+  { day: '10', month: 'JUN', name: 'Playoffs — Rodada 1', desc: 'Semifinais da Airball Dynasty', status: 'FUTURO', cls: 'cal-future' },
+  { day: '24', month: 'JUN', name: 'Final AirBall', desc: 'A grande decisão — Best of 3', status: 'FUTURO', cls: 'cal-future' },
+  { day: '05', month: 'JUL', name: 'AirBall Awards', desc: 'MVP, Coach, Rookie e Troféu Larry Ball', status: 'FUTURO', cls: 'cal-future' },
+];
+
+const HOF_DATA = [
+  { year: '2025', icon: '🏆', title: 'Campeão', name: 'SuperSonics', sub: 'GM: Stéfano — 1ª temporada' },
+  { year: '2025', icon: '🥈', title: 'Vice-Campeão', name: 'Ghost of Goat', sub: 'GM: Marcos — Finalista histórico' },
+  { year: '2025', icon: '⭐', title: 'MVP da Temporada', name: 'Giannis A.', sub: '2840 pts • SuperSonics' },
+  { year: '2025', icon: '📈', title: 'Maior Pontuação', name: 'SuperSonics', sub: 'Semana 9 • 1.204 pts' },
+  { year: '2025', icon: '🎯', title: 'Rookie do Ano', name: 'Nets Nebulosos', sub: 'GM: Felipe' },
+  { year: '2025', icon: '💼', title: 'Melhor GM', name: 'Stéfano', sub: 'SuperSonics — Draft perfeito' },
+];
+
+const TRADES_DATA = [
+  { week: 'SEMANA 6 • 2026/27', status: 'APROVADO', cls: 'trade-approved', teamA: 'SuperSonics', teamB: 'Canalhas do Bem', givesA: ['Jaylen Brown', 'Pick 2ª Rd 2027'], givesB: ['Damian Lillard', 'Pick 1ª Rd 2027'], analysis: 'Troca equilibrada. SuperSonics melhora o backcourt enquanto Canalhas ganha profundidade para o stretch.' },
+  { week: 'SEMANA 7 • 2026/27', status: 'PENDENTE', cls: 'trade-pending', teamA: 'Ironclads', teamB: "Splash Bro's", givesA: ['Kevin Durant', 'Pick 3ª Rd'], givesB: ['Anthony Davis', 'Draymond Green'], analysis: 'Trade polêmico. Comissão analisa equilíbrio da troca antes de aprovar.' },
+];
+
+const DRAFT_ORDER = [
+  { pick: 1, name: 'Nets Nebulosos', gm: 'Felipe', color: '#1d4ed8', init: 'NN', badge: 'LOTTERY', cls: 'pick-lottery' },
+  { pick: 2, name: 'Canalhas do Bem', gm: 'Caio', color: '#059669', init: 'CB', badge: 'LOTTERY', cls: 'pick-lottery' },
+  { pick: 3, name: 'Popovich', gm: 'André', color: '#dc2626', init: 'PO', badge: 'LOTTERY', cls: 'pick-lottery' },
+  { pick: 4, name: 'Lakers Nation', gm: 'Guilherme', color: '#7e22ce', init: 'LN', badge: 'ORIGINAL', cls: 'pick-orig' },
+  { pick: 5, name: "Splash Bro's", gm: 'Rafael', color: '#0284c7', init: 'SB', badge: 'ORIGINAL', cls: 'pick-orig' },
+  { pick: 6, name: 'Ghost of Goat', gm: 'Marcos', color: '#d97706', init: 'GG', badge: 'ORIGINAL', cls: 'pick-orig' },
+  { pick: 7, name: 'Ironclads', gm: 'Hiago', color: '#2563eb', init: 'IC', badge: 'ORIGINAL', cls: 'pick-orig' },
+  { pick: 8, name: 'SuperSonics', gm: 'Stéfano', color: '#7c3aed', init: 'SS', badge: 'ORIGINAL', cls: 'pick-orig' },
+];
+
+// ==================== COMPONENTS ====================
+
+function TopBar({ activePage, setPage }) {
+  const links = ['INÍCIO', 'TIMES', 'REGRAS', 'CALENDÁRIO', 'HALL DA FAMA', 'TRADES', 'DRAFT'];
+  return (
+    <div className="topbar">
+      <div className="topbar-links">
+        {links.map(l => (
+          <button key={l} className={`topbar-link ${(l === 'INÍCIO' ? activePage === 'HOME' : activePage === l) ? 'active' : ''}`} onClick={() => setPage(l === 'INÍCIO' ? 'HOME' : (l === activePage ? 'HOME' : l))}>
+            {l}
+          </button>
+        ))}
+      </div>
+      <div className="topbar-right">
+        <span className="topbar-season">TEMPORADA 2026/27</span>
+        <span>•</span>
+        <span>SEMANA 8</span>
+      </div>
+    </div>
+  );
+}
+
+function Header() {
+  return (
+    <header className="header">
+      <div className="header-left">
+        <button className="menu-btn">
+          <span/><span/><span/>
+        </button>
+        <span className="menu-label">MENU</span>
+        <div style={{width:1, height:32, background:'rgba(255,255,255,0.1)', margin:'0 8px'}}/>
+        <div className="logo-area">
+          <img src="/mnt/user-data/uploads/Logo_Airball.png" alt="Airball Dynasty League" style={{height:'56px', width:'auto', display:'block', filter:'drop-shadow(0 2px 8px rgba(249,115,22,0.35))'}} />
+        </div>
+      </div>
+      <div className="header-right">
+        <div className="search-box">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input placeholder="Buscar notícias, times, jogadores..." />
+        </div>
+        <div className="user-area">
+          <div>
+            <div className="user-greeting">Olá,</div>
+            <div className="user-name">Stéfano</div>
+          </div>
+          <div className="user-avatar">ST</div>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+function MatchupCard({ m }) {
+  return (
+    <div className="matchup-card">
+      <div className="matchup-time">
+        <span className="matchup-when">{m.day} • {m.time}</span>
+        {m.status === 'AO VIVO' ? <span className="badge-live">● AO VIVO</span> : <span className="badge-preview">{m.status}</span>}
+      </div>
+      <div className="matchup-teams">
+        <div className="team-mini">
+          <div className="team-mini-icon" style={{background:m.colorH}}>{m.home.slice(0,2).toUpperCase()}</div>
+          <div className="team-mini-name">{m.home}</div>
+        </div>
+        <div className="vs-score">
+          <div className="score-display">{m.scoreH} — {m.scoreA}</div>
+          <div className="score-period">{m.period}</div>
+        </div>
+        <div className="team-mini">
+          <div className="team-mini-icon" style={{background:m.colorA}}>{m.away.slice(0,2).toUpperCase()}</div>
+          <div className="team-mini-name">{m.away}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MatchupsStrip() {
+  return (
+    <div className="matchups-strip">
+      <div className="matchups-scroll">
+        <div className="week-card">
+          <div className="week-label">SEM 8</div>
+          <button className="week-btn">VER CALENDÁRIO</button>
+        </div>
+        {MATCHUPS.map((m, i) => <MatchupCard key={i} m={m} />)}
+      </div>
+    </div>
+  );
+}
+
+function FeaturedNews() {
+  return (
+    <div className="featured-card">
+      <div className="featured-bg"/>
+      <div className="court-lines"/>
+      <div className="ball-deco"/>
+      <div className="featured-content">
+        <span className="featured-badge">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          DESTAQUE
+        </span>
+        <h1 className="featured-title">SUPERSONICS ASSUMEM O TOPO DA AIRBALL</h1>
+        <div className="featured-bullets">
+          <div className="featured-bullet">Vitória dominante sobre o Canalhas do Bem</div>
+          <div className="featured-bullet">Time tem o melhor ataque e defesa da liga</div>
+          <div className="featured-bullet">MVP da semana: Ray Allen Jr.</div>
+        </div>
+        <div className="featured-footer">
+          <div className="featured-mvp">
+            <span className="mvp-icon">🏅</span>
+            <div>
+              <div className="mvp-label">MVP DA SEMANA</div>
+              <div className="mvp-name">Ray Allen Jr.</div>
+            </div>
+          </div>
+          <span className="featured-time">Há 15 minutos</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SideNews({ gradient, catClass, cat, title, desc }) {
+  return (
+    <div className="side-news">
+      <div className="side-news-bg" style={{background: gradient}}/>
+      <div style={{position:'absolute',inset:0,background:'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.15) 100%)'}}/>
+      <div className="side-news-content">
+        <span className={`news-cat ${catClass}`}>{cat}</span>
+        <div className="side-news-title">{title}</div>
+        <div className="side-news-desc">{desc}</div>
+      </div>
+    </div>
+  );
+}
+
+function StandingsCard() {
+  const rankClass = (pos) => pos === 1 ? 'gold' : pos === 2 ? 'silver' : pos === 3 ? 'bronze' : '';
+  return (
+    <div className="sidebar-card">
+      <div className="sidebar-card-header">
+        <span className="sidebar-card-title">🏅 Classificação AirBall</span>
+        <span className="sidebar-card-season">2026/27</span>
+      </div>
+      <div className="sidebar-card-body">
+        <table className="standings-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Time</th>
+              <th>V</th>
+              <th>D</th>
+              <th>PF</th>
+            </tr>
+          </thead>
+          <tbody>
+            {STANDINGS.map(t => (
+              <tr key={t.pos} className={t.pos <= 3 ? 'top3' : ''}>
+                <td><span className={`rank-num ${rankClass(t.pos)}`}>{t.pos}</span></td>
+                <td>
+                  <div className="team-cell">
+                    <span className="team-dot" style={{background:t.color}}/>
+                    <span className="team-name-small">{t.name}</span>
+                  </div>
+                </td>
+                <td><span className="win">{t.w}</span></td>
+                <td><span className="loss">{t.l}</span></td>
+                <td><span className="pf">{t.pf.toLocaleString()}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function PowerRankingsCard() {
+  return (
+    <div className="sidebar-card">
+      <div className="sidebar-card-header">
+        <span className="sidebar-card-title">⚡ Power Rankings</span>
+        <span className="sidebar-card-season">SEM. 8</span>
+      </div>
+      <div className="sidebar-card-body">
+        <div className="power-list">
+          {POWER_RANKINGS.map(t => (
+            <div className="power-item" key={t.rank}>
+              <span className="power-rank">{t.rank}</span>
+              <div className="power-icon" style={{background:t.color}}>{t.init}</div>
+              <div className="power-info">
+                <div className="power-name">{t.name}</div>
+                <div className={`power-trend trend-${t.type}`}>
+                  {t.trend === '—' ? '— Manteve' : t.type === 'up' ? `${t.trend} Subiu` : `${t.trend} Caiu`}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="sidebar-link-row">
+          <a className="sidebar-link" href="#">Ver ranking completo →</a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const SIDEBAR_TRADES = [
+  {
+    week: 'SEM. 6',
+    status: 'APROVADO',
+    approved: true,
+    teamA: { name: 'SuperSonics', init: 'SS', color: '#7c3aed' },
+    teamB: { name: 'Canalhas', init: 'CB', color: '#059669' },
+    gives: ['Jaylen Brown', 'Pick 2ª Rd'],
+    gets:  ['D. Lillard', 'Pick 1ª Rd'],
+  },
+  {
+    week: 'SEM. 7',
+    status: 'PENDENTE',
+    approved: false,
+    teamA: { name: 'Ironclads', init: 'IC', color: '#2563eb' },
+    teamB: { name: "Splash Bro's", init: 'SB', color: '#0284c7' },
+    gives: ['Kevin Durant', 'Pick 3ª Rd'],
+    gets:  ['Anthony Davis', 'Draymond G.'],
+  },
+];
+
+function TradeArt({ teamA, teamB }) {
+  return (
+    <svg viewBox="0 0 260 72" width="100%" style={{display:'block', borderRadius:10, overflow:'visible'}}>
+      <defs>
+        <linearGradient id={`ga-${teamA.init}`} x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor={teamA.color} stopOpacity="1"/>
+          <stop offset="100%" stopColor={teamA.color} stopOpacity="0.6"/>
+        </linearGradient>
+        <linearGradient id={`gb-${teamB.init}`} x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor={teamB.color} stopOpacity="1"/>
+          <stop offset="100%" stopColor={teamB.color} stopOpacity="0.6"/>
+        </linearGradient>
+        <linearGradient id={`gmid-${teamA.init}`} x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor={teamA.color} stopOpacity="0.15"/>
+          <stop offset="50%" stopColor="#1a0635" stopOpacity="0.95"/>
+          <stop offset="100%" stopColor={teamB.color} stopOpacity="0.15"/>
+        </linearGradient>
+      </defs>
+
+      {/* Background */}
+      <rect x="0" y="0" width="260" height="72" rx="10" fill="#0f0520"/>
+
+      {/* Left team bg wash */}
+      <rect x="0" y="0" width="100" height="72" rx="10" fill={`url(#ga-${teamA.init})`} opacity="0.18"/>
+      {/* Right team bg wash */}
+      <rect x="160" y="0" width="100" height="72" rx="10" fill={`url(#gb-${teamB.init})`} opacity="0.18"/>
+
+      {/* Subtle diagonal lines left */}
+      {[0,12,24,36,48,60,72,84,96].map((x,i) => (
+        <line key={i} x1={x} y1="0" x2={x-30} y2="72" stroke={teamA.color} strokeWidth="0.4" opacity="0.12"/>
+      ))}
+      {/* Subtle diagonal lines right */}
+      {[160,172,184,196,208,220,232,244,256].map((x,i) => (
+        <line key={i} x1={x} y1="0" x2={x+30} y2="72" stroke={teamB.color} strokeWidth="0.4" opacity="0.12"/>
+      ))}
+
+      {/* Left team circle */}
+      <circle cx="46" cy="36" r="22" fill={teamA.color} opacity="0.15"/>
+      <circle cx="46" cy="36" r="16" fill={teamA.color} opacity="0.9"/>
+      <text x="46" y="41" textAnchor="middle" fill="white" fontFamily="Oswald, sans-serif" fontWeight="700" fontSize="11">{teamA.init}</text>
+
+      {/* Right team circle */}
+      <circle cx="214" cy="36" r="22" fill={teamB.color} opacity="0.15"/>
+      <circle cx="214" cy="36" r="16" fill={teamB.color} opacity="0.9"/>
+      <text x="214" y="41" textAnchor="middle" fill="white" fontFamily="Oswald, sans-serif" fontWeight="700" fontSize="11">{teamB.init}</text>
+
+      {/* Center icon background */}
+      <circle cx="130" cy="36" r="18" fill="#1a0635"/>
+      <circle cx="130" cy="36" r="14" fill="#F97316" opacity="0.12"/>
+
+      {/* Arrow left → right */}
+      <path d="M118 30 L138 30 L134 26 M138 30 L134 34" fill="none" stroke="#F97316" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+      {/* Arrow right → left */}
+      <path d="M142 42 L122 42 L126 38 M122 42 L126 46" fill="none" stroke="#c084fc" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+
+      {/* Team name left */}
+      <text x="46" y="64" textAnchor="middle" fill="white" fontFamily="Oswald, sans-serif" fontWeight="600" fontSize="8" opacity="0.7">{teamA.name.slice(0,10)}</text>
+      {/* Team name right */}
+      <text x="214" y="64" textAnchor="middle" fill="white" fontFamily="Oswald, sans-serif" fontWeight="600" fontSize="8" opacity="0.7">{teamB.name.slice(0,10)}</text>
+    </svg>
+  );
+}
+
+function LatestTradesCard() {
+  return (
+    <div className="sidebar-card">
+      <div className="sidebar-card-header">
+        <span className="sidebar-card-title">🔄 Últimas Trades</span>
+        <span className="sidebar-card-season">SEM. 8</span>
+      </div>
+      <div style={{display:'flex', flexDirection:'column', gap:0}}>
+        {SIDEBAR_TRADES.map((t, i) => (
+          <div key={i} style={{
+            padding:'14px 16px',
+            borderBottom: i < SIDEBAR_TRADES.length - 1 ? '1px solid #f0f0f4' : 'none',
+            cursor:'pointer', transition:'background 0.15s',
+          }}
+          onMouseEnter={e => e.currentTarget.style.background='#f8f4ff'}
+          onMouseLeave={e => e.currentTarget.style.background=''}
+          >
+            {/* Header row */}
+            <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:10}}>
+              <span style={{fontFamily:'Oswald,sans-serif', fontSize:11, color:'#888', letterSpacing:'1px', fontWeight:600}}>{t.week}</span>
+              <span style={{
+                fontSize:9, fontWeight:700, padding:'2px 8px', borderRadius:20, letterSpacing:1,
+                background: t.approved ? '#d1fae5' : '#fef3c7',
+                color: t.approved ? '#065f46' : '#92400e',
+              }}>{t.status}</span>
+            </div>
+
+            {/* Visual art */}
+            <TradeArt teamA={t.teamA} teamB={t.teamB} />
+
+            {/* Players exchanged */}
+            <div style={{display:'grid', gridTemplateColumns:'1fr auto 1fr', gap:4, marginTop:10, alignItems:'start'}}>
+              <div>
+                {t.gives.map((p, j) => (
+                  <div key={j} style={{fontSize:10, color:'#555', fontWeight:500, padding:'1px 0', display:'flex', alignItems:'center', gap:4}}>
+                    <span style={{width:5, height:5, borderRadius:'50%', background:t.teamA.color, display:'inline-block', flexShrink:0}}/>
+                    {p}
+                  </div>
+                ))}
+              </div>
+              <div style={{textAlign:'center', paddingTop:2}}>
+                <span style={{fontSize:14, color:'#F97316', fontWeight:700}}>⇄</span>
+              </div>
+              <div style={{textAlign:'right'}}>
+                {t.gets.map((p, j) => (
+                  <div key={j} style={{fontSize:10, color:'#555', fontWeight:500, padding:'1px 0', display:'flex', alignItems:'center', justifyContent:'flex-end', gap:4}}>
+                    {p}
+                    <span style={{width:5, height:5, borderRadius:'50%', background:t.teamB.color, display:'inline-block', flexShrink:0}}/>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="sidebar-link-row">
+        <a className="sidebar-link" href="#">Ver todas as trades →</a>
+      </div>
+    </div>
+  );
+}
+
+function NewsFeed() {
+  return (
+    <div>
+      <div className="section-header">
+        <span className="section-title">Últimas Notícias</span>
+        <span className="section-more">Ver tudo →</span>
+      </div>
+      <div className="news-feed">
+        {NEWS_FEED.map((n, i) => (
+          <div className="feed-item" key={i}>
+            <div className="feed-thumb" style={{background:n.bg}}>
+              <span style={{fontSize:28}}>{n.emoji}</span>
+            </div>
+            <div className="feed-content">
+              <div className="feed-top">
+                <span className={`news-cat ${n.catClass}`}>{n.cat}</span>
+                <div className="feed-title">{n.title}</div>
+                <div className="feed-desc">{n.desc}</div>
+              </div>
+              <div className="feed-meta">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span className="feed-time">{n.time}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function HomePage() {
+  return (
+    <>
+      <MatchupsStrip />
+      <div className="main-wrap">
+        <div className="content-grid">
+          <div>
+            <div className="news-grid">
+              <FeaturedNews />
+              <SideNews gradient="linear-gradient(135deg, #2d1b69, #0f0a20)" catClass="cat-rules" cat="REGRAS" title="COMISSÃO DEFINE NOVA REGRA PARA TANKING" desc="Medida busca mais equilíbrio e competitividade na liga." />
+              <SideNews gradient="linear-gradient(135deg, #064e3b, #022c22)" catClass="cat-market" cat="MERCADO" title="TRADE CENTER ESQUENTA ANTES DA DEADLINE" desc="Veja as negociações mais comentadas da semana." />
+            </div>
+            <NewsFeed />
+          </div>
+          <div className="sidebar">
+            <StandingsCard />
+            <PowerRankingsCard />
+            <LatestTradesCard />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function TeamsPage() {
+  return (
+    <div className="main-wrap">
+      <div className="page-hero">
+        <div className="page-hero-title">🏀 Franquias</div>
+        <div className="page-hero-sub">Temporada 2026/27 • 8 franquias disputando o troféu Larry Ball</div>
+      </div>
+      <div className="teams-grid">
+        {TEAMS_DATA.map((t, i) => (
+          <div className="team-card" key={i} style={{borderColor:t.color}}>
+            <div className="team-card-top">
+              <div className="team-card-icon" style={{background:t.color}}>{t.init}</div>
+              <div>
+                <div className="team-card-name">{t.name}</div>
+                <div className="team-card-gm">GM: {t.gm}</div>
+              </div>
+            </div>
+            <div className="team-stats">
+              <div className="team-stat">
+                <div className="team-stat-val" style={{color:'#059669'}}>{t.w}</div>
+                <div className="team-stat-label">VITÓRIAS</div>
+              </div>
+              <div className="team-stat">
+                <div className="team-stat-val" style={{color:'#dc2626'}}>{t.l}</div>
+                <div className="team-stat-label">DERROTAS</div>
+              </div>
+              <div className="team-stat">
+                <div className="team-stat-val" style={{color:'#7c3aed', fontSize:16}}>{t.pf.toLocaleString()}</div>
+                <div className="team-stat-label">PONTOS</div>
+              </div>
+            </div>
+            <div><span className={`status-badge ${t.statusClass}`}>{t.status.toUpperCase()}</span></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function RulesPage() {
+  return (
+    <div className="main-wrap">
+      <div className="page-hero">
+        <div className="page-hero-title">📋 Regras da Liga</div>
+        <div className="page-hero-sub">Tudo que você precisa saber para competir na Airball Dynasty</div>
+      </div>
+      <div className="rules-grid">
+        {RULES_DATA.map((r, i) => (
+          <div className="rule-card" key={i}>
+            <div className="rule-icon">{r.icon}</div>
+            <div className="rule-title">{r.title}</div>
+            <div className="rule-desc">{r.desc}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function CalendarPage() {
+  return (
+    <div className="main-wrap">
+      <div className="page-hero">
+        <div className="page-hero-title">📅 Calendário Oficial</div>
+        <div className="page-hero-sub">Datas importantes da temporada 2026/27</div>
+      </div>
+      <div className="calendar-list">
+        {CALENDAR_DATA.map((c, i) => (
+          <div className="cal-item" key={i}>
+            <div className="cal-date">
+              <div className="cal-day">{c.day}</div>
+              <div className="cal-month">{c.month}</div>
+            </div>
+            <div className="cal-info">
+              <div className="cal-name">{c.name}</div>
+              <div className="cal-desc">{c.desc}</div>
+            </div>
+            <span className={`cal-status ${c.cls}`}>{c.status}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function HallOfFamePage() {
+  return (
+    <div className="main-wrap">
+      <div className="page-hero">
+        <div className="page-hero-title">🏛️ Hall da Fama</div>
+        <div className="page-hero-sub">Os imortais da Airball Dynasty League • Since FEV 2025</div>
+      </div>
+      <div className="hof-grid">
+        {HOF_DATA.map((h, i) => (
+          <div className="hof-card" key={i}>
+            <div className="hof-trophy">{h.icon}</div>
+            <div className="hof-year">{h.year}</div>
+            <div className="hof-title">{h.title}</div>
+            <div style={{fontFamily:'Oswald', fontSize:20, fontWeight:700, color:'#F97316', margin:'4px 0'}}>{h.name}</div>
+            <div className="hof-sub">{h.sub}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function TradesPage() {
+  return (
+    <div className="main-wrap">
+      <div className="page-hero">
+        <div className="page-hero-title">🔄 Trade Center</div>
+        <div className="page-hero-sub">Negociações da temporada • Deadline: 20 de Maio</div>
+      </div>
+      <div className="trades-grid">
+        {TRADES_DATA.map((t, i) => (
+          <div className="trade-card" key={i}>
+            <div className="trade-header">
+              <span className="trade-week">{t.week}</span>
+              <span className={`trade-status ${t.cls}`}>{t.status}</span>
+            </div>
+            <div className="trade-body">
+              <div className="trade-side">
+                <div className="trade-team-name">{t.teamA} recebe:</div>
+                <div className="trade-receives-label">RECEBE</div>
+                {t.givesB.map((p, j) => <div className="trade-player" key={j}>• {p}</div>)}
+              </div>
+              <div className="trade-arrow">⇄</div>
+              <div className="trade-side">
+                <div className="trade-team-name">{t.teamB} recebe:</div>
+                <div className="trade-receives-label">RECEBE</div>
+                {t.givesA.map((p, j) => <div className="trade-player" key={j}>• {p}</div>)}
+              </div>
+            </div>
+            <div className="trade-analysis"><strong>Análise: </strong>{t.analysis}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function DraftPage() {
+  return (
+    <div className="main-wrap">
+      <div className="page-hero">
+        <div className="page-hero-title">⭐ Draft</div>
+        <div className="page-hero-sub">Ordem do Draft 2027/28 • Lottery já definida</div>
+      </div>
+      <div className="draft-grid">
+        <div className="draft-order-card">
+          <div className="sidebar-card-header">
+            <span className="sidebar-card-title">Ordem do Draft 2027/28</span>
+          </div>
+          <div className="draft-order-list">
+            {DRAFT_ORDER.map(p => (
+              <div className="draft-pick" key={p.pick}>
+                <span className="pick-num">{p.pick}</span>
+                <div className="pick-icon" style={{background:p.color}}>{p.init}</div>
+                <div className="pick-info">
+                  <div className="pick-team">{p.name}</div>
+                  <div className="pick-gm">GM: {p.gm}</div>
+                </div>
+                <span className={`pick-badge ${p.cls}`}>{p.badge}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="draft-order-card">
+          <div className="sidebar-card-header">
+            <span className="sidebar-card-title">Picks Trocadas</span>
+          </div>
+          <div className="draft-order-list">
+            {[
+              { from: 'SuperSonics', to: 'Canalhas do Bem', pick: 'Pick 1ª Rd 2027', via: 'Trade Sem. 6' },
+              { from: 'Ironclads', to: "Splash Bro's", pick: 'Pick 3ª Rd 2027', via: 'Trade Sem. 7' },
+              { from: 'Lakers Nation', to: 'Ghost of Goat', pick: 'Pick 2ª Rd 2028', via: 'Trade 2025' },
+            ].map((p, i) => (
+              <div className="draft-pick" key={i} style={{flexDirection:'column', alignItems:'flex-start', gap:4, padding:'14px 18px'}}>
+                <div style={{display:'flex', alignItems:'center', gap:8}}>
+                  <span className="pick-badge pick-orig">{p.pick}</span>
+                  <span style={{fontSize:10, color:'#aaa'}}>{p.via}</span>
+                </div>
+                <div style={{fontSize:12, color:'#555'}}>
+                  <strong style={{color:'#333'}}>{p.from}</strong> → <strong style={{color:'#7c3aed'}}>{p.to}</strong>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="sidebar-card-header" style={{marginTop:0}}>
+            <span className="sidebar-card-title">Mock Draft 2027</span>
+          </div>
+          <div className="draft-order-list">
+            {[
+              { pick: '1', player: 'Victor Wembanyama Jr.', pos: 'C', val: '⭐⭐⭐⭐⭐' },
+              { pick: '2', player: 'Bronny James II', pos: 'SG', val: '⭐⭐⭐⭐' },
+              { pick: '3', player: 'Scoot Henderson Jr.', pos: 'PG', val: '⭐⭐⭐⭐' },
+            ].map((m, i) => (
+              <div className="draft-pick" key={i}>
+                <span className="pick-num">{m.pick}</span>
+                <div className="pick-info">
+                  <div className="pick-team">{m.player}</div>
+                  <div className="pick-gm">{m.pos} • {m.val}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ==================== APP ====================
+function App() {
+  const [page, setPage] = useState('HOME');
+
+  const renderPage = () => {
+    switch (page) {
+      case 'TIMES': return <TeamsPage />;
+      case 'REGRAS': return <RulesPage />;
+      case 'CALENDÁRIO': return <CalendarPage />;
+      case 'HALL DA FAMA': return <HallOfFamePage />;
+      case 'TRADES': return <TradesPage />;
+      case 'DRAFT': return <DraftPage />;
+      default: return <HomePage />;
+    }
+  };
+
+  return (
+    <div>
+      <TopBar activePage={page} setPage={setPage} />
+      <Header />
+      {renderPage()}
+      <footer className="footer">
+        <strong>AIRBALL DYNASTY LEAGUE</strong> • Since FEV 2025 • Temporada 2026/27 • Todos os direitos reservados
+      </footer>
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById('root'));
+</script>
+</body>
+</html>
