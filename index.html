@@ -529,6 +529,103 @@
   }
   .footer strong { color: var(--orange); font-family: 'Oswald', sans-serif; }
 
+
+  .team-logo-wrap {
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    flex-shrink: 0;
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+  .team-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .team-logo-fallback {
+    font-size: 9px;
+    color: white;
+    text-align: center;
+  }
+  .scroll-card-body {
+    max-height: 390px;
+    overflow-y: auto;
+  }
+  .scroll-card-body::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scroll-card-body::-webkit-scrollbar-thumb {
+    background: #d8c7f2;
+    border-radius: 8px;
+  }
+  .champion-crown {
+    color: #f59e0b;
+    font-size: 18px;
+    margin-left: 6px;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+  }
+  .final-standings-card {
+    background: white;
+    border-radius: 14px;
+    margin-top: 24px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .final-standings-list {
+    max-height: 520px;
+    overflow-y: auto;
+  }
+  .final-row {
+    display: grid;
+    grid-template-columns: 48px 1fr 90px;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 18px;
+    border-bottom: 1px solid #f0f0f4;
+  }
+  .final-row:last-child { border-bottom: none; }
+  .final-rank {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gray-text);
+  }
+  .final-team-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .final-team-name {
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .final-gm {
+    font-size: 11px;
+    color: var(--gray-text);
+    margin-top: 2px;
+  }
+  .final-rec {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    color: var(--purple-mid);
+    text-align: right;
+    font-weight: 700;
+  }
+  .news-image-layer {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.78;
+  }
+
   /* RESPONSIVE */
   @media (max-width: 900px) {
     .content-grid { grid-template-columns: 1fr; }
@@ -559,38 +656,129 @@
 const { useState, useRef } = React;
 
 // ==================== DATA ====================
+const TEAMS_MASTER = [
+  {"slug": "stefanos-supersonics", "name": "Stéfano's SuperSonics", "gm": "Stéfano Cecin", "init": "SS", "color": "#15803d", "logo": "./assets/logos/stefanos-supersonics.png", "w": 0, "l": 0, "pf": 0, "status": "Campeão 25-26", "statusClass": "status-contender"},
+  {"slug": "ghost-of-goat", "name": "Ghost of goat", "gm": "GABRIEL Silva", "init": "GOG", "color": "#111827", "logo": "./assets/logos/ghost-of-goat.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
+  {"slug": "wictors-team", "name": "Wictor's Team", "gm": "Wictor Cezar", "init": "WIC", "color": "#f59e0b", "logo": "./assets/logos/wictors-team.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
+  {"slug": "chugabum-ironclads", "name": "Chugabum Ironclads", "gm": "Hiago Valverde", "init": "CHIR", "color": "#4b5563", "logo": "./assets/logos/chugabum-ironclads.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
+  {"slug": "fi-du-jequisom", "name": "Fi du Jequisom", "gm": "Darlan Machado Pinto", "init": "FDJ", "color": "#dc2626", "logo": "./assets/logos/fi-du-jequisom.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
+  {"slug": "paysandu-lobos", "name": "Paysandu Lobo's", "gm": "Geraldo Oliveira Jr", "init": "PAY", "color": "#0891b2", "logo": "./assets/logos/paysandu-lobos.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
+  {"slug": "pistons-de-pira", "name": "Pistons de Pira", "gm": "Marino Mondek", "init": "PDP", "color": "#f97316", "logo": "./assets/logos/pistons-de-pira.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
+  {"slug": "acre-dinosaurs", "name": "Acre Dinosaurs", "gm": "Sidney Assunção", "init": "DINO", "color": "#581c87", "logo": "./assets/logos/acre-dinosaurs.png", "w": 0, "l": 0, "pf": 0, "status": "Vice 25-26", "statusClass": "status-contender"},
+  {"slug": "charlotte-dunklipe", "name": "Charlotte DunkLipe", "gm": "Felipe C", "init": "CHA", "color": "#7c3aed", "logo": "./assets/logos/charlotte-dunklipe.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
+  {"slug": "revolution-francaise", "name": "Revolution francaise", "gm": "Filipe Xavier", "init": "FFT", "color": "#b45309", "logo": "./assets/logos/revolution-francaise.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
+  {"slug": "instituto-popovich", "name": "Instituto Popovich", "gm": "Andre Caetano", "init": "IPH", "color": "#166534", "logo": "./assets/logos/instituto-popovich.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
+  {"slug": "imprudente-hotshots", "name": "Imprudente HotShots", "gm": "ANDRE LUIZ SILVA", "init": "IMP", "color": "#ea580c", "logo": "./assets/logos/imprudente-hotshots.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
+  {"slug": "nortz", "name": "Nortz", "gm": "Caio Rogério Amaro Almeida", "init": "NTZ", "color": "#ca8a04", "logo": "./assets/logos/nortz.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
+  {"slug": "patos-team", "name": "Pato's Team", "gm": "Mateus Pato", "init": "PATO", "color": "#facc15", "logo": "./assets/logos/patos-team.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
+  {"slug": "red-hot-blazer-peppers", "name": "Red Hot Blazer Peppers", "gm": "Aleison Götz", "init": "RHBP", "color": "#dc2626", "logo": "./assets/logos/red-hot-blazer-peppers.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
+  {"slug": "team-djalma-jr", "name": "Team Djalma Jr", "gm": "Djalma Júnior", "init": "TDJ", "color": "#111827", "logo": "./assets/logos/team-djalma-jr.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
+  {"slug": "canalhas-do-bem", "name": "Canalhas do Bem", "gm": "Paulo Vitor Campodonio", "init": "CDB", "color": "#059669", "logo": "./assets/logos/canalhas-do-bem.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
+  {"slug": "bears", "name": "Bears", "gm": "Ruan Bastos", "init": "BEAR", "color": "#2563eb", "logo": "./assets/logos/bears.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"}
+];
+
+const TEAM_ALIASES = {
+  "SuperSonics": "Stéfano's SuperSonics",
+  "Stéfano's Supersonics": "Stéfano's SuperSonics",
+  "Stefano's SuperSonics": "Stéfano's SuperSonics",
+  "Stefano's Supersonics": "Stéfano's SuperSonics",
+  "Acre Dinossaur's": "Acre Dinosaurs",
+  "Acre Dinossaur": "Acre Dinosaurs",
+  "Acre Dinossauros": "Acre Dinosaurs",
+  "Canalhas": "Canalhas do Bem"
+};
+
+function normalizeTeamName(name) {
+  return TEAM_ALIASES[name] || name;
+}
+
+function getTeam(name) {
+  const normalized = normalizeTeamName(name);
+  return TEAMS_MASTER.find(t => t.name === normalized) || {
+    name: normalized,
+    gm: "",
+    init: normalized.slice(0, 3).toUpperCase(),
+    color: "#6B2FA0",
+    logo: "./assets/logos/default-team.png"
+  };
+}
+
+function TeamLogo({ team, size = 32 }) {
+  const t = getTeam(team);
+  return (
+    <span className="team-logo-wrap" style={{width:size, height:size, background:t.color}}>
+      <img src={t.logo} alt={t.name} className="team-logo-img" onError={(e) => {
+        e.currentTarget.style.display = 'none';
+        e.currentTarget.parentElement.classList.add('team-logo-fallback');
+        e.currentTarget.parentElement.textContent = t.init;
+      }} />
+    </span>
+  );
+}
+
 const MATCHUPS = [
-  { day: 'SEX', time: '20:30', status: 'PRÉVIA', home: 'SuperSonics', away: 'Canalhas do Bem', scoreH: 0, scoreA: 0, period: 'Sem. 8', colorH: '#7c3aed', colorA: '#059669' },
-  { day: 'SEX', time: '21:15', status: 'AO VIVO', home: 'Ironclads', away: 'Popovich', scoreH: 35, scoreA: 42, period: 'Q2 • 06:42', colorH: '#2563eb', colorA: '#dc2626' },
-  { day: 'SÁB', time: '18:00', status: 'PRÉVIA', home: 'Ghost of Goat', away: 'Paysandu', scoreH: 0, scoreA: 0, period: 'Sem. 8', colorH: '#d97706', colorA: '#0891b2' },
-  { day: 'SÁB', time: '20:00', status: 'PRÉVIA', home: "Splash Bro's", away: 'Nets Nebulosos', scoreH: 0, scoreA: 0, period: 'Sem. 8', colorH: '#0284c7', colorA: '#1d4ed8' },
-  { day: 'DOM', time: '17:00', status: 'PRÉVIA', home: 'Lakers Nation', away: 'Triplo Duplo', scoreH: 0, scoreA: 0, period: 'Sem. 8', colorH: '#7e22ce', colorA: '#15803d' },
+
+  { day: 'SEG', time: '20/10', status: 'PRÉVIA', home: "Stéfano's SuperSonics", away: 'Ghost of goat', scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#15803d', colorA: '#111827' },
+  { day: 'SEG', time: '20/10', status: 'PRÉVIA', home: "Acre Dinosaurs", away: "Wictor's Team", scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#581c87', colorA: '#f59e0b' },
+  { day: 'SEG', time: '20/10', status: 'PRÉVIA', home: 'Canalhas do Bem', away: 'Chugabum Ironclads', scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#059669', colorA: '#4b5563' },
+  { day: 'TER', time: '21/10', status: 'PRÉVIA', home: 'Team Djalma Jr', away: 'Fi du Jequisom', scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#111827', colorA: '#dc2626' },
+  { day: 'TER', time: '21/10', status: 'PRÉVIA', home: 'Red Hot Blazer Peppers', away: "Paysandu Lobo's", scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#dc2626', colorA: '#0891b2' },
+  { day: 'QUA', time: '22/10', status: 'PRÉVIA', home: 'Nortz', away: 'Pistons de Pira', scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#ca8a04', colorA: '#f97316' },
+  { day: 'QUA', time: '22/10', status: 'PRÉVIA', home: 'Instituto Popovich', away: 'Charlotte DunkLipe', scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#166534', colorA: '#7c3aed' },
+  { day: 'QUI', time: '23/10', status: 'PRÉVIA', home: 'Imprudente HotShots', away: 'Revolution francaise', scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#ea580c', colorA: '#b45309' },
+  { day: 'QUI', time: '23/10', status: 'PRÉVIA', home: "Pato's Team", away: 'Bears', scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#facc15', colorA: '#2563eb' },
+
 ];
 
 const STANDINGS = [
-  { pos: 1, name: 'SuperSonics', w: 6, l: 2, pf: 9120, color: '#7c3aed', init: 'SS' },
-  { pos: 2, name: 'Ironclads', w: 6, l: 2, pf: 8945, color: '#2563eb', init: 'IC' },
-  { pos: 3, name: 'Ghost of Goat', w: 5, l: 3, pf: 9011, color: '#d97706', init: 'GG' },
-  { pos: 4, name: "Splash Bro's", w: 5, l: 3, pf: 8802, color: '#0284c7', init: 'SB' },
-  { pos: 5, name: 'Lakers Nation', w: 4, l: 4, pf: 8720, color: '#7e22ce', init: 'LN' },
-  { pos: 6, name: 'Popovich', w: 4, l: 4, pf: 8654, color: '#dc2626', init: 'PO' },
-  { pos: 7, name: 'Canalhas do Bem', w: 3, l: 5, pf: 8501, color: '#059669', init: 'CB' },
-  { pos: 8, name: 'Nets Nebulosos', w: 2, l: 6, pf: 8350, color: '#1d4ed8', init: 'NN' },
+  {"pos": 1, "name": "Stéfano's SuperSonics", "w": 0, "l": 0, "pf": 0, "color": "#15803d", "init": "SS"},
+  {"pos": 2, "name": "Ghost of goat", "w": 0, "l": 0, "pf": 0, "color": "#111827", "init": "GOG"},
+  {"pos": 3, "name": "Wictor's Team", "w": 0, "l": 0, "pf": 0, "color": "#f59e0b", "init": "WIC"},
+  {"pos": 4, "name": "Chugabum Ironclads", "w": 0, "l": 0, "pf": 0, "color": "#4b5563", "init": "CHIR"},
+  {"pos": 5, "name": "Fi du Jequisom", "w": 0, "l": 0, "pf": 0, "color": "#dc2626", "init": "FDJ"},
+  {"pos": 6, "name": "Paysandu Lobo's", "w": 0, "l": 0, "pf": 0, "color": "#0891b2", "init": "PAY"},
+  {"pos": 7, "name": "Pistons de Pira", "w": 0, "l": 0, "pf": 0, "color": "#f97316", "init": "PDP"},
+  {"pos": 8, "name": "Acre Dinosaurs", "w": 0, "l": 0, "pf": 0, "color": "#581c87", "init": "DINO"},
+  {"pos": 9, "name": "Charlotte DunkLipe", "w": 0, "l": 0, "pf": 0, "color": "#7c3aed", "init": "CHA"},
+  {"pos": 10, "name": "Revolution francaise", "w": 0, "l": 0, "pf": 0, "color": "#b45309", "init": "FFT"},
+  {"pos": 11, "name": "Instituto Popovich", "w": 0, "l": 0, "pf": 0, "color": "#166534", "init": "IPH"},
+  {"pos": 12, "name": "Imprudente HotShots", "w": 0, "l": 0, "pf": 0, "color": "#ea580c", "init": "IMP"},
+  {"pos": 13, "name": "Nortz", "w": 0, "l": 0, "pf": 0, "color": "#ca8a04", "init": "NTZ"},
+  {"pos": 14, "name": "Pato's Team", "w": 0, "l": 0, "pf": 0, "color": "#facc15", "init": "PATO"},
+  {"pos": 15, "name": "Red Hot Blazer Peppers", "w": 0, "l": 0, "pf": 0, "color": "#dc2626", "init": "RHBP"},
+  {"pos": 16, "name": "Team Djalma Jr", "w": 0, "l": 0, "pf": 0, "color": "#111827", "init": "TDJ"},
+  {"pos": 17, "name": "Canalhas do Bem", "w": 0, "l": 0, "pf": 0, "color": "#059669", "init": "CDB"},
+  {"pos": 18, "name": "Bears", "w": 0, "l": 0, "pf": 0, "color": "#2563eb", "init": "BEAR"},
 ];
 
 const POWER_RANKINGS = [
-  { rank: 1, name: 'SuperSonics', trend: '↑2', type: 'up', color: '#7c3aed', init: 'SS' },
-  { rank: 2, name: 'Ironclads', trend: '—', type: 'same', color: '#2563eb', init: 'IC' },
-  { rank: 3, name: 'Ghost of Goat', trend: '↑1', type: 'up', color: '#d97706', init: 'GG' },
-  { rank: 4, name: "Splash Bro's", trend: '↓1', type: 'down', color: '#0284c7', init: 'SB' },
-  { rank: 5, name: 'Lakers Nation', trend: '↑3', type: 'up', color: '#7e22ce', init: 'LN' },
+  {"rank": 1, "name": "Stéfano's SuperSonics", "trend": "Pré", "type": "same", "color": "#15803d", "init": "SS"},
+  {"rank": 2, "name": "Ghost of goat", "trend": "Pré", "type": "same", "color": "#111827", "init": "GOG"},
+  {"rank": 3, "name": "Wictor's Team", "trend": "Pré", "type": "same", "color": "#f59e0b", "init": "WIC"},
+  {"rank": 4, "name": "Chugabum Ironclads", "trend": "Pré", "type": "same", "color": "#4b5563", "init": "CHIR"},
+  {"rank": 5, "name": "Fi du Jequisom", "trend": "Pré", "type": "same", "color": "#dc2626", "init": "FDJ"},
+  {"rank": 6, "name": "Paysandu Lobo's", "trend": "Pré", "type": "same", "color": "#0891b2", "init": "PAY"},
+  {"rank": 7, "name": "Pistons de Pira", "trend": "Pré", "type": "same", "color": "#f97316", "init": "PDP"},
+  {"rank": 8, "name": "Acre Dinosaurs", "trend": "Pré", "type": "same", "color": "#581c87", "init": "DINO"},
+  {"rank": 9, "name": "Charlotte DunkLipe", "trend": "Pré", "type": "same", "color": "#7c3aed", "init": "CHA"},
+  {"rank": 10, "name": "Revolution francaise", "trend": "Pré", "type": "same", "color": "#b45309", "init": "FFT"},
+  {"rank": 11, "name": "Instituto Popovich", "trend": "Pré", "type": "same", "color": "#166534", "init": "IPH"},
+  {"rank": 12, "name": "Imprudente HotShots", "trend": "Pré", "type": "same", "color": "#ea580c", "init": "IMP"},
+  {"rank": 13, "name": "Nortz", "trend": "Pré", "type": "same", "color": "#ca8a04", "init": "NTZ"},
+  {"rank": 14, "name": "Pato's Team", "trend": "Pré", "type": "same", "color": "#facc15", "init": "PATO"},
+  {"rank": 15, "name": "Red Hot Blazer Peppers", "trend": "Pré", "type": "same", "color": "#dc2626", "init": "RHBP"},
+  {"rank": 16, "name": "Team Djalma Jr", "trend": "Pré", "type": "same", "color": "#111827", "init": "TDJ"},
+  {"rank": 17, "name": "Canalhas do Bem", "trend": "Pré", "type": "same", "color": "#059669", "init": "CDB"},
+  {"rank": 18, "name": "Bears", "trend": "Pré", "type": "same", "color": "#2563eb", "init": "BEAR"},
 ];
 
 const NEWS_FEED = [
-  { cat: 'DESEMPENHO', catClass: 'cat-perf', time: 'Há 31 minutos', title: 'Jayson Tatum explode na semana e lidera pontuação da liga', desc: 'Ala do SuperSonics teve média de 38.7 pontos, 8.2 rebotes e 6.1 assistências na semana.', bg: 'linear-gradient(135deg, #1e3a5f, #0f2040)', emoji: '🔥' },
-  { cat: 'ANÁLISE', catClass: 'cat-analysis', time: 'Há 2 horas', title: 'Quais times ainda podem brigar pelo título?', desc: 'Analisamos o cenário da liga e os caminhos até o troféu Larry Ball.', bg: 'linear-gradient(135deg, #2d1b69, #0f0a20)', emoji: '🏆' },
-  { cat: 'ENTREVISTA', catClass: 'cat-interview', time: 'Há 4 horas', title: '"Nosso objetivo é o bicampeonato", diz técnico do Ironclads', desc: 'Treinador fala sobre o início da temporada e a expectativa para o playoff.', bg: 'linear-gradient(135deg, #7f1d1d, #450a0a)', emoji: '🎙️' },
-  { cat: 'DRAFT', catClass: 'cat-draft', time: 'Ontem', title: 'Jovens que podem virar steal na próxima temporada', desc: 'Lista traz nomes promissores que podem mudar o futuro das franquias.', bg: 'linear-gradient(135deg, #78350f, #451a03)', emoji: '⭐' },
+
+  { cat: 'PRÉ-TEMPORADA', catClass: 'cat-perf', time: 'Em breve', title: 'AirBall se prepara para a nova temporada', desc: 'Com 18 franquias zeradas, a disputa começa oficialmente no dia 20 de outubro.', bg: 'linear-gradient(135deg, #1e3a5f, #0f2040)', image: './assets/news/pre-temporada-airball.jpg', emoji: '🏀' },
+  { cat: 'DRAFT', catClass: 'cat-draft', time: '10 de outubro', title: 'Draft AirBall 2026/27 já tem data marcada', desc: 'Os GMs terão a chance de montar seus elencos para a nova corrida pelo título.', bg: 'linear-gradient(135deg, #78350f, #451a03)', image: './assets/news/draft-airball.jpg', emoji: '⭐' },
+  { cat: 'SEEDS', catClass: 'cat-analysis', time: '8 de outubro', title: 'Sorteio dos seeds abre oficialmente a temporada', desc: 'A ordem inicial será definida antes do draft e promete movimentar a liga.', bg: 'linear-gradient(135deg, #2d1b69, #0f0a20)', image: './assets/news/sorteio-seeds.jpg', emoji: '🎲' },
+  { cat: 'HALL DA FAMA', catClass: 'cat-interview', time: '2025-26', title: "Stéfano's Supersonics entra para a história", desc: 'Franquia foi campeã da temporada 25-26 com Jalen Duren brilhando nos playoffs.', bg: 'linear-gradient(135deg, #7f1d1d, #450a0a)', image: './assets/news/campeao-2526.jpg', emoji: '🏆' },
+
 ];
 
 const VIDEOS = [
@@ -600,15 +788,47 @@ const VIDEOS = [
 ];
 
 const TEAMS_DATA = [
-  { name: 'SuperSonics', gm: 'Stéfano', w: 6, l: 2, pf: 9120, status: 'Contender', statusClass: 'status-contender', color: '#7c3aed', init: 'SS' },
-  { name: 'Canalhas do Bem', gm: 'Caio', w: 3, l: 5, pf: 8501, status: 'Playoff Hunt', statusClass: 'status-hunt', color: '#059669', init: 'CB' },
-  { name: 'Ironclads', gm: 'Hiago', w: 6, l: 2, pf: 8945, status: 'Contender', statusClass: 'status-contender', color: '#2563eb', init: 'IC' },
-  { name: 'Ghost of Goat', gm: 'Marcos', w: 5, l: 3, pf: 9011, status: 'Contender', statusClass: 'status-contender', color: '#d97706', init: 'GG' },
-  { name: "Splash Bro's", gm: 'Rafael', w: 5, l: 3, pf: 8802, status: 'Playoff Hunt', statusClass: 'status-hunt', color: '#0284c7', init: 'SB' },
-  { name: 'Lakers Nation', gm: 'Guilherme', w: 4, l: 4, pf: 8720, status: 'Playoff Hunt', statusClass: 'status-hunt', color: '#7e22ce', init: 'LN' },
-  { name: 'Popovich', gm: 'André', w: 4, l: 4, pf: 8654, status: 'Playoff Hunt', statusClass: 'status-hunt', color: '#dc2626', init: 'PO' },
-  { name: 'Nets Nebulosos', gm: 'Felipe', w: 2, l: 6, pf: 8350, status: 'Rebuild', statusClass: 'status-rebuild', color: '#1d4ed8', init: 'NN' },
+  {"name": "Stéfano's SuperSonics", "gm": "Stéfano Cecin", "w": 0, "l": 0, "pf": 0, "status": "Campeão 25-26", "statusClass": "status-contender", "color": "#15803d", "init": "SS", "champion": true},
+  {"name": "Ghost of goat", "gm": "GABRIEL Silva", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#111827", "init": "GOG", "champion": false},
+  {"name": "Wictor's Team", "gm": "Wictor Cezar", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#f59e0b", "init": "WIC", "champion": false},
+  {"name": "Chugabum Ironclads", "gm": "Hiago Valverde", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#4b5563", "init": "CHIR", "champion": false},
+  {"name": "Fi du Jequisom", "gm": "Darlan Machado Pinto", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#dc2626", "init": "FDJ", "champion": false},
+  {"name": "Paysandu Lobo's", "gm": "Geraldo Oliveira Jr", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#0891b2", "init": "PAY", "champion": false},
+  {"name": "Pistons de Pira", "gm": "Marino Mondek", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#f97316", "init": "PDP", "champion": false},
+  {"name": "Acre Dinosaurs", "gm": "Sidney Assunção", "w": 0, "l": 0, "pf": 0, "status": "Vice 25-26", "statusClass": "status-contender", "color": "#581c87", "init": "DINO", "champion": false},
+  {"name": "Charlotte DunkLipe", "gm": "Felipe C", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#7c3aed", "init": "CHA", "champion": false},
+  {"name": "Revolution francaise", "gm": "Filipe Xavier", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#b45309", "init": "FFT", "champion": false},
+  {"name": "Instituto Popovich", "gm": "Andre Caetano", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#166534", "init": "IPH", "champion": false},
+  {"name": "Imprudente HotShots", "gm": "ANDRE LUIZ SILVA", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#ea580c", "init": "IMP", "champion": false},
+  {"name": "Nortz", "gm": "Caio Rogério Amaro Almeida", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#ca8a04", "init": "NTZ", "champion": false},
+  {"name": "Pato's Team", "gm": "Mateus Pato", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#facc15", "init": "PATO", "champion": false},
+  {"name": "Red Hot Blazer Peppers", "gm": "Aleison Götz", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#dc2626", "init": "RHBP", "champion": false},
+  {"name": "Team Djalma Jr", "gm": "Djalma Júnior", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#111827", "init": "TDJ", "champion": false},
+  {"name": "Canalhas do Bem", "gm": "Paulo Vitor Campodonio", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#059669", "init": "CDB", "champion": false},
+  {"name": "Bears", "gm": "Ruan Bastos", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#2563eb", "init": "BEAR", "champion": false},
 ];
+
+const FINAL_STANDINGS_2526 = [
+  {"rank": 1, "team": "Stéfano's SuperSonics", "gm": "Stéfano Cecin", "rec": "14-3-0"},
+  {"rank": 2, "team": "Acre Dinosaurs", "gm": "Sidney Assunção", "rec": "12-5-0"},
+  {"rank": 3, "team": "Canalhas do Bem", "gm": "Paulo Vitor Campodonio", "rec": "11-6-0"},
+  {"rank": 4, "team": "Team Djalma Jr", "gm": "Djalma Júnior", "rec": "10-7-0"},
+  {"rank": 5, "team": "Red Hot Blazer Peppers", "gm": "Aleison Götz", "rec": "13-4-0"},
+  {"rank": 6, "team": "Fi du Jequisom", "gm": "Darlan Machado Pinto", "rec": "11-6-0"},
+  {"rank": 7, "team": "Nortz", "gm": "Caio Rogério Amaro Almeida", "rec": "12-5-0"},
+  {"rank": 8, "team": "Chugabum Ironclads", "gm": "Hiago Valverde", "rec": "10-7-0"},
+  {"rank": 9, "team": "Revolution francaise", "gm": "Filipe Xavier", "rec": "10 vitórias"},
+  {"rank": 10, "team": "Instituto Popovich", "gm": "Andre Caetano", "rec": "9 vitórias"},
+  {"rank": 11, "team": "Imprudente HotShots", "gm": "ANDRE LUIZ SILVA", "rec": "7 vitórias"},
+  {"rank": 12, "team": "Bears", "gm": "Ruan Bastos", "rec": "7 vitórias"},
+  {"rank": 13, "team": "Pato's Team", "gm": "Mateus Pato", "rec": "6 vitórias"},
+  {"rank": 14, "team": "Paysandu Lobo's", "gm": "Geraldo Oliveira Jr", "rec": "6 vitórias"},
+  {"rank": 15, "team": "Wictor's Team", "gm": "Wictor Cezar", "rec": "5 vitórias"},
+  {"rank": 16, "team": "Pistons de Pira", "gm": "Marino Mondek", "rec": "5 vitórias"},
+  {"rank": 17, "team": "Charlotte DunkLipe", "gm": "Felipe C", "rec": "3 vitórias"},
+  {"rank": 18, "team": "Ghost of goat", "gm": "GABRIEL Silva", "rec": "2 vitórias"}
+];
+
 
 const RULES_DATA = [
   { icon: '📋', title: 'Formato da Liga', desc: '10 times, temporada regular de 14 semanas, confrontos head-to-head. Os 6 melhores avançam aos playoffs.' },
@@ -622,37 +842,49 @@ const RULES_DATA = [
 ];
 
 const CALENDAR_DATA = [
-  { day: '14', month: 'FEV', name: 'Draft Night', desc: 'Draft de Snake, 15 rodadas, 90s/pick', status: 'REALIZADO', cls: 'cal-done' },
-  { day: '01', month: 'MAR', name: 'Início da Temporada', desc: 'Semana 1 começa — que o melhor vença!', status: 'REALIZADO', cls: 'cal-done' },
-  { day: '20', month: 'MAI', name: 'Trade Deadline', desc: 'Última data para trades nesta temporada', status: 'EM BREVE', cls: 'cal-next' },
-  { day: '10', month: 'JUN', name: 'Playoffs — Rodada 1', desc: 'Semifinais da Airball Dynasty', status: 'FUTURO', cls: 'cal-future' },
-  { day: '24', month: 'JUN', name: 'Final AirBall', desc: 'A grande decisão — Best of 3', status: 'FUTURO', cls: 'cal-future' },
-  { day: '05', month: 'JUL', name: 'AirBall Awards', desc: 'MVP, Coach, Rookie e Troféu Larry Ball', status: 'FUTURO', cls: 'cal-future' },
+
+  { day: '08', month: 'OUT', name: 'Sorteio dos Seeds', desc: 'Definição oficial dos seeds e ordem inicial da temporada.', status: 'PRÉ-TEMPORADA', cls: 'cal-next' },
+  { day: '10', month: 'OUT', name: 'Draft AirBall 2026/27', desc: 'Draft oficial da nova temporada da AirBall Dynasty League.', status: 'DRAFT', cls: 'cal-future' },
+  { day: '20', month: 'OUT', name: 'Começo da Temporada', desc: 'Semana 1 começa oficialmente na AirBall Dynasty League.', status: 'ABERTURA', cls: 'cal-future' },
+
 ];
 
 const HOF_DATA = [
-  { year: '2025', icon: '🏆', title: 'Campeão', name: 'SuperSonics', sub: 'GM: Stéfano — 1ª temporada' },
-  { year: '2025', icon: '🥈', title: 'Vice-Campeão', name: 'Ghost of Goat', sub: 'GM: Marcos — Finalista histórico' },
-  { year: '2025', icon: '⭐', title: 'MVP da Temporada', name: 'Giannis A.', sub: '2840 pts • SuperSonics' },
-  { year: '2025', icon: '📈', title: 'Maior Pontuação', name: 'SuperSonics', sub: 'Semana 9 • 1.204 pts' },
-  { year: '2025', icon: '🎯', title: 'Rookie do Ano', name: 'Nets Nebulosos', sub: 'GM: Felipe' },
-  { year: '2025', icon: '💼', title: 'Melhor GM', name: 'Stéfano', sub: 'SuperSonics — Draft perfeito' },
+
+  { year: '2025-26', icon: '🏆', title: 'Campeão', name: "Stéfano's Supersonics", sub: 'GM: Stéfano Cecin' },
+  { year: '2025-26', icon: '🥈', title: 'Vice-Campeão', name: "Acre Dinossaur's", sub: 'GM: Sidney Assunção' },
+  { year: '2025-26', icon: '⭐', title: 'MVP da Temporada', name: 'Nikola Jokic', sub: 'Temporada regular dominante' },
+  { year: '2025-26', icon: '🔥', title: 'MVP dos Playoffs', name: 'Jalen Duren', sub: "Stéfano's Supersonics" },
+  { year: '2025-26', icon: '🎯', title: 'Rookie do Ano', name: 'Keyonte George', sub: 'Melhor novato da temporada' },
+
 ];
 
 const TRADES_DATA = [
-  { week: 'SEMANA 6 • 2026/27', status: 'APROVADO', cls: 'trade-approved', teamA: 'SuperSonics', teamB: 'Canalhas do Bem', givesA: ['Jaylen Brown', 'Pick 2ª Rd 2027'], givesB: ['Damian Lillard', 'Pick 1ª Rd 2027'], analysis: 'Troca equilibrada. SuperSonics melhora o backcourt enquanto Canalhas ganha profundidade para o stretch.' },
-  { week: 'SEMANA 7 • 2026/27', status: 'PENDENTE', cls: 'trade-pending', teamA: 'Ironclads', teamB: "Splash Bro's", givesA: ['Kevin Durant', 'Pick 3ª Rd'], givesB: ['Anthony Davis', 'Draymond Green'], analysis: 'Trade polêmico. Comissão analisa equilíbrio da troca antes de aprovar.' },
+
+  { week: 'PRÉ-TEMPORADA • 2026/27', status: 'RUMOR', cls: 'trade-pending', teamA: "Stéfano's SuperSonics", teamB: 'Acre Dinosaurs', givesA: ['Pick futura', 'Jogador a definir'], givesB: ['Veterano a definir'], analysis: 'Espaço reservado para registrar as trades oficiais da AirBall.' },
+  { week: 'PRÉ-TEMPORADA • 2026/27', status: 'RUMOR', cls: 'trade-pending', teamA: 'Canalhas do Bem', teamB: 'Chugabum Ironclads', givesA: ['Ativo a definir'], givesB: ['Pick a definir'], analysis: 'Use esta área para atualizar rumores, aprovações e análises da comissão.' },
+
 ];
 
 const DRAFT_ORDER = [
-  { pick: 1, name: 'Nets Nebulosos', gm: 'Felipe', color: '#1d4ed8', init: 'NN', badge: 'LOTTERY', cls: 'pick-lottery' },
-  { pick: 2, name: 'Canalhas do Bem', gm: 'Caio', color: '#059669', init: 'CB', badge: 'LOTTERY', cls: 'pick-lottery' },
-  { pick: 3, name: 'Popovich', gm: 'André', color: '#dc2626', init: 'PO', badge: 'LOTTERY', cls: 'pick-lottery' },
-  { pick: 4, name: 'Lakers Nation', gm: 'Guilherme', color: '#7e22ce', init: 'LN', badge: 'ORIGINAL', cls: 'pick-orig' },
-  { pick: 5, name: "Splash Bro's", gm: 'Rafael', color: '#0284c7', init: 'SB', badge: 'ORIGINAL', cls: 'pick-orig' },
-  { pick: 6, name: 'Ghost of Goat', gm: 'Marcos', color: '#d97706', init: 'GG', badge: 'ORIGINAL', cls: 'pick-orig' },
-  { pick: 7, name: 'Ironclads', gm: 'Hiago', color: '#2563eb', init: 'IC', badge: 'ORIGINAL', cls: 'pick-orig' },
-  { pick: 8, name: 'SuperSonics', gm: 'Stéfano', color: '#7c3aed', init: 'SS', badge: 'ORIGINAL', cls: 'pick-orig' },
+  {"pick": 1, "name": "Stéfano's SuperSonics", "gm": "Stéfano Cecin", "color": "#15803d", "init": "SS", "badge": "SEED 1", "cls": "pick-orig"},
+  {"pick": 2, "name": "Ghost of goat", "gm": "GABRIEL Silva", "color": "#111827", "init": "GOG", "badge": "SEED 2", "cls": "pick-orig"},
+  {"pick": 3, "name": "Wictor's Team", "gm": "Wictor Cezar", "color": "#f59e0b", "init": "WIC", "badge": "SEED 3", "cls": "pick-orig"},
+  {"pick": 4, "name": "Chugabum Ironclads", "gm": "Hiago Valverde", "color": "#4b5563", "init": "CHIR", "badge": "SEED 4", "cls": "pick-orig"},
+  {"pick": 5, "name": "Fi du Jequisom", "gm": "Darlan Machado Pinto", "color": "#dc2626", "init": "FDJ", "badge": "SEED 5", "cls": "pick-orig"},
+  {"pick": 6, "name": "Paysandu Lobo's", "gm": "Geraldo Oliveira Jr", "color": "#0891b2", "init": "PAY", "badge": "SEED 6", "cls": "pick-orig"},
+  {"pick": 7, "name": "Pistons de Pira", "gm": "Marino Mondek", "color": "#f97316", "init": "PDP", "badge": "SEED 7", "cls": "pick-orig"},
+  {"pick": 8, "name": "Acre Dinosaurs", "gm": "Sidney Assunção", "color": "#581c87", "init": "DINO", "badge": "SEED 8", "cls": "pick-orig"},
+  {"pick": 9, "name": "Charlotte DunkLipe", "gm": "Felipe C", "color": "#7c3aed", "init": "CHA", "badge": "SEED 9", "cls": "pick-orig"},
+  {"pick": 10, "name": "Revolution francaise", "gm": "Filipe Xavier", "color": "#b45309", "init": "FFT", "badge": "SEED 10", "cls": "pick-orig"},
+  {"pick": 11, "name": "Instituto Popovich", "gm": "Andre Caetano", "color": "#166534", "init": "IPH", "badge": "SEED 11", "cls": "pick-orig"},
+  {"pick": 12, "name": "Imprudente HotShots", "gm": "ANDRE LUIZ SILVA", "color": "#ea580c", "init": "IMP", "badge": "SEED 12", "cls": "pick-orig"},
+  {"pick": 13, "name": "Nortz", "gm": "Caio Rogério Amaro Almeida", "color": "#ca8a04", "init": "NTZ", "badge": "SEED 13", "cls": "pick-orig"},
+  {"pick": 14, "name": "Pato's Team", "gm": "Mateus Pato", "color": "#facc15", "init": "PATO", "badge": "SEED 14", "cls": "pick-orig"},
+  {"pick": 15, "name": "Red Hot Blazer Peppers", "gm": "Aleison Götz", "color": "#dc2626", "init": "RHBP", "badge": "SEED 15", "cls": "pick-orig"},
+  {"pick": 16, "name": "Team Djalma Jr", "gm": "Djalma Júnior", "color": "#111827", "init": "TDJ", "badge": "SEED 16", "cls": "pick-orig"},
+  {"pick": 17, "name": "Canalhas do Bem", "gm": "Paulo Vitor Campodonio", "color": "#059669", "init": "CDB", "badge": "SEED 17", "cls": "pick-orig"},
+  {"pick": 18, "name": "Bears", "gm": "Ruan Bastos", "color": "#2563eb", "init": "BEAR", "badge": "SEED 18", "cls": "pick-orig"},
 ];
 
 // ==================== COMPONENTS ====================
@@ -671,7 +903,7 @@ function TopBar({ activePage, setPage }) {
       <div className="topbar-right">
         <span className="topbar-season">TEMPORADA 2026/27</span>
         <span>•</span>
-        <span>SEMANA 8</span>
+        <span>SEMANA 1</span>
       </div>
     </div>
   );
@@ -688,15 +920,15 @@ function Header() {
         <div style={{width:1, height:32, background:'rgba(255,255,255,0.1)', margin:'0 8px'}}/>
         <div className="logo-area">
           <img 
-  src="./assets/Logo_Airball.png" 
-  alt="Airball Dynasty League" 
-  style={{
-    height: '56px',
-    width: 'auto',
-    display: 'block',
-    filter: 'drop-shadow(0 2px 8px rgba(249,115,22,0.35))'
-  }} 
-/>
+            src="./assets/Logo_Airball.png" 
+            alt="Airball Dynasty League" 
+            style={{
+              height: '56px',
+              width: 'auto',
+              display: 'block',
+              filter: 'drop-shadow(0 2px 8px rgba(249,115,22,0.35))'
+            }} 
+          />
         </div>
       </div>
       <div className="header-right">
@@ -704,19 +936,14 @@ function Header() {
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
           <input placeholder="Buscar notícias, times, jogadores..." />
         </div>
-        <div className="user-area">
-          <div>
-            <div className="user-greeting">Olá,</div>
-            <div className="user-name">Stéfano</div>
-          </div>
-          <div className="user-avatar">ST</div>
-        </div>
       </div>
     </header>
   );
 }
 
 function MatchupCard({ m }) {
+  const home = getTeam(m.home);
+  const away = getTeam(m.away);
   return (
     <div className="matchup-card">
       <div className="matchup-time">
@@ -725,16 +952,16 @@ function MatchupCard({ m }) {
       </div>
       <div className="matchup-teams">
         <div className="team-mini">
-          <div className="team-mini-icon" style={{background:m.colorH}}>{m.home.slice(0,2).toUpperCase()}</div>
-          <div className="team-mini-name">{m.home}</div>
+          <TeamLogo team={m.home} size={30} />
+          <div className="team-mini-name">{home.name}</div>
         </div>
         <div className="vs-score">
           <div className="score-display">{m.scoreH} — {m.scoreA}</div>
           <div className="score-period">{m.period}</div>
         </div>
         <div className="team-mini">
-          <div className="team-mini-icon" style={{background:m.colorA}}>{m.away.slice(0,2).toUpperCase()}</div>
-          <div className="team-mini-name">{m.away}</div>
+          <TeamLogo team={m.away} size={30} />
+          <div className="team-mini-name">{away.name}</div>
         </div>
       </div>
     </div>
@@ -746,7 +973,7 @@ function MatchupsStrip() {
     <div className="matchups-strip">
       <div className="matchups-scroll">
         <div className="week-card">
-          <div className="week-label">SEM 8</div>
+          <div className="week-label">SEM 1</div>
           <button className="week-btn">VER CALENDÁRIO</button>
         </div>
         {MATCHUPS.map((m, i) => <MatchupCard key={i} m={m} />)}
@@ -759,38 +986,41 @@ function FeaturedNews() {
   return (
     <div className="featured-card">
       <div className="featured-bg"/>
+      <div className="news-image-layer" style={{backgroundImage:"url('./assets/news/destaque-home.jpg')"}}/>
       <div className="court-lines"/>
       <div className="ball-deco"/>
+      <div style={{position:'absolute',inset:0,background:'linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.22) 100%)'}}/>
       <div className="featured-content">
         <span className="featured-badge">
           <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           DESTAQUE
         </span>
-        <h1 className="featured-title">SUPERSONICS ASSUMEM O TOPO DA AIRBALL</h1>
+        <h1 className="featured-title">AIRBALL INICIA NOVA ERA COM 18 FRANQUIAS</h1>
         <div className="featured-bullets">
-          <div className="featured-bullet">Vitória dominante sobre o Canalhas do Bem</div>
-          <div className="featured-bullet">Time tem o melhor ataque e defesa da liga</div>
-          <div className="featured-bullet">MVP da semana: Ray Allen Jr.</div>
+          <div className="featured-bullet">Temporada começa oficialmente em 20 de outubro</div>
+          <div className="featured-bullet">Draft marcado para 10 de outubro</div>
+          <div className="featured-bullet">Stéfano's Supersonics defende o título 25-26</div>
         </div>
         <div className="featured-footer">
           <div className="featured-mvp">
-            <span className="mvp-icon">🏅</span>
+            <span className="mvp-icon">👑</span>
             <div>
-              <div className="mvp-label">MVP DA SEMANA</div>
-              <div className="mvp-name">Ray Allen Jr.</div>
+              <div className="mvp-label">CAMPEÃO ATUAL</div>
+              <div className="mvp-name">Stéfano's Supersonics</div>
             </div>
           </div>
-          <span className="featured-time">Há 15 minutos</span>
+          <span className="featured-time">Pré-temporada</span>
         </div>
       </div>
     </div>
   );
 }
 
-function SideNews({ gradient, catClass, cat, title, desc }) {
+function SideNews({ gradient, catClass, cat, title, desc, image }) {
   return (
     <div className="side-news">
       <div className="side-news-bg" style={{background: gradient}}/>
+      {image && <div className="news-image-layer" style={{backgroundImage:`url(${image})`}}/>}
       <div style={{position:'absolute',inset:0,background:'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.15) 100%)'}}/>
       <div className="side-news-content">
         <span className={`news-cat ${catClass}`}>{cat}</span>
@@ -809,7 +1039,7 @@ function StandingsCard() {
         <span className="sidebar-card-title">🏅 Classificação AirBall</span>
         <span className="sidebar-card-season">2026/27</span>
       </div>
-      <div className="sidebar-card-body">
+      <div className="sidebar-card-body scroll-card-body">
         <table className="standings-table">
           <thead>
             <tr>
@@ -826,7 +1056,7 @@ function StandingsCard() {
                 <td><span className={`rank-num ${rankClass(t.pos)}`}>{t.pos}</span></td>
                 <td>
                   <div className="team-cell">
-                    <span className="team-dot" style={{background:t.color}}/>
+                    <TeamLogo team={t.name} size={24} />
                     <span className="team-name-small">{t.name}</span>
                   </div>
                 </td>
@@ -847,25 +1077,23 @@ function PowerRankingsCard() {
     <div className="sidebar-card">
       <div className="sidebar-card-header">
         <span className="sidebar-card-title">⚡ Power Rankings</span>
-        <span className="sidebar-card-season">SEM. 8</span>
+        <span className="sidebar-card-season">PRÉ-TEMP.</span>
       </div>
       <div className="sidebar-card-body">
-        <div className="power-list">
+        <div className="power-list scroll-card-body">
           {POWER_RANKINGS.map(t => (
             <div className="power-item" key={t.rank}>
               <span className="power-rank">{t.rank}</span>
-              <div className="power-icon" style={{background:t.color}}>{t.init}</div>
+              <TeamLogo team={t.name} size={32} />
               <div className="power-info">
                 <div className="power-name">{t.name}</div>
-                <div className={`power-trend trend-${t.type}`}>
-                  {t.trend === '—' ? '— Manteve' : t.type === 'up' ? `${t.trend} Subiu` : `${t.trend} Caiu`}
-                </div>
+                <div className={`power-trend trend-${t.type}`}>Pré-temporada</div>
               </div>
             </div>
           ))}
         </div>
         <div className="sidebar-link-row">
-          <a className="sidebar-link" href="#">Ver ranking completo →</a>
+          <a className="sidebar-link" href="#">Ranking completo →</a>
         </div>
       </div>
     </div>
@@ -873,24 +1101,26 @@ function PowerRankingsCard() {
 }
 
 const SIDEBAR_TRADES = [
+
   {
-    week: 'SEM. 6',
-    status: 'APROVADO',
-    approved: true,
-    teamA: { name: 'SuperSonics', init: 'SS', color: '#7c3aed' },
-    teamB: { name: 'Canalhas', init: 'CB', color: '#059669' },
-    gives: ['Jaylen Brown', 'Pick 2ª Rd'],
-    gets:  ['D. Lillard', 'Pick 1ª Rd'],
-  },
-  {
-    week: 'SEM. 7',
-    status: 'PENDENTE',
+    week: 'PRÉ-TEMP.',
+    status: 'RUMOR',
     approved: false,
-    teamA: { name: 'Ironclads', init: 'IC', color: '#2563eb' },
-    teamB: { name: "Splash Bro's", init: 'SB', color: '#0284c7' },
-    gives: ['Kevin Durant', 'Pick 3ª Rd'],
-    gets:  ['Anthony Davis', 'Draymond G.'],
+    teamA: { name: "Stéfano's SuperSonics", init: 'SS', color: '#15803d' },
+    teamB: { name: 'Acre Dinosaurs', init: 'DINO', color: '#581c87' },
+    gives: ['Pick futura', 'Jogador a definir'],
+    gets:  ['Veterano a definir'],
   },
+  {
+    week: 'PRÉ-TEMP.',
+    status: 'RUMOR',
+    approved: false,
+    teamA: { name: 'Canalhas do Bem', init: 'CDB', color: '#059669' },
+    teamB: { name: 'Chugabum Ironclads', init: 'CHIR', color: '#4b5563' },
+    gives: ['Ativo a definir'],
+    gets:  ['Pick a definir'],
+  },
+
 ];
 
 function TradeArt({ teamA, teamB }) {
@@ -961,7 +1191,7 @@ function LatestTradesCard() {
     <div className="sidebar-card">
       <div className="sidebar-card-header">
         <span className="sidebar-card-title">🔄 Últimas Trades</span>
-        <span className="sidebar-card-season">SEM. 8</span>
+        <span className="sidebar-card-season">PRÉ-TEMP.</span>
       </div>
       <div style={{display:'flex', flexDirection:'column', gap:0}}>
         {SIDEBAR_TRADES.map((t, i) => (
@@ -973,7 +1203,6 @@ function LatestTradesCard() {
           onMouseEnter={e => e.currentTarget.style.background='#f8f4ff'}
           onMouseLeave={e => e.currentTarget.style.background=''}
           >
-            {/* Header row */}
             <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:10}}>
               <span style={{fontFamily:'Oswald,sans-serif', fontSize:11, color:'#888', letterSpacing:'1px', fontWeight:600}}>{t.week}</span>
               <span style={{
@@ -982,37 +1211,27 @@ function LatestTradesCard() {
                 color: t.approved ? '#065f46' : '#92400e',
               }}>{t.status}</span>
             </div>
-
-            {/* Visual art */}
-            <TradeArt teamA={t.teamA} teamB={t.teamB} />
-
-            {/* Players exchanged */}
-            <div style={{display:'grid', gridTemplateColumns:'1fr auto 1fr', gap:4, marginTop:10, alignItems:'start'}}>
+            <div style={{display:'grid', gridTemplateColumns:'1fr auto 1fr', alignItems:'center', gap:10, marginBottom:10}}>
+              <div style={{display:'flex', alignItems:'center', gap:8}}>
+                <TeamLogo team={t.teamA.name} size={34} />
+                <strong style={{fontSize:12}}>{getTeam(t.teamA.name).name}</strong>
+              </div>
+              <span style={{color:'#F97316', fontWeight:800}}>⇄</span>
+              <div style={{display:'flex', alignItems:'center', gap:8, justifyContent:'flex-end'}}>
+                <strong style={{fontSize:12, textAlign:'right'}}>{getTeam(t.teamB.name).name}</strong>
+                <TeamLogo team={t.teamB.name} size={34} />
+              </div>
+            </div>
+            <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:8}}>
               <div>
-                {t.gives.map((p, j) => (
-                  <div key={j} style={{fontSize:10, color:'#555', fontWeight:500, padding:'1px 0', display:'flex', alignItems:'center', gap:4}}>
-                    <span style={{width:5, height:5, borderRadius:'50%', background:t.teamA.color, display:'inline-block', flexShrink:0}}/>
-                    {p}
-                  </div>
-                ))}
+                {t.gives.map((p, j) => <div key={j} style={{fontSize:10, color:'#555', padding:'1px 0'}}>• {p}</div>)}
               </div>
-              <div style={{textAlign:'center', paddingTop:2}}>
-                <span style={{fontSize:14, color:'#F97316', fontWeight:700}}>⇄</span>
-              </div>
-              <div style={{textAlign:'right'}}>
-                {t.gets.map((p, j) => (
-                  <div key={j} style={{fontSize:10, color:'#555', fontWeight:500, padding:'1px 0', display:'flex', alignItems:'center', justifyContent:'flex-end', gap:4}}>
-                    {p}
-                    <span style={{width:5, height:5, borderRadius:'50%', background:t.teamB.color, display:'inline-block', flexShrink:0}}/>
-                  </div>
-                ))}
+              <div>
+                {t.gets.map((p, j) => <div key={j} style={{fontSize:10, color:'#555', padding:'1px 0', textAlign:'right'}}>• {p}</div>)}
               </div>
             </div>
           </div>
         ))}
-      </div>
-      <div className="sidebar-link-row">
-        <a className="sidebar-link" href="#">Ver todas as trades →</a>
       </div>
     </div>
   );
@@ -1020,16 +1239,21 @@ function LatestTradesCard() {
 
 function NewsFeed() {
   return (
-    <div>
+    <>
       <div className="section-header">
-        <span className="section-title">Últimas Notícias</span>
-        <span className="section-more">Ver tudo →</span>
+        <div className="section-title">Últimas Notícias</div>
+        <div className="section-more">Ver todas →</div>
       </div>
       <div className="news-feed">
         {NEWS_FEED.map((n, i) => (
           <div className="feed-item" key={i}>
-            <div className="feed-thumb" style={{background:n.bg}}>
-              <span style={{fontSize:28}}>{n.emoji}</span>
+            <div className="feed-thumb" style={{
+              background: n.image ? `${n.bg}, url(${n.image})` : n.bg,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              color: 'white'
+            }}>
+              {!n.image && n.emoji}
             </div>
             <div className="feed-content">
               <div className="feed-top">
@@ -1038,16 +1262,16 @@ function NewsFeed() {
                 <div className="feed-desc">{n.desc}</div>
               </div>
               <div className="feed-meta">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 <span className="feed-time">{n.time}</span>
               </div>
             </div>
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 }
+
 
 function HomePage() {
   return (
@@ -1058,8 +1282,8 @@ function HomePage() {
           <div>
             <div className="news-grid">
               <FeaturedNews />
-              <SideNews gradient="linear-gradient(135deg, #2d1b69, #0f0a20)" catClass="cat-rules" cat="REGRAS" title="COMISSÃO DEFINE NOVA REGRA PARA TANKING" desc="Medida busca mais equilíbrio e competitividade na liga." />
-              <SideNews gradient="linear-gradient(135deg, #064e3b, #022c22)" catClass="cat-market" cat="MERCADO" title="TRADE CENTER ESQUENTA ANTES DA DEADLINE" desc="Veja as negociações mais comentadas da semana." />
+              <SideNews gradient="linear-gradient(135deg, #2d1b69, #0f0a20)" image="./assets/news/sorteio-seeds.jpg" catClass="cat-rules" cat="SEEDS" title="SORTEIO DOS SEEDS SERÁ DIA 8 DE OUTUBRO" desc="A ordem inicial da temporada será definida antes do draft." />
+              <SideNews gradient="linear-gradient(135deg, #064e3b, #022c22)" image="./assets/news/draft-airball.jpg" catClass="cat-market" cat="DRAFT" title="DRAFT AIRBALL MARCADO PARA 10 DE OUTUBRO" desc="Os 18 GMs se preparam para montar os elencos da nova temporada." />
             </div>
             <NewsFeed />
           </div>
@@ -1079,15 +1303,18 @@ function TeamsPage() {
     <div className="main-wrap">
       <div className="page-hero">
         <div className="page-hero-title">🏀 Franquias</div>
-        <div className="page-hero-sub">Temporada 2026/27 • 8 franquias disputando o troféu Larry Ball</div>
+        <div className="page-hero-sub">Temporada 2026/27 • 18 franquias zeradas na disputa pelo troféu Larry Ball</div>
       </div>
       <div className="teams-grid">
         {TEAMS_DATA.map((t, i) => (
           <div className="team-card" key={i} style={{borderColor:t.color}}>
             <div className="team-card-top">
-              <div className="team-card-icon" style={{background:t.color}}>{t.init}</div>
+              <TeamLogo team={t.name} size={52} />
               <div>
-                <div className="team-card-name">{t.name}</div>
+                <div className="team-card-name">
+                  {t.name}
+                  {t.champion && <span className="champion-crown" title="Campeão 25-26">👑</span>}
+                </div>
                 <div className="team-card-gm">GM: {t.gm}</div>
               </div>
             </div>
@@ -1109,9 +1336,35 @@ function TeamsPage() {
           </div>
         ))}
       </div>
+
+      <div className="final-standings-card">
+        <div className="sidebar-card-header">
+          <span className="sidebar-card-title">Classificação Final 25-26</span>
+          <span className="sidebar-card-season">FINAL STANDINGS</span>
+        </div>
+        <div className="final-standings-list">
+          {FINAL_STANDINGS_2526.map(row => (
+            <div className="final-row" key={row.rank}>
+              <div className="final-rank">{row.rank}</div>
+              <div className="final-team-cell">
+                <TeamLogo team={row.team} size={34} />
+                <div>
+                  <div className="final-team-name">
+                    {row.team}
+                    {row.rank === 1 && <span className="champion-crown">👑</span>}
+                  </div>
+                  <div className="final-gm">GM: {row.gm}</div>
+                </div>
+              </div>
+              <div className="final-rec">{row.rec}</div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
+
 
 function RulesPage() {
   return (
@@ -1164,7 +1417,7 @@ function HallOfFamePage() {
     <div className="main-wrap">
       <div className="page-hero">
         <div className="page-hero-title">🏛️ Hall da Fama</div>
-        <div className="page-hero-sub">Os imortais da Airball Dynasty League • Since FEV 2025</div>
+        <div className="page-hero-sub">Os imortais da Airball Dynasty League • Temporada 25-26</div>
       </div>
       <div className="hof-grid">
         {HOF_DATA.map((h, i) => (
@@ -1186,7 +1439,7 @@ function TradesPage() {
     <div className="main-wrap">
       <div className="page-hero">
         <div className="page-hero-title">🔄 Trade Center</div>
-        <div className="page-hero-sub">Negociações da temporada • Deadline: 20 de Maio</div>
+        <div className="page-hero-sub">Negociações da temporada • espaço para rumores, aprovações e análises</div>
       </div>
       <div className="trades-grid">
         {TRADES_DATA.map((t, i) => (
@@ -1197,18 +1450,24 @@ function TradesPage() {
             </div>
             <div className="trade-body">
               <div className="trade-side">
-                <div className="trade-team-name">{t.teamA} recebe:</div>
+                <div style={{display:'flex', alignItems:'center', gap:8, marginBottom:8}}>
+                  <TeamLogo team={t.teamA} size={34} />
+                  <div className="trade-team-name" style={{marginBottom:0}}>{t.teamA} recebe:</div>
+                </div>
                 <div className="trade-receives-label">RECEBE</div>
                 {t.givesB.map((p, j) => <div className="trade-player" key={j}>• {p}</div>)}
               </div>
               <div className="trade-arrow">⇄</div>
               <div className="trade-side">
-                <div className="trade-team-name">{t.teamB} recebe:</div>
+                <div style={{display:'flex', alignItems:'center', gap:8, marginBottom:8}}>
+                  <TeamLogo team={t.teamB} size={34} />
+                  <div className="trade-team-name" style={{marginBottom:0}}>{t.teamB} recebe:</div>
+                </div>
                 <div className="trade-receives-label">RECEBE</div>
                 {t.givesA.map((p, j) => <div className="trade-player" key={j}>• {p}</div>)}
               </div>
             </div>
-            <div className="trade-analysis"><strong>Análise: </strong>{t.analysis}</div>
+            <div className="trade-analysis"><strong>Análise:</strong> {t.analysis}</div>
           </div>
         ))}
       </div>
@@ -1221,18 +1480,18 @@ function DraftPage() {
     <div className="main-wrap">
       <div className="page-hero">
         <div className="page-hero-title">⭐ Draft</div>
-        <div className="page-hero-sub">Ordem do Draft 2027/28 • Lottery já definida</div>
+        <div className="page-hero-sub">Draft 2026/27 • sorteio dos seeds em 08/10 e draft oficial em 10/10</div>
       </div>
       <div className="draft-grid">
         <div className="draft-order-card">
           <div className="sidebar-card-header">
-            <span className="sidebar-card-title">Ordem do Draft 2027/28</span>
+            <span className="sidebar-card-title">Seeds / Ordem inicial 2026/27</span>
           </div>
           <div className="draft-order-list">
             {DRAFT_ORDER.map(p => (
               <div className="draft-pick" key={p.pick}>
                 <span className="pick-num">{p.pick}</span>
-                <div className="pick-icon" style={{background:p.color}}>{p.init}</div>
+                <TeamLogo team={p.name} size={34} />
                 <div className="pick-info">
                   <div className="pick-team">{p.name}</div>
                   <div className="pick-gm">GM: {p.gm}</div>
@@ -1244,48 +1503,46 @@ function DraftPage() {
         </div>
         <div className="draft-order-card">
           <div className="sidebar-card-header">
-            <span className="sidebar-card-title">Picks Trocadas</span>
+            <span className="sidebar-card-title">Datas do Draft</span>
           </div>
           <div className="draft-order-list">
-            {[
-              { from: 'SuperSonics', to: 'Canalhas do Bem', pick: 'Pick 1ª Rd 2027', via: 'Trade Sem. 6' },
-              { from: 'Ironclads', to: "Splash Bro's", pick: 'Pick 3ª Rd 2027', via: 'Trade Sem. 7' },
-              { from: 'Lakers Nation', to: 'Ghost of Goat', pick: 'Pick 2ª Rd 2028', via: 'Trade 2025' },
-            ].map((p, i) => (
-              <div className="draft-pick" key={i} style={{flexDirection:'column', alignItems:'flex-start', gap:4, padding:'14px 18px'}}>
-                <div style={{display:'flex', alignItems:'center', gap:8}}>
-                  <span className="pick-badge pick-orig">{p.pick}</span>
-                  <span style={{fontSize:10, color:'#aaa'}}>{p.via}</span>
-                </div>
-                <div style={{fontSize:12, color:'#555'}}>
-                  <strong style={{color:'#333'}}>{p.from}</strong> → <strong style={{color:'#7c3aed'}}>{p.to}</strong>
-                </div>
+            <div className="draft-pick">
+              <span className="pick-num">08</span>
+              <div className="pick-info">
+                <div className="pick-team">Sorteio dos Seeds</div>
+                <div className="pick-gm">Definição da ordem inicial da liga</div>
               </div>
-            ))}
+              <span className="pick-badge pick-lottery">OUT</span>
+            </div>
+            <div className="draft-pick">
+              <span className="pick-num">10</span>
+              <div className="pick-info">
+                <div className="pick-team">Draft AirBall 2026/27</div>
+                <div className="pick-gm">Todos os GMs montam seus elencos</div>
+              </div>
+              <span className="pick-badge pick-orig">OUT</span>
+            </div>
+            <div className="draft-pick">
+              <span className="pick-num">20</span>
+              <div className="pick-info">
+                <div className="pick-team">Começo da Temporada</div>
+                <div className="pick-gm">Semana 1 oficialmente aberta</div>
+              </div>
+              <span className="pick-badge pick-orig">OUT</span>
+            </div>
           </div>
           <div className="sidebar-card-header" style={{marginTop:0}}>
-            <span className="sidebar-card-title">Mock Draft 2027</span>
+            <span className="sidebar-card-title">Observações</span>
           </div>
-          <div className="draft-order-list">
-            {[
-              { pick: '1', player: 'Victor Wembanyama Jr.', pos: 'C', val: '⭐⭐⭐⭐⭐' },
-              { pick: '2', player: 'Bronny James II', pos: 'SG', val: '⭐⭐⭐⭐' },
-              { pick: '3', player: 'Scoot Henderson Jr.', pos: 'PG', val: '⭐⭐⭐⭐' },
-            ].map((m, i) => (
-              <div className="draft-pick" key={i}>
-                <span className="pick-num">{m.pick}</span>
-                <div className="pick-info">
-                  <div className="pick-team">{m.player}</div>
-                  <div className="pick-gm">{m.pos} • {m.val}</div>
-                </div>
-              </div>
-            ))}
+          <div style={{padding:18, fontSize:13, color:'#6B6B7B', lineHeight:1.6}}>
+            Stéfano's SuperSonics foi adicionado à aba Draft e aparece com coroa de campeão nas páginas da liga. A ordem exibida aqui pode ser ajustada após o sorteio oficial dos seeds.
           </div>
         </div>
       </div>
     </div>
   );
 }
+
 
 // ==================== APP ====================
 function App() {
