@@ -195,54 +195,19 @@
   /* MATCHUPS STRIP */
   .matchups-strip {
     background: var(--gray-dark);
-    padding: 0;
+    padding: 0 24px;
     border-bottom: 1px solid #2a2a3e;
-    display: flex;
-    align-items: stretch;
-    overflow: hidden;
   }
-  .matchups-marquee {
-    flex: 1;
-    overflow: hidden;
-    position: relative;
+  .matchups-scroll {
+    display: flex; gap: 0; overflow-x: auto; padding: 0;
+    scrollbar-width: none;
   }
-  .matchups-track {
-    display: flex;
-    gap: 0;
-    width: max-content;
-    animation: matchupMarquee 58s linear infinite;
-    will-change: transform;
-  }
-  .matchups-track:hover { animation-play-state: paused; }
-  @keyframes matchupMarquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-  .matchups-marquee::before, .matchups-marquee::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 36px;
-    z-index: 3;
-    pointer-events: none;
-  }
-  .matchups-marquee::before {
-    left: 0;
-    background: linear-gradient(to right, var(--gray-dark), rgba(26,26,46,0));
-  }
-  .matchups-marquee::after {
-    right: 0;
-    background: linear-gradient(to left, var(--gray-dark), rgba(26,26,46,0));
-  }
+  .matchups-scroll::-webkit-scrollbar { display: none; }
 
   .week-card {
     min-width: 130px; padding: 14px 16px;
     border-right: 1px solid #2a2a3e;
     display: flex; flex-direction: column; justify-content: center; gap: 8px;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 4;
   }
   .week-label { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; color: var(--orange); }
   .week-btn {
@@ -256,7 +221,6 @@
   .matchup-card {
     min-width: 360px; padding: 14px 20px;
     border-right: 1px solid #2a2a3e; cursor: pointer;
-    flex-shrink: 0;
     transition: background 0.2s;
     display: flex; flex-direction: column; gap: 6px;
   }
@@ -1056,17 +1020,14 @@ function MatchupCard({ m }) {
 }
 
 function MatchupsStrip() {
-  const marqueeMatchups = [...MATCHUPS, ...MATCHUPS];
   return (
     <div className="matchups-strip">
-      <div className="week-card">
-        <div className="week-label">SEM 1</div>
-        <button className="week-btn">VER CALENDÁRIO</button>
-      </div>
-      <div className="matchups-marquee">
-        <div className="matchups-track">
-          {marqueeMatchups.map((m, i) => <MatchupCard key={i} m={m} />)}
+      <div className="matchups-scroll">
+        <div className="week-card">
+          <div className="week-label">SEM 1</div>
+          <button className="week-btn">VER CALENDÁRIO</button>
         </div>
+        {MATCHUPS.map((m, i) => <MatchupCard key={i} m={m} />)}
       </div>
     </div>
   );
