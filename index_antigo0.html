@@ -9,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Ultra&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
   :root {
     --purple-deep: #2D0A4E;
@@ -110,64 +110,6 @@
   .logo-main { font-family: 'Oswald', sans-serif; font-size: 22px; font-weight: 700; color: var(--orange); letter-spacing: 1px; line-height: 1; }
   .logo-sub { font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 500; color: #c084fc; letter-spacing: 4px; text-transform: uppercase; }
 
-  .header-brand-text {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    white-space: nowrap;
-    text-align: center;
-    line-height: 0.92;
-  }
-  .brand-airball {
-    display: block;
-    font-family: 'Ultra', 'Rockwell Extra Bold', 'Georgia', serif;
-    font-size: 38px;
-    font-weight: 900;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #F97316;
-    -webkit-text-fill-color: #F97316;
-    -webkit-text-stroke: 0;
-    paint-order: stroke fill;
-    text-shadow:
-      2px 0 0 #ffffff,
-      -2px 0 0 #ffffff,
-      0 2px 0 #ffffff,
-      0 -2px 0 #ffffff,
-      2px 2px 0 #ffffff,
-      -2px 2px 0 #ffffff,
-      2px -2px 0 #ffffff,
-      -2px -2px 0 #ffffff,
-      4px 5px 0 rgba(0,0,0,0.72),
-      0 0 18px rgba(249,115,22,0.55);
-  }
-  .brand-dynasty {
-    display: block;
-    margin-top: 6px;
-    font-family: 'Ultra', 'Rockwell Extra Bold', 'Georgia', serif;
-    font-size: 24px;
-    font-weight: 900;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    color: #7C3AED;
-    -webkit-text-fill-color: #7C3AED;
-    -webkit-text-stroke: 0;
-    paint-order: stroke fill;
-    text-shadow:
-      1.5px 0 0 #ffffff,
-      -1.5px 0 0 #ffffff,
-      0 1.5px 0 #ffffff,
-      0 -1.5px 0 #ffffff,
-      1.5px 1.5px 0 #ffffff,
-      -1.5px 1.5px 0 #ffffff,
-      1.5px -1.5px 0 #ffffff,
-      -1.5px -1.5px 0 #ffffff,
-      3px 4px 0 rgba(0,0,0,0.75),
-      0 0 14px rgba(124,58,237,0.6);
-  }
-
   .header-right { display: flex; align-items: center; gap: 16px; }
   .search-box {
     display: flex; align-items: center;
@@ -219,7 +161,7 @@
   .week-btn:hover { background: var(--orange-dark); }
 
   .matchup-card {
-    min-width: 360px; padding: 14px 20px;
+    min-width: 200px; padding: 10px 16px;
     border-right: 1px solid #2a2a3e; cursor: pointer;
     transition: background 0.2s;
     display: flex; flex-direction: column; gap: 6px;
@@ -235,18 +177,18 @@
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
 
   .matchup-teams {
-    display: flex; align-items: center; justify-content: space-between; gap: 18px;
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
   }
-  .team-mini { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; min-width: 96px; }
+  .team-mini { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
   .team-mini-icon {
     width: 28px; height: 28px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     font-size: 12px; font-weight: 700; color: white; font-family: 'Oswald', sans-serif;
   }
-  .team-mini-name { font-size: 10px; color: #cfd0dc; text-align: center; font-weight: 600; max-width: 96px; line-height: 1.15; }
-  .vs-score { text-align: center; min-width: 74px; flex-shrink: 0; }
-  .score-display { font-family: 'Oswald', sans-serif; font-size: 22px; font-weight: 700; color: white; white-space: nowrap; letter-spacing: 0.5px; }
-  .score-period { font-size: 10px; color: var(--orange); font-weight: 700; }
+  .team-mini-name { font-size: 9px; color: #999; text-align: center; font-weight: 600; max-width: 60px; line-height: 1.2; }
+  .vs-score { text-align: center; }
+  .score-display { font-family: 'Oswald', sans-serif; font-size: 16px; font-weight: 700; color: white; }
+  .score-period { font-size: 9px; color: var(--orange); font-weight: 600; }
 
   /* MAIN CONTENT */
   .main-wrap { max-width: 1280px; margin: 0 auto; padding: 24px 16px; }
@@ -545,7 +487,6 @@
   .hof-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
   .hof-card { background: linear-gradient(135deg, var(--purple-deep), #1a0635); border-radius: 14px; padding: 24px; color: white; text-align: center; }
   .hof-trophy { font-size: 36px; margin-bottom: 12px; }
-  .hof-logo { display:flex; justify-content:center; margin-bottom:12px; }
   .hof-year { font-family: 'Oswald', sans-serif; font-size: 12px; color: var(--orange); letter-spacing: 2px; }
   .hof-title { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; margin: 4px 0; }
   .hof-sub { font-size: 12px; color: rgba(255,255,255,0.6); }
@@ -605,7 +546,7 @@
   .team-logo-img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     display: block;
   }
   .team-logo-fallback {
@@ -699,7 +640,6 @@
     .draft-grid { grid-template-columns: 1fr; }
     .main-wrap { padding: 16px 10px; }
     .header { padding: 0 12px; height: 60px; }
-    .brand-airball { font-size: 23px; letter-spacing: 1.6px; } .brand-dynasty { font-size: 13px; letter-spacing: 2px; }
   }
   @media (max-width: 600px) {
     .teams-grid { grid-template-columns: 1fr; }
@@ -911,11 +851,11 @@ const CALENDAR_DATA = [
 
 const HOF_DATA = [
 
-  { year: '2025-26', icon: '🏆', title: 'Campeão', name: "Stéfano's Supersonics", sub: 'GM: Stéfano Cecin', team: "Stéfano's SuperSonics" },
-  { year: '2025-26', icon: '🥈', title: 'Vice-Campeão', name: "Acre Dinossaur's", sub: 'GM: Sidney Assunção', team: 'Acre Dinosaurs' },
-  { year: '2025-26', icon: '⭐', title: 'MVP da Temporada', name: 'Nikola Jokic', sub: 'Temporada regular dominante', team: "Stéfano's SuperSonics" },
-  { year: '2025-26', icon: '🔥', title: 'MVP dos Playoffs', name: 'Jalen Duren', sub: "Stéfano's Supersonics", team: "Stéfano's SuperSonics" },
-  { year: '2025-26', icon: '🎯', title: 'Rookie do Ano', name: 'Keyonte George', sub: 'Melhor novato da temporada', team: 'Charlotte DunkLipe' },
+  { year: '2025-26', icon: '🏆', title: 'Campeão', name: "Stéfano's Supersonics", sub: 'GM: Stéfano Cecin' },
+  { year: '2025-26', icon: '🥈', title: 'Vice-Campeão', name: "Acre Dinossaur's", sub: 'GM: Sidney Assunção' },
+  { year: '2025-26', icon: '⭐', title: 'MVP da Temporada', name: 'Nikola Jokic', sub: 'Temporada regular dominante' },
+  { year: '2025-26', icon: '🔥', title: 'MVP dos Playoffs', name: 'Jalen Duren', sub: "Stéfano's Supersonics" },
+  { year: '2025-26', icon: '🎯', title: 'Rookie do Ano', name: 'Keyonte George', sub: 'Melhor novato da temporada' },
 
 ];
 
@@ -977,10 +917,19 @@ function Header() {
           <span/><span/><span/>
         </button>
         <span className="menu-label">MENU</span>
-      </div>
-      <div className="header-brand-text">
-        <span className="brand-airball">AIRBALL</span>
-        <span className="brand-dynasty">DYNASTY LEAGUE</span>
+        <div style={{width:1, height:32, background:'rgba(255,255,255,0.1)', margin:'0 8px'}}/>
+        <div className="logo-area">
+          <img 
+            src="./assets/Logo_Airball.png" 
+            alt="Airball Dynasty League" 
+            style={{
+              height: '56px',
+              width: 'auto',
+              display: 'block',
+              filter: 'drop-shadow(0 2px 8px rgba(249,115,22,0.35))'
+            }} 
+          />
+        </div>
       </div>
       <div className="header-right">
         <div className="search-box">
@@ -1003,7 +952,7 @@ function MatchupCard({ m }) {
       </div>
       <div className="matchup-teams">
         <div className="team-mini">
-          <TeamLogo team={m.home} size={82} />
+          <TeamLogo team={m.home} size={30} />
           <div className="team-mini-name">{home.name}</div>
         </div>
         <div className="vs-score">
@@ -1011,7 +960,7 @@ function MatchupCard({ m }) {
           <div className="score-period">{m.period}</div>
         </div>
         <div className="team-mini">
-          <TeamLogo team={m.away} size={82} />
+          <TeamLogo team={m.away} size={30} />
           <div className="team-mini-name">{away.name}</div>
         </div>
       </div>
@@ -1107,7 +1056,7 @@ function StandingsCard() {
                 <td><span className={`rank-num ${rankClass(t.pos)}`}>{t.pos}</span></td>
                 <td>
                   <div className="team-cell">
-                    <TeamLogo team={t.name} size={48} />
+                    <TeamLogo team={t.name} size={24} />
                     <span className="team-name-small">{t.name}</span>
                   </div>
                 </td>
@@ -1135,7 +1084,7 @@ function PowerRankingsCard() {
           {POWER_RANKINGS.map(t => (
             <div className="power-item" key={t.rank}>
               <span className="power-rank">{t.rank}</span>
-              <TeamLogo team={t.name} size={64} />
+              <TeamLogo team={t.name} size={32} />
               <div className="power-info">
                 <div className="power-name">{t.name}</div>
                 <div className={`power-trend trend-${t.type}`}>Pré-temporada</div>
@@ -1264,13 +1213,13 @@ function LatestTradesCard() {
             </div>
             <div style={{display:'grid', gridTemplateColumns:'1fr auto 1fr', alignItems:'center', gap:10, marginBottom:10}}>
               <div style={{display:'flex', alignItems:'center', gap:8}}>
-                <TeamLogo team={t.teamA.name} size={51} />
+                <TeamLogo team={t.teamA.name} size={34} />
                 <strong style={{fontSize:12}}>{getTeam(t.teamA.name).name}</strong>
               </div>
               <span style={{color:'#F97316', fontWeight:800}}>⇄</span>
               <div style={{display:'flex', alignItems:'center', gap:8, justifyContent:'flex-end'}}>
                 <strong style={{fontSize:12, textAlign:'right'}}>{getTeam(t.teamB.name).name}</strong>
-                <TeamLogo team={t.teamB.name} size={51} />
+                <TeamLogo team={t.teamB.name} size={34} />
               </div>
             </div>
             <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:8}}>
@@ -1299,7 +1248,7 @@ function NewsFeed() {
         {NEWS_FEED.map((n, i) => (
           <div className="feed-item" key={i}>
             <div className="feed-thumb" style={{
-              background: n.image ? `url(${n.image})` : n.bg,
+              background: n.image ? `${n.bg}, url(${n.image})` : n.bg,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               color: 'white'
@@ -1473,9 +1422,7 @@ function HallOfFamePage() {
       <div className="hof-grid">
         {HOF_DATA.map((h, i) => (
           <div className="hof-card" key={i}>
-            <div className="hof-logo">
-              {h.team ? <TeamLogo team={h.team} size={58} /> : <div className="hof-trophy">{h.icon}</div>}
-            </div>
+            <div className="hof-trophy">{h.icon}</div>
             <div className="hof-year">{h.year}</div>
             <div className="hof-title">{h.title}</div>
             <div style={{fontFamily:'Oswald', fontSize:20, fontWeight:700, color:'#F97316', margin:'4px 0'}}>{h.name}</div>
@@ -1504,7 +1451,7 @@ function TradesPage() {
             <div className="trade-body">
               <div className="trade-side">
                 <div style={{display:'flex', alignItems:'center', gap:8, marginBottom:8}}>
-                  <TeamLogo team={t.teamA} size={51} />
+                  <TeamLogo team={t.teamA} size={34} />
                   <div className="trade-team-name" style={{marginBottom:0}}>{t.teamA} recebe:</div>
                 </div>
                 <div className="trade-receives-label">RECEBE</div>
@@ -1513,7 +1460,7 @@ function TradesPage() {
               <div className="trade-arrow">⇄</div>
               <div className="trade-side">
                 <div style={{display:'flex', alignItems:'center', gap:8, marginBottom:8}}>
-                  <TeamLogo team={t.teamB} size={51} />
+                  <TeamLogo team={t.teamB} size={34} />
                   <div className="trade-team-name" style={{marginBottom:0}}>{t.teamB} recebe:</div>
                 </div>
                 <div className="trade-receives-label">RECEBE</div>
@@ -1544,7 +1491,7 @@ function DraftPage() {
             {DRAFT_ORDER.map(p => (
               <div className="draft-pick" key={p.pick}>
                 <span className="pick-num">{p.pick}</span>
-                <TeamLogo team={p.name} size={51} />
+                <TeamLogo team={p.name} size={34} />
                 <div className="pick-info">
                   <div className="pick-team">{p.name}</div>
                   <div className="pick-gm">GM: {p.gm}</div>
