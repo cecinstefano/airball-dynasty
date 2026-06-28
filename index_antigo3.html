@@ -851,104 +851,6 @@
     text-align: right;
   }
 
-
-  /* FRANQUIAS - CARDS GRANDES UM POR LINHA */
-  .teams-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
-    max-width: 980px;
-    margin: 0 auto;
-  }
-  .teams-grid .team-card {
-    padding: 34px 42px;
-    border-radius: 22px;
-    border-left-width: 8px;
-    display: grid;
-    grid-template-columns: 190px minmax(0, 1fr) 200px;
-    align-items: center;
-    gap: 34px;
-    min-height: 240px;
-    box-shadow: 0 8px 26px rgba(0,0,0,0.08);
-  }
-  .teams-grid .franchise-card-logo-line {
-    margin-bottom: 0;
-    justify-content: center;
-  }
-  .teams-grid .franchise-card-name {
-    font-size: 36px;
-    text-align: left;
-    line-height: 1.05;
-    margin-bottom: 8px;
-  }
-  .teams-grid .franchise-card-gm {
-    font-size: 18px;
-    text-align: left;
-    margin-top: 0;
-  }
-  .teams-grid .franchise-info-list {
-    margin-top: 24px;
-    padding-top: 20px;
-    gap: 12px;
-  }
-  .teams-grid .franchise-info-row {
-    font-size: 17px;
-    justify-content: flex-start;
-    gap: 18px;
-  }
-  .teams-grid .franchise-info-label {
-    min-width: 170px;
-    font-size: 14px;
-  }
-  .teams-grid .franchise-info-value {
-    font-size: 17px;
-    text-align: left;
-  }
-
-
-  .franchise-card-content {
-    min-width: 0;
-  }
-  .franchise-gm-photo {
-    width: 180px;
-    height: 180px;
-    border-radius: 18px;
-    overflow: hidden;
-    background:
-      radial-gradient(circle at 35% 25%, rgba(249,115,22,0.18), transparent 45%),
-      linear-gradient(135deg, #1a0635, #2D0A4E);
-    border: 2px solid rgba(249,115,22,0.22);
-    box-shadow: 0 8px 22px rgba(0,0,0,0.16);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255,255,255,0.72);
-    font-family: 'Oswald', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 1.4px;
-    text-align: center;
-    text-transform: uppercase;
-    justify-self: end;
-  }
-  .franchise-gm-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .franchise-season-position {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'Oswald', sans-serif;
-    color: var(--orange);
-    font-size: 14px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
   /* DRAFT COUNTDOWN */
   .draft-countdown-card {
     position: relative;
@@ -1185,10 +1087,6 @@
     .draft-countdown-date { white-space: normal; font-size: 15px; }
     .draft-countdown-number { font-size: 40px; }
     .home-draft-countdown-number { font-size: 22px; }
-    .teams-grid .team-card { grid-template-columns: 150px minmax(0,1fr) 160px; gap: 24px; padding: 28px; }
-    .franchise-gm-photo { width: 150px; height: 150px; }
-    .teams-grid .franchise-card-name { font-size: 30px; }
-    .teams-grid .franchise-card-gm { font-size: 16px; }
     .main-wrap { padding: 16px 10px; }
     .header { padding: 0 12px; height: 60px; }
     .brand-airball { font-size: 23px; letter-spacing: 1.6px; } .brand-dynasty { font-size: 13px; letter-spacing: 2px; }
@@ -1840,8 +1738,8 @@ function NewsFeed() {
 
 function formatFinalPosition(rank) {
   if (!rank) return 'A definir';
-  if (rank === 1) return '1º lugar';
-  if (rank === 2) return '2º lugar';
+  if (rank === 1) return 'Campeão';
+  if (rank === 2) return 'Vice-Campeão';
   if (rank === 3) return '3º lugar';
   return `${rank}º lugar`;
 }
@@ -1927,33 +1825,7 @@ function HomePage() {
   );
 }
 
-
-function GmPhoto({ team }) {
-  const t = getTeam(team);
-  const gmPath = `./assets/gms/${t.slug || 'default-gm'}.jpg`;
-
-  return (
-    <div className="franchise-gm-photo">
-      <img
-        src={gmPath}
-        alt={`Foto do GM - ${t.name}`}
-        onError={(e) => {
-          e.currentTarget.style.display = 'none';
-          e.currentTarget.parentElement.textContent = 'Foto do GM';
-        }}
-      />
-    </div>
-  );
-}
-
 function TeamsPage() {
-  const orderedFranchises = [
-    ...FINAL_STANDINGS_2526
-      .map(row => TEAMS_DATA.find(t => normalizeTeamName(t.name) === normalizeTeamName(row.team)))
-      .filter(Boolean),
-    ...TEAMS_DATA.filter(t => !FINAL_STANDINGS_2526.some(row => normalizeTeamName(row.team) === normalizeTeamName(t.name)))
-  ];
-
   return (
     <div className="main-wrap">
       <div className="page-hero">
@@ -1961,31 +1833,29 @@ function TeamsPage() {
         <div className="page-hero-sub">Temporada 2026/27 • 18 franquias da AirBall Dynasty League</div>
       </div>
       <div className="teams-grid">
-        {orderedFranchises.map((t, i) => {
+        {TEAMS_DATA.map((t, i) => {
           const finalStanding = getFinalStandingForTeam(t.name);
           return (
             <div className="team-card" key={i} style={{borderColor:t.color}}>
               <div className="franchise-card-logo-line">
-                <TeamLogo team={t.name} size={170} />
+                <TeamLogo team={t.name} size={92} />
               </div>
+              <div className="franchise-card-name">
+                {t.name}
+                {t.champion && <span className="champion-crown" title="Campeão 25-26">👑</span>}
+              </div>
+              <div className="franchise-card-gm">GM: {t.gm}</div>
 
-              <div className="franchise-card-content">
-                <div className="franchise-season-position">Temporada 25-26: {formatFinalPosition(finalStanding?.rank)}</div>
-                <div className="franchise-card-name">
-                  {t.name}
-                  {t.champion && <span className="champion-crown" title="Campeão 25-26">👑</span>}
+              <div className="franchise-info-list">
+                <div className="franchise-info-row">
+                  <span className="franchise-info-label">Temporada 25-26:</span>
+                  <span className="franchise-info-value">{formatFinalPosition(finalStanding?.rank)}</span>
                 </div>
-                <div className="franchise-card-gm">GM: {t.gm}</div>
-
-                <div className="franchise-info-list">
-                  <div className="franchise-info-row">
-                    <span className="franchise-info-label">Keepers:</span>
-                    <span className="franchise-info-value">&nbsp;</span>
-                  </div>
+                <div className="franchise-info-row">
+                  <span className="franchise-info-label">Keepers:</span>
+                  <span className="franchise-info-value">&nbsp;</span>
                 </div>
               </div>
-
-              <GmPhoto team={t.name} />
             </div>
           );
         })}
