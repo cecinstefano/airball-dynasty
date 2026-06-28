@@ -1748,6 +1748,7 @@ const { useState, useRef, useEffect } = React;
 const TEAMS_MASTER = [
   {"slug": "stefanos-supersonics", "name": "Stéfano's SuperSonics", "gm": "Stéfano Cecin", "init": "SS", "color": "#15803d", "logo": "./assets/logos/stefanos-supersonics.png", "w": 0, "l": 0, "pf": 0, "status": "Campeão 25-26", "statusClass": "status-contender"},
   {"slug": "ghost-of-goat", "name": "Ghost of goat", "gm": "GABRIEL Silva", "init": "GOG", "color": "#111827", "logo": "./assets/logos/ghost-of-goat.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
+  {"slug": "wictors-team", "name": "Wictor's Team", "gm": "Wictor Cezar", "init": "WIC", "color": "#f59e0b", "logo": "./assets/logos/wictors-team.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
   {"slug": "chugabum-ironclads", "name": "Chugabum Ironclads", "gm": "Hiago Valverde", "init": "CHIR", "color": "#4b5563", "logo": "./assets/logos/chugabum-ironclads.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
   {"slug": "fi-du-jequisom", "name": "Fi du Jequisom", "gm": "Darlan Machado Pinto", "init": "FDJ", "color": "#dc2626", "logo": "./assets/logos/fi-du-jequisom.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
   {"slug": "paysandu-lobos", "name": "Paysandu Lobo's", "gm": "Geraldo Oliveira Jr", "init": "PAY", "color": "#0891b2", "logo": "./assets/logos/paysandu-lobos.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
@@ -1756,6 +1757,7 @@ const TEAMS_MASTER = [
   {"slug": "charlotte-dunklipe", "name": "Charlotte DunkLipe", "gm": "Felipe C", "init": "CHA", "color": "#7c3aed", "logo": "./assets/logos/charlotte-dunklipe.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
   {"slug": "revolution-francaise", "name": "Revolution francaise", "gm": "Filipe Xavier", "init": "FFT", "color": "#b45309", "logo": "./assets/logos/revolution-francaise.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
   {"slug": "instituto-popovich", "name": "Instituto Popovich", "gm": "Andre Caetano", "init": "IPH", "color": "#166534", "logo": "./assets/logos/instituto-popovich.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
+  {"slug": "imprudente-hotshots", "name": "Imprudente HotShots", "gm": "ANDRE LUIZ SILVA", "init": "IMP", "color": "#ea580c", "logo": "./assets/logos/imprudente-hotshots.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
   {"slug": "nortz", "name": "Nortz", "gm": "Caio Rogério Amaro Almeida", "init": "NTZ", "color": "#ca8a04", "logo": "./assets/logos/nortz.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
   {"slug": "patos-team", "name": "Pato's Team", "gm": "Mateus Pato", "init": "PATO", "color": "#facc15", "logo": "./assets/logos/patos-team.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
   {"slug": "red-hot-blazer-peppers", "name": "Red Hot Blazer Peppers", "gm": "Aleison Götz", "init": "RHBP", "color": "#dc2626", "logo": "./assets/logos/red-hot-blazer-peppers.png", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt"},
@@ -1806,12 +1808,13 @@ function TeamLogo({ team, size = 32 }) {
 const MATCHUPS = [
 
   { day: 'SEG', time: '20/10', status: 'PRÉVIA', home: "Stéfano's SuperSonics", away: 'Ghost of goat', scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#15803d', colorA: '#111827' },
-  { day: 'SEG', time: '20/10', status: 'PRÉVIA', home: "Acre Dinosaurs", away: 'Chugabum Ironclads', scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#581c87', colorA: '#4b5563' },
-  { day: 'TER', time: '21/10', status: 'PRÉVIA', home: 'Canalhas do Bem', away: 'Fi du Jequisom', scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#059669', colorA: '#dc2626' },
-  { day: 'TER', time: '21/10', status: 'PRÉVIA', home: 'Team Djalma Jr', away: "Paysandu Lobo's", scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#111827', colorA: '#0891b2' },
-  { day: 'QUA', time: '22/10', status: 'PRÉVIA', home: 'Red Hot Blazer Peppers', away: 'Pistons de Pira', scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#dc2626', colorA: '#f97316' },
-  { day: 'QUA', time: '22/10', status: 'PRÉVIA', home: 'Nortz', away: 'Charlotte DunkLipe', scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#ca8a04', colorA: '#7c3aed' },
-  { day: 'QUI', time: '23/10', status: 'PRÉVIA', home: 'Instituto Popovich', away: 'Revolution francaise', scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#166534', colorA: '#b45309' },
+  { day: 'SEG', time: '20/10', status: 'PRÉVIA', home: "Acre Dinosaurs", away: "Wictor's Team", scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#581c87', colorA: '#f59e0b' },
+  { day: 'SEG', time: '20/10', status: 'PRÉVIA', home: 'Canalhas do Bem', away: 'Chugabum Ironclads', scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#059669', colorA: '#4b5563' },
+  { day: 'TER', time: '21/10', status: 'PRÉVIA', home: 'Team Djalma Jr', away: 'Fi du Jequisom', scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#111827', colorA: '#dc2626' },
+  { day: 'TER', time: '21/10', status: 'PRÉVIA', home: 'Red Hot Blazer Peppers', away: "Paysandu Lobo's", scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#dc2626', colorA: '#0891b2' },
+  { day: 'QUA', time: '22/10', status: 'PRÉVIA', home: 'Nortz', away: 'Pistons de Pira', scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#ca8a04', colorA: '#f97316' },
+  { day: 'QUA', time: '22/10', status: 'PRÉVIA', home: 'Instituto Popovich', away: 'Charlotte DunkLipe', scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#166534', colorA: '#7c3aed' },
+  { day: 'QUI', time: '23/10', status: 'PRÉVIA', home: 'Imprudente HotShots', away: 'Revolution francaise', scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#ea580c', colorA: '#b45309' },
   { day: 'QUI', time: '23/10', status: 'PRÉVIA', home: "Pato's Team", away: 'Warlock Jamaicans', scoreH: 0, scoreA: 0, period: 'Semana 1', colorH: '#facc15', colorA: '#16a34a' },
 
 ];
@@ -1819,44 +1822,48 @@ const MATCHUPS = [
 const STANDINGS = [
   {"pos": 1, "name": "Stéfano's SuperSonics", "w": 0, "l": 0, "pf": 0, "color": "#15803d", "init": "SS"},
   {"pos": 2, "name": "Ghost of goat", "w": 0, "l": 0, "pf": 0, "color": "#111827", "init": "GOG"},
-  {"pos": 3, "name": "Chugabum Ironclads", "w": 0, "l": 0, "pf": 0, "color": "#4b5563", "init": "CHIR"},
-  {"pos": 4, "name": "Fi du Jequisom", "w": 0, "l": 0, "pf": 0, "color": "#dc2626", "init": "FDJ"},
-  {"pos": 5, "name": "Paysandu Lobo's", "w": 0, "l": 0, "pf": 0, "color": "#0891b2", "init": "PAY"},
-  {"pos": 6, "name": "Pistons de Pira", "w": 0, "l": 0, "pf": 0, "color": "#f97316", "init": "PDP"},
-  {"pos": 7, "name": "Acre Dinosaurs", "w": 0, "l": 0, "pf": 0, "color": "#581c87", "init": "DINO"},
-  {"pos": 8, "name": "Charlotte DunkLipe", "w": 0, "l": 0, "pf": 0, "color": "#7c3aed", "init": "CHA"},
-  {"pos": 9, "name": "Revolution francaise", "w": 0, "l": 0, "pf": 0, "color": "#b45309", "init": "FFT"},
-  {"pos": 10, "name": "Instituto Popovich", "w": 0, "l": 0, "pf": 0, "color": "#166534", "init": "IPH"},
-  {"pos": 11, "name": "Nortz", "w": 0, "l": 0, "pf": 0, "color": "#ca8a04", "init": "NTZ"},
-  {"pos": 12, "name": "Pato's Team", "w": 0, "l": 0, "pf": 0, "color": "#facc15", "init": "PATO"},
-  {"pos": 13, "name": "Red Hot Blazer Peppers", "w": 0, "l": 0, "pf": 0, "color": "#dc2626", "init": "RHBP"},
-  {"pos": 14, "name": "Team Djalma Jr", "w": 0, "l": 0, "pf": 0, "color": "#111827", "init": "TDJ"},
-  {"pos": 15, "name": "Canalhas do Bem", "w": 0, "l": 0, "pf": 0, "color": "#059669", "init": "CDB"},
-  {"pos": 16, "name": "Warlock Jamaicans", "w": 0, "l": 0, "pf": 0, "color": "#16a34a", "init": "WJ"},
+  {"pos": 3, "name": "Wictor's Team", "w": 0, "l": 0, "pf": 0, "color": "#f59e0b", "init": "WIC"},
+  {"pos": 4, "name": "Chugabum Ironclads", "w": 0, "l": 0, "pf": 0, "color": "#4b5563", "init": "CHIR"},
+  {"pos": 5, "name": "Fi du Jequisom", "w": 0, "l": 0, "pf": 0, "color": "#dc2626", "init": "FDJ"},
+  {"pos": 6, "name": "Paysandu Lobo's", "w": 0, "l": 0, "pf": 0, "color": "#0891b2", "init": "PAY"},
+  {"pos": 7, "name": "Pistons de Pira", "w": 0, "l": 0, "pf": 0, "color": "#f97316", "init": "PDP"},
+  {"pos": 8, "name": "Acre Dinosaurs", "w": 0, "l": 0, "pf": 0, "color": "#581c87", "init": "DINO"},
+  {"pos": 9, "name": "Charlotte DunkLipe", "w": 0, "l": 0, "pf": 0, "color": "#7c3aed", "init": "CHA"},
+  {"pos": 10, "name": "Revolution francaise", "w": 0, "l": 0, "pf": 0, "color": "#b45309", "init": "FFT"},
+  {"pos": 11, "name": "Instituto Popovich", "w": 0, "l": 0, "pf": 0, "color": "#166534", "init": "IPH"},
+  {"pos": 12, "name": "Imprudente HotShots", "w": 0, "l": 0, "pf": 0, "color": "#ea580c", "init": "IMP"},
+  {"pos": 13, "name": "Nortz", "w": 0, "l": 0, "pf": 0, "color": "#ca8a04", "init": "NTZ"},
+  {"pos": 14, "name": "Pato's Team", "w": 0, "l": 0, "pf": 0, "color": "#facc15", "init": "PATO"},
+  {"pos": 15, "name": "Red Hot Blazer Peppers", "w": 0, "l": 0, "pf": 0, "color": "#dc2626", "init": "RHBP"},
+  {"pos": 16, "name": "Team Djalma Jr", "w": 0, "l": 0, "pf": 0, "color": "#111827", "init": "TDJ"},
+  {"pos": 17, "name": "Canalhas do Bem", "w": 0, "l": 0, "pf": 0, "color": "#059669", "init": "CDB"},
+  {"pos": 18, "name": "Warlock Jamaicans", "w": 0, "l": 0, "pf": 0, "color": "#16a34a", "init": "WJ"},
 ];
 
 const POWER_RANKINGS = [
   {"rank": 1, "name": "Stéfano's SuperSonics", "trend": "Pré", "type": "same", "color": "#15803d", "init": "SS"},
   {"rank": 2, "name": "Ghost of goat", "trend": "Pré", "type": "same", "color": "#111827", "init": "GOG"},
-  {"rank": 3, "name": "Chugabum Ironclads", "trend": "Pré", "type": "same", "color": "#4b5563", "init": "CHIR"},
-  {"rank": 4, "name": "Fi du Jequisom", "trend": "Pré", "type": "same", "color": "#dc2626", "init": "FDJ"},
-  {"rank": 5, "name": "Paysandu Lobo's", "trend": "Pré", "type": "same", "color": "#0891b2", "init": "PAY"},
-  {"rank": 6, "name": "Pistons de Pira", "trend": "Pré", "type": "same", "color": "#f97316", "init": "PDP"},
-  {"rank": 7, "name": "Acre Dinosaurs", "trend": "Pré", "type": "same", "color": "#581c87", "init": "DINO"},
-  {"rank": 8, "name": "Charlotte DunkLipe", "trend": "Pré", "type": "same", "color": "#7c3aed", "init": "CHA"},
-  {"rank": 9, "name": "Revolution francaise", "trend": "Pré", "type": "same", "color": "#b45309", "init": "FFT"},
-  {"rank": 10, "name": "Instituto Popovich", "trend": "Pré", "type": "same", "color": "#166534", "init": "IPH"},
-  {"rank": 11, "name": "Nortz", "trend": "Pré", "type": "same", "color": "#ca8a04", "init": "NTZ"},
-  {"rank": 12, "name": "Pato's Team", "trend": "Pré", "type": "same", "color": "#facc15", "init": "PATO"},
-  {"rank": 13, "name": "Red Hot Blazer Peppers", "trend": "Pré", "type": "same", "color": "#dc2626", "init": "RHBP"},
-  {"rank": 14, "name": "Team Djalma Jr", "trend": "Pré", "type": "same", "color": "#111827", "init": "TDJ"},
-  {"rank": 15, "name": "Canalhas do Bem", "trend": "Pré", "type": "same", "color": "#059669", "init": "CDB"},
-  {"rank": 16, "name": "Warlock Jamaicans", "trend": "Pré", "type": "same", "color": "#16a34a", "init": "WJ"},
+  {"rank": 3, "name": "Wictor's Team", "trend": "Pré", "type": "same", "color": "#f59e0b", "init": "WIC"},
+  {"rank": 4, "name": "Chugabum Ironclads", "trend": "Pré", "type": "same", "color": "#4b5563", "init": "CHIR"},
+  {"rank": 5, "name": "Fi du Jequisom", "trend": "Pré", "type": "same", "color": "#dc2626", "init": "FDJ"},
+  {"rank": 6, "name": "Paysandu Lobo's", "trend": "Pré", "type": "same", "color": "#0891b2", "init": "PAY"},
+  {"rank": 7, "name": "Pistons de Pira", "trend": "Pré", "type": "same", "color": "#f97316", "init": "PDP"},
+  {"rank": 8, "name": "Acre Dinosaurs", "trend": "Pré", "type": "same", "color": "#581c87", "init": "DINO"},
+  {"rank": 9, "name": "Charlotte DunkLipe", "trend": "Pré", "type": "same", "color": "#7c3aed", "init": "CHA"},
+  {"rank": 10, "name": "Revolution francaise", "trend": "Pré", "type": "same", "color": "#b45309", "init": "FFT"},
+  {"rank": 11, "name": "Instituto Popovich", "trend": "Pré", "type": "same", "color": "#166534", "init": "IPH"},
+  {"rank": 12, "name": "Imprudente HotShots", "trend": "Pré", "type": "same", "color": "#ea580c", "init": "IMP"},
+  {"rank": 13, "name": "Nortz", "trend": "Pré", "type": "same", "color": "#ca8a04", "init": "NTZ"},
+  {"rank": 14, "name": "Pato's Team", "trend": "Pré", "type": "same", "color": "#facc15", "init": "PATO"},
+  {"rank": 15, "name": "Red Hot Blazer Peppers", "trend": "Pré", "type": "same", "color": "#dc2626", "init": "RHBP"},
+  {"rank": 16, "name": "Team Djalma Jr", "trend": "Pré", "type": "same", "color": "#111827", "init": "TDJ"},
+  {"rank": 17, "name": "Canalhas do Bem", "trend": "Pré", "type": "same", "color": "#059669", "init": "CDB"},
+  {"rank": 18, "name": "Warlock Jamaicans", "trend": "Pré", "type": "same", "color": "#16a34a", "init": "WJ"},
 ];
 
 const NEWS_FEED = [
 
-  { cat: 'DRAFT', catClass: 'cat-draft', time: 'Atualização', title: "Tyrese Maxey, Shai Gilgeous-Alexander, Anthony Davis e LaMelo Ball estarão no draft", desc: "Com a desistência de Wictor's Team e Imprudente HotShots, quatro grandes nomes entram no pool do Draft AirBall 2026/27.", bg: 'linear-gradient(135deg, #78350f, #451a03)', image: './assets/news/draft-pool-desistencias.jpg', emoji: '⭐' },
+  { cat: 'PRÉ-TEMPORADA', catClass: 'cat-perf', time: 'Em breve', title: 'AirBall se prepara para a nova temporada', desc: 'Com 18 franquias zeradas, a disputa começa oficialmente no dia 20 de outubro.', bg: 'linear-gradient(135deg, #1e3a5f, #0f2040)', image: './assets/news/pre-temporada-airball.jpg', emoji: '🏀' },
   { cat: 'DRAFT', catClass: 'cat-draft', time: '10 de outubro', title: 'Draft AirBall 2026/27 já tem data marcada', desc: 'Os GMs terão a chance de montar seus elencos para a nova corrida pelo título.', bg: 'linear-gradient(135deg, #78350f, #451a03)', image: './assets/news/draft-airball.jpg', emoji: '⭐' },
   { cat: 'SEEDS', catClass: 'cat-analysis', time: '8 de outubro', title: 'Sorteio dos seeds abre oficialmente a temporada', desc: 'A ordem inicial será definida antes do draft e promete movimentar a liga.', bg: 'linear-gradient(135deg, #2d1b69, #0f0a20)', image: './assets/news/sorteio-seeds.jpg', emoji: '🎲' },
   { cat: 'HALL DA FAMA', catClass: 'cat-interview', time: '2025-26', title: "Stéfano's Supersonics entra para a história", desc: 'Franquia foi campeã da temporada 25-26 com Jalen Duren brilhando nos playoffs.', bg: 'linear-gradient(135deg, #7f1d1d, #450a0a)', image: './assets/news/campeao-2526.jpg', emoji: '🏆' },
@@ -1872,6 +1879,7 @@ const VIDEOS = [
 const TEAMS_DATA = [
   {"name": "Stéfano's SuperSonics", "gm": "Stéfano Cecin", "w": 0, "l": 0, "pf": 0, "status": "Campeão 25-26", "statusClass": "status-contender", "color": "#15803d", "init": "SS", "champion": true},
   {"name": "Ghost of goat", "gm": "GABRIEL Silva", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#111827", "init": "GOG", "champion": false},
+  {"name": "Wictor's Team", "gm": "Wictor Cezar", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#f59e0b", "init": "WIC", "champion": false},
   {"name": "Chugabum Ironclads", "gm": "Hiago Valverde", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#4b5563", "init": "CHIR", "champion": false},
   {"name": "Fi du Jequisom", "gm": "Darlan Machado Pinto", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#dc2626", "init": "FDJ", "champion": false},
   {"name": "Paysandu Lobo's", "gm": "Geraldo Oliveira Jr", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#0891b2", "init": "PAY", "champion": false},
@@ -1880,6 +1888,7 @@ const TEAMS_DATA = [
   {"name": "Charlotte DunkLipe", "gm": "Felipe C", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#7c3aed", "init": "CHA", "champion": false},
   {"name": "Revolution francaise", "gm": "Filipe Xavier", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#b45309", "init": "FFT", "champion": false},
   {"name": "Instituto Popovich", "gm": "Andre Caetano", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#166534", "init": "IPH", "champion": false},
+  {"name": "Imprudente HotShots", "gm": "ANDRE LUIZ SILVA", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#ea580c", "init": "IMP", "champion": false},
   {"name": "Nortz", "gm": "Caio Rogério Amaro Almeida", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#ca8a04", "init": "NTZ", "champion": false},
   {"name": "Pato's Team", "gm": "Mateus Pato", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#facc15", "init": "PATO", "champion": false},
   {"name": "Red Hot Blazer Peppers", "gm": "Aleison Götz", "w": 0, "l": 0, "pf": 0, "status": "Pré-temporada", "statusClass": "status-hunt", "color": "#dc2626", "init": "RHBP", "champion": false},
@@ -1899,12 +1908,14 @@ const FINAL_STANDINGS_2526 = [
   {"rank": 8, "team": "Chugabum Ironclads", "gm": "Hiago Valverde", "rec": "10-7-0"},
   {"rank": 9, "team": "Revolution francaise", "gm": "Filipe Xavier", "rec": "10 vitórias"},
   {"rank": 10, "team": "Instituto Popovich", "gm": "Andre Caetano", "rec": "9 vitórias"},
-  {"rank": 11, "team": "Warlock Jamaicans", "gm": "Ruan Bastos", "rec": "7 vitórias"},
-  {"rank": 12, "team": "Pato's Team", "gm": "Mateus Pato", "rec": "6 vitórias"},
-  {"rank": 13, "team": "Paysandu Lobo's", "gm": "Geraldo Oliveira Jr", "rec": "6 vitórias"},
-  {"rank": 14, "team": "Pistons de Pira", "gm": "Marino Mondek", "rec": "5 vitórias"},
-  {"rank": 15, "team": "Charlotte DunkLipe", "gm": "Felipe C", "rec": "3 vitórias"},
-  {"rank": 16, "team": "Ghost of goat", "gm": "GABRIEL Silva", "rec": "2 vitórias"}
+  {"rank": 11, "team": "Imprudente HotShots", "gm": "ANDRE LUIZ SILVA", "rec": "7 vitórias"},
+  {"rank": 12, "team": "Warlock Jamaicans", "gm": "Ruan Bastos", "rec": "7 vitórias"},
+  {"rank": 13, "team": "Pato's Team", "gm": "Mateus Pato", "rec": "6 vitórias"},
+  {"rank": 14, "team": "Paysandu Lobo's", "gm": "Geraldo Oliveira Jr", "rec": "6 vitórias"},
+  {"rank": 15, "team": "Wictor's Team", "gm": "Wictor Cezar", "rec": "5 vitórias"},
+  {"rank": 16, "team": "Pistons de Pira", "gm": "Marino Mondek", "rec": "5 vitórias"},
+  {"rank": 17, "team": "Charlotte DunkLipe", "gm": "Felipe C", "rec": "3 vitórias"},
+  {"rank": 18, "team": "Ghost of goat", "gm": "GABRIEL Silva", "rec": "2 vitórias"}
 ];
 
 
@@ -1948,6 +1959,22 @@ const KEEPERS_DATA = {
     players: [
       { name: "Cade Cunningham", fp: "53,70", health: "81,0%" },
       { name: "Anthony Edwards", fp: "49,22", health: "83,2%" }
+    ]
+  },
+  "Wictor's Team": {
+    unofficial: true,
+    sum: "102,27",
+    players: [
+      { name: "Tyrese Maxey", fp: "55,25", health: "76,6%" },
+      { name: "Anthony Davis", fp: "47,02", health: "39,5%" }
+    ]
+  },
+  "Imprudente HotShots": {
+    unofficial: true,
+    sum: "97,51",
+    players: [
+      { name: "Shai Gilgeous-Alexander", fp: "60,24", health: "86,8%" },
+      { name: "Tyler Herro", fp: "37,27", health: "61,7%" }
     ]
   },
   "Pato's Team": {
@@ -2083,20 +2110,22 @@ const TRADES_DATA = [
 const DRAFT_ORDER = [
   {"pick": 1, "name": "Stéfano's SuperSonics", "gm": "Stéfano Cecin", "color": "#15803d", "init": "SS", "badge": "SEED 1", "cls": "pick-orig"},
   {"pick": 2, "name": "Ghost of goat", "gm": "GABRIEL Silva", "color": "#111827", "init": "GOG", "badge": "SEED 2", "cls": "pick-orig"},
-  {"pick": 3, "name": "Chugabum Ironclads", "gm": "Hiago Valverde", "color": "#4b5563", "init": "CHIR", "badge": "SEED 3", "cls": "pick-orig"},
-  {"pick": 4, "name": "Fi du Jequisom", "gm": "Darlan Machado Pinto", "color": "#dc2626", "init": "FDJ", "badge": "SEED 4", "cls": "pick-orig"},
-  {"pick": 5, "name": "Paysandu Lobo's", "gm": "Geraldo Oliveira Jr", "color": "#0891b2", "init": "PAY", "badge": "SEED 5", "cls": "pick-orig"},
-  {"pick": 6, "name": "Pistons de Pira", "gm": "Marino Mondek", "color": "#f97316", "init": "PDP", "badge": "SEED 6", "cls": "pick-orig"},
-  {"pick": 7, "name": "Acre Dinosaurs", "gm": "Sidney Assunção", "color": "#581c87", "init": "DINO", "badge": "SEED 7", "cls": "pick-orig"},
-  {"pick": 8, "name": "Charlotte DunkLipe", "gm": "Felipe C", "color": "#7c3aed", "init": "CHA", "badge": "SEED 8", "cls": "pick-orig"},
-  {"pick": 9, "name": "Revolution francaise", "gm": "Filipe Xavier", "color": "#b45309", "init": "FFT", "badge": "SEED 9", "cls": "pick-orig"},
-  {"pick": 10, "name": "Instituto Popovich", "gm": "Andre Caetano", "color": "#166534", "init": "IPH", "badge": "SEED 10", "cls": "pick-orig"},
-  {"pick": 11, "name": "Nortz", "gm": "Caio Rogério Amaro Almeida", "color": "#ca8a04", "init": "NTZ", "badge": "SEED 11", "cls": "pick-orig"},
-  {"pick": 12, "name": "Pato's Team", "gm": "Mateus Pato", "color": "#facc15", "init": "PATO", "badge": "SEED 12", "cls": "pick-orig"},
-  {"pick": 13, "name": "Red Hot Blazer Peppers", "gm": "Aleison Götz", "color": "#dc2626", "init": "RHBP", "badge": "SEED 13", "cls": "pick-orig"},
-  {"pick": 14, "name": "Team Djalma Jr", "gm": "Djalma Júnior", "color": "#111827", "init": "TDJ", "badge": "SEED 14", "cls": "pick-orig"},
-  {"pick": 15, "name": "Canalhas do Bem", "gm": "Paulo Vitor Campodonio", "color": "#059669", "init": "CDB", "badge": "SEED 15", "cls": "pick-orig"},
-  {"pick": 16, "name": "Warlock Jamaicans", "gm": "Ruan Bastos", "color": "#16a34a", "init": "WJ", "badge": "SEED 16", "cls": "pick-orig"},
+  {"pick": 3, "name": "Wictor's Team", "gm": "Wictor Cezar", "color": "#f59e0b", "init": "WIC", "badge": "SEED 3", "cls": "pick-orig"},
+  {"pick": 4, "name": "Chugabum Ironclads", "gm": "Hiago Valverde", "color": "#4b5563", "init": "CHIR", "badge": "SEED 4", "cls": "pick-orig"},
+  {"pick": 5, "name": "Fi du Jequisom", "gm": "Darlan Machado Pinto", "color": "#dc2626", "init": "FDJ", "badge": "SEED 5", "cls": "pick-orig"},
+  {"pick": 6, "name": "Paysandu Lobo's", "gm": "Geraldo Oliveira Jr", "color": "#0891b2", "init": "PAY", "badge": "SEED 6", "cls": "pick-orig"},
+  {"pick": 7, "name": "Pistons de Pira", "gm": "Marino Mondek", "color": "#f97316", "init": "PDP", "badge": "SEED 7", "cls": "pick-orig"},
+  {"pick": 8, "name": "Acre Dinosaurs", "gm": "Sidney Assunção", "color": "#581c87", "init": "DINO", "badge": "SEED 8", "cls": "pick-orig"},
+  {"pick": 9, "name": "Charlotte DunkLipe", "gm": "Felipe C", "color": "#7c3aed", "init": "CHA", "badge": "SEED 9", "cls": "pick-orig"},
+  {"pick": 10, "name": "Revolution francaise", "gm": "Filipe Xavier", "color": "#b45309", "init": "FFT", "badge": "SEED 10", "cls": "pick-orig"},
+  {"pick": 11, "name": "Instituto Popovich", "gm": "Andre Caetano", "color": "#166534", "init": "IPH", "badge": "SEED 11", "cls": "pick-orig"},
+  {"pick": 12, "name": "Imprudente HotShots", "gm": "ANDRE LUIZ SILVA", "color": "#ea580c", "init": "IMP", "badge": "SEED 12", "cls": "pick-orig"},
+  {"pick": 13, "name": "Nortz", "gm": "Caio Rogério Amaro Almeida", "color": "#ca8a04", "init": "NTZ", "badge": "SEED 13", "cls": "pick-orig"},
+  {"pick": 14, "name": "Pato's Team", "gm": "Mateus Pato", "color": "#facc15", "init": "PATO", "badge": "SEED 14", "cls": "pick-orig"},
+  {"pick": 15, "name": "Red Hot Blazer Peppers", "gm": "Aleison Götz", "color": "#dc2626", "init": "RHBP", "badge": "SEED 15", "cls": "pick-orig"},
+  {"pick": 16, "name": "Team Djalma Jr", "gm": "Djalma Júnior", "color": "#111827", "init": "TDJ", "badge": "SEED 16", "cls": "pick-orig"},
+  {"pick": 17, "name": "Canalhas do Bem", "gm": "Paulo Vitor Campodonio", "color": "#059669", "init": "CDB", "badge": "SEED 17", "cls": "pick-orig"},
+  {"pick": 18, "name": "Warlock Jamaicans", "gm": "Ruan Bastos", "color": "#16a34a", "init": "WJ", "badge": "SEED 18", "cls": "pick-orig"},
 ];
 
 // ==================== COMPONENTS ====================
@@ -2129,6 +2158,12 @@ function TopBar({ activePage, setPage }) {
 function Header() {
   return (
     <header className="header">
+      <div className="header-left">
+        <button className="menu-btn">
+          <span/><span/><span/>
+        </button>
+        <span className="menu-label">MENU</span>
+      </div>
       <div className="header-brand-text">
         <span className="brand-airball">AIRBALL</span>
         <span className="brand-dynasty">DYNASTY LEAGUE</span>
@@ -2186,13 +2221,13 @@ function MatchupCard({ m }) {
   );
 }
 
-function MatchupsStrip({ setPage }) {
+function MatchupsStrip() {
   const marqueeMatchups = [...MATCHUPS, ...MATCHUPS];
   return (
     <div className="matchups-strip">
       <div className="week-card">
         <div className="week-label">SEM 1</div>
-        <button className="week-btn" onClick={() => setPage && setPage('CALENDÁRIO')}>VER CALENDÁRIO</button>
+        <button className="week-btn">VER CALENDÁRIO</button>
       </div>
       <div className="matchups-marquee">
         <div className="matchups-track">
@@ -2216,11 +2251,11 @@ function FeaturedNews() {
           <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           DESTAQUE
         </span>
-        <h1 className="featured-title">AIRBALL INICIA NOVA ERA COM 16 FRANQUIAS</h1>
+        <h1 className="featured-title">AIRBALL INICIA NOVA ERA COM 18 FRANQUIAS</h1>
         <div className="featured-bullets">
           <div className="featured-bullet">Temporada começa oficialmente em 20 de outubro</div>
           <div className="featured-bullet">Draft marcado para 10 de outubro</div>
-          <div className="featured-bullet">A Liga se despede do GM Wictor e do GM Andre Luiz, que não conseguiram ter tempo para acompanhar a liga.</div>
+          <div className="featured-bullet">Stéfano's Supersonics defende o título 25-26</div>
         </div>
         <div className="featured-footer">
           <div className="featured-mvp">
@@ -2558,17 +2593,17 @@ function HomeDraftCountdown() {
   );
 }
 
-function HomePage({ setPage }) {
+function HomePage() {
   return (
     <>
-      <MatchupsStrip setPage={setPage} />
+      <MatchupsStrip />
       <div className="main-wrap">
         <div className="content-grid">
           <div>
             <div className="news-grid">
               <FeaturedNews />
               <SideNews gradient="linear-gradient(135deg, #2d1b69, #0f0a20)" image="./assets/news/sorteio-seeds.jpg" catClass="cat-rules" cat="SEEDS" title="SORTEIO DOS SEEDS SERÁ DIA 8 DE OUTUBRO" desc="A ordem inicial da temporada será definida antes do draft." />
-              <SideNews gradient="linear-gradient(135deg, #064e3b, #022c22)" image="./assets/news/draft-airball.jpg" catClass="cat-market" cat="DRAFT" title="DRAFT AIRBALL MARCADO PARA 10 DE OUTUBRO" desc="Os 16 GMs se preparam para montar os elencos da nova temporada." />
+              <SideNews gradient="linear-gradient(135deg, #064e3b, #022c22)" image="./assets/news/draft-airball.jpg" catClass="cat-market" cat="DRAFT" title="DRAFT AIRBALL MARCADO PARA 10 DE OUTUBRO" desc="Os 18 GMs se preparam para montar os elencos da nova temporada." />
             </div>
             <NewsFeed />
           </div>
@@ -2615,7 +2650,7 @@ function TeamsPage() {
     <div className="main-wrap">
       <div className="page-hero">
         <div className="page-hero-title">🏀 Franquias</div>
-        <div className="page-hero-sub">Temporada 2026/27 • 16 franquias da AirBall Dynasty League</div>
+        <div className="page-hero-sub">Temporada 2026/27 • 18 franquias da AirBall Dynasty League</div>
       </div>
       <div className="teams-grid">
         {orderedFranchises.map((t, i) => {
@@ -3143,7 +3178,7 @@ function DraftPage() {
               <span className="pick-num">10</span>
               <div className="pick-info">
                 <div className="pick-team">Draft AirBall 2026/27</div>
-                <div className="pick-gm">Os GMs montam seus elencos</div>
+                <div className="pick-gm">Todos os GMs montam seus elencos</div>
               </div>
               <span className="pick-badge pick-orig">OUT</span>
             </div>
@@ -3182,7 +3217,7 @@ function App() {
       case 'HALL DA FAMA': return <HallOfFamePage />;
       case 'TRADES': return <TradesPage />;
       case 'DRAFT': return <DraftPage />;
-      default: return <HomePage setPage={setPage} />;
+      default: return <HomePage />;
     }
   };
 
