@@ -746,226 +746,6 @@
   .pick-lottery { background: #fef3c7; color: #92400e; }
   .pick-orig { background: #ede9fe; color: #5b21b6; }
 
-
-
-  /* HOME DRAFT MINI COUNTDOWN */
-  .home-draft-countdown {
-    background: linear-gradient(135deg, #1a0635 0%, var(--purple-deep) 55%, #0a0a0a 100%);
-    color: white;
-    border-radius: 14px;
-    overflow: hidden;
-    border: 1px solid rgba(249,115,22,0.24);
-    box-shadow: 0 3px 14px rgba(0,0,0,0.08);
-  }
-  .home-draft-countdown-header {
-    padding: 12px 16px;
-    background: rgba(249,115,22,0.12);
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    align-items: center;
-  }
-  .home-draft-countdown-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--orange);
-  }
-  .home-draft-countdown-date {
-    font-family: 'Oswald', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    color: #c084fc;
-    letter-spacing: 1px;
-    white-space: nowrap;
-  }
-  .home-draft-countdown-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-  }
-  .home-draft-countdown-box {
-    padding: 11px 6px;
-    text-align: center;
-    border-right: 1px solid rgba(255,255,255,0.10);
-  }
-  .home-draft-countdown-box:last-child { border-right: none; }
-  .home-draft-countdown-number {
-    font-family: 'Oswald', sans-serif;
-    font-size: 25px;
-    line-height: 1;
-    font-weight: 700;
-    color: white;
-  }
-  .home-draft-countdown-label {
-    margin-top: 3px;
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 1px;
-    color: rgba(255,255,255,0.56);
-    text-transform: uppercase;
-  }
-  .franchise-card-logo-line {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 14px;
-  }
-  .franchise-card-name {
-    font-family: 'Oswald', sans-serif;
-    font-size: 21px;
-    line-height: 1.15;
-    font-weight: 700;
-    text-align: center;
-  }
-  .franchise-card-gm {
-    text-align: center;
-    font-size: 13px;
-    color: var(--gray-text);
-    margin-top: 4px;
-  }
-  .franchise-info-list {
-    margin-top: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    border-top: 1px solid #f0f0f4;
-    padding-top: 14px;
-  }
-  .franchise-info-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    font-size: 12px;
-  }
-  .franchise-info-label {
-    color: var(--gray-text);
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-  }
-  .franchise-info-value {
-    color: var(--purple-mid);
-    font-weight: 700;
-    text-align: right;
-  }
-
-  /* DRAFT COUNTDOWN */
-  .draft-countdown-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 20px;
-    margin-bottom: 24px;
-    padding: 30px;
-    color: white;
-    background:
-      radial-gradient(circle at 15% 15%, rgba(249,115,22,0.28), transparent 34%),
-      radial-gradient(circle at 85% 20%, rgba(124,58,237,0.30), transparent 34%),
-      linear-gradient(135deg, #16042c 0%, #2D0A4E 52%, #0A0A0A 100%);
-    border: 1px solid rgba(249,115,22,0.28);
-    box-shadow: 0 14px 34px rgba(0,0,0,0.16);
-  }
-  .draft-countdown-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    opacity: 0.08;
-    background-image:
-      repeating-linear-gradient(0deg, transparent, transparent 38px, rgba(255,255,255,0.65) 39px),
-      repeating-linear-gradient(90deg, transparent, transparent 76px, rgba(255,255,255,0.35) 77px);
-    pointer-events: none;
-  }
-  .draft-countdown-top {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    justify-content: space-between;
-    gap: 18px;
-    align-items: flex-end;
-    margin-bottom: 22px;
-  }
-  .draft-countdown-kicker {
-    font-family: 'Oswald', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 2.8px;
-    text-transform: uppercase;
-    color: var(--orange);
-    margin-bottom: 4px;
-  }
-  .draft-countdown-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 38px;
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    line-height: 1;
-    text-shadow: 0 4px 16px rgba(0,0,0,0.42);
-  }
-  .draft-countdown-date {
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px;
-    color: #c084fc;
-    letter-spacing: 1.6px;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-  .draft-countdown-grid {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 14px;
-  }
-  .draft-countdown-box {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.14);
-    border-radius: 16px;
-    padding: 18px 10px;
-    text-align: center;
-    backdrop-filter: blur(3px);
-  }
-  .draft-countdown-number {
-    font-family: 'Oswald', sans-serif;
-    font-size: 52px;
-    font-weight: 700;
-    line-height: 1;
-    color: #fff;
-    text-shadow: 0 0 18px rgba(249,115,22,0.35);
-  }
-  .draft-countdown-label {
-    margin-top: 6px;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    color: rgba(255,255,255,0.66);
-    text-transform: uppercase;
-  }
-  .draft-page .draft-grid {
-    gap: 24px;
-  }
-  .draft-page .draft-order-list .draft-pick {
-    padding: 18px 22px;
-    gap: 18px;
-  }
-  .draft-page .draft-order-list .pick-num {
-    font-size: 34px;
-    width: 44px;
-  }
-  .draft-page .draft-order-list .pick-team {
-    font-size: 22px;
-    line-height: 1.15;
-  }
-  .draft-page .draft-order-list .pick-gm {
-    font-size: 15px;
-    margin-top: 3px;
-  }
-  .draft-page .draft-order-list .pick-badge {
-    font-size: 12px;
-    padding: 5px 12px;
-  }
-
   /* FOOTER */
   .footer {
     background: var(--black); color: #555; text-align: center;
@@ -1082,11 +862,6 @@
     .topbar-links { gap: 0; }
     .topbar-link { padding: 0 8px; font-size: 10px; }
     .draft-grid { grid-template-columns: 1fr; }
-    .draft-countdown-top { flex-direction: column; align-items: flex-start; }
-    .draft-countdown-title { font-size: 30px; }
-    .draft-countdown-date { white-space: normal; font-size: 15px; }
-    .draft-countdown-number { font-size: 40px; }
-    .home-draft-countdown-number { font-size: 22px; }
     .main-wrap { padding: 16px 10px; }
     .header { padding: 0 12px; height: 60px; }
     .brand-airball { font-size: 23px; letter-spacing: 1.6px; } .brand-dynasty { font-size: 13px; letter-spacing: 2px; }
@@ -1116,7 +891,7 @@
 <body>
 <div id="root"></div>
 <script type="text/babel">
-const { useState, useRef, useEffect } = React;
+const { useState, useRef } = React;
 
 // ==================== DATA ====================
 const TEAMS_MASTER = [
@@ -1353,20 +1128,15 @@ const DRAFT_ORDER = [
 // ==================== COMPONENTS ====================
 
 function TopBar({ activePage, setPage }) {
-  const links = ['INÍCIO', 'FRANQUIAS', 'REGRAS', 'CALENDÁRIO', 'HALL DA FAMA', 'TRADES', 'DRAFT'];
-  const pageForLink = (l) => l === 'INÍCIO' ? 'HOME' : l === 'FRANQUIAS' ? 'TIMES' : l;
+  const links = ['INÍCIO', 'TIMES', 'REGRAS', 'CALENDÁRIO', 'HALL DA FAMA', 'TRADES', 'DRAFT'];
   return (
     <div className="topbar">
       <div className="topbar-links">
-        {links.map(l => {
-          const targetPage = pageForLink(l);
-          const isActive = activePage === targetPage;
-          return (
-            <button key={l} className={`topbar-link ${isActive ? 'active' : ''}`} onClick={() => setPage(targetPage === activePage ? 'HOME' : targetPage)}>
-              {l}
-            </button>
-          );
-        })}
+        {links.map(l => (
+          <button key={l} className={`topbar-link ${(l === 'INÍCIO' ? activePage === 'HOME' : activePage === l) ? 'active' : ''}`} onClick={() => setPage(l === 'INÍCIO' ? 'HOME' : (l === activePage ? 'HOME' : l))}>
+            {l}
+          </button>
+        ))}
       </div>
       <div className="topbar-right">
         <span className="topbar-season">TEMPORADA 2026/27</span>
@@ -1735,70 +1505,6 @@ function NewsFeed() {
 }
 
 
-
-function formatFinalPosition(rank) {
-  if (!rank) return 'A definir';
-  if (rank === 1) return 'Campeão';
-  if (rank === 2) return 'Vice-Campeão';
-  if (rank === 3) return '3º lugar';
-  return `${rank}º lugar`;
-}
-
-function getFinalStandingForTeam(teamName) {
-  const normalized = normalizeTeamName(teamName);
-  return FINAL_STANDINGS_2526.find(row => normalizeTeamName(row.team) === normalized);
-}
-
-function HomeDraftCountdown() {
-  const targetDate = new Date('2026-10-10T00:00:00-03:00');
-
-  const getTimeLeft = () => {
-    const diff = targetDate.getTime() - new Date().getTime();
-    const total = Math.max(diff, 0);
-    const days = Math.floor(total / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((total / (1000 * 60)) % 60);
-    const seconds = Math.floor((total / 1000) % 60);
-    return { days, hours, minutes, seconds };
-  };
-
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft());
-
-  useEffect(() => {
-    const timer = setInterval(() => setTimeLeft(getTimeLeft()), 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const pad = (n) => String(n).padStart(2, '0');
-
-  return (
-    <div className="home-draft-countdown">
-      <div className="home-draft-countdown-header">
-        <div className="home-draft-countdown-title">⏳ Draft AirBall</div>
-        <div className="home-draft-countdown-date">10 OUT 2026</div>
-      </div>
-      <div className="home-draft-countdown-grid">
-        <div className="home-draft-countdown-box">
-          <div className="home-draft-countdown-number">{timeLeft.days}</div>
-          <div className="home-draft-countdown-label">Dias</div>
-        </div>
-        <div className="home-draft-countdown-box">
-          <div className="home-draft-countdown-number">{pad(timeLeft.hours)}</div>
-          <div className="home-draft-countdown-label">Horas</div>
-        </div>
-        <div className="home-draft-countdown-box">
-          <div className="home-draft-countdown-number">{pad(timeLeft.minutes)}</div>
-          <div className="home-draft-countdown-label">Min</div>
-        </div>
-        <div className="home-draft-countdown-box">
-          <div className="home-draft-countdown-number">{pad(timeLeft.seconds)}</div>
-          <div className="home-draft-countdown-label">Seg</div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function HomePage() {
   return (
     <>
@@ -1814,7 +1520,6 @@ function HomePage() {
             <NewsFeed />
           </div>
           <div className="sidebar">
-            <HomeDraftCountdown />
             <StandingsCard />
             <PowerRankingsCard />
             <LatestTradesCard />
@@ -1830,35 +1535,38 @@ function TeamsPage() {
     <div className="main-wrap">
       <div className="page-hero">
         <div className="page-hero-title">🏀 Franquias</div>
-        <div className="page-hero-sub">Temporada 2026/27 • 18 franquias da AirBall Dynasty League</div>
+        <div className="page-hero-sub">Temporada 2026/27 • 18 franquias zeradas na disputa pelo troféu Larry Ball</div>
       </div>
       <div className="teams-grid">
-        {TEAMS_DATA.map((t, i) => {
-          const finalStanding = getFinalStandingForTeam(t.name);
-          return (
-            <div className="team-card" key={i} style={{borderColor:t.color}}>
-              <div className="franchise-card-logo-line">
-                <TeamLogo team={t.name} size={92} />
-              </div>
-              <div className="franchise-card-name">
-                {t.name}
-                {t.champion && <span className="champion-crown" title="Campeão 25-26">👑</span>}
-              </div>
-              <div className="franchise-card-gm">GM: {t.gm}</div>
-
-              <div className="franchise-info-list">
-                <div className="franchise-info-row">
-                  <span className="franchise-info-label">Temporada 25-26:</span>
-                  <span className="franchise-info-value">{formatFinalPosition(finalStanding?.rank)}</span>
+        {TEAMS_DATA.map((t, i) => (
+          <div className="team-card" key={i} style={{borderColor:t.color}}>
+            <div className="team-card-top">
+              <TeamLogo team={t.name} size={52} />
+              <div>
+                <div className="team-card-name">
+                  {t.name}
+                  {t.champion && <span className="champion-crown" title="Campeão 25-26">👑</span>}
                 </div>
-                <div className="franchise-info-row">
-                  <span className="franchise-info-label">Keepers:</span>
-                  <span className="franchise-info-value">&nbsp;</span>
-                </div>
+                <div className="team-card-gm">GM: {t.gm}</div>
               </div>
             </div>
-          );
-        })}
+            <div className="team-stats">
+              <div className="team-stat">
+                <div className="team-stat-val" style={{color:'#059669'}}>{t.w}</div>
+                <div className="team-stat-label">VITÓRIAS</div>
+              </div>
+              <div className="team-stat">
+                <div className="team-stat-val" style={{color:'#dc2626'}}>{t.l}</div>
+                <div className="team-stat-label">DERROTAS</div>
+              </div>
+              <div className="team-stat">
+                <div className="team-stat-val" style={{color:'#7c3aed', fontSize:16}}>{t.pf.toLocaleString()}</div>
+                <div className="team-stat-label">PONTOS</div>
+              </div>
+            </div>
+            <div><span className={`status-badge ${t.statusClass}`}>{t.status.toUpperCase()}</span></div>
+          </div>
+        ))}
       </div>
 
       <div className="final-standings-card">
@@ -1888,6 +1596,7 @@ function TeamsPage() {
     </div>
   );
 }
+
 
 function RulesPage() {
   return (
@@ -2043,68 +1752,13 @@ function TradesPage() {
   );
 }
 
-
-function DraftCountdown() {
-  const targetDate = new Date('2026-10-10T00:00:00-03:00');
-
-  const getTimeLeft = () => {
-    const diff = targetDate.getTime() - new Date().getTime();
-    const total = Math.max(diff, 0);
-    const days = Math.floor(total / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((total / (1000 * 60)) % 60);
-    const seconds = Math.floor((total / 1000) % 60);
-    return { days, hours, minutes, seconds };
-  };
-
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft());
-
-  useEffect(() => {
-    const timer = setInterval(() => setTimeLeft(getTimeLeft()), 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const pad = (n) => String(n).padStart(2, '0');
-
-  return (
-    <div className="draft-countdown-card">
-      <div className="draft-countdown-top">
-        <div>
-          <div className="draft-countdown-kicker">Contagem regressiva oficial</div>
-          <div className="draft-countdown-title">Draft AirBall 2026/27</div>
-        </div>
-        <div className="draft-countdown-date">10 de outubro de 2026</div>
-      </div>
-      <div className="draft-countdown-grid">
-        <div className="draft-countdown-box">
-          <div className="draft-countdown-number">{timeLeft.days}</div>
-          <div className="draft-countdown-label">Dias</div>
-        </div>
-        <div className="draft-countdown-box">
-          <div className="draft-countdown-number">{pad(timeLeft.hours)}</div>
-          <div className="draft-countdown-label">Horas</div>
-        </div>
-        <div className="draft-countdown-box">
-          <div className="draft-countdown-number">{pad(timeLeft.minutes)}</div>
-          <div className="draft-countdown-label">Minutos</div>
-        </div>
-        <div className="draft-countdown-box">
-          <div className="draft-countdown-number">{pad(timeLeft.seconds)}</div>
-          <div className="draft-countdown-label">Segundos</div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function DraftPage() {
   return (
-    <div className="main-wrap draft-page">
+    <div className="main-wrap">
       <div className="page-hero">
         <div className="page-hero-title">⭐ Draft</div>
         <div className="page-hero-sub">Draft 2026/27 • sorteio dos seeds em 08/10 e draft oficial em 10/10</div>
       </div>
-      <DraftCountdown />
       <div className="draft-grid">
         <div className="draft-order-card">
           <div className="sidebar-card-header">
@@ -2114,7 +1768,7 @@ function DraftPage() {
             {DRAFT_ORDER.map(p => (
               <div className="draft-pick" key={p.pick}>
                 <span className="pick-num">{p.pick}</span>
-                <TeamLogo team={p.name} size={102} />
+                <TeamLogo team={p.name} size={51} />
                 <div className="pick-info">
                   <div className="pick-team">{p.name}</div>
                   <div className="pick-gm">GM: {p.gm}</div>
