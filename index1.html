@@ -168,17 +168,7 @@
       0 0 14px rgba(124,58,237,0.6);
   }
 
-  .header-right { display: none; }
-  .champion-header-banner {
-    position: absolute;
-    right: 92px;
-    top: -26px;
-    width: 138px;
-    height: auto;
-    z-index: 6;
-    pointer-events: none;
-    filter: drop-shadow(0 10px 18px rgba(0,0,0,0.38));
-  }
+  .header-right { display: flex; align-items: center; gap: 16px; }
   .search-box {
     display: flex; align-items: center;
     background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
@@ -1074,326 +1064,6 @@
     padding: 5px 12px;
   }
 
-
-  /* RULEBOOK / HONESTÔMETRO */
-  .rulebook-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-  }
-  .rulebook-section {
-    background: white;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.06);
-    border: 1px solid rgba(45,10,78,0.08);
-  }
-  .rulebook-section-header {
-    background:
-      radial-gradient(circle at 14% 0%, rgba(249,115,22,0.18), transparent 38%),
-      linear-gradient(135deg, var(--purple-deep), var(--purple-mid));
-    color: white;
-    padding: 18px 22px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .rulebook-num {
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
-    background: var(--orange);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Oswald', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    flex-shrink: 0;
-    box-shadow: 0 4px 14px rgba(249,115,22,0.28);
-  }
-  .rulebook-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 1.1;
-    text-transform: uppercase;
-    letter-spacing: .6px;
-  }
-  .rulebook-sub {
-    margin-top: 3px;
-    color: rgba(255,255,255,.68);
-    font-size: 13px;
-    line-height: 1.45;
-  }
-  .rulebook-body {
-    padding: 22px;
-  }
-  .rulebook-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 14px;
-  }
-  .rule-info-card {
-    background: #f8f4ff;
-    border: 1px solid #ece3ff;
-    border-radius: 14px;
-    padding: 16px;
-  }
-  .rule-info-label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 12px;
-    color: var(--orange);
-    text-transform: uppercase;
-    letter-spacing: 1.4px;
-    font-weight: 700;
-    margin-bottom: 5px;
-  }
-  .rule-info-value {
-    font-size: 15px;
-    color: #21132f;
-    font-weight: 700;
-    line-height: 1.35;
-  }
-  .position-chip-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 14px;
-  }
-  .position-chip {
-    min-width: 74px;
-    text-align: center;
-    background: linear-gradient(135deg, #1a0635, var(--purple-deep));
-    color: white;
-    border: 1px solid rgba(249,115,22,.32);
-    border-radius: 12px;
-    padding: 11px 13px;
-    font-family: 'Oswald', sans-serif;
-    font-size: 16px;
-    letter-spacing: .8px;
-    font-weight: 700;
-  }
-  .scoring-table-wrap {
-    overflow-x: auto;
-    border-radius: 14px;
-    border: 1px solid #ececf2;
-  }
-  .scoring-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-  }
-  .scoring-table th {
-    background: #1a0635;
-    color: white;
-    font-family: 'Oswald', sans-serif;
-    font-size: 13px;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    padding: 13px 16px;
-    text-align: left;
-  }
-  .scoring-table th:last-child,
-  .scoring-table td:last-child {
-    text-align: right;
-  }
-  .scoring-table td {
-    padding: 11px 16px;
-    border-bottom: 1px solid #f0f0f4;
-    font-size: 14px;
-  }
-  .scoring-table tr:last-child td { border-bottom: none; }
-  .scoring-value {
-    font-family: 'Oswald', sans-serif;
-    font-size: 16px;
-    color: var(--purple-mid);
-    font-weight: 700;
-  }
-  .rule-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 4px;
-  }
-  .rule-list-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 14px;
-    color: #3d3348;
-    line-height: 1.55;
-  }
-  .rule-list-item::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    margin-top: 7px;
-    border-radius: 50%;
-    background: var(--orange);
-    flex-shrink: 0;
-  }
-  .rule-note {
-    margin-top: 16px;
-    padding: 15px 16px;
-    border-radius: 14px;
-    background: rgba(249,115,22,.10);
-    border: 1px solid rgba(249,115,22,.22);
-    color: #3f2a18;
-    font-size: 14px;
-    line-height: 1.55;
-  }
-  .rule-subtitle {
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px;
-    color: var(--purple-deep);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 20px 0 10px;
-  }
-  .draft-priority-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 14px;
-  }
-  .priority-card {
-    background: #fafafa;
-    border: 1px solid #ededf3;
-    border-radius: 14px;
-    padding: 16px;
-  }
-  .priority-title {
-    font-family: 'Oswald', sans-serif;
-    color: var(--purple-deep);
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .honest-hero {
-    background:
-      radial-gradient(circle at 12% 12%, rgba(249,115,22,.34), transparent 30%),
-      radial-gradient(circle at 88% 16%, rgba(124,58,237,.34), transparent 30%),
-      linear-gradient(135deg, #12021f 0%, var(--purple-deep) 54%, #0A0A0A 100%);
-    color: white;
-    border-radius: 20px;
-    overflow: hidden;
-    padding: 34px;
-    border: 1px solid rgba(249,115,22,.28);
-    box-shadow: 0 14px 34px rgba(0,0,0,0.14);
-    position: relative;
-  }
-  .honest-hero::after {
-    content: '⚖️';
-    position: absolute;
-    right: 26px;
-    top: 10px;
-    font-size: 120px;
-    opacity: .08;
-  }
-  .honest-kicker {
-    font-family: 'Oswald', sans-serif;
-    color: var(--orange);
-    font-size: 14px;
-    letter-spacing: 2.6px;
-    text-transform: uppercase;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .honest-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 44px;
-    line-height: 1;
-    text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 12px;
-  }
-  .honest-text {
-    max-width: 780px;
-    font-size: 15px;
-    color: rgba(255,255,255,.78);
-    line-height: 1.6;
-  }
-  .honest-grid {
-    display: grid;
-    grid-template-columns: 1.05fr .95fr;
-    gap: 22px;
-    margin-top: 22px;
-  }
-  .honest-card {
-    background: white;
-    border-radius: 18px;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.06);
-    border: 1px solid rgba(45,10,78,0.08);
-    overflow: hidden;
-  }
-  .honest-card-header {
-    background: linear-gradient(135deg, var(--purple-deep), var(--purple-mid));
-    color: white;
-    padding: 16px 20px;
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-  .honest-card-body {
-    padding: 20px;
-  }
-  .honest-step {
-    display: grid;
-    grid-template-columns: 38px 1fr;
-    gap: 12px;
-    padding: 13px 0;
-    border-bottom: 1px solid #f0f0f4;
-  }
-  .honest-step:last-child { border-bottom: none; }
-  .honest-step-num {
-    width: 34px;
-    height: 34px;
-    border-radius: 10px;
-    background: var(--orange);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-  }
-  .honest-step-text {
-    font-size: 14px;
-    color: #3d3348;
-    line-height: 1.5;
-  }
-  .honest-placeholder {
-    background:
-      radial-gradient(circle at 30% 15%, rgba(249,115,22,.24), transparent 36%),
-      linear-gradient(135deg, #f8f4ff, #ffffff);
-    border: 1px dashed rgba(107,47,160,.35);
-    border-radius: 16px;
-    padding: 28px;
-    text-align: center;
-    color: var(--purple-deep);
-  }
-  .honest-placeholder-icon {
-    font-size: 46px;
-    margin-bottom: 8px;
-  }
-  .honest-placeholder-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--purple-deep);
-    text-transform: uppercase;
-  }
-  .honest-placeholder-sub {
-    margin-top: 8px;
-    color: var(--gray-text);
-    font-size: 13px;
-    line-height: 1.45;
-  }
-
   /* FOOTER */
   .footer {
     background: var(--black); color: #555; text-align: center;
@@ -1514,9 +1184,6 @@
     .draft-countdown-title { font-size: 30px; }
     .draft-countdown-date { white-space: normal; font-size: 15px; }
     .draft-countdown-number { font-size: 40px; }
-    .honest-grid { grid-template-columns: 1fr; }
-    .honest-title { font-size: 34px; }
-    .rulebook-title { font-size: 21px; }
     .home-draft-countdown-number { font-size: 22px; }
     .teams-grid .team-card { grid-template-columns: 150px minmax(0,1fr) 160px; gap: 24px; padding: 28px; }
     .franchise-gm-photo { width: 150px; height: 150px; }
@@ -1524,10 +1191,9 @@
     .teams-grid .franchise-card-gm { font-size: 16px; }
     .main-wrap { padding: 16px 10px; }
     .header { padding: 0 12px; height: 60px; }
-    .brand-airball { font-size: 23px; letter-spacing: 1.6px; } .brand-dynasty { font-size: 13px; letter-spacing: 2px; } .champion-header-banner { width: 108px; right: 18px; top: -18px; }
+    .brand-airball { font-size: 23px; letter-spacing: 1.6px; } .brand-dynasty { font-size: 13px; letter-spacing: 2px; }
   }
   @media (max-width: 600px) {
-    .champion-header-banner { display: none; }
     .champion-feature-layout { min-height: 620px; }
     .champion-feature-photo { min-height: 620px; }
     .champion-feature-info { width: 100%; padding: 28px 22px 24px; justify-content: flex-end; min-height: 620px; }
@@ -1789,7 +1455,7 @@ const DRAFT_ORDER = [
 // ==================== COMPONENTS ====================
 
 function TopBar({ activePage, setPage }) {
-  const links = ['INÍCIO', 'FRANQUIAS', 'REGRAS', 'HONESTÔMETRO', 'CALENDÁRIO', 'HALL DA FAMA', 'TRADES', 'DRAFT'];
+  const links = ['INÍCIO', 'FRANQUIAS', 'REGRAS', 'CALENDÁRIO', 'HALL DA FAMA', 'TRADES', 'DRAFT'];
   const pageForLink = (l) => l === 'INÍCIO' ? 'HOME' : l === 'FRANQUIAS' ? 'TIMES' : l;
   return (
     <div className="topbar">
@@ -1826,8 +1492,12 @@ function Header() {
         <span className="brand-airball">AIRBALL</span>
         <span className="brand-dynasty">DYNASTY LEAGUE</span>
       </div>
-      <img className="champion-header-banner" src="./assets/champion-banner-supersonics.png" alt="25-26 Stéfano's SuperSonics campeão" />
-      <div className="header-right"></div>
+      <div className="header-right">
+        <div className="search-box">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input placeholder="Buscar notícias, times, jogadores..." />
+        </div>
+      </div>
     </header>
   );
 }
@@ -2350,215 +2020,20 @@ function TeamsPage() {
 }
 
 function RulesPage() {
-  const scoring = [
-    ['FGM', '+2'], ['FGA', '-1'], ['FTM', '+1'], ['FTA', '-0.5'],
-    ['3PM', '+1'], ['OReb', '+0.5'], ['REB', '+1'], ['AST', '+2'],
-    ['STL', '+4'], ['BLK', '+4'], ['TO', '-2'], ['EJ', '-5'],
-    ['TF', '-1'], ['QD — Quadruplo-duplo', '+100'], ['PTS', '+1']
-  ];
-
-  const RuleSection = ({num, title, sub, children}) => (
-    <div className="rulebook-section">
-      <div className="rulebook-section-header">
-        <div className="rulebook-num">{num}</div>
-        <div>
-          <div className="rulebook-title">{title}</div>
-          {sub && <div className="rulebook-sub">{sub}</div>}
-        </div>
-      </div>
-      <div className="rulebook-body">{children}</div>
-    </div>
-  );
-
   return (
     <div className="main-wrap">
       <div className="page-hero">
-        <div className="page-hero-title">📘 Regras Oficiais</div>
-        <div className="page-hero-sub">Regulamento oficial da AirBall Dynasty League • Temporada 2026/27</div>
+        <div className="page-hero-title">📋 Regras da Liga</div>
+        <div className="page-hero-sub">Tudo que você precisa saber para competir na Airball Dynasty</div>
       </div>
-
-      <div className="rulebook-wrap">
-        <RuleSection num="1" title="Formato da Liga" sub="Estrutura principal da temporada regular">
-          <div className="rulebook-grid">
-            <div className="rule-info-card"><div className="rule-info-label">Tipo</div><div className="rule-info-value">Head-to-Head Points</div></div>
-            <div className="rule-info-card"><div className="rule-info-label">Número de times</div><div className="rule-info-value">18 equipes</div></div>
-            <div className="rule-info-card"><div className="rule-info-label">Temporada regular</div><div className="rule-info-value">17 rodadas, todos contra todos</div></div>
-            <div className="rule-info-card"><div className="rule-info-label">Calendário</div><div className="rule-info-value">Segue a temporada regular da NBA</div></div>
+      <div className="rules-grid">
+        {RULES_DATA.map((r, i) => (
+          <div className="rule-card" key={i}>
+            <div className="rule-icon">{r.icon}</div>
+            <div className="rule-title">{r.title}</div>
+            <div className="rule-desc">{r.desc}</div>
           </div>
-        </RuleSection>
-
-        <RuleSection num="2" title="Composição do Roster" sub="Configuração oficial dos elencos">
-          <div className="rulebook-grid">
-            <div className="rule-info-card"><div className="rule-info-label">Total de jogadores</div><div className="rule-info-value">13 por equipe</div></div>
-            <div className="rule-info-card"><div className="rule-info-label">Titulares por rodada</div><div className="rule-info-value">7 jogadores</div></div>
-            <div className="rule-info-card"><div className="rule-info-label">Banco</div><div className="rule-info-value">6 jogadores</div></div>
-            <div className="rule-info-card"><div className="rule-info-label">Injury Reserve</div><div className="rule-info-value">2 vagas</div></div>
-          </div>
-          <div className="rule-subtitle">Posições ativas</div>
-          <div className="position-chip-row">
-            {['C', 'G', 'G', 'F', 'SG/SF', 'PF/C', 'UTIL'].map((p, i) => <div className="position-chip" key={i}>{p}</div>)}
-          </div>
-        </RuleSection>
-
-        <RuleSection num="3" title="Sistema de Pontuação" sub="Pontuação oficial de cada estatística">
-          <div className="scoring-table-wrap">
-            <table className="scoring-table">
-              <thead><tr><th>Estatística</th><th>Pontuação</th></tr></thead>
-              <tbody>
-                {scoring.map(([stat, pts]) => (
-                  <tr key={stat}><td>{stat}</td><td><span className="scoring-value">{pts}</span></td></tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </RuleSection>
-
-        <RuleSection num="4" title="Waivers e Free Agency" sub="Sistema de prioridade e limite semanal">
-          <div className="rule-list">
-            <div className="rule-list-item">O sistema de waivers será por prioridade inversa ao draft.</div>
-            <div className="rule-list-item">Ao usar a waiver, o time vai para o último lugar da fila.</div>
-            <div className="rule-list-item">Limite de adições semanais: <strong>4 movimentações</strong>.</div>
-          </div>
-        </RuleSection>
-
-        <RuleSection num="5" title="Trocas e Honestômetro" sub="Sistema oficial para validar negociações">
-          <div className="rule-list">
-            <div className="rule-list-item">As trocas serão avaliadas pelo <strong>Honestômetro</strong>, ferramenta oficial de auditoria da liga.</div>
-            <div className="rule-list-item">O Honestômetro será o filtro inicial para validar se uma negociação está dentro dos parâmetros de equilíbrio definidos pela AirBall.</div>
-            <div className="rule-list-item">Caso a troca seja aprovada pelo sistema, os GMs deverão exportar ou printar o resultado e enviar no grupo oficial.</div>
-          </div>
-
-          <div className="rule-subtitle">Regra do Atravessamento</div>
-          <div className="rule-list">
-            <div className="rule-list-item">Toda troca aprovada deverá ser postada no grupo oficial da liga antes de ser consumada.</div>
-            <div className="rule-list-item">Após a postagem, haverá uma janela de <strong>12 horas</strong> para outros GMs atravessarem a negociação com uma proposta melhor.</div>
-            <div className="rule-list-item">Caso haja atravessamento, o GM envolvido poderá escolher a proposta que preferir.</div>
-            <div className="rule-list-item">Caso ninguém atravesse dentro do prazo, a troca será confirmada.</div>
-          </div>
-
-          <div className="rule-note">
-            Para ser confirmada, a troca precisa ser aprovada pelo Honestômetro, ter print ou comprovante enviado no grupo, respeitar as 12 horas de atravessamento e não ser substituída por uma proposta escolhida como melhor pelos GMs envolvidos.
-          </div>
-        </RuleSection>
-
-        <RuleSection num="6" title="Keepers" sub="Regra de manutenção de jogadores entre temporadas">
-          <div className="rulebook-grid">
-            <div className="rule-info-card"><div className="rule-info-label">Quantidade</div><div className="rule-info-value">2 jogadores por time</div></div>
-            <div className="rule-info-card"><div className="rule-info-label">Limite combinado</div><div className="rule-info-value">Até 110 Fantasy Points somados</div></div>
-          </div>
-          <div className="rule-note">
-            A regra dos keepers evita que um time com um jogador extremamente dominante consiga manter também um segundo keeper muito forte, criando uma vantagem permanente. O teto combinado obriga cada GM a fazer escolhas estratégicas e mantém a competitividade.
-          </div>
-        </RuleSection>
-
-        <RuleSection num="7" title="Playoffs" sub="Formato da pós-temporada">
-          <div className="rulebook-grid">
-            <div className="rule-info-card"><div className="rule-info-label">Classificados</div><div className="rule-info-value">8 times</div></div>
-            <div className="rule-info-card"><div className="rule-info-label">Formato</div><div className="rule-info-value">Eliminatória simples</div></div>
-            <div className="rule-info-card"><div className="rule-info-label">Quartas</div><div className="rule-info-value">Semana 18 da NBA</div></div>
-            <div className="rule-info-card"><div className="rule-info-label">Semifinal</div><div className="rule-info-value">Semana 19 da NBA</div></div>
-            <div className="rule-info-card"><div className="rule-info-label">Final</div><div className="rule-info-value">Semanas 20 e 21 da NBA</div></div>
-          </div>
-          <div className="rule-note">A liga não utilizará as últimas 3 rodadas da NBA, pois são conhecidas por preservação de jogadores, descanso de atletas e maior risco de distorções competitivas.</div>
-        </RuleSection>
-
-        <RuleSection num="8" title="Draft" sub="Formato e definição da ordem">
-          <div className="rulebook-grid">
-            <div className="rule-info-card"><div className="rule-info-label">Formato</div><div className="rule-info-value">Snake Draft</div></div>
-            <div className="rule-info-card"><div className="rule-info-label">Ordem</div><div className="rule-info-value">Definida por sorteio e Índice de Prioridade</div></div>
-          </div>
-        </RuleSection>
-
-        <RuleSection num="9" title="Ordem do Draft 2026/2027" sub="Índice de prioridade, keepers, classificação final e trava dos playoffs">
-          <div className="draft-priority-grid">
-            <div className="priority-card"><div className="priority-title">Índice de Prioridade</div><div className="rule-list"><div className="rule-list-item">50% Poder dos Keepers.</div><div className="rule-list-item">50% Classificação Final.</div><div className="rule-list-item">Quanto maior o índice, maior a prioridade no sorteio.</div></div></div>
-            <div className="priority-card"><div className="priority-title">Poder dos Keepers</div><div className="rule-list"><div className="rule-list-item">Keepers somando 85 pontos ou menos recebem 50 pontos de prioridade.</div><div className="rule-list-item">Keepers somando 110 pontos ou próximo disso recebem 10 pontos de prioridade.</div><div className="rule-list-item">A pontuação varia de forma linear entre esses pontos.</div></div></div>
-            <div className="priority-card"><div className="priority-title">Classificação Final</div><div className="rule-list"><div className="rule-list-item">O último colocado recebe 50 pontos de prioridade.</div><div className="rule-list-item">O campeão recebe 0 pontos de prioridade.</div><div className="rule-list-item">As posições intermediárias recebem pontuação proporcional.</div></div></div>
-            <div className="priority-card"><div className="priority-title">Trava dos Playoffs</div><div className="rule-list"><div className="rule-list-item">Times classificados aos playoffs nunca poderão ter picks no Top 5.</div><div className="rule-list-item">O Top 5 será exclusivo dos times que não foram aos playoffs.</div><div className="rule-list-item">Se a matemática colocar time de playoff no Top 5, ele será movido para fora.</div></div></div>
-          </div>
-          <div className="rule-subtitle">Definição da ordem final</div>
-          <div className="rule-list">
-            <div className="rule-list-item">Picks 1 a 5 serão definidas apenas entre os times que não foram aos playoffs.</div>
-            <div className="rule-list-item">Picks 6 a 18 serão definidas pela pontuação matemática geral, já permitindo a entrada dos times que foram aos playoffs.</div>
-            <div className="rule-list-item">A trava dos playoffs continua sendo respeitada: nenhum time de playoff pode entrar no Top 5.</div>
-          </div>
-        </RuleSection>
-
-        <RuleSection num="10" title="Casos Omissos" sub="Critério geral da liga">
-          <div className="rule-note">Casos não previstos neste regulamento serão avaliados com base no bom senso, transparência e equilíbrio competitivo da AirBall Dynasty League.</div>
-        </RuleSection>
-      </div>
-    </div>
-  );
-}
-
-function HonestometroPage() {
-  const steps = [
-    'Acessar a calculadora no site da AirBall.',
-    'Configurar a troca, adicionando a quantidade de jogadores envolvidos de cada lado.',
-    'Inserir o nome de cada jogador e sua respectiva média de Fantasy Points.',
-    'Verificar o resultado da análise pelo Honestômetro.',
-    'Caso a troca seja aprovada pelo sistema, clicar no botão Exportar.',
-    'Enviar o arquivo ou print da aprovação para o outro GM e/ou no grupo oficial da liga.'
-  ];
-
-  return (
-    <div className="main-wrap">
-      <div className="honest-hero">
-        <div className="honest-kicker">Ferramenta oficial de auditoria</div>
-        <div className="honest-title">⚖️ Honestômetro</div>
-        <div className="honest-text">
-          O Honestômetro é o filtro inicial das trades da AirBall Dynasty League. Ele serve para verificar se uma troca está dentro dos parâmetros de equilíbrio da liga antes de seguir para a janela de atravessamento.
-        </div>
-      </div>
-
-      <div className="honest-grid">
-        <div className="honest-card">
-          <div className="honest-card-header">Como usar</div>
-          <div className="honest-card-body">
-            {steps.map((s, i) => (
-              <div className="honest-step" key={i}>
-                <div className="honest-step-num">{i + 1}</div>
-                <div className="honest-step-text">{s}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="honest-card">
-          <div className="honest-card-header">Área da Calculadora</div>
-          <div className="honest-card-body">
-            <div className="honest-placeholder">
-              <div className="honest-placeholder-icon">🧮</div>
-              <div className="honest-placeholder-title">Calculadora de Trades</div>
-              <div className="honest-placeholder-sub">
-                Espaço reservado para a calculadora oficial do Honestômetro. Aqui você poderá inserir jogadores, médias de fantasy points, comparar os lados da troca e exportar o resultado.
-              </div>
-            </div>
-            <div className="rule-note">
-              Quando a troca for aprovada, poste o comprovante no grupo oficial da liga. A partir da postagem, começa a janela de 12 horas para atravessamento.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="rulebook-wrap" style={{marginTop:22}}>
-        <div className="rulebook-section">
-          <div className="rulebook-section-header">
-            <div className="rulebook-num">12h</div>
-            <div>
-              <div className="rulebook-title">Regra do Atravessamento</div>
-              <div className="rulebook-sub">Toda trade aprovada pelo Honestômetro precisa ficar 12 horas aberta no grupo da liga.</div>
-            </div>
-          </div>
-          <div className="rulebook-body">
-            <div className="rule-list">
-              <div className="rule-list-item">Outros GMs podem atravessar a negociação oferecendo uma proposta melhor para qualquer um dos envolvidos.</div>
-              <div className="rule-list-item">O GM envolvido poderá escolher a proposta que preferir.</div>
-              <div className="rule-list-item">Caso ninguém atravesse dentro do prazo, a troca será confirmada.</div>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
@@ -2830,7 +2305,6 @@ function App() {
     switch (page) {
       case 'TIMES': return <TeamsPage />;
       case 'REGRAS': return <RulesPage />;
-      case 'HONESTÔMETRO': return <HonestometroPage />;
       case 'CALENDÁRIO': return <CalendarPage />;
       case 'HALL DA FAMA': return <HallOfFamePage />;
       case 'TRADES': return <TradesPage />;
