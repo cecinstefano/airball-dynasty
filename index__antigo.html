@@ -580,135 +580,6 @@
 
   .hof-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
   .hof-card { background: linear-gradient(135deg, var(--purple-deep), #1a0635); border-radius: 14px; padding: 24px; color: white; text-align: center; }
-
-  .champion-feature-card {
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    color: white;
-    box-shadow: 0 14px 34px rgba(0,0,0,0.18);
-    margin-bottom: 26px;
-    border: 1px solid rgba(249,115,22,0.22);
-    min-height: 560px;
-  }
-  .champion-feature-layout {
-    position: relative;
-    min-height: 560px;
-  }
-  .champion-feature-photo {
-    position: absolute;
-    inset: 0;
-    min-height: 560px;
-    background-size: cover;
-    background-position: center;
-  }
-  .champion-feature-photo::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, rgba(10,0,20,0.16) 0%, rgba(10,0,20,0.28) 35%, rgba(10,0,20,0.62) 62%, rgba(10,0,20,0.88) 100%),
-                linear-gradient(to top, rgba(0,0,0,0.58), rgba(0,0,0,0.12) 45%, rgba(0,0,0,0.30) 100%);
-  }
-  .champion-feature-badge {
-    position: absolute;
-    left: 26px;
-    bottom: 24px;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(0,0,0,0.38);
-    border: 1px solid rgba(255,255,255,0.16);
-    border-radius: 14px;
-    padding: 12px 16px;
-    backdrop-filter: blur(4px);
-  }
-  .champion-feature-info {
-    position: relative;
-    z-index: 2;
-    margin-left: auto;
-    width: min(46%, 500px);
-    min-height: 560px;
-    padding: 34px 34px 34px 28px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background: transparent;
-  }
-  .champion-kicker {
-    font-family: 'Oswald', sans-serif;
-    font-size: 12px;
-    color: var(--orange);
-    letter-spacing: 2.5px;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-  .champion-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 36px;
-    line-height: 1.05;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-  .champion-subtitle {
-    font-size: 14px;
-    color: rgba(255,255,255,0.84);
-    line-height: 1.55;
-    margin-bottom: 22px;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.45);
-  }
-  .champion-stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 22px;
-  }
-  .champion-stat-box {
-    background: rgba(0,0,0,0.24);
-    border: 1px solid rgba(255,255,255,0.14);
-    border-radius: 12px;
-    padding: 12px;
-    backdrop-filter: blur(2px);
-  }
-  .champion-stat-label {
-    font-size: 10px;
-    color: rgba(255,255,255,0.52);
-    letter-spacing: 1.4px;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-  .champion-stat-value {
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px;
-    color: white;
-    font-weight: 700;
-  }
-  .champion-section-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 13px;
-    color: var(--orange);
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-    margin: 12px 0 8px;
-  }
-  .champion-list {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    color: rgba(255,255,255,0.88);
-    font-size: 13px;
-    line-height: 1.4;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.40);
-  }
-  .champion-list span::before {
-    content: '•';
-    color: var(--orange);
-    margin-right: 8px;
-  }
-
   .hof-trophy { font-size: 36px; margin-bottom: 12px; }
   .hof-logo { display:flex; justify-content:center; margin-bottom:12px; }
   .hof-year { font-family: 'Oswald', sans-serif; font-size: 12px; color: var(--orange); letter-spacing: 2px; }
@@ -867,19 +738,11 @@
     .brand-airball { font-size: 23px; letter-spacing: 1.6px; } .brand-dynasty { font-size: 13px; letter-spacing: 2px; }
   }
   @media (max-width: 600px) {
-    .champion-feature-layout { min-height: 620px; }
-    .champion-feature-photo { min-height: 620px; }
-    .champion-feature-info { width: 100%; padding: 28px 22px 24px; justify-content: flex-end; min-height: 620px; }
-    .champion-title { font-size: 30px; }
     .teams-grid { grid-template-columns: 1fr; }
     .rules-grid { grid-template-columns: 1fr; }
     .hof-grid { grid-template-columns: 1fr 1fr; }
     .trade-body { grid-template-columns: 1fr; }
     .trade-arrow { display: none; }
-    .champion-stats-grid { grid-template-columns: 1fr; }
-    .champion-feature-card, .champion-feature-layout, .champion-feature-photo { min-height: 680px; }
-    .champion-feature-badge { left: 14px; right: 14px; bottom: 14px; }
-    .champion-feature-info { min-height: 680px; }
     .feed-item { gap: 14px; align-items: flex-start; }
     .feed-thumb { width: 160px; height: 96px; }
     .feed-content { min-height: 96px; }
@@ -1091,7 +954,7 @@ const HOF_DATA = [
 
   { year: '2025-26', icon: '🏆', title: 'Campeão', name: "Stéfano's Supersonics", sub: 'GM: Stéfano Cecin', team: "Stéfano's SuperSonics" },
   { year: '2025-26', icon: '🥈', title: 'Vice-Campeão', name: "Acre Dinossaur's", sub: 'GM: Sidney Assunção', team: 'Acre Dinosaurs' },
-  { year: '2025-26', icon: '⭐', title: 'MVP da Temporada', name: 'Derrick White', sub: 'Temporada regular dominante', team: "Stéfano's SuperSonics" },
+  { year: '2025-26', icon: '⭐', title: 'MVP da Temporada', name: 'Nikola Jokic', sub: 'Temporada regular dominante', team: "Stéfano's SuperSonics" },
   { year: '2025-26', icon: '🔥', title: 'MVP dos Playoffs', name: 'Jalen Duren', sub: "Stéfano's Supersonics", team: "Stéfano's SuperSonics" },
   { year: '2025-26', icon: '🎯', title: 'Rookie do Ano', name: 'Keyonte George', sub: 'Melhor novato da temporada', team: 'Charlotte DunkLipe' },
 
@@ -1651,62 +1514,19 @@ function HallOfFamePage() {
         <div className="page-hero-title">🏛️ Hall da Fama</div>
         <div className="page-hero-sub">Os imortais da Airball Dynasty League • Temporada 25-26</div>
       </div>
-
-      <div className="champion-feature-card">
-        <div className="champion-feature-layout">
-          <div className="champion-feature-photo" style={{backgroundImage:`url('./assets/hall/supersonics-campeao-2526.jpg')`}}>
-            <div className="champion-feature-badge">
-              <TeamLogo team={"Stéfano's SuperSonics"} size={74} />
-              <div>
-                <div style={{fontFamily:'Oswald', fontSize:12, color:'#F97316', letterSpacing:2, fontWeight:700}}>CAMPEÃO 25-26</div>
-                <div style={{fontFamily:'Oswald', fontSize:22, fontWeight:700}}>Stéfano's SuperSonics</div>
-              </div>
+      <div className="hof-grid">
+        {HOF_DATA.map((h, i) => (
+          <div className="hof-card" key={i}>
+            <div className="hof-logo">
+              {h.team ? <TeamLogo team={h.team} size={58} /> : <div className="hof-trophy">{h.icon}</div>}
             </div>
+            <div className="hof-year">{h.year}</div>
+            <div className="hof-title">{h.title}</div>
+            <div style={{fontFamily:'Oswald', fontSize:20, fontWeight:700, color:'#F97316', margin:'4px 0'}}>{h.name}</div>
+            <div className="hof-sub">{h.sub}</div>
           </div>
-
-          <div className="champion-feature-info">
-            <div className="champion-kicker">TEMPORADA 2025/2026</div>
-            <div className="champion-title">Stéfano's SuperSonics entra para a história</div>
-            <div className="champion-subtitle">
-              Stéfano's SuperSonics é o primeiro campeão da AirBall Dinasty League. Temporada histórica coroada com título, domínio nos playoffs e uma campanha que marcou a primeira grande era da liga.
-            </div>
-
-            <div className="champion-stats-grid">
-              <div className="champion-stat-box">
-                <div className="champion-stat-label">Campanha</div>
-                <div className="champion-stat-value">14-3-0</div>
-              </div>
-              <div className="champion-stat-box">
-                <div className="champion-stat-label">MVP Playoffs</div>
-                <div className="champion-stat-value">Jalen Duren</div>
-              </div>
-              <div className="champion-stat-box">
-                <div className="champion-stat-label">MVP da Temporada</div>
-                <div className="champion-stat-value">Derrick White</div>
-              </div>
-              <div className="champion-stat-box">
-                <div className="champion-stat-label">Recorde</div>
-                <div className="champion-stat-value">1º campeão da AirBall</div>
-              </div>
-            </div>
-
-            <div className="champion-section-title">Maiores jogadores da franquia na temporada do título</div>
-            <div className="champion-list">
-              <span>Jalen Duren — símbolo do título e MVP dos playoffs</span>
-              <span>Derrick White — MVP da temporada e peça central da campanha</span>
-            </div>
-
-            <div className="champion-section-title">Recordes da campanha</div>
-            <div className="champion-list">
-              <span>Melhor campanha geral da temporada 25-26</span>
-              <span>Primeira franquia campeã da nova era da AirBall</span>
-              <span>Temporada encerrada com campanha de 14 vitórias e 3 derrotas</span>
-              <span>Sequência invicta de 12 vitórias seguidas (12-0)</span>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
-
     </div>
   );
 }
