@@ -773,21 +773,22 @@
   }
   .schedule-games-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
     gap: 0;
   }
   .schedule-game {
-    padding: 18px 24px;
+    padding: 16px 18px;
+    border-right: 1px solid #f0f0f4;
     border-bottom: 1px solid #f0f0f4;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr);
+    grid-template-columns: 1fr 34px 1fr;
     align-items: center;
-    gap: 18px;
+    gap: 10px;
   }
   .schedule-team {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 9px;
     min-width: 0;
   }
   .schedule-team.away {
@@ -795,15 +796,15 @@
     text-align: right;
   }
   .schedule-team-name {
-    font-weight: 800;
-    font-size: 17px;
+    font-weight: 700;
+    font-size: 13px;
     color: #21132f;
     line-height: 1.15;
   }
   .schedule-vs {
     font-family: 'Oswald', sans-serif;
-    font-size: 18px;
-    font-weight: 800;
+    font-size: 13px;
+    font-weight: 700;
     color: var(--orange);
     text-align: center;
   }
@@ -3736,13 +3737,13 @@ function CalendarPage() {
               {w.games.map((g, i) => (
                 <div className="schedule-game" key={i}>
                   <div className="schedule-team">
-                    <TeamLogo team={g.home} size={58} />
+                    <TeamLogo team={g.home} size={42} />
                     <div className="schedule-team-name">{getTeam(g.home).name}</div>
                   </div>
                   <div className="schedule-vs">x</div>
                   <div className="schedule-team away">
                     <div className="schedule-team-name">{getTeam(g.away).name}</div>
-                    <TeamLogo team={g.away} size={58} />
+                    <TeamLogo team={g.away} size={42} />
                   </div>
                 </div>
               ))}
