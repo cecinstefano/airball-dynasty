@@ -249,22 +249,19 @@
   }
   .champion-pennant-mark {
     margin: 5px 0 5px;
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     background: rgba(255,255,255,0.14);
     border: 1px solid rgba(255,255,255,0.42);
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 21px;
+    font-weight: 700;
+    color: white;
     box-shadow: inset 0 0 8px rgba(0,0,0,0.18);
-    overflow: hidden;
-  }
-  .champion-pennant-mark img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
   }
   .champion-pennant-champ {
     font-family: 'Oswald', sans-serif;
@@ -1935,16 +1932,7 @@ function Header() {
           <div className="champion-pennant-content">
             <div className="champion-pennant-kicker">2025 / 26</div>
             <div className="champion-pennant-team">Stéfano's<br/>SuperSonics</div>
-            <div className="champion-pennant-mark">
-              <img
-                src="./assets/logos/stefanos-supersonics.png"
-                alt="Stéfano's SuperSonics"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                  e.currentTarget.parentElement.textContent = 'S';
-                }}
-              />
-            </div>
+            <div className="champion-pennant-mark">S</div>
             <div className="champion-pennant-champ">Champions</div>
             <div className="champion-pennant-trophy">🏆</div>
           </div>
