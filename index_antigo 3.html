@@ -1299,7 +1299,7 @@ function NewsFeed() {
         {NEWS_FEED.map((n, i) => (
           <div className="feed-item" key={i}>
             <div className="feed-thumb" style={{
-              background: n.image ? `url(${n.image})` : n.bg,
+              background: n.image ? `${n.bg}, url(${n.image})` : n.bg,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               color: 'white'
