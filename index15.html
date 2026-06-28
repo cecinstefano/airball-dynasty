@@ -1514,30 +1514,25 @@
   .rule-list {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    margin-top: 6px;
+    gap: 10px;
+    margin-top: 4px;
   }
   .rule-list-item {
-    position: relative;
-    display: block;
-    padding-left: 20px;
-    font-size: 15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
     color: #3d3348;
-    line-height: 1.65;
+    line-height: 1.55;
   }
   .rule-list-item::before {
     content: '';
-    position: absolute;
-    left: 0;
-    top: 10px;
     width: 8px;
     height: 8px;
+    margin-top: 7px;
     border-radius: 50%;
     background: var(--orange);
-  }
-  .priority-card .rule-list-item strong {
-    color: #1f1630;
-    font-weight: 800;
+    flex-shrink: 0;
   }
   .rule-note {
     margin-top: 16px;
@@ -1567,7 +1562,7 @@
     background: #fafafa;
     border: 1px solid #ededf3;
     border-radius: 14px;
-    padding: 18px 18px 16px;
+    padding: 16px;
   }
   .priority-title {
     font-family: 'Oswald', sans-serif;
@@ -3346,49 +3341,49 @@ const DRAFT_LOTTERIES = [
       {
         "original": 4,
         "team": "Team Djalma Jr",
-        "chance": 23.0,
+        "chance": 35.0,
         "locked": true
       },
       {
         "original": 7,
         "team": "Fi du Jequisom",
-        "chance": 20.0,
+        "chance": 24.5,
         "locked": true
       },
       {
         "original": 10,
         "team": "Acre Dinosaurs",
-        "chance": 17.0,
+        "chance": 14.0,
         "locked": true
       },
       {
         "original": 11,
         "team": "Nortz",
-        "chance": 13.5,
+        "chance": 10.5,
         "locked": true
       },
       {
         "original": 13,
         "team": "Stéfano's SuperSonics",
-        "chance": 10.5,
+        "chance": 5.3,
         "locked": true
       },
       {
         "original": 14,
         "team": "Red Hot Blazer Peppers",
-        "chance": 8.0,
+        "chance": 3.5,
         "locked": true
       },
       {
         "original": 15,
         "team": "Chugabum Ironclads",
-        "chance": 5.5,
+        "chance": 1.8,
         "locked": true
       },
       {
         "original": 16,
         "team": "Canalhas do Bem",
-        "chance": 2.5,
+        "chance": 1.4,
         "locked": true
       }
     ]
@@ -3398,7 +3393,7 @@ const DRAFT_LOTTERIES = [
 // ==================== COMPONENTS ====================
 
 function TopBar({ activePage, setPage }) {
-  const links = ['INÍCIO', 'DRAFT', 'FRANQUIAS', 'REGRAS', 'HONESTÔMETRO', 'CALENDÁRIO', 'HALL DA FAMA', 'TRADES'];
+  const links = ['INÍCIO', 'FRANQUIAS', 'REGRAS', 'HONESTÔMETRO', 'CALENDÁRIO', 'HALL DA FAMA', 'TRADES', 'DRAFT'];
   const pageForLink = (l) => l === 'INÍCIO' ? 'HOME' : l === 'FRANQUIAS' ? 'TIMES' : l;
   return (
     <div className="topbar">
@@ -4112,50 +4107,18 @@ function RulesPage() {
           </div>
         </RuleSection>
 
-        <RuleSection num="9" title="Ordem do Draft 2026/2027" sub="Índice de prioridade, força dos keepers e separação entre times de playoffs e fora dos playoffs">
+        <RuleSection num="9" title="Ordem do Draft 2026/2027" sub="Índice de prioridade, keepers, classificação final e trava dos playoffs">
           <div className="draft-priority-grid">
-            <div className="priority-card">
-              <div className="priority-title">Base do Índice de Prioridade</div>
-              <div className="rule-list">
-                <div className="rule-list-item">A ordem do draft será definida por uma média entre a posição da última temporada e a posição de força dos keepers.</div>
-                <div className="rule-list-item">A força dos keepers será calculada pela soma das médias de Fantasy Points dos jogadores mantidos.</div>
-                <div className="rule-list-item">Quanto mais fraco o conjunto de keepers e pior a posição final da última temporada, maior tende a ser a prioridade no sorteio.</div>
-              </div>
-            </div>
-
-            <div className="priority-card">
-              <div className="priority-title">Times fora dos playoffs</div>
-              <div className="rule-list">
-                <div className="rule-list-item">Times que ficaram fora dos playoffs têm <strong>100% de chance</strong> de pegar uma escolha dentro do Top 8.</div>
-                <div className="rule-list-item">Esses times disputam exclusivamente as escolhas de 1 a 8.</div>
-                <div className="rule-list-item">A ordem entre eles será definida pelo índice de prioridade.</div>
-              </div>
-            </div>
-
-            <div className="priority-card">
-              <div className="priority-title">Times de playoffs</div>
-              <div className="rule-list">
-                <div className="rule-list-item">Times que se classificaram aos playoffs <strong>não poderão ter as 8 primeiras escolhas</strong>.</div>
-                <div className="rule-list-item">Esses times entram apenas na disputa das escolhas de 9 a 16.</div>
-                <div className="rule-list-item">A ordem entre eles também será definida pelo índice de prioridade.</div>
-              </div>
-            </div>
-
-            <div className="priority-card">
-              <div className="priority-title">Keepers ainda podem mudar</div>
-              <div className="rule-list">
-                <div className="rule-list-item">Como os keepers ainda podem sofrer alterações, a lista de prioridade divulgada antes da definição final não é definitiva.</div>
-                <div className="rule-list-item">Mesmo assim, ela serve como um bom indicativo da tendência da ordem do draft.</div>
-                <div className="rule-list-item">Após a confirmação oficial dos keepers, o índice poderá ser atualizado.</div>
-              </div>
-            </div>
+            <div className="priority-card"><div className="priority-title">Índice de Prioridade</div><div className="rule-list"><div className="rule-list-item">50% Poder dos Keepers.</div><div className="rule-list-item">50% Classificação Final.</div><div className="rule-list-item">Quanto maior o índice, maior a prioridade no sorteio.</div></div></div>
+            <div className="priority-card"><div className="priority-title">Poder dos Keepers</div><div className="rule-list"><div className="rule-list-item">Keepers somando 85 pontos ou menos recebem 50 pontos de prioridade.</div><div className="rule-list-item">Keepers somando 110 pontos ou próximo disso recebem 10 pontos de prioridade.</div><div className="rule-list-item">A pontuação varia de forma linear entre esses pontos.</div></div></div>
+            <div className="priority-card"><div className="priority-title">Classificação Final</div><div className="rule-list"><div className="rule-list-item">O último colocado recebe 50 pontos de prioridade.</div><div className="rule-list-item">O campeão recebe 0 pontos de prioridade.</div><div className="rule-list-item">As posições intermediárias recebem pontuação proporcional.</div></div></div>
+            <div className="priority-card"><div className="priority-title">Trava dos Playoffs</div><div className="rule-list"><div className="rule-list-item">Times classificados aos playoffs nunca poderão ter picks no Top 5.</div><div className="rule-list-item">O Top 5 será exclusivo dos times que não foram aos playoffs.</div><div className="rule-list-item">Se a matemática colocar time de playoff no Top 5, ele será movido para fora.</div></div></div>
           </div>
-
           <div className="rule-subtitle">Definição da ordem final</div>
           <div className="rule-list">
-            <div className="rule-list-item">Picks 1 a 8 serão definidas apenas entre os times que ficaram fora dos playoffs.</div>
-            <div className="rule-list-item">Picks 9 a 16 serão definidas apenas entre os times que jogaram os playoffs.</div>
-            <div className="rule-list-item">A posição dentro de cada grupo será baseada na média entre classificação da última temporada e força dos keepers.</div>
+            <div className="rule-list-item">Picks 1 a 5 serão definidas apenas entre os times que não foram aos playoffs.</div>
+            <div className="rule-list-item">Picks 6 a 18 serão definidas pela pontuação matemática geral, já permitindo a entrada dos times que foram aos playoffs.</div>
+            <div className="rule-list-item">A trava dos playoffs continua sendo respeitada: nenhum time de playoff pode entrar no Top 5.</div>
           </div>
         </RuleSection>
 
@@ -4459,7 +4422,7 @@ function DraftPrioritySection() {
         <div className="draft-priority-kicker">Draft 2026/27</div>
         <div className="draft-priority-title">Índice de Prioridade do Draft AirBall Dynasty League</div>
         <div className="draft-priority-note">
-          Esta lista ainda não é definitiva, porque ainda podem haver mudanças de keepers. Mesmo assim, ela já serve como um bom indicativo da prioridade atual. Os times da segunda loteria não podem ter as 8 primeiras escolhas do draft.
+          Esta lista ainda não é definitiva, porque ainda podem haver mudanças de keepers. Mesmo assim, ela já serve como um bom indicativo da prioridade atual. Os times da segunda loteria não podem ficar no Top 5 do draft.
         </div>
       </div>
 
@@ -4471,7 +4434,7 @@ function DraftPrioritySection() {
               <TeamLogo team={row.team} size={42} />
               <div className="draft-index-team">{displayName(row)}</div>
               {row.top5Locked
-                ? <span className="draft-lock-badge">Luta pelo Pick 9</span>
+                ? <span className="draft-lock-badge">Luta pelo Pick 8</span>
                 : <span className="draft-lock-badge draft-open-badge">Luta pelo Pick 1</span>
               }
             </div>
