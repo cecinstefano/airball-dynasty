@@ -1773,14 +1773,6 @@
     line-height: 1.15;
     min-width: 0;
   }
-  .draft-index-score {
-    margin-top: 3px;
-    font-size: 11px;
-    font-weight: 800;
-    color: var(--orange);
-    letter-spacing: .4px;
-    text-transform: uppercase;
-  }
   .draft-lock-badge {
     display: inline-flex;
     align-items: center;
@@ -1914,7 +1906,7 @@
   }
   .draft-basis-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 18px;
     padding: 20px;
   }
@@ -1924,62 +1916,6 @@
     overflow: hidden;
     background: #fff;
   }
-  .draft-basis-card.priority-formula-card {
-    grid-column: 1 / -1;
-  }
-  .draft-formula-scroll {
-    overflow-x: auto;
-  }
-  .draft-formula-header,
-  .draft-formula-row {
-    min-width: 820px;
-    display: grid;
-    grid-template-columns: 42px 34px minmax(0, 1fr) 118px 26px 150px 26px 72px;
-    gap: 8px;
-    align-items: center;
-  }
-  .draft-formula-header {
-    padding: 10px 12px;
-    background: #f8f4ff;
-    border-bottom: 1px solid #ececf4;
-    font-size: 10px;
-    font-weight: 900;
-    color: var(--gray-text);
-    text-transform: uppercase;
-    letter-spacing: .8px;
-  }
-  .draft-formula-row {
-    padding: 10px 12px;
-    border-bottom: 1px solid #f0f0f4;
-  }
-  .draft-formula-row:last-child { border-bottom: none; }
-  .formula-col {
-    font-family: 'Oswald', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--purple-mid);
-    text-align: center;
-  }
-  .formula-symbol {
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--orange);
-    text-align: center;
-  }
-  .formula-total {
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--orange);
-    text-align: center;
-  }
-  .draft-formula-row.playoff-row .draft-basis-team,
-  .draft-formula-row.playoff-row .formula-col,
-  .draft-formula-row.playoff-row .formula-symbol {
-    color: #7f1d1d;
-  }
-
   .draft-basis-card-head {
     padding: 14px 16px;
     background: #faf7ff;
@@ -1995,7 +1931,7 @@
   }
   .draft-basis-row {
     display: grid;
-    grid-template-columns: 34px 34px minmax(0,1fr) 90px;
+    grid-template-columns: 34px 34px minmax(0,1fr) 62px;
     gap: 8px;
     align-items: center;
     padding: 10px 12px;
@@ -2018,43 +1954,19 @@
   }
   .draft-basis-value {
     font-family: 'Oswald', sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     color: var(--orange);
     text-align: right;
-    line-height: 1.05;
-  }
-  .draft-basis-value small {
-    display: block;
-    margin-top: 3px;
-    font-family: inherit;
-    font-size: 10px;
-    color: var(--gray-text);
-    font-weight: 700;
   }
   .draft-basis-row.playoff-row {
     background: rgba(254,226,226,0.55);
-  }
-  .draft-formula-row.playoff-row {
-    background: rgba(254,226,226,0.78);
-    border-left: 5px solid #dc2626;
   }
   .draft-basis-legend {
     padding: 0 20px 20px;
     font-size: 12px;
     color: var(--gray-text);
     line-height: 1.5;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .draft-red-strip {
-    width: 74px;
-    height: 18px;
-    border-radius: 6px;
-    background: rgba(254,226,226,0.95);
-    border: 1px solid #fecaca;
-    flex-shrink: 0;
   }
 
   /* FOOTER */
@@ -3272,37 +3184,37 @@ const DRAFT_ORDER = [
   },
   {
     "pick": 4,
-    "name": "Pato's Team",
-    "gm": "Mateus Pato",
-    "color": "#facc15",
-    "init": "PATO",
+    "name": "Instituto Popovich",
+    "gm": "Andre Caetano",
+    "color": "#166534",
+    "init": "IPH",
     "badge": "PRIORIDADE 4",
     "cls": "pick-lottery"
   },
   {
     "pick": 5,
-    "name": "Instituto Popovich",
-    "gm": "Andre Caetano",
-    "color": "#166534",
-    "init": "IPH",
+    "name": "Pato's Team",
+    "gm": "Mateus Pato",
+    "color": "#facc15",
+    "init": "PATO",
     "badge": "PRIORIDADE 5",
     "cls": "pick-lottery"
   },
   {
     "pick": 6,
-    "name": "Pistons de Pira",
-    "gm": "Marino Mondek",
-    "color": "#f97316",
-    "init": "PDP",
+    "name": "Paysandu Lobo's",
+    "gm": "Geraldo Oliveira Jr",
+    "color": "#0891b2",
+    "init": "PAY",
     "badge": "PRIORIDADE 6",
     "cls": "pick-lottery"
   },
   {
     "pick": 7,
-    "name": "Paysandu Lobo's",
-    "gm": "Geraldo Oliveira Jr",
-    "color": "#0891b2",
-    "init": "PAY",
+    "name": "Pistons de Pira",
+    "gm": "Marino Mondek",
+    "color": "#f97316",
+    "init": "PDP",
     "badge": "PRIORIDADE 7",
     "cls": "pick-lottery"
   },
@@ -3335,19 +3247,19 @@ const DRAFT_ORDER = [
   },
   {
     "pick": 11,
-    "name": "Nortz",
-    "gm": "Caio Rogério Amaro Almeida",
-    "color": "#ca8a04",
-    "init": "NTZ",
+    "name": "Acre Dinosaurs",
+    "gm": "Sidney Assunção",
+    "color": "#581c87",
+    "init": "DINO",
     "badge": "PRIORIDADE 11",
     "cls": "pick-orig"
   },
   {
     "pick": 12,
-    "name": "Acre Dinosaurs",
-    "gm": "Sidney Assunção",
-    "color": "#581c87",
-    "init": "DINO",
+    "name": "Nortz",
+    "gm": "Caio Rogério Amaro Almeida",
+    "color": "#ca8a04",
+    "init": "NTZ",
     "badge": "PRIORIDADE 12",
     "cls": "pick-orig"
   },
@@ -3394,98 +3306,82 @@ const DRAFT_PRIORITY_INDEX = [
   {
     "pos": 1,
     "team": "Charlotte DunkLipe",
-    "score": 31,
     "top5Locked": false
   },
   {
     "pos": 2,
     "team": "Ghost of goat",
-    "score": 29,
     "top5Locked": false
   },
   {
     "pos": 3,
     "team": "Warlock Jamaicans",
-    "score": 21,
     "top5Locked": false
   },
   {
     "pos": 4,
     "team": "Team Djalma Jr",
-    "score": 19,
     "top5Locked": true
   },
   {
     "pos": 5,
-    "team": "Pato's Team",
-    "score": 18,
+    "team": "Instituto Popovich",
     "top5Locked": false
   },
   {
     "pos": 6,
-    "team": "Instituto Popovich",
-    "score": 18,
+    "team": "Pato's Team",
     "top5Locked": false
   },
   {
     "pos": 7,
-    "team": "Pistons de Pira",
-    "score": 17,
-    "top5Locked": false
+    "team": "Fi du Jequisom",
+    "top5Locked": true
   },
   {
     "pos": 8,
     "team": "Paysandu Lobo's",
-    "score": 17,
     "top5Locked": false
   },
   {
     "pos": 9,
-    "team": "Fi du Jequisom",
-    "score": 17,
-    "top5Locked": true
+    "team": "Pistons de Pira",
+    "top5Locked": false
   },
   {
     "pos": 10,
-    "team": "Nortz",
-    "score": 16,
+    "team": "Acre Dinosaurs",
     "top5Locked": true
   },
   {
     "pos": 11,
-    "team": "Acre Dinosaurs",
-    "score": 16,
+    "team": "Nortz",
     "top5Locked": true
   },
   {
     "pos": 12,
     "team": "Revolution francaise",
     "display": "Revolution française",
-    "score": 14,
     "top5Locked": false
   },
   {
     "pos": 13,
     "team": "Stéfano's SuperSonics",
-    "score": 13,
     "top5Locked": true
   },
   {
     "pos": 14,
     "team": "Red Hot Blazer Peppers",
-    "score": 12,
     "top5Locked": true
   },
   {
     "pos": 15,
     "team": "Chugabum Ironclads",
-    "score": 10,
     "top5Locked": true
   },
   {
     "pos": 16,
     "team": "Canalhas do Bem",
-    "score": 4,
     "top5Locked": true
   }
 ];
@@ -3513,22 +3409,22 @@ const DRAFT_LOTTERIES = [
       },
       {
         "original": 4,
-        "team": "Pato's Team",
+        "team": "Instituto Popovich",
         "chance": 13.5
       },
       {
         "original": 5,
-        "team": "Instituto Popovich",
+        "team": "Pato's Team",
         "chance": 10.5
       },
       {
         "original": 6,
-        "team": "Pistons de Pira",
+        "team": "Paysandu Lobo's",
         "chance": 8.0
       },
       {
         "original": 7,
-        "team": "Paysandu Lobo's",
+        "team": "Pistons de Pira",
         "chance": 5.5
       },
       {
@@ -3558,13 +3454,13 @@ const DRAFT_LOTTERIES = [
       },
       {
         "original": 3,
-        "team": "Nortz",
+        "team": "Acre Dinosaurs",
         "chance": 17.0,
         "locked": true
       },
       {
         "original": 4,
-        "team": "Acre Dinosaurs",
+        "team": "Nortz",
         "chance": 13.5,
         "locked": true
       },
@@ -3769,122 +3665,90 @@ const DRAFT_PRIORITY_TABLE = [
   {
     "rank": 1,
     "team": "Charlotte DunkLipe",
-    "keeper": 16,
-    "season": 15,
-    "value": "31"
+    "value": "15,5"
   },
   {
     "rank": 2,
     "team": "Ghost of goat",
-    "keeper": 13,
-    "season": 16,
-    "value": "29"
+    "value": "14,5"
   },
   {
     "rank": 3,
     "team": "Warlock Jamaicans",
-    "keeper": 10,
-    "season": 11,
-    "value": "21"
+    "value": "10,5"
   },
   {
     "rank": 4,
     "team": "Team Djalma Jr",
-    "keeper": 15,
-    "season": 4,
-    "value": "19",
+    "value": "9,5",
     "playoffs": true
   },
   {
     "rank": 5,
-    "team": "Pato's Team",
-    "keeper": 6,
-    "season": 12,
-    "value": "18"
+    "team": "Instituto Popovich",
+    "value": "9"
   },
   {
     "rank": 6,
-    "team": "Instituto Popovich",
-    "keeper": 8,
-    "season": 10,
-    "value": "18"
+    "team": "Pato's Team",
+    "value": "9"
   },
   {
     "rank": 7,
-    "team": "Pistons de Pira",
-    "keeper": 3,
-    "season": 14,
-    "value": "17"
+    "team": "Fi du Jequisom",
+    "value": "8,5",
+    "playoffs": true
   },
   {
     "rank": 8,
     "team": "Paysandu Lobo's",
-    "keeper": 4,
-    "season": 13,
-    "value": "17"
+    "value": "8,5"
   },
   {
     "rank": 9,
-    "team": "Fi du Jequisom",
-    "keeper": 11,
-    "season": 6,
-    "value": "17",
-    "playoffs": true
+    "team": "Pistons de Pira",
+    "value": "8,5"
   },
   {
     "rank": 10,
-    "team": "Nortz",
-    "keeper": 9,
-    "season": 7,
-    "value": "16",
+    "team": "Acre Dinosaurs",
+    "value": "8",
     "playoffs": true
   },
   {
     "rank": 11,
-    "team": "Acre Dinosaurs",
-    "keeper": 14,
-    "season": 2,
-    "value": "16",
+    "team": "Nortz",
+    "value": "8",
     "playoffs": true
   },
   {
     "rank": 12,
     "team": "Revolution francaise",
     "display": "Revolution française",
-    "keeper": 5,
-    "season": 9,
-    "value": "14"
+    "value": "7"
   },
   {
     "rank": 13,
     "team": "Stéfano's SuperSonics",
-    "keeper": 12,
-    "season": 1,
-    "value": "13",
+    "value": "6,5",
     "playoffs": true
   },
   {
     "rank": 14,
     "team": "Red Hot Blazer Peppers",
-    "keeper": 7,
-    "season": 5,
-    "value": "12",
+    "value": "6",
     "playoffs": true
   },
   {
     "rank": 15,
     "team": "Chugabum Ironclads",
-    "keeper": 2,
-    "season": 8,
-    "value": "10",
+    "value": "5",
     "playoffs": true
   },
   {
     "rank": 16,
     "team": "Canalhas do Bem",
-    "keeper": 1,
-    "season": 3,
-    "value": "4",
+    "value": "2",
     "playoffs": true
   }
 ];
@@ -4611,9 +4475,9 @@ function RulesPage() {
             <div className="priority-card">
               <div className="priority-title">Base do Índice de Prioridade</div>
               <div className="rule-list">
-                <div className="rule-list-item">A ordem do draft será definida pela soma entre a posição da última temporada e a posição de força dos keepers.</div>
+                <div className="rule-list-item">A ordem do draft será definida por uma média entre a posição da última temporada e a posição de força dos keepers.</div>
                 <div className="rule-list-item">A força dos keepers será calculada pela soma das médias de Fantasy Points dos jogadores mantidos.</div>
-                <div className="rule-list-item">Quanto maior a soma entre posição de keepers e posição da última temporada, maior tende a ser a prioridade no sorteio.</div>
+                <div className="rule-list-item">Quanto mais fraco o conjunto de keepers e pior a posição final da última temporada, maior tende a ser a prioridade no sorteio.</div>
               </div>
             </div>
 
@@ -4649,7 +4513,7 @@ function RulesPage() {
           <div className="rule-list">
             <div className="rule-list-item">Picks 1 a 8 serão definidas apenas entre os times que ficaram fora dos playoffs.</div>
             <div className="rule-list-item">Picks 9 a 16 serão definidas apenas entre os times que jogaram os playoffs.</div>
-            <div className="rule-list-item">A posição dentro de cada grupo será baseada na soma entre classificação da última temporada e força dos keepers.</div>
+            <div className="rule-list-item">A posição dentro de cada grupo será baseada na média entre classificação da última temporada e força dos keepers.</div>
           </div>
         </RuleSection>
 
@@ -4951,14 +4815,28 @@ function DraftPrioritySection() {
     <div className="draft-priority-card">
       <div className="draft-priority-header">
         <div className="draft-priority-kicker">Draft 2026/27</div>
-        <div className="draft-priority-title">Sorteios do Draft AirBall Dynasty League</div>
+        <div className="draft-priority-title">Índice de Prioridade do Draft AirBall Dynasty League</div>
         <div className="draft-priority-note">
-          O Draft será dividido em duas loterias: a primeira para os times fora dos playoffs, disputando as picks 1 a 8, e a segunda para os times de playoffs, disputando as picks 9 a 16.
+          Esta lista ainda não é definitiva, porque ainda podem haver mudanças de keepers. Mesmo assim, ela já serve como um bom indicativo da prioridade atual. Os times da segunda loteria não podem ter as 8 primeiras escolhas do draft.
         </div>
       </div>
 
       <div className="draft-priority-body">
-        <div className="lottery-grid" style={{marginTop: 0}}>
+        <div className="draft-index-grid">
+          {DRAFT_PRIORITY_INDEX.map(row => (
+            <div className="draft-index-row" key={row.pos}>
+              <div className="draft-index-pos">{row.pos}</div>
+              <TeamLogo team={row.team} size={42} />
+              <div className="draft-index-team">{displayName(row)}</div>
+              {row.top5Locked
+                ? <span className="draft-lock-badge">Luta pelo Pick 9</span>
+                : <span className="draft-lock-badge draft-open-badge">Luta pelo Pick 1</span>
+              }
+            </div>
+          ))}
+        </div>
+
+        <div className="lottery-grid">
           {DRAFT_LOTTERIES.map((lottery, i) => (
             <div className="lottery-card" key={i}>
               <div className="lottery-card-head">
@@ -4990,10 +4868,11 @@ function DraftPrioritySection() {
   );
 }
 
+
 function DraftBasisTables() {
   const displayName = (row) => row.display || getTeam(row.team).name;
 
-  const TableCard = ({ title, rows, showPlayoff }) => (
+  const TableCard = ({ title, rows, valueLabel, showPlayoff }) => (
     <div className="draft-basis-card">
       <div className="draft-basis-card-head">
         <div className="draft-basis-card-title">{title}</div>
@@ -5011,54 +4890,21 @@ function DraftBasisTables() {
     </div>
   );
 
-  const PriorityFormulaCard = () => (
-    <div className="draft-basis-card priority-formula-card">
-      <div className="draft-basis-card-head">
-        <div className="draft-basis-card-title">Índice de Prioridade</div>
-      </div>
-      <div className="draft-formula-scroll">
-        <div className="draft-formula-header">
-          <span>#</span>
-          <span></span>
-          <span>Time</span>
-          <span>Posição Keeper</span>
-          <span>+</span>
-          <span>Posição Classificação</span>
-          <span>=</span>
-          <span>Total</span>
-        </div>
-        {DRAFT_PRIORITY_TABLE.map(row => (
-          <div className={`draft-formula-row ${row.playoffs ? 'playoff-row' : ''}`} key={`priority-formula-${row.rank}`}>
-            <div className="draft-basis-rank">{row.rank}</div>
-            <TeamLogo team={row.team} size={30} />
-            <div className="draft-basis-team">{displayName(row)}</div>
-            <div className="formula-col">{row.keeper}</div>
-            <div className="formula-symbol">+</div>
-            <div className="formula-col">{row.season}</div>
-            <div className="formula-symbol">=</div>
-            <div className="formula-total">{row.value}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-
   return (
     <div className="draft-basis-section">
       <div className="draft-basis-header">
         <div className="draft-basis-title">Base do Índice de Prioridade</div>
         <div className="draft-basis-sub">
-          O índice é calculado pela soma entre a posição de força dos keepers e a posição final da temporada anterior. A tabela serve como referência enquanto os keepers ainda não forem oficializados.
+          O índice é calculado pela média entre a posição de força dos keepers e a posição final da temporada anterior. A tabela serve como referência enquanto os keepers ainda não forem oficializados.
         </div>
       </div>
       <div className="draft-basis-grid">
         <TableCard title="Classificação dos Keepers" rows={DRAFT_KEEPER_RANKING} />
         <TableCard title="Posição Temporada 25-26" rows={DRAFT_SEASON_POSITION} />
-        <PriorityFormulaCard />
+        <TableCard title="Índice de Prioridade" rows={DRAFT_PRIORITY_TABLE} showPlayoff />
       </div>
       <div className="draft-basis-legend">
-        <span className="draft-red-strip"></span>
-        <span>A faixa vermelha indica que o time estava nos playoffs e por isso não pode ter picks 1 a 8; esses times entram apenas na loteria das picks 9 a 16. Em caso de empate na soma, fica à frente o time com pior classificação na temporada anterior.</span>
+        Times destacados no índice são franquias que foram aos playoffs e disputam apenas a loteria das picks 9 a 16.
       </div>
     </div>
   );
@@ -5073,11 +4919,10 @@ function DraftPage() {
       </div>
       <DraftCountdown />
       <DraftPrioritySection />
-      <DraftBasisTables />
       <div className="draft-grid">
         <div className="draft-order-card">
           <div className="sidebar-card-header">
-            <span className="sidebar-card-title">Ordem do Sorteio 2026/27</span>
+            <span className="sidebar-card-title">Índice / Ordem de prioridade 2026/27</span>
           </div>
           <div className="draft-order-list">
             {DRAFT_ORDER.map(p => (
@@ -5131,6 +4976,7 @@ function DraftPage() {
           </div>
         </div>
       </div>
+      <DraftBasisTables />
     </div>
   );
 }
