@@ -2249,9 +2249,7 @@ const TEAM_ALIASES = {
   "Acre Dinossaur's": "Acre Dinosaurs",
   "Acre Dinossaur": "Acre Dinosaurs",
   "Acre Dinossauros": "Acre Dinosaurs",
-  "Canalhas": "Canalhas do Bem",
-  "Revolution Française": "Revolution francaise",
-  "Revolution française": "Revolution francaise"
+  "Canalhas": "Canalhas do Bem"
 };
 
 function normalizeTeamName(name) {
@@ -3239,18 +3237,8 @@ const HOF_DATA = [
 
 const TRADES_DATA = [
 
-  {
-    week: '27/06 • PRÉ-SEASON 2026/27',
-    status: 'OFICIAL',
-    cls: 'trade-approved',
-    teamA: "Stéfano's SuperSonics",
-    teamB: 'Revolution francaise',
-    teamADisplay: "Stéfano's SuperSonics",
-    teamBDisplay: 'Revolution Française',
-    givesA: ['Jalen Duren'],
-    givesB: ['Chet Holmgren'],
-    analysis: "Única troca registrada na pré-season: Chet Holmgren sai do Revolution Française para o Stéfano's SuperSonics em troca de Jalen Duren."
-  },
+  { week: 'PRÉ-TEMPORADA • 2026/27', status: 'RUMOR', cls: 'trade-pending', teamA: "Stéfano's SuperSonics", teamB: 'Acre Dinosaurs', givesA: ['Pick futura', 'Jogador a definir'], givesB: ['Veterano a definir'], analysis: 'Espaço reservado para registrar as trades oficiais da AirBall.' },
+  { week: 'PRÉ-TEMPORADA • 2026/27', status: 'RUMOR', cls: 'trade-pending', teamA: 'Canalhas do Bem', teamB: 'Chugabum Ironclads', givesA: ['Ativo a definir'], givesB: ['Pick a definir'], analysis: 'Use esta área para atualizar rumores, aprovações e análises da comissão.' },
 
 ];
 
@@ -4126,13 +4114,22 @@ function PowerRankingsCard() {
 const SIDEBAR_TRADES = [
 
   {
-    week: '27/06',
-    status: 'OFICIAL',
-    approved: true,
+    week: 'PRÉ-TEMP.',
+    status: 'RUMOR',
+    approved: false,
     teamA: { name: "Stéfano's SuperSonics", init: 'SS', color: '#15803d' },
-    teamB: { name: 'Revolution francaise', init: 'RF', color: '#b45309' },
-    gives: ['Jalen Duren'],
-    gets:  ['Chet Holmgren'],
+    teamB: { name: 'Acre Dinosaurs', init: 'DINO', color: '#581c87' },
+    gives: ['Pick futura', 'Jogador a definir'],
+    gets:  ['Veterano a definir'],
+  },
+  {
+    week: 'PRÉ-TEMP.',
+    status: 'RUMOR',
+    approved: false,
+    teamA: { name: 'Canalhas do Bem', init: 'CDB', color: '#059669' },
+    teamB: { name: 'Chugabum Ironclads', init: 'CHIR', color: '#4b5563' },
+    gives: ['Ativo a definir'],
+    gets:  ['Pick a definir'],
   },
 
 ];
@@ -4855,7 +4852,7 @@ function TradesPage() {
     <div className="main-wrap">
       <div className="page-hero">
         <div className="page-hero-title">🔄 Trade Center</div>
-        <div className="page-hero-sub">Negociações oficiais da AirBall Dynasty League</div>
+        <div className="page-hero-sub">Negociações da temporada • espaço para rumores, aprovações e análises</div>
       </div>
       <div className="trades-grid">
         {TRADES_DATA.map((t, i) => (
@@ -4868,7 +4865,7 @@ function TradesPage() {
               <div className="trade-side">
                 <div style={{display:'flex', alignItems:'center', gap:8, marginBottom:8}}>
                   <TeamLogo team={t.teamA} size={51} />
-                  <div className="trade-team-name" style={{marginBottom:0}}>{t.teamADisplay || t.teamA} recebe:</div>
+                  <div className="trade-team-name" style={{marginBottom:0}}>{t.teamA} recebe:</div>
                 </div>
                 <div className="trade-receives-label">RECEBE</div>
                 {t.givesB.map((p, j) => <div className="trade-player" key={j}>• {p}</div>)}
@@ -4877,7 +4874,7 @@ function TradesPage() {
               <div className="trade-side">
                 <div style={{display:'flex', alignItems:'center', gap:8, marginBottom:8}}>
                   <TeamLogo team={t.teamB} size={51} />
-                  <div className="trade-team-name" style={{marginBottom:0}}>{t.teamBDisplay || t.teamB} recebe:</div>
+                  <div className="trade-team-name" style={{marginBottom:0}}>{t.teamB} recebe:</div>
                 </div>
                 <div className="trade-receives-label">RECEBE</div>
                 {t.givesA.map((p, j) => <div className="trade-player" key={j}>• {p}</div>)}
