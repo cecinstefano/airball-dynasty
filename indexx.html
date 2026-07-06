@@ -2214,440 +2214,6 @@
     .feed-title { font-size: 15px; }
     .feed-desc { font-size: 12px; }
   }
-
-  /* HONESTÔMETRO NOVO - AIRBALL TRADE LAB */
-  .trade-lab-shell {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 360px;
-    gap: 18px;
-    align-items: start;
-  }
-  .trade-lab-card {
-    background: #fff;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 8px 26px rgba(0,0,0,0.07);
-    border: 1px solid rgba(45,10,78,0.08);
-  }
-  .trade-lab-header {
-    background:
-      radial-gradient(circle at 10% 0%, rgba(249,115,22,.24), transparent 34%),
-      linear-gradient(135deg, var(--purple-deep), var(--purple-mid));
-    color: white;
-    padding: 20px 22px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
-  }
-  .trade-lab-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 23px;
-    line-height: 1;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .9px;
-  }
-  .trade-lab-subtitle {
-    margin-top: 5px;
-    font-size: 12px;
-    color: rgba(255,255,255,.68);
-    line-height: 1.4;
-  }
-  .trade-lab-pill {
-    border: 1px solid rgba(249,115,22,.42);
-    background: rgba(249,115,22,.16);
-    color: #fff2e7;
-    border-radius: 999px;
-    padding: 7px 11px;
-    font-size: 10px;
-    font-weight: 900;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-  .trade-lab-body { padding: 18px; }
-  .trade-lab-config {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-  .trade-lab-field label {
-    display: block;
-    font-size: 10px;
-    color: var(--gray-text);
-    text-transform: uppercase;
-    font-weight: 900;
-    letter-spacing: 1px;
-    margin-bottom: 6px;
-  }
-  .trade-lab-input, .trade-lab-select {
-    width: 100%;
-    border: 1px solid #e8e3f1;
-    background: #fbfaff;
-    border-radius: 12px;
-    padding: 11px 12px;
-    outline: none;
-    font-size: 13px;
-    color: #21132f;
-    transition: border .15s, box-shadow .15s, background .15s;
-  }
-  .trade-lab-input:focus, .trade-lab-select:focus {
-    border-color: rgba(249,115,22,.65);
-    box-shadow: 0 0 0 3px rgba(249,115,22,.12);
-    background: white;
-  }
-  .trade-sides-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 16px;
-  }
-  .trade-side-box {
-    background: linear-gradient(180deg, #fbfaff 0%, #ffffff 100%);
-    border: 1px solid #ece3ff;
-    border-radius: 18px;
-    overflow: hidden;
-  }
-  .trade-side-top {
-    padding: 15px;
-    background: #f8f4ff;
-    border-bottom: 1px solid #ece3ff;
-  }
-  .trade-side-kicker {
-    font-size: 10px;
-    font-weight: 900;
-    letter-spacing: 1.3px;
-    text-transform: uppercase;
-    color: var(--orange);
-    margin-bottom: 6px;
-  }
-  .trade-team-input {
-    width: 100%;
-    border: none;
-    background: transparent;
-    outline: none;
-    font-family: 'Oswald', sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--purple-deep);
-  }
-  .trade-add-row {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 84px 48px;
-    gap: 8px;
-    padding: 14px 15px;
-    border-bottom: 1px solid #f0edf7;
-  }
-  .trade-add-wrap { position: relative; }
-  .trade-suggestions {
-    position: absolute;
-    z-index: 30;
-    top: calc(100% + 6px);
-    left: 0;
-    right: 0;
-    background: white;
-    border: 1px solid #ece3ff;
-    box-shadow: 0 12px 28px rgba(0,0,0,.14);
-    border-radius: 14px;
-    overflow: hidden;
-    max-height: 260px;
-    overflow-y: auto;
-  }
-  .trade-suggestion {
-    padding: 10px 12px;
-    cursor: pointer;
-    border-bottom: 1px solid #f3eefc;
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    align-items: center;
-  }
-  .trade-suggestion:last-child { border-bottom: none; }
-  .trade-suggestion:hover { background: #f8f4ff; }
-  .trade-suggestion-name { font-size: 13px; font-weight: 800; color: #21132f; }
-  .trade-suggestion-meta { font-size: 10px; color: var(--gray-text); margin-top: 2px; }
-  .trade-suggestion-score { font-family: 'Oswald', sans-serif; font-size: 15px; color: var(--purple-mid); font-weight: 700; white-space: nowrap; }
-  .trade-add-btn, .trade-action-btn {
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 800;
-    letter-spacing: .7px;
-    text-transform: uppercase;
-    transition: transform .12s, opacity .12s, background .12s;
-  }
-  .trade-add-btn {
-    background: var(--orange);
-    color: white;
-    font-size: 18px;
-  }
-  .trade-add-btn:hover, .trade-action-btn:hover { transform: translateY(-1px); }
-  .trade-add-btn:disabled, .trade-action-btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
-  .trade-player-list { padding: 8px 15px 15px; min-height: 170px; }
-  .trade-empty-state {
-    border: 1px dashed #dcccf3;
-    color: var(--gray-text);
-    border-radius: 14px;
-    padding: 24px 14px;
-    text-align: center;
-    font-size: 12px;
-    line-height: 1.45;
-    margin-top: 8px;
-    background: rgba(248,244,255,.62);
-  }
-  .trade-player-row-new {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 76px 34px;
-    gap: 10px;
-    align-items: center;
-    padding: 11px 0;
-    border-bottom: 1px solid #f0edf7;
-  }
-  .trade-player-row-new:last-child { border-bottom: none; }
-  .trade-player-name-new {
-    font-weight: 900;
-    font-size: 14px;
-    color: #20112e;
-    line-height: 1.15;
-  }
-  .trade-player-meta-new {
-    font-size: 10px;
-    color: var(--gray-text);
-    margin-top: 4px;
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-  .trade-player-value-new {
-    font-family: 'Oswald', sans-serif;
-    color: var(--purple-mid);
-    font-weight: 800;
-    font-size: 18px;
-    text-align: right;
-  }
-  .trade-remove-btn {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 1px solid #f1cfcf;
-    background: #fff6f6;
-    color: #dc2626;
-    cursor: pointer;
-    font-weight: 900;
-  }
-  .trade-side-total {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 15px;
-    background: linear-gradient(135deg, #1a0635, var(--purple-deep));
-    color: white;
-  }
-  .trade-side-total-label {
-    font-size: 10px;
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,.58);
-    font-weight: 900;
-  }
-  .trade-side-total-value {
-    font-family: 'Oswald', sans-serif;
-    font-size: 28px;
-    line-height: 1;
-    font-weight: 800;
-    color: var(--orange);
-  }
-  .trade-result-panel {
-    position: sticky;
-    top: 92px;
-  }
-  .trade-result-score {
-    padding: 22px;
-    text-align: center;
-    background:
-      radial-gradient(circle at 50% 0%, rgba(249,115,22,.22), transparent 34%),
-      linear-gradient(135deg, #1a0635, var(--purple-deep));
-    color: white;
-  }
-  .trade-result-label {
-    font-size: 10px;
-    color: rgba(255,255,255,.58);
-    letter-spacing: 1.7px;
-    font-weight: 900;
-    text-transform: uppercase;
-  }
-  .trade-result-verdict {
-    font-family: 'Oswald', sans-serif;
-    font-size: 31px;
-    line-height: 1;
-    font-weight: 800;
-    margin-top: 9px;
-    color: var(--orange);
-    text-transform: uppercase;
-  }
-  .trade-result-diff {
-    margin-top: 8px;
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px;
-    color: #c084fc;
-    font-weight: 700;
-  }
-  .trade-meter-wrap {
-    padding: 18px;
-  }
-  .trade-meter {
-    height: 12px;
-    background: #eee7f8;
-    border-radius: 999px;
-    overflow: hidden;
-    position: relative;
-  }
-  .trade-meter-fill {
-    height: 100%;
-    border-radius: 999px;
-    background: linear-gradient(90deg, #16a34a, #f97316, #dc2626);
-    transition: width .2s;
-  }
-  .trade-meter-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 9px;
-    color: var(--gray-text);
-    font-weight: 900;
-    letter-spacing: .9px;
-    margin-top: 7px;
-    text-transform: uppercase;
-  }
-  .trade-summary-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    padding: 0 18px 18px;
-  }
-  .trade-summary-box {
-    background: #f8f4ff;
-    border: 1px solid #ece3ff;
-    border-radius: 14px;
-    padding: 12px;
-  }
-  .trade-summary-label {
-    font-size: 9px;
-    color: var(--gray-text);
-    font-weight: 900;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-  .trade-summary-value {
-    margin-top: 4px;
-    font-family: 'Oswald', sans-serif;
-    color: var(--purple-deep);
-    font-size: 20px;
-    font-weight: 800;
-  }
-  .trade-result-note {
-    margin: 0 18px 18px;
-    padding: 13px 14px;
-    background: #fff7ed;
-    border: 1px solid #fed7aa;
-    border-radius: 14px;
-    color: #9a3412;
-    font-size: 12px;
-    line-height: 1.45;
-  }
-  .trade-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    padding: 0 18px 18px;
-  }
-  .trade-action-btn {
-    padding: 12px 10px;
-    font-size: 12px;
-  }
-  .trade-action-primary { background: var(--orange); color: white; }
-  .trade-action-secondary { background: #ede9fe; color: var(--purple-deep); }
-  .trade-api-status {
-    margin-top: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    background: rgba(255,255,255,.08);
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 12px;
-    padding: 9px 11px;
-    font-size: 11px;
-    color: rgba(255,255,255,.7);
-  }
-  .trade-status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #f59e0b;
-    flex-shrink: 0;
-  }
-  .trade-status-dot.live { background: #16a34a; }
-  .trade-status-dot.error { background: #dc2626; }
-  .trade-rule-mini {
-    margin-top: 18px;
-    background: white;
-    border-radius: 16px;
-    padding: 17px 18px;
-    box-shadow: 0 4px 16px rgba(0,0,0,.05);
-    border: 1px solid rgba(45,10,78,0.08);
-  }
-  .trade-rule-mini-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 17px;
-    color: var(--purple-deep);
-    font-weight: 800;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-  .trade-rule-mini-text {
-    font-size: 12px;
-    color: var(--gray-text);
-    line-height: 1.55;
-  }
-  @media (max-width: 980px) {
-    .trade-lab-shell { grid-template-columns: 1fr; }
-    .trade-result-panel { position: static; }
-  }
-  @media (max-width: 760px) {
-    .trade-lab-config, .trade-sides-grid { grid-template-columns: 1fr; }
-    .trade-lab-header { align-items: flex-start; flex-direction: column; }
-    .trade-add-row { grid-template-columns: minmax(0, 1fr) 78px 44px; }
-    .trade-result-verdict { font-size: 27px; }
-  }
-
-
-  /* HONESTÔMETRO - REGRAS OFICIAIS AIRBALL */
-  .trade-rules-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 16px; }
-  .trade-rule-badge { background: #f8f4ff; border: 1px solid #ece3ff; border-radius: 14px; padding: 12px; }
-  .trade-rule-badge-label { font-size: 9px; font-weight: 900; letter-spacing: 1px; color: var(--gray-text); text-transform: uppercase; margin-bottom: 4px; }
-  .trade-rule-badge-value { font-family: 'Oswald', sans-serif; font-size: 17px; font-weight: 800; color: var(--purple-deep); line-height: 1.1; }
-  .multiplier-table-mini { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
-  .multiplier-chip { border: 1px solid #ece3ff; background: #fbfaff; border-radius: 12px; padding: 9px 10px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-  .multiplier-range { font-size: 10px; color: var(--gray-text); font-weight: 900; letter-spacing: .6px; }
-  .multiplier-value { font-family: 'Oswald', sans-serif; color: var(--orange); font-size: 15px; font-weight: 800; white-space: nowrap; }
-  .trade-player-row-new { grid-template-columns: minmax(0, 1fr) 92px 82px 34px; }
-  .trade-player-avg-new { text-align: right; }
-  .trade-player-avg-label { font-size: 9px; color: var(--gray-text); font-weight: 900; letter-spacing: .7px; text-transform: uppercase; }
-  .trade-player-avg-value { font-family: 'Oswald', sans-serif; color: #21132f; font-size: 17px; font-weight: 800; }
-  .trade-player-value-sub { font-size: 9px; color: var(--gray-text); text-align: right; margin-top: 2px; font-weight: 800; }
-  .slot-comp-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 15px; background: #fff7ed; border-top: 1px solid #fed7aa; color: #9a3412; font-size: 12px; font-weight: 700; }
-  .slot-comp-value { font-family: 'Oswald', sans-serif; font-size: 17px; font-weight: 800; color: #c2410c; }
-  .trade-result-approved { margin: 0 18px 12px; border-radius: 14px; padding: 12px 14px; font-size: 12px; line-height: 1.45; font-weight: 700; }
-  .trade-result-approved.good { background: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46; }
-  .trade-result-approved.bad { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
-  .trade-result-approved.neutral { background: #f8f4ff; border: 1px solid #ece3ff; color: var(--purple-deep); }
-  .trade-summary-sub { margin-top: 4px; font-size: 10px; color: var(--gray-text); line-height: 1.35; }
-  .trade-search-hint { padding: 0 15px 12px; margin-top: -6px; font-size: 11px; color: var(--gray-text); line-height: 1.4; }
-  @media (max-width: 980px) { .trade-rules-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 760px) { .trade-rules-grid, .multiplier-table-mini { grid-template-columns: 1fr; } .trade-player-row-new { grid-template-columns: minmax(0, 1fr) 70px 70px 30px; } }
-
 </style>
 </head>
 <body>
@@ -5099,264 +4665,76 @@ function RulesPage() {
 }
 
 function HonestometroPage() {
-  const HONESTOMETRO_CONFIG = {
-    leagueId: '1245069102',
-    seasonId: '2027',
-    playersApiUrl: 'https://airball-espn-proxy.stefanocecin.workers.dev/players' // Worker ESPN AirBall
-  };
-
-  const FLOOR_AVG = 20;
-  const SLOT_COMPENSATION = 20;
-  const APPROVAL_LIMIT = 10;
-
-  const MULTIPLIERS = [
-    { label: '≤ 28.0', max: 28, mult: 1.00 },
-    { label: '28.1 - 32.0', max: 32, mult: 1.15 },
-    { label: '32.1 - 38.0', max: 38, mult: 1.30 },
-    { label: '38.1 - 42.0', max: 42, mult: 1.50 },
-    { label: '42.1 - 48.0', max: 48, mult: 1.65 },
-    { label: '48.1 - 58.0', max: 58, mult: 2.00 },
-    { label: '> 58.0', max: Infinity, mult: 2.35 }
+  const steps = [
+    'Acessar a calculadora no site da AirBall.',
+    'Configurar a troca, adicionando a quantidade de jogadores envolvidos de cada lado.',
+    'Inserir o nome de cada jogador e sua respectiva média de Fantasy Points.',
+    'Verificar o resultado da análise pelo Honestômetro.',
+    'Caso a troca seja aprovada pelo sistema, clicar no botão Exportar.',
+    'Enviar o arquivo ou print da aprovação para o outro GM e/ou no grupo oficial da liga.'
   ];
-
-  const DEMO_PLAYERS = [
-    { id: 'demo-1', name: 'Nikola Jokic', team: 'DEN', position: 'C', fantasyTeam: 'Demo', fantasyPoints: 61.4, status: 'DEMO' },
-    { id: 'demo-2', name: 'Shai Gilgeous-Alexander', team: 'OKC', position: 'G', fantasyTeam: 'Demo', fantasyPoints: 55.2, status: 'DEMO' },
-    { id: 'demo-3', name: 'Anthony Edwards', team: 'MIN', position: 'G/F', fantasyTeam: 'Demo', fantasyPoints: 43.8, status: 'DEMO' },
-    { id: 'demo-4', name: 'Jalen Duren', team: 'DET', position: 'C', fantasyTeam: 'Demo', fantasyPoints: 39.6, status: 'DEMO' },
-    { id: 'demo-5', name: 'Payton Pritchard', team: 'BOS', position: 'G', fantasyTeam: 'Demo', fantasyPoints: 29.4, status: 'DEMO' },
-    { id: 'demo-6', name: 'Austin Reaves', team: 'LAL', position: 'G', fantasyTeam: 'Demo', fantasyPoints: 36.4, status: 'DEMO' },
-    { id: 'demo-7', name: 'Deni Avdija', team: 'POR', position: 'F', fantasyTeam: 'Demo', fantasyPoints: 35.7, status: 'DEMO' },
-    { id: 'demo-8', name: 'Chet Holmgren', team: 'OKC', position: 'PF/C', fantasyTeam: 'Demo', fantasyPoints: 41.8, status: 'DEMO' },
-    { id: 'demo-9', name: 'Devin Booker', team: 'PHX', position: 'G', fantasyTeam: 'Demo', fantasyPoints: 44.1, status: 'DEMO' },
-    { id: 'demo-10', name: 'Karl-Anthony Towns', team: 'NYK', position: 'PF/C', fantasyTeam: 'Demo', fantasyPoints: 43.5, status: 'DEMO' },
-    { id: 'demo-11', name: 'Free Agent / Slot Livre', team: 'FA', position: '—', fantasyTeam: 'Livre', fantasyPoints: 20, status: 'PISO' }
-  ];
-
-  const normalizeText = (value) => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-
-  const normalizePlayer = (p, index) => {
-    const nested = p.player || {};
-    const name = p.name || p.fullName || p.playerName || p.displayName || nested.fullName || 'Jogador sem nome';
-    const rawAvg = p.fantasyPoints ?? p.avgFantasyPoints ?? p.averageFantasyPoints ?? p.avg ?? p.appliedAverage ?? p.value ?? nested.appliedAverage ?? 0;
-    const fantasyPoints = Number(rawAvg) || 0;
-    const position = p.position || p.defaultPosition || p.eligibleSlotsText || (Array.isArray(p.positions) ? p.positions.join('/') : '') || '—';
-    const team = p.team || p.proTeam || p.proTeamAbbrev || p.nbaTeam || p.proTeamId || 'NBA';
-    const fantasyTeam = p.fantasyTeam || p.owner || p.fantasyOwner || '—';
-    const status = p.status || p.injuryStatus || nested.injuryStatus || 'OK';
-    return {
-      id: String(p.id || p.playerId || p.espnId || nested.id || `${name}-${index}`),
-      name,
-      fantasyPoints: Number(fantasyPoints.toFixed ? fantasyPoints.toFixed(1) : fantasyPoints),
-      position,
-      team,
-      fantasyTeam,
-      status
-    };
-  };
-
-  const [players, setPlayers] = useState(DEMO_PLAYERS);
-  const [dataStatus, setDataStatus] = useState(HONESTOMETRO_CONFIG.playersApiUrl ? 'Carregando jogadores da ESPN...' : 'Modo demonstração — configure o Worker para dados reais');
-  const [dataLive, setDataLive] = useState(false);
-  const [teamA, setTeamA] = useState('Time A');
-  const [teamB, setTeamB] = useState('Time B');
-  const [sideA, setSideA] = useState([]);
-  const [sideB, setSideB] = useState([]);
-  const [queryA, setQueryA] = useState('');
-  const [queryB, setQueryB] = useState('');
-  const [manualA, setManualA] = useState('');
-  const [manualB, setManualB] = useState('');
-  const [selectedA, setSelectedA] = useState(null);
-  const [selectedB, setSelectedB] = useState(null);
-  const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    if (!HONESTOMETRO_CONFIG.playersApiUrl) return;
-    fetch(HONESTOMETRO_CONFIG.playersApiUrl)
-      .then(res => {
-        if (!res.ok) throw new Error('Erro HTTP ' + res.status);
-        return res.json();
-      })
-      .then(data => {
-        const list = Array.isArray(data) ? data : (data.players || data.items || []);
-        const normalized = list.map(normalizePlayer).filter(p => p.name && Number(p.fantasyPoints) > 0);
-        if (normalized.length) {
-          setPlayers(normalized);
-          setDataLive(true);
-          setDataStatus(`${normalized.length} jogadores ESPN carregados`);
-        } else {
-          setDataStatus('API conectada, mas sem jogadores válidos');
-        }
-      })
-      .catch(() => {
-        setDataLive(false);
-        setDataStatus('Erro na API — usando demonstração');
-      });
-  }, []);
-
-  const getMultiplier = (avg) => MULTIPLIERS.find(row => avg <= row.max) || MULTIPLIERS[MULTIPLIERS.length - 1];
-
-  const calcPlayer = (player) => {
-    const rawAvg = Number(player.fantasyPoints) || 0;
-    const effectiveAvg = Math.max(rawAvg, FLOOR_AVG);
-    const row = getMultiplier(effectiveAvg);
-    const value = Number((effectiveAvg * row.mult).toFixed(1));
-    return { rawAvg: Number(rawAvg.toFixed ? rawAvg.toFixed(1) : rawAvg), effectiveAvg: Number(effectiveAvg.toFixed(1)), multiplier: row.mult, multiplierLabel: `${row.mult.toFixed(2)}x`, value };
-  };
-
-  const sumPlayers = (side) => Number(side.reduce((acc, p) => acc + calcPlayer(p).value, 0).toFixed(1));
-  const slotCompFor = (side, otherSide) => Math.max(0, otherSide.length - side.length) * SLOT_COMPENSATION;
-  const sideTotal = (side, otherSide) => Number((sumPlayers(side) + slotCompFor(side, otherSide)).toFixed(1));
-
-  const playerSubtotalA = sumPlayers(sideA);
-  const playerSubtotalB = sumPlayers(sideB);
-  const slotCompA = slotCompFor(sideA, sideB);
-  const slotCompB = slotCompFor(sideB, sideA);
-  const totalA = sideTotal(sideA, sideB);
-  const totalB = sideTotal(sideB, sideA);
-  const high = Math.max(totalA, totalB);
-  const low = Math.min(totalA, totalB);
-  const diffPct = high > 0 ? Number((((high - low) / high) * 100).toFixed(1)) : 0;
-  const leader = totalA === totalB ? 'Empate' : totalA > totalB ? teamA : teamB;
-
-  const verdict = (() => {
-    if (!totalA || !totalB) return { label: 'Monte a troca', note: 'Adicione jogadores dos dois lados para liberar o parecer.', cls: 'neutral', status: 'Aguardando jogadores' };
-    if (diffPct < APPROVAL_LIMIT) return { label: 'Aprovada', note: 'Diferença abaixo de 10%. Pode exportar/postar e iniciar a janela de 12h para atravessamento.', cls: 'good', status: 'Trade aprovada pelo cálculo' };
-    return { label: 'Reprovada', note: `Diferença de ${diffPct}% favorece ${leader}. Ajuste a troca até ficar abaixo de 10%.`, cls: 'bad', status: 'Trade fora da margem' };
-  })();
-
-  const suggest = (query, side) => {
-    const q = normalizeText(query.trim());
-    if (!q) return [];
-    const used = new Set([...sideA, ...sideB].map(p => p.id));
-    return players
-      .filter(p => !used.has(p.id) || side.some(item => item.id === p.id))
-      .map(p => ({ ...p, searchName: normalizeText(p.name), searchTeam: normalizeText(p.team), searchPos: normalizeText(p.position) }))
-      .filter(p => p.searchName.includes(q) || p.searchTeam.includes(q) || p.searchPos.includes(q))
-      .sort((a, b) => {
-        const aStarts = a.searchName.startsWith(q) ? 0 : 1;
-        const bStarts = b.searchName.startsWith(q) ? 0 : 1;
-        if (aStarts !== bStarts) return aStarts - bStarts;
-        return (Number(b.fantasyPoints) || 0) - (Number(a.fantasyPoints) || 0);
-      })
-      .slice(0, 8);
-  };
-
-  const suggestionsA = suggest(queryA, sideA);
-  const suggestionsB = suggest(queryB, sideB);
-
-  const addPlayer = (sideName) => {
-    const isA = sideName === 'A';
-    const selected = isA ? selectedA : selectedB;
-    const query = isA ? queryA : queryB;
-    const manual = Number(isA ? manualA : manualB);
-    if (!selected && !query.trim()) return;
-    const player = selected || { id: `manual-${Date.now()}-${Math.random()}`, name: query.trim(), fantasyPoints: Number((manual || FLOOR_AVG).toFixed(1)), team: 'Manual', position: '—', fantasyTeam: 'Manual', status: 'Manual' };
-    const avgToUse = Number.isFinite(manual) && manual > 0 ? manual : Number(player.fantasyPoints) || FLOOR_AVG;
-    const playerWithValue = { ...player, fantasyPoints: Number(avgToUse.toFixed(1)) };
-    if (isA) { setSideA([...sideA, playerWithValue]); setQueryA(''); setManualA(''); setSelectedA(null); }
-    else { setSideB([...sideB, playerWithValue]); setQueryB(''); setManualB(''); setSelectedB(null); }
-  };
-
-  const removePlayer = (sideName, id) => {
-    if (sideName === 'A') setSideA(sideA.filter(p => p.id !== id));
-    if (sideName === 'B') setSideB(sideB.filter(p => p.id !== id));
-  };
-
-  const pickSuggestion = (sideName, player) => {
-    if (sideName === 'A') { setSelectedA(player); setQueryA(player.name); setManualA(String(player.fantasyPoints)); }
-    else { setSelectedB(player); setQueryB(player.name); setManualB(String(player.fantasyPoints)); }
-  };
-
-  const exportText = () => {
-    const list = (side) => side.length ? side.map(p => {
-      const c = calcPlayer(p);
-      const floorNote = c.rawAvg < FLOOR_AVG ? ` | piso ${FLOOR_AVG}` : '';
-      return `• ${p.name} — AVG ${c.rawAvg}${floorNote} × ${c.multiplierLabel} = ${c.value}`;
-    }).join('\n') : '• Nenhum jogador';
-    return `⚖️ HONESTÔMETRO AIRBALL\n\nRegras: piso ${FLOOR_AVG} pts, multiplicadores por AVG, compensação de ${SLOT_COMPENSATION} pts por slot de diferença e aprovação se diferença < ${APPROVAL_LIMIT}%.\n\n${teamA} recebe:\n${list(sideA)}\nSubtotal jogadores: ${playerSubtotalA}\nCompensação de slot: +${slotCompA}\nTotal: ${totalA}\n\n${teamB} recebe:\n${list(sideB)}\nSubtotal jogadores: ${playerSubtotalB}\nCompensação de slot: +${slotCompB}\nTotal: ${totalB}\n\nDiferença: ${diffPct}%\nResultado: ${verdict.label}\nParecer: ${verdict.note}\n\nApós postagem, começa a janela de 12 horas para atravessamento.`;
-  };
-
-  const copyResult = async () => {
-    const text = exportText();
-    try { await navigator.clipboard.writeText(text); setCopied(true); setTimeout(() => setCopied(false), 1800); }
-    catch (e) { window.prompt('Copie o resultado:', text); }
-  };
-
-  const clearTrade = () => { setSideA([]); setSideB([]); setQueryA(''); setQueryB(''); setManualA(''); setManualB(''); setSelectedA(null); setSelectedB(null); };
-
-  const TradeSide = ({ sideName, teamName, setTeamName, side, otherSide, query, setQuery, manual, setManual, suggestions }) => {
-    const isA = sideName === 'A';
-    const selected = isA ? selectedA : selectedB;
-    const subtotal = sumPlayers(side);
-    const comp = slotCompFor(side, otherSide);
-    const total = sideTotal(side, otherSide);
-    return (
-      <div className="trade-side-box">
-        <div className="trade-side-top"><div className="trade-side-kicker">Lado {sideName} recebe</div><input className="trade-team-input" value={teamName} onChange={e => setTeamName(e.target.value)} /></div>
-        <div className="trade-add-row">
-          <div className="trade-add-wrap">
-            <input className="trade-lab-input" value={query} onChange={e => { setQuery(e.target.value); if (isA) setSelectedA(null); else setSelectedB(null); }} onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); if (suggestions[0] && !selected) pickSuggestion(sideName, suggestions[0]); else addPlayer(sideName); } }} placeholder="Digite o nome: Pay, Jokic, Duren..." />
-            {query && suggestions.length > 0 && !(selected && selected.name === query) && (
-              <div className="trade-suggestions">
-                {suggestions.map(p => (
-                  <div className="trade-suggestion" key={p.id} onClick={() => pickSuggestion(sideName, p)}>
-                    <div><div className="trade-suggestion-name">{p.name}</div><div className="trade-suggestion-meta">{p.team} • {p.position} • {p.fantasyTeam || p.status}</div></div>
-                    <div className="trade-suggestion-score">{Number(p.fantasyPoints).toFixed(1)}</div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-          <input className="trade-lab-input" type="number" step="0.1" value={manual} onChange={e => setManual(e.target.value)} placeholder="AVG" />
-          <button className="trade-add-btn" onClick={() => addPlayer(sideName)} disabled={!query.trim()}>+</button>
-        </div>
-        <div className="trade-search-hint">Ao selecionar um jogador da lista, o AVG da ESPN entra automaticamente. Se for manual/FA, o piso mínimo usado no cálculo é {FLOOR_AVG}.</div>
-        <div className="trade-player-list">
-          {side.length === 0 && <div className="trade-empty-state">Busque um jogador para montar este lado da troca.</div>}
-          {side.map(p => { const c = calcPlayer(p); return (
-            <div className="trade-player-row-new" key={p.id}>
-              <div><div className="trade-player-name-new">{p.name}</div><div className="trade-player-meta-new"><span>{p.team}</span><span>•</span><span>{p.position}</span><span>•</span><span>{p.fantasyTeam || p.status}</span></div></div>
-              <div className="trade-player-avg-new"><div className="trade-player-avg-label">AVG</div><div className="trade-player-avg-value">{c.rawAvg.toFixed(1)}</div></div>
-              <div><div className="trade-player-value-new">{c.value}</div><div className="trade-player-value-sub">{c.effectiveAvg.toFixed(1)} × {c.multiplierLabel}</div></div>
-              <button className="trade-remove-btn" onClick={() => removePlayer(sideName, p.id)}>×</button>
-            </div>
-          ); })}
-        </div>
-        {comp > 0 && <div className="slot-comp-row"><span>Compensação por {otherSide.length - side.length} slot(s) livre(s)</span><span className="slot-comp-value">+{comp}</span></div>}
-        <div className="trade-side-total"><div><div className="trade-side-total-label">Total do lado</div><div style={{fontSize:10, color:'rgba(255,255,255,.56)', marginTop:3}}>Jogadores {subtotal} {comp ? `+ slots ${comp}` : ''}</div></div><div className="trade-side-total-value">{total}</div></div>
-      </div>
-    );
-  };
 
   return (
     <div className="main-wrap">
-      <div className="honest-hero"><div className="honest-kicker">Ferramenta oficial de auditoria</div><div className="honest-title">⚖️ Honestômetro</div><div className="honest-text">Calculadora oficial da AirBall Dynasty League com dados da ESPN Fantasy, piso mínimo de Free Agent, multiplicadores por faixa de AVG e compensação automática de slots.</div></div>
-      <div className="trade-lab-shell">
-        <div className="trade-lab-card">
-          <div className="trade-lab-header"><div><div className="trade-lab-title">AirBall Trade Lab</div><div className="trade-lab-subtitle">Base ESPN Fantasy • Liga {HONESTOMETRO_CONFIG.leagueId} • Temporada {HONESTOMETRO_CONFIG.seasonId}</div><div className="trade-api-status"><span style={{display:'flex', alignItems:'center', gap:8}}><span className={`trade-status-dot ${dataLive ? 'live' : ''}`}></span>{dataStatus}</span><span>{players.length} atletas</span></div></div><div className="trade-lab-pill">Regras oficiais</div></div>
-          <div className="trade-lab-body">
-            <div className="trade-rules-grid"><div className="trade-rule-badge"><div className="trade-rule-badge-label">Piso</div><div className="trade-rule-badge-value">20 pts</div></div><div className="trade-rule-badge"><div className="trade-rule-badge-label">Slots</div><div className="trade-rule-badge-value">+20 cada</div></div><div className="trade-rule-badge"><div className="trade-rule-badge-label">Aprovação</div><div className="trade-rule-badge-value">&lt; 10%</div></div><div className="trade-rule-badge"><div className="trade-rule-badge-label">Busca</div><div className="trade-rule-badge-value">ESPN</div></div></div>
-            <div className="trade-sides-grid">
-              <TradeSide sideName="A" teamName={teamA} setTeamName={setTeamA} side={sideA} otherSide={sideB} query={queryA} setQuery={setQueryA} manual={manualA} setManual={setManualA} suggestions={suggestionsA} />
-              <TradeSide sideName="B" teamName={teamB} setTeamName={setTeamB} side={sideB} otherSide={sideA} query={queryB} setQuery={setQueryB} manual={manualB} setManual={setManualB} suggestions={suggestionsB} />
+      <div className="honest-hero">
+        <div className="honest-kicker">Ferramenta oficial de auditoria</div>
+        <div className="honest-title">⚖️ Honestômetro</div>
+        <div className="honest-text">
+          O Honestômetro é o filtro inicial das trades da AirBall Dynasty League. Ele serve para verificar se uma troca está dentro dos parâmetros de equilíbrio da liga antes de seguir para a janela de atravessamento.
+        </div>
+      </div>
+
+      <div className="honest-grid">
+        <div className="honest-card">
+          <div className="honest-card-header">Como usar</div>
+          <div className="honest-card-body">
+            {steps.map((s, i) => (
+              <div className="honest-step" key={i}>
+                <div className="honest-step-num">{i + 1}</div>
+                <div className="honest-step-text">{s}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="honest-card">
+          <div className="honest-card-header">Área da Calculadora</div>
+          <div className="honest-card-body">
+            <div className="honest-placeholder">
+              <div className="honest-placeholder-icon">🧮</div>
+              <div className="honest-placeholder-title">Calculadora de Trades</div>
+              <div className="honest-placeholder-sub">
+                Espaço reservado para a calculadora oficial do Honestômetro. Aqui você poderá inserir jogadores, médias de fantasy points, comparar os lados da troca e exportar o resultado.
+              </div>
+            </div>
+            <div className="rule-note">
+              Quando a troca for aprovada, poste o comprovante no grupo oficial da liga. A partir da postagem, começa a janela de 12 horas para atravessamento.
             </div>
           </div>
         </div>
-        <div className="trade-lab-card trade-result-panel">
-          <div className="trade-result-score"><div className="trade-result-label">Parecer do Honestômetro</div><div className="trade-result-verdict">{verdict.label}</div><div className="trade-result-diff">Diferença: {diffPct}%</div></div>
-          <div className="trade-meter-wrap"><div className="trade-meter"><div className="trade-meter-fill" style={{width: `${Math.min(diffPct, 35) / 35 * 100}%`}}></div></div><div className="trade-meter-labels"><span>Aprovada</span><span>10%</span><span>Reprovada</span></div></div>
-          <div className={`trade-result-approved ${verdict.cls}`}>{verdict.status}</div>
-          <div className="trade-summary-grid"><div className="trade-summary-box"><div className="trade-summary-label">{teamA}</div><div className="trade-summary-value">{totalA}</div><div className="trade-summary-sub">Jogadores: {playerSubtotalA}<br/>Slots: +{slotCompA}</div></div><div className="trade-summary-box"><div className="trade-summary-label">{teamB}</div><div className="trade-summary-value">{totalB}</div><div className="trade-summary-sub">Jogadores: {playerSubtotalB}<br/>Slots: +{slotCompB}</div></div></div>
-          <div className="trade-result-note">{verdict.note}</div>
-          <div className="trade-actions"><button className="trade-action-btn trade-action-primary" onClick={copyResult} disabled={!totalA || !totalB}>{copied ? 'Copiado!' : 'Copiar resultado'}</button><button className="trade-action-btn trade-action-secondary" onClick={clearTrade}>Limpar</button></div>
+      </div>
+
+      <div className="rulebook-wrap" style={{marginTop:22}}>
+        <div className="rulebook-section">
+          <div className="rulebook-section-header">
+            <div className="rulebook-num">12h</div>
+            <div>
+              <div className="rulebook-title">Regra do Atravessamento</div>
+              <div className="rulebook-sub">Toda trade aprovada pelo Honestômetro precisa ficar 12 horas aberta no grupo da liga.</div>
+            </div>
+          </div>
+          <div className="rulebook-body">
+            <div className="rule-list">
+              <div className="rule-list-item">Outros GMs podem atravessar a negociação oferecendo uma proposta melhor para qualquer um dos envolvidos.</div>
+              <div className="rule-list-item">O GM envolvido poderá escolher a proposta que preferir.</div>
+              <div className="rule-list-item">Caso ninguém atravesse dentro do prazo, a troca será confirmada.</div>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="trade-rule-mini"><div className="trade-rule-mini-title">Regras aplicadas no cálculo</div><div className="trade-rule-mini-text">Valor do jogador = maior valor entre AVG ESPN e 20 pontos, multiplicado pela faixa correspondente. Se um lado recebe menos jogadores, recebe +20 pontos por slot de diferença, simulando o valor mínimo de Free Agent. A trade é aprovada somente quando a diferença entre os totais finais fica abaixo de 10%.</div><div className="multiplier-table-mini">{MULTIPLIERS.map((row, index) => (<div className="multiplier-chip" key={index}><span className="multiplier-range">{row.label}</span><span className="multiplier-value">{row.mult.toFixed(2)}x</span></div>))}</div></div>
     </div>
   );
 }
-
 
 function CalendarPage() {
   return (
