@@ -2370,15 +2370,6 @@
   .trade-suggestion-meta { font-size: 10px; color: var(--gray-text); margin-top: 2px; }
   .trade-suggestion-score { font-family: 'Oswald', sans-serif; font-size: 14px; color: var(--purple-mid); font-weight: 800; white-space: nowrap; text-align: right; display: flex; flex-direction: column; gap: 2px; }
   .trade-suggestion-score small { font-family: 'Inter', sans-serif; font-size: 9px; color: var(--gray-text); font-weight: 900; letter-spacing: .5px; }
-  .trade-suggestion-main { display: flex; align-items: center; gap: 10px; min-width: 0; }
-  .trade-player-photo { border-radius: 50%; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; background: linear-gradient(135deg, var(--purple-deep), var(--orange)); border: 2px solid rgba(249,115,22,.35); box-shadow: 0 2px 8px rgba(0,0,0,.14); color: white; font-family: 'Oswald', sans-serif; font-size: 11px; font-weight: 900; letter-spacing: .4px; }
-  .trade-player-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .trade-player-photo-fallback span { transform: translateY(-.5px); }
-  .trade-player-info-new { display: flex; align-items: center; gap: 10px; min-width: 0; }
-  .trade-player-info-text { min-width: 0; }
-  .trade-selected-preview { margin: 0 15px 10px; display: flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #f8f4ff, #fff7ed); border: 1px solid #ece3ff; border-radius: 13px; padding: 9px 10px; }
-  .trade-selected-preview-name { font-weight: 900; color: #21132f; font-size: 13px; line-height: 1.15; }
-  .trade-selected-preview-meta { margin-top: 2px; color: var(--gray-text); font-size: 10px; font-weight: 700; }
   .trade-add-btn, .trade-action-btn {
     border: none;
     border-radius: 12px;
@@ -2770,8 +2761,6 @@
     border-radius: 12px;
     padding: 9px 10px;
   }
-  .trade-result-player-mini-main { display: flex; align-items: center; gap: 9px; min-width: 0; }
-  .trade-result-player-mini-text { min-width: 0; flex: 1; }
   .trade-result-player-mini-name {
     font-size: 12px;
     font-weight: 900;
@@ -2987,25 +2976,6 @@ function TeamLogo({ team, size = 32 }) {
       ) : (
         <img key={logoKey} src={t.logo} alt={t.name} className="team-logo-img" onError={() => setFailedLogo(logoKey)} />
       )}
-    </span>
-  );
-}
-
-function getPlayerInitials(name) {
-  const parts = String(name || 'Jogador').trim().split(/\s+/).filter(Boolean);
-  if (!parts.length) return 'FA';
-  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-  return `${parts[0][0] || ''}${parts[parts.length - 1][0] || ''}`.toUpperCase();
-}
-
-function PlayerPhoto({ player, size = 38 }) {
-  const [failedPhoto, setFailedPhoto] = useState(false);
-  const name = player?.name || 'Jogador';
-  const photoUrl = player?.photoUrl || player?.playerPhoto || player?.headshotUrl || player?.headshot || player?.photo || player?.image || '';
-  const showFallback = failedPhoto || !photoUrl;
-  return (
-    <span className={`trade-player-photo ${showFallback ? 'trade-player-photo-fallback' : ''}`} style={{width:size, height:size}} title={name}>
-      {showFallback ? <span>{getPlayerInitials(name)}</span> : <img src={photoUrl} alt={name} crossOrigin="anonymous" referrerPolicy="no-referrer" onError={() => setFailedPhoto(true)} />}
     </span>
   );
 }
@@ -5451,21 +5421,15 @@ function HonestometroPage() {
     const team = p.team || p.proTeam || p.proTeamAbbrev || p.nbaTeam || p.proTeamId || 'NBA';
     const fantasyTeam = p.fantasyTeam || p.owner || p.fantasyOwner || '—';
     const status = p.status || p.injuryStatus || nested.injuryStatus || 'OK';
-    const id = String(p.id || p.playerId || p.espnId || nested.id || `${name}-${index}`);
-    const workerOrigin = (() => { try { return HONESTOMETRO_CONFIG.playersApiUrl ? new URL(HONESTOMETRO_CONFIG.playersApiUrl).origin : ''; } catch (e) { return ''; } })();
-    const workerPhotoUrl = workerOrigin && /^\d+$/.test(id) ? `${workerOrigin}/player-photo/${id}` : '';
-    const directHeadshot = nested.headshot?.href || nested.headshot?.url || p.headshotUrl || p.headshot?.href || p.headshot?.url || p.playerPhoto || p.photoUrl || p.photo || p.image || '';
-    const photoUrl = workerPhotoUrl || directHeadshot;
     return {
-      id,
+      id: String(p.id || p.playerId || p.espnId || nested.id || `${name}-${index}`),
       name,
       fantasyPoints: Number(fantasyPoints.toFixed ? fantasyPoints.toFixed(1) : fantasyPoints),
       totalPoints: Number(totalPoints.toFixed ? totalPoints.toFixed(1) : totalPoints),
       position,
       team,
       fantasyTeam,
-      status,
-      photoUrl
+      status
     };
   };
 
@@ -5668,12 +5632,12 @@ function HonestometroPage() {
             const c = calcPlayer(p);
             return (
               <div className="trade-result-player-mini" key={`result-${p.id}`}>
-                <div className="trade-result-player-mini-main"><PlayerPhoto player={p} size={42} /><div className="trade-result-player-mini-text"><div className="trade-result-player-mini-name">{p.name}</div>
+                <div className="trade-result-player-mini-name">{p.name}</div>
                 <div className="trade-result-player-mini-stats">
                   <span>AVG <strong>{c.rawAvg.toFixed(1)}</strong></span>
                   <span>TOTAL <strong>{formatNumber(p.totalPoints)}</strong></span>
                   <span>VALOR <strong>{c.value}</strong></span>
-                </div></div></div>
+                </div>
               </div>
             );
           })}
@@ -5745,7 +5709,7 @@ function HonestometroPage() {
               <div className="trade-suggestions">
                 {suggestions.map(p => (
                   <div className="trade-suggestion" key={p.id} onClick={() => pickSuggestion(sideName, p)}>
-                    <div className="trade-suggestion-main"><PlayerPhoto player={p} size={38} /><div><div className="trade-suggestion-name">{p.name}</div><div className="trade-suggestion-meta">{p.team} • {p.position} • {p.fantasyTeam || p.status}</div></div></div>
+                    <div><div className="trade-suggestion-name">{p.name}</div><div className="trade-suggestion-meta">{p.team} • {p.position} • {p.fantasyTeam || p.status}</div></div>
                     <div className="trade-suggestion-score"><span>AVG {Number(p.fantasyPoints).toFixed(1)}</span><small>TOTAL {formatNumber(p.totalPoints)}</small></div>
                   </div>
                 ))}
@@ -5755,20 +5719,17 @@ function HonestometroPage() {
           <button className="trade-add-btn" onClick={() => addPlayer(sideName)} disabled={!query.trim()}>+</button>
         </div>
         {selected && selected.name === query && (
-          <React.Fragment>
-            <div className="trade-selected-preview"><PlayerPhoto player={selected} size={42} /><div><div className="trade-selected-preview-name">{selected.name}</div><div className="trade-selected-preview-meta">{selected.team} • {selected.position} • {selected.fantasyTeam || selected.status}</div></div></div>
-            <div className="trade-selected-stats">
-              <div><span>AVG ESPN</span><strong>{Number(selected.fantasyPoints).toFixed(1)}</strong></div>
-              <div><span>TOTAL ESPN</span><strong>{formatNumber(selected.totalPoints)}</strong></div>
-            </div>
-          </React.Fragment>
+          <div className="trade-selected-stats">
+            <div><span>AVG ESPN</span><strong>{Number(selected.fantasyPoints).toFixed(1)}</strong></div>
+            <div><span>TOTAL ESPN</span><strong>{formatNumber(selected.totalPoints)}</strong></div>
+          </div>
         )}
         <div className="trade-search-hint">Ao selecionar um jogador da lista, o AVG, o TOTAL e o time fantasy da ESPN entram automaticamente. Se o jogador tiver dono, o lado da troca será renomeado com esse time; se digitar manual/FA, será usado o piso de {FLOOR_AVG} no cálculo.</div>
         <div className="trade-player-list">
           {side.length === 0 && <div className="trade-empty-state">Busque um jogador para montar este lado da troca.</div>}
           {side.map(p => { const c = calcPlayer(p); return (
             <div className="trade-player-row-new" key={p.id}>
-              <div className="trade-player-info-new"><PlayerPhoto player={p} size={40} /><div className="trade-player-info-text"><div className="trade-player-name-new">{p.name}</div><div className="trade-player-meta-new"><span>{p.team}</span><span>•</span><span>{p.position}</span><span>•</span><span>{p.fantasyTeam || p.status}</span><span>•</span><span>TOTAL {formatNumber(p.totalPoints)}</span></div></div></div>
+              <div><div className="trade-player-name-new">{p.name}</div><div className="trade-player-meta-new"><span>{p.team}</span><span>•</span><span>{p.position}</span><span>•</span><span>{p.fantasyTeam || p.status}</span><span>•</span><span>TOTAL {formatNumber(p.totalPoints)}</span></div></div>
               <div className="trade-player-avg-new"><div className="trade-player-avg-label">AVG</div><div className="trade-player-avg-value">{c.rawAvg.toFixed(1)}</div></div>
               <div><div className="trade-player-value-new">{c.value}</div><div className="trade-player-value-sub">{c.effectiveAvg.toFixed(1)} × {c.multiplierLabel}</div></div>
               <button className="trade-remove-btn" onClick={() => removePlayer(sideName, p.id)}>×</button>
