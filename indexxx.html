@@ -14,7 +14,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Ultra&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -2335,7 +2334,7 @@
   }
   .trade-add-row {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 48px;
+    grid-template-columns: minmax(0, 1fr) 84px 48px;
     gap: 8px;
     padding: 14px 15px;
     border-bottom: 1px solid #f0edf7;
@@ -2368,8 +2367,7 @@
   .trade-suggestion:hover { background: #f8f4ff; }
   .trade-suggestion-name { font-size: 13px; font-weight: 800; color: #21132f; }
   .trade-suggestion-meta { font-size: 10px; color: var(--gray-text); margin-top: 2px; }
-  .trade-suggestion-score { font-family: 'Oswald', sans-serif; font-size: 14px; color: var(--purple-mid); font-weight: 800; white-space: nowrap; text-align: right; display: flex; flex-direction: column; gap: 2px; }
-  .trade-suggestion-score small { font-family: 'Inter', sans-serif; font-size: 9px; color: var(--gray-text); font-weight: 900; letter-spacing: .5px; }
+  .trade-suggestion-score { font-family: 'Oswald', sans-serif; font-size: 15px; color: var(--purple-mid); font-weight: 700; white-space: nowrap; }
   .trade-add-btn, .trade-action-btn {
     border: none;
     border-radius: 12px;
@@ -2387,34 +2385,6 @@
   }
   .trade-add-btn:hover, .trade-action-btn:hover { transform: translateY(-1px); }
   .trade-add-btn:disabled, .trade-action-btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
-  .trade-selected-stats {
-    margin: 0 15px 10px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-  .trade-selected-stats div {
-    background: #fff7ed;
-    border: 1px solid #fed7aa;
-    border-radius: 12px;
-    padding: 9px 10px;
-  }
-  .trade-selected-stats span {
-    display: block;
-    font-size: 9px;
-    color: #9a3412;
-    font-weight: 900;
-    letter-spacing: .8px;
-    text-transform: uppercase;
-    margin-bottom: 2px;
-  }
-  .trade-selected-stats strong {
-    display: block;
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px;
-    line-height: 1;
-    color: var(--purple-deep);
-  }
   .trade-player-list { padding: 8px 15px 15px; min-height: 170px; }
   .trade-empty-state {
     border: 1px dashed #dcccf3;
@@ -2588,7 +2558,7 @@
   }
   .trade-actions {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 10px;
     padding: 0 18px 18px;
   }
@@ -2648,7 +2618,7 @@
   @media (max-width: 760px) {
     .trade-lab-config, .trade-sides-grid { grid-template-columns: 1fr; }
     .trade-lab-header { align-items: flex-start; flex-direction: column; }
-    .trade-add-row { grid-template-columns: minmax(0, 1fr) 44px; }
+    .trade-add-row { grid-template-columns: minmax(0, 1fr) 78px 44px; }
     .trade-result-verdict { font-size: 27px; }
   }
 
@@ -2677,170 +2647,6 @@
   .trade-search-hint { padding: 0 15px 12px; margin-top: -6px; font-size: 11px; color: var(--gray-text); line-height: 1.4; }
   @media (max-width: 980px) { .trade-rules-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 760px) { .trade-rules-grid, .multiplier-table-mini { grid-template-columns: 1fr; } .trade-player-row-new { grid-template-columns: minmax(0, 1fr) 70px 70px 30px; } }
-
-
-  /* PARECER DO HONESTÔMETRO - CARD PARA PRINT */
-  .trade-result-print-card {
-    background: white;
-    border-radius: 18px;
-    overflow: hidden;
-  }
-  .trade-result-teams-print {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1fr);
-    gap: 10px;
-    padding: 0 18px 18px;
-    align-items: stretch;
-  }
-  .trade-result-vs {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Oswald', sans-serif;
-    font-size: 16px;
-    color: var(--orange);
-    font-weight: 900;
-    letter-spacing: 1px;
-  }
-  .trade-result-team-card {
-    background: linear-gradient(180deg, #fbfaff 0%, #ffffff 100%);
-    border: 1px solid #ece3ff;
-    border-radius: 16px;
-    padding: 12px;
-    min-width: 0;
-  }
-  .trade-result-team-head {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #f0edf7;
-  }
-  .trade-result-team-name {
-    font-family: 'Oswald', sans-serif;
-    font-size: 15px;
-    line-height: 1.05;
-    color: var(--purple-deep);
-    font-weight: 800;
-    text-transform: uppercase;
-  }
-  .trade-result-team-action {
-    margin-top: 2px;
-    font-size: 9px;
-    color: var(--gray-text);
-    font-weight: 900;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-  .trade-result-player-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 10px;
-  }
-  .trade-result-player-mini {
-    background: #f8f4ff;
-    border: 1px solid #efe7fb;
-    border-radius: 12px;
-    padding: 9px 10px;
-  }
-  .trade-result-player-mini-name {
-    font-size: 12px;
-    font-weight: 900;
-    color: #21132f;
-    line-height: 1.2;
-  }
-  .trade-result-player-mini-stats {
-    margin-top: 5px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    font-size: 9px;
-    color: var(--gray-text);
-    font-weight: 900;
-    letter-spacing: .45px;
-    text-transform: uppercase;
-  }
-  .trade-result-player-mini-stats strong {
-    color: var(--purple-mid);
-    font-family: 'Oswald', sans-serif;
-    font-size: 12px;
-    letter-spacing: 0;
-  }
-  .trade-result-side-total {
-    margin-top: 10px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #1a0635, var(--purple-deep));
-    color: white;
-    padding: 10px 11px;
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    align-items: center;
-  }
-  .trade-result-side-total span {
-    font-size: 9px;
-    color: rgba(255,255,255,.60);
-    font-weight: 900;
-    letter-spacing: .8px;
-    text-transform: uppercase;
-  }
-  .trade-result-side-total small {
-    display: block;
-    margin-top: 2px;
-    font-size: 9px;
-    color: rgba(255,255,255,.50);
-  }
-  .trade-result-side-total strong {
-    font-family: 'Oswald', sans-serif;
-    color: var(--orange);
-    font-size: 22px;
-    line-height: 1;
-  }
-  .trade-result-empty-mini {
-    margin-top: 10px;
-    border: 1px dashed #dcccf3;
-    border-radius: 12px;
-    padding: 16px 10px;
-    text-align: center;
-    color: var(--gray-text);
-    font-size: 11px;
-  }
-  .trade-result-brand-footer {
-    margin: 0 18px 18px;
-    padding-top: 12px;
-    border-top: 1px solid #f0edf7;
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    align-items: center;
-    color: var(--gray-text);
-    font-size: 9px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-  .trade-result-brand-footer strong { color: var(--orange); }
-  .trade-action-print { background: #1a0635; color: white; }
-  .trade-action-btn.loading { opacity: .65; cursor: wait; }
-  @media (max-width: 760px) {
-    .trade-result-teams-print { grid-template-columns: 1fr; }
-    .trade-result-vs { padding: 0 0 2px; }
-    .trade-actions { grid-template-columns: 1fr; }
-  }
-
-
-  @media print {
-    body * { visibility: hidden !important; }
-    #trade-result-card, #trade-result-card * { visibility: visible !important; }
-    #trade-result-card {
-      position: absolute !important;
-      left: 0 !important;
-      top: 0 !important;
-      width: 100% !important;
-      box-shadow: none !important;
-    }
-  }
 
 </style>
 </head>
@@ -2879,9 +2685,7 @@ const TEAM_ALIASES = {
   "Acre Dinossauros": "Acre Dinosaurs",
   "Canalhas": "Canalhas do Bem",
   "Revolution Française": "Revolution francaise",
-  "Revolution française": "Revolution francaise",
-  "Fi du Jeiquisom": "Fi du Jequisom",
-  "Fi du Jeiquisom": "Fi du Jequisom"
+  "Revolution française": "Revolution francaise"
 };
 
 function normalizeTeamName(name) {
@@ -5316,17 +5120,17 @@ function HonestometroPage() {
   ];
 
   const DEMO_PLAYERS = [
-    { id: 'demo-1', name: 'Nikola Jokic', team: 'DEN', position: 'C', fantasyTeam: 'Demo', fantasyPoints: 61.4, totalPoints: 4200, status: 'DEMO' },
-    { id: 'demo-2', name: 'Shai Gilgeous-Alexander', team: 'OKC', position: 'G', fantasyTeam: 'Demo', fantasyPoints: 55.2, totalPoints: 3900, status: 'DEMO' },
-    { id: 'demo-3', name: 'Anthony Edwards', team: 'MIN', position: 'G/F', fantasyTeam: 'Demo', fantasyPoints: 43.8, totalPoints: 3300, status: 'DEMO' },
-    { id: 'demo-4', name: 'Jalen Duren', team: 'DET', position: 'C', fantasyTeam: 'Demo', fantasyPoints: 39.6, totalPoints: 2850, status: 'DEMO' },
-    { id: 'demo-5', name: 'Payton Pritchard', team: 'BOS', position: 'G', fantasyTeam: 'Demo', fantasyPoints: 29.4, totalPoints: 2100, status: 'DEMO' },
-    { id: 'demo-6', name: 'Austin Reaves', team: 'LAL', position: 'G', fantasyTeam: 'Demo', fantasyPoints: 36.4, totalPoints: 2600, status: 'DEMO' },
-    { id: 'demo-7', name: 'Deni Avdija', team: 'POR', position: 'F', fantasyTeam: 'Demo', fantasyPoints: 35.7, totalPoints: 2500, status: 'DEMO' },
-    { id: 'demo-8', name: 'Chet Holmgren', team: 'OKC', position: 'PF/C', fantasyTeam: 'Demo', fantasyPoints: 41.8, totalPoints: 3000, status: 'DEMO' },
-    { id: 'demo-9', name: 'Devin Booker', team: 'PHX', position: 'G', fantasyTeam: 'Demo', fantasyPoints: 44.1, totalPoints: 3150, status: 'DEMO' },
-    { id: 'demo-10', name: 'Karl-Anthony Towns', team: 'NYK', position: 'PF/C', fantasyTeam: 'Demo', fantasyPoints: 43.5, totalPoints: 3100, status: 'DEMO' },
-    { id: 'demo-11', name: 'Free Agent / Slot Livre', team: 'FA', position: '—', fantasyTeam: 'Livre', fantasyPoints: 20, totalPoints: 0, status: 'PISO' }
+    { id: 'demo-1', name: 'Nikola Jokic', team: 'DEN', position: 'C', fantasyTeam: 'Demo', fantasyPoints: 61.4, status: 'DEMO' },
+    { id: 'demo-2', name: 'Shai Gilgeous-Alexander', team: 'OKC', position: 'G', fantasyTeam: 'Demo', fantasyPoints: 55.2, status: 'DEMO' },
+    { id: 'demo-3', name: 'Anthony Edwards', team: 'MIN', position: 'G/F', fantasyTeam: 'Demo', fantasyPoints: 43.8, status: 'DEMO' },
+    { id: 'demo-4', name: 'Jalen Duren', team: 'DET', position: 'C', fantasyTeam: 'Demo', fantasyPoints: 39.6, status: 'DEMO' },
+    { id: 'demo-5', name: 'Payton Pritchard', team: 'BOS', position: 'G', fantasyTeam: 'Demo', fantasyPoints: 29.4, status: 'DEMO' },
+    { id: 'demo-6', name: 'Austin Reaves', team: 'LAL', position: 'G', fantasyTeam: 'Demo', fantasyPoints: 36.4, status: 'DEMO' },
+    { id: 'demo-7', name: 'Deni Avdija', team: 'POR', position: 'F', fantasyTeam: 'Demo', fantasyPoints: 35.7, status: 'DEMO' },
+    { id: 'demo-8', name: 'Chet Holmgren', team: 'OKC', position: 'PF/C', fantasyTeam: 'Demo', fantasyPoints: 41.8, status: 'DEMO' },
+    { id: 'demo-9', name: 'Devin Booker', team: 'PHX', position: 'G', fantasyTeam: 'Demo', fantasyPoints: 44.1, status: 'DEMO' },
+    { id: 'demo-10', name: 'Karl-Anthony Towns', team: 'NYK', position: 'PF/C', fantasyTeam: 'Demo', fantasyPoints: 43.5, status: 'DEMO' },
+    { id: 'demo-11', name: 'Free Agent / Slot Livre', team: 'FA', position: '—', fantasyTeam: 'Livre', fantasyPoints: 20, status: 'PISO' }
   ];
 
   const normalizeText = (value) => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
@@ -5335,9 +5139,7 @@ function HonestometroPage() {
     const nested = p.player || {};
     const name = p.name || p.fullName || p.playerName || p.displayName || nested.fullName || 'Jogador sem nome';
     const rawAvg = p.fantasyPoints ?? p.avgFantasyPoints ?? p.averageFantasyPoints ?? p.avg ?? p.appliedAverage ?? p.value ?? nested.appliedAverage ?? 0;
-    const rawTotal = p.totalPoints ?? p.totalFantasyPoints ?? p.total ?? p.appliedTotal ?? nested.appliedTotal ?? 0;
     const fantasyPoints = Number(rawAvg) || 0;
-    const totalPoints = Number(rawTotal) || 0;
     const position = p.position || p.defaultPosition || p.eligibleSlotsText || (Array.isArray(p.positions) ? p.positions.join('/') : '') || '—';
     const team = p.team || p.proTeam || p.proTeamAbbrev || p.nbaTeam || p.proTeamId || 'NBA';
     const fantasyTeam = p.fantasyTeam || p.owner || p.fantasyOwner || '—';
@@ -5346,7 +5148,6 @@ function HonestometroPage() {
       id: String(p.id || p.playerId || p.espnId || nested.id || `${name}-${index}`),
       name,
       fantasyPoints: Number(fantasyPoints.toFixed ? fantasyPoints.toFixed(1) : fantasyPoints),
-      totalPoints: Number(totalPoints.toFixed ? totalPoints.toFixed(1) : totalPoints),
       position,
       team,
       fantasyTeam,
@@ -5368,8 +5169,6 @@ function HonestometroPage() {
   const [selectedA, setSelectedA] = useState(null);
   const [selectedB, setSelectedB] = useState(null);
   const [copied, setCopied] = useState(false);
-  const [printing, setPrinting] = useState(false);
-  const resultCardRef = useRef(null);
 
   useEffect(() => {
     if (!HONESTOMETRO_CONFIG.playersApiUrl) return;
@@ -5418,12 +5217,12 @@ function HonestometroPage() {
   const high = Math.max(totalA, totalB);
   const low = Math.min(totalA, totalB);
   const diffPct = high > 0 ? Number((((high - low) / high) * 100).toFixed(1)) : 0;
-  const largerPackage = totalA === totalB ? 'Empate' : totalA > totalB ? teamA : teamB;
+  const leader = totalA === totalB ? 'Empate' : totalA > totalB ? teamA : teamB;
 
   const verdict = (() => {
     if (!totalA || !totalB) return { label: 'Monte a troca', note: 'Adicione jogadores dos dois lados para liberar o parecer.', cls: 'neutral', status: 'Aguardando jogadores' };
     if (diffPct < APPROVAL_LIMIT) return { label: 'Aprovada', note: 'Diferença abaixo de 10%. Pode exportar/postar e iniciar a janela de 12h para atravessamento.', cls: 'good', status: 'Trade aprovada pelo cálculo' };
-    return { label: 'Reprovada', note: `Diferença de ${diffPct}% entre os pacotes. O maior pacote é de ${largerPackage}. Ajuste a troca até ficar abaixo de 10%.`, cls: 'bad', status: 'Trade fora da margem' };
+    return { label: 'Reprovada', note: `Diferença de ${diffPct}% favorece ${leader}. Ajuste a troca até ficar abaixo de 10%.`, cls: 'bad', status: 'Trade fora da margem' };
   })();
 
   const suggest = (query, side) => {
@@ -5446,134 +5245,36 @@ function HonestometroPage() {
   const suggestionsA = suggest(queryA, sideA);
   const suggestionsB = suggest(queryB, sideB);
 
-  const isValidFantasyTeam = (name) => {
-    const clean = String(name || '').trim();
-    const blocked = ['—', '-', 'Livre', 'Free Agent', 'Manual/FA', 'Demo', 'PISO', 'OK'];
-    return clean && !blocked.some(item => normalizeText(item) === normalizeText(clean));
-  };
-
-  const getOwnerName = (player) => {
-    const owner = String(player?.fantasyTeam || '').trim();
-    return isValidFantasyTeam(owner) ? owner : '';
-  };
-
-  const setSideOwnerName = (sideName, player, currentSideLength = 0) => {
-    const owner = getOwnerName(player);
-    if (!owner || currentSideLength > 0) return;
-    if (sideName === 'A') setTeamA(owner);
-    if (sideName === 'B') setTeamB(owner);
-  };
-
-  const syncTeamNameAfterRemove = (sideName, nextSide) => {
-    if (sideName === 'A') {
-      if (!nextSide.length) { setTeamA('Time A'); return; }
-      const owner = getOwnerName(nextSide[0]);
-      if (owner) setTeamA(owner);
-    }
-    if (sideName === 'B') {
-      if (!nextSide.length) { setTeamB('Time B'); return; }
-      const owner = getOwnerName(nextSide[0]);
-      if (owner) setTeamB(owner);
-    }
-  };
-
   const addPlayer = (sideName) => {
     const isA = sideName === 'A';
     const selected = isA ? selectedA : selectedB;
     const query = isA ? queryA : queryB;
+    const manual = Number(isA ? manualA : manualB);
     if (!selected && !query.trim()) return;
-    const player = selected || { id: `manual-${Date.now()}-${Math.random()}`, name: query.trim(), fantasyPoints: FLOOR_AVG, totalPoints: 0, team: 'Manual/FA', position: '—', fantasyTeam: 'Livre', status: 'PISO' };
-    const avgToUse = Number(player.fantasyPoints) || FLOOR_AVG;
-    const totalToUse = Number(player.totalPoints) || 0;
-    const playerWithValue = { ...player, fantasyPoints: Number(avgToUse.toFixed(1)), totalPoints: Number(totalToUse.toFixed(1)) };
-    if (isA) {
-      setSideOwnerName('A', playerWithValue, sideA.length);
-      setSideA([...sideA, playerWithValue]);
-      setQueryA('');
-      setManualA('');
-      setSelectedA(null);
-    } else {
-      setSideOwnerName('B', playerWithValue, sideB.length);
-      setSideB([...sideB, playerWithValue]);
-      setQueryB('');
-      setManualB('');
-      setSelectedB(null);
-    }
+    const player = selected || { id: `manual-${Date.now()}-${Math.random()}`, name: query.trim(), fantasyPoints: Number((manual || FLOOR_AVG).toFixed(1)), team: 'Manual', position: '—', fantasyTeam: 'Manual', status: 'Manual' };
+    const avgToUse = Number.isFinite(manual) && manual > 0 ? manual : Number(player.fantasyPoints) || FLOOR_AVG;
+    const playerWithValue = { ...player, fantasyPoints: Number(avgToUse.toFixed(1)) };
+    if (isA) { setSideA([...sideA, playerWithValue]); setQueryA(''); setManualA(''); setSelectedA(null); }
+    else { setSideB([...sideB, playerWithValue]); setQueryB(''); setManualB(''); setSelectedB(null); }
   };
 
   const removePlayer = (sideName, id) => {
-    if (sideName === 'A') {
-      const nextSide = sideA.filter(p => p.id !== id);
-      setSideA(nextSide);
-      syncTeamNameAfterRemove('A', nextSide);
-    }
-    if (sideName === 'B') {
-      const nextSide = sideB.filter(p => p.id !== id);
-      setSideB(nextSide);
-      syncTeamNameAfterRemove('B', nextSide);
-    }
+    if (sideName === 'A') setSideA(sideA.filter(p => p.id !== id));
+    if (sideName === 'B') setSideB(sideB.filter(p => p.id !== id));
   };
 
   const pickSuggestion = (sideName, player) => {
-    if (sideName === 'A') { setSelectedA(player); setQueryA(player.name); setManualA(''); }
-    else { setSelectedB(player); setQueryB(player.name); setManualB(''); }
+    if (sideName === 'A') { setSelectedA(player); setQueryA(player.name); setManualA(String(player.fantasyPoints)); }
+    else { setSelectedB(player); setQueryB(player.name); setManualB(String(player.fantasyPoints)); }
   };
-
-  const formatNumber = (value) => {
-    const n = Number(value) || 0;
-    return n.toLocaleString('pt-BR', { maximumFractionDigits: 1 });
-  };
-
-  const safeFileName = (value) => String(value || '')
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-zA-Z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .toLowerCase() || 'trade';
-
-  const renderResultSide = ({ teamName, side, otherSide, subtotal, comp, total }) => (
-    <div className="trade-result-team-card">
-      <div className="trade-result-team-head">
-        <TeamLogo team={teamName} size={44} />
-        <div>
-          <div className="trade-result-team-name">{teamName}</div>
-          <div className="trade-result-team-action">envia</div>
-        </div>
-      </div>
-      {side.length === 0 ? (
-        <div className="trade-result-empty-mini">Nenhum jogador selecionado.</div>
-      ) : (
-        <div className="trade-result-player-list">
-          {side.map(p => {
-            const c = calcPlayer(p);
-            return (
-              <div className="trade-result-player-mini" key={`result-${p.id}`}>
-                <div className="trade-result-player-mini-name">{p.name}</div>
-                <div className="trade-result-player-mini-stats">
-                  <span>AVG <strong>{c.rawAvg.toFixed(1)}</strong></span>
-                  <span>TOTAL <strong>{formatNumber(p.totalPoints)}</strong></span>
-                  <span>VALOR <strong>{c.value}</strong></span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-      <div className="trade-result-side-total">
-        <div><span>Total do pacote</span><small>Jogadores {subtotal} {comp ? `+ slots ${comp}` : ''}</small></div>
-        <strong>{total}</strong>
-      </div>
-    </div>
-  );
 
   const exportText = () => {
     const list = (side) => side.length ? side.map(p => {
       const c = calcPlayer(p);
       const floorNote = c.rawAvg < FLOOR_AVG ? ` | piso ${FLOOR_AVG}` : '';
-      const totalInfo = p.totalPoints ? ` | TOTAL ${formatNumber(p.totalPoints)}` : '';
-      return `• ${p.name} — AVG ${c.rawAvg}${totalInfo}${floorNote} × ${c.multiplierLabel} = ${c.value}`;
+      return `• ${p.name} — AVG ${c.rawAvg}${floorNote} × ${c.multiplierLabel} = ${c.value}`;
     }).join('\n') : '• Nenhum jogador';
-    return `⚖️ HONESTÔMETRO AIRBALL\n\nRegras: piso ${FLOOR_AVG} pts, multiplicadores por AVG, compensação de ${SLOT_COMPENSATION} pts por slot de diferença e aprovação se diferença < ${APPROVAL_LIMIT}%.\n\n${teamA} envia:\n${list(sideA)}\nSubtotal jogadores: ${playerSubtotalA}\nCompensação de slot: +${slotCompA}\nTotal: ${totalA}\n\n${teamB} envia:\n${list(sideB)}\nSubtotal jogadores: ${playerSubtotalB}\nCompensação de slot: +${slotCompB}\nTotal: ${totalB}\n\nDiferença: ${diffPct}%\nResultado: ${verdict.label}\nParecer: ${verdict.note}\n\nApós postagem, começa a janela de 12 horas para atravessamento.`;
+    return `⚖️ HONESTÔMETRO AIRBALL\n\nRegras: piso ${FLOOR_AVG} pts, multiplicadores por AVG, compensação de ${SLOT_COMPENSATION} pts por slot de diferença e aprovação se diferença < ${APPROVAL_LIMIT}%.\n\n${teamA} recebe:\n${list(sideA)}\nSubtotal jogadores: ${playerSubtotalA}\nCompensação de slot: +${slotCompA}\nTotal: ${totalA}\n\n${teamB} recebe:\n${list(sideB)}\nSubtotal jogadores: ${playerSubtotalB}\nCompensação de slot: +${slotCompB}\nTotal: ${totalB}\n\nDiferença: ${diffPct}%\nResultado: ${verdict.label}\nParecer: ${verdict.note}\n\nApós postagem, começa a janela de 12 horas para atravessamento.`;
   };
 
   const copyResult = async () => {
@@ -5582,34 +5283,9 @@ function HonestometroPage() {
     catch (e) { window.prompt('Copie o resultado:', text); }
   };
 
-  const printResultCard = async () => {
-    if (!resultCardRef.current || printing) return;
-    setPrinting(true);
-    try {
-      if (window.html2canvas) {
-        const canvas = await window.html2canvas(resultCardRef.current, {
-          backgroundColor: '#ffffff',
-          scale: 2.5,
-          useCORS: true,
-          logging: false
-        });
-        const link = document.createElement('a');
-        link.download = `honestometro-${safeFileName(teamA)}-x-${safeFileName(teamB)}.png`;
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-      } else {
-        window.print();
-      }
-    } catch (e) {
-      window.print();
-    } finally {
-      setPrinting(false);
-    }
-  };
+  const clearTrade = () => { setSideA([]); setSideB([]); setQueryA(''); setQueryB(''); setManualA(''); setManualB(''); setSelectedA(null); setSelectedB(null); };
 
-  const clearTrade = () => { setSideA([]); setSideB([]); setTeamA('Time A'); setTeamB('Time B'); setQueryA(''); setQueryB(''); setManualA(''); setManualB(''); setSelectedA(null); setSelectedB(null); };
-
-  const renderTradeSide = ({ sideName, teamName, setTeamName, side, otherSide, query, setQuery, suggestions }) => {
+  const TradeSide = ({ sideName, teamName, setTeamName, side, otherSide, query, setQuery, manual, setManual, suggestions }) => {
     const isA = sideName === 'A';
     const selected = isA ? selectedA : selectedB;
     const subtotal = sumPlayers(side);
@@ -5617,7 +5293,7 @@ function HonestometroPage() {
     const total = sideTotal(side, otherSide);
     return (
       <div className="trade-side-box">
-        <div className="trade-side-top"><div className="trade-side-kicker">Pacote do lado {sideName}</div><input className="trade-team-input" value={teamName} onChange={e => setTeamName(e.target.value)} /></div>
+        <div className="trade-side-top"><div className="trade-side-kicker">Lado {sideName} recebe</div><input className="trade-team-input" value={teamName} onChange={e => setTeamName(e.target.value)} /></div>
         <div className="trade-add-row">
           <div className="trade-add-wrap">
             <input className="trade-lab-input" value={query} onChange={e => { setQuery(e.target.value); if (isA) setSelectedA(null); else setSelectedB(null); }} onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); if (suggestions[0] && !selected) pickSuggestion(sideName, suggestions[0]); else addPlayer(sideName); } }} placeholder="Digite o nome: Pay, Jokic, Duren..." />
@@ -5626,26 +5302,21 @@ function HonestometroPage() {
                 {suggestions.map(p => (
                   <div className="trade-suggestion" key={p.id} onClick={() => pickSuggestion(sideName, p)}>
                     <div><div className="trade-suggestion-name">{p.name}</div><div className="trade-suggestion-meta">{p.team} • {p.position} • {p.fantasyTeam || p.status}</div></div>
-                    <div className="trade-suggestion-score"><span>AVG {Number(p.fantasyPoints).toFixed(1)}</span><small>TOTAL {formatNumber(p.totalPoints)}</small></div>
+                    <div className="trade-suggestion-score">{Number(p.fantasyPoints).toFixed(1)}</div>
                   </div>
                 ))}
               </div>
             )}
           </div>
+          <input className="trade-lab-input" type="number" step="0.1" value={manual} onChange={e => setManual(e.target.value)} placeholder="AVG" />
           <button className="trade-add-btn" onClick={() => addPlayer(sideName)} disabled={!query.trim()}>+</button>
         </div>
-        {selected && selected.name === query && (
-          <div className="trade-selected-stats">
-            <div><span>AVG ESPN</span><strong>{Number(selected.fantasyPoints).toFixed(1)}</strong></div>
-            <div><span>TOTAL ESPN</span><strong>{formatNumber(selected.totalPoints)}</strong></div>
-          </div>
-        )}
-        <div className="trade-search-hint">Ao selecionar um jogador da lista, o AVG, o TOTAL e o time fantasy da ESPN entram automaticamente. Se o jogador tiver dono, o lado da troca será renomeado com esse time; se digitar manual/FA, será usado o piso de {FLOOR_AVG} no cálculo.</div>
+        <div className="trade-search-hint">Ao selecionar um jogador da lista, o AVG da ESPN entra automaticamente. Se for manual/FA, o piso mínimo usado no cálculo é {FLOOR_AVG}.</div>
         <div className="trade-player-list">
           {side.length === 0 && <div className="trade-empty-state">Busque um jogador para montar este lado da troca.</div>}
           {side.map(p => { const c = calcPlayer(p); return (
             <div className="trade-player-row-new" key={p.id}>
-              <div><div className="trade-player-name-new">{p.name}</div><div className="trade-player-meta-new"><span>{p.team}</span><span>•</span><span>{p.position}</span><span>•</span><span>{p.fantasyTeam || p.status}</span><span>•</span><span>TOTAL {formatNumber(p.totalPoints)}</span></div></div>
+              <div><div className="trade-player-name-new">{p.name}</div><div className="trade-player-meta-new"><span>{p.team}</span><span>•</span><span>{p.position}</span><span>•</span><span>{p.fantasyTeam || p.status}</span></div></div>
               <div className="trade-player-avg-new"><div className="trade-player-avg-label">AVG</div><div className="trade-player-avg-value">{c.rawAvg.toFixed(1)}</div></div>
               <div><div className="trade-player-value-new">{c.value}</div><div className="trade-player-value-sub">{c.effectiveAvg.toFixed(1)} × {c.multiplierLabel}</div></div>
               <button className="trade-remove-btn" onClick={() => removePlayer(sideName, p.id)}>×</button>
@@ -5663,29 +5334,22 @@ function HonestometroPage() {
       <div className="honest-hero"><div className="honest-kicker">Ferramenta oficial de auditoria</div><div className="honest-title">⚖️ Honestômetro</div><div className="honest-text">Calculadora oficial da AirBall Dynasty League com dados da ESPN Fantasy, piso mínimo de Free Agent, multiplicadores por faixa de AVG e compensação automática de slots.</div></div>
       <div className="trade-lab-shell">
         <div className="trade-lab-card">
-          <div className="trade-lab-header"><div><div className="trade-lab-title">AirBall Trade Lab</div><div className="trade-lab-subtitle">Base ESPN Fantasy • Temporada {HONESTOMETRO_CONFIG.seasonId}</div><div className="trade-api-status"><span style={{display:'flex', alignItems:'center', gap:8}}><span className={`trade-status-dot ${dataLive ? 'live' : ''}`}></span>{dataStatus}</span><span>{players.length} atletas</span></div></div><div className="trade-lab-pill">Regras oficiais</div></div>
+          <div className="trade-lab-header"><div><div className="trade-lab-title">AirBall Trade Lab</div><div className="trade-lab-subtitle">Base ESPN Fantasy • Liga {HONESTOMETRO_CONFIG.leagueId} • Temporada {HONESTOMETRO_CONFIG.seasonId}</div><div className="trade-api-status"><span style={{display:'flex', alignItems:'center', gap:8}}><span className={`trade-status-dot ${dataLive ? 'live' : ''}`}></span>{dataStatus}</span><span>{players.length} atletas</span></div></div><div className="trade-lab-pill">Regras oficiais</div></div>
           <div className="trade-lab-body">
             <div className="trade-rules-grid"><div className="trade-rule-badge"><div className="trade-rule-badge-label">Piso</div><div className="trade-rule-badge-value">20 pts</div></div><div className="trade-rule-badge"><div className="trade-rule-badge-label">Slots</div><div className="trade-rule-badge-value">+20 cada</div></div><div className="trade-rule-badge"><div className="trade-rule-badge-label">Aprovação</div><div className="trade-rule-badge-value">&lt; 10%</div></div><div className="trade-rule-badge"><div className="trade-rule-badge-label">Busca</div><div className="trade-rule-badge-value">ESPN</div></div></div>
             <div className="trade-sides-grid">
-              {renderTradeSide({ sideName: 'A', teamName: teamA, setTeamName: setTeamA, side: sideA, otherSide: sideB, query: queryA, setQuery: setQueryA, suggestions: suggestionsA })}
-              {renderTradeSide({ sideName: 'B', teamName: teamB, setTeamName: setTeamB, side: sideB, otherSide: sideA, query: queryB, setQuery: setQueryB, suggestions: suggestionsB })}
+              <TradeSide sideName="A" teamName={teamA} setTeamName={setTeamA} side={sideA} otherSide={sideB} query={queryA} setQuery={setQueryA} manual={manualA} setManual={setManualA} suggestions={suggestionsA} />
+              <TradeSide sideName="B" teamName={teamB} setTeamName={setTeamB} side={sideB} otherSide={sideA} query={queryB} setQuery={setQueryB} manual={manualB} setManual={setManualB} suggestions={suggestionsB} />
             </div>
           </div>
         </div>
         <div className="trade-lab-card trade-result-panel">
-          <div ref={resultCardRef} id="trade-result-card" className="trade-result-print-card">
-            <div className="trade-result-score"><div className="trade-result-label">Parecer do Honestômetro</div><div className="trade-result-verdict">{verdict.label}</div><div className="trade-result-diff">Diferença: {diffPct}%</div></div>
-            <div className="trade-meter-wrap"><div className="trade-meter"><div className="trade-meter-fill" style={{width: `${Math.min(diffPct, 35) / 35 * 100}%`}}></div></div><div className="trade-meter-labels"><span>Aprovada</span><span>10%</span><span>Reprovada</span></div></div>
-            <div className={`trade-result-approved ${verdict.cls}`}>{verdict.status}</div>
-            <div className="trade-result-teams-print">
-              {renderResultSide({ teamName: teamA, side: sideA, otherSide: sideB, subtotal: playerSubtotalA, comp: slotCompA, total: totalA })}
-              <div className="trade-result-vs">VS</div>
-              {renderResultSide({ teamName: teamB, side: sideB, otherSide: sideA, subtotal: playerSubtotalB, comp: slotCompB, total: totalB })}
-            </div>
-            <div className="trade-result-note">{verdict.note}</div>
-            <div className="trade-result-brand-footer"><span>AirBall Dynasty League</span><strong>Honestômetro Oficial</strong></div>
-          </div>
-          <div className="trade-actions"><button className="trade-action-btn trade-action-primary" onClick={copyResult} disabled={!totalA || !totalB}>{copied ? 'Copiado!' : 'Copiar resultado'}</button><button className={`trade-action-btn trade-action-print ${printing ? 'loading' : ''}`} onClick={printResultCard} disabled={!totalA || !totalB || printing}>{printing ? 'Gerando...' : 'Printar parecer'}</button><button className="trade-action-btn trade-action-secondary" onClick={clearTrade}>Limpar</button></div>
+          <div className="trade-result-score"><div className="trade-result-label">Parecer do Honestômetro</div><div className="trade-result-verdict">{verdict.label}</div><div className="trade-result-diff">Diferença: {diffPct}%</div></div>
+          <div className="trade-meter-wrap"><div className="trade-meter"><div className="trade-meter-fill" style={{width: `${Math.min(diffPct, 35) / 35 * 100}%`}}></div></div><div className="trade-meter-labels"><span>Aprovada</span><span>10%</span><span>Reprovada</span></div></div>
+          <div className={`trade-result-approved ${verdict.cls}`}>{verdict.status}</div>
+          <div className="trade-summary-grid"><div className="trade-summary-box"><div className="trade-summary-label">{teamA}</div><div className="trade-summary-value">{totalA}</div><div className="trade-summary-sub">Jogadores: {playerSubtotalA}<br/>Slots: +{slotCompA}</div></div><div className="trade-summary-box"><div className="trade-summary-label">{teamB}</div><div className="trade-summary-value">{totalB}</div><div className="trade-summary-sub">Jogadores: {playerSubtotalB}<br/>Slots: +{slotCompB}</div></div></div>
+          <div className="trade-result-note">{verdict.note}</div>
+          <div className="trade-actions"><button className="trade-action-btn trade-action-primary" onClick={copyResult} disabled={!totalA || !totalB}>{copied ? 'Copiado!' : 'Copiar resultado'}</button><button className="trade-action-btn trade-action-secondary" onClick={clearTrade}>Limpar</button></div>
         </div>
       </div>
       <div className="trade-rule-mini"><div className="trade-rule-mini-title">Regras aplicadas no cálculo</div><div className="trade-rule-mini-text">Valor do jogador = maior valor entre AVG ESPN e 20 pontos, multiplicado pela faixa correspondente. Se um lado recebe menos jogadores, recebe +20 pontos por slot de diferença, simulando o valor mínimo de Free Agent. A trade é aprovada somente quando a diferença entre os totais finais fica abaixo de 10%.</div><div className="multiplier-table-mini">{MULTIPLIERS.map((row, index) => (<div className="multiplier-chip" key={index}><span className="multiplier-range">{row.label}</span><span className="multiplier-value">{row.mult.toFixed(2)}x</span></div>))}</div></div>
