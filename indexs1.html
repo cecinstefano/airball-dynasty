@@ -2871,77 +2871,30 @@ const TEAMS_MASTER = [
 ];
 
 const TEAM_ALIASES = {
-  "supersonics": "Stéfano's SuperSonics",
-  "stefano s supersonics": "Stéfano's SuperSonics",
-  "stefanos supersonics": "Stéfano's SuperSonics",
-  "stefano supersonics": "Stéfano's SuperSonics",
-  "stefano's supersonics": "Stéfano's SuperSonics",
-  "stéfano's supersonics": "Stéfano's SuperSonics",
-  "ghost of goat": "Ghost of goat",
-  "chugabum ironclads": "Chugabum Ironclads",
-  "fi du jequisom": "Fi du Jequisom",
-  "fi du jeiquisom": "Fi du Jequisom",
-  "fi do jequisom": "Fi du Jequisom",
-  "fi do jeiquisom": "Fi du Jequisom",
-  "paysandu lobos": "Paysandu Lobo's",
-  "paysandu lobo s": "Paysandu Lobo's",
-  "paysandu lobo's": "Paysandu Lobo's",
-  "pistons de pira": "Pistons de Pira",
-  "acre dinosaurs": "Acre Dinosaurs",
-  "acre dinosaur s": "Acre Dinosaurs",
-  "acre dinosaur's": "Acre Dinosaurs",
-  "acre dinossaur": "Acre Dinosaurs",
-  "acre dinossaur s": "Acre Dinosaurs",
-  "acre dinossaur's": "Acre Dinosaurs",
-  "acre dinossauros": "Acre Dinosaurs",
-  "charlotte dunklipe": "Charlotte DunkLipe",
-  "revolution francaise": "Revolution francaise",
-  "revolution française": "Revolution francaise",
-  "instituto popovich": "Instituto Popovich",
-  "nortz": "Nortz",
-  "patos team": "Pato's Team",
-  "pato s team": "Pato's Team",
-  "pato's team": "Pato's Team",
-  "red hot blazer peppers": "Red Hot Blazer Peppers",
-  "team djalma jr": "Team Djalma Jr",
-  "djalma jr": "Team Djalma Jr",
-  "canalhas do bem": "Canalhas do Bem",
-  "canalhas": "Canalhas do Bem",
-  "warlock jamaicans": "Warlock Jamaicans"
+  "SuperSonics": "Stéfano's SuperSonics",
+  "Stéfano's Supersonics": "Stéfano's SuperSonics",
+  "Stefano's SuperSonics": "Stéfano's SuperSonics",
+  "Stefano's Supersonics": "Stéfano's SuperSonics",
+  "Acre Dinossaur's": "Acre Dinosaurs",
+  "Acre Dinossaur": "Acre Dinosaurs",
+  "Acre Dinossauros": "Acre Dinosaurs",
+  "Canalhas": "Canalhas do Bem",
+  "Revolution Française": "Revolution francaise",
+  "Revolution française": "Revolution francaise",
+  "Fi du Jeiquisom": "Fi du Jequisom",
+  "Fi du Jeiquisom": "Fi du Jequisom"
 };
 
-function normalizeTeamKey(value) {
-  return String(value || '')
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[’']/g, ' ')
-    .replace(/[^a-zA-Z0-9]+/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .toLowerCase();
-}
-
 function normalizeTeamName(name) {
-  const raw = String(name || '').trim();
-  if (!raw) return '';
-  if (TEAM_ALIASES[raw]) return TEAM_ALIASES[raw];
-  const key = normalizeTeamKey(raw);
-  if (TEAM_ALIASES[key]) return TEAM_ALIASES[key];
-  const direct = TEAMS_MASTER.find(t => normalizeTeamKey(t.name) === key || normalizeTeamKey(t.slug) === key);
-  if (direct) return direct.name;
-  return raw;
+  return TEAM_ALIASES[name] || name;
 }
 
 function getTeam(name) {
-  const raw = String(name || '').trim();
-  const normalized = normalizeTeamName(raw);
-  const key = normalizeTeamKey(normalized);
-  const found = TEAMS_MASTER.find(t => normalizeTeamKey(t.name) === key || normalizeTeamKey(t.slug) === key);
-  if (found) return found;
-  return {
-    name: normalized || raw || 'Time',
+  const normalized = normalizeTeamName(name);
+  return TEAMS_MASTER.find(t => t.name === normalized) || {
+    name: normalized,
     gm: "",
-    init: (normalized || raw || 'T').slice(0, 3).toUpperCase(),
+    init: normalized.slice(0, 3).toUpperCase(),
     color: "#6B2FA0",
     logo: "./assets/logos/default-team.png"
   };
@@ -2951,7 +2904,7 @@ function TeamLogo({ team, size = 32 }) {
   const t = getTeam(team);
   return (
     <span className="team-logo-wrap" style={{width:size, height:size, background:t.color}}>
-      <img key={`${t.name}-${t.logo}`} src={t.logo} alt={t.name} className="team-logo-img" onError={(e) => {
+      <img src={t.logo} alt={t.name} className="team-logo-img" onError={(e) => {
         e.currentTarget.style.display = 'none';
         e.currentTarget.parentElement.classList.add('team-logo-fallback');
         e.currentTarget.parentElement.textContent = t.init;
@@ -5508,21 +5461,20 @@ function HonestometroPage() {
   const setSideOwnerName = (sideName, player, currentSideLength = 0) => {
     const owner = getOwnerName(player);
     if (!owner || currentSideLength > 0) return;
-    const canonicalOwner = getTeam(owner).name;
-    if (sideName === 'A') setTeamA(canonicalOwner);
-    if (sideName === 'B') setTeamB(canonicalOwner);
+    if (sideName === 'A') setTeamA(owner);
+    if (sideName === 'B') setTeamB(owner);
   };
 
   const syncTeamNameAfterRemove = (sideName, nextSide) => {
     if (sideName === 'A') {
       if (!nextSide.length) { setTeamA('Time A'); return; }
       const owner = getOwnerName(nextSide[0]);
-      if (owner) setTeamA(getTeam(owner).name);
+      if (owner) setTeamA(owner);
     }
     if (sideName === 'B') {
       if (!nextSide.length) { setTeamB('Time B'); return; }
       const owner = getOwnerName(nextSide[0]);
-      if (owner) setTeamB(getTeam(owner).name);
+      if (owner) setTeamB(owner);
     }
   };
 
