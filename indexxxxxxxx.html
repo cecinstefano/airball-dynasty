@@ -5383,17 +5383,6 @@ function HonestometroPage() {
 
   const normalizeText = (value) => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 
-  const cleanLeaguePosition = (position) => {
-    const allowed = ['PG', 'SG', 'SF', 'PF', 'C'];
-    const raw = String(position || '')
-      .toUpperCase()
-      .replace(/[^A-Z/ ,.-]/g, ' ')
-      .split(/[\/\s,.-]+/)
-      .filter(Boolean);
-    const filtered = raw.filter(pos => allowed.includes(pos));
-    return [...new Set(filtered)].join('/') || '—';
-  };
-
   const normalizePlayer = (p, index) => {
     const nested = p.player || {};
     const name = p.name || p.fullName || p.playerName || p.displayName || nested.fullName || 'Jogador sem nome';
@@ -5401,7 +5390,7 @@ function HonestometroPage() {
     const rawTotal = p.totalPoints ?? p.totalFantasyPoints ?? p.total ?? p.appliedTotal ?? nested.appliedTotal ?? 0;
     const fantasyPoints = Number(rawAvg) || 0;
     const totalPoints = Number(rawTotal) || 0;
-    const position = cleanLeaguePosition(p.position || p.defaultPosition || p.eligibleSlotsText || (Array.isArray(p.positions) ? p.positions.join('/') : '') || '—');
+    const position = p.position || p.defaultPosition || p.eligibleSlotsText || (Array.isArray(p.positions) ? p.positions.join('/') : '') || '—';
     const team = p.team || p.proTeam || p.proTeamAbbrev || p.nbaTeam || p.proTeamId || 'NBA';
     const fantasyTeam = p.fantasyTeam || p.owner || p.fantasyOwner || '—';
     const status = p.status || p.injuryStatus || nested.injuryStatus || 'OK';
@@ -5482,15 +5471,11 @@ function HonestometroPage() {
   const low = Math.min(totalA, totalB);
   const diffPct = high > 0 ? Number((((high - low) / high) * 100).toFixed(1)) : 0;
   const largerPackage = totalA === totalB ? 'Empate' : totalA > totalB ? teamA : teamB;
-  const isOneForOne = sideA.length === 1 && sideB.length === 1;
-  const oneForOneAvgDiff = isOneForOne ? Number(Math.abs((Number(sideA[0]?.fantasyPoints) || 0) - (Number(sideB[0]?.fantasyPoints) || 0)).toFixed(1)) : null;
-  const oneForOneException = isOneForOne && oneForOneAvgDiff < 3;
 
   const verdict = (() => {
     if (!totalA || !totalB) return { label: 'Monte a troca', note: 'Adicione jogadores dos dois lados para liberar o parecer.', cls: 'neutral', status: 'Aguardando jogadores' };
-    if (oneForOneException) return { label: 'Aprovada', note: `Regra especial 1x1 aplicada: a diferença de AVG entre os jogadores é de ${oneForOneAvgDiff} fantasy points, abaixo de 3. A troca é aceita mesmo se passar da margem percentual.`, cls: 'good', status: 'Trade aprovada pela regra 1x1' };
     if (diffPct < APPROVAL_LIMIT) return { label: 'Aprovada', note: 'Diferença abaixo de 10%. Pode exportar/postar e iniciar a janela de 12h para atravessamento.', cls: 'good', status: 'Trade aprovada pelo cálculo' };
-    return { label: 'Reprovada', note: `Diferença de ${diffPct}% entre os pacotes. O maior pacote é de ${largerPackage}. Ajuste a troca até ficar abaixo de 10%, exceto em trocas 1x1 com diferença de AVG menor que 3 fantasy points.`, cls: 'bad', status: 'Trade fora da margem' };
+    return { label: 'Reprovada', note: `Diferença de ${diffPct}% entre os pacotes. O maior pacote é de ${largerPackage}. Ajuste a troca até ficar abaixo de 10%.`, cls: 'bad', status: 'Trade fora da margem' };
   })();
 
   const suggest = (query, side) => {
@@ -5641,7 +5626,7 @@ function HonestometroPage() {
       const totalInfo = p.totalPoints ? ` | TOTAL ${formatNumber(p.totalPoints)}` : '';
       return `• ${p.name} — AVG ${c.rawAvg}${totalInfo}${floorNote} × ${c.multiplierLabel} = ${c.value}`;
     }).join('\n') : '• Nenhum jogador';
-    return `⚖️ HONESTÔMETRO AIRBALL\n\nRegras: piso ${FLOOR_AVG} pts, multiplicadores por AVG, compensação de ${SLOT_COMPENSATION} pts por slot de diferença, aprovação se diferença < ${APPROVAL_LIMIT}% e regra especial 1x1: se a diferença de AVG for menor que 3 fantasy points, a troca é aceita.\n\n${teamA} envia:\n${list(sideA)}\nSubtotal jogadores: ${playerSubtotalA}\nCompensação de slot: +${slotCompA}\nTotal: ${totalA}\n\n${teamB} envia:\n${list(sideB)}\nSubtotal jogadores: ${playerSubtotalB}\nCompensação de slot: +${slotCompB}\nTotal: ${totalB}\n\nDiferença: ${diffPct}%${oneForOneAvgDiff !== null ? `\nDiferença de AVG 1x1: ${oneForOneAvgDiff}` : ''}\nResultado: ${verdict.label}\nParecer: ${verdict.note}\n\nApós postagem, começa a janela de 12 horas para atravessamento.`;
+    return `⚖️ HONESTÔMETRO AIRBALL\n\nRegras: piso ${FLOOR_AVG} pts, multiplicadores por AVG, compensação de ${SLOT_COMPENSATION} pts por slot de diferença e aprovação se diferença < ${APPROVAL_LIMIT}%.\n\n${teamA} envia:\n${list(sideA)}\nSubtotal jogadores: ${playerSubtotalA}\nCompensação de slot: +${slotCompA}\nTotal: ${totalA}\n\n${teamB} envia:\n${list(sideB)}\nSubtotal jogadores: ${playerSubtotalB}\nCompensação de slot: +${slotCompB}\nTotal: ${totalB}\n\nDiferença: ${diffPct}%\nResultado: ${verdict.label}\nParecer: ${verdict.note}\n\nApós postagem, começa a janela de 12 horas para atravessamento.`;
   };
 
   const copyResult = async () => {
@@ -5733,7 +5718,7 @@ function HonestometroPage() {
         <div className="trade-lab-card">
           <div className="trade-lab-header"><div><div className="trade-lab-title">AirBall Trade Lab</div><div className="trade-lab-subtitle">Base ESPN Fantasy • Temporada {HONESTOMETRO_CONFIG.seasonId}</div><div className="trade-api-status"><span style={{display:'flex', alignItems:'center', gap:8}}><span className={`trade-status-dot ${dataLive ? 'live' : ''}`}></span>{dataStatus}</span><span>{players.length} atletas</span></div></div><div className="trade-lab-pill">Regras oficiais</div></div>
           <div className="trade-lab-body">
-            <div className="trade-rules-grid"><div className="trade-rule-badge"><div className="trade-rule-badge-label">Piso</div><div className="trade-rule-badge-value">20 pts</div></div><div className="trade-rule-badge"><div className="trade-rule-badge-label">Slots</div><div className="trade-rule-badge-value">+20 cada</div></div><div className="trade-rule-badge"><div className="trade-rule-badge-label">Aprovação</div><div className="trade-rule-badge-value">&lt; 10%</div></div><div className="trade-rule-badge"><div className="trade-rule-badge-label">Regra 1x1</div><div className="trade-rule-badge-value">AVG &lt; 3</div></div><div className="trade-rule-badge"><div className="trade-rule-badge-label">Busca</div><div className="trade-rule-badge-value">ESPN</div></div></div>
+            <div className="trade-rules-grid"><div className="trade-rule-badge"><div className="trade-rule-badge-label">Piso</div><div className="trade-rule-badge-value">20 pts</div></div><div className="trade-rule-badge"><div className="trade-rule-badge-label">Slots</div><div className="trade-rule-badge-value">+20 cada</div></div><div className="trade-rule-badge"><div className="trade-rule-badge-label">Aprovação</div><div className="trade-rule-badge-value">&lt; 10%</div></div><div className="trade-rule-badge"><div className="trade-rule-badge-label">Busca</div><div className="trade-rule-badge-value">ESPN</div></div></div>
             <div className="trade-sides-grid">
               {renderTradeSide({ sideName: 'A', teamName: teamA, setTeamName: setTeamA, side: sideA, otherSide: sideB, query: queryA, setQuery: setQueryA, suggestions: suggestionsA })}
               {renderTradeSide({ sideName: 'B', teamName: teamB, setTeamName: setTeamB, side: sideB, otherSide: sideA, query: queryB, setQuery: setQueryB, suggestions: suggestionsB })}
@@ -5756,7 +5741,7 @@ function HonestometroPage() {
           <div className="trade-actions"><button className="trade-action-btn trade-action-primary" onClick={copyResult} disabled={!totalA || !totalB}>{copied ? 'Copiado!' : 'Copiar resultado'}</button><button className={`trade-action-btn trade-action-print ${printing ? 'loading' : ''}`} onClick={printResultCard} disabled={!totalA || !totalB || printing}>{printing ? 'Gerando...' : 'Printar parecer'}</button><button className="trade-action-btn trade-action-secondary" onClick={clearTrade}>Limpar</button></div>
         </div>
       </div>
-      <div className="trade-rule-mini"><div className="trade-rule-mini-title">Regras aplicadas no cálculo</div><div className="trade-rule-mini-text">Valor do jogador = maior valor entre AVG ESPN e 20 pontos, multiplicado pela faixa correspondente. Se um lado recebe menos jogadores, recebe +20 pontos por slot de diferença, simulando o valor mínimo de Free Agent. A trade é aprovada quando a diferença entre os totais finais fica abaixo de 10%. Em trocas 1x1, se a diferença de AVG entre os dois jogadores for menor que 3 fantasy points, a troca também é aceita mesmo fora da margem percentual.</div><div className="multiplier-table-mini">{MULTIPLIERS.map((row, index) => (<div className="multiplier-chip" key={index}><span className="multiplier-range">{row.label}</span><span className="multiplier-value">{row.mult.toFixed(2)}x</span></div>))}</div></div>
+      <div className="trade-rule-mini"><div className="trade-rule-mini-title">Regras aplicadas no cálculo</div><div className="trade-rule-mini-text">Valor do jogador = maior valor entre AVG ESPN e 20 pontos, multiplicado pela faixa correspondente. Se um lado recebe menos jogadores, recebe +20 pontos por slot de diferença, simulando o valor mínimo de Free Agent. A trade é aprovada somente quando a diferença entre os totais finais fica abaixo de 10%.</div><div className="multiplier-table-mini">{MULTIPLIERS.map((row, index) => (<div className="multiplier-chip" key={index}><span className="multiplier-range">{row.label}</span><span className="multiplier-value">{row.mult.toFixed(2)}x</span></div>))}</div></div>
     </div>
   );
 }
