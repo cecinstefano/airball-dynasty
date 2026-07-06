@@ -2219,8 +2219,8 @@
   /* HONESTÔMETRO NOVO - AIRBALL TRADE LAB */
   .trade-lab-shell {
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 22px;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 18px;
     align-items: start;
   }
   .trade-lab-card {
@@ -2490,8 +2490,8 @@
     color: var(--orange);
   }
   .trade-result-panel {
-    position: static;
-    width: 100%;
+    position: sticky;
+    top: 92px;
   }
   .trade-result-score {
     padding: 22px;
@@ -2677,7 +2677,6 @@
   .trade-search-hint { padding: 0 15px 12px; margin-top: -6px; font-size: 11px; color: var(--gray-text); line-height: 1.4; }
   @media (max-width: 980px) { .trade-rules-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 760px) { .trade-rules-grid, .multiplier-table-mini { grid-template-columns: 1fr; } .trade-player-row-new { grid-template-columns: minmax(0, 1fr) 70px 70px 30px; } }
-  @media (max-width: 760px) { .trade-result-teams-print { grid-template-columns: 1fr; gap: 12px; padding: 0 14px 16px; } .trade-result-vs { min-height: 26px; } }
 
 
   /* PARECER DO HONESTÔMETRO - CARD PARA PRINT */
@@ -2688,9 +2687,9 @@
   }
   .trade-result-teams-print {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 54px minmax(0, 1fr);
-    gap: 16px;
-    padding: 0 22px 22px;
+    grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1fr);
+    gap: 10px;
+    padding: 0 18px 18px;
     align-items: stretch;
   }
   .trade-result-vs {
