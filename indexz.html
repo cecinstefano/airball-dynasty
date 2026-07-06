@@ -2494,28 +2494,12 @@
     width: 100%;
   }
   .trade-result-score {
-    padding: 28px 22px;
+    padding: 22px;
     text-align: center;
     background:
-      linear-gradient(135deg, rgba(26,6,53,.88) 0%, rgba(45,10,78,.82) 55%, rgba(10,10,10,.78) 100%),
-      radial-gradient(circle at 50% 0%, rgba(249,115,22,.34), transparent 38%),
-      url('./assets/honestometro/parecer-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+      radial-gradient(circle at 50% 0%, rgba(249,115,22,.22), transparent 34%),
+      linear-gradient(135deg, #1a0635, var(--purple-deep));
     color: white;
-    position: relative;
-  }
-  .trade-result-score::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(255,255,255,.06), rgba(0,0,0,.10));
-    pointer-events: none;
-  }
-  .trade-result-score > * {
-    position: relative;
-    z-index: 1;
   }
   .trade-result-label {
     font-size: 10px;
