@@ -2949,17 +2949,13 @@ function getTeam(name) {
 
 function TeamLogo({ team, size = 32 }) {
   const t = getTeam(team);
-  const logoKey = `${t.name}-${t.logo}`;
-  const [failedLogo, setFailedLogo] = useState('');
-  const showFallback = failedLogo === logoKey;
-
   return (
-    <span className={`team-logo-wrap ${showFallback ? 'team-logo-fallback' : ''}`} style={{width:size, height:size, background:t.color}} title={t.name}>
-      {showFallback ? (
-        <span>{t.init}</span>
-      ) : (
-        <img key={logoKey} src={t.logo} alt={t.name} className="team-logo-img" onError={() => setFailedLogo(logoKey)} />
-      )}
+    <span className="team-logo-wrap" style={{width:size, height:size, background:t.color}}>
+      <img key={`${t.name}-${t.logo}`} src={t.logo} alt={t.name} className="team-logo-img" onError={(e) => {
+        e.currentTarget.style.display = 'none';
+        e.currentTarget.parentElement.classList.add('team-logo-fallback');
+        e.currentTarget.parentElement.textContent = t.init;
+      }} />
     </span>
   );
 }
