@@ -2315,19 +2315,6 @@
     padding: 9px 12px;
     white-space: nowrap;
   }
-  .draft-draw-sound-note {
-    margin-top: 10px;
-    padding: 10px 12px;
-    border-radius: 12px;
-    background: #f8f4ff;
-    border: 1px solid #ece3ff;
-    color: var(--gray-text);
-    font-size: 11px;
-    line-height: 1.45;
-  }
-  .draft-draw-sound-note strong {
-    color: var(--purple-deep);
-  }
   .draft-draw-results-scroll {
     max-height: 620px;
     overflow-y: auto;
@@ -2405,185 +2392,11 @@
     font-size: 13px;
     line-height: 1.5;
   }
-
-  .draft-draw-animation-card {
-    margin-bottom: 14px;
-    border-radius: 20px;
-    padding: 18px;
-    overflow: hidden;
-    position: relative;
-    background:
-      radial-gradient(circle at 18% 12%, rgba(249,115,22,.28), transparent 34%),
-      radial-gradient(circle at 86% 18%, rgba(192,132,252,.24), transparent 34%),
-      linear-gradient(135deg, #16042c, var(--purple-deep));
-    color: white;
-    border: 1px solid rgba(249,115,22,.28);
-    box-shadow: 0 10px 26px rgba(45,10,78,.18);
-  }
-  .draft-draw-animation-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    opacity: .08;
-    background-image:
-      repeating-linear-gradient(0deg, transparent, transparent 32px, rgba(255,255,255,.7) 33px),
-      repeating-linear-gradient(90deg, transparent, transparent 64px, rgba(255,255,255,.4) 65px);
-    pointer-events: none;
-  }
-  .draft-draw-animation-layout {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: 118px minmax(0, 1fr) 78px;
-    gap: 16px;
-    align-items: center;
-  }
-  .draft-draw-urn {
-    width: 112px;
-    height: 112px;
-    border-radius: 28px 28px 42px 42px;
-    position: relative;
-    background:
-      radial-gradient(circle at 35% 22%, rgba(255,255,255,.35), transparent 28%),
-      linear-gradient(145deg, rgba(255,255,255,.18), rgba(255,255,255,.04));
-    border: 2px solid rgba(255,255,255,.24);
-    box-shadow: inset 0 0 20px rgba(255,255,255,.08), 0 10px 24px rgba(0,0,0,.26);
-    animation: airballUrnShake .46s ease-in-out infinite;
-  }
-  .draft-draw-urn::before {
-    content: '';
-    position: absolute;
-    left: 18px;
-    right: 18px;
-    top: -11px;
-    height: 16px;
-    border-radius: 999px;
-    background: linear-gradient(180deg, #f6dc74, #d4a72c);
-    box-shadow: 0 3px 10px rgba(0,0,0,.22);
-  }
-  .draft-draw-urn::after {
-    content: 'AIRBALL';
-    position: absolute;
-    left: 50%;
-    bottom: 12px;
-    transform: translateX(-50%);
-    font-family: 'Oswald', sans-serif;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 1.4px;
-    color: rgba(255,255,255,.56);
-  }
-  .draft-draw-ball {
-    position: absolute;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #fff8dc 0%, #f97316 42%, #c45a00 100%);
-    box-shadow: 0 3px 8px rgba(0,0,0,.26), inset -3px -3px 8px rgba(0,0,0,.16);
-    animation: airballBallRoll .74s ease-in-out infinite alternate;
-  }
-  .draft-draw-ball:nth-child(1) { left: 18px; top: 38px; animation-delay: 0s; }
-  .draft-draw-ball:nth-child(2) { left: 45px; top: 26px; animation-delay: .12s; background: radial-gradient(circle at 35% 30%, #f5f3ff 0%, #7c3aed 46%, #3b0764 100%); }
-  .draft-draw-ball:nth-child(3) { left: 72px; top: 46px; animation-delay: .24s; }
-  .draft-draw-ball:nth-child(4) { left: 34px; top: 68px; animation-delay: .36s; background: radial-gradient(circle at 35% 30%, #f5f3ff 0%, #7c3aed 46%, #3b0764 100%); }
-  .draft-draw-ball:nth-child(5) { left: 64px; top: 72px; animation-delay: .48s; }
-  @keyframes airballUrnShake {
-    0%, 100% { transform: rotate(-2deg) translateY(0); }
-    30% { transform: rotate(3deg) translateY(-2px); }
-    65% { transform: rotate(-4deg) translateY(2px); }
-  }
-  @keyframes airballBallRoll {
-    0% { transform: translate(0, 0) scale(.92); }
-    40% { transform: translate(8px, -7px) scale(1.05); }
-    75% { transform: translate(-7px, 6px) scale(.98); }
-    100% { transform: translate(5px, 9px) scale(1.08); }
-  }
-  .draft-draw-animation-kicker {
-    font-family: 'Oswald', sans-serif;
-    color: var(--orange);
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-  .draft-draw-animation-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 24px;
-    line-height: 1.05;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: .6px;
-  }
-  .draft-draw-animation-sub {
-    margin-top: 6px;
-    color: rgba(255,255,255,.70);
-    font-size: 12px;
-    line-height: 1.45;
-  }
-  .draft-draw-countdown {
-    width: 72px;
-    height: 72px;
-    border-radius: 20px;
-    background: rgba(255,255,255,.10);
-    border: 1px solid rgba(255,255,255,.16);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Oswald', sans-serif;
-    font-size: 42px;
-    font-weight: 800;
-    color: white;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
-    animation: airballCountdownPulse .7s ease-in-out infinite;
-  }
-  @keyframes airballCountdownPulse {
-    0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(249,115,22,0); }
-    50% { transform: scale(1.08); box-shadow: 0 0 22px rgba(249,115,22,.32); }
-  }
-
-  .draft-draw-result-reveal {
-    width: 112px;
-    height: 112px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    animation: airballRevealPop .48s ease-out;
-  }
-  .draft-draw-result-ball {
-    width: 104px;
-    height: 104px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #fff8dc 0%, #f97316 42%, #c45a00 100%);
-    box-shadow: 0 10px 28px rgba(0,0,0,.28), inset -8px -8px 18px rgba(0,0,0,.16), inset 8px 8px 16px rgba(255,255,255,.18);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 3px solid rgba(255,255,255,.30);
-    overflow: hidden;
-    animation: airballResultBounce 1.1s ease-in-out infinite;
-  }
-  .draft-draw-result-ball .team-logo-fallback {
-    box-shadow: none;
-  }
-  @keyframes airballRevealPop {
-    0% { transform: scale(.72) rotate(-10deg); opacity: 0; }
-    75% { transform: scale(1.08) rotate(3deg); opacity: 1; }
-    100% { transform: scale(1) rotate(0deg); opacity: 1; }
-  }
-  @keyframes airballResultBounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-  }
   @media (max-width: 900px) {
     .draft-draw-header { flex-direction: column; align-items: flex-start; }
     .draft-draw-body { grid-template-columns: 1fr; }
     .draft-draw-nextpick { width: 100%; }
     .draft-draw-actions { grid-template-columns: 1fr; }
-    .draft-draw-animation-layout { grid-template-columns: 94px minmax(0, 1fr) 62px; }
-    .draft-draw-urn { width: 92px; height: 92px; }
-    .draft-draw-countdown { width: 58px; height: 58px; font-size: 34px; }
   }
   @media (max-width: 640px) {
     .draft-draw-title { font-size: 26px; }
@@ -2592,7 +2405,6 @@
     .draft-draw-current-main { grid-template-columns: 48px minmax(0,1fr); }
     .draft-draw-current-pick { grid-column: 1 / -1; text-align: center; }
     .draft-draw-table { min-width: 720px; }
-    .draft-draw-animation-layout { grid-template-columns: 1fr; text-align: center; justify-items: center; }
   }
 
 
@@ -6921,8 +6733,7 @@ function DraftPrioritySection() {
 }
 
 function DraftDrawPage() {
-  const STORAGE_KEY = 'airball-draft-sorteio-2026-27-v5-custom-sound-result-ball';
-  const CUSTOM_DRAFT_DRAW_SOUND_URL = 'assets/audio/draft-sortear.mp3';
+  const STORAGE_KEY = 'airball-draft-sorteio-2026-27-v4-dynamic-pick-odds';
 
   const getLotteryGroups = () => DRAFT_LOTTERIES.map((lottery, index) => {
     const isPlayoff = index === 1;
@@ -7087,19 +6898,7 @@ function DraftDrawPage() {
   };
 
   const [drawState, setDrawState] = useState(readStoredState);
-  const [drawAnimation, setDrawAnimation] = useState({ active: false, countdown: null, pick: null, phase: '', chosen: null });
-  const drawTimersRef = useRef([]);
   const results = Array.isArray(drawState.results) ? drawState.results : [];
-  const isDrawing = !!drawAnimation.active;
-
-  const clearDraftDrawTimers = () => {
-    drawTimersRef.current.forEach(timer => clearTimeout(timer));
-    drawTimersRef.current = [];
-  };
-
-  useEffect(() => {
-    return () => clearDraftDrawTimers();
-  }, []);
 
   useEffect(() => {
     try {
@@ -7125,69 +6924,8 @@ function DraftDrawPage() {
   const currentPickChances = calculateCurrentPickChances(visiblePool);
   const basePickChances = calculateBasePickChances(visiblePool);
 
-  const playDraftDrawSound = () => {
-    const playFallbackSynth = () => {
-      try {
-        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-        if (!AudioContextClass) return;
-        const ctx = new AudioContextClass();
-        const master = ctx.createGain();
-        master.gain.setValueAtTime(0.055, ctx.currentTime);
-        master.connect(ctx.destination);
-
-        const now = ctx.currentTime;
-        const notes = [174, 207, 246, 293, 349, 440, 554, 698];
-        notes.forEach((freq, index) => {
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          const start = now + index * 0.085;
-          osc.type = index % 2 ? 'triangle' : 'sine';
-          osc.frequency.setValueAtTime(freq, start);
-          gain.gain.setValueAtTime(0.001, start);
-          gain.gain.exponentialRampToValueAtTime(0.8, start + 0.012);
-          gain.gain.exponentialRampToValueAtTime(0.001, start + 0.075);
-          osc.connect(gain);
-          gain.connect(master);
-          osc.start(start);
-          osc.stop(start + 0.09);
-        });
-
-        const finalOsc = ctx.createOscillator();
-        const finalGain = ctx.createGain();
-        finalOsc.type = 'sawtooth';
-        finalOsc.frequency.setValueAtTime(220, now + 2.45);
-        finalOsc.frequency.exponentialRampToValueAtTime(880, now + 2.88);
-        finalGain.gain.setValueAtTime(0.001, now + 2.45);
-        finalGain.gain.exponentialRampToValueAtTime(0.65, now + 2.52);
-        finalGain.gain.exponentialRampToValueAtTime(0.001, now + 3.02);
-        finalOsc.connect(finalGain);
-        finalGain.connect(master);
-        finalOsc.start(now + 2.45);
-        finalOsc.stop(now + 3.05);
-
-        setTimeout(() => ctx.close().catch(() => {}), 3600);
-      } catch (e) {}
-    };
-
-    try {
-      const audio = new Audio(`${CUSTOM_DRAFT_DRAW_SOUND_URL}?v=1`);
-      audio.preload = 'auto';
-      audio.volume = 1;
-      const playAttempt = audio.play();
-      if (playAttempt && typeof playAttempt.catch === 'function') {
-        playAttempt.catch(() => playFallbackSynth());
-      }
-    } catch (e) {
-      playFallbackSynth();
-    }
-  };
-
-
   const drawNext = () => {
-    if (!nextPick || !visiblePool.length || isDrawing) return;
-
-    clearDraftDrawTimers();
-    playDraftDrawSound();
+    if (!nextPick || !visiblePool.length) return;
 
     const chosen = pickByChanceMap(visiblePool, currentPickChances);
     const chanceForPick = Number(currentPickChances[normalizeTeamKey(chosen.team)] || 0);
@@ -7203,33 +6941,13 @@ function DraftDrawPage() {
       drawnAt: new Date().toISOString()
     };
 
-    setDrawAnimation({
-      active: true,
-      countdown: 3,
-      pick: nextPick,
-      phase: 'Girando a urna...',
-      chosen: null
+    setDrawState(prev => {
+      const currentResults = Array.isArray(prev.results) ? prev.results : [];
+      return { results: [nextResult, ...currentResults] };
     });
-
-    drawTimersRef.current = [
-      setTimeout(() => setDrawAnimation(prev => ({ ...prev, countdown: 2, phase: 'Misturando as bolinhas...' })), 900),
-      setTimeout(() => setDrawAnimation(prev => ({ ...prev, countdown: 1, phase: 'Preparando o resultado...' })), 1800),
-      setTimeout(() => setDrawAnimation(prev => ({ ...prev, countdown: '!', phase: 'Bola sorteada!', chosen: nextResult })), 2700),
-      setTimeout(() => {
-        setDrawState(prev => {
-          const currentResults = Array.isArray(prev.results) ? prev.results : [];
-          return { results: [nextResult, ...currentResults] };
-        });
-      }, 3350),
-      setTimeout(() => {
-        setDrawAnimation({ active: false, countdown: null, pick: null, phase: '', chosen: null });
-        drawTimersRef.current = [];
-      }, 4300)
-    ];
   };
 
   const resetDraw = () => {
-    if (isDrawing) return;
     const ok = window.confirm('Resetar o sorteio do draft e voltar todos os times para as urnas?');
     if (ok) setDrawState({ results: [] });
   };
@@ -7259,7 +6977,7 @@ function DraftDrawPage() {
             <div className="draft-draw-kicker">Regras oficiais do draft</div>
             <div className="draft-draw-title">Sorteio do Draft AirBall</div>
             <div className="draft-draw-sub">
-              O sorteio respeita as porcentagens de cada equipe e a separação oficial da liga: times fora dos playoffs disputam apenas as picks 1 a 8; times que foram aos playoffs disputam apenas as picks 9 a 16. A revelação acontece de trás para frente, com contagem regressiva, urna animada e som a cada clique. As porcentagens mudam a cada sorteio: Pick #9/Pick #1 mostra a chance atual da melhor pick da urna, e a coluna roxa mostra a chance real da pick que está sendo sorteada agora.
+              O sorteio respeita as porcentagens de cada equipe e a separação oficial da liga: times fora dos playoffs disputam apenas as picks 1 a 8; times que foram aos playoffs disputam apenas as picks 9 a 16. A revelação acontece de trás para frente. As porcentagens mudam a cada sorteio: Pick #9/Pick #1 mostra a chance atual da melhor pick da urna, e a coluna roxa mostra a chance real da pick que está sendo sorteada agora.
             </div>
           </div>
           <div className="draft-draw-nextpick">
@@ -7308,48 +7026,13 @@ function DraftDrawPage() {
 
           <div>
             <div className="draft-draw-actions">
-              <button className="draft-draw-btn draft-draw-btn-primary" onClick={drawNext} disabled={!nextPick || isDrawing}>
-                {isDrawing ? `Sorteando pick ${drawAnimation.pick}...` : (nextPick ? `Sortear pick ${nextPick}` : 'Sorteio concluído')}
+              <button className="draft-draw-btn draft-draw-btn-primary" onClick={drawNext} disabled={!nextPick}>
+                {nextPick ? `Sortear pick ${nextPick}` : 'Sorteio concluído'}
               </button>
-              <button className="draft-draw-btn draft-draw-btn-secondary" onClick={resetDraw} disabled={!results.length || isDrawing}>
+              <button className="draft-draw-btn draft-draw-btn-secondary" onClick={resetDraw} disabled={!results.length}>
                 Resetar
               </button>
             </div>
-            <div className="draft-draw-sound-note">
-              <strong>Som personalizado:</strong> coloque seu áudio em <strong>assets/audio/draft-sortear.mp3</strong>. Se o arquivo não existir, o sistema usa o som padrão do navegador.
-            </div>
-
-            {drawAnimation.active && (
-              <div className="draft-draw-animation-card">
-                <div className="draft-draw-animation-layout">
-                  {drawAnimation.chosen ? (
-                    <div className="draft-draw-result-reveal" aria-hidden="true">
-                      <div className="draft-draw-result-ball">
-                        <TeamLogo team={drawAnimation.chosen.team} size={72} />
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="draft-draw-urn" aria-hidden="true">
-                      <span className="draft-draw-ball"></span>
-                      <span className="draft-draw-ball"></span>
-                      <span className="draft-draw-ball"></span>
-                      <span className="draft-draw-ball"></span>
-                      <span className="draft-draw-ball"></span>
-                    </div>
-                  )}
-                  <div>
-                    <div className="draft-draw-animation-kicker">{drawAnimation.chosen ? 'Resultado revelado' : 'Urna AirBall em movimento'}</div>
-                    <div className="draft-draw-animation-title">{drawAnimation.chosen ? drawAnimation.chosen.display : `Sorteando pick #${drawAnimation.pick}`}</div>
-                    <div className="draft-draw-animation-sub">
-                      {drawAnimation.chosen
-                        ? `Pick #${drawAnimation.chosen.pick} definida para ${drawAnimation.chosen.display}. Chance usada no momento do sorteio: ${chanceText(drawAnimation.chosen.currentChance ?? drawAnimation.chosen.chance)}.`
-                        : `${drawAnimation.phase} O time só será revelado quando a contagem terminar.`}
-                    </div>
-                  </div>
-                  <div className="draft-draw-countdown">{drawAnimation.countdown}</div>
-                </div>
-              </div>
-            )}
 
             {lastDraw && (
               <div className="draft-draw-current">
@@ -7414,7 +7097,7 @@ function DraftDrawPage() {
                   </table>
                 ) : (
                   <div className="draft-draw-empty">
-                    Nenhum time sorteado ainda. Clique em “Sortear pick 16” para começar pela urna dos playoffs com a urna animada e contagem regressiva. As colunas de chance são recalculadas automaticamente a cada time sorteado.
+                    Nenhum time sorteado ainda. Clique em “Sortear pick 16” para começar pela urna dos playoffs. As colunas de chance são recalculadas automaticamente a cada time sorteado.
                   </div>
                 )}
               </div>
