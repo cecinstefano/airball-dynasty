@@ -5368,18 +5368,7 @@ const HOF_DATA = [
 ];
 
 const TRADES_DATA = [
-  {
-    week: '14/07 • TRADE PROCESSADA',
-    status: 'OFICIAL',
-    cls: 'trade-approved',
-    teamA: 'Acre Dinosaurs',
-    teamB: 'Fi du Jequisom',
-    teamADisplay: 'Acre Dinossaurs',
-    teamBDisplay: 'Fi du Jequisom',
-    givesA: ['LeBron James'],
-    givesB: ['Jaylen Brown'],
-    analysis: 'Acre Dinossaurs envia LeBron James para o Fi du Jequisom e recebe Jaylen Brown.'
-  },
+
   {
     week: '27/06 • PRÉ-SEASON 2026/27',
     status: 'OFICIAL',
@@ -5390,8 +5379,9 @@ const TRADES_DATA = [
     teamBDisplay: 'Revolution Française',
     givesA: ['Jalen Duren'],
     givesB: ['Chet Holmgren'],
-    analysis: "Stéfano's SuperSonics recebe Chet Holmgren, enquanto o Revolution Française recebe Jalen Duren."
+    analysis: "Única troca registrada na pré-season: Chet Holmgren sai do Revolution Française para o Stéfano's SuperSonics em troca de Jalen Duren."
   },
+
 ];
 
 const DRAFT_ORDER = [
@@ -6341,7 +6331,7 @@ function TradeArt({ teamA, teamB }) {
 }
 
 
-const LEAGUE_PLAYERS_API_URL = 'https://airball-espn-proxy.stefanocecin.workers.dev/players';
+const LEAGUE_TRADES_API_URL = 'https://airball-espn-proxy.stefanocecin.workers.dev/trades';
 
 function formatTradeScore(value) {
   const num = Number(value);
@@ -6349,87 +6339,39 @@ function formatTradeScore(value) {
   return num.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 }
 
-function normalizeTradeName(value) {
-  return String(value || '')
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-zA-Z0-9 ]+/g, ' ')
-    .replace(/\s+/g, ' ')
-    .toLowerCase()
-    .trim();
-}
-
-function getTradeWorkerOrigin() {
-  try { return new URL(LEAGUE_PLAYERS_API_URL).origin; } catch (e) { return ''; }
-}
-
 function normalizeTradePlayerForUi(player) {
-  if (typeof player === 'string') {
-    return { id: '', name: player, avg: 0, total: 0, position: '—', proTeam: 'NBA', photoUrl: '' };
-  }
+  if (typeof player === 'string') return { name: player };
   const id = String(player?.id || player?.playerId || player?.espnId || '');
-  const workerOrigin = getTradeWorkerOrigin();
+  const workerOrigin = (() => { try { return new URL(LEAGUE_TRADES_API_URL).origin; } catch (e) { return ''; } })();
   const workerPhotoUrl = workerOrigin && /^\d+$/.test(id) ? `${workerOrigin}/player-photo/${id}` : '';
   return {
     id,
     name: player?.name || player?.fullName || player?.playerName || 'Jogador',
-    avg: Number(player?.avg ?? player?.fantasyPoints ?? player?.average ?? player?.avgFantasyPoints ?? 0) || 0,
-    total: Number(player?.total ?? player?.totalPoints ?? player?.totalFantasyPoints ?? player?.appliedTotal ?? 0) || 0,
+    avg: Number(player?.avg ?? player?.fantasyPoints ?? player?.average ?? 0) || 0,
+    total: Number(player?.total ?? player?.totalPoints ?? 0) || 0,
     position: player?.position || '—',
-    proTeam: player?.proTeam || player?.team || player?.proTeamAbbrev || 'NBA',
-    photoUrl: player?.photoUrl || player?.headshotUrl || player?.headshot || player?.playerPhoto || workerPhotoUrl
+    proTeam: player?.proTeam || player?.team || 'NBA',
+    photoUrl: player?.photoUrl || player?.headshotUrl || player?.headshot || workerPhotoUrl
   };
 }
 
-function buildTradePlayerLookup(players) {
-  const lookup = new Map();
-  (Array.isArray(players) ? players : []).forEach(raw => {
-    const p = normalizeTradePlayerForUi(raw);
-    const key = normalizeTradeName(p.name);
-    if (key && !lookup.has(key)) lookup.set(key, p);
-  });
-  return lookup;
-}
-
-function resolveTradePlayer(player, lookup) {
-  if (typeof player !== 'string') return normalizeTradePlayerForUi(player);
-  const key = normalizeTradeName(player);
-  const exact = lookup && lookup.get(key);
-  if (exact) return { ...exact, name: exact.name || player };
-
-  // fallback para pequenas variações de grafia, ex: Holmgreen/Holmgren
-  if (lookup && key) {
-    const compact = key.replace(/\s+/g, '');
-    for (const [candidateKey, candidate] of lookup.entries()) {
-      const candidateCompact = candidateKey.replace(/\s+/g, '');
-      if (candidateCompact.includes(compact) || compact.includes(candidateCompact)) return candidate;
-    }
-  }
-
-  return normalizeTradePlayerForUi(player);
-}
-
-function staticTradeToLeagueTrade(t, index = 0, playerLookup = new Map()) {
-  const givesA = Array.isArray(t.givesA) ? t.givesA : [];
-  const givesB = Array.isArray(t.givesB) ? t.givesB : [];
+function staticTradeToLeagueTrade(t, index = 0) {
   return {
-    id: `manual-${index}`,
+    id: `static-${index}`,
     dateText: t.week || 'Trade',
     status: t.status || 'OFICIAL',
-    cls: t.cls || 'trade-approved',
+    cls: t.cls || (t.approved ? 'trade-approved' : 'trade-pending'),
     teamA: t.teamA?.name || t.teamA,
     teamADisplay: t.teamADisplay || t.teamA?.name || t.teamA,
     teamB: t.teamB?.name || t.teamB,
     teamBDisplay: t.teamBDisplay || t.teamB?.name || t.teamB,
-    // Time A recebe o que o Time B enviou; Time B recebe o que o Time A enviou.
-    sideAReceives: givesB.map(player => resolveTradePlayer(player, playerLookup)),
-    sideBReceives: givesA.map(player => resolveTradePlayer(player, playerLookup)),
-    summary: t.analysis || 'Trade registrada manualmente na AirBall Dynasty League com dados de jogadores puxados da ESPN.'
+    sideAReceives: (t.givesB || t.gets || []).map(normalizeTradePlayerForUi),
+    sideBReceives: (t.givesA || t.gives || []).map(normalizeTradePlayerForUi),
+    summary: t.analysis || 'Trade registrada na AirBall Dynasty League.'
   };
 }
 
 function normalizeLeagueTradeForUi(trade, index = 0) {
-  if (!trade || String(trade.id || '').startsWith('manual-')) return trade;
   const normalized = staticTradeToLeagueTrade(trade || {}, index);
   const sideA = trade?.sideAReceives || trade?.teamAReceives || trade?.receivesA || trade?.getsA || normalized.sideAReceives || [];
   const sideB = trade?.sideBReceives || trade?.teamBReceives || trade?.receivesB || trade?.getsB || normalized.sideBReceives || [];
@@ -6451,28 +6393,27 @@ function normalizeLeagueTradeForUi(trade, index = 0) {
 
 function useLeagueTrades(limit = null) {
   const [trades, setTrades] = useState([]);
-  const [status, setStatus] = useState('Carregando jogadores ESPN...');
+  const [status, setStatus] = useState('Carregando ESPN...');
 
   useEffect(() => {
     let alive = true;
-    fetch(LEAGUE_PLAYERS_API_URL)
+    fetch(LEAGUE_TRADES_API_URL)
       .then(res => {
         if (!res.ok) throw new Error('Erro HTTP ' + res.status);
         return res.json();
       })
       .then(data => {
         if (!alive) return;
-        const players = Array.isArray(data) ? data : (data.players || data.items || []);
-        const playerLookup = buildTradePlayerLookup(players);
-        const manualTrades = TRADES_DATA.map((trade, index) => staticTradeToLeagueTrade(trade, index, playerLookup));
-        setTrades(limit ? manualTrades.slice(0, limit) : manualTrades);
-        setStatus('Atualização manual + dados ESPN');
+        const rawTrades = Array.isArray(data) ? data : (data.trades || data.items || []);
+        const normalized = rawTrades.map(normalizeLeagueTradeForUi).filter(t => t.teamA && t.teamB);
+        setTrades(limit ? normalized.slice(0, limit) : normalized);
+        setStatus(normalized.length ? `${normalized.length} trades ESPN` : 'Nenhuma trade ESPN');
       })
       .catch(() => {
         if (!alive) return;
-        const fallback = TRADES_DATA.map((trade, index) => staticTradeToLeagueTrade(trade, index));
+        const fallback = TRADES_DATA.map(staticTradeToLeagueTrade);
         setTrades(limit ? fallback.slice(0, limit) : fallback);
-        setStatus('Atualização manual');
+        setStatus('Fallback local');
       });
 
     return () => { alive = false; };
@@ -6583,20 +6524,20 @@ function LatestTradesCard() {
                 <div>
                   {(t.sideAReceives || []).slice(0,3).map((p, j) => {
                     const player = normalizeTradePlayerForUi(p);
-                    return <div className="latest-trade-player-line" key={j}>• {player.name} <span style={{color:'#888'}}>AVG {formatTradeScore(player.avg)}</span></div>;
+                    return <div className="latest-trade-player-line" key={j}>• {player.name}</div>;
                   })}
                 </div>
                 <div>
                   {(t.sideBReceives || []).slice(0,3).map((p, j) => {
                     const player = normalizeTradePlayerForUi(p);
-                    return <div className="latest-trade-player-line" key={j} style={{textAlign:'right'}}>• {player.name} <span style={{color:'#888'}}>AVG {formatTradeScore(player.avg)}</span></div>;
+                    return <div className="latest-trade-player-line" key={j} style={{textAlign:'right'}}>• {player.name}</div>;
                   })}
                 </div>
               </div>
             </div>
           );
         }) : (
-          <div className="latest-trades-loading">Nenhuma trade manual cadastrada.</div>
+          <div className="latest-trades-loading">Nenhuma trade encontrada no histórico da ESPN.</div>
         )}
       </div>
     </div>
@@ -7562,7 +7503,7 @@ function TradesPage() {
     <div className="main-wrap">
       <div className="page-hero">
         <div className="page-hero-title">🔄 Trade Center</div>
-        <div className="page-hero-sub">Últimas atualizações manuais de trade com jogadores, médias e fotos puxados da ESPN • {status}</div>
+        <div className="page-hero-sub">Últimas transações oficiais puxadas automaticamente da ESPN • {status}</div>
       </div>
 
       <div className="trades-grid">
@@ -7570,7 +7511,7 @@ function TradesPage() {
           trades.map((trade, i) => <TradeNewsCard trade={trade} key={trade.id || i} />)
         ) : (
           <div className="trade-dynamic-empty">
-            Nenhuma trade manual cadastrada ainda.
+            Nenhuma trade encontrada no histórico da ESPN. Quando uma troca for processada na liga, ela aparecerá aqui automaticamente.
           </div>
         )}
       </div>
