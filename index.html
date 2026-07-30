@@ -3274,6 +3274,24 @@
       repeating-linear-gradient(90deg, transparent, transparent 76px, rgba(255,255,255,.44) 77px);
     pointer-events: none;
   }
+  .draft-draw-popup-team-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: .16;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 62% auto;
+    filter: drop-shadow(0 0 18px rgba(0,0,0,.20));
+    pointer-events: none;
+  }
+  .draft-draw-popup-team-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at center, transparent 0%, rgba(22,4,44,.10) 36%, rgba(10,10,10,.46) 100%);
+  }
   .draft-draw-popup-close {
     position: absolute;
     top: 16px;
@@ -8926,6 +8944,7 @@ function DraftDrawPage() {
   };
 
   const popupSecondRoundPick = drawPopup ? 33 - Number(drawPopup.pick) : null;
+  const popupTeamVisual = drawPopup ? getTeam(drawPopup.team) : null;
   const popupPlayerGroups = drawPopup
     ? [
         {
@@ -8964,6 +8983,15 @@ function DraftDrawPage() {
       {drawPopup && (
         <div className="draft-draw-popup-backdrop" onClick={() => setDrawPopup(null)}>
           <div className="draft-draw-popup-card" onClick={(event) => event.stopPropagation()}>
+            {popupTeamVisual && (
+              <div
+                className="draft-draw-popup-team-bg"
+                style={{
+                  backgroundImage: `url(${popupTeamVisual.logo})`
+                }}
+                aria-hidden="true"
+              />
+            )}
             <button className="draft-draw-popup-close" type="button" onClick={() => setDrawPopup(null)} aria-label="Fechar resultado">×</button>
             <div className="draft-draw-popup-kicker">Resultado do sorteio</div>
             <div className="draft-draw-popup-pick">Pick #{drawPopup.pick}</div>
