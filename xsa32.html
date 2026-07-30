@@ -263,7 +263,7 @@
     border: 1px solid rgba(255,255,255,0.42);
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     box-shadow: inset 0 0 8px rgba(0,0,0,0.18);
     overflow: hidden;
   }
@@ -2822,152 +2822,6 @@
     padding: 9px 12px;
     white-space: nowrap;
   }
-
-  .draft-draw-live-area {
-    display: block;
-    margin-bottom: 14px;
-  }
-  .draft-draw-live-main {
-    min-width: 0;
-  }
-  .draft-order-live-card {
-    border-radius: 20px;
-    overflow: hidden;
-    background: white;
-    border: 1px solid rgba(45,10,78,0.10);
-    box-shadow: 0 10px 26px rgba(45,10,78,.08);
-    margin: 24px 0;
-  }
-  .draft-order-live-header {
-    background:
-      radial-gradient(circle at 14% 0%, rgba(249,115,22,.22), transparent 36%),
-      radial-gradient(circle at 84% 8%, rgba(192,132,252,.24), transparent 34%),
-      linear-gradient(135deg, #16042c, var(--purple-deep));
-    color: white;
-    padding: 20px 22px;
-  }
-  .draft-order-live-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 28px;
-    line-height: 1;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .draft-order-live-note {
-    margin-top: 6px;
-    color: rgba(255,255,255,.68);
-    font-size: 11px;
-    line-height: 1.45;
-  }
-  .draft-order-live-status {
-    margin-top: 8px;
-    display: inline-flex;
-    width: fit-content;
-    border-radius: 999px;
-    padding: 4px 9px;
-    background: rgba(249,115,22,.14);
-    border: 1px solid rgba(249,115,22,.28);
-    color: var(--orange);
-    font-size: 10px;
-    font-weight: 900;
-    letter-spacing: .7px;
-    text-transform: uppercase;
-  }
-  .draft-order-live-list {
-    max-height: 760px;
-    overflow-y: auto;
-    background: #fff;
-  }
-  .draft-order-live-list::-webkit-scrollbar { width: 9px; }
-  .draft-order-live-list::-webkit-scrollbar-track { background: #f1ecfa; }
-  .draft-order-live-list::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 999px; border: 2px solid #f1ecfa; }
-  .draft-order-live-row {
-    display: grid;
-    grid-template-columns: 54px 42px minmax(190px, 1fr) 56px minmax(260px, 1.35fr) 88px;
-    align-items: center;
-    gap: 12px;
-    padding: 13px 18px;
-    border-bottom: 1px solid #f0f0f4;
-    transition: background .24s ease, box-shadow .24s ease, transform .24s ease;
-  }
-  .draft-order-live-row:last-child { border-bottom: none; }
-  .draft-order-live-row.empty {
-    opacity: .82;
-  }
-  .draft-order-live-row.recent {
-    background: linear-gradient(90deg, rgba(249,115,22,.16), rgba(248,244,255,.96));
-    box-shadow: inset 4px 0 0 var(--orange), 0 0 24px rgba(249,115,22,.16);
-    transform: translateX(2px);
-  }
-  .draft-order-live-pick {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 800;
-    color: var(--orange);
-    text-align: center;
-    line-height: 1;
-  }
-  .draft-order-live-pick span {
-    display: block;
-    font-size: 18px;
-  }
-  .draft-order-live-pick em {
-    display: block;
-    margin-top: 3px;
-    font-style: normal;
-    font-family: 'Inter', sans-serif;
-    font-size: 8px;
-    color: var(--gray-text);
-    font-weight: 900;
-    letter-spacing: .8px;
-    text-transform: uppercase;
-  }
-  .draft-order-live-team-name {
-    font-weight: 900;
-    color: #21132f;
-    font-size: 12px;
-    line-height: 1.12;
-  }
-  .draft-order-live-waiting {
-    color: var(--gray-text);
-    font-size: 11px;
-    font-weight: 800;
-    line-height: 1.15;
-  }
-  .draft-order-live-player-name {
-    font-weight: 900;
-    color: #21132f;
-    font-size: 12px;
-    line-height: 1.12;
-  }
-  .draft-order-live-player-meta {
-    margin-top: 2px;
-    color: var(--gray-text);
-    font-size: 9px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: .5px;
-  }
-  .draft-order-live-avg {
-    font-family: 'Oswald', sans-serif;
-    color: var(--purple-deep);
-    font-size: 15px;
-    font-weight: 800;
-    text-align: right;
-    white-space: nowrap;
-  }
-  .draft-order-live-avg span {
-    display: block;
-    color: var(--gray-text);
-    font-family: 'Inter', sans-serif;
-    font-size: 8px;
-    font-weight: 900;
-    letter-spacing: .8px;
-    text-transform: uppercase;
-  }
-  .draft-order-live-mobile-label {
-    display: none;
-  }
   .draft-draw-sound-note {
     margin-top: 10px;
     padding: 10px 12px;
@@ -3243,12 +3097,10 @@
   }
   .draft-draw-popup-card {
     position: relative;
-    width: min(94vw, 1020px);
-    max-height: 92vh;
+    width: min(92vw, 760px);
     min-height: 520px;
     border-radius: 32px;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden;
     color: white;
     background:
       radial-gradient(circle at 18% 8%, rgba(249,115,22,.34), transparent 34%),
@@ -3358,127 +3210,6 @@
     color: rgba(255,255,255,.72);
     line-height: 1.45;
   }
-  .draft-draw-popup-rounds {
-    position: relative;
-    z-index: 2;
-    width: min(100%, 900px);
-    margin-top: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .draft-draw-popup-round-section {
-    border-radius: 24px;
-    padding: 12px;
-    background: rgba(255,255,255,.07);
-    border: 1px solid rgba(255,255,255,.13);
-  }
-  .draft-draw-popup-round-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 10px;
-    text-align: left;
-  }
-  .draft-draw-popup-round-title {
-    font-family: 'Oswald', sans-serif;
-    color: var(--orange);
-    font-size: 16px;
-    font-weight: 900;
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
-  }
-  .draft-draw-popup-round-sub {
-    color: rgba(255,255,255,.62);
-    font-size: 11px;
-    font-weight: 800;
-    text-align: right;
-  }
-  .draft-draw-popup-players {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-  }
-  .draft-draw-popup-player-card {
-    padding: 12px 10px;
-    border-radius: 18px;
-    background: rgba(255,255,255,.10);
-    border: 1px solid rgba(255,255,255,.18);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    backdrop-filter: blur(4px);
-    min-height: 188px;
-  }
-  .draft-draw-popup-player-card.featured {
-    background: rgba(249,115,22,.18);
-    border-color: rgba(249,115,22,.60);
-    box-shadow: 0 0 26px rgba(249,115,22,.22), inset 0 0 0 1px rgba(255,255,255,.10);
-    transform: translateY(-3px);
-  }
-  .draft-draw-popup-player-pick {
-    width: fit-content;
-    margin-bottom: 7px;
-    border-radius: 999px;
-    padding: 4px 8px;
-    background: rgba(0,0,0,.26);
-    border: 1px solid rgba(255,255,255,.16);
-    color: rgba(255,255,255,.78);
-    font-size: 8px;
-    font-weight: 900;
-    letter-spacing: .8px;
-    text-transform: uppercase;
-  }
-  .draft-draw-popup-player-card.featured .draft-draw-popup-player-pick {
-    color: white;
-    background: var(--orange);
-    border-color: rgba(255,255,255,.24);
-  }
-  .draft-draw-popup-player-kicker {
-    margin-top: 9px;
-    font-size: 10px;
-    color: rgba(255,255,255,.58);
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 1.4px;
-    margin-bottom: 3px;
-  }
-  .draft-draw-popup-player-name {
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px;
-    line-height: 1.05;
-    font-weight: 900;
-    color: white;
-    text-transform: uppercase;
-  }
-  .draft-draw-popup-player-meta {
-    margin-top: 4px;
-    color: rgba(255,255,255,.68);
-    font-size: 11px;
-    font-weight: 700;
-  }
-  .draft-draw-popup-player-avg {
-    margin-top: auto;
-    padding-top: 10px;
-    font-family: 'Oswald', sans-serif;
-    font-size: 22px;
-    color: var(--orange);
-    font-weight: 900;
-    text-align: center;
-    white-space: nowrap;
-  }
-  .draft-draw-popup-player-avg span {
-    display: block;
-    color: rgba(255,255,255,.58);
-    font-family: 'Inter', sans-serif;
-    font-size: 9px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 2px;
-  }
   .draft-draw-popup-confirm {
     position: relative;
     z-index: 2;
@@ -3515,9 +3246,6 @@
     .draft-draw-body { grid-template-columns: 1fr; }
     .draft-draw-nextpick { width: 100%; }
     .draft-draw-actions { grid-template-columns: 1fr; }
-    .draft-draw-live-area { grid-template-columns: 1fr; }
-    .draft-order-live-card { order: 2; }
-    .draft-order-live-list { max-height: 520px; }
     .draft-draw-animation-layout { grid-template-columns: 94px minmax(0, 1fr) 62px; }
     .draft-draw-urn { width: 92px; height: 92px; }
     .draft-draw-countdown { width: 58px; height: 58px; font-size: 34px; }
@@ -3530,11 +3258,6 @@
     .draft-draw-current-pick { grid-column: 1 / -1; text-align: center; }
     .draft-draw-table { min-width: 720px; }
     .draft-draw-animation-layout { grid-template-columns: 1fr; text-align: center; justify-items: center; }
-    .draft-order-live-row { grid-template-columns: 36px 32px minmax(0,1fr); gap: 8px; align-items: center; }
-    .draft-order-live-row .player-photo,
-    .draft-order-live-avg { display: none; }
-    .draft-order-live-player-name { grid-column: 2 / -1; }
-    .draft-order-live-mobile-label { display: inline; color: var(--orange); font-weight: 900; }
   }
 
 
@@ -8445,46 +8168,6 @@ function DraftPrioritySection() {
 function DraftDrawPage() {
   const STORAGE_KEY = 'airball-draft-sorteio-2026-27-v5-custom-sound-result-ball';
   const CUSTOM_DRAFT_DRAW_SOUND_URL = 'assets/audio/draft-sortear.mp3';
-  const PLAYERS_API_URL = 'https://airball-espn-proxy.stefanocecin.workers.dev/players';
-
-  const normalizeText = (value) => String(value || '')
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .trim();
-
-  const cleanLeaguePosition = (position) => {
-    const allowed = ['PG', 'SG', 'SF', 'PF', 'C'];
-    const raw = String(position || '')
-      .toUpperCase()
-      .replace(/[^A-Z/ ,.-]/g, ' ')
-      .split(/[\/\s,.-]+/)
-      .filter(Boolean);
-    const filtered = raw.filter(pos => allowed.includes(pos));
-    return [...new Set(filtered)].join('/') || '—';
-  };
-
-  const isFreeFantasyTeam = (team) => {
-    const normalized = normalizeText(team);
-    return !normalized || ['livre', 'free agent', 'fa', 'waiver', 'waivers', '-', '—'].includes(normalized);
-  };
-
-  const normalizeDraftBoardPlayer = (p, index) => {
-    const id = String(p.id || p.playerId || p.espnId || `${p.name || 'player'}-${index}`);
-    const name = p.name || p.fullName || p.playerName || p.displayName || 'Jogador sem nome';
-    const avg = Number(p.fantasyPoints ?? p.avgFantasyPoints ?? p.averageFantasyPoints ?? p.avg ?? p.appliedAverage ?? 0) || 0;
-    const workerOrigin = (() => { try { return new URL(PLAYERS_API_URL).origin; } catch (e) { return ''; } })();
-    const workerPhotoUrl = workerOrigin && /^\d+$/.test(id) ? `${workerOrigin}/player-photo/${id}` : '';
-    return {
-      id,
-      name,
-      avg: Number(avg.toFixed(1)),
-      position: cleanLeaguePosition(p.position || p.defaultPosition || p.eligibleSlotsText || (Array.isArray(p.positions) ? p.positions.join('/') : '') || '—'),
-      team: p.team || p.proTeam || p.proTeamAbbrev || p.nbaTeam || 'NBA',
-      fantasyTeam: p.fantasyTeam || p.owner || p.fantasyOwner || 'Livre',
-      photoUrl: p.photoUrl || p.headshotUrl || p.playerPhoto || p.photo || workerPhotoUrl
-    };
-  };
 
   const getLotteryGroups = () => DRAFT_LOTTERIES.map((lottery, index) => {
     const isPlayoff = index === 1;
@@ -8651,9 +8334,6 @@ function DraftDrawPage() {
   const [drawState, setDrawState] = useState(readStoredState);
   const [drawAnimation, setDrawAnimation] = useState({ active: false, countdown: null, pick: null, phase: '', chosen: null });
   const [drawPopup, setDrawPopup] = useState(null);
-  const [draftBoardPlayers, setDraftBoardPlayers] = useState([]);
-  const [draftBoardStatus, setDraftBoardStatus] = useState('Carregando jogadores...');
-  const [draftOrderHighlightPick, setDraftOrderHighlightPick] = useState(null);
   const drawTimersRef = useRef([]);
   const results = Array.isArray(drawState.results) ? drawState.results : [];
   const isDrawing = !!drawAnimation.active;
@@ -8673,28 +8353,6 @@ function DraftDrawPage() {
     };
     window.addEventListener('keydown', closeOnEscape);
     return () => window.removeEventListener('keydown', closeOnEscape);
-  }, []);
-
-  useEffect(() => {
-    fetch(PLAYERS_API_URL)
-      .then(res => {
-        if (!res.ok) throw new Error('Erro HTTP ' + res.status);
-        return res.json();
-      })
-      .then(data => {
-        const list = Array.isArray(data) ? data : (data.players || data.items || []);
-        const normalized = list
-          .map(normalizeDraftBoardPlayer)
-          .filter(player => player.name && Number(player.avg) > 0 && isFreeFantasyTeam(player.fantasyTeam))
-          .sort((a, b) => Number(b.avg || 0) - Number(a.avg || 0))
-          .slice(0, 32);
-        setDraftBoardPlayers(normalized);
-        setDraftBoardStatus(`${normalized.length} jogadores alinhados por AVG • 2 rounds snake`);
-      })
-      .catch(() => {
-        setDraftBoardPlayers([]);
-        setDraftBoardStatus('Erro ao carregar ranking de AVG');
-      });
   }, []);
 
   useEffect(() => {
@@ -8812,7 +8470,6 @@ function DraftDrawPage() {
       setTimeout(() => setDrawAnimation(prev => ({ ...prev, countdown: 1, phase: 'Preparando o resultado...' })), 1800),
       setTimeout(() => {
         setDrawAnimation(prev => ({ ...prev, countdown: '!', phase: 'Bola sorteada!', chosen: nextResult }));
-        setDraftOrderHighlightPick(nextPick);
         setDrawPopup(nextResult);
       }, 2700),
       setTimeout(() => {
@@ -8824,8 +8481,7 @@ function DraftDrawPage() {
       setTimeout(() => {
         setDrawAnimation({ active: false, countdown: null, pick: null, phase: '', chosen: null });
         drawTimersRef.current = [];
-      }, 4300),
-      setTimeout(() => setDraftOrderHighlightPick(null), 8300)
+      }, 4300)
     ];
   };
 
@@ -8834,7 +8490,6 @@ function DraftDrawPage() {
     const ok = window.confirm('Resetar o sorteio do draft e voltar todos os times para as urnas?');
     if (ok) {
       setDrawPopup(null);
-      setDraftOrderHighlightPick(null);
       setDrawState({ results: [] });
     }
   };
@@ -8849,109 +8504,6 @@ function DraftDrawPage() {
     const number = Number(value) || 0;
     const decimals = number > 0 && number < 10 ? 2 : 1;
     return `${number.toLocaleString('pt-BR', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}%`;
-  };
-
-  const getAssignedTeamForOverallPick = (overallPick) => {
-    const pick = Number(overallPick);
-    const firstRoundPick = pick <= 16 ? pick : 33 - pick;
-    return results.find(row => Number(row.pick) === firstRoundPick) ||
-      (drawAnimation.chosen && Number(drawAnimation.chosen.pick) === firstRoundPick ? drawAnimation.chosen : null);
-  };
-
-  const draftOrderRows = Array.from({ length: 32 }, (_, index) => {
-    const pick = index + 1;
-    const round = pick <= 16 ? 1 : 2;
-    const pickInRound = round === 1 ? pick : pick - 16;
-    const assigned = getAssignedTeamForOverallPick(pick);
-    const player = draftBoardPlayers[index] || null;
-    return { pick, round, pickInRound, assigned, player };
-  });
-
-  const DraftOrderLivePanel = () => (
-    <div className="draft-order-live-card">
-      <div className="draft-order-live-header">
-        <div className="draft-order-live-title">ORDEM DO DRAFT</div>
-        <div className="draft-order-live-note">Jogadores alinhados conforme o ranking de AVG da liga. 2 rounds completos no formato snake: o pick #16 volta no pick geral #17.</div>
-        <div className="draft-order-live-status">{draftBoardStatus}</div>
-      </div>
-      <div className="draft-order-live-list">
-        {draftOrderRows.map(row => {
-          const assigned = row.assigned;
-          const player = row.player;
-          const recentSecondRoundPick = draftOrderHighlightPick ? 33 - Number(draftOrderHighlightPick) : null;
-          const isRecent = Number(draftOrderHighlightPick) === Number(row.pick) || Number(recentSecondRoundPick) === Number(row.pick);
-          return (
-            <div className={`draft-order-live-row ${assigned ? 'filled' : 'empty'} ${isRecent ? 'recent' : ''}`} key={`draft-order-live-${row.pick}`}>
-              <div className="draft-order-live-pick">
-                <span>{String(row.pick).padStart(2, '0')}</span>
-                <em>R{row.round}</em>
-              </div>
-              {assigned ? <TeamLogo team={assigned.team} size={34} /> : <div className="team-logo-fallback" style={{width:34,height:34,fontSize:10}}>?</div>}
-              <div>
-                {assigned ? (
-                  <div className="draft-order-live-team-name">{assigned.display}</div>
-                ) : (
-                  <div className="draft-order-live-waiting">Aguardando sorteio</div>
-                )}
-              </div>
-              {player ? <PlayerPhoto player={player} size={42} /> : <div className="team-logo-fallback" style={{width:42,height:42,fontSize:10}}>AVG</div>}
-              <div>
-                <div className="draft-order-live-player-name">
-                  <span className="draft-order-live-mobile-label">Jogador: </span>{player ? player.name : 'Aguardando ranking'}
-                </div>
-                <div className="draft-order-live-player-meta">{player ? `${player.team} • ${player.position}` : 'ESPN'}</div>
-              </div>
-              <div className="draft-order-live-avg"><span>AVG</span>{player ? player.avg.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : '—'}</div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-
-  const getPlayerWindowByOverallPick = (overallPick) => {
-    const centerPick = Number(overallPick);
-    const centerIndex = centerPick - 1;
-    const count = Math.min(3, draftBoardPlayers.length);
-    if (!Number.isFinite(centerIndex) || centerIndex < 0 || centerIndex >= draftBoardPlayers.length || count <= 0) return [];
-    const start = Math.max(0, Math.min(centerIndex - 1, draftBoardPlayers.length - count));
-    return Array.from({ length: count }, (_, offset) => {
-      const index = start + offset;
-      return {
-        pick: index + 1,
-        player: draftBoardPlayers[index],
-        isMain: index === centerIndex
-      };
-    });
-  };
-
-  const popupSecondRoundPick = drawPopup ? 33 - Number(drawPopup.pick) : null;
-  const popupPlayerGroups = drawPopup
-    ? [
-        {
-          id: 'round-1',
-          title: '1º ROUND',
-          subtitle: `Jogadores próximos da pick #${drawPopup.pick}`,
-          centerPick: Number(drawPopup.pick),
-          mainText: 'Possível escolha principal',
-          items: getPlayerWindowByOverallPick(Number(drawPopup.pick))
-        },
-        {
-          id: 'round-2',
-          title: '2º ROUND • SNAKE',
-          subtitle: `O mesmo time volta na pick geral #${popupSecondRoundPick}`,
-          centerPick: Number(popupSecondRoundPick),
-          mainText: 'Volta do snake',
-          items: getPlayerWindowByOverallPick(Number(popupSecondRoundPick))
-        }
-      ]
-    : [];
-
-  const popupPlayerRelation = (pick, centerPick, mainText) => {
-    if (Number(pick) === Number(centerPick)) return mainText || 'Jogador da pick';
-    const distance = Math.abs(Number(pick) - Number(centerPick));
-    const label = distance === 1 ? '1 posição' : `${distance} posições`;
-    return Number(pick) < Number(centerPick) ? `${label} acima` : `${label} abaixo`;
   };
 
   return (
@@ -8974,37 +8526,6 @@ function DraftDrawPage() {
             <div className="draft-draw-popup-sub">
               {drawPopup.groupShortLabel} • Prioridade #{drawPopup.priority} • Chance da pick: {chanceText(drawPopup.currentChance ?? drawPopup.chance)}
             </div>
-            {popupPlayerGroups.some(group => group.items.length > 0) && (
-              <div className="draft-draw-popup-rounds">
-                {popupPlayerGroups.map(group => (
-                  <div className="draft-draw-popup-round-section" key={group.id}>
-                    <div className="draft-draw-popup-round-head">
-                      <div className="draft-draw-popup-round-title">{group.title}</div>
-                      <div className="draft-draw-popup-round-sub">{group.subtitle}</div>
-                    </div>
-                    <div className="draft-draw-popup-players">
-                      {group.items.map(item => (
-                        <div className={`draft-draw-popup-player-card ${item.isMain ? 'featured' : ''}`} key={`${group.id}-popup-player-${item.pick}`}>
-                          <div className="draft-draw-popup-player-pick">
-                            {item.isMain ? `Pick #${item.pick} • destaque` : `Pick #${item.pick}`}
-                          </div>
-                          <PlayerPhoto player={item.player} size={64} />
-                          <div className="draft-draw-popup-player-kicker">
-                            {popupPlayerRelation(item.pick, group.centerPick, group.mainText)}
-                          </div>
-                          <div className="draft-draw-popup-player-name">{item.player.name}</div>
-                          <div className="draft-draw-popup-player-meta">{item.player.team} • {item.player.position}</div>
-                          <div className="draft-draw-popup-player-avg">
-                            <span>AVG</span>
-                            {item.player.avg.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
             <button className="draft-draw-popup-confirm" type="button" onClick={() => setDrawPopup(null)}>Continuar sorteio</button>
           </div>
         </div>
@@ -9076,58 +8597,53 @@ function DraftDrawPage() {
               <strong>Som personalizado:</strong> coloque seu áudio em <strong>assets/audio/draft-sortear.mp3</strong>. Se o arquivo não existir, o sistema usa o som padrão do navegador.
             </div>
 
-            <div className="draft-draw-live-area">
-              <div className="draft-draw-live-main">
-                {drawAnimation.active && (
-                  <div className="draft-draw-animation-card">
-                    <div className="draft-draw-animation-layout">
-                      {drawAnimation.chosen ? (
-                        <div className="draft-draw-result-reveal" aria-hidden="true">
-                          <div className="draft-draw-result-ball">
-                            <TeamLogo team={drawAnimation.chosen.team} size={72} />
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="draft-draw-urn" aria-hidden="true">
-                          <span className="draft-draw-ball"></span>
-                          <span className="draft-draw-ball"></span>
-                          <span className="draft-draw-ball"></span>
-                          <span className="draft-draw-ball"></span>
-                          <span className="draft-draw-ball"></span>
-                        </div>
-                      )}
-                      <div>
-                        <div className="draft-draw-animation-kicker">{drawAnimation.chosen ? 'Resultado revelado' : 'Urna AirBall em movimento'}</div>
-                        <div className="draft-draw-animation-title">{drawAnimation.chosen ? drawAnimation.chosen.display : `Sorteando pick #${drawAnimation.pick}`}</div>
-                        <div className="draft-draw-animation-sub">
-                          {drawAnimation.chosen
-                            ? `Pick #${drawAnimation.chosen.pick} definida para ${drawAnimation.chosen.display}. Chance usada no momento do sorteio: ${chanceText(drawAnimation.chosen.currentChance ?? drawAnimation.chosen.chance)}.`
-                            : `${drawAnimation.phase} O time só será revelado quando a contagem terminar.`}
-                        </div>
+            {drawAnimation.active && (
+              <div className="draft-draw-animation-card">
+                <div className="draft-draw-animation-layout">
+                  {drawAnimation.chosen ? (
+                    <div className="draft-draw-result-reveal" aria-hidden="true">
+                      <div className="draft-draw-result-ball">
+                        <TeamLogo team={drawAnimation.chosen.team} size={72} />
                       </div>
-                      <div className="draft-draw-countdown">{drawAnimation.countdown}</div>
+                    </div>
+                  ) : (
+                    <div className="draft-draw-urn" aria-hidden="true">
+                      <span className="draft-draw-ball"></span>
+                      <span className="draft-draw-ball"></span>
+                      <span className="draft-draw-ball"></span>
+                      <span className="draft-draw-ball"></span>
+                      <span className="draft-draw-ball"></span>
+                    </div>
+                  )}
+                  <div>
+                    <div className="draft-draw-animation-kicker">{drawAnimation.chosen ? 'Resultado revelado' : 'Urna AirBall em movimento'}</div>
+                    <div className="draft-draw-animation-title">{drawAnimation.chosen ? drawAnimation.chosen.display : `Sorteando pick #${drawAnimation.pick}`}</div>
+                    <div className="draft-draw-animation-sub">
+                      {drawAnimation.chosen
+                        ? `Pick #${drawAnimation.chosen.pick} definida para ${drawAnimation.chosen.display}. Chance usada no momento do sorteio: ${chanceText(drawAnimation.chosen.currentChance ?? drawAnimation.chosen.chance)}.`
+                        : `${drawAnimation.phase} O time só será revelado quando a contagem terminar.`}
                     </div>
                   </div>
-                )}
-
-                {lastDraw && (
-                  <div className="draft-draw-current">
-                    <div className="draft-draw-current-label">
-                      Último sorteado • {lastDraw.groupShortLabel} • Chance para pick #{lastDraw.pick}: {chanceText(lastDraw.currentChance ?? lastDraw.chance)}
-                    </div>
-                    <div className="draft-draw-current-main">
-                      <TeamLogo team={lastDraw.team} size={56} />
-                      <div>
-                        <div className="draft-draw-current-team">{lastDraw.display}</div>
-                        <div className="draft-draw-team-gm">Prioridade #{lastDraw.priority} na urna • pick base #{lastDraw.idealPick} • chance pick #{lastDraw.pickStart}: {chanceText(lastDraw.baseChance ?? lastDraw.chance)} • GM: {lastDraw.gm || '—'}</div>
-                      </div>
-                      <div className="draft-draw-current-pick">Pick #{lastDraw.pick}</div>
-                    </div>
-                  </div>
-                )}
+                  <div className="draft-draw-countdown">{drawAnimation.countdown}</div>
+                </div>
               </div>
+            )}
 
-            </div>
+            {lastDraw && (
+              <div className="draft-draw-current">
+                <div className="draft-draw-current-label">
+                  Último sorteado • {lastDraw.groupShortLabel} • Chance para pick #{lastDraw.pick}: {chanceText(lastDraw.currentChance ?? lastDraw.chance)}
+                </div>
+                <div className="draft-draw-current-main">
+                  <TeamLogo team={lastDraw.team} size={56} />
+                  <div>
+                    <div className="draft-draw-current-team">{lastDraw.display}</div>
+                    <div className="draft-draw-team-gm">Prioridade #{lastDraw.priority} na urna • pick base #{lastDraw.idealPick} • chance pick #{lastDraw.pickStart}: {chanceText(lastDraw.baseChance ?? lastDraw.chance)} • GM: {lastDraw.gm || '—'}</div>
+                  </div>
+                  <div className="draft-draw-current-pick">Pick #{lastDraw.pick}</div>
+                </div>
+              </div>
+            )}
 
             <div className="draft-draw-panel">
               <div className="draft-draw-panel-head">
@@ -9184,8 +8700,6 @@ function DraftDrawPage() {
           </div>
         </div>
       </div>
-
-      <DraftOrderLivePanel />
 
       <DraftPrioritySection />
       <DraftBasisTables />
