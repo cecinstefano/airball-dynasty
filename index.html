@@ -3268,29 +3268,30 @@
     content: '';
     position: absolute;
     inset: 0;
+    z-index: 1;
     opacity: .08;
     background-image:
       repeating-linear-gradient(0deg, transparent, transparent 38px, rgba(255,255,255,.72) 39px),
       repeating-linear-gradient(90deg, transparent, transparent 76px, rgba(255,255,255,.44) 77px);
     pointer-events: none;
   }
-  .draft-draw-popup-team-bg {
+  .draft-draw-popup-wallpaper {
     position: absolute;
     inset: 0;
     z-index: 0;
-    opacity: .16;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 62% auto;
-    filter: drop-shadow(0 0 18px rgba(0,0,0,.20));
+    background-size: cover;
     pointer-events: none;
   }
-  .draft-draw-popup-team-bg::after {
+  .draft-draw-popup-wallpaper::after {
     content: '';
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(circle at center, transparent 0%, rgba(22,4,44,.10) 36%, rgba(10,10,10,.46) 100%);
+      radial-gradient(circle at 50% 26%, rgba(0,0,0,.14), rgba(10,10,10,.58) 62%, rgba(10,10,10,.84) 100%),
+      linear-gradient(135deg, rgba(22,4,44,.62), rgba(45,10,78,.55) 44%, rgba(10,10,10,.72));
+    backdrop-filter: blur(1.5px);
   }
   .draft-draw-popup-close {
     position: absolute;
@@ -8943,8 +8944,14 @@ function DraftDrawPage() {
     });
   };
 
+  const getDraftPickWallpaperUrl = (pick) => {
+    const number = Number(pick);
+    if (!Number.isFinite(number) || number < 1 || number > 16) return '';
+    return `assets/draft-wallpapers/pick-${String(number).padStart(2, '0')}.jpg`;
+  };
+
   const popupSecondRoundPick = drawPopup ? 33 - Number(drawPopup.pick) : null;
-  const popupTeamVisual = drawPopup ? getTeam(drawPopup.team) : null;
+  const popupWallpaperUrl = drawPopup ? getDraftPickWallpaperUrl(drawPopup.pick) : '';
   const popupPlayerGroups = drawPopup
     ? [
         {
@@ -8983,11 +8990,11 @@ function DraftDrawPage() {
       {drawPopup && (
         <div className="draft-draw-popup-backdrop" onClick={() => setDrawPopup(null)}>
           <div className="draft-draw-popup-card" onClick={(event) => event.stopPropagation()}>
-            {popupTeamVisual && (
+            {popupWallpaperUrl && (
               <div
-                className="draft-draw-popup-team-bg"
+                className="draft-draw-popup-wallpaper"
                 style={{
-                  backgroundImage: `url(${popupTeamVisual.logo})`
+                  backgroundImage: `url(${popupWallpaperUrl})`
                 }}
                 aria-hidden="true"
               />
