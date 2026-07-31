@@ -3339,24 +3339,61 @@
       0 0 28px rgba(249,115,22,.55);
     margin-bottom: 24px;
   }
-  .draft-draw-popup-ball {
+  .draft-draw-popup-logo-showcase {
     position: relative;
     z-index: 2;
-    width: 210px;
-    height: 210px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #fff8dc 0%, #f97316 42%, #c45a00 100%);
-    box-shadow: 0 16px 42px rgba(0,0,0,.38), inset -13px -13px 28px rgba(0,0,0,.18), inset 12px 12px 24px rgba(255,255,255,.18);
+    width: min(100%, 440px);
+    min-height: 245px;
+    margin: 4px auto 22px;
+    border-radius: 34px;
+    background:
+      radial-gradient(circle at 50% 18%, rgba(255,255,255,.24), rgba(255,255,255,.08) 46%, rgba(255,255,255,.035) 100%);
+    border: 1px solid rgba(255,255,255,.22);
+    box-shadow:
+      0 22px 60px rgba(0,0,0,.34),
+      inset 0 0 0 1px rgba(255,255,255,.08);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 5px solid rgba(255,255,255,.34);
-    margin-bottom: 22px;
-    animation: airballPopupBall .92s ease-in-out infinite;
     overflow: hidden;
+    backdrop-filter: blur(3px);
   }
-  .draft-draw-popup-ball .team-logo-fallback {
-    box-shadow: none;
+  .draft-draw-popup-logo-showcase::before {
+    content: '';
+    position: absolute;
+    width: 270px;
+    height: 270px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(249,115,22,.30), rgba(192,132,252,.14) 48%, transparent 72%);
+    filter: blur(2px);
+    pointer-events: none;
+  }
+  .draft-draw-popup-logo-showcase .team-logo-wrap {
+    position: relative;
+    z-index: 2;
+    background: transparent !important;
+    border: none;
+    border-radius: 28px;
+    box-shadow: drop-shadow(0 22px 34px rgba(0,0,0,.35));
+  }
+  .draft-draw-popup-logo-showcase .team-logo-img {
+    object-fit: contain;
+    filter: drop-shadow(0 18px 26px rgba(0,0,0,.40));
+  }
+  .draft-draw-popup-logo-label {
+    position: relative;
+    z-index: 2;
+    margin-top: 14px;
+    border-radius: 999px;
+    padding: 6px 12px;
+    background: rgba(0,0,0,.28);
+    border: 1px solid rgba(255,255,255,.16);
+    color: rgba(255,255,255,.76);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
   }
   .draft-draw-popup-team {
     position: relative;
@@ -9002,8 +9039,9 @@ function DraftDrawPage() {
             <button className="draft-draw-popup-close" type="button" onClick={() => setDrawPopup(null)} aria-label="Fechar resultado">×</button>
             <div className="draft-draw-popup-kicker">Resultado do sorteio</div>
             <div className="draft-draw-popup-pick">Pick #{drawPopup.pick}</div>
-            <div className="draft-draw-popup-ball">
-              <TeamLogo team={drawPopup.team} size={150} />
+            <div className="draft-draw-popup-logo-showcase">
+              <TeamLogo team={drawPopup.team} size={230} />
+              <div className="draft-draw-popup-logo-label">Franquia sorteada</div>
             </div>
             <div className="draft-draw-popup-team">{drawPopup.display}</div>
             <div className="draft-draw-popup-sub">
