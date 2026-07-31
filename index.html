@@ -3342,58 +3342,64 @@
   .draft-draw-popup-logo-showcase {
     position: relative;
     z-index: 2;
-    width: min(100%, 440px);
-    min-height: 245px;
+    width: min(100%, 520px);
+    height: 260px;
     margin: 4px auto 22px;
     border-radius: 34px;
     background:
-      radial-gradient(circle at 50% 18%, rgba(255,255,255,.24), rgba(255,255,255,.08) 46%, rgba(255,255,255,.035) 100%);
-    border: 1px solid rgba(255,255,255,.22);
+      linear-gradient(135deg, rgba(7,7,12,.72), rgba(29,15,49,.72)),
+      radial-gradient(circle at 50% 50%, rgba(255,255,255,.10), rgba(255,255,255,.02) 55%, transparent 76%);
+    border: 1px solid rgba(255,255,255,.20);
     box-shadow:
       0 22px 60px rgba(0,0,0,.34),
-      inset 0 0 0 1px rgba(255,255,255,.08);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+      inset 0 0 0 1px rgba(255,255,255,.06);
     overflow: hidden;
     backdrop-filter: blur(3px);
   }
   .draft-draw-popup-logo-showcase::before {
     content: '';
     position: absolute;
-    width: 270px;
-    height: 270px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(249,115,22,.30), rgba(192,132,252,.14) 48%, transparent 72%);
-    filter: blur(2px);
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.10), transparent 58%);
     pointer-events: none;
+    z-index: 1;
   }
-  .draft-draw-popup-logo-showcase .team-logo-wrap {
-    position: relative;
+  .draft-draw-popup-logo-bg {
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 92% auto;
+    opacity: .26;
+    filter: blur(10px) saturate(1.2);
+    transform: scale(1.08);
+  }
+  .draft-draw-popup-logo-image {
+    position: absolute;
+    inset: 0;
     z-index: 2;
-    background: transparent !important;
-    border: none;
-    border-radius: 28px;
-    box-shadow: drop-shadow(0 22px 34px rgba(0,0,0,.35));
-  }
-  .draft-draw-popup-logo-showcase .team-logo-img {
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 18px 26px rgba(0,0,0,.40));
+    padding: 8px;
+    filter: drop-shadow(0 18px 28px rgba(0,0,0,.38));
   }
   .draft-draw-popup-logo-label {
-    position: relative;
-    z-index: 2;
-    margin-top: 14px;
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
     border-radius: 999px;
     padding: 6px 12px;
-    background: rgba(0,0,0,.28);
+    background: rgba(0,0,0,.32);
     border: 1px solid rgba(255,255,255,.16);
-    color: rgba(255,255,255,.76);
+    color: rgba(255,255,255,.82);
     font-size: 10px;
     font-weight: 900;
     letter-spacing: 1.5px;
     text-transform: uppercase;
+    white-space: nowrap;
   }
   .draft-draw-popup-team {
     position: relative;
@@ -8989,6 +8995,7 @@ function DraftDrawPage() {
 
   const popupSecondRoundPick = drawPopup ? 33 - Number(drawPopup.pick) : null;
   const popupWallpaperUrl = drawPopup ? getDraftPickWallpaperUrl(drawPopup.pick) : '';
+  const popupTeamVisual = drawPopup ? getTeam(drawPopup.team) : null;
   const popupPlayerGroups = drawPopup
     ? [
         {
@@ -9040,7 +9047,20 @@ function DraftDrawPage() {
             <div className="draft-draw-popup-kicker">Resultado do sorteio</div>
             <div className="draft-draw-popup-pick">Pick #{drawPopup.pick}</div>
             <div className="draft-draw-popup-logo-showcase">
-              <TeamLogo team={drawPopup.team} size={230} />
+              {popupTeamVisual && (
+                <>
+                  <div
+                    className="draft-draw-popup-logo-bg"
+                    style={{ backgroundImage: `url(${popupTeamVisual.logo})` }}
+                    aria-hidden="true"
+                  />
+                  <img
+                    className="draft-draw-popup-logo-image"
+                    src={popupTeamVisual.logo}
+                    alt={drawPopup.display}
+                  />
+                </>
+              )}
               <div className="draft-draw-popup-logo-label">Franquia sorteada</div>
             </div>
             <div className="draft-draw-popup-team">{drawPopup.display}</div>
