@@ -635,7 +635,12 @@
     line-height: .98;
     max-width: 920px;
     text-transform: uppercase;
-    text-shadow: 0 8px 28px rgba(0,0,0,.45);
+    color: #ffffff;
+    -webkit-text-stroke: 1.4px var(--orange);
+    paint-order: stroke fill;
+    text-shadow:
+      0 8px 28px rgba(0,0,0,.48),
+      0 0 18px rgba(249,115,22,.18);
   }
   .featured-card.featured-article-main .featured-bullets {
     max-width: 780px;
