@@ -5265,6 +5265,15 @@
     }
   }
 
+
+  /* DRAFT BOARD - snake display fix */
+  .draft-top50-row {
+    grid-template-columns: 52px 72px minmax(0, 1.05fr) minmax(310px, 1.25fr) 126px 82px 100px !important;
+  }
+  .draft-top50-pick-chip {
+    min-width: 108px;
+  }
+
 </style>
 </head>
 <body>
@@ -9047,13 +9056,14 @@ function DraftTop50Players() {
     const getDraftAssignment = (overallIndex) => {
         const overallPick = overallIndex + 1;
         const round = Math.floor(overallIndex / 16) + 1;
-        const slot = (overallIndex % 16) + 1;
-        const pick = round % 2 === 1 ? slot : 17 - slot;
-        const team = DRAFT_ORDER.find(row => Number(row.pick) === Number(pick)) || DRAFT_ORDER[0];
+        const roundPick = (overallIndex % 16) + 1;
+        const seedPick = round % 2 === 1 ? roundPick : 17 - roundPick;
+        const team = DRAFT_ORDER.find(row => Number(row.pick) === Number(seedPick)) || DRAFT_ORDER[0];
         return {
             overallPick,
             round,
-            pick,
+            pick: roundPick,
+            seedPick,
             team
         };
     };
@@ -9113,10 +9123,12 @@ function DraftTop50Players() {
                             "Pick ",
                             assignment.pick,
                             " \u2022 Round ",
-                            assignment.round))),
+                            assignment.round,
+                            " \u2022 Pick ",
+                            assignment.overallPick))),
                 React.createElement("div", { className: "draft-top50-pick-chip" },
-                    "Pick ",
-                    assignment.pick),
+                    "Overall ",
+                    assignment.overallPick),
                 React.createElement("div", { className: "draft-top50-stat" },
                     React.createElement("span", { className: "draft-top50-stat-label" }, "AVG"),
                     React.createElement("span", { className: "draft-top50-stat-value" }, p.fantasyPoints.toFixed(1))),
