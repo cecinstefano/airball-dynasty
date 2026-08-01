@@ -1395,7 +1395,8 @@
   .draft-top50-table {
     display: flex;
     flex-direction: column;
-    overflow-x: auto;
+    max-height: 920px;
+    overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--orange) #f1ecfa;
   }
@@ -1404,7 +1405,7 @@
   .draft-top50-table::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 999px; border: 2px solid #f1ecfa; }
   .draft-top50-row {
     display: grid;
-    grid-template-columns: 52px 72px minmax(0, 1.05fr) minmax(250px, 1fr) 82px 82px 100px;
+    grid-template-columns: 52px 82px minmax(0, 1.2fr) 80px 90px 90px 110px;
     gap: 12px;
     align-items: center;
     min-height: 92px;
@@ -5082,78 +5083,6 @@
   }
 
 
-  .draft-top50-assignment {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    min-width: 240px;
-  }
-  .draft-top50-assignment-team {
-    font-weight: 900;
-    color: #21132f;
-    line-height: 1.12;
-    font-size: 13px;
-  }
-  .draft-top50-assignment-meta {
-    margin-top: 3px;
-    color: var(--orange);
-    font-family: 'Oswald', sans-serif;
-    font-size: 12px;
-    font-weight: 900;
-    letter-spacing: .8px;
-    text-transform: uppercase;
-  }
-  .draft-top50-pick-chip {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 999px;
-    padding: 5px 10px;
-    background: #1a0635;
-    color: white;
-    font-family: 'Oswald', sans-serif;
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: .8px;
-    white-space: nowrap;
-    text-transform: uppercase;
-  }
-  .draft-top50-pagination {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 14px;
-    padding: 16px 20px;
-    border-top: 1px solid #f0f0f4;
-    background: #fcfbff;
-  }
-  .draft-top50-pagination-info {
-    color: var(--gray-text);
-    font-size: 12px;
-    font-weight: 800;
-  }
-  .draft-top50-pagination-actions {
-    display: flex;
-    gap: 8px;
-  }
-  .draft-top50-page-btn {
-    border: none;
-    border-radius: 999px;
-    padding: 8px 13px;
-    background: var(--purple-deep);
-    color: white;
-    font-family: 'Oswald', sans-serif;
-    font-size: 12px;
-    font-weight: 900;
-    letter-spacing: .8px;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-  .draft-top50-page-btn:disabled {
-    opacity: .4;
-    cursor: not-allowed;
-  }
-
   /* FIX FRANQUIAS - keepers oficiais alinhados */
   .keeper-box .keeper-stat-labels {
     display: grid !important;
@@ -5195,74 +5124,6 @@
     text-align: right !important;
     font-size: 17px !important;
     color: var(--purple-mid) !important;
-  }
-
-
-  /* LIVE DO SORTEIO DO DRAFT */
-  .draft-live-card {
-    margin-top: 18px;
-    background: white;
-    border-radius: 18px;
-    overflow: hidden;
-    border: 1px solid rgba(45,10,78,.10);
-    box-shadow: 0 10px 30px rgba(45,10,78,.10);
-  }
-  .draft-live-header {
-    background:
-      radial-gradient(circle at 12% 0%, rgba(249,115,22,.22), transparent 36%),
-      linear-gradient(135deg, #16042c, var(--purple-deep));
-    color: white;
-    padding: 18px 22px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
-  }
-  .draft-live-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(22px, 3vw, 36px);
-    line-height: 1;
-    font-weight: 900;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: white;
-    -webkit-text-stroke: .8px var(--orange);
-    paint-order: stroke fill;
-    text-shadow: 0 5px 18px rgba(0,0,0,.36);
-  }
-  .draft-live-pill {
-    border-radius: 999px;
-    padding: 7px 12px;
-    background: rgba(249,115,22,.16);
-    border: 1px solid rgba(249,115,22,.34);
-    color: var(--orange);
-    font-size: 11px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    white-space: nowrap;
-  }
-  .draft-live-video {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: #0a0a0a;
-  }
-  .draft-live-video iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
-  @media (max-width: 720px) {
-    .draft-live-header {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .draft-live-pill {
-      width: fit-content;
-    }
   }
 
 </style>
@@ -6652,16 +6513,16 @@ const DRAFT_ORDER = [
         "gm": "Felipe C",
         "color": "#7c3aed",
         "init": "CHA",
-        "badge": "PRIOR. #1 • 23,0%",
+        "badge": "PRIORIDADE 1",
         "cls": "pick-lottery"
     },
     {
         "pick": 2,
-        "name": "Paysandu Lobo's",
-        "gm": "Geraldo Oliveira Jr",
-        "color": "#0891b2",
-        "init": "PAY",
-        "badge": "PRIOR. #7 • 5,5%",
+        "name": "Ghost of goat",
+        "gm": "GABRIEL Silva",
+        "color": "#111827",
+        "init": "GOG",
+        "badge": "PRIORIDADE 2",
         "cls": "pick-lottery"
     },
     {
@@ -6670,43 +6531,43 @@ const DRAFT_ORDER = [
         "gm": "Ruan Bastos",
         "color": "#16a34a",
         "init": "WJ",
-        "badge": "PRIOR. #3 • 17,0%",
+        "badge": "PRIORIDADE 3",
         "cls": "pick-lottery"
     },
     {
         "pick": 4,
-        "name": "Ghost of goat",
-        "gm": "GABRIEL Silva",
-        "color": "#111827",
-        "init": "GOG",
-        "badge": "PRIOR. #2 • 20,0%",
-        "cls": "pick-lottery"
-    },
-    {
-        "pick": 5,
         "name": "Pato's Team",
         "gm": "Mateus Pato",
         "color": "#facc15",
         "init": "PATO",
-        "badge": "PRIOR. #4 • 13,5%",
+        "badge": "PRIORIDADE 4",
         "cls": "pick-lottery"
     },
     {
-        "pick": 6,
+        "pick": 5,
         "name": "Instituto Popovich",
         "gm": "Andre Caetano",
         "color": "#166534",
         "init": "IPH",
-        "badge": "PRIOR. #5 • 10,5%",
+        "badge": "PRIORIDADE 5",
         "cls": "pick-lottery"
     },
     {
-        "pick": 7,
+        "pick": 6,
         "name": "Pistons de Pira",
         "gm": "Marino Mondek",
         "color": "#f97316",
         "init": "PDP",
-        "badge": "PRIOR. #6 • 8,0%",
+        "badge": "PRIORIDADE 6",
+        "cls": "pick-lottery"
+    },
+    {
+        "pick": 7,
+        "name": "Paysandu Lobo's",
+        "gm": "Geraldo Oliveira Jr",
+        "color": "#0891b2",
+        "init": "PAY",
+        "badge": "PRIORIDADE 7",
         "cls": "pick-lottery"
     },
     {
@@ -6715,70 +6576,70 @@ const DRAFT_ORDER = [
         "gm": "Filipe Xavier",
         "color": "#b45309",
         "init": "FFT",
-        "badge": "PRIOR. #8 • 2,5%",
+        "badge": "PRIORIDADE 8",
         "cls": "pick-lottery"
     },
     {
         "pick": 9,
-        "name": "Acre Dinosaurs",
-        "gm": "Sidney Assunção",
-        "color": "#581c87",
-        "init": "DINO",
-        "badge": "PRIOR. #5 • 10,5%",
-        "cls": "pick-orig"
-    },
-    {
-        "pick": 10,
         "name": "Team Djalma Jr",
         "gm": "Djalma Júnior",
         "color": "#111827",
         "init": "TDJ",
-        "badge": "PRIOR. #2 • 20,0%",
+        "badge": "PRIORIDADE 9",
         "cls": "pick-orig"
     },
     {
-        "pick": 11,
+        "pick": 10,
         "name": "Fi du Jequisom",
         "gm": "Darlan Machado Pinto",
         "color": "#dc2626",
         "init": "FDJ",
-        "badge": "PRIOR. #1 • 23,0%",
+        "badge": "PRIORIDADE 10",
         "cls": "pick-orig"
     },
     {
-        "pick": 12,
-        "name": "Stéfano's SuperSonics",
-        "gm": "Stéfano Cecin",
-        "color": "#15803d",
-        "init": "SS",
-        "badge": "PRIOR. #3 • 17,0%",
-        "cls": "pick-orig"
-    },
-    {
-        "pick": 13,
-        "name": "Red Hot Blazer Peppers",
-        "gm": "Aleison Götz",
-        "color": "#dc2626",
-        "init": "RHBP",
-        "badge": "PRIOR. #6 • 8,0%",
-        "cls": "pick-orig"
-    },
-    {
-        "pick": 14,
-        "name": "Chugabum Ironclads",
-        "gm": "Hiago Valverde",
-        "color": "#4b5563",
-        "init": "CHIR",
-        "badge": "PRIOR. #7 • 5,5%",
-        "cls": "pick-orig"
-    },
-    {
-        "pick": 15,
+        "pick": 11,
         "name": "Nortz",
         "gm": "Caio Rogério Amaro Almeida",
         "color": "#ca8a04",
         "init": "NTZ",
-        "badge": "PRIOR. #4 • 13,5%",
+        "badge": "PRIORIDADE 11",
+        "cls": "pick-orig"
+    },
+    {
+        "pick": 12,
+        "name": "Acre Dinosaurs",
+        "gm": "Sidney Assunção",
+        "color": "#581c87",
+        "init": "DINO",
+        "badge": "PRIORIDADE 12",
+        "cls": "pick-orig"
+    },
+    {
+        "pick": 13,
+        "name": "Stéfano's SuperSonics",
+        "gm": "Stéfano Cecin",
+        "color": "#15803d",
+        "init": "SS",
+        "badge": "PRIORIDADE 13",
+        "cls": "pick-orig"
+    },
+    {
+        "pick": 14,
+        "name": "Red Hot Blazer Peppers",
+        "gm": "Aleison Götz",
+        "color": "#dc2626",
+        "init": "RHBP",
+        "badge": "PRIORIDADE 14",
+        "cls": "pick-orig"
+    },
+    {
+        "pick": 15,
+        "name": "Chugabum Ironclads",
+        "gm": "Hiago Valverde",
+        "color": "#4b5563",
+        "init": "CHIR",
+        "badge": "PRIORIDADE 15",
         "cls": "pick-orig"
     },
     {
@@ -6787,7 +6648,7 @@ const DRAFT_ORDER = [
         "gm": "Paulo Vitor Campodonio",
         "color": "#059669",
         "init": "CDB",
-        "badge": "PRIOR. #8 • 2,5%",
+        "badge": "PRIORIDADE 16",
         "cls": "pick-orig"
     }
 ];
@@ -7503,7 +7364,7 @@ function useDraftPriorityData() {
 }
 // ==================== COMPONENTS ====================
 function TopBar({ activePage, setPage }) {
-    const links = ['INÍCIO', 'JOGADORES', 'DRAFT', 'FRANQUIAS', 'REGRAS', 'HONESTÔMETRO', 'CALENDÁRIO', 'HALL DA FAMA', 'TRADES'];
+    const links = ['INÍCIO', 'JOGADORES', 'DRAFT', 'SORTEIO DRAFT', 'FRANQUIAS', 'REGRAS', 'HONESTÔMETRO', 'CALENDÁRIO', 'HALL DA FAMA', 'TRADES'];
     const pageForLink = (l) => l === 'INÍCIO' ? 'HOME' : l === 'FRANQUIAS' ? 'TIMES' : l;
     return (React.createElement("div", { className: "topbar" },
         React.createElement("div", { className: "topbar-links" }, links.map(l => {
@@ -8088,26 +7949,6 @@ function HomeDraftCountdown() {
                 React.createElement("div", { className: "home-draft-countdown-number" }, pad(timeLeft.seconds)),
                 React.createElement("div", { className: "home-draft-countdown-label" }, "Seg")))));
 }
-
-function DraftLiveEmbed() {
-    const embedOrigin = window.location.origin && window.location.origin !== 'null'
-        ? `&origin=${encodeURIComponent(window.location.origin)}`
-        : '';
-    const embedSrc = `https://www.youtube.com/embed/oSDC54vZ23w?start=555&rel=0${embedOrigin}`;
-    return (React.createElement("div", { className: "draft-live-card" },
-        React.createElement("div", { className: "draft-live-header" },
-            React.createElement("div", { className: "draft-live-title" }, "LIVE DO SORTEIO DO DRAFT:"),
-            React.createElement("div", { className: "draft-live-pill" }, "Ordem final das picks")),
-        React.createElement("div", { className: "draft-live-video" },
-            React.createElement("iframe", {
-                src: embedSrc,
-                title: "Live do Sorteio do Draft AirBall Dynasty League",
-                allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
-                referrerPolicy: "strict-origin-when-cross-origin",
-                allowFullScreen: true
-            }))));
-}
-
 function HomePage({ setPage }) {
     return (React.createElement(React.Fragment, null,
         React.createElement(MatchupsStrip, { setPage: setPage }),
@@ -8116,7 +7957,6 @@ function HomePage({ setPage }) {
                 React.createElement("div", null,
                     React.createElement("div", { className: "news-grid featured-only" },
                         React.createElement(FeaturedNews, { setPage: setPage })),
-                    React.createElement(DraftLiveEmbed, null),
                     React.createElement(NewsFeed, null)),
                 React.createElement("div", { className: "sidebar" },
                     React.createElement(HomeDraftCountdown, null),
@@ -8992,11 +8832,8 @@ function TradesPage() {
 }
 function DraftTop50Players() {
     const PLAYERS_API_URL = 'https://airball-espn-proxy.stefanocecin.workers.dev/players';
-    const PAGE_SIZE = 50;
-    const BOARD_SIZE = 200;
     const [players, setPlayers] = useState([]);
     const [status, setStatus] = useState('Carregando ESPN...');
-    const [page, setPage] = useState(1);
     const normalizeText = (value) => String(value || '')
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '')
@@ -9013,12 +8850,11 @@ function DraftTop50Players() {
         return [...new Set(filtered)].join('/') || '—';
     };
     const normalizeDraftPlayer = (p, index) => {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
-        const nested = p.player || {};
-        const id = String(p.id || p.playerId || p.espnId || nested.id || `${p.name || 'player'}-${index}`);
-        const name = p.name || p.fullName || p.playerName || p.displayName || nested.fullName || 'Jogador sem nome';
-        const avg = Number((_f = (_e = (_d = (_c = (_b = (_a = p.fantasyPoints) !== null && _a !== void 0 ? _a : p.avgFantasyPoints) !== null && _b !== void 0 ? _b : p.averageFantasyPoints) !== null && _c !== void 0 ? _c : p.avg) !== null && _d !== void 0 ? _d : p.appliedAverage) !== null && _e !== void 0 ? _e : nested.appliedAverage) !== null && _f !== void 0 ? _f : 0) || 0;
-        const total = Number((_l = (_k = (_j = (_h = (_g = p.totalPoints) !== null && _g !== void 0 ? _g : p.totalFantasyPoints) !== null && _h !== void 0 ? _h : p.total) !== null && _j !== void 0 ? _j : p.appliedTotal) !== null && _k !== void 0 ? _k : nested.appliedTotal) !== null && _l !== void 0 ? _l : 0) || 0;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+        const id = String(p.id || p.playerId || p.espnId || `${p.name || 'player'}-${index}`);
+        const name = p.name || p.fullName || p.playerName || p.displayName || 'Jogador sem nome';
+        const avg = Number((_e = (_d = (_c = (_b = (_a = p.fantasyPoints) !== null && _a !== void 0 ? _a : p.avgFantasyPoints) !== null && _b !== void 0 ? _b : p.averageFantasyPoints) !== null && _c !== void 0 ? _c : p.avg) !== null && _d !== void 0 ? _d : p.appliedAverage) !== null && _e !== void 0 ? _e : 0) || 0;
+        const total = Number((_j = (_h = (_g = (_f = p.totalPoints) !== null && _f !== void 0 ? _f : p.totalFantasyPoints) !== null && _g !== void 0 ? _g : p.total) !== null && _h !== void 0 ? _h : p.appliedTotal) !== null && _j !== void 0 ? _j : 0) || 0;
         const workerOrigin = (() => { try {
             return new URL(PLAYERS_API_URL).origin;
         }
@@ -9034,7 +8870,7 @@ function DraftTop50Players() {
             position: cleanLeaguePosition(p.position || p.defaultPosition || p.eligibleSlotsText || (Array.isArray(p.positions) ? p.positions.join('/') : '') || '—'),
             team: p.team || p.proTeam || p.proTeamAbbrev || p.nbaTeam || 'NBA',
             fantasyTeam: p.fantasyTeam || p.owner || p.fantasyOwner || 'Livre',
-            photoUrl: p.photoUrl || p.headshotUrl || p.playerPhoto || p.photo || p.image || workerPhotoUrl
+            photoUrl: p.photoUrl || p.headshotUrl || p.playerPhoto || p.photo || workerPhotoUrl
         };
     };
     const isKeeperOrOwned = (player) => {
@@ -9043,19 +8879,6 @@ function DraftTop50Players() {
             return false;
         const freeLabels = new Set(['livre', 'free agent', 'fa', 'waiver', 'waivers', '-', '—']);
         return !freeLabels.has(team);
-    };
-    const getDraftAssignment = (overallIndex) => {
-        const overallPick = overallIndex + 1;
-        const round = Math.floor(overallIndex / 16) + 1;
-        const slot = (overallIndex % 16) + 1;
-        const pick = round % 2 === 1 ? slot : 17 - slot;
-        const team = DRAFT_ORDER.find(row => Number(row.pick) === Number(pick)) || DRAFT_ORDER[0];
-        return {
-            overallPick,
-            round,
-            pick,
-            team
-        };
     };
     useEffect(() => {
         fetch(PLAYERS_API_URL)
@@ -9072,71 +8895,39 @@ function DraftTop50Players() {
             const pool = normalized
                 .filter(p => !isKeeperOrOwned(p))
                 .sort((a, b) => b.fantasyPoints - a.fantasyPoints)
-                .slice(0, BOARD_SIZE);
+                .slice(0, 50);
             setPlayers(pool);
-            setStatus(`${pool.length} jogadores disponíveis • 50 por página`);
+            setStatus(`${pool.length} jogadores disponíveis`);
         })
             .catch(() => {
             setStatus('Erro ao carregar ESPN');
             setPlayers([]);
         });
     }, []);
-    const totalPages = Math.max(1, Math.ceil(players.length / PAGE_SIZE));
-    const safePage = Math.min(page, totalPages);
-    const visiblePlayers = players.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
     return (React.createElement("div", { className: "draft-top50-card" },
         React.createElement("div", { className: "draft-top50-header" },
             React.createElement("div", null,
                 React.createElement("div", { className: "draft-top50-kicker" }, "Board autom\u00E1tico ESPN"),
-                React.createElement("div", { className: "draft-top50-title" }, "Board do Draft \u2022 200 jogadores"),
-                React.createElement("div", { className: "draft-top50-sub" }, "Lista pelos maiores AVG da ESPN, excluindo jogadores vinculados aos elencos atuais. Cada linha j\u00E1 mostra qual franquia escolhe naquela posi\u00E7\u00E3o, respeitando o formato snake.")),
+                React.createElement("div", { className: "draft-top50-title" }, "Top 50 dispon\u00EDveis do Draft"),
+                React.createElement("div", { className: "draft-top50-sub" }, "Lista pelos maiores AVG da ESPN, excluindo jogadores que aparecem vinculados a franquias/keepers na liga. Mostra 10 por vez; role para ver o Top 50 completo.")),
             React.createElement("div", { className: "draft-top50-status" }, status)),
-        React.createElement("div", { className: "draft-top50-table" }, visiblePlayers.length ? visiblePlayers.map((p, localIndex) => {
-            const boardIndex = (safePage - 1) * PAGE_SIZE + localIndex;
-            const assignment = getDraftAssignment(boardIndex);
-            return (React.createElement("div", { className: "draft-top50-row", key: p.id || `${p.name}-${boardIndex}` },
-                React.createElement("div", { className: "draft-top50-rank" },
-                    "#",
-                    boardIndex + 1),
-                React.createElement(PlayerPhoto, { player: p, size: 60 }),
-                React.createElement("div", { className: "draft-top50-player" },
-                    React.createElement("div", { className: "draft-top50-name" }, p.name),
-                    React.createElement("div", { className: "draft-top50-meta" },
-                        p.team,
-                        " \u2022 ",
-                        p.position)),
-                React.createElement("div", { className: "draft-top50-assignment" },
-                    React.createElement(TeamLogo, { team: assignment.team.name, size: 42 }),
-                    React.createElement("div", null,
-                        React.createElement("div", { className: "draft-top50-assignment-team" }, assignment.team.name),
-                        React.createElement("div", { className: "draft-top50-assignment-meta" },
-                            "Pick ",
-                            assignment.pick,
-                            " \u2022 Round ",
-                            assignment.round))),
-                React.createElement("div", { className: "draft-top50-pick-chip" },
-                    "Pick ",
-                    assignment.pick),
-                React.createElement("div", { className: "draft-top50-stat" },
-                    React.createElement("span", { className: "draft-top50-stat-label" }, "AVG"),
-                    React.createElement("span", { className: "draft-top50-stat-value" }, p.fantasyPoints.toFixed(1))),
-                React.createElement("div", { className: "draft-top50-free" }, "Dispon\u00EDvel")));
-        }) : (React.createElement("div", { className: "draft-top50-empty" }, "Nenhum jogador dispon\u00EDvel carregado ainda. Confirme se o Worker est\u00E1 ativo e se os rosters da ESPN est\u00E3o atualizados."))),
-        React.createElement("div", { className: "draft-top50-pagination" },
-            React.createElement("div", { className: "draft-top50-pagination-info" },
-                "Mostrando ",
-                visiblePlayers.length ? ((safePage - 1) * PAGE_SIZE + 1) : 0,
-                " - ",
-                Math.min(safePage * PAGE_SIZE, players.length),
-                " de ",
-                players.length,
-                " jogadores \u2022 P\u00E1gina ",
-                safePage,
-                " de ",
-                totalPages),
-            React.createElement("div", { className: "draft-top50-pagination-actions" },
-                React.createElement("button", { className: "draft-top50-page-btn", type: "button", onClick: () => setPage(prev => Math.max(1, prev - 1)), disabled: safePage <= 1 }, "Anterior"),
-                React.createElement("button", { className: "draft-top50-page-btn", type: "button", onClick: () => setPage(prev => Math.min(totalPages, prev + 1)), disabled: safePage >= totalPages }, "Pr\u00F3xima")))));
+        React.createElement("div", { className: "draft-top50-table" }, players.length ? players.map((p, i) => (React.createElement("div", { className: "draft-top50-row", key: p.id || `${p.name}-${i}` },
+            React.createElement("div", { className: "draft-top50-rank" }, i + 1),
+            React.createElement(PlayerPhoto, { player: p, size: 69 }),
+            React.createElement("div", { className: "draft-top50-player" },
+                React.createElement("div", { className: "draft-top50-name" }, p.name),
+                React.createElement("div", { className: "draft-top50-meta" },
+                    p.team,
+                    " \u2022 ",
+                    p.position)),
+            React.createElement("div", { className: "draft-top50-chip" }, p.position),
+            React.createElement("div", { className: "draft-top50-stat" },
+                React.createElement("span", { className: "draft-top50-stat-label" }, "AVG"),
+                React.createElement("span", { className: "draft-top50-stat-value" }, p.fantasyPoints.toFixed(1))),
+            React.createElement("div", { className: "draft-top50-stat" },
+                React.createElement("span", { className: "draft-top50-stat-label" }, "TOTAL"),
+                React.createElement("span", { className: "draft-top50-stat-value" }, Math.round(p.totalPoints).toLocaleString('pt-BR'))),
+            React.createElement("div", { className: "draft-top50-free" }, "Dispon\u00EDvel")))) : (React.createElement("div", { className: "draft-top50-empty" }, "Nenhum jogador dispon\u00EDvel carregado ainda. Confirme se o Worker est\u00E1 ativo e se os keepers/rosters da ESPN est\u00E3o atualizados.")))));
 }
 function PlayersPage() {
     const PLAYERS_API_URL = 'https://airball-espn-proxy.stefanocecin.workers.dev/players';
@@ -10207,7 +9998,9 @@ function DraftDrawPage() {
                                             " ",
                                             move.text))));
                             })))) : (React.createElement("div", { className: "draft-draw-empty" }, "Nenhum time sorteado ainda. Clique em \u201CSortear pick 16\u201D para come\u00E7ar pela urna dos playoffs com a urna animada e contagem regressiva. As colunas de chance s\u00E3o recalculadas automaticamente a cada time sorteado."))))))),
-        React.createElement(DraftOrderLivePanel, null)));
+        React.createElement(DraftOrderLivePanel, null),
+        React.createElement(DraftPrioritySection, null),
+        React.createElement(DraftBasisTables, null)));
 }
 function DraftBasisTables() {
     const { keeperRanking, seasonRows, priorityTable, status, isDynamic } = useDraftPriorityData();
@@ -10285,9 +10078,11 @@ function DraftPage() {
     return (React.createElement("div", { className: "main-wrap draft-page" },
         React.createElement("div", { className: "page-hero" },
             React.createElement("div", { className: "page-hero-title" }, "\u2B50 Draft"),
-            React.createElement("div", { className: "page-hero-sub" }, "Draft 2026/27 \u2022 ordem final do sorteio atualizada \u2022 draft oficial em 10/10")),
+            React.createElement("div", { className: "page-hero-sub" }, "Draft 2026/27 \u2022 sorteio dos seeds em 08/10 e draft oficial em 10/10")),
         React.createElement(DraftCountdown, null),
         React.createElement(DraftTop50Players, null),
+        React.createElement(DraftPrioritySection, null),
+        React.createElement(DraftBasisTables, null),
         React.createElement("div", { className: "draft-grid" },
             React.createElement("div", { className: "draft-order-card" },
                 React.createElement("div", { className: "sidebar-card-header" },
@@ -10325,7 +10120,7 @@ function DraftPage() {
                         React.createElement("span", { className: "pick-badge pick-orig" }, "OUT"))),
                 React.createElement("div", { className: "sidebar-card-header", style: { marginTop: 0 } },
                     React.createElement("span", { className: "sidebar-card-title" }, "Observa\u00E7\u00F5es")),
-                React.createElement("div", { style: { padding: 18, fontSize: 13, color: '#6B6B7B', lineHeight: 1.6 } }, "Ordem final do sorteio j\u00E1 atualizada conforme o resultado oficial. O draft \u00E9 snake: nos rounds pares, a ordem inverte automaticamente.")))));
+                React.createElement("div", { style: { padding: 18, fontSize: 13, color: '#6B6B7B', lineHeight: 1.6 } }, "St\u00E9fano's SuperSonics foi adicionado \u00E0 aba Draft e aparece com coroa de campe\u00E3o nas p\u00E1ginas da liga. A ordem exibida aqui pode ser ajustada ap\u00F3s o sorteio oficial dos seeds.")))));
 }
 // ==================== APP ====================
 function App() {
