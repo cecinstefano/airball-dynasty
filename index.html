@@ -5194,8 +5194,9 @@ const FEATURE_KEEPERS_ARTICLE = {
     subtitle: "Chugabum Ironclads inicia 2026–27 como favorito no ranking de duplas, enquanto Canalhas do Bem, Paysandu Lobos e Revolution Française aparecem como principais ameaças",
     heroImage: './assets/news/keepers-2026-27-capa.jpg',
     inlineImages: [
-        './assets/news/keepers-2026-27-foto-1.jpg',
-        './assets/news/keepers-2026-27-foto-2.jpg'
+        './assets/news/foto-1.jpg',
+        './assets/news/foto-2.jpg',
+        './assets/news/foto-3.jpg'
     ],
     body: [
         "A temporada 2026–27 da AirBall Dynasty League ainda nem começou, mas a disputa entre os 16 participantes já ganhou seus primeiros contornos. Com os keepers definidos, o cenário aponta para uma liga marcada por superestrelas consolidadas, jovens em ascensão e várias mudanças de contexto que podem alterar profundamente a produção no fantasy.",
@@ -7203,11 +7204,20 @@ function KeeperArticlePage({ setPage }) {
         const playerMatch = line.match(/^(.+?)\s+—\s+([\d,.]+)\s+FP$/);
         const totalMatch = line.match(/^Total projetado:\s*([\d,.]+)\s+FP$/);
         const nodes = [];
-        if (index === 3) {
-            nodes.push(React.createElement(FeatureArticleImage, { key: `image-1-${index}`, src: article.inlineImages[0] }));
-        }
+        const imageAfterTitle = (() => {
+            if (line.startsWith('1º —'))
+                return { src: article.inlineImages[0], label: 'FOTO 1' };
+            if (line.startsWith('9º —'))
+                return { src: article.inlineImages[1], label: 'FOTO 2' };
+            if (line.startsWith('16º —'))
+                return { src: article.inlineImages[2], label: 'FOTO 3' };
+            return null;
+        })();
         if (sectionMatch) {
             nodes.push(React.createElement("h2", { className: "article-section-title", key: `line-${index}` }, line));
+            if (imageAfterTitle) {
+                nodes.push(React.createElement(FeatureArticleImage, { key: `image-${imageAfterTitle.label}-${index}`, src: imageAfterTitle.src }));
+            }
         }
         else if (playerMatch) {
             nodes.push(React.createElement("div", { className: "article-player-stat", key: `line-${index}` },
@@ -7225,9 +7235,6 @@ function KeeperArticlePage({ setPage }) {
         }
         else {
             nodes.push(React.createElement("p", { className: "article-paragraph", key: `line-${index}` }, line));
-        }
-        if (line.startsWith('8º —')) {
-            nodes.push(React.createElement(FeatureArticleImage, { key: `image-2-${index}`, src: article.inlineImages[1] }));
         }
         return nodes;
     };
