@@ -2521,6 +2521,13 @@
     color: #21132f;
     line-height: 1.12;
   }
+  .lottery-team-meta {
+    margin-top: 3px;
+    font-size: 10px;
+    color: var(--gray-text);
+    font-weight: 800;
+    line-height: 1.2;
+  }
   .lottery-chance {
     font-family: 'Oswald', sans-serif;
     color: var(--orange);
@@ -3698,6 +3705,62 @@
     border-bottom: 1px solid #f0f0f4;
   }
   .draft-basis-row:last-child { border-bottom: none; }
+  .draft-basis-row.keeper-row {
+    grid-template-columns: 34px 34px minmax(0,1.3fr) minmax(230px,1.6fr) 86px;
+    align-items: center;
+  }
+  .draft-keeper-team-block {
+    min-width: 0;
+  }
+  .draft-keeper-players {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+  .draft-keeper-player {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    min-width: 0;
+  }
+  .draft-keeper-player-name {
+    color: #21132f;
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .draft-keeper-player-meta {
+    margin-top: 1px;
+    color: var(--gray-text);
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+  }
+  .draft-keeper-empty {
+    color: var(--gray-text);
+    font-size: 11px;
+    font-weight: 800;
+  }
+  .draft-basis-status {
+    padding: 10px 16px 0;
+    color: var(--gray-text);
+    font-size: 11px;
+    font-weight: 800;
+  }
+  @media (max-width: 760px) {
+    .draft-basis-row.keeper-row {
+      grid-template-columns: 30px 30px minmax(0,1fr) 76px;
+    }
+    .draft-keeper-players {
+      grid-column: 3 / 5;
+      margin-top: 4px;
+    }
+  }
   .draft-basis-rank {
     font-family: 'Oswald', sans-serif;
     font-size: 15px;
@@ -6498,6 +6561,238 @@ const DRAFT_PRIORITY_TABLE = [
   }
 ];
 
+
+const DRAFT_PLAYERS_API_URL = 'https://airball-espn-proxy.stefanocecin.workers.dev/players';
+const DRAFT_PRIORITY_CHANCES = [23, 20, 17, 13.5, 10.5, 8, 5.5, 2.5];
+
+function parseDraftNumberValue(value) {
+  if (value === null || value === undefined || value === '') return 0;
+  if (typeof value === 'number') return Number.isFinite(value) ? value : 0;
+  const cleaned = String(value).replace(/\./g, '').replace(',', '.').replace(/[^\d.-]/g, '');
+  const number = Number(cleaned);
+  return Number.isFinite(number) ? number : 0;
+}
+
+function formatDraftScore(value, digits = 1) {
+  return Number(value || 0).toLocaleString('pt-BR', {
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits
+  });
+}
+
+function isDraftFreeFantasyTeam(team) {
+  const normalized = normalizeTeamKey(team);
+  return !normalized || ['livre', 'free agent', 'fa', 'waiver', 'waivers'].includes(normalized) || normalized === '-';
+}
+
+function cleanDraftPosition(position) {
+  const allowed = ['PG', 'SG', 'SF', 'PF', 'C'];
+  const raw = String(position || '')
+    .toUpperCase()
+    .replace(/[^A-Z/ ,.-]/g, ' ')
+    .split(/[\/\s,.-]+/)
+    .filter(Boolean);
+  const filtered = raw.filter(pos => allowed.includes(pos));
+  return [...new Set(filtered)].join('/') || '—';
+}
+
+function normalizeDraftPriorityPlayer(p, index) {
+  const nested = p.player || {};
+  const id = String(p.id || p.playerId || p.espnId || nested.id || `${p.name || 'player'}-${index}`);
+  const name = p.name || p.fullName || p.playerName || p.displayName || nested.fullName || 'Jogador sem nome';
+  const avg = parseDraftNumberValue(
+    p.avg,
+    p.fantasyPoints,
+    p.avgFantasyPoints,
+    p.averageFantasyPoints,
+    p.appliedAverage,
+    nested.appliedAverage
+  );
+  const fantasyTeam = normalizeTeamName(p.fantasyTeam || p.owner || p.fantasyOwner || p.teamName || 'Livre');
+  const workerOrigin = (() => { try { return new URL(DRAFT_PLAYERS_API_URL).origin; } catch (e) { return ''; } })();
+  const workerPhotoUrl = workerOrigin && /^\d+$/.test(id) ? `${workerOrigin}/player-photo/${id}` : '';
+
+  return {
+    id,
+    name,
+    avg: Number(avg.toFixed ? avg.toFixed(1) : avg),
+    position: cleanDraftPosition(p.position || p.defaultPosition || p.eligibleSlotsText || (Array.isArray(p.positions) ? p.positions.join('/') : '') || '—'),
+    team: p.team || p.proTeam || p.proTeamAbbrev || p.nbaTeam || 'NBA',
+    fantasyTeam,
+    photoUrl: p.photoUrl || p.headshotUrl || p.playerPhoto || p.photo || p.image || workerPhotoUrl
+  };
+}
+
+function makeFallbackDraftPriorityData(status = 'Carregando base de jogadores da ESPN...') {
+  return {
+    status,
+    isDynamic: false,
+    keeperRanking: DRAFT_KEEPER_RANKING,
+    seasonRows: DRAFT_SEASON_POSITION,
+    priorityTable: DRAFT_PRIORITY_TABLE,
+    lotteries: DRAFT_LOTTERIES
+  };
+}
+
+function buildDynamicDraftPriorityData(rawPlayers) {
+  const normalizedPlayers = (Array.isArray(rawPlayers) ? rawPlayers : [])
+    .map(normalizeDraftPriorityPlayer)
+    .filter(player => player.name && Number(player.avg) > 0 && !isDraftFreeFantasyTeam(player.fantasyTeam));
+
+  const teamNames = DRAFT_SEASON_POSITION.map(row => normalizeTeamName(row.team));
+  const grouped = {};
+  teamNames.forEach(team => { grouped[team] = []; });
+
+  normalizedPlayers.forEach(player => {
+    const team = normalizeTeamName(player.fantasyTeam);
+    if (!team || isDraftFreeFantasyTeam(team)) return;
+    if (!grouped[team]) grouped[team] = [];
+    grouped[team].push(player);
+  });
+
+  const keeperRanking = teamNames
+    .map(team => {
+      const players = [...(grouped[team] || [])].sort((a, b) => Number(b.avg || 0) - Number(a.avg || 0));
+      const topPlayers = players.slice(0, 2);
+      const totalAvg = topPlayers.reduce((sum, player) => sum + Number(player.avg || 0), 0);
+      return {
+        team,
+        display: getTeam(team).name,
+        topPlayers,
+        playerCount: players.length,
+        totalAvg,
+        value: formatDraftScore(totalAvg, 1)
+      };
+    })
+    .sort((a, b) => {
+      const avgDiff = Number(b.totalAvg || 0) - Number(a.totalAvg || 0);
+      if (avgDiff !== 0) return avgDiff;
+      return String(a.display || a.team).localeCompare(String(b.display || b.team), 'pt-BR');
+    })
+    .map((row, index) => ({ ...row, rank: index + 1 }));
+
+  const keeperRankMap = keeperRanking.reduce((acc, row) => {
+    acc[normalizeTeamKey(row.team)] = row;
+    return acc;
+  }, {});
+
+  const seasonRows = DRAFT_SEASON_POSITION.map(row => ({
+    ...row,
+    team: normalizeTeamName(row.team),
+    display: row.display || getTeam(row.team).name,
+    seasonRank: Number(row.value || row.rank) || Number(row.rank) || 99,
+    value: String(row.value || row.rank)
+  }));
+
+  const seasonRankMap = seasonRows.reduce((acc, row) => {
+    acc[normalizeTeamKey(row.team)] = row;
+    return acc;
+  }, {});
+
+  const priorityTable = teamNames
+    .map(team => {
+      const key = normalizeTeamKey(team);
+      const keeper = keeperRankMap[key] || { rank: 16, totalAvg: 0, topPlayers: [], value: '0,0', playerCount: 0 };
+      const season = seasonRankMap[key] || { seasonRank: 99, value: '99' };
+      const priorityIndex = Number(keeper.rank || 0) + Number(season.seasonRank || 0);
+      return {
+        team,
+        display: getTeam(team).name,
+        keeper: Number(keeper.rank || 0),
+        season: Number(season.seasonRank || 0),
+        value: String(priorityIndex),
+        priorityIndex,
+        totalAvg: Number(keeper.totalAvg || 0),
+        topPlayers: keeper.topPlayers || [],
+        playerCount: keeper.playerCount || 0,
+        playoffs: Number(season.seasonRank || 0) <= 8
+      };
+    })
+    .sort((a, b) => {
+      const priorityDiff = Number(b.priorityIndex || 0) - Number(a.priorityIndex || 0);
+      if (priorityDiff !== 0) return priorityDiff;
+      const seasonDiff = Number(b.season || 0) - Number(a.season || 0);
+      if (seasonDiff !== 0) return seasonDiff;
+      return Number(b.keeper || 0) - Number(a.keeper || 0);
+    })
+    .map((row, index) => ({ ...row, rank: index + 1 }));
+
+  const makeLottery = (playoffs) => {
+    const rows = priorityTable
+      .filter(row => !!row.playoffs === !!playoffs)
+      .sort((a, b) => {
+        const priorityDiff = Number(b.priorityIndex || 0) - Number(a.priorityIndex || 0);
+        if (priorityDiff !== 0) return priorityDiff;
+        const seasonDiff = Number(b.season || 0) - Number(a.season || 0);
+        if (seasonDiff !== 0) return seasonDiff;
+        return Number(b.keeper || 0) - Number(a.keeper || 0);
+      })
+      .slice(0, 8)
+      .map((row, index) => ({
+        original: index + 1,
+        priority: index + 1,
+        team: row.team,
+        display: row.display,
+        chance: DRAFT_PRIORITY_CHANCES[index] || 0,
+        keeper: row.keeper,
+        season: row.season,
+        value: row.value,
+        priorityIndex: row.priorityIndex,
+        totalAvg: row.totalAvg,
+        topPlayers: row.topPlayers,
+        playerCount: row.playerCount,
+        playoffs: row.playoffs,
+        locked: playoffs
+      }));
+
+    return {
+      title: playoffs ? 'Sorteio 2: Loteria dos Playoffs' : 'Sorteio 1: Loteria dos Desclassificados',
+      subtitle: playoffs
+        ? 'Picks 9 ao 16 • apenas os 8 times que jogaram os playoffs entram nesta urna.'
+        : 'Picks 1 ao 8 • apenas os 8 times fora dos playoffs participam desta urna.',
+      chanceLabel: playoffs ? 'Chance para o Pick 9' : 'Chance para o Pick 1',
+      rows
+    };
+  };
+
+  return {
+    status: `${normalizedPlayers.length} jogadores de elenco lidos da ESPN`,
+    isDynamic: true,
+    keeperRanking,
+    seasonRows,
+    priorityTable,
+    lotteries: [makeLottery(false), makeLottery(true)]
+  };
+}
+
+function useDraftPriorityData() {
+  const [data, setData] = useState(() => makeFallbackDraftPriorityData());
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(DRAFT_PLAYERS_API_URL)
+      .then(res => {
+        if (!res.ok) throw new Error('Erro HTTP ' + res.status);
+        return res.json();
+      })
+      .then(payload => {
+        const list = Array.isArray(payload) ? payload : (payload.players || payload.items || []);
+        const dynamicData = buildDynamicDraftPriorityData(list);
+        if (!cancelled) setData(dynamicData);
+      })
+      .catch(() => {
+        if (!cancelled) setData(makeFallbackDraftPriorityData('Erro ao carregar ESPN • usando tabela estática'));
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return data;
+}
+
+
 // ==================== COMPONENTS ====================
 
 function TopBar({ activePage, setPage }) {
@@ -8576,8 +8871,9 @@ function DraftCountdown() {
 
 
 function DraftPrioritySection() {
+  const { lotteries, status, isDynamic } = useDraftPriorityData();
   const displayName = (row) => row.display || getTeam(row.team).name;
-  const chanceText = (value) => `${String(value).replace('.', ',')}%`;
+  const chanceText = (value) => `${Number(value || 0).toLocaleString('pt-BR', { minimumFractionDigits: Number(value || 0) % 1 ? 1 : 0, maximumFractionDigits: 1 })}%`;
 
   return (
     <div className="draft-priority-card">
@@ -8585,13 +8881,14 @@ function DraftPrioritySection() {
         <div className="draft-priority-kicker">Draft 2026/27</div>
         <div className="draft-priority-title">Sorteios do Draft AirBall Dynasty League</div>
         <div className="draft-priority-note">
-          O Draft será dividido em duas loterias: a primeira para os times fora dos playoffs, disputando as picks 1 a 8, e a segunda para os times de playoffs, disputando as picks 9 a 16.
+          O Draft será dividido em duas loterias. A prioridade agora usa a soma dos 2 melhores AVG do elenco pela ESPN + a posição final da temporada 25-26.
         </div>
       </div>
 
       <div className="draft-priority-body">
-        <div className="lottery-grid" style={{marginTop: 0}}>
-          {DRAFT_LOTTERIES.map((lottery, i) => (
+        <div className="draft-basis-status">{status}{isDynamic ? ' • probabilidades recalculadas automaticamente' : ''}</div>
+        <div className="lottery-grid" style={{marginTop: 10}}>
+          {lotteries.map((lottery, i) => (
             <div className="lottery-card" key={i}>
               <div className="lottery-card-head">
                 <div className="lottery-card-title">{lottery.title}</div>
@@ -8603,8 +8900,9 @@ function DraftPrioritySection() {
                     <div className="lottery-original">{row.original}</div>
                     <TeamLogo team={row.team} size={34} />
                     <div className="lottery-team-info">
-                      <div className="lottery-team-name">
-                        {displayName(row)}
+                      <div className="lottery-team-name">{displayName(row)}</div>
+                      <div className="lottery-team-meta">
+                        Índice {row.priorityIndex ?? row.value} • Keeper #{row.keeper ?? '—'} • 25/26 #{row.season ?? '—'} • Top2 AVG {row.totalAvg ? formatDraftScore(row.totalAvg, 1) : '—'}
                       </div>
                     </div>
                     <div className="lottery-chance">{chanceText(row.chance)}</div>
@@ -8622,8 +8920,9 @@ function DraftPrioritySection() {
   );
 }
 
+
 function DraftDrawPage() {
-  const STORAGE_KEY = 'airball-draft-sorteio-2026-27-v5-custom-sound-result-ball';
+  const STORAGE_KEY = 'airball-draft-sorteio-2026-27-v6-dynamic-priority-base-chance';
   const CUSTOM_DRAFT_DRAW_SOUND_URL = 'assets/audio/draft-sortear.mp3';
   const PLAYERS_API_URL = 'https://airball-espn-proxy.stefanocecin.workers.dev/players';
 
@@ -8666,7 +8965,7 @@ function DraftDrawPage() {
     };
   };
 
-  const getLotteryGroups = () => DRAFT_LOTTERIES.map((lottery, index) => {
+  const getLotteryGroups = (lotteriesSource = DRAFT_LOTTERIES) => lotteriesSource.map((lottery, index) => {
     const isPlayoff = index === 1;
     const pickStart = isPlayoff ? 9 : 1;
     const pickEnd = isPlayoff ? 16 : 8;
@@ -8681,8 +8980,9 @@ function DraftDrawPage() {
       pickEnd,
       rows: lottery.rows.map(row => {
         const teamData = getTeam(row.team);
-        const priority = Number(row.original);
+        const priority = Number(row.original || row.priority);
         return {
+          ...row,
           priority,
           team: row.team,
           display: row.display || teamData.name,
@@ -8699,7 +8999,8 @@ function DraftDrawPage() {
     };
   });
 
-  const lotteryGroups = getLotteryGroups();
+  const { lotteries: draftPriorityLotteries } = useDraftPriorityData();
+  const lotteryGroups = getLotteryGroups(draftPriorityLotteries);
 
   const randomFloat = () => {
     try {
@@ -8899,7 +9200,7 @@ function DraftDrawPage() {
     ? upcomingGroup.rows.filter(row => !drawnTeams.has(normalizeTeamKey(row.team)))
     : [];
   const currentPickChances = calculateCurrentPickChances(visiblePool);
-  const basePickChances = calculateBasePickChances(visiblePool);
+  const basePickChances = calculateBasePickChances(upcomingGroup ? upcomingGroup.rows : []);
 
   const playDraftDrawSound = () => {
     const playFallbackSynth = () => {
@@ -8967,14 +9268,15 @@ function DraftDrawPage() {
 
     const chosen = pickByChanceMap(visiblePool, currentPickChances);
     const chanceForPick = Number(currentPickChances[normalizeTeamKey(chosen.team)] || 0);
-    const baseChanceForPickStart = Number(basePickChances[normalizeTeamKey(chosen.team)] || 0);
+    const baseChanceForPickStart = Number(chosen.chance || basePickChances[normalizeTeamKey(chosen.team)] || 0);
     const movement = Number(chosen.idealPick) - Number(nextPick);
 
     const nextResult = {
       ...chosen,
       pick: nextPick,
       movement,
-      currentChance: chanceForPick,
+      currentChance: baseChanceForPickStart,
+      liveChance: chanceForPick,
       baseChance: baseChanceForPickStart,
       drawnAt: new Date().toISOString()
     };
@@ -9397,6 +9699,7 @@ function DraftDrawPage() {
 }
 
 function DraftBasisTables() {
+  const { keeperRanking, seasonRows, priorityTable, status, isDynamic } = useDraftPriorityData();
   const displayName = (row) => row.display || getTeam(row.team).name;
 
   const TableCard = ({ title, rows, showPlayoff }) => (
@@ -9417,6 +9720,46 @@ function DraftBasisTables() {
     </div>
   );
 
+  const KeeperTableCard = () => (
+    <div className="draft-basis-card">
+      <div className="draft-basis-card-head">
+        <div className="draft-basis-card-title">Classificação dos Keepers</div>
+      </div>
+      <div>
+        {keeperRanking.map(row => {
+          const topPlayers = Array.isArray(row.topPlayers) ? row.topPlayers : [];
+          return (
+            <div className="draft-basis-row keeper-row" key={`keeper-${row.rank}-${row.team}`}>
+              <div className="draft-basis-rank">{row.rank}</div>
+              <TeamLogo team={row.team} size={30} />
+              <div className="draft-keeper-team-block">
+                <div className="draft-basis-team">{displayName(row)}</div>
+                <div className="draft-keeper-empty">{row.playerCount ? `${row.playerCount} jogadores no elenco` : ''}</div>
+              </div>
+              <div className="draft-keeper-players">
+                {topPlayers.length ? topPlayers.map(player => (
+                  <div className="draft-keeper-player" key={`${row.team}-${player.id}`}>
+                    <PlayerPhoto player={player} size={32} />
+                    <div style={{minWidth:0}}>
+                      <div className="draft-keeper-player-name">{player.name}</div>
+                      <div className="draft-keeper-player-meta">AVG {formatDraftScore(player.avg, 1)} • {player.position}</div>
+                    </div>
+                  </div>
+                )) : (
+                  <div className="draft-keeper-empty">Aguardando jogadores da ESPN</div>
+                )}
+              </div>
+              <div className="draft-basis-value">
+                {row.totalAvg !== undefined ? formatDraftScore(row.totalAvg, 1) : row.value}
+                <small>Total AVG</small>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+
   const PriorityFormulaCard = () => (
     <div className="draft-basis-card priority-formula-card">
       <div className="draft-basis-card-head">
@@ -9429,11 +9772,11 @@ function DraftBasisTables() {
           <span>Time</span>
           <span>Posição Keeper</span>
           <span>+</span>
-          <span>Posição Classificação</span>
+          <span>Posição 25-26</span>
           <span>=</span>
           <span>Total</span>
         </div>
-        {DRAFT_PRIORITY_TABLE.map(row => (
+        {priorityTable.map(row => (
           <div className={`draft-formula-row ${row.playoffs ? 'playoff-row' : ''}`} key={`priority-formula-${row.rank}`}>
             <div className="draft-basis-rank">{row.rank}</div>
             <TeamLogo team={row.team} size={30} />
@@ -9454,12 +9797,13 @@ function DraftBasisTables() {
       <div className="draft-basis-header">
         <div className="draft-basis-title">Base do Índice de Prioridade</div>
         <div className="draft-basis-sub">
-          O índice é calculado pela soma entre a posição de força dos keepers e a posição final da temporada anterior. A tabela serve como referência enquanto os keepers ainda não forem oficializados.
+          O índice é calculado pela soma entre a posição da classificação dos keepers, baseada nos 2 melhores AVG do elenco na ESPN, e a posição final da temporada 25-26.
         </div>
+        <div className="draft-basis-status">{status}{isDynamic ? ' • base dinâmica ativa' : ''}</div>
       </div>
       <div className="draft-basis-grid">
-        <TableCard title="Classificação dos Keepers" rows={DRAFT_KEEPER_RANKING} />
-        <TableCard title="Posição Temporada 25-26" rows={DRAFT_SEASON_POSITION} />
+        <KeeperTableCard />
+        <TableCard title="Posição Temporada 25-26" rows={seasonRows} />
         <PriorityFormulaCard />
       </div>
       <div className="draft-basis-legend">
@@ -9469,6 +9813,7 @@ function DraftBasisTables() {
     </div>
   );
 }
+
 
 function DraftPage() {
   return (
