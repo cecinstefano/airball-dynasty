@@ -1875,9 +1875,204 @@
     font-size: 12px;
     font-weight: 800;
   }
+  .players-team-compare-controls {
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f4;
+    background: #fcfbff;
+  }
+  .players-team-compare-help {
+    font-size: 13px;
+    color: var(--gray-text);
+    line-height: 1.45;
+  }
+  .players-team-add-btn,
+  .players-team-remove-btn {
+    border: none;
+    border-radius: 999px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 900;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .players-team-add-btn {
+    padding: 11px 16px;
+    background: var(--orange);
+    color: white;
+    box-shadow: 0 8px 20px rgba(249,115,22,.22);
+  }
+  .players-team-remove-btn {
+    padding: 7px 11px;
+    background: #fee2e2;
+    color: #991b1b;
+    font-size: 10px;
+  }
+  .players-team-compare-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 20px;
+  }
+  .players-team-compare-item {
+    border: 1px solid #ececf4;
+    border-radius: 22px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 6px 18px rgba(45,10,78,.06);
+  }
+  .players-team-compare-select-row {
+    display: grid;
+    grid-template-columns: minmax(240px, 1fr) auto;
+    gap: 12px;
+    align-items: end;
+    padding: 16px;
+    background: #f8f4ff;
+    border-bottom: 1px solid #ececf4;
+  }
+  .players-team-compare-select-row select {
+    width: 100%;
+    border: 1px solid #e2d7f4;
+    border-radius: 12px;
+    padding: 11px 12px;
+    background: white;
+    color: #21132f;
+    font-weight: 800;
+    outline: none;
+  }
+  .players-team-compare-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 24px;
+    background:
+      radial-gradient(circle at 12% 20%, rgba(249,115,22,.18), transparent 34%),
+      linear-gradient(135deg, #16042c, var(--purple-deep));
+    color: white;
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    align-items: center;
+    gap: 22px;
+  }
+  .players-team-compare-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .players-team-compare-hero-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(30px, 5vw, 58px);
+    line-height: .95;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+  }
+  .players-team-compare-hero-meta {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .players-team-compare-pill {
+    border-radius: 999px;
+    padding: 8px 12px;
+    background: rgba(255,255,255,.10);
+    border: 1px solid rgba(255,255,255,.16);
+    font-family: 'Oswald', sans-serif;
+    color: rgba(255,255,255,.88);
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: .7px;
+    text-transform: uppercase;
+  }
+  .players-team-compare-total {
+    color: var(--orange);
+  }
+  .players-team-roster-wrap {
+    overflow-x: auto;
+  }
+  .players-team-roster-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+  }
+  .players-team-roster-table th {
+    background: #1a0635;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 12px;
+    text-align: left;
+  }
+  .players-team-roster-table td {
+    padding: 12px;
+    border-bottom: 1px solid #f0f0f4;
+    font-size: 13px;
+    vertical-align: middle;
+  }
+  .players-team-roster-table tbody tr:nth-child(even) td { background: #fcfbff; }
+  .players-team-roster-player {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 240px;
+  }
+  .players-team-roster-player-name {
+    font-weight: 900;
+    color: #21132f;
+    line-height: 1.12;
+  }
+  .players-team-roster-player-meta {
+    margin-top: 2px;
+    color: var(--gray-text);
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+  .players-team-empty-select {
+    padding: 28px;
+    color: var(--gray-text);
+    font-weight: 800;
+    text-align: center;
+  }
+  .keepers-official-badge {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    background: rgba(16,185,129,.12);
+    border: 1px solid rgba(16,185,129,.30);
+    color: #047857;
+    border-radius: 999px;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .keeper-player-official {
+    grid-template-columns: 38px 1fr 78px;
+  }
+  .keeper-player-meta {
+    margin-top: 2px;
+    color: var(--gray-text);
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
   @media (max-width: 720px) {
     .players-team-ranking-header { flex-direction: column; align-items: flex-start; }
     .players-team-ranking-count { width: 100%; text-align: center; }
+    .players-team-compare-controls { flex-direction: column; align-items: flex-start; }
+    .players-team-compare-select-row { grid-template-columns: 1fr; }
+    .players-team-compare-hero { grid-template-columns: 1fr; text-align: center; }
   }
 
   /* HOME DRAFT MINI COUNTDOWN */
@@ -2160,6 +2355,13 @@
   }
   .keeper-stat-labels span:nth-child(2) {
     text-align: right;
+  }
+
+  .keepers-loading-note {
+    margin-top: 10px;
+    color: var(--gray-text);
+    font-size: 12px;
+    font-weight: 800;
   }
 
   /* DRAFT COUNTDOWN */
@@ -7728,6 +7930,11 @@ function GmPhoto({ team }) {
             } })));
 }
 function TeamsPage() {
+    const { keeperRanking, status: keepersStatus, isDynamic } = useDraftPriorityData();
+    const officialKeepersByTeam = keeperRanking.reduce((acc, row) => {
+        acc[normalizeTeamName(row.team)] = row;
+        return acc;
+    }, {});
     const orderedFranchises = [
         ...FINAL_STANDINGS_2526
             .map(row => TEAMS_DATA.find(t => normalizeTeamName(t.name) === normalizeTeamName(row.team)))
@@ -7740,6 +7947,9 @@ function TeamsPage() {
             React.createElement("div", { className: "page-hero-sub" }, "Temporada 2026/27 \u2022 16 franquias da AirBall Dynasty League")),
         React.createElement("div", { className: "teams-grid" }, orderedFranchises.map((t, i) => {
             const finalStanding = getFinalStandingForTeam(t.name);
+            const officialKeepers = officialKeepersByTeam[normalizeTeamName(t.name)];
+            const topPlayers = Array.isArray(officialKeepers === null || officialKeepers === void 0 ? void 0 : officialKeepers.topPlayers) ? officialKeepers.topPlayers : [];
+            const keepersTotal = Number((officialKeepers === null || officialKeepers === void 0 ? void 0 : officialKeepers.totalAvg) || 0);
             return (React.createElement("div", { className: "team-card", key: i, style: { borderColor: t.color } },
                 React.createElement("div", { className: "franchise-card-logo-line" },
                     React.createElement(TeamLogo, { team: t.name, size: 170 })),
@@ -7756,20 +7966,26 @@ function TeamsPage() {
                     React.createElement("div", { className: "franchise-info-list" },
                         React.createElement("div", { className: "franchise-info-row" },
                             React.createElement("span", { className: "franchise-info-label" }, "Keepers:"),
-                            React.createElement("span", { className: "franchise-info-value" }, "\u00A0"))),
-                    getKeepersForTeam(t.name) && (React.createElement("div", { className: "keeper-box" },
-                        React.createElement("div", { className: "keepers-unofficial-badge" }, "\u26A0\uFE0F N\u00E3o oficial"),
+                            React.createElement("span", { className: "franchise-info-value" }, isDynamic ? 'Oficiais pela ESPN' : 'Carregando ESPN'))),
+                    topPlayers.length ? (React.createElement("div", { className: "keeper-box" },
+                        React.createElement("div", { className: "keepers-official-badge" }, "\u2705 Oficial"),
                         React.createElement("div", { className: "keeper-box-header" },
-                            React.createElement("div", { className: "keeper-box-title" }, "Keepers projetados"),
+                            React.createElement("div", { className: "keeper-box-title" }, "Keepers oficiais"),
                             React.createElement("div", { className: "keeper-sum" },
                                 "Soma: ",
-                                getKeepersForTeam(t.name).sum)),
+                                formatDraftScore(keepersTotal, 1))),
                         React.createElement("div", { className: "keeper-stat-labels" },
                             React.createElement("span", null, "Jogador"),
                             React.createElement("span", null, "M\u00E9dia FP")),
-                        getKeepersForTeam(t.name).players.map((kp, idx) => (React.createElement("div", { className: "keeper-player-row", key: idx },
-                            React.createElement("div", { className: "keeper-player-name" }, kp.name),
-                            React.createElement("div", { className: "keeper-stat" }, kp.fp))))))),
+                        topPlayers.map((kp, idx) => (React.createElement("div", { className: "keeper-player-row keeper-player-official", key: `${t.name}-${kp.id || idx}` },
+                            React.createElement(PlayerPhoto, { player: kp, size: 34 }),
+                            React.createElement("div", null,
+                                React.createElement("div", { className: "keeper-player-name" }, kp.name),
+                                React.createElement("div", { className: "keeper-player-meta" },
+                                    kp.team || 'NBA',
+                                    " \u2022 ",
+                                    kp.position || '—')),
+                            React.createElement("div", { className: "keeper-stat" }, formatDraftScore(kp.avg, 1))))))) : (React.createElement("div", { className: "keepers-loading-note" }, keepersStatus))),
                 React.createElement(GmPhoto, { team: t.name })));
         })),
         React.createElement("div", { className: "final-standings-card" },
@@ -8680,6 +8896,7 @@ function PlayersPage() {
     const [keeperFilter, setKeeperFilter] = useState('ALL');
     const [sort, setSort] = useState({ key: 'avg', dir: 'desc' });
     const [page, setPage] = useState(1);
+    const [comparisonTeams, setComparisonTeams] = useState(['']);
     const normalizeText = (value) => String(value || '')
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '')
@@ -8821,32 +9038,34 @@ function PlayersPage() {
         setPage(1);
     }, [search, teamFilter, positionFilter, keeperFilter]);
     const formatScore = (value) => Number(value || 0).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
-    const teamTopTwoRanking = (() => {
+    const rosterTeamOptions = fantasyTeams.filter(team => !isFreeFantasyTeam(team));
+    const rostersByTeam = (() => {
         const grouped = {};
         players
-            .filter(player => !isFreeFantasyTeam(player.fantasyTeam) && Number(player.avg) > 0)
+            .filter(player => !isFreeFantasyTeam(player.fantasyTeam))
             .forEach(player => {
             const teamName = player.fantasyTeam || 'Livre';
             if (!grouped[teamName])
                 grouped[teamName] = [];
             grouped[teamName].push(player);
         });
-        return Object.entries(grouped)
-            .map(([teamName, teamPlayers]) => {
-            const bestTwo = [...teamPlayers]
-                .sort((a, b) => Number(b.avg || 0) - Number(a.avg || 0))
-                .slice(0, 2);
-            const totalAvg = bestTwo.reduce((sum, player) => sum + Number(player.avg || 0), 0);
-            return {
-                teamName,
-                bestTwo,
-                totalAvg,
-                playerCount: teamPlayers.length
-            };
-        })
-            .filter(row => row.bestTwo.length)
-            .sort((a, b) => b.totalAvg - a.totalAvg);
+        Object.keys(grouped).forEach(teamName => {
+            grouped[teamName] = grouped[teamName]
+                .sort((a, b) => Number(b.avg || 0) - Number(a.avg || 0));
+        });
+        return grouped;
     })();
+    const getRosterForTeam = (teamName) => rostersByTeam[teamName] || [];
+    const getRosterTotalAvg = (teamName) => getRosterForTeam(teamName).reduce((sum, player) => sum + Number(player.avg || 0), 0);
+    const updateComparisonTeam = (index, teamName) => {
+        setComparisonTeams(prev => prev.map((item, itemIndex) => itemIndex === index ? teamName : item));
+    };
+    const addComparisonTeam = () => {
+        setComparisonTeams(prev => [...prev, '']);
+    };
+    const removeComparisonTeam = (index) => {
+        setComparisonTeams(prev => prev.length <= 1 ? [''] : prev.filter((_, itemIndex) => itemIndex !== index));
+    };
     return (React.createElement("div", { className: "main-wrap" },
         React.createElement("div", { className: "page-hero" },
             React.createElement("div", { className: "page-hero-title" }, "\uD83D\uDC65 Jogadores"),
@@ -8932,57 +9151,74 @@ function PlayersPage() {
                 React.createElement("div", { className: "players-pagination-actions" },
                     React.createElement("button", { className: "players-page-btn", onClick: () => setPage(prev => Math.max(1, prev - 1)), disabled: safePage <= 1 }, "Anterior"),
                     React.createElement("button", { className: "players-page-btn", onClick: () => setPage(prev => Math.min(totalPages, prev + 1)), disabled: safePage >= totalPages }, "Pr\u00F3xima")))),
-        React.createElement("div", { className: "players-team-ranking-card" },
+        React.createElement("div", { className: "players-team-ranking-card players-team-compare-card" },
             React.createElement("div", { className: "players-team-ranking-header" },
                 React.createElement("div", null,
-                    React.createElement("div", { className: "players-team-ranking-kicker" }, "For\u00E7a por dupla de elite"),
-                    React.createElement("div", { className: "players-team-ranking-title" }, "Ranking dos 2 melhores AVG por franquia"),
-                    React.createElement("div", { className: "players-team-ranking-sub" }, "Classifica\u00E7\u00E3o autom\u00E1tica somando os dois maiores AVG de cada time fantasy. Jogadores livres n\u00E3o entram neste ranking.")),
+                    React.createElement("div", { className: "players-team-ranking-kicker" }, "Comparador por elenco"),
+                    React.createElement("div", { className: "players-team-ranking-title" }, "TIME"),
+                    React.createElement("div", { className: "players-team-ranking-sub" }, "Selecione uma franquia para puxar todos os jogadores vinculados ao time pela ESPN. A soma considera o AVG de todo o elenco carregado.")),
                 React.createElement("div", { className: "players-team-ranking-count" },
-                    teamTopTwoRanking.length,
-                    " franquias")),
-            React.createElement("div", { className: "players-team-ranking-wrap" },
-                React.createElement("table", { className: "players-team-ranking-table" },
-                    React.createElement("thead", null,
-                        React.createElement("tr", null,
-                            React.createElement("th", null, "#"),
-                            React.createElement("th", null, "Time Fantasy"),
-                            React.createElement("th", null, "Soma AVG"),
-                            React.createElement("th", null, "Jogador 1"),
-                            React.createElement("th", null, "Jogador 2"))),
-                    React.createElement("tbody", null, teamTopTwoRanking.length ? teamTopTwoRanking.map((row, index) => {
-                        const first = row.bestTwo[0];
-                        const second = row.bestTwo[1];
-                        return (React.createElement("tr", { key: `top-two-${row.teamName}` },
-                            React.createElement("td", null,
-                                React.createElement("span", { className: "players-team-ranking-rank" }, index + 1)),
-                            React.createElement("td", null,
-                                React.createElement("div", { className: "players-team-ranking-team" },
-                                    React.createElement(TeamLogo, { team: row.teamName, size: 42 }),
-                                    React.createElement("div", null,
-                                        React.createElement("div", { className: "players-team-ranking-name" }, row.teamName),
-                                        React.createElement("div", { className: "players-team-ranking-meta" },
-                                            row.playerCount,
-                                            " jogadores vinculados")))),
-                            React.createElement("td", null,
-                                React.createElement("span", { className: "players-team-ranking-total" }, formatScore(row.totalAvg))),
-                            React.createElement("td", null, first ? (React.createElement("div", { className: "players-team-ranking-player" },
-                                React.createElement(PlayerPhoto, { player: first, size: 38 }),
-                                React.createElement("div", null,
-                                    React.createElement("div", { className: "players-team-ranking-player-name" }, first.name),
-                                    React.createElement("div", { className: "players-team-ranking-player-avg" },
-                                        "AVG ",
-                                        formatScore(first.avg))))) : React.createElement("span", { className: "players-team-ranking-missing" }, "\u2014")),
-                            React.createElement("td", null, second ? (React.createElement("div", { className: "players-team-ranking-player" },
-                                React.createElement(PlayerPhoto, { player: second, size: 38 }),
-                                React.createElement("div", null,
-                                    React.createElement("div", { className: "players-team-ranking-player-name" }, second.name),
-                                    React.createElement("div", { className: "players-team-ranking-player-avg" },
-                                        "AVG ",
-                                        formatScore(second.avg))))) : React.createElement("span", { className: "players-team-ranking-missing" }, "Sem 2\u00BA jogador"))));
-                    }) : (React.createElement("tr", null,
-                        React.createElement("td", { colSpan: "5" },
-                            React.createElement("div", { className: "players-empty" }, "Ranking indispon\u00EDvel enquanto os jogadores da ESPN n\u00E3o carregarem."))))))))));
+                    rosterTeamOptions.length,
+                    " times")),
+            React.createElement("div", { className: "players-team-compare-controls" },
+                React.createElement("div", { className: "players-team-compare-help" }, "Use \u201CAdicionar time\u201D para comparar dois ou mais elencos lado a lado, com logo grande, jogadores e somat\u00F3ria das m\u00E9dias."),
+                React.createElement("button", { className: "players-team-add-btn", type: "button", onClick: addComparisonTeam }, "+ Adicionar time")),
+            React.createElement("div", { className: "players-team-compare-list" }, comparisonTeams.map((selectedTeam, index) => {
+                const roster = getRosterForTeam(selectedTeam);
+                const totalAvg = getRosterTotalAvg(selectedTeam);
+                const teamData = selectedTeam ? getTeam(selectedTeam) : null;
+                return (React.createElement("div", { className: "players-team-compare-item", key: `team-compare-${index}` },
+                    React.createElement("div", { className: "players-team-compare-select-row" },
+                        React.createElement("label", { className: "players-filter-field", style: { margin: 0 } },
+                            React.createElement("span", { className: "players-filter-label" }, "Selecionar time"),
+                            React.createElement("select", { value: selectedTeam, onChange: (e) => updateComparisonTeam(index, e.target.value) },
+                                React.createElement("option", { value: "" }, "Escolha uma franquia"),
+                                rosterTeamOptions.map(team => React.createElement("option", { key: `${index}-${team}`, value: team }, getTeam(team).name)))),
+                        React.createElement("button", { className: "players-team-remove-btn", type: "button", onClick: () => removeComparisonTeam(index) }, "Remover")),
+                    selectedTeam ? (React.createElement(React.Fragment, null,
+                        React.createElement("div", { className: "players-team-compare-hero" },
+                            React.createElement("div", { className: "players-team-compare-logo" },
+                                React.createElement(TeamLogo, { team: selectedTeam, size: 170 })),
+                            React.createElement("div", null,
+                                React.createElement("div", { className: "players-team-compare-hero-name" }, (teamData === null || teamData === void 0 ? void 0 : teamData.name) || selectedTeam),
+                                React.createElement("div", { className: "players-team-compare-hero-meta" },
+                                    React.createElement("span", { className: "players-team-compare-pill" },
+                                        roster.length,
+                                        " jogadores"),
+                                    React.createElement("span", { className: "players-team-compare-pill players-team-compare-total" },
+                                        "Soma AVG ",
+                                        formatScore(totalAvg))))),
+                        React.createElement("div", { className: "players-team-roster-wrap" },
+                            React.createElement("table", { className: "players-team-roster-table" },
+                                React.createElement("thead", null,
+                                    React.createElement("tr", null,
+                                        React.createElement("th", null, "#"),
+                                        React.createElement("th", null, "Jogador"),
+                                        React.createElement("th", null, "Posi\u00E7\u00E3o"),
+                                        React.createElement("th", null, "NBA"),
+                                        React.createElement("th", null, "Proje\u00E7\u00E3o ESPN"),
+                                        React.createElement("th", null, "AVG"))),
+                                React.createElement("tbody", null, roster.length ? roster.map((player, playerIndex) => (React.createElement("tr", { key: `${selectedTeam}-${player.id}-${playerIndex}` },
+                                    React.createElement("td", null,
+                                        React.createElement("span", { className: "players-rank" }, playerIndex + 1)),
+                                    React.createElement("td", null,
+                                        React.createElement("div", { className: "players-team-roster-player" },
+                                            React.createElement(PlayerPhoto, { player: player, size: 42 }),
+                                            React.createElement("div", null,
+                                                React.createElement("div", { className: "players-team-roster-player-name" }, player.name),
+                                                React.createElement("div", { className: "players-team-roster-player-meta" },
+                                                    "ID ",
+                                                    player.id)))),
+                                    React.createElement("td", null,
+                                        React.createElement("span", { className: "players-pos-chip" }, player.position)),
+                                    React.createElement("td", null, player.team),
+                                    React.createElement("td", null,
+                                        React.createElement("span", { className: "players-number" }, player.espnProjection ? formatScore(player.espnProjection) : '—')),
+                                    React.createElement("td", null,
+                                        React.createElement("span", { className: "players-number" }, formatScore(player.avg)))))) : (React.createElement("tr", null,
+                                    React.createElement("td", { colSpan: "6" },
+                                        React.createElement("div", { className: "players-empty" }, "Nenhum jogador encontrado para este time na base ESPN."))))))))) : (React.createElement("div", { className: "players-team-empty-select" }, "Selecione uma franquia para visualizar o elenco completo."))));
+            })))));
 }
 function DraftCountdown() {
     const targetDate = new Date('2026-10-10T00:00:00-03:00');
