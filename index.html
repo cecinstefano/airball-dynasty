@@ -617,6 +617,243 @@
   .feed-meta { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
   .feed-time { font-size: 12px; color: #aaa; }
 
+  .news-grid.featured-only {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .featured-card.featured-article-main {
+    grid-row: auto;
+    grid-column: auto;
+    min-height: 560px;
+    border: 1px solid rgba(249,115,22,.22);
+    box-shadow: 0 18px 48px rgba(45,10,78,.18);
+  }
+  .featured-card.featured-article-main .news-image-layer {
+    opacity: .88;
+  }
+  .featured-card.featured-article-main .featured-title {
+    font-size: clamp(34px, 5vw, 64px);
+    line-height: .98;
+    max-width: 920px;
+    text-transform: uppercase;
+    text-shadow: 0 8px 28px rgba(0,0,0,.45);
+  }
+  .featured-card.featured-article-main .featured-bullets {
+    max-width: 780px;
+  }
+  .featured-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin-top: 22px;
+    border-radius: 999px;
+    padding: 11px 18px;
+    background: var(--orange);
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    box-shadow: 0 10px 24px rgba(249,115,22,.24);
+  }
+
+  .article-page {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 24px 16px 0;
+  }
+  .article-back {
+    border: none;
+    border-radius: 999px;
+    background: #f8f4ff;
+    color: var(--purple-deep);
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    cursor: pointer;
+    margin-bottom: 16px;
+  }
+  .article-hero {
+    position: relative;
+    min-height: 520px;
+    border-radius: 28px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--purple-deep), #0a0015);
+    box-shadow: 0 20px 60px rgba(45,10,78,.22);
+    border: 1px solid rgba(249,115,22,.20);
+  }
+  .article-hero-image {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: .82;
+  }
+  .article-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.34) 58%, rgba(0,0,0,.16) 100%),
+      radial-gradient(circle at 15% 12%, rgba(249,115,22,.25), transparent 36%);
+  }
+  .article-hero-content {
+    position: relative;
+    z-index: 2;
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 36px;
+    color: white;
+  }
+  .article-kicker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .article-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(38px, 6vw, 76px);
+    line-height: .95;
+    font-weight: 900;
+    text-transform: uppercase;
+    max-width: 960px;
+    text-shadow: 0 8px 30px rgba(0,0,0,.5);
+  }
+  .article-subtitle {
+    margin-top: 18px;
+    font-size: 18px;
+    color: rgba(255,255,255,.82);
+    line-height: 1.45;
+    max-width: 920px;
+  }
+  .article-body-card {
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 10px 34px rgba(45,10,78,.10);
+    border: 1px solid rgba(45,10,78,.08);
+    margin-top: 24px;
+    padding: 34px;
+  }
+  .article-body {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .article-paragraph {
+    font-size: 17px;
+    line-height: 1.75;
+    color: #30243f;
+    margin: 0 0 18px;
+  }
+  .article-section-title {
+    font-family: 'Oswald', sans-serif;
+    color: var(--purple-deep);
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.05;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 42px 0 18px;
+    padding-top: 10px;
+    border-top: 3px solid #f3eefb;
+  }
+  .article-player-stat,
+  .article-total-stat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    border-radius: 16px;
+    padding: 12px 15px;
+    margin: 8px 0;
+    background: #f8f4ff;
+    border: 1px solid #ece3ff;
+  }
+  .article-player-name {
+    font-weight: 900;
+    color: #21132f;
+  }
+  .article-stat-value {
+    font-family: 'Oswald', sans-serif;
+    color: var(--orange);
+    font-size: 20px;
+    font-weight: 900;
+    white-space: nowrap;
+  }
+  .article-total-stat {
+    background: linear-gradient(135deg, var(--purple-deep), var(--purple-mid));
+    color: white;
+    margin-bottom: 18px;
+  }
+  .article-total-stat .article-player-name {
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    font-size: 12px;
+  }
+  .article-inline-image {
+    margin: 32px 0;
+    border-radius: 22px;
+    overflow: hidden;
+    min-height: 360px;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 14px 38px rgba(0,0,0,.16);
+    border: 1px solid rgba(45,10,78,.08);
+  }
+  .article-ranking-wrap {
+    overflow-x: auto;
+    margin: 24px 0 8px;
+    border-radius: 18px;
+    border: 1px solid #ececf4;
+  }
+  .article-ranking-table {
+    width: 100%;
+    min-width: 740px;
+    border-collapse: collapse;
+  }
+  .article-ranking-table th {
+    background: #1a0635;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+    padding: 12px;
+    text-align: left;
+  }
+  .article-ranking-table td {
+    padding: 12px;
+    border-bottom: 1px solid #f0f0f4;
+    font-size: 13px;
+    vertical-align: middle;
+  }
+  .article-ranking-table tr:nth-child(even) td {
+    background: #fcfbff;
+  }
+  .article-ranking-table td:first-child {
+    font-family: 'Oswald', sans-serif;
+    color: var(--orange);
+    font-size: 18px;
+    font-weight: 900;
+    text-align: center;
+  }
+  @media (max-width: 900px) {
+    .featured-card.featured-article-main { min-height: 460px; }
+    .article-hero, .article-hero-content { min-height: 430px; }
+    .article-hero-content { padding: 24px; }
+    .article-body-card { padding: 22px 18px; }
+    .article-inline-image { min-height: 240px; }
+    .feed-item { flex-direction: column; gap: 12px; }
+    .feed-thumb { width: 100%; height: 180px; }
+  }
+
   /* VIDEOS */
   .videos-card {
     background: white; border-radius: 14px; overflow: hidden;
@@ -2975,19 +3212,6 @@
   .draft-order-live-mobile-label {
     display: none;
   }
-  .draft-draw-sound-note {
-    margin-top: 10px;
-    padding: 10px 12px;
-    border-radius: 12px;
-    background: #f8f4ff;
-    border: 1px solid #ece3ff;
-    color: var(--gray-text);
-    font-size: 11px;
-    line-height: 1.45;
-  }
-  .draft-draw-sound-note strong {
-    color: var(--purple-deep);
-  }
   .draft-draw-results-scroll {
     max-height: 620px;
     overflow-y: auto;
@@ -4985,12 +5209,180 @@ const POWER_RANKINGS = [
 
 const NEWS_FEED = [
 
+  { cat: 'LIGA', catClass: 'cat-featured', time: 'Pré-temporada', title: 'AirBall inicia nova era com 16 franquias', desc: 'Temporada começa oficialmente em 20 de outubro; draft marcado para 10 de outubro e nova formação da liga.', bg: 'linear-gradient(135deg, #1a0635, #0a0015)', image: './assets/news/destaque-home.jpg', emoji: '🏀' },
   { cat: 'DRAFT', catClass: 'cat-draft', time: 'Atualização', title: "Tyrese Maxey, Shai Gilgeous-Alexander, Anthony Davis e LaMelo Ball estarão no draft", desc: "Com a desistência de Wictor's Team e Imprudente HotShots, quatro grandes nomes entram no pool do Draft AirBall 2026/27.", bg: 'linear-gradient(135deg, #78350f, #451a03)', image: './assets/news/draft-pool-desistencias.jpg', emoji: '⭐' },
   { cat: 'DRAFT', catClass: 'cat-draft', time: '10 de outubro', title: 'Draft AirBall 2026/27 já tem data marcada', desc: 'Os GMs terão a chance de montar seus elencos para a nova corrida pelo título.', bg: 'linear-gradient(135deg, #78350f, #451a03)', image: './assets/news/draft-airball.jpg', emoji: '⭐' },
   { cat: 'SEEDS', catClass: 'cat-analysis', time: '8 de outubro', title: 'Sorteio dos seeds abre oficialmente a temporada', desc: 'A ordem inicial será definida antes do draft e promete movimentar a liga.', bg: 'linear-gradient(135deg, #2d1b69, #0f0a20)', image: './assets/news/sorteio-seeds.jpg', emoji: '🎲' },
   { cat: 'HALL DA FAMA', catClass: 'cat-interview', time: '2025-26', title: "Stéfano's Supersonics entra para a história", desc: 'Franquia foi campeã da temporada 25-26 com Jalen Duren brilhando nos playoffs.', bg: 'linear-gradient(135deg, #7f1d1d, #450a0a)', image: './assets/news/campeao-2526.jpg', emoji: '🏆' },
 
 ];
+
+
+const FEATURE_KEEPERS_ARTICLE = {
+  id: 'ranking-keepers-2026-27',
+  cat: 'ANÁLISE',
+  catClass: 'cat-analysis',
+  time: 'Pré-temporada 2026/27',
+  title: "I.A PROJETA CHUGABUM IRONCLADS COMO O TIME COM OS MELHORES KEEPERS PARA A PRÓXIMA TEMPORADA, VEJA TODOS!,
+  subtitle: "Chugabum Ironclads inicia 2026–27 como favorito no ranking de duplas, enquanto Canalhas do Bem, Paysandu Lobos e Revolution Française aparecem como principais ameaças",
+  heroImage: './assets/news/keepers-2026-27-capa.jpg',
+  inlineImages: [
+    './assets/news/keepers-2026-27-foto-1.jpg',
+    './assets/news/keepers-2026-27-foto-2.jpg'
+  ],
+  body: [
+  "A temporada 2026–27 da AirBall Dynasty League ainda nem começou, mas a disputa entre os 16 participantes já ganhou seus primeiros contornos. Com os keepers definidos, o cenário aponta para uma liga marcada por superestrelas consolidadas, jovens em ascensão e várias mudanças de contexto que podem alterar profundamente a produção no fantasy.",
+  "A análise considera não apenas o desempenho recente dos jogadores, mas também seus novos companheiros, espaço na rotação, uso ofensivo, idade, histórico físico e o peso específico da pontuação da AirBall, que valoriza especialmente assistências, roubos, bloqueios e eficiência.",
+  "Na fórmula da liga, jogadores versáteis e defensivamente ativos podem superar grandes pontuadores da NBA. É justamente por isso que nomes como Victor Wembanyama, Chet Holmgren, Scottie Barnes e Amen Thompson ganham valor adicional.",
+  "A seguir, o ranking projetado começa pelo elenco com os keepers menos valorizados e termina com o principal favorito da temporada.",
+  "16º — Acre Dinosaurs tenta sobreviver à redução de protagonismo",
+  "Bam Adebayo — 39,8 FP",
+  "Jaylen Brown — 42,0 FP",
+  "Total projetado: 81,8 FP",
+  "O Acre Dinosaurs abre o ranking com dois jogadores de excelente nível na NBA, mas que podem enfrentar redução de protagonismo em 2026–27.",
+  "Bam Adebayo continua oferecendo rebotes, assistências e produção defensiva. O problema é que a presença de outro astro dominante no garrafão pode diminuir sua participação nos rebotes e nas posses próximas à cesta.",
+  "Jaylen Brown também chega a um ambiente com vários jogadores capazes de criar e finalizar. Com menos necessidade de carregar o ataque, sua eficiência pode melhorar, mas o volume tende a cair.",
+  "A dupla possui um bom piso, porém chega com pouco potencial de crescimento em relação aos concorrentes.",
+  "15º — Team Djalma’Jr aposta na experiência de Durant e Fox",
+  "Kevin Durant — 43,5 FP",
+  "De’Aaron Fox — 39,5 FP",
+  "Total projetado: 83,0 FP",
+  "Kevin Durant continua sendo um dos jogadores mais eficientes da liga, mesmo perto dos 38 anos. Quando está em quadra, ainda consegue produzir como um keeper de primeira linha. O risco está na quantidade de jogos e no possível controle de minutos durante a temporada.",
+  "De’Aaron Fox vive uma situação mais complicada. Dividindo a criação com outros armadores e atuando ao lado de uma superestrela como Wembanyama, ele dificilmente terá o mesmo domínio da bola que possuía em Sacramento.",
+  "O Team Djalma’Jr pode superar a projeção caso Durant permaneça saudável, mas a dupla apresenta mais risco do que potencial de valorização.",
+  "14º — Cooper Flagg já ameaça assumir o protagonismo do Fi du Jequisom",
+  "LeBron James — 40,5 FP",
+  "Cooper Flagg — 45,5 FP",
+  "Total projetado: 86,0 FP",
+  "O Fi du Jequisom apresenta uma dupla formada por dois jogadores em momentos completamente diferentes da carreira.",
+  "LeBron James continua capaz de grandes atuações, mas a tendência é de diminuição de minutos e responsabilidade ao longo da temporada. Cercado por outros grandes criadores, ele não precisará controlar todas as posses como em anos anteriores.",
+  "Cooper Flagg, por outro lado, está em plena ascensão. A expectativa é de crescimento em pontos, rebotes, assistências e estatísticas defensivas. Seu estilo completo se encaixa muito bem na pontuação da AirBall.",
+  "Flagg já aparece como o principal ativo do time, enquanto LeBron passa a ser uma opção de alto nível, mas com risco crescente de descanso e lesões.",
+  "13º — Donovan Mitchell carrega as esperanças do Instituto Popovich",
+  "Donovan Mitchell — 49,0 FP",
+  "Keyonte George — 37,5 FP",
+  "Total projetado: 86,5 FP",
+  "Donovan Mitchell é o grande responsável por manter o Instituto Popovich competitivo neste ranking. Pontuador de elite, ele também contribui com assistências, bolas de três e roubos, categorias muito valiosas na liga.",
+  "A chegada de outro grande criador pode retirar algumas assistências de suas mãos, mas também deve proporcionar arremessos mais fáceis e melhorar sua eficiência.",
+  "A dúvida está em Keyonte George. Depois de ganhar espaço em um elenco que precisava de criação, ele agora terá maior concorrência por minutos, arremessos e controle da bola.",
+  "Mitchell oferece produção de elite, mas Keyonte precisará surpreender para que o time avance muitas posições.",
+  "12º — Ghost of Goat aposta na estabilidade de Brunson e Siakam",
+  "Pascal Siakam — 40,5 FP",
+  "Jalen Brunson — 46,5 FP",
+  "Total projetado: 87,0 FP",
+  "O Ghost of Goat possui uma das duplas mais seguras da parte inferior da classificação.",
+  "Jalen Brunson permanece como principal organizador e pontuador de sua equipe. Sua função está consolidada, e a expectativa é de manutenção próxima da produção recente.",
+  "Pascal Siakam deverá continuar eficiente, mas pode perder parte do volume ofensivo com o retorno e a presença de outros criadores. Ainda assim, sua capacidade de pontuar, rebater e distribuir assistências mantém seu piso elevado.",
+  "É uma dupla confiável, embora sem o mesmo teto explosivo dos times mais bem classificados.",
+  "11º — Versatilidade coloca Warlock Jamaicans perto do top 10",
+  "Josh Giddey — 45,5 FP",
+  "Scottie Barnes — 44,5 FP",
+  "Total projetado: 90,0 FP",
+  "Poucas duplas combinam tanta versatilidade quanto Giddey e Barnes.",
+  "Josh Giddey é especialmente valioso no sistema da AirBall. Como armador, oferece rebotes acima da média e grande volume de assistências, além da possibilidade constante de triple-double.",
+  "Scottie Barnes também pontua em praticamente todas as categorias. Roubos e bloqueios aumentam significativamente seu valor, mesmo quando ele não vive uma grande noite ofensiva.",
+  "O principal questionamento está na distribuição de uso dentro de Toronto. Caso Barnes mantenha a bola nas mãos e continue atuando como criador, o Warlock Jamaicans pode avançar algumas posições.",
+  "10º — Jamal Murray lidera uma dupla perigosa no Nortz",
+  "Jamal Murray — 47,5 FP",
+  "Paolo Banchero — 43,5 FP",
+  "Total projetado: 91,0 FP",
+  "Jamal Murray chega depois de uma temporada de altíssimo nível. Atuando ao lado de Nikola Jokić, recebe arremessos de qualidade e continua responsável por boa parte da criação no perímetro.",
+  "Paolo Banchero possui números tradicionais impressionantes, mas ainda perde pontos no sistema da AirBall por causa dos turnovers e da eficiência irregular.",
+  "Para subir de patamar, Banchero precisará transformar seu grande volume em produção mais eficiente, especialmente nos arremessos e no controle da bola.",
+  "O Nortz tem uma dupla forte, mas ainda espera um salto fantasy de Paolo.",
+  "9º — Reaves e Chet colocam Stefano’s SuperSonics entre os times de maior potencial",
+  "Austin Reaves — 47,0 FP",
+  "Chet Holmgren — 44,5 FP",
+  "Total projetado: 91,5 FP",
+  "O Stefano’s SuperSonics aparece apenas na nona posição, mas possui uma das duplas com maior possibilidade de superar a projeção.",
+  "Austin Reaves tende a receber ainda mais responsabilidade como criador. Ao lado de Luka Dončić, continuará encontrando espaço como segunda opção. Quando Luka não estiver disponível, Reaves pode assumir completamente o ataque e produzir números próximos dos grandes astros do fantasy.",
+  "Chet Holmgren também tem um encaixe perfeito na pontuação da AirBall. Seus bloqueios valem quatro pontos cada, e uma pequena evolução defensiva pode elevar consideravelmente sua média.",
+  "A projeção central coloca a dupla em 91,5 FP, mas um cenário de crescimento pode aproximá-la dos 97 pontos combinados, produção suficiente para disputar o top 6.",
+  "8º — Pato’s Team possui teto de elite, mas depende da saúde de Kawhi",
+  "Kawhi Leonard — 49,0 FP",
+  "Evan Mobley — 45,0 FP",
+  "Total projetado: 94,0 FP",
+  "Em produção por partida, o Pato’s Team poderia aparecer ainda mais alto.",
+  "Kawhi Leonard reúne eficiência, pontuação e grande produção defensiva. O problema continua sendo sua disponibilidade. Controle de carga, lesões e descansos tornam qualquer projeção mais arriscada.",
+  "Evan Mobley representa o lado seguro da dupla. Rebotes e bloqueios sustentam sua pontuação, mesmo sem ser a principal opção ofensiva de sua equipe.",
+  "Caso Kawhi dispute uma temporada relativamente saudável, o Pato’s Team poderá brigar diretamente entre os cinco melhores.",
+  "7º — Jalen Johnson transforma Red Hot Blazer Peppers em candidato a surpresa",
+  "Amen Thompson — 41,0 FP",
+  "Jalen Johnson — 52,5 FP",
+  "Total projetado: 93,5 FP",
+  "Jalen Johnson é o nome que eleva o Red Hot Blazer Peppers para a parte superior do ranking.",
+  "Com espaço para criar, ele passou a produzir pontos, rebotes e assistências em nível de estrela. Sua capacidade de contribuir em todas as categorias o transforma em um keeper próximo de 50 FP.",
+  "Amen Thompson também possui enorme potencial, especialmente por sua produção defensiva e pelos rebotes. A questão será o volume ofensivo em uma rotação mais completa e saudável.",
+  "Mesmo com soma ligeiramente inferior à do Pato’s Team, o Red Hot aparece acima por apresentar menor risco físico.",
+  "6º — Trae Young e Şengün formam uma das duplas mais completas",
+  "Trae Young — 47,0 FP",
+  "Alperen Şengün — 48,5 FP",
+  "Total projetado: 95,5 FP",
+  "O Charlotte DunkLipe possui dois jogadores capazes de organizar ataques inteiros.",
+  "Trae Young deverá continuar acumulando grande volume de assistências. Mesmo que sua pontuação varie de acordo com o elenco ao redor, seu controle da bola e capacidade de criar oportunidades sustentam um piso elevado.",
+  "Şengün oferece produção ainda mais completa. Além dos pontos e rebotes, atua como facilitador e contribui defensivamente.",
+  "É uma dupla sem uma fraqueza evidente. O principal fator de preocupação é a disponibilidade física de Trae e como será sua adaptação ao novo contexto.",
+  "5º — Giannis mantém Pistons de Pira entre os favoritos",
+  "James Harden — 43,0 FP",
+  "Giannis Antetokounmpo — 56,0 FP",
+  "Total projetado: 99,0 FP",
+  "Giannis Antetokounmpo continua sendo um dos jogadores mais dominantes do fantasy.",
+  "Sua combinação de pontos, rebotes, assistências e eficiência garante produção próxima de 55 FP mesmo em partidas com minutos reduzidos. Mudanças ao seu redor podem afetar alguns rebotes e posses, mas dificilmente retirarão sua condição de superestrela.",
+  "James Harden já não vive seu auge atlético, mas continua entregando pontos e muitas assistências. O risco envolve idade, minutos e a divisão da criação.",
+  "O Pistons de Pira possui teto de campeão, mas dependerá da saúde de dois veteranos.",
+  "4º — Wembanyama coloca Revolution Française na disputa pelo título",
+  "Victor Wembanyama — 65,0 FP",
+  "Stephon Castle — 37,0 FP",
+  "Total projetado: 102,0 FP",
+  "Nenhum jogador é tão favorecido pela pontuação defensiva da AirBall quanto Victor Wembanyama.",
+  "Além de pontuar e rebater como uma estrela, ele pode produzir mais de 12 fantasy points apenas com bloqueios em uma noite normal. Com um pequeno aumento de minutos, sua média pode se aproximar de 65 FP.",
+  "Stephon Castle é o ponto de interrogação. Embora possua grande potencial, enfrentará uma rotação com diversos jogadores que precisam da bola.",
+  "A Revolution Française possui um dos maiores tetos da liga porque Wembanyama pode decidir confrontos praticamente sozinho.",
+  "3º — Paysandu Lobos apresenta a dupla mais equilibrada do ranking",
+  "Cade Cunningham — 53,0 FP",
+  "Anthony Edwards — 49,0 FP",
+  "Total projetado: 102,0 FP",
+  "O Paysandu Lobos não possui o jogador com maior projeção individual, mas talvez tenha a melhor combinação entre os dois keepers.",
+  "Cade Cunningham controla completamente o ataque de sua equipe. Suas assistências e roubos compensam os turnovers e o colocam acima de 50 FP.",
+  "Anthony Edwards oferece pontuação, bolas de três e crescente produção defensiva. Mesmo dividindo a criação, deve continuar como principal finalizador.",
+  "Diferentemente de outros concorrentes, o Paysandu não depende de um único jogador carregar a dupla.",
+  "2º — Luka conduz Canalhas do Bem à vice-liderança",
+  "Luka Dončić — 63,5 FP",
+  "Lauri Markkanen — 41,5 FP",
+  "Total projetado: 105,0 FP",
+  "Luka Dončić permanece entre os jogadores mais valiosos de toda a AirBall.",
+  "Com liberdade para controlar o ataque, ele combina pontuação de elite, rebotes e assistências em volume extraordinário. Mesmo com Reaves participando ativamente, Luka continuará sendo o centro de praticamente todas as posses importantes.",
+  "Lauri Markkanen é o ponto que impede a liderança. A chegada de novos companheiros ofensivos pode reduzir seu volume de arremessos e sua média de pontos.",
+  "Ainda assim, a presença de Luka faz do Canalhas do Bem um dos principais favoritos ao título.",
+  "1º — Jokić coloca Chugabum Ironclads no topo da pré-temporada",
+  "Nikola Jokić — 69,5 FP",
+  "Jalen Williams — 42,5 FP",
+  "Total projetado: 112,0 FP",
+  "O Chugabum Ironclads inicia a temporada como líder do ranking e favorito entre os keepers.",
+  "Nikola Jokić continua sendo o jogador mais completo do fantasy. Pontua com eficiência, lidera a liga em criação entre os pivôs e domina os rebotes. Mesmo quando não busca o arremesso, acumula fantasy points por meio das assistências.",
+  "Jalen Williams completa a dupla com uma produção sólida em todas as categorias. Sua média pode não alcançar a das principais estrelas, mas é suficientemente elevada para evitar que Jokić fique acompanhado de um keeper fraco.",
+  "Com quase 112 FP projetados, o Chugabum abre vantagem sobre o restante da liga e começa a temporada como o time a ser perseguido.",
+  "Ranking final projetado",
+  "Pos.\tTime\tKeepers\tTotal",
+  "1\tChugabum Ironclads\tJokić e Jalen Williams\t112,0",
+  "2\tCanalhas do Bem\tLuka e Markkanen\t105,0",
+  "3\tPaysandu Lobos\tCade e Edwards\t102,0",
+  "4\tRevolution Française\tWembanyama e Castle\t102,0",
+  "5\tPistons de Pira\tGiannis e Harden\t99,0",
+  "6\tCharlotte DunkLipe\tTrae e Şengün\t95,5",
+  "7\tRed Hot Blazer Peppers\tAmen e Jalen Johnson\t93,5",
+  "8\tPato’s Team\tKawhi e Mobley\t94,0",
+  "9\tStefano’s SuperSonics\tReaves e Chet\t91,5",
+  "10\tNortz\tMurray e Banchero\t91,0",
+  "11\tWarlock Jamaicans\tGiddey e Barnes\t90,0",
+  "12\tGhost of Goat\tSiakam e Brunson\t87,0",
+  "13\tInstituto Popovich\tMitchell e Keyonte\t86,5",
+  "14\tFi du Jequisom\tLeBron e Flagg\t86,0",
+  "15\tTeam Djalma’Jr\tDurant e Fox\t83,0",
+  "16\tAcre Dinosaurs\tBam e Jaylen Brown\t81,8",
+  "A classificação ainda pode mudar com trocas, lesões e movimentações nas rotações. Por enquanto, porém, o recado da pré-temporada é claro: Jokić coloca o Chugabum na liderança, mas a presença de Luka, Wembanyama, Cade e Giannis promete manter a disputa aberta."
+]
+};
 
 const VIDEOS = [
   { title: 'Top 10 jogadas da Semana 7', dur: '1:25', bg: 'linear-gradient(135deg, #7c3aed, #4b1a7a)' },
@@ -6897,39 +7289,159 @@ function MatchupsStrip({ setPage }) {
   );
 }
 
-function FeaturedNews() {
+
+function FeatureArticleImage({ src, className = 'article-inline-image' }) {
+  return <div className={className} style={{backgroundImage:`url(${src})`}} />;
+}
+
+function KeeperArticlePage({ setPage }) {
+  const article = FEATURE_KEEPERS_ARTICLE;
+  const rankingStart = article.body.findIndex(line => line === 'Ranking final projetado');
+  const bodyLines = rankingStart >= 0 ? article.body.slice(0, rankingStart) : article.body;
+  const rankingLines = rankingStart >= 0 ? article.body.slice(rankingStart + 1) : [];
+  const rankingRows = rankingLines
+    .filter(line => /^\d+\s+/.test(line))
+    .map(line => {
+      const parts = line.split(/\t+/);
+      return {
+        pos: parts[0] || '',
+        team: parts[1] || '',
+        keepers: parts[2] || '',
+        total: parts[3] || ''
+      };
+    })
+    .filter(row => row.pos && row.team);
+
+  const renderArticleLine = (line, index) => {
+    const sectionMatch = line.match(/^\d+º\s+—\s+/);
+    const playerMatch = line.match(/^(.+?)\s+—\s+([\d,.]+)\s+FP$/);
+    const totalMatch = line.match(/^Total projetado:\s*([\d,.]+)\s+FP$/);
+
+    const nodes = [];
+
+    if (index === 3) {
+      nodes.push(<FeatureArticleImage key={`image-1-${index}`} src={article.inlineImages[0]} />);
+    }
+
+    if (sectionMatch) {
+      nodes.push(<h2 className="article-section-title" key={`line-${index}`}>{line}</h2>);
+    } else if (playerMatch) {
+      nodes.push(
+        <div className="article-player-stat" key={`line-${index}`}>
+          <span className="article-player-name">{playerMatch[1]}</span>
+          <span className="article-stat-value">{playerMatch[2]} FP</span>
+        </div>
+      );
+    } else if (totalMatch) {
+      nodes.push(
+        <div className="article-total-stat" key={`line-${index}`}>
+          <span className="article-player-name">Total projetado</span>
+          <span className="article-stat-value">{totalMatch[1]} FP</span>
+        </div>
+      );
+    } else {
+      nodes.push(<p className="article-paragraph" key={`line-${index}`}>{line}</p>);
+    }
+
+    if (line.startsWith('8º —')) {
+      nodes.push(<FeatureArticleImage key={`image-2-${index}`} src={article.inlineImages[1]} />);
+    }
+
+    return nodes;
+  };
+
   return (
-    <div className="featured-card">
+    <div className="article-page">
+      <button className="article-back" type="button" onClick={() => setPage('HOME')}>← Voltar para notícias</button>
+
+      <article>
+        <div className="article-hero">
+          <FeatureArticleImage src={article.heroImage} className="article-hero-image" />
+          <div className="article-hero-content">
+            <div className="article-kicker">
+              <span className={`news-cat ${article.catClass}`}>{article.cat}</span>
+              <span className="feed-time">{article.time}</span>
+            </div>
+            <h1 className="article-title">{article.title}</h1>
+            <div className="article-subtitle">{article.subtitle}</div>
+          </div>
+        </div>
+
+        <div className="article-body-card">
+          <div className="article-body">
+            {bodyLines.map(renderArticleLine)}
+
+            <h2 className="article-section-title">Ranking final projetado</h2>
+            {rankingRows.length > 0 && (
+              <div className="article-ranking-wrap">
+                <table className="article-ranking-table">
+                  <thead>
+                    <tr>
+                      <th>Pos.</th>
+                      <th>Time</th>
+                      <th>Keepers</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {rankingRows.map(row => (
+                      <tr key={`${row.pos}-${row.team}`}>
+                        <td>{row.pos}</td>
+                        <td><strong>{row.team}</strong></td>
+                        <td>{row.keepers}</td>
+                        <td><strong>{row.total}</strong></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+            {rankingLines
+              .filter(line => !/^\d+\s+/.test(line) && line !== 'Pos.\tTime\tKeepers\tTotal')
+              .map((line, index) => <p className="article-paragraph" key={`ranking-extra-${index}`}>{line}</p>)}
+          </div>
+        </div>
+      </article>
+    </div>
+  );
+}
+
+function FeaturedNews({ setPage }) {
+  const article = FEATURE_KEEPERS_ARTICLE;
+  return (
+    <div className="featured-card featured-article-main" onClick={() => setPage('KEEPERS_ARTICLE')}>
       <div className="featured-bg"/>
-      <div className="news-image-layer" style={{backgroundImage:"url('./assets/news/destaque-home.jpg')"}}/>
+      <div className="news-image-layer" style={{backgroundImage:`url(${article.heroImage})`}}/>
       <div className="court-lines"/>
       <div className="ball-deco"/>
-      <div style={{position:'absolute',inset:0,background:'linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.22) 100%)'}}/>
+      <div style={{position:'absolute',inset:0,background:'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.28) 58%, rgba(0,0,0,0.12) 100%)'}}/>
       <div className="featured-content">
         <span className="featured-badge">
           <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          DESTAQUE
+          NOTÍCIA PRINCIPAL
         </span>
-        <h1 className="featured-title">AIRBALL INICIA NOVA ERA COM 16 FRANQUIAS</h1>
+        <h1 className="featured-title">{article.title}</h1>
         <div className="featured-bullets">
-          <div className="featured-bullet">Temporada começa oficialmente em 20 de outubro</div>
-          <div className="featured-bullet">Draft marcado para 10 de outubro</div>
-          <div className="featured-bullet">A Liga se despede do GM Wictor e do GM Andre Luiz, que não conseguiram ter tempo para acompanhar a liga.</div>
+          <div className="featured-bullet">Chugabum Ironclads começa no topo com Nikola Jokić</div>
+          <div className="featured-bullet">Canalhas do Bem, Paysandu Lobos e Revolution Française aparecem como ameaças diretas</div>
+          <div className="featured-bullet">Ranking considera encaixe, rotação, companheiros, uso ofensivo e pontuação AirBall</div>
         </div>
+        <div className="featured-cta">Ler matéria completa →</div>
         <div className="featured-footer">
           <div className="featured-mvp">
-            <span className="mvp-icon">👑</span>
+            <span className="mvp-icon">🏀</span>
             <div>
-              <div className="mvp-label">CAMPEÃO ATUAL</div>
-              <div className="mvp-name">Stéfano's Supersonics</div>
+              <div className="mvp-label">POWER RANKING</div>
+              <div className="mvp-name">Keepers 2026/27</div>
             </div>
           </div>
-          <span className="featured-time">Pré-temporada</span>
+          <span className="featured-time">{article.time}</span>
         </div>
       </div>
     </div>
   );
 }
+
 
 function SideNews({ gradient, catClass, cat, title, desc, image }) {
   return (
@@ -7462,10 +7974,8 @@ function HomePage({ setPage }) {
       <div className="main-wrap">
         <div className="content-grid">
           <div>
-            <div className="news-grid">
-              <FeaturedNews />
-              <SideNews gradient="linear-gradient(135deg, #2d1b69, #0f0a20)" image="./assets/news/sorteio-seeds.jpg" catClass="cat-rules" cat="SEEDS" title="SORTEIO DOS SEEDS SERÁ DIA 8 DE OUTUBRO" desc="A ordem inicial da temporada será definida antes do draft." />
-              <SideNews gradient="linear-gradient(135deg, #064e3b, #022c22)" image="./assets/news/draft-airball.jpg" catClass="cat-market" cat="DRAFT" title="DRAFT AIRBALL MARCADO PARA 10 DE OUTUBRO" desc="Os 16 GMs se preparam para montar os elencos da nova temporada." />
+            <div className="news-grid featured-only">
+              <FeaturedNews setPage={setPage} />
             </div>
             <NewsFeed />
           </div>
@@ -9577,9 +10087,6 @@ function DraftDrawPage() {
                 Resetar
               </button>
             </div>
-            <div className="draft-draw-sound-note">
-              <strong>Som personalizado:</strong> coloque seu áudio em <strong>assets/audio/draft-sortear.mp3</strong>. Se o arquivo não existir, o sistema usa o som padrão do navegador.
-            </div>
 
             <div className="draft-draw-live-area">
               <div className="draft-draw-live-main">
@@ -9903,6 +10410,7 @@ function App() {
       case 'DRAFT': return <DraftPage />;
       case 'SORTEIO DRAFT': return <DraftDrawPage />;
       case 'JOGADORES': return <PlayersPage />;
+      case 'KEEPERS_ARTICLE': return <KeeperArticlePage setPage={setPage} />;
       default: return <HomePage setPage={setPage} />;
     }
   };
