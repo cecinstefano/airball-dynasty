@@ -5082,6 +5082,50 @@
     .players-pagination-actions { justify-content: space-between; }
   }
 
+
+  /* FIX FRANQUIAS - keepers oficiais alinhados */
+  .keeper-box .keeper-stat-labels {
+    display: grid !important;
+    grid-template-columns: 56px minmax(0, 1fr) 86px !important;
+    gap: 12px !important;
+    align-items: center !important;
+  }
+  .keeper-box .keeper-stat-labels span:first-child {
+    grid-column: 2 / 3 !important;
+  }
+  .keeper-box .keeper-stat-labels span:nth-child(2) {
+    grid-column: 3 / 4 !important;
+    text-align: right !important;
+  }
+  .keeper-box .keeper-player-row.keeper-player-official {
+    display: grid !important;
+    grid-template-columns: 56px minmax(0, 1fr) 86px !important;
+    gap: 12px !important;
+    align-items: center !important;
+    padding: 12px 0 !important;
+  }
+  .keeper-box .keeper-player-row.keeper-player-official .trade-player-photo {
+    width: 48px !important;
+    height: 48px !important;
+  }
+  .keeper-box .keeper-player-row.keeper-player-official .keeper-player-name {
+    font-size: 14px !important;
+    line-height: 1.12 !important;
+    text-align: left !important;
+    color: #27153a !important;
+  }
+  .keeper-box .keeper-player-row.keeper-player-official .keeper-player-meta {
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    text-align: left !important;
+    color: var(--gray-text) !important;
+  }
+  .keeper-box .keeper-player-row.keeper-player-official .keeper-stat {
+    text-align: right !important;
+    font-size: 17px !important;
+    color: var(--purple-mid) !important;
+  }
+
 </style>
 </head>
 <body>
@@ -7978,7 +8022,7 @@ function TeamsPage() {
                             React.createElement("span", null, "Jogador"),
                             React.createElement("span", null, "M\u00E9dia FP")),
                         topPlayers.map((kp, idx) => (React.createElement("div", { className: "keeper-player-row keeper-player-official", key: `${t.name}-${kp.id || idx}` },
-                            React.createElement(PlayerPhoto, { player: kp, size: 34 }),
+                            React.createElement(PlayerPhoto, { player: kp, size: 48 }),
                             React.createElement("div", null,
                                 React.createElement("div", { className: "keeper-player-name" }, kp.name),
                                 React.createElement("div", { className: "keeper-player-meta" },
