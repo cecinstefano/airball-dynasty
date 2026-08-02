@@ -5736,33 +5736,6 @@
     }
   }
 
-
-  /* HONESTÔMETRO - picks do draft */
-  .trade-pick-badge {
-    display: inline-flex;
-    align-items: center;
-    width: fit-content;
-    border-radius: 999px;
-    padding: 3px 8px;
-    background: rgba(249,115,22,.12);
-    border: 1px solid rgba(249,115,22,.34);
-    color: #c45a00;
-    font-size: 10px;
-    font-weight: 900;
-    letter-spacing: .8px;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-  .trade-pick-equivalent {
-    display: block;
-    margin-top: 2px;
-    color: var(--orange);
-    font-size: 10px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: .5px;
-  }
-
 </style>
 </head>
 <body>
@@ -8998,52 +8971,6 @@ function HonestometroPage() {
     const sumPlayers = (side) => Number(side.reduce((acc, p) => acc + calcPlayer(p).value, 0).toFixed(1));
     const slotCompFor = (side, otherSide) => Math.max(0, otherSide.length - side.length) * SLOT_COMPENSATION;
     const sideTotal = (side, otherSide) => Number((sumPlayers(side) + slotCompFor(side, otherSide)).toFixed(1));
-    const isFreeDraftPlayer = (player) => {
-        const team = normalizeText(player?.fantasyTeam || '');
-        return !team || ['livre', 'free agent', 'fa', 'waiver', 'waivers', '-', '—', 'manual/fa', 'piso'].includes(team);
-    };
-    const getSnakePickForTeam = (round, seed) => Number(round) % 2 === 1 ? Number(seed) : 17 - Number(seed);
-    const draftBoardPlayers = players
-        .filter(player => player && player.assetType !== 'PICK')
-        .filter(player => isFreeDraftPlayer(player))
-        .sort((a, b) => Number(b.fantasyPoints || 0) - Number(a.fantasyPoints || 0))
-        .slice(0, 160);
-    const draftPickAssets = DRAFT_ORDER.flatMap(orderRow => Array.from({ length: 10 }, (_, index) => {
-        const round = index + 1;
-        const pickNumber = getSnakePickForTeam(round, orderRow.pick);
-        const overall = (round - 1) * 16 + pickNumber;
-        const projected = draftBoardPlayers[overall - 1];
-        if (!projected)
-            return null;
-        const ownerName = getTeam(orderRow.name).name;
-        return {
-            ...projected,
-            id: `draft-pick-${overall}-${normalizeTeamName(ownerName)}`,
-            assetType: 'PICK',
-            name: `PICK ${overall} — ROUND ${round} PICK ${pickNumber} — ${ownerName}`,
-            fantasyPoints: Number(projected.fantasyPoints || 0),
-            totalPoints: Number(projected.totalPoints || 0),
-            team: projected.team || 'NBA',
-            position: `R${round} P${pickNumber}`,
-            fantasyTeam: ownerName,
-            status: 'PICK',
-            pickOwner: ownerName,
-            pickRound: round,
-            pickNumber,
-            pickOverall: overall,
-            projectedPlayerName: projected.name,
-            projectedPlayerId: projected.id,
-            projectedPlayerPosition: projected.position,
-            projectedPlayerTeam: projected.team,
-            pickLabel: `PICK ${overall} ROUND ${round} PICK ${pickNumber}`
-        };
-    }).filter(Boolean));
-    const tradeAssetPool = [...players, ...draftPickAssets];
-    const isPickAsset = (asset) => asset?.assetType === 'PICK';
-    const countAssetTypes = (side) => ({
-        players: side.filter(asset => !isPickAsset(asset)).length,
-        picks: side.filter(asset => isPickAsset(asset)).length
-    });
     const playerSubtotalA = sumPlayers(sideA);
     const playerSubtotalB = sumPlayers(sideB);
     const slotCompA = slotCompFor(sideA, sideB);
@@ -9057,18 +8984,11 @@ function HonestometroPage() {
     const isOneForOne = sideA.length === 1 && sideB.length === 1;
     const oneForOneAvgDiff = isOneForOne ? Number(Math.abs((Number((_a = sideA[0]) === null || _a === void 0 ? void 0 : _a.fantasyPoints) || 0) - (Number((_b = sideB[0]) === null || _b === void 0 ? void 0 : _b.fantasyPoints) || 0)).toFixed(1)) : null;
     const oneForOneException = isOneForOne && oneForOneAvgDiff < 3;
-    const assetCountA = countAssetTypes(sideA);
-    const assetCountB = countAssetTypes(sideB);
-    const hasPickInTrade = assetCountA.picks + assetCountB.picks > 0;
-    const pickStructureValid = !hasPickInTrade || (assetCountA.picks === assetCountB.picks && assetCountA.players === assetCountB.players);
-    const pickStructureNote = `Regra de picks: cada lado precisa enviar a mesma quantidade de picks e jogadores. ${teamA}: ${assetCountA.players} jogador(es) + ${assetCountA.picks} pick(s). ${teamB}: ${assetCountB.players} jogador(es) + ${assetCountB.picks} pick(s).`;
     const verdict = (() => {
         if (!totalA || !totalB)
-            return { label: 'Monte a troca', note: 'Adicione jogadores e/ou picks dos dois lados para liberar o parecer.', cls: 'neutral', status: 'Aguardando ativos' };
-        if (!pickStructureValid)
-            return { label: 'Reprovada', note: pickStructureNote, cls: 'bad', status: 'Trade inválida pela regra de picks' };
+            return { label: 'Monte a troca', note: 'Adicione jogadores dos dois lados para liberar o parecer.', cls: 'neutral', status: 'Aguardando jogadores' };
         if (oneForOneException)
-            return { label: 'Aprovada', note: `Regra especial 1x1 aplicada: a diferença de AVG entre os ativos é de ${oneForOneAvgDiff} fantasy points, abaixo de 3. A troca é aceita mesmo se passar da margem percentual.`, cls: 'good', status: 'Trade aprovada pela regra 1x1' };
+            return { label: 'Aprovada', note: `Regra especial 1x1 aplicada: a diferença de AVG entre os jogadores é de ${oneForOneAvgDiff} fantasy points, abaixo de 3. A troca é aceita mesmo se passar da margem percentual.`, cls: 'good', status: 'Trade aprovada pela regra 1x1' };
         if (diffPct < APPROVAL_LIMIT)
             return { label: 'Aprovada', note: 'Diferença abaixo de 10%. Pode exportar/postar e iniciar a janela de 12h para atravessamento.', cls: 'good', status: 'Trade aprovada pelo cálculo' };
         return { label: 'Reprovada', note: `Diferença de ${diffPct}% entre os pacotes. O maior pacote é de ${largerPackage}. Ajuste a troca até ficar abaixo de 10%, exceto em trocas 1x1 com diferença de AVG menor que 3 fantasy points.`, cls: 'bad', status: 'Trade fora da margem' };
@@ -9078,14 +8998,9 @@ function HonestometroPage() {
         if (!q)
             return [];
         const used = new Set([...sideA, ...sideB].map(p => p.id));
-        return tradeAssetPool
+        return players
             .filter(p => !used.has(p.id) || side.some(item => item.id === p.id))
-            .map(p => ({
-            ...p,
-            searchName: normalizeText(`${p.name} ${p.pickLabel || ''} ${p.projectedPlayerName || ''}`),
-            searchTeam: normalizeText(`${p.team} ${p.fantasyTeam || ''} ${p.pickOwner || ''}`),
-            searchPos: normalizeText(`${p.position} ${p.assetType === 'PICK' ? `pick ${p.pickOverall} round ${p.pickRound} ${p.pickNumber}` : ''}`)
-        }))
+            .map(p => ({ ...p, searchName: normalizeText(p.name), searchTeam: normalizeText(p.team), searchPos: normalizeText(p.position) }))
             .filter(p => p.searchName.includes(q) || p.searchTeam.includes(q) || p.searchPos.includes(q))
             .sort((a, b) => {
             const aStarts = a.searchName.startsWith(q) ? 0 : 1;
@@ -9202,17 +9117,13 @@ function HonestometroPage() {
             React.createElement("div", null,
                 React.createElement("div", { className: "trade-result-team-name" }, teamName),
                 React.createElement("div", { className: "trade-result-team-action" }, "envia"))),
-        side.length === 0 ? (React.createElement("div", { className: "trade-result-empty-mini" }, "Nenhum ativo selecionado.")) : (React.createElement("div", { className: "trade-result-player-list" }, side.map(p => {
+        side.length === 0 ? (React.createElement("div", { className: "trade-result-empty-mini" }, "Nenhum jogador selecionado.")) : (React.createElement("div", { className: "trade-result-player-list" }, side.map(p => {
             const c = calcPlayer(p);
             return (React.createElement("div", { className: "trade-result-player-mini", key: `result-${p.id}` },
                 React.createElement("div", { className: "trade-result-player-mini-main" },
                     React.createElement(PlayerPhoto, { player: p, size: 42 }),
                     React.createElement("div", { className: "trade-result-player-mini-text" },
-                        isPickAsset(p) && React.createElement("div", { className: "trade-pick-badge" }, "Pick do draft"),
                         React.createElement("div", { className: "trade-result-player-mini-name" }, p.name),
-                        isPickAsset(p) && React.createElement("span", { className: "trade-pick-equivalent" },
-                            "Equivale a ",
-                            p.projectedPlayerName),
                         React.createElement("div", { className: "trade-result-player-mini-stats" },
                             React.createElement("span", null,
                                 "AVG ",
@@ -9238,10 +9149,9 @@ function HonestometroPage() {
             const c = calcPlayer(p);
             const floorNote = c.rawAvg < FLOOR_AVG ? ` | piso ${FLOOR_AVG}` : '';
             const totalInfo = p.totalPoints ? ` | TOTAL ${formatNumber(p.totalPoints)}` : '';
-            const pickInfo = isPickAsset(p) ? ` | equivale a ${p.projectedPlayerName}` : '';
-            return `• ${p.name} — AVG ${c.rawAvg}${totalInfo}${floorNote}${pickInfo} × ${c.multiplierLabel} = ${c.value}`;
-        }).join('\n') : '• Nenhum ativo';
-        return `⚖️ HONESTÔMETRO AIRBALL\n\nRegras: piso ${FLOOR_AVG} pts, multiplicadores por AVG, compensação de ${SLOT_COMPENSATION} pts por slot de diferença, aprovação se diferença < ${APPROVAL_LIMIT}% e regra especial 1x1: se a diferença de AVG for menor que 3 fantasy points, a troca é aceita. Picks R1-R10 valem o jogador projetado na posição do board e só são válidas com a mesma quantidade de picks e jogadores dos dois lados.\n\n${teamA} envia:\n${list(sideA)}\nSubtotal jogadores: ${playerSubtotalA}\nCompensação de slot: +${slotCompA}\nTotal: ${totalA}\n\n${teamB} envia:\n${list(sideB)}\nSubtotal jogadores: ${playerSubtotalB}\nCompensação de slot: +${slotCompB}\nTotal: ${totalB}\n\nDiferença: ${diffPct}%${oneForOneAvgDiff !== null ? `\nDiferença de AVG 1x1: ${oneForOneAvgDiff}` : ''}\nResultado: ${verdict.label}\nParecer: ${verdict.note}\n\nApós postagem, começa a janela de 12 horas para atravessamento.`;
+            return `• ${p.name} — AVG ${c.rawAvg}${totalInfo}${floorNote} × ${c.multiplierLabel} = ${c.value}`;
+        }).join('\n') : '• Nenhum jogador';
+        return `⚖️ HONESTÔMETRO AIRBALL\n\nRegras: piso ${FLOOR_AVG} pts, multiplicadores por AVG, compensação de ${SLOT_COMPENSATION} pts por slot de diferença, aprovação se diferença < ${APPROVAL_LIMIT}% e regra especial 1x1: se a diferença de AVG for menor que 3 fantasy points, a troca é aceita.\n\n${teamA} envia:\n${list(sideA)}\nSubtotal jogadores: ${playerSubtotalA}\nCompensação de slot: +${slotCompA}\nTotal: ${totalA}\n\n${teamB} envia:\n${list(sideB)}\nSubtotal jogadores: ${playerSubtotalB}\nCompensação de slot: +${slotCompB}\nTotal: ${totalB}\n\nDiferença: ${diffPct}%${oneForOneAvgDiff !== null ? `\nDiferença de AVG 1x1: ${oneForOneAvgDiff}` : ''}\nResultado: ${verdict.label}\nParecer: ${verdict.note}\n\nApós postagem, começa a janela de 12 horas para atravessamento.`;
     };
     const copyResult = async () => {
         const text = exportText();
@@ -9306,16 +9216,12 @@ function HonestometroPage() {
                                 pickSuggestion(sideName, suggestions[0]);
                             else
                                 addPlayer(sideName);
-                        } }, placeholder: "Digite jogador ou pick: Pay, Jokic, pick 23..." }),
+                        } }, placeholder: "Digite o nome: Pay, Jokic, Duren..." }),
                     query && suggestions.length > 0 && !(selected && selected.name === query) && (React.createElement("div", { className: "trade-suggestions" }, suggestions.map(p => (React.createElement("div", { className: "trade-suggestion", key: p.id, onClick: () => pickSuggestion(sideName, p) },
                         React.createElement("div", { className: "trade-suggestion-main" },
                             React.createElement(PlayerPhoto, { player: p, size: 38 }),
                             React.createElement("div", null,
-                                isPickAsset(p) && React.createElement("div", { className: "trade-pick-badge" }, "Pick do draft"),
                                 React.createElement("div", { className: "trade-suggestion-name" }, p.name),
-                                isPickAsset(p) && React.createElement("span", { className: "trade-pick-equivalent" },
-                                    "Equivale a ",
-                                    p.projectedPlayerName),
                                 React.createElement("div", { className: "trade-suggestion-meta" },
                                     p.team,
                                     " \u2022 ",
@@ -9334,11 +9240,7 @@ function HonestometroPage() {
                 React.createElement("div", { className: "trade-selected-preview" },
                     React.createElement(PlayerPhoto, { player: selected, size: 42 }),
                     React.createElement("div", null,
-                        isPickAsset(selected) && React.createElement("div", { className: "trade-pick-badge" }, "Pick do draft"),
                         React.createElement("div", { className: "trade-selected-preview-name" }, selected.name),
-                        isPickAsset(selected) && React.createElement("span", { className: "trade-pick-equivalent" },
-                            "Equivale a ",
-                            selected.projectedPlayerName),
                         React.createElement("div", { className: "trade-selected-preview-meta" },
                             selected.team,
                             " \u2022 ",
@@ -9357,18 +9259,14 @@ function HonestometroPage() {
                 FLOOR_AVG,
                 " no c\u00E1lculo."),
             React.createElement("div", { className: "trade-player-list" },
-                side.length === 0 && React.createElement("div", { className: "trade-empty-state" }, "Busque um jogador ou pick para montar este lado da troca."),
+                side.length === 0 && React.createElement("div", { className: "trade-empty-state" }, "Busque um jogador para montar este lado da troca."),
                 side.map(p => {
                     const c = calcPlayer(p);
                     return (React.createElement("div", { className: "trade-player-row-new", key: p.id },
                         React.createElement("div", { className: "trade-player-info-new" },
                             React.createElement(PlayerPhoto, { player: p, size: 40 }),
                             React.createElement("div", { className: "trade-player-info-text" },
-                                isPickAsset(p) && React.createElement("div", { className: "trade-pick-badge" }, "Pick do draft"),
                                 React.createElement("div", { className: "trade-player-name-new" }, p.name),
-                                isPickAsset(p) && React.createElement("span", { className: "trade-pick-equivalent" },
-                                    "Equivale a ",
-                                    p.projectedPlayerName),
                                 React.createElement("div", { className: "trade-player-meta-new" },
                                     React.createElement("span", null, p.team),
                                     React.createElement("span", null, "\u2022"),
@@ -9427,9 +9325,7 @@ function HonestometroPage() {
                                 dataStatus),
                             React.createElement("span", null,
                                 players.length,
-                                " atletas • ",
-                                draftPickAssets.length,
-                                " picks"))),
+                                " atletas"))),
                     React.createElement("div", { className: "trade-lab-pill" }, "Regras oficiais")),
                 React.createElement("div", { className: "trade-lab-body" },
                     React.createElement("div", { className: "trade-rules-grid" },
@@ -9447,10 +9343,7 @@ function HonestometroPage() {
                             React.createElement("div", { className: "trade-rule-badge-value" }, "AVG < 3")),
                         React.createElement("div", { className: "trade-rule-badge" },
                             React.createElement("div", { className: "trade-rule-badge-label" }, "Busca"),
-                            React.createElement("div", { className: "trade-rule-badge-value" }, "ESPN")),
-                        React.createElement("div", { className: "trade-rule-badge" },
-                            React.createElement("div", { className: "trade-rule-badge-label" }, "Picks"),
-                            React.createElement("div", { className: "trade-rule-badge-value" }, "R1-R10"))),
+                            React.createElement("div", { className: "trade-rule-badge-value" }, "ESPN"))),
                     React.createElement("div", { className: "trade-sides-grid" },
                         renderTradeSide({ sideName: 'A', teamName: teamA, setTeamName: setTeamA, side: sideA, otherSide: sideB, query: queryA, setQuery: setQueryA, suggestions: suggestionsA }),
                         renderTradeSide({ sideName: 'B', teamName: teamB, setTeamName: setTeamB, side: sideB, otherSide: sideA, query: queryB, setQuery: setQueryB, suggestions: suggestionsB })))),
@@ -9485,7 +9378,7 @@ function HonestometroPage() {
                     React.createElement("button", { className: "trade-action-btn trade-action-secondary", onClick: clearTrade }, "Limpar")))),
         React.createElement("div", { className: "trade-rule-mini" },
             React.createElement("div", { className: "trade-rule-mini-title" }, "Regras aplicadas no c\u00E1lculo"),
-            React.createElement("div", { className: "trade-rule-mini-text" }, "Valor do jogador = maior valor entre AVG ESPN e 20 pontos, multiplicado pela faixa correspondente. Picks do draft até o 10º round entram como ativos e valem exatamente o jogador projetado naquela posição do board. Trocas com picks só são válidas quando os dois lados enviam a mesma quantidade de picks e jogadores: pick avulsa, 2 picks por 1 pick, ou jogador + pick por apenas jogador são reprovados automaticamente. Se um lado recebe menos jogadores em trocas sem picks, recebe +20 pontos por slot de diferença. A trade é aprovada quando a diferença entre os totais finais fica abaixo de 10%."),
+            React.createElement("div", { className: "trade-rule-mini-text" }, "Valor do jogador = maior valor entre AVG ESPN e 20 pontos, multiplicado pela faixa correspondente. Se um lado recebe menos jogadores, recebe +20 pontos por slot de diferen\u00E7a, simulando o valor m\u00EDnimo de Free Agent. A trade \u00E9 aprovada quando a diferen\u00E7a entre os totais finais fica abaixo de 10%. Em trocas 1x1, se a diferen\u00E7a de AVG entre os dois jogadores for menor que 3 fantasy points, a troca tamb\u00E9m \u00E9 aceita mesmo fora da margem percentual."),
             React.createElement("div", { className: "multiplier-table-mini" }, MULTIPLIERS.map((row, index) => (React.createElement("div", { className: "multiplier-chip", key: index },
                 React.createElement("span", { className: "multiplier-range" }, row.label),
                 React.createElement("span", { className: "multiplier-value" },
