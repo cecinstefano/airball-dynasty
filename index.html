@@ -5763,6 +5763,44 @@
     letter-spacing: .5px;
   }
 
+
+  /* TRADE PRINCIPAL - SUPERSONICS x PISTONS */
+  .article-trade-deal-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:stretch;margin:18px 0 26px}
+  .article-trade-side{border-radius:20px;border:1px solid rgba(124,58,237,.14);background:linear-gradient(180deg,#fff 0%,#fbf7ff 100%);box-shadow:0 12px 28px rgba(49,14,88,.08);padding:18px}
+  .article-trade-side-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .article-trade-team-name{font-family:'Oswald',sans-serif;font-size:24px;font-weight:800;color:var(--purple-deep);text-transform:uppercase;line-height:1}
+  .article-trade-team-sub{margin-top:4px;font-size:12px;color:var(--gray-text);font-weight:700;text-transform:uppercase;letter-spacing:1px}
+  .article-trade-assets{display:flex;flex-direction:column;gap:12px}
+  .article-trade-asset{display:flex;align-items:center;gap:12px;border-radius:16px;padding:12px;background:rgba(124,58,237,.05);border:1px solid rgba(124,58,237,.08)}
+  .article-trade-asset-text{display:flex;flex-direction:column;min-width:0}
+  .article-trade-asset-name{font-family:'Oswald',sans-serif;font-size:22px;font-weight:800;color:var(--purple-deep);line-height:1}
+  .article-trade-asset-meta{margin-top:4px;font-size:12px;color:var(--gray-text);font-weight:700}
+  .article-trade-asset-pick{margin-top:2px;color:var(--orange);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.8px}
+  .article-trade-center{display:flex;align-items:center;justify-content:center;min-width:78px}
+  .article-trade-swap{width:68px;height:68px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 25%,#ffb347 0%,#f97316 45%,#7c3aed 100%);color:#fff;box-shadow:0 12px 30px rgba(124,58,237,.3);font-size:34px;font-weight:900}
+  .article-notice{margin:0 0 22px;border-radius:18px;padding:16px 18px;background:linear-gradient(90deg,rgba(249,115,22,.12),rgba(124,58,237,.08));border:1px solid rgba(249,115,22,.18);color:#45235f;font-weight:700;line-height:1.5}
+  .article-player-spotlights{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:16px 0 24px}
+  .article-player-spotlight{border-radius:18px;border:1px solid rgba(124,58,237,.14);background:linear-gradient(180deg,#fff 0%,#faf8ff 100%);padding:16px;box-shadow:0 12px 28px rgba(49,14,88,.07)}
+  .article-player-spotlight-top{display:flex;align-items:center;gap:12px}
+  .article-player-spotlight-name{font-family:'Oswald',sans-serif;font-size:22px;font-weight:800;color:var(--purple-deep);line-height:1}
+  .article-player-spotlight-team{margin-top:4px;font-size:12px;color:var(--gray-text);font-weight:700}
+  .article-player-spotlight-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+  .article-player-spotlight-stat{border-radius:14px;background:rgba(124,58,237,.05);border:1px solid rgba(124,58,237,.08);padding:10px 12px}
+  .article-player-spotlight-label{font-size:11px;color:var(--gray-text);font-weight:800;text-transform:uppercase;letter-spacing:.8px}
+  .article-player-spotlight-value{margin-top:4px;font-family:'Oswald',sans-serif;font-size:22px;color:var(--orange);font-weight:800;line-height:1}
+  @media (max-width:960px){.article-trade-deal-grid{grid-template-columns:1fr}.article-trade-center{min-width:0}.article-player-spotlights{grid-template-columns:1fr}}
+
+
+  /* HONESTÔMETRO - GM no parecer/print */
+  .trade-result-team-gm {
+    margin-top: 3px;
+    font-size: 10px;
+    color: var(--gray-text);
+    font-weight: 900;
+    letter-spacing: .4px;
+    line-height: 1.15;
+  }
+
 </style>
 </head>
 <body>
@@ -6073,6 +6111,17 @@ const NEWS_FEED = [
     { cat: 'SEEDS', catClass: 'cat-analysis', time: '8 de outubro', title: 'Sorteio dos seeds abre oficialmente a temporada', desc: 'A ordem inicial será definida antes do draft e promete movimentar a liga.', bg: 'linear-gradient(135deg, #2d1b69, #0f0a20)', image: './assets/news/sorteio-seeds.jpg', emoji: '🎲' },
     { cat: 'HALL DA FAMA', catClass: 'cat-interview', time: '2025-26', title: "Stéfano's Supersonics entra para a história", desc: 'Franquia foi campeã da temporada 25-26 com Jalen Duren brilhando nos playoffs.', bg: 'linear-gradient(135deg, #7f1d1d, #450a0a)', image: './assets/news/campeao-2526.jpg', emoji: '🏆' },
 ];
+
+const FEATURE_TRADE_PICKS_ARTICLE = {
+    id: 'primeira-troca-com-picks-2026-27',
+    cat: 'TRADE',
+    catClass: 'cat-draft',
+    time: '14 de julho de 2026',
+    title: 'A PRIMEIRA TROCA COM PICKS DA LIGA: SUPERSONICS E PISTONS DE PIRA AGITAM A OFFSEASON',
+    subtitle: 'Stéfano\'s SuperSonics envia Chet Holmgren e a pick 12 para receber Giannis Antetokounmpo e a pick 103 do Pistons de Pira.',
+    heroImage: './assets/news/trade-supersonics-pistons-capa.jpg'
+};
+
 const FEATURE_KEEPERS_ARTICLE = {
     id: 'ranking-keepers-2026-27',
     cat: 'ANÁLISE',
@@ -6239,6 +6288,18 @@ const FEATURE_KEEPERS_ARTICLE = {
         "A classificação ainda pode mudar com trocas, lesões e movimentações nas rotações. Por enquanto, porém, o recado da pré-temporada é claro: Jokić coloca o Chugabum na liderança, mas a presença de Luka, Wembanyama, Cade e Giannis promete manter a disputa aberta."
     ]
 };
+
+const KEEPERS_NEWS_CARD = {
+    cat: FEATURE_KEEPERS_ARTICLE.cat,
+    catClass: FEATURE_KEEPERS_ARTICLE.catClass,
+    time: FEATURE_KEEPERS_ARTICLE.time,
+    title: FEATURE_KEEPERS_ARTICLE.title,
+    desc: 'A análise da I.A. ranqueia os 16 pares de keepers e explica por que o Chugabum Ironclads abre a temporada no topo.',
+    image: FEATURE_KEEPERS_ARTICLE.heroImage,
+    emoji: '🤖',
+    page: 'KEEPERS_ARTICLE'
+};
+
 const VIDEOS = [
     { title: 'Top 10 jogadas da Semana 7', dur: '1:25', bg: 'linear-gradient(135deg, #7c3aed, #4b1a7a)' },
     { title: 'Melhores Buzzer Beaters', dur: '2:08', bg: 'linear-gradient(135deg, #F97316, #c45a00)' },
@@ -8160,32 +8221,118 @@ function KeeperArticlePage({ setPage }) {
                         .filter(line => !/^\d+\s+/.test(line) && line !== 'Pos.\tTime\tKeepers\tTotal')
                         .map((line, index) => React.createElement("p", { className: "article-paragraph", key: `ranking-extra-${index}` }, line)))))));
 }
+function TradePicksArticlePage({ setPage }) {
+    const article = FEATURE_TRADE_PICKS_ARTICLE;
+    const [playerLookup, setPlayerLookup] = useState(new Map());
+    useEffect(() => {
+        let mounted = true;
+        fetch(LEAGUE_PLAYERS_API_URL)
+            .then(r => r.json())
+            .then(data => {
+                const list = Array.isArray(data) ? data : (data.players || data.items || []);
+                const lookup = new Map();
+                list.forEach(raw => {
+                    const normalized = normalizeTradePlayerForUi(raw);
+                    if (!normalized.name) return;
+                    const key = normalizeTradeName(normalized.name);
+                    if (key && !lookup.has(key)) lookup.set(key, normalized);
+                });
+                if (mounted) setPlayerLookup(lookup);
+            })
+            .catch(() => { if (mounted) setPlayerLookup(new Map()); });
+        return () => { mounted = false; };
+    }, []);
+    const chet = resolveTradePlayer('Chet Holmgren', playerLookup);
+    const giannis = resolveTradePlayer('Giannis Antetokounmpo', playerLookup);
+    const fmt = (v) => formatTradeScore(v);
+    const Asset = ({ asset }) => React.createElement("div", { className: "article-trade-asset" },
+        asset.type === 'player'
+            ? React.createElement(PlayerPhoto, { player: asset.player, size: 62 })
+            : React.createElement(TeamLogo, { team: asset.team, size: 56 }),
+        React.createElement("div", { className: "article-trade-asset-text" },
+            React.createElement("div", { className: "article-trade-asset-name" }, asset.label),
+            React.createElement("div", { className: "article-trade-asset-meta" }, asset.meta),
+            asset.pick ? React.createElement("div", { className: "article-trade-asset-pick" }, asset.pick) : null));
+    const Side = ({ team, assets }) => React.createElement("div", { className: "article-trade-side" },
+        React.createElement("div", { className: "article-trade-side-header" },
+            React.createElement(TeamLogo, { team: team, size: 72 }),
+            React.createElement("div", null,
+                React.createElement("div", { className: "article-trade-team-name" }, team),
+                React.createElement("div", { className: "article-trade-team-sub" }, "Envia"))),
+        React.createElement("div", { className: "article-trade-assets" }, assets.map((asset, i) => React.createElement(Asset, { asset: asset, key: i }))));
+    const Spotlight = ({ player, fallbackName, fallbackTeam, fallbackPos }) => React.createElement("div", { className: "article-player-spotlight" },
+        React.createElement("div", { className: "article-player-spotlight-top" },
+            React.createElement(PlayerPhoto, { player: player, size: 72 }),
+            React.createElement("div", null,
+                React.createElement("div", { className: "article-player-spotlight-name" }, player.name || fallbackName),
+                React.createElement("div", { className: "article-player-spotlight-team" }, `${player.proTeam || fallbackTeam} • ${player.position || fallbackPos}`))),
+        React.createElement("div", { className: "article-player-spotlight-stats" },
+            React.createElement("div", { className: "article-player-spotlight-stat" },
+                React.createElement("div", { className: "article-player-spotlight-label" }, "AVG"),
+                React.createElement("div", { className: "article-player-spotlight-value" }, fmt(player.avg))),
+            React.createElement("div", { className: "article-player-spotlight-stat" },
+                React.createElement("div", { className: "article-player-spotlight-label" }, "TOTAL"),
+                React.createElement("div", { className: "article-player-spotlight-value" }, fmt(player.total)))));
+    const superAssets = [
+        { type: 'player', player: chet, label: chet.name || 'Chet Holmgren', meta: `${chet.proTeam || 'OKC'} • ${chet.position || 'PF/C'} • AVG ${fmt(chet.avg)}` },
+        { type: 'pick', team: "Stéfano's SuperSonics", label: 'Pick de 1º Round', meta: 'Ativo premium para o draft 2026/27', pick: 'Pick 12' }
+    ];
+    const piraAssets = [
+        { type: 'player', player: giannis, label: giannis.name || 'Giannis Antetokounmpo', meta: `${giannis.proTeam || 'MIL'} • ${giannis.position || 'PF/C'} • AVG ${fmt(giannis.avg)}` },
+        { type: 'pick', team: 'Pistons de Pira', label: 'Pick de 7º Round', meta: 'Peça secundária para profundidade de elenco', pick: 'Pick 103' }
+    ];
+    return (React.createElement("div", { className: "article-page" },
+        React.createElement("button", { className: "article-back", type: "button", onClick: () => setPage('HOME') }, "← Voltar para notícias"),
+        React.createElement("article", null,
+            React.createElement("div", { className: "article-hero" },
+                React.createElement(FeatureArticleImage, { src: article.heroImage, className: "article-hero-image" }),
+                React.createElement("div", { className: "article-hero-content" },
+                    React.createElement("div", { className: "article-kicker" },
+                        React.createElement("span", { className: `news-cat ${article.catClass}` }, article.cat),
+                        React.createElement("span", { className: "feed-time" }, article.time)),
+                    React.createElement("h1", { className: "article-title" }, article.title),
+                    React.createElement("div", { className: "article-subtitle" }, article.subtitle))),
+            React.createElement("div", { className: "article-body-card" },
+                React.createElement("div", { className: "article-body" },
+                    React.createElement("p", { className: "article-paragraph" }, "A offseason da AirBall Dynasty League ganhou seu primeiro grande terremoto envolvendo picks. SuperSonics e Pistons de Pira fecharam a primeira troca oficial da liga com escolhas de draft no pacote."),
+                    React.createElement("p", { className: "article-paragraph" }, "A leitura do SuperSonics foi clara: trocar potencial e flexibilidade por impacto imediato. Já o Pistons de Pira enxergou a chance de rejuvenescer o elenco, ganhar um big de elite para fantasy e ainda adicionar uma pick premium."),
+                    React.createElement("div", { className: "article-notice" }, "Resumo oficial: Stéfano’s SuperSonics envia Chet Holmgren + pick 12. Pistons de Pira envia Giannis Antetokounmpo + pick 103."),
+                    React.createElement("div", { className: "article-trade-deal-grid" },
+                        React.createElement(Side, { team: "Stéfano's SuperSonics", assets: superAssets }),
+                        React.createElement("div", { className: "article-trade-center" }, React.createElement("div", { className: "article-trade-swap" }, "↔")),
+                        React.createElement(Side, { team: "Pistons de Pira", assets: piraAssets })),
+                    React.createElement("h2", { className: "article-section-title" }, "Como a troca nasceu"),
+                    React.createElement("p", { className: "article-paragraph" }, "Segundo a versão fictícia da redação AirBall, a negociação começou com um contato direto do GM Stéfano Cecin. O objetivo era claro: buscar um nome capaz de elevar o teto competitivo do time já na largada da temporada."),
+                    React.createElement("p", { className: "article-paragraph" }, "O Pistons de Pira topou abrir conversa quando a pick 12 entrou na mesa. A partir dali, o acordo passou a equilibrar duas filosofias: o SuperSonics compra presente; o Pistons compra presente e futuro ao mesmo tempo."),
+                    React.createElement("h2", { className: "article-section-title" }, "Leitura de fantasy"),
+                    React.createElement("div", { className: "article-player-spotlights" },
+                        React.createElement(Spotlight, { player: chet, fallbackName: 'Chet Holmgren', fallbackTeam: 'OKC', fallbackPos: 'PF/C' }),
+                        React.createElement(Spotlight, { player: giannis, fallbackName: 'Giannis Antetokounmpo', fallbackTeam: 'MIL', fallbackPos: 'PF/C' })),
+                    React.createElement("p", { className: "article-paragraph" }, "No fantasy, o SuperSonics aposta em teto imediato. Giannis muda o desenho competitivo de qualquer franquia porque entrega produção massiva em múltiplas categorias e tem capacidade de dominar confrontos sozinho."),
+                    React.createElement("p", { className: "article-paragraph" }, "O Pistons de Pira, por sua vez, faz um movimento muito forte para dynasty. Chet Holmgren encaixa muito bem no formato AirBall por oferecer bloqueios, rebotes, eficiência e espaço real para crescimento. A pick 12 amplia ainda mais esse valor."),
+                    React.createElement("p", { className: "article-paragraph" }, "A pick 103 é bem menor em peso, mas ajuda a fechar a conta do negócio e adiciona profundidade para o lado do SuperSonics."),
+                    React.createElement("h2", { className: "article-section-title" }, "Veredito da redação"),
+                    React.createElement("p", { className: "article-paragraph" }, "No curto prazo, o SuperSonics sai com o maior nome. No recorte dynasty, o Pistons de Pira recebe um pacote muito forte com juventude e capital de draft. É exatamente esse conflito entre presente e futuro que faz a primeira troca com picks da AirBall ser tão boa para a liga."))))));
+}
+
 function FeaturedNews({ setPage }) {
-    const article = FEATURE_KEEPERS_ARTICLE;
-    return (React.createElement("div", { className: "featured-card featured-article-main", onClick: () => setPage('KEEPERS_ARTICLE') },
+    const article = FEATURE_TRADE_PICKS_ARTICLE;
+    return (React.createElement("div", { className: "featured-card featured-article-main", onClick: () => setPage('TRADE_PICKS_ARTICLE') },
         React.createElement("div", { className: "featured-bg" }),
         React.createElement("div", { className: "news-image-layer", style: { backgroundImage: `url(${article.heroImage})` } }),
         React.createElement("div", { className: "court-lines" }),
         React.createElement("div", { className: "ball-deco" }),
-        React.createElement("div", { style: { position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.28) 58%, rgba(0,0,0,0.12) 100%)' } }),
+        React.createElement("div", { style: { position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.34) 56%, rgba(0,0,0,0.18) 100%)' } }),
         React.createElement("div", { className: "featured-content" },
-            React.createElement("span", { className: "featured-badge" },
-                React.createElement("svg", { width: "10", height: "10", viewBox: "0 0 24 24", fill: "currentColor" },
-                    React.createElement("polygon", { points: "12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" })),
-                "NOT\u00CDCIA PRINCIPAL"),
+            React.createElement("span", { className: "featured-badge" }, "NOTÍCIA PRINCIPAL"),
             React.createElement("h1", { className: "featured-title" }, article.title),
             React.createElement("div", { className: "featured-bullets" },
-                React.createElement("div", { className: "featured-bullet" }, "Chugabum Ironclads come\u00E7a no topo com Nikola Joki\u0107"),
-                React.createElement("div", { className: "featured-bullet" }, "Canalhas do Bem, Paysandu Lobos e Revolution Fran\u00E7aise aparecem como amea\u00E7as diretas"),
-                React.createElement("div", { className: "featured-bullet" }, "Ranking considera encaixe, rota\u00E7\u00E3o, companheiros, uso ofensivo e pontua\u00E7\u00E3o AirBall")),
-            React.createElement("div", { className: "featured-cta" }, "Ler mat\u00E9ria completa \u2192"),
-            React.createElement("div", { className: "featured-footer" },
-                React.createElement("div", { className: "featured-mvp" },
-                    React.createElement("span", { className: "mvp-icon" }, "\uD83C\uDFC0"),
-                    React.createElement("div", null,
-                        React.createElement("div", { className: "mvp-label" }, "POWER RANKING"),
-                        React.createElement("div", { className: "mvp-name" }, "Keepers 2026/27"))),
-                React.createElement("span", { className: "featured-time" }, article.time)))));
+                React.createElement("div", { className: "featured-bullet" }, "Primeira troca com picks da história da AirBall Dynasty League"),
+                React.createElement("div", { className: "featured-bullet" }, "SuperSonics aposta em Giannis para subir o teto competitivo"),
+                React.createElement("div", { className: "featured-bullet" }, "Pistons de Pira recebe Chet Holmgren e a pick 12")),
+            React.createElement("div", { className: "featured-actions" },
+                React.createElement("button", { className: "btn-light" }, "Ler notícia"),
+                React.createElement("div", { className: "feed-time" }, article.time)))));
 }
 function SideNews({ gradient, catClass, cat, title, desc, image }) {
     return (React.createElement("div", { className: "side-news" },
@@ -8516,25 +8663,25 @@ function LatestTradesCard() {
                     })))));
         }) : (React.createElement("div", { className: "latest-trades-loading" }, "Nenhuma trade manual cadastrada.")))));
 }
-function NewsFeed() {
-    return (React.createElement(React.Fragment, null,
+function NewsFeed({ setPage }) {
+    const items = [KEEPERS_NEWS_CARD, ...NEWS_FEED];
+    return React.createElement(React.Fragment, null,
         React.createElement("div", { className: "section-header" },
-            React.createElement("div", { className: "section-title" }, "\u00DAltimas Not\u00EDcias"),
-            React.createElement("div", { className: "section-more" }, "Ver todas \u2192")),
-        React.createElement("div", { className: "news-feed" }, NEWS_FEED.map((n, i) => (React.createElement("div", { className: "feed-item", key: i },
-            React.createElement("div", { className: "feed-thumb", style: {
-                    background: n.image ? `url(${n.image})` : n.bg,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    color: 'white'
-                } }, !n.image && n.emoji),
-            React.createElement("div", { className: "feed-content" },
-                React.createElement("div", { className: "feed-top" },
-                    React.createElement("span", { className: `news-cat ${n.catClass}` }, n.cat),
-                    React.createElement("div", { className: "feed-title" }, n.title),
-                    React.createElement("div", { className: "feed-desc" }, n.desc)),
-                React.createElement("div", { className: "feed-meta" },
-                    React.createElement("span", { className: "feed-time" }, n.time)))))))));
+            React.createElement("div", { className: "section-title" }, "Últimas Notícias"),
+            React.createElement("div", { className: "section-more" }, "Ver todas →")),
+        React.createElement("div", { className: "news-feed" },
+            items.map((n, i) => {
+                const interactive = Boolean(n.page);
+                return React.createElement("div", { className: "feed-item", key: `${n.title}-${i}`, onClick: interactive ? () => setPage(n.page) : undefined, style: interactive ? { cursor: 'pointer' } : undefined },
+                    React.createElement("div", { className: "feed-thumb", style: { background: n.image ? `url(${n.image})` : n.bg, backgroundSize: 'cover', backgroundPosition: 'center', color: 'white' } }, !n.image && n.emoji),
+                    React.createElement("div", { className: "feed-content" },
+                        React.createElement("div", { className: "feed-top" },
+                            React.createElement("span", { className: `news-cat ${n.catClass}` }, n.cat),
+                            React.createElement("span", { className: "feed-time" }, n.time)),
+                        React.createElement("div", { className: "feed-title" }, n.title),
+                        React.createElement("div", { className: "feed-desc" }, n.desc),
+                        interactive ? React.createElement("div", { className: "feed-time", style: { marginTop: 8, color: 'var(--orange)', fontWeight: 800 } }, "Clique para abrir a matéria") : null));
+            })));
 }
 function formatFinalPosition(rank) {
     if (!rank)
@@ -8615,7 +8762,7 @@ function HomePage({ setPage }) {
                     React.createElement("div", { className: "news-grid featured-only" },
                         React.createElement(FeaturedNews, { setPage: setPage })),
                     React.createElement(DraftLiveEmbed, null),
-                    React.createElement(NewsFeed, null)),
+                    React.createElement(NewsFeed, { setPage: setPage })),
                 React.createElement("div", { className: "sidebar" },
                     React.createElement(HomeDraftCountdown, null),
                     React.createElement(StandingsCard, null),
@@ -9196,11 +9343,16 @@ function HonestometroPage() {
         .replace(/[^a-zA-Z0-9]+/g, '-')
         .replace(/^-+|-+$/g, '')
         .toLowerCase() || 'trade';
+    const getTradeGmLabel = (teamName) => {
+        const team = getTeam(teamName);
+        return team?.gm ? `GM ${team.gm}` : 'GM —';
+    };
     const renderResultSide = ({ teamName, side, otherSide, subtotal, comp, total }) => (React.createElement("div", { className: "trade-result-team-card" },
         React.createElement("div", { className: "trade-result-team-head" },
             React.createElement(TeamLogo, { team: teamName, size: 44 }),
             React.createElement("div", null,
                 React.createElement("div", { className: "trade-result-team-name" }, teamName),
+                React.createElement("div", { className: "trade-result-team-gm" }, getTradeGmLabel(teamName)),
                 React.createElement("div", { className: "trade-result-team-action" }, "envia"))),
         side.length === 0 ? (React.createElement("div", { className: "trade-result-empty-mini" }, "Nenhum ativo selecionado.")) : (React.createElement("div", { className: "trade-result-player-list" }, side.map(p => {
             const c = calcPlayer(p);
@@ -9241,7 +9393,7 @@ function HonestometroPage() {
             const pickInfo = isPickAsset(p) ? ` | equivale a ${p.projectedPlayerName}` : '';
             return `• ${p.name} — AVG ${c.rawAvg}${totalInfo}${floorNote}${pickInfo} × ${c.multiplierLabel} = ${c.value}`;
         }).join('\n') : '• Nenhum ativo';
-        return `⚖️ HONESTÔMETRO AIRBALL\n\nRegras: piso ${FLOOR_AVG} pts, multiplicadores por AVG, compensação de ${SLOT_COMPENSATION} pts por slot de diferença, aprovação se diferença < ${APPROVAL_LIMIT}% e regra especial 1x1: se a diferença de AVG for menor que 3 fantasy points, a troca é aceita. Picks R1-R10 valem o jogador projetado na posição do board e só são válidas com a mesma quantidade de picks e jogadores dos dois lados.\n\n${teamA} envia:\n${list(sideA)}\nSubtotal jogadores: ${playerSubtotalA}\nCompensação de slot: +${slotCompA}\nTotal: ${totalA}\n\n${teamB} envia:\n${list(sideB)}\nSubtotal jogadores: ${playerSubtotalB}\nCompensação de slot: +${slotCompB}\nTotal: ${totalB}\n\nDiferença: ${diffPct}%${oneForOneAvgDiff !== null ? `\nDiferença de AVG 1x1: ${oneForOneAvgDiff}` : ''}\nResultado: ${verdict.label}\nParecer: ${verdict.note}\n\nApós postagem, começa a janela de 12 horas para atravessamento.`;
+        return `⚖️ HONESTÔMETRO AIRBALL\n\nRegras: piso ${FLOOR_AVG} pts, multiplicadores por AVG, compensação de ${SLOT_COMPENSATION} pts por slot de diferença, aprovação se diferença < ${APPROVAL_LIMIT}% e regra especial 1x1: se a diferença de AVG for menor que 3 fantasy points, a troca é aceita. Picks R1-R10 valem o jogador projetado na posição do board e só são válidas com a mesma quantidade de picks e jogadores dos dois lados.\n\n${teamA}\n${getTradeGmLabel(teamA)}\nenvia:\n${list(sideA)}\nSubtotal jogadores: ${playerSubtotalA}\nCompensação de slot: +${slotCompA}\nTotal: ${totalA}\n\n${teamB}\n${getTradeGmLabel(teamB)}\nenvia:\n${list(sideB)}\nSubtotal jogadores: ${playerSubtotalB}\nCompensação de slot: +${slotCompB}\nTotal: ${totalB}\n\nDiferença: ${diffPct}%${oneForOneAvgDiff !== null ? `\nDiferença de AVG 1x1: ${oneForOneAvgDiff}` : ''}\nResultado: ${verdict.label}\nParecer: ${verdict.note}\n\nApós postagem, começa a janela de 12 horas para atravessamento.`;
     };
     const copyResult = async () => {
         const text = exportText();
@@ -11211,6 +11363,7 @@ function App() {
             case 'SORTEIO DRAFT': return React.createElement(DraftDrawPage, null);
             case 'JOGADORES': return React.createElement(PlayersPage, null);
             case 'KEEPERS_ARTICLE': return React.createElement(KeeperArticlePage, { setPage: setPage });
+            case 'TRADE_PICKS_ARTICLE': return React.createElement(TradePicksArticlePage, { setPage: setPage });
             default: return React.createElement(HomePage, { setPage: setPage });
         }
     };
