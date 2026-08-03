@@ -7180,6 +7180,18 @@ const HOF_DATA = [
 ];
 const TRADES_DATA = [
     {
+        week: 'OFFSEASON • PRIMEIRA TROCA COM PICKS',
+        status: 'OFICIAL',
+        cls: 'trade-approved',
+        teamA: "Stéfano's SuperSonics",
+        teamB: 'Pistons de Pira',
+        teamADisplay: "Stéfano's SuperSonics",
+        teamBDisplay: 'Pistons de Pira',
+        givesA: ['Chet Holmgren', 'Pick 12'],
+        givesB: ['Giannis Antetokounmpo', 'Pick 103'],
+        analysis: "Primeira troca com picks da história da AirBall: Stéfano's SuperSonics envia Chet Holmgren + pick 12 e recebe Giannis Antetokounmpo + pick 103 do Pistons de Pira."
+    },
+    {
         week: '14/07 • TRADE PROCESSADA',
         status: 'OFICIAL',
         cls: 'trade-approved',
@@ -7350,6 +7362,43 @@ const DRAFT_ORDER = [
         "cls": "pick-orig"
     }
 ];
+
+const DRAFT_PICK_OWNER_OVERRIDES = {
+    12: 'Pistons de Pira',
+    103: "Stéfano's SuperSonics"
+};
+function getDraftPickInfoForOverall(overallPick) {
+    const overall = Number(overallPick) || 1;
+    const round = Math.floor((overall - 1) / 16) + 1;
+    const pick = ((overall - 1) % 16) + 1;
+    const seedPick = round % 2 === 1 ? pick : 17 - pick;
+    const originalTeam = DRAFT_ORDER.find(row => Number(row.pick) === Number(seedPick)) || DRAFT_ORDER[0];
+    const ownerName = DRAFT_PICK_OWNER_OVERRIDES[overall] || originalTeam.name;
+    const ownerTeam = getTeam(ownerName);
+    return {
+        overall,
+        overallPick: overall,
+        round,
+        pick,
+        seedPick,
+        originalTeam,
+        ownerName,
+        ownerTeam,
+        team: ownerTeam
+    };
+}
+function getDraftPicksForTeam(teamName, rounds = 8) {
+    const normalized = normalizeTeamName(teamName);
+    const maxOverall = Number(rounds || 8) * 16;
+    const picks = [];
+    for (let overall = 1; overall <= maxOverall; overall += 1) {
+        const info = getDraftPickInfoForOverall(overall);
+        if (normalizeTeamName(info.ownerName) === normalized) {
+            picks.push(info);
+        }
+    }
+    return picks;
+}
 const DRAFT_PRIORITY_INDEX = [
     {
         "pos": 1,
@@ -8457,6 +8506,10 @@ function getTradeWorkerOrigin() {
 function normalizeTradePlayerForUi(player) {
     var _a, _b, _c, _d, _e, _f, _g, _h;
     if (typeof player === 'string') {
+        const pickMatch = player.match(/^\s*pick\s*(\d+)\s*$/i);
+        if (pickMatch) {
+            return { id: `trade-pick-${pickMatch[1]}`, name: `Pick ${pickMatch[1]}`, avg: 0, total: 0, position: 'PICK', proTeam: 'DRAFT', photoUrl: '', isDraftPick: true };
+        }
         return { id: '', name: player, avg: 0, total: 0, position: '—', proTeam: 'NBA', photoUrl: '' };
     }
     const id = String((player === null || player === void 0 ? void 0 : player.id) || (player === null || player === void 0 ? void 0 : player.playerId) || (player === null || player === void 0 ? void 0 : player.espnId) || '');
@@ -8583,11 +8636,11 @@ function TradePlayersList({ players }) {
             React.createElement("div", null,
                 React.createElement("div", { className: "trade-dynamic-player-name" }, p.name),
                 React.createElement("div", { className: "trade-dynamic-player-meta" },
-                    p.proTeam || 'NBA',
+                    p.isDraftPick ? 'DRAFT' : (p.proTeam || 'NBA'),
                     " \u2022 ",
                     p.position || '—',
-                    " \u2022 AVG ",
-                    formatTradeScore(p.avg)))));
+                    p.isDraftPick ? "" : " \u2022 AVG ",
+                    p.isDraftPick ? "" : formatTradeScore(p.avg)))));
     })));
 }
 function TradeNewsCard({ trade }) {
@@ -9162,7 +9215,8 @@ function HonestometroPage() {
         const projected = draftBoardPlayers[overall - 1];
         if (!projected)
             return null;
-        const ownerName = getTeam(orderRow.name).name;
+        const pickInfo = getDraftPickInfoForOverall(overall);
+        const ownerName = getTeam(pickInfo.ownerName).name;
         return {
             ...projected,
             id: `draft-pick-${overall}-${normalizeTeamName(ownerName)}`,
@@ -9776,17 +9830,7 @@ function DraftTop50Players() {
     };
     const getDraftAssignment = (overallIndex) => {
         const overallPick = overallIndex + 1;
-        const round = Math.floor(overallIndex / 16) + 1;
-        const roundPick = (overallIndex % 16) + 1;
-        const seedPick = round % 2 === 1 ? roundPick : 17 - roundPick;
-        const team = DRAFT_ORDER.find(row => Number(row.pick) === Number(seedPick)) || DRAFT_ORDER[0];
-        return {
-            overallPick,
-            round,
-            pick: roundPick,
-            seedPick,
-            team
-        };
+        return getDraftPickInfoForOverall(overallPick);
     };
     useEffect(() => {
         fetch(PLAYERS_API_URL)
@@ -9961,21 +10005,16 @@ function DraftSimulatorPage() {
 
     const formatScore = (value) => Number(value || 0).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
-    const getTeamSeed = (teamName) => {
-        const row = DRAFT_ORDER.find(item => normalizeTeamName(item.name) === normalizeTeamName(teamName));
-        return Number(row?.pick || 1);
+    const teamDraftPicks = getDraftPicksForTeam(selectedTeam, ROUNDS);
+
+    const getPickInfo = (slotIndex) => {
+        const info = teamDraftPicks[Number(slotIndex) - 1] || getDraftPickInfoForOverall(Number(slotIndex) || 1);
+        return { ...info, slotIndex: Number(slotIndex) };
     };
 
-    const getPickInfo = (round) => {
-        const seed = getTeamSeed(selectedTeam);
-        const pick = Number(round) % 2 === 1 ? seed : 17 - seed;
-        const overall = (Number(round) - 1) * 16 + pick;
-        return { seed, pick, round: Number(round), overall };
-    };
-
-    const getWindowStartRank = (round) => {
-        const info = getPickInfo(round);
-        const offset = Number(round) === 1 ? 2 : 3;
+    const getWindowStartRank = (slotIndex) => {
+        const info = getPickInfo(slotIndex);
+        const offset = Number(info.round) === 1 ? 2 : 3;
         return Math.max(1, info.overall - offset);
     };
 
@@ -10038,7 +10077,7 @@ function DraftSimulatorPage() {
     return (React.createElement("div", { className: "main-wrap draft-page" },
         React.createElement("div", { className: "page-hero" },
             React.createElement("div", { className: "page-hero-title" }, "🧪 Simulador de Draft"),
-            React.createElement("div", { className: "page-hero-sub" }, "Escolha uma franquia, simule 8 rounds e monte um board com AVG total e média do time")),
+            React.createElement("div", { className: "page-hero-sub" }, "Escolha uma franquia, simule suas escolhas atualizadas após trocas de picks e monte um board com AVG total e média do time")),
         React.createElement("div", { className: "draft-sim-card" },
             React.createElement("div", { className: "draft-sim-header" },
                 React.createElement("div", null,
@@ -10059,11 +10098,10 @@ function DraftSimulatorPage() {
                         React.createElement(TeamLogo, { team: selectedTeam, size: 150 }),
                         React.createElement("div", { className: "draft-sim-team-name" }, selectedTeamData.name),
                         React.createElement("div", { className: "draft-sim-team-seed" },
-                            "Seed ",
-                            getTeamSeed(selectedTeam),
-                            " • ",
+                            teamDraftPicks.length,
+                            " escolhas de draft • ",
                             teamKeepers.length,
-                            " keepers + 8 escolhas simuladas")),
+                            " keepers oficiais")),
                     React.createElement("div", { className: "draft-sim-totals" },
                         React.createElement("div", { className: "draft-sim-total-box" },
                             React.createElement("div", { className: "draft-sim-total-label" }, "AVG total"),
