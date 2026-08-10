@@ -5802,6 +5802,417 @@
   }
 
 
+
+  /* Draft ideal + keepers article */
+  .draft-ideal-hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 22px;
+    max-width: 880px;
+  }
+  .draft-ideal-hero-stat {
+    border-radius: 18px;
+    padding: 14px 16px;
+    background: rgba(255,255,255,.13);
+    border: 1px solid rgba(255,255,255,.20);
+    backdrop-filter: blur(3px);
+  }
+  .draft-ideal-hero-stat-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,.72);
+    font-weight: 900;
+  }
+  .draft-ideal-hero-stat-value {
+    margin-top: 4px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 30px;
+    line-height: 1;
+    color: #fff;
+    font-weight: 900;
+  }
+  .draft-ideal-lede {
+    border-radius: 22px;
+    padding: 22px;
+    background: linear-gradient(135deg, rgba(249,115,22,.14), rgba(124,58,237,.08));
+    border: 1px solid rgba(249,115,22,.18);
+    color: #45235f;
+    font-size: 17px;
+    line-height: 1.65;
+    font-weight: 800;
+    margin-bottom: 24px;
+  }
+  .draft-ideal-table-wrap {
+    overflow-x: auto;
+    border-radius: 20px;
+    border: 1px solid rgba(45,10,78,.10);
+    box-shadow: 0 10px 28px rgba(45,10,78,.08);
+    margin: 22px 0 30px;
+  }
+  .draft-ideal-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+    background: #fff;
+  }
+  .draft-ideal-table th {
+    background: #1a0635;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 12px;
+    text-align: left;
+  }
+  .draft-ideal-table td {
+    padding: 12px;
+    border-bottom: 1px solid #f0edf7;
+    font-size: 13px;
+    vertical-align: middle;
+  }
+  .draft-ideal-table tr:nth-child(even) td { background: #fcfbff; }
+  .draft-ideal-table .rank-cell {
+    font-family: 'Oswald', sans-serif;
+    color: var(--orange);
+    font-size: 20px;
+    font-weight: 900;
+    text-align: center;
+  }
+  .draft-ideal-team-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 220px;
+    font-weight: 900;
+    color: #21132f;
+  }
+  .draft-ideal-total {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--purple-deep);
+  }
+  .draft-ideal-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin: 22px 0 32px;
+  }
+  .draft-ideal-photo-card {
+    border-radius: 20px;
+    padding: 16px;
+    min-height: 170px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(180deg, #fff 0%, #faf8ff 100%);
+    border: 1px solid rgba(124,58,237,.12);
+    box-shadow: 0 12px 28px rgba(49,14,88,.08);
+  }
+  .draft-ideal-photo-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .draft-ideal-photo-name {
+    font-family: 'Oswald', sans-serif;
+    color: var(--purple-deep);
+    font-size: 22px;
+    line-height: 1;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  .draft-ideal-photo-role {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--gray-text);
+    text-transform: uppercase;
+    letter-spacing: .7px;
+    font-weight: 800;
+  }
+  .draft-ideal-photo-note {
+    margin-top: 14px;
+    color: #4b3a60;
+    font-size: 13px;
+    line-height: 1.45;
+    font-weight: 700;
+  }
+  .draft-ideal-team-focus {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin: 22px 0 32px;
+  }
+  .draft-ideal-focus-card {
+    border-radius: 22px;
+    padding: 18px;
+    color: white;
+    min-height: 190px;
+    background:
+      radial-gradient(circle at 90% 10%, rgba(249,115,22,.38), transparent 34%),
+      linear-gradient(135deg, #1a0635 0%, #0a0015 100%);
+    box-shadow: 0 14px 34px rgba(45,10,78,.18);
+    border: 1px solid rgba(255,255,255,.10);
+  }
+  .draft-ideal-focus-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .draft-ideal-focus-team {
+    font-family: 'Oswald', sans-serif;
+    font-size: 24px;
+    line-height: 1;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  .draft-ideal-focus-total {
+    color: var(--orange);
+    font-family: 'Oswald', sans-serif;
+    font-size: 34px;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .draft-ideal-focus-text {
+    color: rgba(255,255,255,.78);
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 700;
+  }
+  .draft-ideal-inline-banner {
+    margin: 34px 0;
+    border-radius: 24px;
+    min-height: 320px;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    box-shadow: 0 16px 38px rgba(45,10,78,.16);
+  }
+  @media (max-width: 900px) {
+    .draft-ideal-hero-stats,
+    .draft-ideal-photo-grid,
+    .draft-ideal-team-focus { grid-template-columns: 1fr; }
+  }
+
+
+  /* Draft ideal expanded article */
+  .draft-ideal-tier-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin: 22px 0 34px;
+  }
+  .draft-ideal-tier-card {
+    border-radius: 22px;
+    padding: 18px;
+    background: linear-gradient(180deg, #fff 0%, #faf8ff 100%);
+    border: 1px solid rgba(124,58,237,.13);
+    box-shadow: 0 12px 28px rgba(49,14,88,.08);
+  }
+  .draft-ideal-tier-title {
+    font-family: 'Oswald', sans-serif;
+    color: var(--purple-deep);
+    font-size: 24px;
+    line-height: 1;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .draft-ideal-tier-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .draft-ideal-tier-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 9px 10px;
+    border-radius: 14px;
+    background: #f8f4ff;
+    border: 1px solid #ece3ff;
+    font-size: 13px;
+    font-weight: 900;
+    color: #241532;
+  }
+  .draft-ideal-tier-row span:last-child {
+    font-family: 'Oswald', sans-serif;
+    color: var(--orange);
+    font-size: 18px;
+  }
+  .draft-ideal-split {
+    display: grid;
+    grid-template-columns: minmax(260px, .92fr) minmax(0, 1.08fr);
+    gap: 24px;
+    align-items: stretch;
+    margin: 34px 0;
+    border-radius: 28px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid rgba(45,10,78,.10);
+    box-shadow: 0 16px 38px rgba(45,10,78,.12);
+  }
+  .draft-ideal-split.reverse {
+    grid-template-columns: minmax(0, 1.08fr) minmax(260px, .92fr);
+  }
+  .draft-ideal-split-media {
+    position: relative;
+    min-height: 390px;
+    padding: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      radial-gradient(circle at 50% 22%, rgba(249,115,22,.34), transparent 32%),
+      linear-gradient(135deg, #1a0635 0%, #0a0015 100%);
+    overflow: hidden;
+  }
+  .draft-ideal-split-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,.04), transparent 42%),
+      repeating-linear-gradient(90deg, transparent 0 52px, rgba(255,255,255,.025) 52px 53px);
+    pointer-events: none;
+  }
+  .draft-ideal-split-photos {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .draft-ideal-split-photo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+  }
+  .draft-ideal-split-photo-item .trade-player-photo {
+    border: 4px solid rgba(255,255,255,.72);
+    box-shadow: 0 18px 34px rgba(0,0,0,.35);
+    background: rgba(255,255,255,.14);
+  }
+  .draft-ideal-split-photo-label {
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    line-height: 1;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    text-shadow: 0 6px 16px rgba(0,0,0,.42);
+  }
+  .draft-ideal-split-content {
+    padding: 30px 30px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .draft-ideal-split-rank {
+    display: inline-flex;
+    width: fit-content;
+    padding: 6px 11px;
+    border-radius: 999px;
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .draft-ideal-split-title {
+    font-family: 'Oswald', sans-serif;
+    color: var(--purple-deep);
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: .98;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .draft-ideal-split-text {
+    color: #352541;
+    font-size: 16px;
+    line-height: 1.72;
+    margin: 0 0 14px;
+  }
+  .draft-ideal-split-numbers {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .draft-ideal-number-box {
+    border-radius: 16px;
+    padding: 11px 12px;
+    background: #f8f4ff;
+    border: 1px solid #ece3ff;
+  }
+  .draft-ideal-number-label {
+    color: var(--gray-text);
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+  }
+  .draft-ideal-number-value {
+    margin-top: 3px;
+    font-family: 'Oswald', sans-serif;
+    color: var(--purple-deep);
+    font-size: 25px;
+    line-height: 1;
+    font-weight: 900;
+  }
+  .draft-ideal-pick-list {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .draft-ideal-pick-chip {
+    border-radius: 999px;
+    padding: 6px 10px;
+    background: rgba(249,115,22,.10);
+    color: #7a3300;
+    border: 1px solid rgba(249,115,22,.18);
+    font-size: 11px;
+    font-weight: 900;
+  }
+  .draft-ideal-long-read {
+    columns: 2 320px;
+    column-gap: 32px;
+    margin: 8px 0 24px;
+  }
+  .draft-ideal-long-read p {
+    break-inside: avoid;
+  }
+  @media (max-width: 900px) {
+    .draft-ideal-tier-grid,
+    .draft-ideal-split,
+    .draft-ideal-split.reverse {
+      grid-template-columns: 1fr;
+    }
+    .draft-ideal-split.reverse .draft-ideal-split-content {
+      order: 2;
+    }
+    .draft-ideal-split.reverse .draft-ideal-split-media {
+      order: 1;
+    }
+    .draft-ideal-split-numbers {
+      grid-template-columns: 1fr;
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -6121,6 +6532,59 @@ const FEATURE_TRADE_PICKS_ARTICLE = {
     title: 'A PRIMEIRA TROCA COM PICKS DA LIGA: SUPERSONICS E PISTONS DE PIRA AGITAM A OFFSEASON',
     subtitle: 'Stéfano\'s SuperSonics envia Chet Holmgren e a pick 12 para receber Giannis Antetokounmpo e a pick 103 do Pistons de Pira.',
     heroImage: './assets/news/trade-supersonics-pistons-capa.jpg'
+};
+
+
+const FEATURE_DRAFT_IDEAL_ARTICLE = {
+    id: 'draft-ideal-keepers-2026-27',
+    cat: 'POWER RANKING',
+    catClass: 'cat-analysis',
+    time: 'Pré-temporada 2026/27',
+    title: 'CHATGPT SIMULA O DRAFT IDEAL DA AIRBALL E SOMA COM OS KEEPERS',
+    subtitle: 'Paysandu assume o topo na soma geral, Pistons dispara com duas picks de 1º round e SuperSonics aposta que Giannis compensa um draft mais curto.',
+    heroImage: './assets/news/draft-ideal-keepers-capa.jpg',
+    inlineImage: './assets/news/draft-ideal-keepers-meio.jpg'
+};
+
+const DRAFT_IDEAL_RANKING = [
+    { pos: 1, team: "Paysandu Lobo's", keepers: 102.0, draft: 282.8, total: 384.8, note: "equilíbrio entre Cade, Edwards e um draft forte" },
+    { pos: 2, team: "Chugabum Ironclads", keepers: 112.0, draft: 271.4, total: 383.4, note: "melhor dupla de keepers da liga" },
+    { pos: 3, team: "Charlotte DunkLipe", keepers: 95.5, draft: 287.6, total: 383.1, note: "Pick 1 coloca Shai no elenco" },
+    { pos: 4, team: "Canalhas do Bem", keepers: 105.0, draft: 271.9, total: 376.9, note: "Luka mantém o time no topo" },
+    { pos: 5, team: "Pistons de Pira", keepers: 87.5, draft: 288.5, total: 376.0, note: "melhor draft projetado, com duas picks de 1º round" },
+    { pos: 6, team: "Revolution francaise", keepers: 102.0, draft: 273.3, total: 375.3, note: "Wembanyama carrega teto altíssimo" },
+    { pos: 7, team: "Pato's Team", keepers: 94.0, draft: 274.3, total: 368.3, note: "Kawhi e Mobley sustentam piso forte" },
+    { pos: 8, team: "Warlock Jamaicans", keepers: 90.0, draft: 276.7, total: 366.7, note: "draft sólido aumenta a profundidade" },
+    { pos: 9, team: "Red Hot Blazer Peppers", keepers: 93.5, draft: 272.0, total: 365.5, note: "Jalen Johnson e Amen dão upside dynasty" },
+    { pos: 10, team: "Stéfano's SuperSonics", keepers: 106.0, draft: 257.9, total: 363.9, note: "elite nos keepers, mas sem a pick 12" },
+    { pos: 11, team: "Nortz", keepers: 91.0, draft: 272.0, total: 363.0, note: "Murray e Banchero deixam o time perigoso" },
+    { pos: 12, team: "Ghost of goat", keepers: 87.0, draft: 274.8, total: 361.8, note: "draft melhor que a posição geral sugere" },
+    { pos: 13, team: "Instituto Popovich", keepers: 86.5, draft: 273.8, total: 360.3, note: "Mitchell lidera, mas Keyonte limita a soma" },
+    { pos: 14, team: "Fi du Jequisom", keepers: 86.0, draft: 272.3, total: 358.3, note: "LeBron e Flagg misturam presente e futuro" },
+    { pos: 15, team: "Team Djalma Jr", keepers: 83.0, draft: 272.7, total: 355.7, note: "Durant ainda pesa, mas o conjunto começa atrás" },
+    { pos: 16, team: "Acre Dinosaurs", keepers: 81.8, draft: 273.2, total: 355.0, note: "Bam e Jaylen precisam superar a projeção" }
+];
+
+const DRAFT_IDEAL_NEWS_CARD = {
+    cat: FEATURE_DRAFT_IDEAL_ARTICLE.cat,
+    catClass: FEATURE_DRAFT_IDEAL_ARTICLE.catClass,
+    time: FEATURE_DRAFT_IDEAL_ARTICLE.time,
+    title: FEATURE_DRAFT_IDEAL_ARTICLE.title,
+    desc: 'Simulação soma a projeção de keepers já existente com o draft ideal por AVG, respeitando a troca de picks entre SuperSonics e Pistons.',
+    image: FEATURE_DRAFT_IDEAL_ARTICLE.heroImage,
+    emoji: '📊',
+    page: 'DRAFT_IDEAL_ARTICLE'
+};
+
+const TRADE_PICKS_NEWS_CARD = {
+    cat: FEATURE_TRADE_PICKS_ARTICLE.cat,
+    catClass: FEATURE_TRADE_PICKS_ARTICLE.catClass,
+    time: FEATURE_TRADE_PICKS_ARTICLE.time,
+    title: FEATURE_TRADE_PICKS_ARTICLE.title,
+    desc: 'Primeira troca com picks da liga colocou Giannis no SuperSonics e levou Chet Holmgren mais a pick 12 para o Pistons.',
+    image: FEATURE_TRADE_PICKS_ARTICLE.heroImage,
+    emoji: '🔄',
+    page: 'TRADE_PICKS_ARTICLE'
 };
 
 const FEATURE_KEEPERS_ARTICLE = {
@@ -8271,6 +8735,324 @@ function KeeperArticlePage({ setPage }) {
                         .filter(line => !/^\d+\s+/.test(line) && line !== 'Pos.\tTime\tKeepers\tTotal')
                         .map((line, index) => React.createElement("p", { className: "article-paragraph", key: `ranking-extra-${index}` }, line)))))));
 }
+
+
+function DraftIdealArticlePage({ setPage }) {
+    const e = React.createElement;
+    const article = FEATURE_DRAFT_IDEAL_ARTICLE;
+    const [playerLookup, setPlayerLookup] = useState(new Map());
+
+    useEffect(() => {
+        let mounted = true;
+        fetch(LEAGUE_PLAYERS_API_URL)
+            .then(r => r.json())
+            .then(data => {
+                const list = Array.isArray(data) ? data : (data.players || data.items || []);
+                const lookup = new Map();
+                list.forEach(raw => {
+                    const normalized = normalizeTradePlayerForUi(raw);
+                    if (!normalized.name) return;
+                    const key = normalizeTradeName(normalized.name);
+                    if (key && !lookup.has(key)) lookup.set(key, normalized);
+                });
+                if (mounted) setPlayerLookup(lookup);
+            })
+            .catch(() => { if (mounted) setPlayerLookup(new Map()); });
+        return () => { mounted = false; };
+    }, []);
+
+    const fmt = (value) => Number(value || 0).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    const findPlayer = (name) => resolveTradePlayer(name, playerLookup);
+
+    const PhotoCard = ({ name, role, note }) => {
+        const player = findPlayer(name);
+        return e("div", { className: "draft-ideal-photo-card" },
+            e("div", { className: "draft-ideal-photo-top" },
+                e(PlayerPhoto, { player, size: 66 }),
+                e("div", null,
+                    e("div", { className: "draft-ideal-photo-name" }, name),
+                    e("div", { className: "draft-ideal-photo-role" }, role)
+                )
+            ),
+            e("div", { className: "draft-ideal-photo-note" }, note)
+        );
+    };
+
+    const SplitPhoto = ({ name, label }) => {
+        const player = findPlayer(name);
+        return e("div", { className: "draft-ideal-split-photo-item" },
+            e(PlayerPhoto, { player, size: 138 }),
+            e("div", { className: "draft-ideal-split-photo-label" }, label || name)
+        );
+    };
+
+    const SplitFeature = ({ rank, title, reverse = false, photos = [], paragraphs = [], numbers = [], picks = [] }) =>
+        e("section", { className: `draft-ideal-split ${reverse ? 'reverse' : ''}` },
+            reverse ? e("div", { className: "draft-ideal-split-content" },
+                e("div", { className: "draft-ideal-split-rank" }, rank),
+                e("div", { className: "draft-ideal-split-title" }, title),
+                paragraphs.map((p, i) => e("p", { className: "draft-ideal-split-text", key: `p-${i}` }, p)),
+                e("div", { className: "draft-ideal-split-numbers" }, numbers.map(n => e("div", { className: "draft-ideal-number-box", key: n.label },
+                    e("div", { className: "draft-ideal-number-label" }, n.label),
+                    e("div", { className: "draft-ideal-number-value" }, n.value)
+                ))),
+                e("div", { className: "draft-ideal-pick-list" }, picks.map(p => e("span", { className: "draft-ideal-pick-chip", key: p }, p)))
+            ) : e("div", { className: "draft-ideal-split-media" },
+                e("div", { className: "draft-ideal-split-photos" }, photos.map(p => e(SplitPhoto, { key: p.name, ...p })))
+            ),
+            reverse ? e("div", { className: "draft-ideal-split-media" },
+                e("div", { className: "draft-ideal-split-photos" }, photos.map(p => e(SplitPhoto, { key: p.name, ...p })))
+            ) : e("div", { className: "draft-ideal-split-content" },
+                e("div", { className: "draft-ideal-split-rank" }, rank),
+                e("div", { className: "draft-ideal-split-title" }, title),
+                paragraphs.map((p, i) => e("p", { className: "draft-ideal-split-text", key: `p-${i}` }, p)),
+                e("div", { className: "draft-ideal-split-numbers" }, numbers.map(n => e("div", { className: "draft-ideal-number-box", key: n.label },
+                    e("div", { className: "draft-ideal-number-label" }, n.label),
+                    e("div", { className: "draft-ideal-number-value" }, n.value)
+                ))),
+                e("div", { className: "draft-ideal-pick-list" }, picks.map(p => e("span", { className: "draft-ideal-pick-chip", key: p }, p)))
+            )
+        );
+
+    const FocusCard = ({ team, total, text }) => e("div", { className: "draft-ideal-focus-card" },
+        e("div", { className: "draft-ideal-focus-top" },
+            e(TeamLogo, { team, size: 58 }),
+            e("div", null,
+                e("div", { className: "draft-ideal-focus-team" }, getTeam(team).name),
+                e("div", { className: "draft-ideal-focus-total" }, `${fmt(total)} FP`)
+            )
+        ),
+        e("div", { className: "draft-ideal-focus-text" }, text)
+    );
+
+    const TierCard = ({ title, rows }) => e("div", { className: "draft-ideal-tier-card" },
+        e("div", { className: "draft-ideal-tier-title" }, title),
+        e("div", { className: "draft-ideal-tier-list" }, rows.map(row => e("div", { className: "draft-ideal-tier-row", key: row.team },
+            e("span", null, `${row.pos}. ${row.team}`),
+            e("span", null, `${fmt(row.total)}`)
+        )))
+    );
+
+    const RankingTable = () => e("div", { className: "draft-ideal-table-wrap" },
+        e("table", { className: "draft-ideal-table" },
+            e("thead", null,
+                e("tr", null,
+                    e("th", null, "#"),
+                    e("th", null, "Time"),
+                    e("th", null, "Keepers"),
+                    e("th", null, "Draft ideal"),
+                    e("th", null, "Total"),
+                    e("th", null, "Leitura")
+                )
+            ),
+            e("tbody", null, DRAFT_IDEAL_RANKING.map(row => e("tr", { key: row.team },
+                e("td", { className: "rank-cell" }, row.pos),
+                e("td", null,
+                    e("div", { className: "draft-ideal-team-cell" },
+                        e(TeamLogo, { team: row.team, size: 38 }),
+                        e("span", null, getTeam(row.team).name)
+                    )
+                ),
+                e("td", null, fmt(row.keepers)),
+                e("td", null, fmt(row.draft)),
+                e("td", { className: "draft-ideal-total" }, fmt(row.total)),
+                e("td", null, row.note)
+            )))
+        )
+    );
+
+    const tier1 = DRAFT_IDEAL_RANKING.slice(0, 3);
+    const tier2 = DRAFT_IDEAL_RANKING.slice(3, 6);
+    const tier3 = DRAFT_IDEAL_RANKING.slice(6, 12);
+    const tier4 = DRAFT_IDEAL_RANKING.slice(12);
+
+    return e("div", { className: "article-page" },
+        e("button", { className: "article-back", onClick: () => setPage('HOME') }, "← Voltar para início"),
+        e("article", null,
+            e("div", { className: "article-hero" },
+                e("div", { className: "article-hero-image", style: { backgroundImage: `url(${article.heroImage})` } }),
+                e("div", { className: "article-hero-content" },
+                    e("div", { className: "article-kicker" },
+                        e("span", { className: `news-cat ${article.catClass}` }, article.cat),
+                        e("span", { className: "feed-time" }, article.time)
+                    ),
+                    e("h1", { className: "article-title" }, article.title),
+                    e("div", { className: "article-subtitle" }, article.subtitle),
+                    e("div", { className: "draft-ideal-hero-stats" },
+                        e("div", { className: "draft-ideal-hero-stat" },
+                            e("div", { className: "draft-ideal-hero-stat-label" }, "Líder geral"),
+                            e("div", { className: "draft-ideal-hero-stat-value" }, "Paysandu")
+                        ),
+                        e("div", { className: "draft-ideal-hero-stat" },
+                            e("div", { className: "draft-ideal-hero-stat-label" }, "Melhor draft"),
+                            e("div", { className: "draft-ideal-hero-stat-value" }, "Pistons")
+                        ),
+                        e("div", { className: "draft-ideal-hero-stat" },
+                            e("div", { className: "draft-ideal-hero-stat-label" }, "Melhores keepers"),
+                            e("div", { className: "draft-ideal-hero-stat-value" }, "Chugabum")
+                        )
+                    )
+                )
+            ),
+            e("div", { className: "article-body-card" },
+                e("div", { className: "article-body" },
+                    e("div", { className: "draft-ideal-lede" },
+                        "A projeção de keepers não mudou. A novidade é outra: o ChatGPT simulou o draft ideal de todos os times, usando a ordem do board por AVG, aplicou as picks trocadas e somou esse resultado aos keepers já projetados."
+                    ),
+
+                    e("div", { className: "draft-ideal-long-read" },
+                        e("p", { className: "article-paragraph" },
+                            "O exercício é simples, mas poderoso: se cada franquia escolhesse exatamente o jogador correspondente à sua posição no board, como ficaria a força total dos elencos? A resposta muda a leitura da pré-temporada. O ranking puro de keepers tinha o Chugabum no topo, o SuperSonics como principal perseguidor e o Canalhas logo atrás. Só que, ao somar o draft ideal, a vantagem de algumas franquias muda de lugar."
+                        ),
+                        e("p", { className: "article-paragraph" },
+                            "A troca entre Stéfano's SuperSonics e Pistons de Pira é o ponto mais sensível da simulação. O Pistons fica com duas escolhas de 1º round, enquanto o SuperSonics começa o draft apenas no 2º round e ganha uma escolha extra no 7º. Isso cria dois caminhos opostos: o Pistons ganha profundidade imediata no board, e o SuperSonics concentra mais valor nos keepers com Giannis e Reaves."
+                        )
+                    ),
+
+                    e("h2", { className: "article-section-title" }, "Ranking completo: keepers + draft ideal"),
+                    e(RankingTable, null),
+
+                    e("h2", { className: "article-section-title" }, "Separação por tiers"),
+                    e("div", { className: "draft-ideal-tier-grid" },
+                        e(TierCard, { title: "Tier 1 — Topo absoluto", rows: tier1 }),
+                        e(TierCard, { title: "Tier 2 — Candidatos fortes", rows: tier2 }),
+                        e(TierCard, { title: "Tier 3 — Playoff embolado", rows: tier3 }),
+                        e(TierCard, { title: "Tier 4 — Precisam superar a projeção", rows: tier4 })
+                    ),
+
+                    e(SplitFeature, {
+                        rank: "1º geral • 384,8 FP",
+                        title: "Paysandu assume a liderança pelo equilíbrio",
+                        photos: [
+                            { name: "Cade Cunningham", label: "Cade" },
+                            { name: "Anthony Edwards", label: "Edwards" },
+                            { name: "Tyrese Maxey", label: "Maxey" }
+                        ],
+                        paragraphs: [
+                            "O Paysandu Lobo's vira o número 1 da simulação porque combina uma base de keepers forte com um draft ideal acima da média. Cade Cunningham e Anthony Edwards já entregam 102,0 FP antes do draft, uma das somas mais seguras da liga.",
+                            "No board ideal, a franquia ainda adiciona Tyrese Maxey, Franz Wagner, Ja Morant, Josh Hart, Kyshawn George, Deandre Ayton, Jakob Poeltl e Cameron Johnson. Não é apenas topo: é profundidade. Por isso, o Paysandu passa Chugabum e Charlotte por margem curta, mas suficiente."
+                        ],
+                        numbers: [
+                            { label: "Keepers", value: "102,0" },
+                            { label: "Draft", value: "282,8" },
+                            { label: "Total", value: "384,8" }
+                        ],
+                        picks: ["R1 P2 Maxey", "R2 P15 Franz", "R3 P2 Ja", "R5 P2 Kyshawn"]
+                    }),
+
+                    e(SplitFeature, {
+                        reverse: true,
+                        rank: "2º geral • 383,4 FP",
+                        title: "Chugabum continua fortíssimo, mas perde a ponta por detalhe",
+                        photos: [
+                            { name: "Nikola Jokic", label: "Jokić" },
+                            { name: "Jalen Williams", label: "Jalen W." },
+                            { name: "Trey Murphy III", label: "Trey" }
+                        ],
+                        paragraphs: [
+                            "O Chugabum Ironclads ainda tem a maior vantagem de keepers da liga. Nikola Jokić e Jalen Williams somam 112,0 FP, e isso mantém a franquia como uma das favoritas naturais da temporada.",
+                            "A queda para o 2º lugar acontece porque o draft ideal do Chugabum soma 271,4 FP, abaixo de Paysandu, Charlotte e Pistons. Mesmo assim, a diferença para o topo é mínima. Em uma liga de fantasy, ter Jokić ainda muda qualquer projeção."
+                        ],
+                        numbers: [
+                            { label: "Keepers", value: "112,0" },
+                            { label: "Draft", value: "271,4" },
+                            { label: "Total", value: "383,4" }
+                        ],
+                        picks: ["R1 P14 Trey", "R2 P3 Derrick White", "R3 P14 Vucevic", "R4 P3 Pritchard"]
+                    }),
+
+                    e(FeatureArticleImage, { src: article.inlineImage, className: "draft-ideal-inline-banner" }),
+
+                    e(SplitFeature, {
+                        rank: "3º geral • 383,1 FP",
+                        title: "Charlotte quase vira líder com a força da Pick 1",
+                        photos: [
+                            { name: "Shai Gilgeous-Alexander", label: "SGA" },
+                            { name: "Trae Young", label: "Trae" },
+                            { name: "Alperen Sengun", label: "Şengün" }
+                        ],
+                        paragraphs: [
+                            "A Charlotte DunkLipe aparece praticamente empatada com o topo. A dupla Trae Young e Alperen Şengün soma 95,5 FP, um pacote de keepers forte, mas não tão dominante quanto Chugabum ou SuperSonics.",
+                            "Só que a Pick 1 muda tudo. Ao adicionar Shai Gilgeous-Alexander, o melhor nome disponível do board com 60,2 FP, a Charlotte encosta nos líderes. O time sai da simulação com 287,6 FP de draft, a segunda melhor marca da liga."
+                        ],
+                        numbers: [
+                            { label: "Keepers", value: "95,5" },
+                            { label: "Draft", value: "287,6" },
+                            { label: "Total", value: "383,1" }
+                        ],
+                        picks: ["R1 P1 Shai", "R2 P16 Okongwu", "R3 P1 JJJ", "R5 P1 Claxton"]
+                    }),
+
+                    e(SplitFeature, {
+                        reverse: true,
+                        rank: "5º geral • 376,0 FP",
+                        title: "Pistons vira o grande vencedor do draft ideal",
+                        photos: [
+                            { name: "James Harden", label: "Harden" },
+                            { name: "Chet Holmgren", label: "Chet" },
+                            { name: "Jayson Tatum", label: "Tatum" },
+                            { name: "Jalen Duren", label: "Duren" }
+                        ],
+                        paragraphs: [
+                            "O Pistons de Pira não aparece entre as maiores duplas de keepers. Harden e Chet somam 87,5 FP, uma base interessante, jovem e valiosa em dynasty, mas distante das duplas mais fortes no curto prazo.",
+                            "A história muda no draft. Com a pick 12 recebida do SuperSonics, o Pistons passa a ter duas escolhas de 1º round. No cenário ideal, adiciona Jayson Tatum e Jalen Duren logo de cara, além de Brandon Ingram, Rudy Gobert, Andrew Wiggins, Shaedon Sharpe, Isaiah Collier e Scotty Pippen Jr. Resultado: melhor draft da liga, com 288,5 FP."
+                        ],
+                        numbers: [
+                            { label: "Keepers", value: "87,5" },
+                            { label: "Draft", value: "288,5" },
+                            { label: "Total", value: "376,0" }
+                        ],
+                        picks: ["R1 P7 Tatum", "R1 P12 Duren", "R2 P10 Ingram", "R3 P7 Gobert"]
+                    }),
+
+                    e(SplitFeature, {
+                        rank: "10º geral • 363,9 FP",
+                        title: "SuperSonics aposta em estrelas e paga no draft",
+                        photos: [
+                            { name: "Giannis Antetokounmpo", label: "Giannis" },
+                            { name: "Austin Reaves", label: "Reaves" },
+                            { name: "Myles Turner", label: "Turner" },
+                            { name: "Coby White", label: "Coby" }
+                        ],
+                        paragraphs: [
+                            "O Stéfano's SuperSonics é o time mais polarizante da projeção. Giannis Antetokounmpo e Austin Reaves somam 106,0 FP, a segunda melhor dupla de keepers da AirBall. Em força de topo, o atual campeão segue assustador.",
+                            "Mas a simulação completa mostra o preço da troca. Sem a pick geral 12, o SuperSonics começa no R2 P5 e termina com o menor draft projetado da liga: 257,9 FP. O elenco ideal adicionaria Ty Jerome, Norman Powell, Kon Knueppel, Julian Reese, Alondes Williams, Myles Turner, Coby White e Jaylon Tyson. É uma aposta clara: menos profundidade de draft, mais poder imediato com Giannis."
+                        ],
+                        numbers: [
+                            { label: "Keepers", value: "106,0" },
+                            { label: "Draft", value: "257,9" },
+                            { label: "Total", value: "363,9" }
+                        ],
+                        picks: ["R2 P5 Ty Jerome", "R3 P12 Norman", "R7 P7 Turner", "R7 P12 Coby"]
+                    }),
+
+                    e("h2", { className: "article-section-title" }, "Mais nomes que movimentam a simulação"),
+                    e("p", { className: "article-paragraph" },
+                        "Além dos cinco protagonistas da matéria, outros times ficam em regiões muito interessantes. O Canalhas do Bem segue no top 4 porque Luka Dončić sustenta uma das maiores projeções individuais da liga. A Revolution Française aparece logo atrás, puxada por Victor Wembanyama. Pato's Team, Warlock Jamaicans, Red Hot Blazer Peppers e Nortz formam um bloco de playoff muito próximo."
+                    ),
+                    e("div", { className: "draft-ideal-photo-grid" },
+                        e(PhotoCard, { name: "Luka Doncic", role: "Keeper • Canalhas", note: "Mantém o Canalhas no top 4 mesmo sem um dos maiores drafts projetados." }),
+                        e(PhotoCard, { name: "Victor Wembanyama", role: "Keeper • Revolution", note: "Carrega uma das maiores projeções individuais da temporada." }),
+                        e(PhotoCard, { name: "Kawhi Leonard", role: "Keeper • Pato's Team", note: "Dá teto de elite ao 7º colocado geral." }),
+                        e(PhotoCard, { name: "Scottie Barnes", role: "Keeper • Warlock", note: "Ajuda o Warlock a fechar o top 8 na soma completa." })
+                    ),
+
+                    e("h2", { className: "article-section-title" }, "Leitura final da I.A."),
+                    e("p", { className: "article-paragraph" },
+                        "A grande conclusão é que o ranking completo não substitui o ranking de keepers. Ele adiciona contexto. Keepers mostram a força inicial de cada franquia; o draft ideal mostra o quanto cada time poderia completar o elenco caso seguisse friamente o board por AVG."
+                    ),
+                    e("p", { className: "article-paragraph" },
+                        "Nesse cenário, o Paysandu assume a liderança por ser o elenco mais completo da conta. O Chugabum segue extremamente forte pela vantagem de Jokić. A Charlotte vira ameaça real pela pick 1. O Pistons prova o valor de acumular escolhas altas. E o SuperSonics confirma uma estratégia agressiva: abrir mão de profundidade para colocar Giannis ao lado de Reaves e tentar ganhar agora."
+                    ),
+                    e("div", { className: "article-notice" },
+                        "Manchete final: ChatGPT simula o draft ideal da AirBall, soma com os keepers já projetados e coloca o Paysandu no topo da pré-temporada, com Chugabum e Charlotte colados, Pistons em alta e SuperSonics apostando tudo no impacto de Giannis."
+                    )
+                )
+            )
+        )
+    );
+}
+
 function TradePicksArticlePage({ setPage }) {
     const article = FEATURE_TRADE_PICKS_ARTICLE;
     const [playerLookup, setPlayerLookup] = useState(new Map());
@@ -8366,20 +9148,20 @@ function TradePicksArticlePage({ setPage }) {
 }
 
 function FeaturedNews({ setPage }) {
-    const article = FEATURE_TRADE_PICKS_ARTICLE;
-    return (React.createElement("div", { className: "featured-card featured-article-main", onClick: () => setPage('TRADE_PICKS_ARTICLE') },
+    const article = FEATURE_DRAFT_IDEAL_ARTICLE;
+    return (React.createElement("div", { className: "featured-card featured-article-main", onClick: () => setPage('DRAFT_IDEAL_ARTICLE') },
         React.createElement("div", { className: "featured-bg" }),
         React.createElement("div", { className: "news-image-layer", style: { backgroundImage: `url(${article.heroImage})` } }),
         React.createElement("div", { className: "court-lines" }),
         React.createElement("div", { className: "ball-deco" }),
-        React.createElement("div", { style: { position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.34) 56%, rgba(0,0,0,0.18) 100%)' } }),
+        React.createElement("div", { style: { position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.42) 56%, rgba(0,0,0,0.20) 100%)' } }),
         React.createElement("div", { className: "featured-content" },
             React.createElement("span", { className: "featured-badge" }, "NOTÍCIA PRINCIPAL"),
             React.createElement("h1", { className: "featured-title" }, article.title),
             React.createElement("div", { className: "featured-bullets" },
-                React.createElement("div", { className: "featured-bullet" }, "Primeira troca com picks da história da AirBall Dynasty League"),
-                React.createElement("div", { className: "featured-bullet" }, "SuperSonics aposta em Giannis para subir o teto competitivo"),
-                React.createElement("div", { className: "featured-bullet" }, "Pistons de Pira recebe Chet Holmgren e a pick 12")),
+                React.createElement("div", { className: "featured-bullet" }, "Paysandu assume o topo ao somar keepers e draft ideal"),
+                React.createElement("div", { className: "featured-bullet" }, "Pistons cresce com duas picks de 1º round"),
+                React.createElement("div", { className: "featured-bullet" }, "SuperSonics tem Giannis, mas sente a perda da pick 12")),
             React.createElement("div", { className: "featured-actions" },
                 React.createElement("button", { className: "btn-light" }, "Ler notícia"),
                 React.createElement("div", { className: "feed-time" }, article.time)))));
@@ -8718,7 +9500,7 @@ function LatestTradesCard() {
         }) : (React.createElement("div", { className: "latest-trades-loading" }, "Nenhuma trade manual cadastrada.")))));
 }
 function NewsFeed({ setPage }) {
-    const items = [KEEPERS_NEWS_CARD, ...NEWS_FEED];
+    const items = [TRADE_PICKS_NEWS_CARD, KEEPERS_NEWS_CARD, ...NEWS_FEED];
     return React.createElement(React.Fragment, null,
         React.createElement("div", { className: "section-header" },
             React.createElement("div", { className: "section-title" }, "Últimas Notícias"),
@@ -11405,6 +12187,7 @@ function App() {
             case 'SORTEIO DRAFT': return React.createElement(DraftDrawPage, null);
             case 'JOGADORES': return React.createElement(PlayersPage, null);
             case 'KEEPERS_ARTICLE': return React.createElement(KeeperArticlePage, { setPage: setPage });
+            case 'DRAFT_IDEAL_ARTICLE': return React.createElement(DraftIdealArticlePage, { setPage: setPage });
             case 'TRADE_PICKS_ARTICLE': return React.createElement(TradePicksArticlePage, { setPage: setPage });
             default: return React.createElement(HomePage, { setPage: setPage });
         }
