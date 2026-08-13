@@ -9535,7 +9535,7 @@ function getFinalStandingForTeam(teamName) {
     return FINAL_STANDINGS_2526.find(row => normalizeTeamName(row.team) === normalized);
 }
 function HomeDraftCountdown() {
-    const targetDate = new Date('2026-10-10T00:00:00-03:00');
+    const targetDate = new Date('2026-09-15T00:00:00-03:00');
     const getTimeLeft = () => {
         const diff = targetDate.getTime() - new Date().getTime();
         const total = Math.max(diff, 0);
@@ -9554,7 +9554,7 @@ function HomeDraftCountdown() {
     return (React.createElement("div", { className: "home-draft-countdown" },
         React.createElement("div", { className: "home-draft-countdown-header" },
             React.createElement("div", { className: "home-draft-countdown-title" }, "\u23F3 Draft AirBall"),
-            React.createElement("div", { className: "home-draft-countdown-date" }, "10 OUT 2026")),
+            React.createElement("div", { className: "home-draft-countdown-date" }, "15 SET 2026")),
         React.createElement("div", { className: "home-draft-countdown-grid" },
             React.createElement("div", { className: "home-draft-countdown-box" },
                 React.createElement("div", { className: "home-draft-countdown-number" }, timeLeft.days),
@@ -11318,7 +11318,7 @@ function PlayersPage() {
             })))));
 }
 function DraftCountdown() {
-    const targetDate = new Date('2026-10-10T00:00:00-03:00');
+    const targetDate = new Date('2026-09-15T00:00:00-03:00');
     const getTimeLeft = () => {
         const diff = targetDate.getTime() - new Date().getTime();
         const total = Math.max(diff, 0);
@@ -11339,7 +11339,7 @@ function DraftCountdown() {
             React.createElement("div", null,
                 React.createElement("div", { className: "draft-countdown-kicker" }, "Contagem regressiva oficial"),
                 React.createElement("div", { className: "draft-countdown-title" }, "Draft AirBall 2026/27")),
-            React.createElement("div", { className: "draft-countdown-date" }, "10 de outubro de 2026")),
+            React.createElement("div", { className: "draft-countdown-date" }, "15 de setembro de 2026")),
         React.createElement("div", { className: "draft-countdown-grid" },
             React.createElement("div", { className: "draft-countdown-box" },
                 React.createElement("div", { className: "draft-countdown-number" }, timeLeft.days),
