@@ -399,37 +399,6 @@
     font-size: 12px; font-weight: 700; color: white; font-family: 'Oswald', sans-serif;
   }
   .team-mini-name { font-size: 10px; color: #cfd0dc; text-align: center; font-weight: 600; max-width: 96px; line-height: 1.15; }
-
-  .matchup-team-logo-plain {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    background: transparent;
-    overflow: visible;
-  }
-  .matchup-team-logo-plain-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-    filter: drop-shadow(0 8px 14px rgba(0,0,0,0.28));
-  }
-  .matchup-team-logo-plain-fallback {
-    width: 100%;
-    height: 100%;
-    border-radius: 18px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--purple-mid), var(--orange));
-    color: white;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: .6px;
-    box-shadow: 0 8px 14px rgba(0,0,0,0.22);
-  }
   .vs-score { text-align: center; min-width: 74px; flex-shrink: 0; }
   .score-display { font-family: 'Oswald', sans-serif; font-size: 22px; font-weight: 700; color: white; white-space: nowrap; letter-spacing: 0.5px; }
   .score-period { font-size: 10px; color: var(--orange); font-weight: 700; }
@@ -6354,18 +6323,6 @@ function TeamLogo({ team, size = 32 }) {
     const showFallback = failedLogo === logoKey;
     return (React.createElement("span", { className: `team-logo-wrap ${showFallback ? 'team-logo-fallback' : ''}`, style: { width: size, height: size, background: t.color }, title: t.name }, showFallback ? (React.createElement("span", null, t.init)) : (React.createElement("img", { key: logoKey, src: t.logo, alt: t.name, className: "team-logo-img", onError: () => setFailedLogo(logoKey) }))));
 }
-
-function MatchupTeamLogo({ team, size = 82 }) {
-    const t = getTeam(team);
-    const logoKey = `${t.name}-${t.logo}`;
-    const [failedLogo, setFailedLogo] = useState('');
-    const showFallback = failedLogo === logoKey;
-    return (React.createElement("span", { className: "matchup-team-logo-plain", style: { width: size, height: size } },
-        showFallback || !t.logo
-            ? React.createElement("span", { className: "matchup-team-logo-plain-fallback" }, t.init)
-            : React.createElement("img", { src: t.logo, alt: t.name, className: "matchup-team-logo-plain-img", referrerPolicy: "no-referrer", onError: () => setFailedLogo(logoKey) })));
-}
-
 function EdgeTrimmedLogo({ src, alt, className = '' }) {
     const [processedSrc, setProcessedSrc] = useState(src || '');
     const [failed, setFailed] = useState(false);
@@ -8664,7 +8621,7 @@ function MatchupCard({ m }) {
             m.status === 'AO VIVO' ? React.createElement("span", { className: "badge-live" }, "\u25CF AO VIVO") : React.createElement("span", { className: "badge-preview" }, m.status || m.period)),
         React.createElement("div", { className: "matchup-teams" },
             React.createElement("div", { className: "team-mini" },
-                React.createElement(MatchupTeamLogo, { team: m.home, size: 82 }),
+                React.createElement(TeamLogo, { team: m.home, size: 82 }),
                 React.createElement("div", { className: "team-mini-name" }, home.name)),
             React.createElement("div", { className: "vs-score" },
                 React.createElement("div", { className: "score-display" },
@@ -8673,7 +8630,7 @@ function MatchupCard({ m }) {
                     m.scoreA),
                 React.createElement("div", { className: "score-period" }, m.period)),
             React.createElement("div", { className: "team-mini" },
-                React.createElement(MatchupTeamLogo, { team: m.away, size: 82 }),
+                React.createElement(TeamLogo, { team: m.away, size: 82 }),
                 React.createElement("div", { className: "team-mini-name" }, away.name)))));
 }
 function MatchupsStrip({ setPage }) {
