@@ -400,7 +400,6 @@
   }
   .team-mini-name { font-size: 10px; color: #cfd0dc; text-align: center; font-weight: 600; max-width: 96px; line-height: 1.15; }
 
-  
   .matchup-team-logo-plain {
     display: inline-flex;
     align-items: center;
@@ -414,7 +413,7 @@
     height: 100%;
     object-fit: contain;
     display: block;
-    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.28));
+    filter: drop-shadow(0 8px 14px rgba(0,0,0,0.28));
   }
   .matchup-team-logo-plain-fallback {
     width: 100%;
@@ -431,7 +430,6 @@
     letter-spacing: .6px;
     box-shadow: 0 8px 14px rgba(0,0,0,0.22);
   }
-
   .vs-score { text-align: center; min-width: 74px; flex-shrink: 0; }
   .score-display { font-family: 'Oswald', sans-serif; font-size: 22px; font-weight: 700; color: white; white-space: nowrap; letter-spacing: 0.5px; }
   .score-period { font-size: 10px; color: var(--orange); font-weight: 700; }
@@ -4286,40 +4284,30 @@
   .footer strong { color: var(--orange); font-family: 'Oswald', sans-serif; }
 
 
-  
   .team-logo-wrap {
+    border-radius: 50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    overflow: visible;
-    background: transparent;
+    overflow: hidden;
     color: white;
     font-family: 'Oswald', sans-serif;
     font-weight: 700;
     font-size: 10px;
     flex-shrink: 0;
-    border: none;
-    box-shadow: none;
+    border: 1px solid rgba(0,0,0,0.08);
   }
   .team-logo-img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     display: block;
-    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.28));
   }
   .team-logo-fallback {
-    width: 100%;
-    height: 100%;
-    border-radius: 18px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--purple-mid), var(--orange));
+    font-size: 9px;
     color: white;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.22);
+    text-align: center;
   }
-
   .scroll-card-body {
     max-height: 390px;
     overflow-y: auto;
@@ -6359,18 +6347,13 @@ function getTeam(name) {
         logo: "./assets/logos/default-team.png"
     };
 }
-
 function TeamLogo({ team, size = 32 }) {
     const t = getTeam(team);
     const logoKey = `${t.name}-${t.logo}`;
     const [failedLogo, setFailedLogo] = useState('');
     const showFallback = failedLogo === logoKey;
-    return (React.createElement("span", { className: "team-logo-wrap", style: { width: size, height: size } },
-        showFallback || !t.logo
-            ? React.createElement("span", { className: "team-logo-fallback", style: { width: size, height: size } }, t.init)
-            : React.createElement("img", { src: t.logo, alt: t.name, className: "team-logo-img", referrerPolicy: "no-referrer", onError: () => setFailedLogo(logoKey) })));
+    return (React.createElement("span", { className: `team-logo-wrap ${showFallback ? 'team-logo-fallback' : ''}`, style: { width: size, height: size, background: t.color }, title: t.name }, showFallback ? (React.createElement("span", null, t.init)) : (React.createElement("img", { key: logoKey, src: t.logo, alt: t.name, className: "team-logo-img", onError: () => setFailedLogo(logoKey) }))));
 }
-
 
 function MatchupTeamLogo({ team, size = 82 }) {
     const t = getTeam(team);
