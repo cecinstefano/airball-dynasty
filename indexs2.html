@@ -7006,7 +7006,7 @@ const RULES_DATA = [
     { icon: '🔒', title: 'Keepers', desc: '3 keepers permitidos por temporada. Custo: a pick da rodada onde o jogador foi selecionado -1.' },
     { icon: '🔄', title: 'Trades', desc: 'Período de trade aberto até a deadline. Veto por comissão em caso de desequilíbrio flagrante.' },
     { icon: '📉', title: 'Regra Anti-Tanking', desc: 'Times com 5+ derrotas seguidas recebem pontos bonus de desempenho para manter competitividade.' },
-    { icon: '🏆', title: 'Playoffs', desc: 'Top 6 da temporada regular. Calend\u00E1rio regular agora com 18 semanas; playoffs conforme configura\u00E7\u00E3o final da liga.' },
+    { icon: '🏆', title: 'Playoffs', desc: 'Top 6 da temporada regular. Semifinais na Sem. 15, Final na Sem. 16 e 17 (best of 3).' },
     { icon: '⚠️', title: 'Punições', desc: 'Waiver não cumprido: -50 pontos. Infração de regra: suspensão de rodada. Tanking deliberado: eliminação.' },
 ];
 const CALENDAR_DATA = [
@@ -7692,46 +7692,6 @@ const SCHEDULE_WEEKS = [
             {
                 "home": "Instituto Popovich",
                 "away": "Warlock Jamaicans"
-            }
-        ]
-    },
-    {
-        "week": 18,
-        "matchup": "Matchup 18",
-        "date": "Feb 15 - 21",
-        "repeat": true,
-        "games": [
-            {
-                "home": "Warlock Jamaicans",
-                "away": "Chugabum Ironclads"
-            },
-            {
-                "home": "Ghost of goat",
-                "away": "Pistons de Pira"
-            },
-            {
-                "home": "Paysandu Lobo's",
-                "away": "Revolution francaise"
-            },
-            {
-                "home": "Nortz",
-                "away": "Stéfano's SuperSonics"
-            },
-            {
-                "home": "Fi du Jequisom",
-                "away": "Charlotte DunkLipe"
-            },
-            {
-                "home": "Acre Dinosaurs",
-                "away": "Canalhas do Bem"
-            },
-            {
-                "home": "Team Djalma Jr",
-                "away": "Instituto Popovich"
-            },
-            {
-                "home": "Red Hot Blazer Peppers",
-                "away": "Pato's Team"
             }
         ]
     }
@@ -10585,10 +10545,10 @@ function CalendarPage() {
     return (React.createElement("div", { className: "main-wrap" },
         React.createElement("div", { className: "page-hero" },
             React.createElement("div", { className: "page-hero-title" }, "\uD83D\uDCC5 Calend\u00E1rio Oficial"),
-            React.createElement("div", { className: "page-hero-sub" }, "Temporada regular 2026/27 \u2022 18 semanas de confrontos")),
+            React.createElement("div", { className: "page-hero-sub" }, "Temporada regular 2026/27 \u2022 17 semanas de confrontos")),
         React.createElement("div", { className: "schedule-explainer" },
             React.createElement("div", { className: "schedule-explainer-title" }, "Formato do calend\u00E1rio"),
-            React.createElement("div", { className: "schedule-explainer-text" }, "Todos jogam contra todos uma vez at\u00E9 a Semana 15, sem repeti\u00E7\u00E3o de confronto. As Semanas 16, 17 e 18 entram como sorteios extras, porque com 16 franquias e 18 semanas n\u00E3o h\u00E1 como manter todos os confrontos in\u00E9ditos at\u00E9 o fim da temporada regular.")),
+            React.createElement("div", { className: "schedule-explainer-text" }, "Todos jogam contra todos uma vez at\u00E9 a Semana 15, sem repeti\u00E7\u00E3o de confronto. A partir da Semana 16 come\u00E7am as repeti\u00E7\u00F5es, porque com 16 franquias e 17 semanas n\u00E3o h\u00E1 como manter todos os confrontos in\u00E9ditos at\u00E9 o fim da temporada regular.")),
         React.createElement("div", { className: "schedule-weeks" }, SCHEDULE_WEEKS.map(w => (React.createElement("div", { className: "schedule-week-card", key: w.week },
             React.createElement("div", { className: "schedule-week-header" },
                 React.createElement("div", { className: "schedule-week-title" },
