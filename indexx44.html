@@ -3,27 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AirBall Dynasty League</title>
-
-<meta name="description" content="Site oficial da AirBall Dynasty League: draft, franquias, calendário, trades, rankings, simulador e notícias da temporada 2026/27.">
-<meta name="keywords" content="AirBall Dynasty League, fantasy NBA, dynasty league, draft fantasy, NBA fantasy, AirBall">
-<meta name="author" content="AirBall Dynasty League">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://cecinstefano.github.io/airball-dynasty/">
-
-<meta property="og:site_name" content="AirBall Dynasty League">
-<meta property="og:title" content="AirBall Dynasty League">
-<meta property="og:description" content="Draft, franquias, calendário, trades, rankings, simulador e notícias da AirBall Dynasty League.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://cecinstefano.github.io/airball-dynasty/">
-<meta property="og:image" content="https://cecinstefano.github.io/airball-dynasty/assets/news/draft-ideal-keepers-capa.jpg">
-<meta property="og:locale" content="pt_BR">
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AirBall Dynasty League">
-<meta name="twitter:description" content="Draft, franquias, calendário, trades, rankings, simulador e notícias da AirBall Dynasty League.">
-<meta name="twitter:image" content="https://cecinstefano.github.io/airball-dynasty/assets/news/draft-ideal-keepers-capa.jpg">
-
+<title>Airball Dynasty League</title>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
@@ -10465,23 +10445,10 @@ function GmPhoto({ team }) {
             } })));
 }
 
-function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
+function TeamsPage() {
     const e = React.createElement;
     const { keeperRanking, status: keepersStatus, isDynamic } = useDraftPriorityData();
-    const [selectedTeamName, setSelectedTeamName] = useState(() => initialTeamSlug ? getTeamNameFromRouteSlug(initialTeamSlug) : null);
-    useEffect(() => {
-        setSelectedTeamName(initialTeamSlug ? getTeamNameFromRouteSlug(initialTeamSlug) : null);
-    }, [initialTeamSlug]);
-    const openTeamModal = (teamName) => {
-        setSelectedTeamName(teamName);
-        if (onTeamRouteChange)
-            onTeamRouteChange(getTeamRouteSlug(teamName));
-    };
-    const closeTeamModal = () => {
-        setSelectedTeamName(null);
-        if (onTeamRouteChange)
-            onTeamRouteChange('');
-    };
+    const [selectedTeamName, setSelectedTeamName] = useState(null);
     const [draftBoard, setDraftBoard] = useState([]);
     const [draftStatus, setDraftStatus] = useState('Carregando board atual...');
     const [playerLookup, setPlayerLookup] = useState(new Map());
@@ -10843,7 +10810,7 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
         ),
         e("div", { className: "franchise-logo-grid" }, orderedFranchises.map(t => {
             const finalStanding = getFinalStandingForTeam(t.name);
-            return e("button", { className: "franchise-logo-card", key: t.name, style: { '--team-color': t.color }, onClick: () => openTeamModal(t.name) },
+            return e("button", { className: "franchise-logo-card", key: t.name, style: { '--team-color': t.color }, onClick: () => setSelectedTeamName(t.name) },
                 e("div", { className: "franchise-logo-card-logo" }, e(TeamLogo, { team: t.name, size: 126 })),
                 e("div", { className: "franchise-logo-card-name" }, t.name),
                 e("div", { className: "franchise-logo-card-gm" }, `GM: ${t.gm}`),
@@ -10870,10 +10837,10 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
                 e("div", { className: "final-rec" }, row.rec)
             )))
         ),
-        selectedTeam && e("div", { className: "franchise-modal-backdrop", onClick: closeTeamModal },
+        selectedTeam && e("div", { className: "franchise-modal-backdrop", onClick: () => setSelectedTeamName(null) },
             e("div", { className: "franchise-modal", onClick: (event) => event.stopPropagation() },
                 e("div", { className: "franchise-modal-hero", style: { '--team-color': selectedTeam.color } },
-                    e("button", { className: "franchise-modal-close", type: "button", onClick: closeTeamModal }, "×"),
+                    e("button", { className: "franchise-modal-close", type: "button", onClick: () => setSelectedTeamName(null) }, "×"),
                     e("div", { className: "franchise-modal-logo-big" }, e(TeamLogo, { team: selectedTeam.name, size: 276 })),
                     e("div", null,
                         e("div", { className: "franchise-modal-title" }, selectedTeam.name),
@@ -13495,213 +13462,12 @@ function DraftPage() {
                     React.createElement("span", { className: "sidebar-card-title" }, "Observa\u00E7\u00F5es")),
                 React.createElement("div", { style: { padding: 18, fontSize: 13, color: '#6B6B7B', lineHeight: 1.6 } }, "Ordem final do sorteio j\u00E1 atualizada conforme o resultado oficial. O draft \u00E9 snake: nos rounds pares, a ordem inverte automaticamente.")))));
 }
-// ==================== ROUTING + SEO ====================
-const AIRBALL_BASE_URL = 'https://cecinstefano.github.io/airball-dynasty/';
-const AIRBALL_SHARE_IMAGE = 'https://cecinstefano.github.io/airball-dynasty/assets/news/draft-ideal-keepers-capa.jpg';
-const PAGE_ROUTE_MAP = {
-    HOME: 'inicio',
-    JOGADORES: 'jogadores',
-    DRAFT: 'draft',
-    'SIMULADOR DE DRAFT': 'simulador-de-draft',
-    TIMES: 'franquias',
-    REGRAS: 'regras',
-    'HONESTÔMETRO': 'honestometro',
-    'CALENDÁRIO': 'calendario',
-    'HALL DA FAMA': 'hall-da-fama',
-    TRADES: 'trades',
-    'SORTEIO DRAFT': 'sorteio-draft',
-    KEEPERS_ARTICLE: 'noticias/keepers-2026-27',
-    DRAFT_IDEAL_ARTICLE: 'noticias/draft-ideal-keepers',
-    TRADE_PICKS_ARTICLE: 'noticias/primeira-trade-com-picks'
-};
-const ROUTE_PAGE_MAP = Object.entries(PAGE_ROUTE_MAP).reduce((acc, [page, route]) => {
-    acc[route] = page;
-    return acc;
-}, {});
-function makeRouteSlug(value) {
-    return String(value || '')
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .toLowerCase()
-        .replace(/&/g, ' e ')
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '');
-}
-function getTeamRouteSlug(teamName) {
-    const t = getTeam(teamName);
-    return t.slug || makeRouteSlug(t.name);
-}
-function getTeamNameFromRouteSlug(slug) {
-    const normalized = makeRouteSlug(slug);
-    const found = TEAMS_DATA.find(t => makeRouteSlug(t.slug || t.name) === normalized || makeRouteSlug(t.name) === normalized);
-    return found ? found.name : null;
-}
-function parseHashRoute() {
-    const raw = decodeURIComponent(String(window.location.hash || '').replace(/^#\/?/, '').replace(/^\/+/, '').trim());
-    if (!raw || raw === 'inicio' || raw === 'home')
-        return { page: 'HOME', teamSlug: '' };
-    const parts = raw.split('/').filter(Boolean);
-    if (parts[0] === 'franquias' && parts[1]) {
-        const teamName = getTeamNameFromRouteSlug(parts[1]);
-        return { page: 'TIMES', teamSlug: teamName ? getTeamRouteSlug(teamName) : '' };
-    }
-    const route = parts.join('/');
-    if (ROUTE_PAGE_MAP[route])
-        return { page: ROUTE_PAGE_MAP[route], teamSlug: '' };
-    if (parts[0] === 'noticias') {
-        const newsRoute = parts.slice(0, 2).join('/');
-        if (ROUTE_PAGE_MAP[newsRoute])
-            return { page: ROUTE_PAGE_MAP[newsRoute], teamSlug: '' };
-    }
-    if (ROUTE_PAGE_MAP[parts[0]])
-        return { page: ROUTE_PAGE_MAP[parts[0]], teamSlug: '' };
-    return { page: 'HOME', teamSlug: '' };
-}
-function routeForState(page, teamSlug = '') {
-    if (page === 'TIMES' && teamSlug)
-        return `franquias/${teamSlug}`;
-    return PAGE_ROUTE_MAP[page] || PAGE_ROUTE_MAP.HOME;
-}
-function updateBrowserHash(page, teamSlug = '', replace = false) {
-    const route = routeForState(page, teamSlug);
-    const nextHash = `#/${route}`;
-    const current = window.location.hash || '';
-    if (current === nextHash)
-        return;
-    const nextUrl = `${window.location.pathname}${window.location.search}${nextHash}`;
-    if (replace)
-        window.history.replaceState({ page, teamSlug }, '', nextUrl);
-    else
-        window.history.pushState({ page, teamSlug }, '', nextUrl);
-}
-function setMetaTag(selectorType, key, content) {
-    if (!content)
-        return;
-    let el = document.querySelector(`meta[${selectorType}="${key}"]`);
-    if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute(selectorType, key);
-        document.head.appendChild(el);
-    }
-    el.setAttribute('content', content);
-}
-function updateCanonical(url) {
-    let el = document.querySelector('link[rel="canonical"]');
-    if (!el) {
-        el = document.createElement('link');
-        el.setAttribute('rel', 'canonical');
-        document.head.appendChild(el);
-    }
-    el.setAttribute('href', url);
-}
-function getRouteUrl(page, teamSlug = '') {
-    const route = routeForState(page, teamSlug);
-    return `${AIRBALL_BASE_URL}#/${route}`;
-}
-function getSeoForPage(page, teamSlug = '') {
-    const teamName = teamSlug ? getTeamNameFromRouteSlug(teamSlug) : '';
-    const titles = {
-        HOME: 'AirBall Dynasty League',
-        JOGADORES: 'Jogadores | AirBall Dynasty League',
-        DRAFT: 'Draft 2026/27 | AirBall Dynasty League',
-        'SIMULADOR DE DRAFT': 'Simulador de Draft | AirBall Dynasty League',
-        TIMES: teamName ? `${teamName} | Franquias AirBall` : 'Franquias | AirBall Dynasty League',
-        REGRAS: 'Regras | AirBall Dynasty League',
-        'HONESTÔMETRO': 'Honestômetro | AirBall Dynasty League',
-        'CALENDÁRIO': 'Calendário | AirBall Dynasty League',
-        'HALL DA FAMA': 'Hall da Fama | AirBall Dynasty League',
-        TRADES: 'Trade Center | AirBall Dynasty League',
-        'SORTEIO DRAFT': 'Sorteio do Draft | AirBall Dynasty League',
-        KEEPERS_ARTICLE: 'I.A. projeta os keepers 2026/27 | AirBall',
-        DRAFT_IDEAL_ARTICLE: 'ChatGPT simula o draft ideal da AirBall | AirBall',
-        TRADE_PICKS_ARTICLE: 'Primeira troca com picks da AirBall | AirBall'
-    };
-    const descriptions = {
-        HOME: 'Site oficial da AirBall Dynasty League: notícias, draft, franquias, calendário, trades, rankings e simulador da temporada 2026/27.',
-        JOGADORES: 'Board de jogadores da AirBall com filtros por posição, franquia, keeper, média fantasy e projeções.',
-        DRAFT: 'Ordem, board, contagem regressiva e informações do Draft AirBall Dynasty League 2026/27.',
-        'SIMULADOR DE DRAFT': 'Simule as escolhas do draft da AirBall respeitando ordem snake, picks trocadas e keepers oficiais.',
-        TIMES: teamName ? `Dossiê completo da franquia ${teamName}: GM, keepers, draft projetado, calendário, trades, jogos esperados e análise da I.A.` : 'Central das franquias da AirBall com logos, GMs, keepers, draft projetado, calendário, trades e análise da I.A.',
-        REGRAS: 'Regulamento oficial da AirBall Dynasty League, sistema de pontuação, rosters, waivers, playoffs e punições.',
-        'HONESTÔMETRO': 'Ferramenta da AirBall para analisar equilíbrio de trades com jogadores, picks e multiplicadores de AVG.',
-        'CALENDÁRIO': 'Calendário oficial da temporada regular 2026/27 da AirBall Dynasty League, com 18 semanas de confrontos.',
-        'HALL DA FAMA': 'Hall da Fama da AirBall Dynasty League com campeões, campanhas históricas, MVPs e recordes.',
-        TRADES: 'Trade Center da AirBall Dynasty League com movimentações oficiais, jogadores envolvidos, AVGs e análises.',
-        'SORTEIO DRAFT': 'Página do sorteio do Draft AirBall Dynasty League 2026/27.',
-        KEEPERS_ARTICLE: 'Análise da I.A. sobre os keepers da temporada 2026/27 da AirBall Dynasty League.',
-        DRAFT_IDEAL_ARTICLE: 'Simulação do draft ideal da AirBall somada aos keepers projetados, com ranking completo das franquias.',
-        TRADE_PICKS_ARTICLE: 'Análise da primeira troca com picks da história da AirBall: Giannis, Chet e movimentação no draft.'
-    };
-    return {
-        title: titles[page] || titles.HOME,
-        description: descriptions[page] || descriptions.HOME,
-        url: getRouteUrl(page, teamSlug),
-        image: AIRBALL_SHARE_IMAGE
-    };
-}
-function updateSeoMeta(page, teamSlug = '') {
-    if (typeof document === 'undefined')
-        return;
-    const seo = getSeoForPage(page, teamSlug);
-    document.title = seo.title;
-    setMetaTag('name', 'description', seo.description);
-    setMetaTag('property', 'og:title', seo.title);
-    setMetaTag('property', 'og:description', seo.description);
-    setMetaTag('property', 'og:url', seo.url);
-    setMetaTag('property', 'og:image', seo.image);
-    setMetaTag('name', 'twitter:title', seo.title);
-    setMetaTag('name', 'twitter:description', seo.description);
-    setMetaTag('name', 'twitter:image', seo.image);
-    updateCanonical(seo.url);
-}
-
 // ==================== APP ====================
 function App() {
-    const [routeState, setRouteState] = useState(() => parseHashRoute());
-    const page = routeState.page || 'HOME';
-    const teamSlug = routeState.teamSlug || '';
-
-    useEffect(() => {
-        if (!window.location.hash)
-            updateBrowserHash(page, teamSlug, true);
-        updateSeoMeta(page, teamSlug);
-        const syncFromUrl = () => {
-            setRouteState(parseHashRoute());
-        };
-        window.addEventListener('popstate', syncFromUrl);
-        window.addEventListener('hashchange', syncFromUrl);
-        return () => {
-            window.removeEventListener('popstate', syncFromUrl);
-            window.removeEventListener('hashchange', syncFromUrl);
-        };
-    }, []);
-
-    useEffect(() => {
-        updateSeoMeta(page, teamSlug);
-    }, [page, teamSlug]);
-
-    const navigateTo = (nextPage, options = {}) => {
-        const nextState = {
-            page: nextPage || 'HOME',
-            teamSlug: options.teamSlug || ''
-        };
-        setRouteState(nextState);
-        updateBrowserHash(nextState.page, nextState.teamSlug);
-        updateSeoMeta(nextState.page, nextState.teamSlug);
-    };
-
-    const setPage = (nextPage) => navigateTo(nextPage);
-
-    const setTeamRoute = (nextTeamSlug = '') => {
-        const nextState = { page: 'TIMES', teamSlug: nextTeamSlug || '' };
-        setRouteState(nextState);
-        updateBrowserHash(nextState.page, nextState.teamSlug);
-        updateSeoMeta(nextState.page, nextState.teamSlug);
-    };
-
+    const [page, setPage] = useState('HOME');
     const renderPage = () => {
         switch (page) {
-            case 'TIMES': return React.createElement(TeamsPage, { initialTeamSlug: teamSlug, onTeamRouteChange: setTeamRoute });
+            case 'TIMES': return React.createElement(TeamsPage, null);
             case 'REGRAS': return React.createElement(RulesPage, null);
             case 'HONESTÔMETRO': return React.createElement(HonestometroPage, null);
             case 'CALENDÁRIO': return React.createElement(CalendarPage, null);
@@ -13723,9 +13489,8 @@ function App() {
         renderPage(),
         React.createElement("footer", { className: "footer" },
             React.createElement("strong", null, "AIRBALL DYNASTY LEAGUE"),
-            " • Since FEV 2025 • Temporada 2026/27 • Todos os direitos reservados")));
+            " \u2022 Since FEV 2025 \u2022 Temporada 2026/27 \u2022 Todos os direitos reservados")));
 }
-
 ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
 
 </script>
