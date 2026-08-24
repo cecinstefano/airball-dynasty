@@ -10003,6 +10003,106 @@
     }
   }
 
+
+  /* LIVE DRAFT - vertical layout for the 3 pick options */
+  .live-draft-pick-option {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    text-align: center !important;
+    grid-template-columns: none !important;
+    gap: 12px !important;
+    min-height: 300px !important;
+    padding: 20px 18px !important;
+  }
+
+  .live-draft-pick-option-rank {
+    width: 100%;
+    grid-column: auto !important;
+    text-align: center !important;
+    margin-bottom: 0 !important;
+  }
+
+  .live-draft-pick-option-name {
+    width: 100%;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(20px, 1.75vw, 30px) !important;
+    line-height: .98 !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+    text-align: center;
+    overflow-wrap: normal;
+    word-break: normal;
+    text-wrap: balance;
+  }
+
+  .live-draft-pick-option .trade-player-photo {
+    width: 132px !important;
+    height: 132px !important;
+    margin: 2px auto !important;
+  }
+
+  .live-draft-pick-option-avg {
+    width: 100%;
+    margin-top: 0 !important;
+    font-size: clamp(42px, 3.4vw, 62px) !important;
+    text-align: center;
+  }
+
+  .live-draft-pick-option-avg span {
+    display: block;
+    margin-top: 3px;
+    color: rgba(255,255,255,.62);
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .live-draft-pick-option-meta {
+    display: none !important;
+  }
+
+  @media (max-width: 1280px) {
+    .live-draft-pick-option {
+      min-height: 270px !important;
+    }
+
+    .live-draft-pick-option .trade-player-photo {
+      width: 124px !important;
+      height: 124px !important;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .live-draft-pick-option {
+      min-height: 236px !important;
+      padding: 16px 14px !important;
+    }
+
+    .live-draft-pick-option-name {
+      min-height: 44px;
+      font-size: clamp(18px, 6vw, 24px) !important;
+    }
+
+    .live-draft-pick-option .trade-player-photo {
+      width: 104px !important;
+      height: 104px !important;
+    }
+
+    .live-draft-pick-option-avg {
+      font-size: clamp(34px, 10vw, 48px) !important;
+    }
+  }
+
 </style>
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20128%20128%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id=%22g%22%20x1=%220%22%20y1=%220%22%20x2=%221%22%20y2=%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%220%%22%20stop-color=%22#2d0a4e%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%2255%%22%20stop-color=%22#5b21b6%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%22100%%22%20stop-color=%22#f97316%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Ccircle%20cx=%2264%22%20cy=%2264%22%20r=%2258%22%20fill=%22url(#g)%22/%3E%0A%20%20%3Ccircle%20cx=%2264%22%20cy=%2264%22%20r=%2248%22%20fill=%22none%22%20stroke=%22#f97316%22%20stroke-width=%228%22/%3E%0A%20%20%3Cpath%20d=%22M22%2064h84M64%2016c18%2017%2027%2033%2027%2048s-9%2031-27%2048M64%2016C46%2033%2037%2049%2037%2064s9%2031%2027%2048%22%0A%20%20%20%20%20%20%20%20fill=%22none%22%20stroke=%22#ffffff%22%20stroke-width=%225%22%20opacity=%22.92%22%20stroke-linecap=%22round%22/%3E%0A%20%20%3Ctext%20x=%2264%22%20y=%2278%22%20text-anchor=%22middle%22%20font-family=%22Arial%20Black,%20Impact,%20sans-serif%22%0A%20%20%20%20%20%20%20%20font-size=%2239%22%20font-weight=%22900%22%20fill=%22#fff%22%20stroke=%22#2d0a4e%22%20stroke-width=%223%22%20paint-order=%22stroke%22%3EA%3C/text%3E%0A%3C/svg%3E">
@@ -13963,12 +14063,13 @@ function LiveDraftPage() {
                         e("div", { className: "live-draft-pick-options" },
                             availablePlayers.slice(0, 3).map((player, index) => e("div", { className: "live-draft-pick-option", key: player.id || `pick-option-${player.name}` },
                                 e("div", { className: "live-draft-pick-option-rank" }, `Opção ${index + 1}`),
+                                e("div", { className: "live-draft-pick-option-name" }, player.name),
                                 e(PlayerPhoto, { player, size: 124 }),
-                                e("div", null,
-                                    e("div", { className: "live-draft-pick-option-name" }, player.name),
-                                    e("div", { className: "live-draft-pick-option-meta" }, `${player.team || 'NBA'} • ${player.position || '—'}`),
-                                    e("div", { className: "live-draft-pick-option-avg" }, formatDraftScore(player.avg, 1))
-                                )
+                                e("div", { className: "live-draft-pick-option-avg" },
+                                    formatDraftScore(player.avg, 1),
+                                    e("span", null, "AVG")
+                                ),
+                                e("div", { className: "live-draft-pick-option-meta" }, `${player.team || 'NBA'} • ${player.position || '—'}`)
                             ))
                         )
                     )
