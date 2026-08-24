@@ -9801,6 +9801,208 @@
     }
   }
 
+
+  /* LIVE DRAFT - layout update: central countdown, larger pick options, bigger vertical order, Instituto gold */
+  .live-draft-main-info {
+    justify-content: center !important;
+  }
+
+  .live-draft-main-info > .live-draft-kicker,
+  .live-draft-main-info > .live-draft-title,
+  .live-draft-main-info > .live-draft-sub {
+    display: none !important;
+  }
+
+  .live-draft-main-countdown {
+    margin-bottom: 24px;
+  }
+
+  .live-draft-main-countdown-label {
+    color: rgba(255,255,255,.62);
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .live-draft-main-countdown-value {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-width: min(100%, 460px);
+    padding: 16px 24px !important;
+    font-size: clamp(54px, 6.8vw, 104px) !important;
+    line-height: .9 !important;
+    border-radius: 18px !important;
+  }
+
+  .live-draft-main-countdown.urgency-warning .live-draft-countdown-scoreboard {
+    color: #fbbf24;
+    text-shadow: 0 0 10px rgba(251,191,36,.65), 0 0 22px rgba(251,191,36,.35);
+  }
+
+  .live-draft-main-countdown.urgency-critical .live-draft-countdown-scoreboard {
+    color: #f87171;
+    text-shadow: 0 0 10px rgba(248,113,113,.7), 0 0 24px rgba(248,113,113,.4);
+    animation: liveDraftPulse 1.4s ease-in-out infinite;
+  }
+
+  .live-draft-main-countdown-deadline {
+    margin-top: 8px;
+    color: rgba(255,255,255,.66);
+    font-size: 13px;
+    line-height: 1.4;
+    font-weight: 800;
+  }
+
+  .live-draft-pick-announcement {
+    margin-top: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .live-draft-pick-announcement-title {
+    font-size: clamp(38px, 5.1vw, 82px) !important;
+    line-height: .92 !important;
+    max-width: 1050px;
+    text-shadow: 0 10px 28px rgba(0,0,0,.28);
+  }
+
+  .live-draft-pick-announcement-sub {
+    font-size: 13px !important;
+    margin-top: 12px !important;
+  }
+
+  .live-draft-pick-options {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 18px !important;
+    margin-top: 22px !important;
+  }
+
+  .live-draft-pick-option {
+    grid-template-columns: 124px minmax(0,1fr) !important;
+    gap: 16px !important;
+    min-height: 188px !important;
+    padding: 18px !important;
+    border-radius: 26px !important;
+    background:
+      radial-gradient(circle at 88% 0%, rgba(249,115,22,.20), transparent 34%),
+      rgba(0,0,0,.28) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.10), 0 14px 26px rgba(0,0,0,.14);
+  }
+
+  .live-draft-pick-option .trade-player-photo {
+    width: 124px !important;
+    height: 124px !important;
+  }
+
+  .live-draft-pick-option-rank {
+    font-size: 13px !important;
+  }
+
+  .live-draft-pick-option-name {
+    font-size: clamp(17px, 1.35vw, 24px) !important;
+    line-height: 1.04 !important;
+  }
+
+  .live-draft-pick-option-meta {
+    font-size: 11px !important;
+  }
+
+  .live-draft-pick-option-avg {
+    font-size: clamp(34px, 3vw, 52px) !important;
+  }
+
+  .live-draft-clock {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100% !important;
+  }
+
+  .live-draft-clock .live-draft-countdown,
+  .live-draft-clock .live-draft-deadline {
+    display: none !important;
+  }
+
+  .live-draft-order-title {
+    font-size: 22px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .live-draft-order-scroll {
+    flex: 1 1 auto !important;
+    max-height: 640px !important;
+    min-height: 520px !important;
+  }
+
+  .live-draft-order-scroll .live-draft-small-pick {
+    min-height: 88px !important;
+    grid-template-columns: 82px minmax(0,1fr) !important;
+    padding: 12px 14px !important;
+  }
+
+  .live-draft-order-scroll .team-logo-wrap {
+    width: 78px !important;
+    height: 78px !important;
+  }
+
+  .live-draft-order-scroll .live-draft-small-pick.current {
+    min-height: 104px !important;
+  }
+
+  .live-draft-order-scroll .live-draft-small-pick.current .team-logo-wrap {
+    width: 94px !important;
+    height: 94px !important;
+  }
+
+  @media (max-width: 1280px) {
+    .live-draft-pick-options {
+      grid-template-columns: 1fr !important;
+    }
+
+    .live-draft-pick-option {
+      grid-template-columns: 118px minmax(0,1fr) !important;
+    }
+
+    .live-draft-pick-option .trade-player-photo {
+      width: 118px !important;
+      height: 118px !important;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .live-draft-main-countdown-value {
+      min-width: 0;
+      width: 100%;
+      font-size: clamp(42px, 15vw, 68px) !important;
+      padding: 14px 12px !important;
+    }
+
+    .live-draft-pick-announcement-title {
+      font-size: clamp(32px, 10vw, 48px) !important;
+    }
+
+    .live-draft-pick-option {
+      grid-template-columns: 92px minmax(0,1fr) !important;
+      min-height: 144px !important;
+      padding: 14px !important;
+    }
+
+    .live-draft-pick-option .trade-player-photo {
+      width: 92px !important;
+      height: 92px !important;
+    }
+
+    .live-draft-order-scroll {
+      min-height: 360px !important;
+      max-height: 430px !important;
+    }
+  }
+
 </style>
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20128%20128%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id=%22g%22%20x1=%220%22%20y1=%220%22%20x2=%221%22%20y2=%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%220%%22%20stop-color=%22#2d0a4e%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%2255%%22%20stop-color=%22#5b21b6%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%22100%%22%20stop-color=%22#f97316%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Ccircle%20cx=%2264%22%20cy=%2264%22%20r=%2258%22%20fill=%22url(#g)%22/%3E%0A%20%20%3Ccircle%20cx=%2264%22%20cy=%2264%22%20r=%2248%22%20fill=%22none%22%20stroke=%22#f97316%22%20stroke-width=%228%22/%3E%0A%20%20%3Cpath%20d=%22M22%2064h84M64%2016c18%2017%2027%2033%2027%2048s-9%2031-27%2048M64%2016C46%2033%2037%2049%2037%2064s9%2031%2027%2048%22%0A%20%20%20%20%20%20%20%20fill=%22none%22%20stroke=%22#ffffff%22%20stroke-width=%225%22%20opacity=%22.92%22%20stroke-linecap=%22round%22/%3E%0A%20%20%3Ctext%20x=%2264%22%20y=%2278%22%20text-anchor=%22middle%22%20font-family=%22Arial%20Black,%20Impact,%20sans-serif%22%0A%20%20%20%20%20%20%20%20font-size=%2239%22%20font-weight=%22900%22%20fill=%22#fff%22%20stroke=%22#2d0a4e%22%20stroke-width=%223%22%20paint-order=%22stroke%22%3EA%3C/text%3E%0A%3C/svg%3E">
@@ -13746,9 +13948,11 @@ function LiveDraftPage() {
                     ) : null
                 ),
                 e("div", { className: "live-draft-main-info" },
-                    e("div", { className: "live-draft-kicker" }, "Slow Draft • 1 dia por escolha"),
-                    e("div", { className: "live-draft-title" }, "LIVE DRAFT"),
-                    e("div", { className: "live-draft-sub" }, "Central oficial do Draft AirBall 2026/27, com pick atual, ordem completa, melhores disponíveis, histórico de escolhas e ranking atualizado por AVG."),
+                    e("div", { className: `live-draft-main-countdown ${urgencyClass}` },
+                        e("div", { className: "live-draft-main-countdown-label" }, isPreDraft ? "Começa em" : "Tempo restante"),
+                        e("div", { className: "live-draft-main-countdown-value live-draft-countdown-scoreboard", "aria-live": "polite" }, formatCountdown(countdownMs)),
+                        e("div", { className: "live-draft-main-countdown-deadline" }, isPreDraft ? `Início previsto: ${formatDeadline(draftStart)}` : `Prazo da escolha atual: ${formatDeadline(pickDeadline)}`)
+                    ),
                     e("div", { className: "live-draft-pick-announcement" },
                         e("div", { className: "live-draft-pick-announcement-title" },
                             currentInfo && currentTeam
@@ -13759,7 +13963,7 @@ function LiveDraftPage() {
                         e("div", { className: "live-draft-pick-options" },
                             availablePlayers.slice(0, 3).map((player, index) => e("div", { className: "live-draft-pick-option", key: player.id || `pick-option-${player.name}` },
                                 e("div", { className: "live-draft-pick-option-rank" }, `Opção ${index + 1}`),
-                                e(PlayerPhoto, { player, size: 58 }),
+                                e(PlayerPhoto, { player, size: 124 }),
                                 e("div", null,
                                     e("div", { className: "live-draft-pick-option-name" }, player.name),
                                     e("div", { className: "live-draft-pick-option-meta" }, `${player.team || 'NBA'} • ${player.position || '—'}`),
@@ -13770,17 +13974,7 @@ function LiveDraftPage() {
                     )
                 ),
                 e("div", { className: `live-draft-clock ${urgencyClass}` },
-                    e("div", { className: "live-draft-clock-title" }, isPreDraft ? "Começa em" : "Tempo restante"),
-                    e("div", { className: "live-draft-countdown live-draft-countdown-scoreboard", "aria-live": "polite" }, formatCountdown(countdownMs)),
-                    e("div", { className: "live-draft-deadline" }, isPreDraft ? `Início previsto: ${formatDeadline(draftStart)}` : `Prazo da escolha atual: ${formatDeadline(pickDeadline)}`),
-                    nextTeamInfo ? e("div", { className: "live-draft-small-pick" },
-                        e(TeamLogo, { team: nextTeamInfo.ownerName, size: 46 }),
-                        e("div", null,
-                            e("strong", null, "Próximo"),
-                            e("span", null, getTeam(nextTeamInfo.ownerName).name)
-                        )
-                    ) : null,
-                    e("div", { className: "live-draft-clock-title", style: { marginTop: 4 } }, "Ordem dos picks"),
+                    e("div", { className: "live-draft-clock-title live-draft-order-title" }, "Ordem dos picks"),
                     e("div", { className: "live-draft-small-list live-draft-order-scroll" },
                         nextPicks.map(info => e("div", { className: `live-draft-small-pick ${info.overall === currentOverall ? 'current' : ''}`, key: `next-${info.overall}` },
                             e(TeamLogo, { team: info.ownerName, size: info.overall === currentOverall ? 86 : 72 }),
@@ -13849,7 +14043,7 @@ function LiveDraftPage() {
                         const isOpen = !!expandedTeams[key];
                         const tier = getTeamTier(row.rank);
                         const leaderPercent = getLeaderRelativePercent(row.total);
-                        return e("div", { className: `live-draft-team-block ${isOpen ? 'is-open' : ''}`, key: row.team.name, style: { '--team-color': row.team.color || '#F97316', '--team-color-soft': hexToRgba(row.team.color || '#F97316', .34), '--team-color-glow': hexToRgba(row.team.color || '#F97316', .32), '--team-color-wash': hexToRgba(row.team.color || '#F97316', .22), '--team-color-wash-strong': hexToRgba(row.team.color || '#F97316', .38) } },
+                        return e("div", { className: `live-draft-team-block ${isOpen ? 'is-open' : ''}`, key: row.team.name, style: (() => { const teamColor = normalizeTeamName(row.team.name) === 'Instituto Popovich' ? '#D4AF37' : (row.team.color || '#F97316'); return { '--team-color': teamColor, '--team-color-soft': hexToRgba(teamColor, .34), '--team-color-glow': hexToRgba(teamColor, .32), '--team-color-wash': hexToRgba(teamColor, .22), '--team-color-wash-strong': hexToRgba(teamColor, .38) }; })() },
                             e("button", { className: "live-draft-ranking-art", type: "button", onClick: () => toggleExpandedTeam(row.team.name), "aria-expanded": isOpen },
                                 e("div", { className: "live-draft-ranking-bg-rank", "aria-hidden": "true" }, row.rank),
                                 e("div", { className: "live-draft-ranking-art-logo" },
