@@ -10209,107 +10209,6 @@
     }
   }
 
-
-  /* LIVE DRAFT - manual pick operator mode */
-  .live-draft-manual-pick-btn {
-    border: 0;
-    border-radius: 999px;
-    background: linear-gradient(135deg, var(--orange), #ffb14a);
-    color: #2D0A4E;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: .04em;
-    padding: 10px 14px;
-    cursor: pointer;
-    box-shadow: 0 10px 22px rgba(249,115,22,.22);
-    transition: transform .16s ease, filter .16s ease, opacity .16s ease;
-  }
-
-  .live-draft-manual-pick-btn:hover:not(:disabled) {
-    transform: translateY(-1px);
-    filter: brightness(1.04);
-  }
-
-  .live-draft-manual-pick-btn:disabled {
-    opacity: .45;
-    cursor: not-allowed;
-    box-shadow: none;
-  }
-
-  .live-draft-manual-pick-btn.main {
-    width: 100%;
-    margin-top: 12px;
-    font-size: 13px;
-  }
-
-  .live-draft-manual-pick-btn.compact {
-    padding: 8px 12px;
-    font-size: 11px;
-    white-space: nowrap;
-  }
-
-  .live-draft-featured-card .live-draft-manual-pick-btn {
-    width: 100%;
-    margin-top: 8px;
-    font-size: 11px;
-  }
-
-  .live-draft-manual-actions {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .live-draft-manual-mini-btn {
-    border: 1px solid rgba(45,10,78,.14);
-    border-radius: 999px;
-    background: #fff;
-    color: #2D0A4E;
-    font-size: 11px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: .04em;
-    padding: 8px 11px;
-    cursor: pointer;
-  }
-
-  .live-draft-manual-mini-btn.danger {
-    color: #9f1239;
-  }
-
-  .live-draft-manual-mini-btn:disabled {
-    opacity: .38;
-    cursor: not-allowed;
-  }
-
-  @media (max-width: 760px) {
-    .live-draft-player-row {
-      gap: 8px;
-    }
-    .live-draft-manual-pick-btn.compact {
-      width: 100%;
-      grid-column: 1 / -1;
-    }
-    .live-draft-manual-actions,
-    .live-draft-manual-mini-btn {
-      width: 100%;
-    }
-  }
-
-
-  /* LIVE DRAFT - hide countdown in manual pick mode */
-  .live-draft-main-countdown,
-  .live-draft-clock .live-draft-countdown,
-  .live-draft-clock .live-draft-deadline {
-    display: none !important;
-  }
-
-  .live-draft-pick-announcement {
-    margin-top: 0 !important;
-  }
-
 </style>
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20128%20128%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id=%22g%22%20x1=%220%22%20y1=%220%22%20x2=%221%22%20y2=%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%220%%22%20stop-color=%22#2d0a4e%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%2255%%22%20stop-color=%22#5b21b6%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%22100%%22%20stop-color=%22#f97316%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Ccircle%20cx=%2264%22%20cy=%2264%22%20r=%2258%22%20fill=%22url(#g)%22/%3E%0A%20%20%3Ccircle%20cx=%2264%22%20cy=%2264%22%20r=%2248%22%20fill=%22none%22%20stroke=%22#f97316%22%20stroke-width=%228%22/%3E%0A%20%20%3Cpath%20d=%22M22%2064h84M64%2016c18%2017%2027%2033%2027%2048s-9%2031-27%2048M64%2016C46%2033%2037%2049%2037%2064s9%2031%2027%2048%22%0A%20%20%20%20%20%20%20%20fill=%22none%22%20stroke=%22#ffffff%22%20stroke-width=%225%22%20opacity=%22.92%22%20stroke-linecap=%22round%22/%3E%0A%20%20%3Ctext%20x=%2264%22%20y=%2278%22%20text-anchor=%22middle%22%20font-family=%22Arial%20Black,%20Impact,%20sans-serif%22%0A%20%20%20%20%20%20%20%20font-size=%2239%22%20font-weight=%22900%22%20fill=%22#fff%22%20stroke=%22#2d0a4e%22%20stroke-width=%223%22%20paint-order=%22stroke%22%3EA%3C/text%3E%0A%3C/svg%3E">
@@ -13791,7 +13690,7 @@ const LIVE_DRAFT_PICK_HOURS = 24;
 const LIVE_DRAFT_ROUNDS = 8;
 const LIVE_DRAFT_ESPN_KEEPER_ROUNDS = 2;
 const LIVE_DRAFT_TEAMS_PER_ROUND = 16;
-const LIVE_DRAFT_USE_CLOUDFLARE = false;
+const LIVE_DRAFT_USE_CLOUDFLARE = true;
 const LIVE_DRAFT_PICKS_API_URL = 'https://airball-espn-proxy.stefanocecin.workers.dev/draft/picks';
 const LIVE_DRAFT_PICKS_MANUAL = [
 ];
@@ -13871,16 +13770,6 @@ function LiveDraftPage() {
     const [livePicks, setLivePicks] = useState([]);
     const [picksStatus, setPicksStatus] = useState('Aguardando início do draft');
     const [workerClock, setWorkerClock] = useState(null);
-    const MANUAL_PICKS_STORAGE_KEY = 'airball-live-manual-picks-v1';
-    const [manualDraftPicks, setManualDraftPicks] = useState(() => {
-        try {
-            const saved = window.localStorage ? window.localStorage.getItem(MANUAL_PICKS_STORAGE_KEY) : null;
-            const parsed = saved ? JSON.parse(saved) : [];
-            return Array.isArray(parsed) ? parsed : [];
-        } catch (e) {
-            return [];
-        }
-    });
     const [expandedTeams, setExpandedTeams] = useState({});
     const [boardPositionFilter, setBoardPositionFilter] = useState('TODOS');
     const [boardMode, setBoardMode] = useState('espn');
@@ -13890,13 +13779,6 @@ function LiveDraftPage() {
         const timer = setInterval(() => setNow(new Date()), 60000);
         return () => clearInterval(timer);
     }, []);
-
-    useEffect(() => {
-        try {
-            if (window.localStorage)
-                window.localStorage.setItem(MANUAL_PICKS_STORAGE_KEY, JSON.stringify(manualDraftPicks));
-        } catch (e) {}
-    }, [manualDraftPicks]);
 
     useEffect(() => {
         let cancelled = false;
@@ -13934,7 +13816,7 @@ function LiveDraftPage() {
         const loadPicks = () => {
             if (!LIVE_DRAFT_USE_CLOUDFLARE) {
                 setLivePicks(LIVE_DRAFT_PICKS_MANUAL);
-                setPicksStatus('Modo manual ativo');
+                setPicksStatus('Aguardando início do draft');
                 return;
             }
             fetch(LIVE_DRAFT_PICKS_API_URL)
@@ -14095,9 +13977,7 @@ function LiveDraftPage() {
         };
     };
 
-    const livePickSource = Array.isArray(livePicks) ? livePicks : [];
-    const manualPickSource = Array.isArray(manualDraftPicks) ? manualDraftPicks : [];
-    const normalizedLivePicks = [...livePickSource, ...manualPickSource].map(normalizePick);
+    const normalizedLivePicks = (Array.isArray(livePicks) ? livePicks : []).map(normalizePick);
     const ignoredKeeperPicksCount = normalizedLivePicks.filter(pick => pick && pick.isKeeperDraftPick).length;
     const completedPicks = normalizedLivePicks
         .filter(pick => pick && !pick.isKeeperDraftPick && pick.overall && pick.player.name && pick.player.name !== 'Escolha sem jogador')
@@ -14414,37 +14294,7 @@ function LiveDraftPage() {
 
     const getBoardValue = (player) => Number(player.boardAvg ?? player.avg ?? 0);
     const getBoardLabel = (player) => player.boardLabel || (boardMode === 'yahoo' ? 'AVG Yahoo' : 'AVG ESPN');
-    const getBoardMeta = (player) => player.boardMeta || (boardMode === 'yahoo' ? 'RANK DRAFT —' : `POS #${player.boardRank || '—'}`);
-    const selectedCurrentPlayerId = pickedNames.has(normalizeTeamKey((completedByOverall[currentOverall] || {}).player?.name || '')) ? String((completedByOverall[currentOverall] || {}).player?.id || '') : '';
-    const selectPlayerForCurrentPick = (player) => {
-        if (!currentInfo || !currentTeam || !player)
-            return;
-        setManualDraftPicks(prev => {
-            const cleanPrev = (Array.isArray(prev) ? prev : []).filter(pick => Number(pick.airballOverall || pick.realOverall || pick.overall) !== Number(currentInfo.overall));
-            const nextPick = {
-                manual: true,
-                airballMapped: true,
-                airballOverall: currentInfo.overall,
-                airballRound: currentInfo.round,
-                airballRoundPick: currentInfo.pick,
-                airballTeam: currentTeam.name,
-                airballOwner: currentTeam.name,
-                playerId: player.id || '',
-                playerName: player.name || 'Jogador sem nome',
-                avg: Number(player.avg || 0) || getBoardValue(player),
-                selectedAvg: getBoardValue(player),
-                selectedAvgLabel: getBoardLabel(player),
-                position: player.position || '—',
-                nbaTeam: player.team || 'NBA',
-                photoUrl: player.photoUrl || '',
-                boardMode,
-                selectedAt: new Date().toISOString()
-            };
-            return [...cleanPrev, nextPick].sort((a, b) => Number(a.airballOverall || a.overall || 0) - Number(b.airballOverall || b.overall || 0));
-        });
-    };
-    const undoLastManualPick = () => setManualDraftPicks(prev => (Array.isArray(prev) ? prev.slice(0, -1) : []));
-    const clearManualPicks = () => setManualDraftPicks([]);
+    const getBoardMeta = (player) => player.boardMeta || (boardMode === 'yahoo' ? 'ADP —' : `POS #${player.boardRank || '—'}`);
 
     const renderPlayerRow = (player, index) => e("div", { className: "live-draft-player-row", key: player.id || `${player.name}-${index}` },
         e("div", { className: "live-draft-rank-num" }, index + 1),
@@ -14456,8 +14306,7 @@ function LiveDraftPage() {
         e("div", { className: "live-draft-avg" },
             formatDraftScore(getBoardValue(player), 1),
             e("span", null, getBoardLabel(player))
-        ),
-        e("button", { className: "live-draft-manual-pick-btn compact", type: "button", disabled: !currentInfo, onClick: () => selectPlayerForCurrentPick(player) }, "Escolher")
+        )
     );
 
     const renderFeaturedCard = (player, index) => e("div", { className: "live-draft-featured-card", key: player.id || `feat-${player.name}-${index}` },
@@ -14469,8 +14318,7 @@ function LiveDraftPage() {
             formatDraftScore(getBoardValue(player), 1),
             e("span", null, getBoardLabel(player))
         ),
-        e("div", { className: "live-draft-featured-meta live-draft-featured-board-meta" }, getBoardMeta(player)),
-        e("button", { className: "live-draft-manual-pick-btn", type: "button", disabled: !currentInfo, onClick: () => selectPlayerForCurrentPick(player) }, "Escolher para a pick")
+        e("div", { className: "live-draft-featured-meta live-draft-featured-board-meta" }, getBoardMeta(player))
     );
 
     const renderHistoryRow = (pick, index) => e("div", { className: `live-draft-history-row ${index === 0 ? 'is-latest' : ''}`, key: `pick-${pick.overall}` },
@@ -14643,7 +14491,7 @@ function LiveDraftPage() {
                                 ? ["COM A PICK NÚMERO ", e("span", { key: "picknum" }, currentInfo.overall), `, O ${currentTeam.name} SELECIONA:`]
                                 : "DRAFT ENCERRADO"
                         ),
-                        e("div", { className: "live-draft-pick-announcement-sub" }, "Escolha manualmente o jogador para o time no relógio"),
+                        e("div", { className: "live-draft-pick-announcement-sub" }, "3 melhores nomes disponíveis por AVG"),
                         e("div", { className: "live-draft-pick-options" },
                             availablePlayers.slice(0, 3).map((player, index) => e("div", { className: "live-draft-pick-option", key: player.id || `pick-option-${player.name}` },
                                 e("div", { className: "live-draft-pick-option-rank" }, `Opção ${index + 1}`),
@@ -14653,8 +14501,7 @@ function LiveDraftPage() {
                                     formatDraftScore(getBoardValue(player), 1),
                                     e("span", null, getBoardLabel(player))
                                 ),
-                                e("div", { className: "live-draft-pick-option-meta" }, `${player.team || 'NBA'} • ${player.position || '—'}`),
-                                e("button", { className: "live-draft-manual-pick-btn main", type: "button", disabled: !currentInfo, onClick: () => selectPlayerForCurrentPick(player) }, "Escolher agora")
+                                e("div", { className: "live-draft-pick-option-meta" }, `${player.team || 'NBA'} • ${player.position || '—'}`)
                             ))
                         )
                     )
@@ -14710,14 +14557,8 @@ function LiveDraftPage() {
                 ),
                 e("div", { className: "live-draft-card" },
                     e("div", { className: "live-draft-card-header" },
-                        e("div", null,
-                            e("div", { className: "live-draft-card-title" }, "Últimas escolhas"),
-                            e("div", { className: "live-draft-card-sub" }, manualDraftPicks.length ? `${manualDraftPicks.length} picks manuais nesta sessão` : (ignoredKeeperPicksCount ? `${picksStatus} • ${ignoredKeeperPicksCount} keepers ESPN ignorados` : picksStatus))
-                        ),
-                        e("div", { className: "live-draft-manual-actions" },
-                            e("button", { className: "live-draft-manual-mini-btn", type: "button", disabled: !manualDraftPicks.length, onClick: undoLastManualPick }, "Desfazer última"),
-                            e("button", { className: "live-draft-manual-mini-btn danger", type: "button", disabled: !manualDraftPicks.length, onClick: clearManualPicks }, "Limpar")
-                        )
+                        e("div", { className: "live-draft-card-title" }, "Últimas escolhas"),
+                        e("div", { className: "live-draft-card-sub" }, ignoredKeeperPicksCount ? `${picksStatus} • ${ignoredKeeperPicksCount} keepers ESPN ignorados` : picksStatus)
                     ),
                     e("div", { className: "live-draft-history-list" },
                         completedPicks.length
