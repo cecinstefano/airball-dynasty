@@ -10187,28 +10187,6 @@
     background: rgba(255,255,255,.10);
   }
 
-
-  /* DRAFT SIMULATOR - AVG source selector and no-keeper summary */
-  .draft-sim-controls {
-    align-items: end;
-  }
-
-  .draft-sim-field select {
-    min-width: 190px;
-  }
-
-  .draft-sim-player-meta {
-    overflow-wrap: anywhere;
-  }
-
-  @media (max-width: 760px) {
-    .draft-sim-field,
-    .draft-sim-field select,
-    .draft-sim-controls .draft-sim-btn {
-      width: 100%;
-    }
-  }
-
 </style>
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20128%20128%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id=%22g%22%20x1=%220%22%20y1=%220%22%20x2=%221%22%20y2=%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%220%%22%20stop-color=%22#2d0a4e%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%2255%%22%20stop-color=%22#5b21b6%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%22100%%22%20stop-color=%22#f97316%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Ccircle%20cx=%2264%22%20cy=%2264%22%20r=%2258%22%20fill=%22url(#g)%22/%3E%0A%20%20%3Ccircle%20cx=%2264%22%20cy=%2264%22%20r=%2248%22%20fill=%22none%22%20stroke=%22#f97316%22%20stroke-width=%228%22/%3E%0A%20%20%3Cpath%20d=%22M22%2064h84M64%2016c18%2017%2027%2033%2027%2048s-9%2031-27%2048M64%2016C46%2033%2037%2049%2037%2064s9%2031%2027%2048%22%0A%20%20%20%20%20%20%20%20fill=%22none%22%20stroke=%22#ffffff%22%20stroke-width=%225%22%20opacity=%22.92%22%20stroke-linecap=%22round%22/%3E%0A%20%20%3Ctext%20x=%2264%22%20y=%2278%22%20text-anchor=%22middle%22%20font-family=%22Arial%20Black,%20Impact,%20sans-serif%22%0A%20%20%20%20%20%20%20%20font-size=%2239%22%20font-weight=%22900%22%20fill=%22#fff%22%20stroke=%22#2d0a4e%22%20stroke-width=%223%22%20paint-order=%22stroke%22%3EA%3C/text%3E%0A%3C/svg%3E">
@@ -13685,11 +13663,9 @@ function GmPhoto({ team }) {
 }
 
 
-const LIVE_DRAFT_START_AT = '2026-08-25T20:15:00-03:00';
+const LIVE_DRAFT_START_AT = '2026-09-15T00:00:00-03:00';
 const LIVE_DRAFT_PICK_HOURS = 24;
 const LIVE_DRAFT_ROUNDS = 8;
-const LIVE_DRAFT_ESPN_KEEPER_ROUNDS = 2;
-const LIVE_DRAFT_TEAMS_PER_ROUND = 16;
 const LIVE_DRAFT_USE_CLOUDFLARE = true;
 const LIVE_DRAFT_PICKS_API_URL = 'https://airball-espn-proxy.stefanocecin.workers.dev/draft/picks';
 const LIVE_DRAFT_PICKS_MANUAL = [
@@ -13769,7 +13745,6 @@ function LiveDraftPage() {
     const [playerStatus, setPlayerStatus] = useState('Carregando board de jogadores...');
     const [livePicks, setLivePicks] = useState([]);
     const [picksStatus, setPicksStatus] = useState('Aguardando início do draft');
-    const [workerClock, setWorkerClock] = useState(null);
     const [expandedTeams, setExpandedTeams] = useState({});
     const [boardPositionFilter, setBoardPositionFilter] = useState('TODOS');
     const [boardMode, setBoardMode] = useState('espn');
@@ -13828,16 +13803,9 @@ function LiveDraftPage() {
                 .then(data => {
                     if (cancelled)
                         return;
-                    const pickBuckets = Array.isArray(data)
-                        ? data
-                        : [data?.picks, data?.items, data?.selections, data?.draftPicks, data?.draft?.picks, data?.draft?.selections, data?.data?.picks, data?.data?.items];
-                    const picks = Array.isArray(pickBuckets) && Array.isArray(data)
-                        ? pickBuckets
-                        : (pickBuckets.find(bucket => Array.isArray(bucket)) || []);
-                    const clock = Array.isArray(data) ? null : (data?.clock || data?.timer || data?.draftClock || data?.currentPick || data?.current || data?.draft?.clock || data?.data?.clock || null);
+                    const picks = Array.isArray(data) ? data : (data.picks || data.items || []);
                     setLivePicks(picks);
-                    setWorkerClock(clock);
-                    setPicksStatus(`${picks.length} registros ESPN carregados`);
+                    setPicksStatus(`${picks.length} escolhas carregadas`);
                 })
                 .catch(() => {
                     if (!cancelled) {
@@ -13899,99 +13867,36 @@ function LiveDraftPage() {
         return { total: 0, players: [] };
     };
 
-    const pickNumberFrom = (...values) => {
-        for (const value of values) {
-            const parsed = Number(String(value ?? '').replace(/[^\d.-]/g, ''));
-            if (Number.isFinite(parsed) && parsed > 0)
-                return parsed;
-        }
-        return 0;
-    };
-
-    const normalizePick = (rawPickInput, index) => {
-        const rawPick = rawPickInput && typeof rawPickInput === 'object' ? rawPickInput : {};
-        const rawPlayer = rawPick.player && typeof rawPick.player === 'object' ? rawPick.player : {};
-        const rawPlayerText = typeof rawPick.player === 'string' ? rawPick.player : '';
-        const explicitAirballOverall = pickNumberFrom(rawPick.airballOverall, rawPick.realOverall, rawPick.actualOverall, rawPick.airballPickOverall);
-        const explicitAirballRound = pickNumberFrom(rawPick.airballRound, rawPick.realRound, rawPick.actualRound);
-        const explicitAirballRoundPick = pickNumberFrom(rawPick.airballRoundPick, rawPick.realRoundPick, rawPick.actualRoundPick);
-        const espnRound = pickNumberFrom(rawPick.espnRound, rawPick.originalRound, rawPick.draftRound, rawPick.round, rawPick.roundId);
-        const espnRoundPick = pickNumberFrom(rawPick.espnRoundPick, rawPick.roundPick, rawPick.pickInRound, rawPick.slot, rawPick.pickNumber, rawPick.roundSelection);
-        const espnOverall = pickNumberFrom(rawPick.espnOverall, rawPick.originalOverall, rawPick.overall, rawPick.overallPick, rawPick.pickOverall, rawPick.pick, rawPick.selection, rawPick.selectionNumber);
-        const hasExplicitAirball = !!(explicitAirballOverall || explicitAirballRound || explicitAirballRoundPick || rawPick.airballMapped || rawPick.isAirballMapped);
-        const keeperPickLimit = LIVE_DRAFT_ESPN_KEEPER_ROUNDS * LIVE_DRAFT_TEAMS_PER_ROUND;
-        const isKeeperRound = !hasExplicitAirball && (
-            rawPick.isKeeper ||
-            rawPick.keeper ||
-            rawPick.isKeeperPick ||
-            (espnRound > 0 && espnRound <= LIVE_DRAFT_ESPN_KEEPER_ROUNDS) ||
-            (!espnRound && espnOverall > 0 && espnOverall <= keeperPickLimit)
-        );
-        const playerId = rawPick.playerId || rawPick.espnId || rawPick.id || rawPlayer.id || rawPlayer.playerId || rawPlayer.espnId || '';
-        const playerName = rawPick.playerName || rawPick.name || rawPick.fullName || rawPick.displayName || rawPlayer.fullName || rawPlayer.displayName || rawPlayer.name || rawPlayerText || '';
-        const playerNameText = String(playerName || '').trim();
-        const matched = playerId ? playerById[String(playerId)] : (playerNameText ? playerByName[normalizeTeamKey(playerNameText)] : null);
-        if (isKeeperRound) {
-            return {
-                isKeeperDraftPick: true,
-                rawRound: espnRound,
-                rawOverall: espnOverall,
-                player: {
-                    id: playerId || (matched ? matched.id : `${playerNameText || 'keeper'}-${espnOverall || index}`),
-                    name: playerNameText || (matched ? matched.name : 'Keeper ESPN')
-                }
-            };
-        }
-        let overall = explicitAirballOverall;
-        if (!overall && explicitAirballRound) {
-            const pick = explicitAirballRoundPick || espnRoundPick || (((espnOverall || 1) - 1) % LIVE_DRAFT_TEAMS_PER_ROUND) + 1;
-            overall = ((explicitAirballRound - 1) * LIVE_DRAFT_TEAMS_PER_ROUND) + pick;
-        }
-        if (!overall && espnRound > LIVE_DRAFT_ESPN_KEEPER_ROUNDS) {
-            const realRound = espnRound - LIVE_DRAFT_ESPN_KEEPER_ROUNDS;
-            const realPick = espnRoundPick || (((espnOverall || 1) - 1) % LIVE_DRAFT_TEAMS_PER_ROUND) + 1;
-            overall = ((realRound - 1) * LIVE_DRAFT_TEAMS_PER_ROUND) + realPick;
-        }
-        if (!overall && espnOverall > keeperPickLimit)
-            overall = espnOverall - keeperPickLimit;
-        if (!overall)
-            overall = index + 1;
+    const normalizePick = (rawPick, index) => {
+        const overall = Number(rawPick.overall || rawPick.overallPick || rawPick.pickOverall || rawPick.pick || (index + 1));
         const info = getDraftPickInfoForOverall(overall);
-        const avg = Number(rawPick.avg || rawPick.fantasyPoints || rawPick.average || rawPick.projectedAvg || rawPlayer.avg || rawPlayer.fantasyPoints || rawPlayer.average || (matched ? matched.avg : 0)) || 0;
+        const playerId = rawPick.playerId || rawPick.espnId || rawPick.id || '';
+        const playerName = rawPick.player || rawPick.playerName || rawPick.name || rawPick.fullName || '';
+        const matched = playerId ? playerById[String(playerId)] : (playerName ? playerByName[normalizeTeamKey(playerName)] : null);
+        const avg = Number(rawPick.avg || rawPick.fantasyPoints || rawPick.average || (matched ? matched.avg : 0)) || 0;
         return {
             overall,
-            espnRound,
-            espnOverall,
-            round: Number(info.round),
-            pick: Number(info.pick),
-            ownerName: normalizeTeamName(rawPick.airballTeam || rawPick.airballOwner || rawPick.ownerName || rawPick.teamName || rawPick.owner || info.ownerName),
+            round: Number(rawPick.round || info.round),
+            pick: Number(rawPick.roundPick || rawPick.pickInRound || info.pick),
+            ownerName: normalizeTeamName(rawPick.team || rawPick.owner || info.ownerName),
             originalTeam: info.originalTeam,
             player: {
-                id: playerId || (matched ? matched.id : `${playerNameText || 'player'}-${overall}`),
-                name: playerNameText || (matched ? matched.name : 'Escolha sem jogador'),
+                id: playerId || (matched ? matched.id : `${playerName}-${overall}`),
+                name: playerName || (matched ? matched.name : 'Escolha sem jogador'),
                 avg,
-                position: rawPick.position || rawPick.pos || rawPlayer.position || rawPlayer.defaultPosition || (matched ? matched.position : '—'),
-                team: rawPick.nbaTeam || rawPick.proTeam || rawPick.proTeamAbbrev || rawPlayer.proTeamAbbrev || rawPlayer.nbaTeam || (matched ? matched.team : 'NBA'),
-                photoUrl: rawPick.photoUrl || rawPick.headshotUrl || rawPick.playerPhoto || rawPlayer.photoUrl || rawPlayer.headshotUrl || (matched ? matched.photoUrl : '')
+                position: rawPick.position || (matched ? matched.position : '—'),
+                team: rawPick.nbaTeam || rawPick.proTeam || (matched ? matched.team : 'NBA'),
+                photoUrl: rawPick.photoUrl || (matched ? matched.photoUrl : '')
             }
         };
     };
 
-    const normalizedLivePicks = (Array.isArray(livePicks) ? livePicks : []).map(normalizePick);
-    const ignoredKeeperPicksCount = normalizedLivePicks.filter(pick => pick && pick.isKeeperDraftPick).length;
-    const completedPicks = normalizedLivePicks
-        .filter(pick => pick && !pick.isKeeperDraftPick && pick.overall && pick.player.name && pick.player.name !== 'Escolha sem jogador')
+    const completedPicks = [...livePicks]
+        .map(normalizePick)
+        .filter(pick => pick.overall && pick.player.name && pick.player.name !== 'Escolha sem jogador')
         .sort((a, b) => Number(a.overall || 0) - Number(b.overall || 0));
 
     const pickedNames = new Set(completedPicks.map(pick => normalizeTeamKey(pick.player.name)));
-    const officialKeeperNames = new Set();
-    Object.values(KEEPERS_DATA || {}).forEach(row => {
-        (row.players || []).forEach(player => officialKeeperNames.add(normalizeTeamKey(player.name || player)));
-    });
-    keeperRanking.forEach(row => {
-        (row.topPlayers || row.players || []).forEach(player => officialKeeperNames.add(normalizeTeamKey(player.name || player)));
-    });
-    const isOfficialKeeperPlayer = (player) => officialKeeperNames.has(normalizeTeamKey(player.name));
     const yahooProjectionByKeyTeam = {};
     const yahooProjectionByKey = {};
     const yahooProjectionKeyCounts = {};
@@ -14130,7 +14035,6 @@ function LiveDraftPage() {
     };
     const baseAvailablePlayers = players
         .filter(player => isDraftFreeFantasyTeam(player.fantasyTeam))
-        .filter(player => !isOfficialKeeperPlayer(player))
         .filter(player => !pickedNames.has(normalizeTeamKey(player.name)))
         .filter(player => boardPositionFilter === 'TODOS' || String(player.position || '').split('/').includes(boardPositionFilter));
     const espnAvailablePlayers = [...baseAvailablePlayers]
@@ -14176,7 +14080,6 @@ function LiveDraftPage() {
         .filter(projection => !baseAvailableYahooKeys.has(projection.key))
         .filter(projection => !pickedYahooProjectionKeys.has(projection.key))
         .map(createYahooOnlyPlayer)
-        .filter(player => !isOfficialKeeperPlayer(player))
         .filter(player => boardPositionFilter === 'TODOS' || String(player.position || '').split(/[\/,\s]+/).includes(boardPositionFilter));
     const yahooAvailablePlayers = [...yahooMappedPlayers, ...yahooOnlyPlayers]
         .sort((a, b) => {
@@ -14199,11 +14102,8 @@ function LiveDraftPage() {
     const currentTeam = currentInfo ? getTeam(currentInfo.ownerName) : null;
     const draftStart = new Date(LIVE_DRAFT_START_AT);
     const pickDeadline = currentInfo ? new Date(draftStart.getTime() + currentOverall * LIVE_DRAFT_PICK_HOURS * 60 * 60 * 1000) : null;
-    const workerDeadlineRaw = workerClock && (workerClock.deadlineAt || workerClock.expiresAt || workerClock.pickDeadline || workerClock.deadline || workerClock.endsAt || workerClock.dueAt);
-    const workerDeadline = workerDeadlineRaw ? new Date(workerDeadlineRaw) : null;
-    const hasWorkerDeadline = workerDeadline && !Number.isNaN(workerDeadline.getTime());
     const isPreDraft = now.getTime() < draftStart.getTime() && completedCount === 0;
-    const countdownTarget = hasWorkerDeadline ? workerDeadline : (isPreDraft ? draftStart : pickDeadline);
+    const countdownTarget = isPreDraft ? draftStart : pickDeadline;
     const countdownMs = countdownTarget ? countdownTarget.getTime() - now.getTime() : 0;
     const lastPick = completedPicks.length ? completedPicks[completedPicks.length - 1] : null;
 
@@ -14558,7 +14458,7 @@ function LiveDraftPage() {
                 e("div", { className: "live-draft-card" },
                     e("div", { className: "live-draft-card-header" },
                         e("div", { className: "live-draft-card-title" }, "Últimas escolhas"),
-                        e("div", { className: "live-draft-card-sub" }, ignoredKeeperPicksCount ? `${picksStatus} • ${ignoredKeeperPicksCount} keepers ESPN ignorados` : picksStatus)
+                        e("div", { className: "live-draft-card-sub" }, picksStatus)
                     ),
                     e("div", { className: "live-draft-history-list" },
                         completedPicks.length
@@ -16184,7 +16084,6 @@ function DraftSimulatorPage() {
     const [allPlayers, setAllPlayers] = useState([]);
     const [status, setStatus] = useState('Carregando board ESPN...');
     const [selectedTeam, setSelectedTeam] = useState("Stéfano's SuperSonics");
-    const [avgMode, setAvgMode] = useState('espn');
     const [activeRound, setActiveRound] = useState(1);
     const [pickedByRound, setPickedByRound] = useState({});
     const printRef = useRef(null);
@@ -16193,13 +16092,6 @@ function DraftSimulatorPage() {
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '')
         .toLowerCase()
-        .trim();
-
-    const makeFullNameKey = (value) => String(value || '')
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, ' ')
         .trim();
 
     const cleanLeaguePosition = (position) => {
@@ -16240,135 +16132,6 @@ function DraftSimulatorPage() {
         return !freeLabels.has(team);
     };
 
-    const yahooProjectionByKeyTeam = {};
-    const yahooProjectionByKey = {};
-    const yahooProjectionKeyCounts = {};
-    YAHOO_AVG_PROJECTIONS_2026_27.forEach(row => {
-        const key = row.key || makePlayerProjectionKey(row.name);
-        const team = String(row.team || '').toUpperCase();
-        if (!key)
-            return;
-        yahooProjectionByKeyTeam[`${key}|${team}`] = row;
-        yahooProjectionByKey[key] = yahooProjectionByKey[key] || row;
-        yahooProjectionKeyCounts[key] = (yahooProjectionKeyCounts[key] || 0) + 1;
-    });
-
-    const getYahooProjectionByRule = (rule) => {
-        if (!rule || !rule.key)
-            return null;
-        let candidates = YAHOO_AVG_PROJECTIONS_2026_27.filter(row => row.key === rule.key);
-        if (rule.team)
-            candidates = candidates.filter(row => String(row.team || '').toUpperCase() === String(rule.team || '').toUpperCase());
-        if (Number.isFinite(Number(rule.minAvg)))
-            candidates = candidates.filter(row => Number(row.avg || 0) >= Number(rule.minAvg));
-        if (Number.isFinite(Number(rule.maxAvg)))
-            candidates = candidates.filter(row => Number(row.avg || 0) < Number(rule.maxAvg));
-        if (Number.isFinite(Number(rule.rank)))
-            candidates = candidates.filter(row => Number(row.rank || 0) === Number(rule.rank));
-        return candidates.sort((a, b) => Number(b.avg || 0) - Number(a.avg || 0))[0] || null;
-    };
-
-    const getYahooProjectionForPlayer = (player) => {
-        const fullNameKey = makeFullNameKey(player.name);
-        const exactOverrides = {
-            'lamelo ball': { key: 'l ball' },
-            'stephen curry': { key: 's curry' },
-            'tyrese haliburton': { key: 't haliburton' },
-            'karl anthony towns': { key: 'k towns' },
-            'karl towns': { key: 'k towns' },
-            'de aaron fox': { key: 'd fox' },
-            'deaaron fox': { key: 'd fox' },
-            'de anthony melton': { key: 'd melton' },
-            'deanthony melton': { key: 'd melton' },
-            'de andre hunter': { key: 'd hunter' },
-            'deandre hunter': { key: 'd hunter' },
-            'cj mccollum': { key: 'c mccollum' },
-            'c j mccollum': { key: 'c mccollum' },
-            'pj washington': { key: 'p washington' },
-            'p j washington': { key: 'p washington' },
-            'tj mcconnell': { key: 't mcconnell' },
-            't j mcconnell': { key: 't mcconnell' },
-            'rj barrett': { key: 'r barrett' },
-            'r j barrett': { key: 'r barrett' },
-            'og anunoby': { key: 'o anunoby' },
-            'o g anunoby': { key: 'o anunoby' },
-            'donovan mitchell': { key: 'd mitchell', team: 'CLE' },
-            'davion mitchell': { key: 'd mitchell', team: 'MIA' },
-            'anthony edwards': { key: 'a edwards' },
-            'amen thompson': { key: 'a thompson', minAvg: 40 },
-            'ausar thompson': { key: 'a thompson', maxAvg: 40 },
-            'miles bridges': { key: 'm bridges', team: 'PHX' },
-            'mikal bridges': { key: 'm bridges', team: 'NYK' },
-            'jaylen brown': { key: 'j brown' },
-            'jalen brunson': { key: 'j brunson' },
-            'jalen green': { key: 'j green' },
-            'jalen johnson': { key: 'j johnson' },
-            'jalen suggs': { key: 'j suggs' },
-            'jalen duren': { key: 'j duren' },
-            'jalen williams': { key: 'j williams', minAvg: 40 },
-            'jaylen williams': { key: 'j williams', minAvg: 40 },
-            'jaylin williams': { key: 'j williams', maxAvg: 40 },
-            'kyshawn george': { key: 'k george', team: 'WAS' },
-            'keyonte george': { key: 'k george', team: 'UTA' },
-            'andrew wiggins': { key: 'a wiggins', team: 'MIA' },
-            'aaron wiggins': { key: 'a wiggins', team: 'ATL' },
-            'julian champagnie': { key: 'j champagnie', team: 'SAS' },
-            'justin champagnie': { key: 'j champagnie', team: 'WAS' },
-            'jarace walker': { key: 'j walker', team: 'IND' },
-            'jabari walker': { key: 'j walker', team: 'PHI' },
-            'cam johnson': { key: 'c johnson', team: 'DEN' },
-            'cameron johnson': { key: 'c johnson', team: 'DEN' }
-        };
-        const blockedAmbiguousNames = new Set(['lonzo ball', 'seth curry']);
-        if (blockedAmbiguousNames.has(fullNameKey))
-            return null;
-        if (exactOverrides[fullNameKey])
-            return getYahooProjectionByRule(exactOverrides[fullNameKey]);
-        const team = String(player.team || player.proTeam || '').toUpperCase();
-        const candidates = getPlayerProjectionKeyCandidates(player.name);
-        for (const key of candidates) {
-            if (yahooProjectionByKeyTeam[`${key}|${team}`])
-                return yahooProjectionByKeyTeam[`${key}|${team}`];
-        }
-        for (const key of candidates) {
-            if (yahooProjectionKeyCounts[key] === 1)
-                return yahooProjectionByKey[key] || null;
-        }
-        return null;
-    };
-
-    const workerOriginForYahooPhotos = (() => {
-        try {
-            return new URL(PLAYERS_API_URL).origin;
-        } catch (e) {
-            return '';
-        }
-    })();
-
-    const yahooOnlyPlayerOverrides = {
-        't haliburton': { name: 'Tyrese Haliburton', espnId: '4396993' }
-    };
-
-    const createYahooOnlyPlayer = (projection) => {
-        const override = yahooOnlyPlayerOverrides[projection.key] || {};
-        const photoUrl = override.espnId && workerOriginForYahooPhotos ? `${workerOriginForYahooPhotos}/player-photo/${override.espnId}` : '';
-        return {
-            id: `yahoo-only-${projection.key}`,
-            name: override.name || projection.name,
-            fantasyPoints: 0,
-            totalPoints: 0,
-            position: projection.pos || '—',
-            team: projection.team || 'NBA',
-            fantasyTeam: 'Livre',
-            photoUrl,
-            yahooProjection: projection,
-            boardScore: Number(projection.avg || 0),
-            boardLabel: 'AVG Yahoo',
-            boardMeta: `RANK DRAFT ${projection.draftRank ? `#${projection.draftRank}` : '—'}`,
-            isYahooOnly: true
-        };
-    };
-
     useEffect(() => {
         fetch(PLAYERS_API_URL)
             .then(res => {
@@ -16382,10 +16145,11 @@ function DraftSimulatorPage() {
                     .filter(p => p.name && Number(p.fantasyPoints) > 0);
                 const pool = normalized
                     .filter(p => !isKeeperOrOwned(p))
-                    .sort((a, b) => b.fantasyPoints - a.fantasyPoints);
+                    .sort((a, b) => b.fantasyPoints - a.fantasyPoints)
+                    .slice(0, 220);
                 setAllPlayers(normalized);
                 setPlayers(pool);
-                setStatus(`${pool.length} jogadores livres carregados`);
+                setStatus(`${pool.length} jogadores disponíveis • keepers puxados da ESPN`);
             })
             .catch(() => {
                 setStatus('Erro ao carregar ESPN');
@@ -16415,93 +16179,27 @@ function DraftSimulatorPage() {
         return Math.max(1, info.overall - offset);
     };
 
+    const teamKeepers = allPlayers
+        .filter(player => normalizeTeamName(player.fantasyTeam) === normalizeTeamName(selectedTeam))
+        .sort((a, b) => Number(b.fantasyPoints || 0) - Number(a.fantasyPoints || 0))
+        .slice(0, 2);
+
     const draftSelectedPlayers = Object.keys(pickedByRound)
         .map(key => pickedByRound[key])
         .filter(Boolean);
 
+    const selectedPlayers = [...teamKeepers, ...draftSelectedPlayers];
+
     const selectedIds = new Set(draftSelectedPlayers.map(player => String(player.id)));
-    const pickedYahooProjectionKeys = new Set(draftSelectedPlayers
-        .map(player => {
-            const projection = getYahooProjectionForPlayer(player);
-            return projection ? projection.key : makePlayerProjectionKey(player.name);
-        })
-        .filter(Boolean));
-
-    const baseYahooKeys = new Set(players
-        .map(player => {
-            const projection = getYahooProjectionForPlayer(player);
-            return projection ? projection.key : null;
-        })
-        .filter(Boolean));
-
-    const espnBoardPlayers = [...players]
-        .filter(player => Number(player.fantasyPoints || 0) > 0)
-        .sort((a, b) => Number(b.fantasyPoints || 0) - Number(a.fantasyPoints || 0))
-        .map((player, index) => ({
-            ...player,
-            boardScore: Number(player.fantasyPoints || 0),
-            boardRank: index + 1,
-            boardLabel: 'AVG ESPN',
-            boardMeta: `POS #${index + 1}`
-        }))
-        .slice(0, 300);
-
-    const yahooMappedPlayers = players
-        .map(player => {
-            const projection = getYahooProjectionForPlayer(player);
-            if (!projection || !Number.isFinite(Number(projection.avg)))
-                return null;
-            return {
-                ...player,
-                yahooProjection: projection,
-                boardScore: Number(projection.avg || 0),
-                boardRank: projection.rank,
-                boardLabel: 'AVG Yahoo',
-                boardMeta: `RANK DRAFT ${projection.draftRank ? `#${projection.draftRank}` : '—'}`
-            };
-        })
-        .filter(Boolean);
-
-    const yahooOnlyPlayers = YAHOO_AVG_PROJECTIONS_2026_27
-        .filter(projection => !!yahooOnlyPlayerOverrides[projection.key])
-        .filter(projection => !baseYahooKeys.has(projection.key))
-        .filter(projection => !pickedYahooProjectionKeys.has(projection.key))
-        .map(createYahooOnlyPlayer);
-
-    const yahooBoardPlayers = [...yahooMappedPlayers, ...yahooOnlyPlayers]
-        .sort((a, b) => {
-            const avgDiff = Number(b.boardScore || 0) - Number(a.boardScore || 0);
-            if (avgDiff !== 0)
-                return avgDiff;
-            return Number(a.yahooProjection?.draftRank || 999) - Number(b.yahooProjection?.draftRank || 999);
-        })
-        .map((player, index) => ({
-            ...player,
-            boardRank: index + 1
-        }))
-        .slice(0, 300);
-
-    const boardPlayers = avgMode === 'yahoo' ? yahooBoardPlayers : espnBoardPlayers;
-
-    const getPlayerScore = (player) => {
-        if (avgMode === 'yahoo') {
-            const projection = player.yahooProjection || getYahooProjectionForPlayer(player);
-            return projection ? Number(projection.avg || 0) : 0;
-        }
-        return Number(player.fantasyPoints || 0);
-    };
-
-    const getPlayerLabel = () => avgMode === 'yahoo' ? 'AVG Yahoo' : 'AVG ESPN';
-
-    const selectedPlayers = draftSelectedPlayers;
-    const totalAvg = selectedPlayers.reduce((sum, player) => sum + getPlayerScore(player), 0);
+    const totalAvg = selectedPlayers.reduce((sum, player) => sum + Number(player.fantasyPoints || 0), 0);
     const averageAvg = selectedPlayers.length ? totalAvg / selectedPlayers.length : 0;
 
     const activeInfo = getPickInfo(activeRound);
     const activeStart = getWindowStartRank(activeRound);
-    const activeCandidates = boardPlayers
+    const activeCandidates = players
+        .map((player, index) => ({ player, boardRank: index + 1 }))
         .slice(activeStart - 1, activeStart - 1 + WINDOW_SIZE)
-        .filter(item => !selectedIds.has(String(item.id)) || String(pickedByRound[activeRound]?.id) === String(item.id));
+        .filter(item => !selectedIds.has(String(item.player.id)) || String(pickedByRound[activeRound]?.id) === String(item.player.id));
 
     const choosePlayer = (round, player) => {
         setPickedByRound(prev => ({ ...prev, [round]: player }));
@@ -16540,24 +16238,19 @@ function DraftSimulatorPage() {
     return (React.createElement("div", { className: "main-wrap draft-page" },
         React.createElement("div", { className: "page-hero" },
             React.createElement("div", { className: "page-hero-title" }, "🧪 Simulador de Draft"),
-            React.createElement("div", { className: "page-hero-sub" }, "Escolha uma franquia, simule apenas as picks do draft e alterne entre AVG ESPN e AVG Yahoo")),
+            React.createElement("div", { className: "page-hero-sub" }, "Escolha uma franquia, simule suas escolhas atualizadas após trocas de picks e monte um board com AVG total e média do time")),
         React.createElement("div", { className: "draft-sim-card" },
             React.createElement("div", { className: "draft-sim-header" },
                 React.createElement("div", null,
                     React.createElement("div", { className: "draft-sim-kicker" }, "Draft Snake • 8 rounds"),
                     React.createElement("div", { className: "draft-sim-title" }, "Simulador de Draft"),
-                    React.createElement("div", { className: "draft-sim-sub" }, "Sem keepers: o resumo mostra somente os jogadores escolhidos na simulação. A janela muda conforme o AVG selecionado.")),
-                React.createElement("div", { className: "draft-sim-status" }, `${status} • ${avgMode === 'yahoo' ? 'AVG Yahoo 2026-2027' : 'AVG ESPN 2025-2026'}`)),
+                    React.createElement("div", { className: "draft-sim-sub" }, "A janela de escolha mostra jogadores próximos da sua pick no board por AVG. Conforme você escolhe, o resumo do time é atualizado automaticamente.")),
+                React.createElement("div", { className: "draft-sim-status" }, status)),
             React.createElement("div", { className: "draft-sim-controls" },
                 React.createElement("label", { className: "draft-sim-field" },
                     React.createElement("span", null, "Selecionar franquia"),
                     React.createElement("select", { value: selectedTeam, onChange: (e) => setSelectedTeam(e.target.value) },
                         DRAFT_ORDER.map(row => React.createElement("option", { key: row.name, value: row.name }, `${row.pick}. ${getTeam(row.name).name}`)))),
-                React.createElement("label", { className: "draft-sim-field" },
-                    React.createElement("span", null, "Base de AVG"),
-                    React.createElement("select", { value: avgMode, onChange: (e) => setAvgMode(e.target.value) },
-                        React.createElement("option", { value: "espn" }, "AVG ESPN 2025-2026"),
-                        React.createElement("option", { value: "yahoo" }, "AVG Yahoo 2026-2027"))),
                 React.createElement("button", { className: "draft-sim-btn secondary", type: "button", onClick: resetDraft }, "Limpar simulação"),
                 React.createElement("button", { className: "draft-sim-btn primary", type: "button", onClick: printSimulation }, "Print do time")),
             React.createElement("div", { className: "draft-sim-layout" },
@@ -16568,14 +16261,31 @@ function DraftSimulatorPage() {
                         React.createElement("div", { className: "draft-sim-team-seed" },
                             teamDraftPicks.length,
                             " escolhas de draft • ",
-                            avgMode === 'yahoo' ? "AVG Yahoo" : "AVG ESPN")),
+                            teamKeepers.length,
+                            " keepers oficiais")),
                     React.createElement("div", { className: "draft-sim-totals" },
                         React.createElement("div", { className: "draft-sim-total-box" },
-                            React.createElement("div", { className: "draft-sim-total-label" }, `AVG total ${avgMode === 'yahoo' ? 'Yahoo' : 'ESPN'}`),
+                            React.createElement("div", { className: "draft-sim-total-label" }, "AVG total"),
                             React.createElement("div", { className: "draft-sim-total-value" }, formatScore(totalAvg))),
                         React.createElement("div", { className: "draft-sim-total-box" },
                             React.createElement("div", { className: "draft-sim-total-label" }, "Média AVG"),
                             React.createElement("div", { className: "draft-sim-total-value" }, formatScore(averageAvg)))),
+                    React.createElement("div", { className: "draft-sim-keepers-title" }, "Keepers oficiais já no time"),
+                    React.createElement("div", { className: "draft-sim-keepers-grid" },
+                        teamKeepers.length ? teamKeepers.map((keeper, keeperIndex) => React.createElement("div", { className: "draft-sim-keeper-card", key: `keeper-${keeper.id || keeperIndex}` },
+                            React.createElement("div", { className: "draft-sim-keeper-badge" },
+                                "Keeper ",
+                                keeperIndex + 1),
+                            React.createElement("div", { className: "draft-sim-picked-player" },
+                                React.createElement(PlayerPhoto, { player: keeper, size: 46 }),
+                                React.createElement("div", null,
+                                    React.createElement("div", { className: "draft-sim-picked-name" }, keeper.name),
+                                    React.createElement("div", { className: "draft-sim-picked-meta" },
+                                        keeper.team,
+                                        " • ",
+                                        keeper.position,
+                                        " • AVG ",
+                                        formatScore(keeper.fantasyPoints)))))) : React.createElement("div", { className: "draft-sim-empty-pick" }, "Keepers ainda não carregados para este time.")),
                     React.createElement("div", { className: "draft-sim-keepers-title" }, "Escolhas do draft"),
                     React.createElement("div", { className: "draft-sim-picked-list" },
                         Array.from({ length: teamPickSlots }, (_, index) => {
@@ -16600,10 +16310,8 @@ function DraftSimulatorPage() {
                                             picked.team,
                                             " • ",
                                             picked.position,
-                                            " • ",
-                                            getPlayerLabel(),
-                                            " ",
-                                            formatScore(getPlayerScore(picked))))) : React.createElement("div", { className: "draft-sim-empty-pick" }, "Clique para escolher esta pick"));
+                                            " • AVG ",
+                                            formatScore(picked.fantasyPoints)))) : React.createElement("div", { className: "draft-sim-empty-pick" }, "Clique para escolher esta pick"));
                         }))),
                 React.createElement("div", { className: "draft-sim-board" },
                     React.createElement("div", { className: "draft-sim-round-head" },
@@ -16616,12 +16324,10 @@ function DraftSimulatorPage() {
                                 " • Overall ",
                                 activeInfo.overall),
                             React.createElement("div", { className: "draft-sim-round-sub" },
-                                "Mostrando jogadores do board ",
-                                avgMode === 'yahoo' ? "Yahoo" : "ESPN",
-                                " a partir da posição #",
+                                "Mostrando jogadores do board a partir da posição #",
                                 activeStart,
                                 " até #",
-                                Math.min(activeStart + WINDOW_SIZE - 1, boardPlayers.length),
+                                Math.min(activeStart + WINDOW_SIZE - 1, players.length),
                                 ". Escolha 1 jogador para esta pick."))),
                     React.createElement("div", { className: "draft-sim-round-tabs" },
                         Array.from({ length: teamPickSlots }, (_, index) => {
@@ -16636,20 +16342,18 @@ function DraftSimulatorPage() {
                                 picked ? ' ✓' : '');
                         })),
                     React.createElement("div", { className: "draft-sim-candidates" },
-                        activeCandidates.length ? activeCandidates.map((player) => React.createElement("div", { className: "draft-sim-candidate", key: `${activeRound}-${player.id}` },
+                        activeCandidates.length ? activeCandidates.map(({ player, boardRank }) => React.createElement("div", { className: "draft-sim-candidate", key: `${activeRound}-${player.id}` },
                             React.createElement("div", { className: "draft-sim-rank" },
                                 "#",
-                                player.boardRank || "—"),
+                                boardRank),
                             React.createElement(PlayerPhoto, { player: player, size: 48 }),
                             React.createElement("div", null,
                                 React.createElement("div", { className: "draft-sim-player-name" }, player.name),
                                 React.createElement("div", { className: "draft-sim-player-meta" },
                                     player.team,
                                     " • ",
-                                    player.position,
-                                    " • ",
-                                    player.boardMeta || "")),
-                            React.createElement("div", { className: "draft-sim-avg" }, formatScore(getPlayerScore(player))),
+                                    player.position)),
+                            React.createElement("div", { className: "draft-sim-avg" }, formatScore(player.fantasyPoints)),
                             React.createElement("button", { className: "draft-sim-candidate-btn", type: "button", onClick: () => choosePlayer(activeRound, player) }, String(pickedByRound[activeRound]?.id) === String(player.id) ? 'Escolhido' : 'Escolher'))) : React.createElement("div", { className: "draft-sim-no-player" }, "Nenhum jogador disponível nesta janela do board.")))))));
 }
 
