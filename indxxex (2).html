@@ -13883,8 +13883,8 @@ function LiveDraftPage() {
     });
     const [expandedTeams, setExpandedTeams] = useState({});
     const [boardPositionFilter, setBoardPositionFilter] = useState('TODOS');
-    const [boardMode, setBoardMode] = useState('yahoo');
-    const [rankingMode, setRankingMode] = useState('yahoo');
+    const [boardMode, setBoardMode] = useState('espn');
+    const [rankingMode, setRankingMode] = useState('espn');
 
     useEffect(() => {
         const timer = setInterval(() => setNow(new Date()), 60000);
@@ -13986,63 +13986,35 @@ function LiveDraftPage() {
         return acc;
     }, {});
 
-    const parseKeeperAvgValue = (value) => {
-        if (value === null || value === undefined || value === '')
-            return null;
-        if (typeof value === 'number')
-            return Number.isFinite(value) ? value : null;
-        const number = Number(String(value).replace(/\./g, '').replace(',', '.').replace(/[^\d.-]/g, ''));
-        return Number.isFinite(number) ? number : null;
-    };
-
-    const buildLiveKeeperPlayer = (source) => {
-        const raw = source && typeof source === 'object' ? source : { name: source };
-        const name = String(raw.name || raw.playerName || raw.fullName || raw.displayName || source || '').trim();
-        const matched = playerByName[normalizeTeamKey(name)] || {};
-        const baseAvg = parseKeeperAvgValue(raw.avg ?? raw.fp ?? raw.fantasyPoints ?? raw.average ?? matched.avg);
-        const player = {
-            id: raw.id || matched.id || `keeper-${normalizeTeamKey(name)}`,
-            name,
-            avg: baseAvg,
-            position: raw.position || raw.pos || matched.position || 'KEEPER',
-            team: raw.team || raw.proTeam || raw.proTeamAbbrev || matched.team || 'NBA',
-            photoUrl: raw.photoUrl || raw.headshotUrl || matched.photoUrl || ''
-        };
-        const projection = getYahooProjectionForPlayer(player);
-        if (projection) {
-            player.yahooProjection = projection;
-            player.yahooAvg = Number(projection.avg || 0);
-            player.yahooDraftRank = projection.draftRank || null;
-            player.position = player.position === 'KEEPER' ? (projection.pos || player.position) : player.position;
-            player.team = player.team === 'NBA' ? (projection.team || player.team) : player.team;
-        }
-        return player;
-    };
-
     const getTeamKeepers = (teamName) => {
         const key = normalizeTeamKey(teamName);
-        const fallback = LIVE_KEEPERS_FALLBACK[normalizeTeamName(teamName)] || LIVE_KEEPERS_FALLBACK[teamName];
-        if (fallback && Array.isArray(fallback.players) && fallback.players.length) {
-            const players = fallback.players.map(buildLiveKeeperPlayer);
-            const yahooTotal = players.reduce((sum, player) => sum + Number(player.yahooAvg || 0), 0);
-            return {
-                total: Number(fallback.total || 0),
-                yahooTotal,
-                players
-            };
-        }
         const dynamic = keeperByTeam[key];
         if (dynamic && Array.isArray(dynamic.topPlayers) && dynamic.topPlayers.length) {
-            const players = dynamic.topPlayers.map(buildLiveKeeperPlayer);
-            const total = players.reduce((sum, player) => sum + Number(player.avg || 0), 0);
-            const yahooTotal = players.reduce((sum, player) => sum + Number(player.yahooAvg || 0), 0);
             return {
-                total: Number(dynamic.totalAvg || total || 0),
-                yahooTotal,
-                players
+                total: Number(dynamic.totalAvg || 0),
+                players: dynamic.topPlayers.map(player => ({
+                    name: player.name,
+                    avg: Number(player.avg || 0),
+                    position: player.position || '—',
+                    team: player.team || 'NBA',
+                    photoUrl: player.photoUrl || ''
+                }))
             };
         }
-        return { total: 0, yahooTotal: 0, players: [] };
+        const fallback = LIVE_KEEPERS_FALLBACK[normalizeTeamName(teamName)] || LIVE_KEEPERS_FALLBACK[teamName];
+        if (fallback) {
+            return {
+                total: Number(fallback.total || 0),
+                players: fallback.players.map(name => ({
+                    name,
+                    avg: null,
+                    position: 'KEEPER',
+                    team: 'NBA',
+                    photoUrl: (playerByName[normalizeTeamKey(name)] || {}).photoUrl || ''
+                }))
+            };
+        }
+        return { total: 0, players: [] };
     };
 
     const pickNumberFrom = (...values) => {
@@ -14136,13 +14108,9 @@ function LiveDraftPage() {
     Object.values(KEEPERS_DATA || {}).forEach(row => {
         (row.players || []).forEach(player => officialKeeperNames.add(normalizeTeamKey(player.name || player)));
     });
-    Object.values(LIVE_KEEPERS_FALLBACK || {}).forEach(row => {
-        (row.players || []).forEach(player => officialKeeperNames.add(normalizeTeamKey(player.name || player)));
-    });
     keeperRanking.forEach(row => {
         (row.topPlayers || row.players || []).forEach(player => officialKeeperNames.add(normalizeTeamKey(player.name || player)));
     });
-    officialKeeperNames.add(normalizeTeamKey('Chet Holmgren'));
     const isOfficialKeeperPlayer = (player) => officialKeeperNames.has(normalizeTeamKey(player.name));
     const yahooProjectionByKeyTeam = {};
     const yahooProjectionByKey = {};
@@ -14240,14 +14208,10 @@ function LiveDraftPage() {
     };
     const getPlayerAvgForMode = (player, mode, fallbackAvg = null) => {
         if (mode === 'yahoo') {
-            const projection = player?.yahooProjection || getYahooProjectionForPlayer(player);
-            if (projection)
-                return Number(projection.avg || 0);
-            if (Number.isFinite(Number(player?.yahooAvg)))
-                return Number(player.yahooAvg);
-            return null;
+            const projection = getYahooProjectionForPlayer(player);
+            return projection ? Number(projection.avg || 0) : null;
         }
-        return Number(fallbackAvg ?? player?.avg ?? player?.boardAvg ?? 0);
+        return Number(fallbackAvg ?? player.avg ?? player.boardAvg ?? 0);
     };
     const getPlayerAvgForModeNumber = (player, mode, fallbackAvg = null) => {
         const value = getPlayerAvgForMode(player, mode, fallbackAvg);
@@ -14411,7 +14375,7 @@ function LiveDraftPage() {
         const keepers = getTeamKeepers(team.name);
         const picks = picksByTeam[normalizeTeamKey(team.name)] || [];
         const keeperTotal = rankingMode === 'yahoo'
-            ? (Number(keepers.yahooTotal || 0) || keepers.players.reduce((sum, player) => sum + getPlayerAvgForModeNumber(player, rankingMode, player.avg), 0))
+            ? keepers.players.reduce((sum, player) => sum + getPlayerAvgForModeNumber(player, rankingMode, player.avg), 0)
             : Number(keepers.total || 0);
         const pickTotal = picks.reduce((sum, pick) => sum + getPlayerAvgForModeNumber(pick.player, rankingMode, pick.player.avg), 0);
         const total = keeperTotal + pickTotal;
