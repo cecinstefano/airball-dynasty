@@ -9324,6 +9324,992 @@
     }
   }
 
+
+  /* LIVE DRAFT - final user refinements: all cards, vertical pick order, team colors, logo-tier layout */
+  .live-draft-board-featured {
+    grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)) !important;
+    gap: 12px !important;
+    padding: 16px 18px !important;
+  }
+
+  .live-draft-featured-card {
+    min-height: 184px !important;
+    justify-content: center !important;
+  }
+
+  .live-draft-featured-card .trade-player-photo {
+    width: 70px !important;
+    height: 70px !important;
+  }
+
+  .live-draft-board-rest-title,
+  .live-draft-board-list {
+    display: none !important;
+  }
+
+  .live-draft-order-scroll {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    max-height: 430px !important;
+    padding-right: 8px !important;
+    padding-bottom: 0 !important;
+    scroll-snap-type: none !important;
+  }
+
+  .live-draft-order-scroll .live-draft-small-pick {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    min-height: 76px !important;
+    grid-template-columns: 74px minmax(0,1fr) !important;
+    text-align: left !important;
+    justify-items: stretch !important;
+    padding: 11px 12px !important;
+    border-radius: 18px !important;
+  }
+
+  .live-draft-order-scroll .team-logo-wrap {
+    width: 70px !important;
+    height: 70px !important;
+  }
+
+  .live-draft-order-scroll .live-draft-small-pick.current {
+    flex-basis: auto !important;
+    transform: none !important;
+    min-height: 88px !important;
+  }
+
+  .live-draft-order-scroll .live-draft-small-pick.current .team-logo-wrap {
+    width: 82px !important;
+    height: 82px !important;
+  }
+
+  .live-draft-order-scroll .live-draft-small-pick strong,
+  .live-draft-order-scroll .live-draft-small-pick span {
+    text-align: left !important;
+    white-space: nowrap !important;
+  }
+
+  .live-draft-order-scroll::-webkit-scrollbar {
+    width: 11px !important;
+    height: auto !important;
+  }
+
+  .live-draft-order-scroll::-webkit-scrollbar-track {
+    background: rgba(255,255,255,.12);
+    border-radius: 999px;
+  }
+
+  .live-draft-order-scroll::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(249,115,22,.95), rgba(124,58,237,.88)) !important;
+    border-radius: 999px;
+    border: 2px solid rgba(0,0,0,.18);
+  }
+
+  .live-draft-pick-announcement {
+    margin-top: 22px;
+    border-radius: 28px;
+    padding: clamp(18px, 2vw, 26px);
+    background:
+      radial-gradient(circle at 90% 0%, rgba(249,115,22,.18), transparent 28%),
+      rgba(255,255,255,.10);
+    border: 1px solid rgba(255,255,255,.16);
+  }
+
+  .live-draft-pick-announcement-title {
+    font-family: 'Oswald', sans-serif;
+    color: white;
+    font-size: clamp(24px, 3.2vw, 46px);
+    line-height: 1;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: .7px;
+  }
+
+  .live-draft-pick-announcement-title span { color: var(--orange); }
+
+  .live-draft-pick-announcement-sub {
+    margin-top: 6px;
+    color: rgba(255,255,255,.64);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+  }
+
+  .live-draft-pick-options {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .live-draft-pick-option {
+    border-radius: 20px;
+    padding: 14px 12px;
+    background: rgba(0,0,0,.22);
+    border: 1px solid rgba(255,255,255,.12);
+    display: grid;
+    grid-template-columns: 58px minmax(0,1fr);
+    gap: 11px;
+    align-items: center;
+    min-height: 110px;
+  }
+
+  .live-draft-pick-option-rank {
+    grid-column: 1 / -1;
+    color: var(--orange);
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .live-draft-pick-option-name {
+    color: white;
+    font-weight: 900;
+    font-size: 13px;
+    line-height: 1.15;
+  }
+
+  .live-draft-pick-option-meta {
+    margin-top: 4px;
+    color: rgba(255,255,255,.58);
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .live-draft-pick-option-avg {
+    margin-top: 6px;
+    color: var(--orange);
+    font-family: 'Oswald', sans-serif;
+    font-size: 24px;
+    line-height: .9;
+    font-weight: 900;
+  }
+
+  .live-draft-team-block {
+    border-color: var(--team-color-soft, rgba(45,10,78,.10)) !important;
+    box-shadow: 0 14px 32px var(--team-color-glow, rgba(45,10,78,.10)) !important;
+  }
+
+  .live-draft-ranking-art {
+    background:
+      radial-gradient(circle at 82% 4%, var(--team-color-soft, rgba(249,115,22,.14)), transparent 36%),
+      linear-gradient(135deg, #ffffff 0%, #fbf8ff 100%) !important;
+    border-left: 7px solid var(--team-color, var(--orange)) !important;
+    grid-template-columns: minmax(190px, .62fr) minmax(0, 1fr) !important;
+    min-height: 300px !important;
+    gap: 20px !important;
+  }
+
+  .live-draft-ranking-art:hover {
+    box-shadow: inset 0 0 0 2px var(--team-color-soft, rgba(249,115,22,.22)) !important;
+  }
+
+  .live-draft-ranking-art-logo {
+    width: 100% !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 12px !important;
+    align-self: stretch !important;
+    padding: 2px 0 0 !important;
+  }
+
+  .live-draft-ranking-art-logo .team-logo-wrap {
+    width: clamp(128px, 9vw, 172px) !important;
+    height: clamp(128px, 9vw, 172px) !important;
+  }
+
+  .live-draft-logo-tier-wrap {
+    width: 100%;
+    margin-top: auto;
+  }
+
+  .live-draft-logo-tier-wrap .live-draft-team-note-title {
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+
+  .live-draft-logo-tier-wrap .live-draft-tier-bar { width: 100%; }
+
+  .live-draft-tier-bar {
+    grid-template-columns: repeat(5, minmax(24px, 1fr)) minmax(58px, 1.28fr) !important;
+  }
+
+  .live-draft-tier-segment {
+    min-height: 31px !important;
+    font-size: 10px !important;
+    letter-spacing: .5px !important;
+  }
+
+  .live-draft-ranking-art-main {
+    justify-content: center !important;
+    padding-bottom: 2px;
+  }
+
+  .live-draft-team-note { margin-top: 18px !important; max-width: none !important; }
+  .live-draft-team-note-summary { margin-top: 0 !important; }
+  .live-draft-team-note-top { color: var(--team-color, var(--orange)) !important; }
+
+  @media (max-width: 1100px) {
+    .live-draft-pick-options { grid-template-columns: 1fr; }
+    .live-draft-ranking-art { grid-template-columns: 170px minmax(0,1fr) !important; }
+    .live-draft-ranking-art-logo .team-logo-wrap { width: 140px !important; height: 140px !important; }
+  }
+
+  @media (max-width: 700px) {
+    .live-draft-ranking-art { grid-template-columns: 1fr !important; min-height: auto !important; }
+    .live-draft-logo-tier-wrap { margin-top: 8px; }
+    .live-draft-pick-announcement-title { font-size: clamp(24px, 9vw, 34px); }
+    .live-draft-order-scroll { max-height: 380px !important; }
+  }
+
+
+  /* LIVE DRAFT - stronger team colors on ranking cards */
+  .live-draft-team-block {
+    border: 2px solid var(--team-color-soft, rgba(45,10,78,.18)) !important;
+    box-shadow:
+      0 18px 42px var(--team-color-glow, rgba(45,10,78,.18)),
+      0 0 0 1px rgba(255,255,255,.70) inset !important;
+  }
+
+  .live-draft-ranking-art {
+    border-left: 12px solid var(--team-color, var(--orange)) !important;
+    background:
+      radial-gradient(circle at 16% 46%, var(--team-color-wash-strong, rgba(249,115,22,.28)) 0%, transparent 36%),
+      radial-gradient(circle at 92% 0%, var(--team-color-wash, rgba(249,115,22,.22)) 0%, transparent 34%),
+      linear-gradient(135deg, var(--team-color-wash, rgba(249,115,22,.20)) 0%, #ffffff 42%, #fbf8ff 100%) !important;
+  }
+
+  .live-draft-ranking-art::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, var(--team-color-wash-strong, rgba(249,115,22,.26)) 0%, transparent 48%),
+      linear-gradient(180deg, rgba(255,255,255,.58), transparent 45%);
+    opacity: .72;
+  }
+
+  .live-draft-ranking-art-logo {
+    border-radius: 24px;
+    padding: 14px 12px 12px !important;
+    background:
+      radial-gradient(circle at 50% 18%, rgba(255,255,255,.74), transparent 34%),
+      linear-gradient(160deg, var(--team-color-wash-strong, rgba(249,115,22,.30)), var(--team-color-wash, rgba(249,115,22,.18)));
+    border: 1px solid var(--team-color-soft, rgba(45,10,78,.20));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.72);
+  }
+
+  .live-draft-logo-tier-wrap {
+    border-radius: 16px;
+    padding: 8px;
+    background: rgba(255,255,255,.68);
+    border: 1px solid rgba(255,255,255,.72);
+  }
+
+  .live-draft-ranking-art-avg,
+  .live-draft-team-note-top {
+    color: var(--team-color, var(--orange)) !important;
+  }
+
+  .live-draft-tier-segment.active {
+    background: linear-gradient(180deg, var(--team-color, var(--orange)), var(--orange-dark)) !important;
+    box-shadow: 0 9px 22px var(--team-color-glow, rgba(249,115,22,.32)), inset 0 1px 0 rgba(255,255,255,.24) !important;
+  }
+
+  .live-draft-tier-segment.active::after {
+    border-top-color: var(--team-color, var(--orange)) !important;
+  }
+
+  /* LIVE DRAFT - contain team note inside colored logo card */
+  .live-draft-ranking-art-logo {
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  .live-draft-logo-tier-wrap {
+    width: min(100%, 190px) !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    align-self: center !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  .live-draft-logo-tier-wrap .live-draft-team-note-title,
+  .live-draft-tier-segment {
+    white-space: nowrap !important;
+  }
+
+  .live-draft-logo-tier-wrap .live-draft-tier-bar,
+  .live-draft-tier-bar {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) minmax(46px, 1.18fr) !important;
+    gap: 0 !important;
+  }
+
+  .live-draft-tier-segment {
+    min-width: 0 !important;
+    padding: 0 2px !important;
+    font-size: 9px !important;
+    letter-spacing: .35px !important;
+  }
+
+  @media (max-width: 700px) {
+    .live-draft-ranking-art-logo .team-logo-wrap {
+      width: clamp(112px, 32vw, 148px) !important;
+      height: clamp(112px, 32vw, 148px) !important;
+    }
+
+    .live-draft-logo-tier-wrap {
+      width: min(100%, 210px) !important;
+      padding: 8px 7px !important;
+    }
+
+    .live-draft-tier-segment {
+      font-size: 8px !important;
+      min-height: 29px !important;
+      padding: 0 1px !important;
+      letter-spacing: .2px !important;
+    }
+  }
+
+
+
+
+  /* LIVE DRAFT - wider bottom tier bar */
+  .live-draft-ranking-art {
+    grid-template-columns: 170px minmax(0, 1fr) !important;
+    grid-template-areas:
+      "logo main"
+      "note note" !important;
+    align-items: center !important;
+    row-gap: 14px !important;
+  }
+
+  .live-draft-ranking-art-logo {
+    grid-area: logo !important;
+    width: 100% !important;
+    height: auto !important;
+    align-self: stretch !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background:
+      radial-gradient(circle at 50% 18%, rgba(255,255,255,.74), transparent 34%),
+      linear-gradient(160deg, var(--team-color-wash-strong, rgba(249,115,22,.30)), var(--team-color-wash, rgba(249,115,22,.18))) !important;
+    border-radius: 24px !important;
+    padding: 14px 12px !important;
+    border: 1px solid var(--team-color-soft, rgba(45,10,78,.20)) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.72) !important;
+    overflow: hidden !important;
+    min-width: 0 !important;
+  }
+
+  .live-draft-ranking-art-logo .team-logo-wrap {
+    width: clamp(128px, 10vw, 172px) !important;
+    height: clamp(128px, 10vw, 172px) !important;
+  }
+
+  .live-draft-ranking-art-main {
+    grid-area: main !important;
+    justify-content: center !important;
+    padding-bottom: 2px !important;
+  }
+
+  .live-draft-team-note-wide {
+    grid-area: note !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin-top: 0 !important;
+    padding-top: 4px !important;
+  }
+
+  .live-draft-team-note-wide .live-draft-team-note-top {
+    margin-bottom: 8px !important;
+    color: var(--team-color, var(--orange)) !important;
+  }
+
+  .live-draft-team-note-wide .live-draft-team-note-title {
+    margin-bottom: 9px !important;
+  }
+
+  .live-draft-team-note-wide .live-draft-tier-bar {
+    width: 100% !important;
+    max-width: 100% !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) minmax(68px, 1.35fr) !important;
+    gap: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .live-draft-team-note-wide .live-draft-tier-segment {
+    min-width: 0 !important;
+    min-height: 36px !important;
+    font-size: 12px !important;
+    letter-spacing: .55px !important;
+    padding: 0 4px !important;
+    white-space: nowrap !important;
+  }
+
+  @media (max-width: 1100px) {
+    .live-draft-ranking-art {
+      grid-template-columns: 150px minmax(0,1fr) !important;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .live-draft-ranking-art {
+      grid-template-columns: 1fr !important;
+      grid-template-areas:
+        "logo"
+        "main"
+        "note" !important;
+    }
+
+    .live-draft-ranking-art-logo {
+      max-width: 240px !important;
+      width: 100% !important;
+      margin: 0 auto !important;
+    }
+
+    .live-draft-team-note-wide .live-draft-tier-bar {
+      grid-template-columns: repeat(5, minmax(0,1fr)) minmax(56px, 1.22fr) !important;
+    }
+
+    .live-draft-team-note-wide .live-draft-tier-segment {
+      font-size: 9px !important;
+      min-height: 31px !important;
+      padding: 0 2px !important;
+      letter-spacing: .25px !important;
+    }
+  }
+
+
+  /* LIVE DRAFT - layout update: central countdown, larger pick options, bigger vertical order, Instituto gold */
+  .live-draft-main-info {
+    justify-content: center !important;
+  }
+
+  .live-draft-main-info > .live-draft-kicker,
+  .live-draft-main-info > .live-draft-title,
+  .live-draft-main-info > .live-draft-sub {
+    display: none !important;
+  }
+
+  .live-draft-main-countdown {
+    margin-bottom: 24px;
+  }
+
+  .live-draft-main-countdown-label {
+    color: rgba(255,255,255,.62);
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .live-draft-main-countdown-value {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-width: min(100%, 460px);
+    padding: 16px 24px !important;
+    font-size: clamp(54px, 6.8vw, 104px) !important;
+    line-height: .9 !important;
+    border-radius: 18px !important;
+  }
+
+  .live-draft-main-countdown.urgency-warning .live-draft-countdown-scoreboard {
+    color: #fbbf24;
+    text-shadow: 0 0 10px rgba(251,191,36,.65), 0 0 22px rgba(251,191,36,.35);
+  }
+
+  .live-draft-main-countdown.urgency-critical .live-draft-countdown-scoreboard {
+    color: #f87171;
+    text-shadow: 0 0 10px rgba(248,113,113,.7), 0 0 24px rgba(248,113,113,.4);
+    animation: liveDraftPulse 1.4s ease-in-out infinite;
+  }
+
+  .live-draft-main-countdown-deadline {
+    margin-top: 8px;
+    color: rgba(255,255,255,.66);
+    font-size: 13px;
+    line-height: 1.4;
+    font-weight: 800;
+  }
+
+  .live-draft-pick-announcement {
+    margin-top: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .live-draft-pick-announcement-title {
+    font-size: clamp(38px, 5.1vw, 82px) !important;
+    line-height: .92 !important;
+    max-width: 1050px;
+    text-shadow: 0 10px 28px rgba(0,0,0,.28);
+  }
+
+  .live-draft-pick-announcement-sub {
+    font-size: 13px !important;
+    margin-top: 12px !important;
+  }
+
+  .live-draft-pick-options {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 18px !important;
+    margin-top: 22px !important;
+  }
+
+  .live-draft-pick-option {
+    grid-template-columns: 124px minmax(0,1fr) !important;
+    gap: 16px !important;
+    min-height: 188px !important;
+    padding: 18px !important;
+    border-radius: 26px !important;
+    background:
+      radial-gradient(circle at 88% 0%, rgba(249,115,22,.20), transparent 34%),
+      rgba(0,0,0,.28) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.10), 0 14px 26px rgba(0,0,0,.14);
+  }
+
+  .live-draft-pick-option .trade-player-photo {
+    width: 124px !important;
+    height: 124px !important;
+  }
+
+  .live-draft-pick-option-rank {
+    font-size: 13px !important;
+  }
+
+  .live-draft-pick-option-name {
+    font-size: clamp(17px, 1.35vw, 24px) !important;
+    line-height: 1.04 !important;
+  }
+
+  .live-draft-pick-option-meta {
+    font-size: 11px !important;
+  }
+
+  .live-draft-pick-option-avg {
+    font-size: clamp(34px, 3vw, 52px) !important;
+  }
+
+  .live-draft-clock {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100% !important;
+  }
+
+  .live-draft-clock .live-draft-countdown,
+  .live-draft-clock .live-draft-deadline {
+    display: none !important;
+  }
+
+  .live-draft-order-title {
+    font-size: 22px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .live-draft-order-scroll {
+    flex: 1 1 auto !important;
+    max-height: 640px !important;
+    min-height: 520px !important;
+  }
+
+  .live-draft-order-scroll .live-draft-small-pick {
+    min-height: 88px !important;
+    grid-template-columns: 82px minmax(0,1fr) !important;
+    padding: 12px 14px !important;
+  }
+
+  .live-draft-order-scroll .team-logo-wrap {
+    width: 78px !important;
+    height: 78px !important;
+  }
+
+  .live-draft-order-scroll .live-draft-small-pick.current {
+    min-height: 104px !important;
+  }
+
+  .live-draft-order-scroll .live-draft-small-pick.current .team-logo-wrap {
+    width: 94px !important;
+    height: 94px !important;
+  }
+
+  @media (max-width: 1280px) {
+    .live-draft-pick-options {
+      grid-template-columns: 1fr !important;
+    }
+
+    .live-draft-pick-option {
+      grid-template-columns: 118px minmax(0,1fr) !important;
+    }
+
+    .live-draft-pick-option .trade-player-photo {
+      width: 118px !important;
+      height: 118px !important;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .live-draft-main-countdown-value {
+      min-width: 0;
+      width: 100%;
+      font-size: clamp(42px, 15vw, 68px) !important;
+      padding: 14px 12px !important;
+    }
+
+    .live-draft-pick-announcement-title {
+      font-size: clamp(32px, 10vw, 48px) !important;
+    }
+
+    .live-draft-pick-option {
+      grid-template-columns: 92px minmax(0,1fr) !important;
+      min-height: 144px !important;
+      padding: 14px !important;
+    }
+
+    .live-draft-pick-option .trade-player-photo {
+      width: 92px !important;
+      height: 92px !important;
+    }
+
+    .live-draft-order-scroll {
+      min-height: 360px !important;
+      max-height: 430px !important;
+    }
+  }
+
+
+  /* LIVE DRAFT - vertical layout for the 3 pick options */
+  .live-draft-pick-option {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    text-align: center !important;
+    grid-template-columns: none !important;
+    gap: 12px !important;
+    min-height: 300px !important;
+    padding: 20px 18px !important;
+  }
+
+  .live-draft-pick-option-rank {
+    width: 100%;
+    grid-column: auto !important;
+    text-align: center !important;
+    margin-bottom: 0 !important;
+  }
+
+  .live-draft-pick-option-name {
+    width: 100%;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(20px, 1.75vw, 30px) !important;
+    line-height: .98 !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+    text-align: center;
+    overflow-wrap: normal;
+    word-break: normal;
+    text-wrap: balance;
+  }
+
+  .live-draft-pick-option .trade-player-photo {
+    width: 132px !important;
+    height: 132px !important;
+    margin: 2px auto !important;
+  }
+
+  .live-draft-pick-option-avg {
+    width: 100%;
+    margin-top: 0 !important;
+    font-size: clamp(42px, 3.4vw, 62px) !important;
+    text-align: center;
+  }
+
+  .live-draft-pick-option-avg span {
+    display: block;
+    margin-top: 3px;
+    color: rgba(255,255,255,.62);
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .live-draft-pick-option-meta {
+    display: none !important;
+  }
+
+  @media (max-width: 1280px) {
+    .live-draft-pick-option {
+      min-height: 270px !important;
+    }
+
+    .live-draft-pick-option .trade-player-photo {
+      width: 124px !important;
+      height: 124px !important;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .live-draft-pick-option {
+      min-height: 236px !important;
+      padding: 16px 14px !important;
+    }
+
+    .live-draft-pick-option-name {
+      min-height: 44px;
+      font-size: clamp(18px, 6vw, 24px) !important;
+    }
+
+    .live-draft-pick-option .trade-player-photo {
+      width: 104px !important;
+      height: 104px !important;
+    }
+
+    .live-draft-pick-option-avg {
+      font-size: clamp(34px, 10vw, 48px) !important;
+    }
+  }
+
+
+  /* LIVE DRAFT - ESPN/Yahoo board mode and 300-player board */
+  .live-draft-mode-select {
+    min-width: 190px;
+  }
+
+  .live-draft-board-scroll {
+    max-height: 980px !important;
+  }
+
+  .live-draft-board-list {
+    display: flex !important;
+    flex-direction: column !important;
+    border-top: 1px solid #f0edf6;
+  }
+
+  .live-draft-board-rest-title {
+    display: block !important;
+    padding: 18px 20px 8px !important;
+    color: var(--purple-deep) !important;
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: #fbf8ff;
+    border-top: 1px solid #ede3fb;
+  }
+
+  .live-draft-featured-board-meta {
+    color: var(--orange) !important;
+    font-size: 10px !important;
+    margin-top: 2px !important;
+  }
+
+  .live-draft-featured-card {
+    min-height: 212px !important;
+  }
+
+  .live-draft-featured-avg span,
+  .live-draft-avg span,
+  .live-draft-pick-option-avg span {
+    white-space: nowrap;
+  }
+
+  @media (max-width: 760px) {
+    .live-draft-board-tools {
+      width: 100%;
+    }
+
+    .live-draft-mode-select,
+    .live-draft-board-tools .live-draft-select {
+      width: 100%;
+    }
+
+    .live-draft-board-scroll {
+      max-height: 760px !important;
+    }
+  }
+
+
+  /* LIVE DRAFT - ranking AVG mode selector */
+  .live-draft-ranking-actions .live-draft-mode-select {
+    min-width: 190px;
+  }
+
+  @media (max-width: 760px) {
+    .live-draft-ranking-actions {
+      width: 100%;
+    }
+
+    .live-draft-ranking-actions .live-draft-mode-select,
+    .live-draft-ranking-actions .live-draft-action-btn {
+      width: 100%;
+    }
+  }
+
+
+  /* LIVE DRAFT - Yahoo-only player support */
+  .live-draft-featured-card .trade-player-photo,
+  .live-draft-pick-option .trade-player-photo {
+    background: rgba(255,255,255,.10);
+  }
+
+
+  /* DRAFT SIMULATOR - AVG source selector and no-keeper summary */
+  .draft-sim-controls {
+    align-items: end;
+  }
+
+  .draft-sim-field select {
+    min-width: 190px;
+  }
+
+  .draft-sim-player-meta {
+    overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 760px) {
+    .draft-sim-field,
+    .draft-sim-field select,
+    .draft-sim-controls .draft-sim-btn {
+      width: 100%;
+    }
+  }
+
+
+  /* LIVE DRAFT - manual pick operator mode */
+  .live-draft-manual-pick-btn {
+    border: 0;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--orange), #ffb14a);
+    color: #2D0A4E;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    padding: 10px 14px;
+    cursor: pointer;
+    box-shadow: 0 10px 22px rgba(249,115,22,.22);
+    transition: transform .16s ease, filter .16s ease, opacity .16s ease;
+  }
+
+  .live-draft-manual-pick-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    filter: brightness(1.04);
+  }
+
+  .live-draft-manual-pick-btn:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+  .live-draft-manual-pick-btn.main {
+    width: 100%;
+    margin-top: 12px;
+    font-size: 13px;
+  }
+
+  .live-draft-manual-pick-btn.compact {
+    padding: 8px 12px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .live-draft-featured-card .live-draft-manual-pick-btn {
+    width: 100%;
+    margin-top: 8px;
+    font-size: 11px;
+  }
+
+  .live-draft-manual-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .live-draft-manual-mini-btn {
+    border: 1px solid rgba(45,10,78,.14);
+    border-radius: 999px;
+    background: #fff;
+    color: #2D0A4E;
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    padding: 8px 11px;
+    cursor: pointer;
+  }
+
+  .live-draft-manual-mini-btn.danger {
+    color: #9f1239;
+  }
+
+  .live-draft-manual-mini-btn:disabled {
+    opacity: .38;
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 760px) {
+    .live-draft-player-row {
+      gap: 8px;
+    }
+    .live-draft-manual-pick-btn.compact {
+      width: 100%;
+      grid-column: 1 / -1;
+    }
+    .live-draft-manual-actions,
+    .live-draft-manual-mini-btn {
+      width: 100%;
+    }
+  }
+
+
+  /* LIVE DRAFT - hide countdown in manual pick mode */
+  .live-draft-main-countdown,
+  .live-draft-clock .live-draft-countdown,
+  .live-draft-clock .live-draft-deadline {
+    display: none !important;
+  }
+
+  .live-draft-pick-announcement {
+    margin-top: 0 !important;
+  }
+
 </style>
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20128%20128%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id=%22g%22%20x1=%220%22%20y1=%220%22%20x2=%221%22%20y2=%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%220%%22%20stop-color=%22#2d0a4e%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%2255%%22%20stop-color=%22#5b21b6%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%22100%%22%20stop-color=%22#f97316%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Ccircle%20cx=%2264%22%20cy=%2264%22%20r=%2258%22%20fill=%22url(#g)%22/%3E%0A%20%20%3Ccircle%20cx=%2264%22%20cy=%2264%22%20r=%2248%22%20fill=%22none%22%20stroke=%22#f97316%22%20stroke-width=%228%22/%3E%0A%20%20%3Cpath%20d=%22M22%2064h84M64%2016c18%2017%2027%2033%2027%2048s-9%2031-27%2048M64%2016C46%2033%2037%2049%2037%2064s9%2031%2027%2048%22%0A%20%20%20%20%20%20%20%20fill=%22none%22%20stroke=%22#ffffff%22%20stroke-width=%225%22%20opacity=%22.92%22%20stroke-linecap=%22round%22/%3E%0A%20%20%3Ctext%20x=%2264%22%20y=%2278%22%20text-anchor=%22middle%22%20font-family=%22Arial%20Black,%20Impact,%20sans-serif%22%0A%20%20%20%20%20%20%20%20font-size=%2239%22%20font-weight=%22900%22%20fill=%22#fff%22%20stroke=%22#2d0a4e%22%20stroke-width=%223%22%20paint-order=%22stroke%22%3EA%3C/text%3E%0A%3C/svg%3E">
@@ -12800,9 +13786,11 @@ function GmPhoto({ team }) {
 }
 
 
-const LIVE_DRAFT_START_AT = '2026-09-15T00:00:00-03:00';
+const LIVE_DRAFT_START_AT = '2026-08-25T20:15:00-03:00';
 const LIVE_DRAFT_PICK_HOURS = 24;
 const LIVE_DRAFT_ROUNDS = 8;
+const LIVE_DRAFT_ESPN_KEEPER_ROUNDS = 2;
+const LIVE_DRAFT_TEAMS_PER_ROUND = 16;
 const LIVE_DRAFT_USE_CLOUDFLARE = false;
 const LIVE_DRAFT_PICKS_API_URL = 'https://airball-espn-proxy.stefanocecin.workers.dev/draft/picks';
 const LIVE_DRAFT_PICKS_MANUAL = [
@@ -12827,6 +13815,53 @@ const LIVE_KEEPERS_FALLBACK = {
     "Acre Dinosaurs": { total: 81.8, players: ["Bam Adebayo", "Jaylen Brown"] }
 };
 
+const YAHOO_AVG_PROJECTIONS_2026_27 = [{"rank":1,"name":"N. Jokić","key":"n jokic","pos":"C","team":"DEN","avg":72.2,"adp":4.7,"draftRank":2},{"rank":2,"name":"V. Wembanyama","key":"v wembanyama","pos":"C","team":"SAS","avg":62.7,"adp":2.6,"draftRank":1},{"rank":3,"name":"L. Dončić","key":"l doncic","pos":"PG,SG","team":"LAL","avg":61.6,"adp":8.3,"draftRank":3},{"rank":4,"name":"G. Antetokounmpo","key":"g antetokounmpo","pos":"PF,C","team":"MIA","avg":61.5,"adp":22.3,"draftRank":9},{"rank":5,"name":"S. Gilgeous-Alexander","key":"s gilgeous alexander","pos":"PG","team":"OKC","avg":60.1,"adp":10.9,"draftRank":4},{"rank":6,"name":"J. Johnson","key":"j johnson","pos":"SF,PF","team":"ATL","avg":53.3,"adp":27.5,"draftRank":10},{"rank":7,"name":"C. Cunningham","key":"c cunningham","pos":"PG,SG","team":"DET","avg":52.9,"adp":14.8,"draftRank":5},{"rank":8,"name":"A. Davis","key":"a davis","pos":"PF,C","team":"WAS","avg":51.5,"adp":22.7,"draftRank":21},{"rank":9,"name":"J. Tatum","key":"j tatum","pos":"SF,PF","team":"BOS","avg":50.3,"adp":20.8,"draftRank":7},{"rank":10,"name":"T. Maxey","key":"t maxey","pos":"PG","team":"PHI","avg":50.1,"adp":18.6,"draftRank":6},{"rank":11,"name":"A. Şengün","key":"a sengun","pos":"PF,C","team":"HOU","avg":49.0,"adp":16.3,"draftRank":23},{"rank":12,"name":"D. Mitchell","key":"d mitchell","pos":"PG,SG","team":"CLE","avg":49.0,"adp":35.4,"draftRank":11},{"rank":13,"name":"C. Flagg","key":"c flagg","pos":"SG,SF,PF","team":"DAL","avg":48.1,"adp":10.8,"draftRank":13},{"rank":14,"name":"J. Murray","key":"j murray","pos":"PG","team":"DEN","avg":47.8,"adp":16.6,"draftRank":17},{"rank":15,"name":"K. Leonard","key":"k leonard","pos":"SG,SF,PF","team":"LAC","avg":47.6,"adp":17.4,"draftRank":18},{"rank":16,"name":"A. Edwards","key":"a edwards","pos":"PG,SG","team":"MIN","avg":47.2,"adp":30.1,"draftRank":8},{"rank":17,"name":"J. Embiid","key":"j embiid","pos":"C","team":"PHI","avg":46.5,"adp":46.7,"draftRank":48},{"rank":18,"name":"S. Barnes","key":"s barnes","pos":"SF,PF,C","team":"TOR","avg":46.0,"adp":12.2,"draftRank":15},{"rank":19,"name":"T. Haliburton","key":"t haliburton","pos":"PG,SG","team":"IND","avg":46.0,"adp":39.6,"draftRank":12},{"rank":20,"name":"L. Ball","key":"l ball","pos":"PG","team":"MIN","avg":45.9,"adp":21.5,"draftRank":20},{"rank":21,"name":"E. Mobley","key":"e mobley","pos":"PF,C","team":"CLE","avg":45.6,"adp":30.1,"draftRank":32},{"rank":22,"name":"K. Towns","key":"k towns","pos":"PF,C","team":"NYK","avg":45.5,"adp":12.9,"draftRank":16},{"rank":23,"name":"J. Brunson","key":"j brunson","pos":"PG","team":"NYK","avg":45.5,"adp":19.9,"draftRank":28},{"rank":24,"name":"W. Kessler","key":"w kessler","pos":"C","team":"LAL","avg":45.3,"adp":27.5,"draftRank":26},{"rank":25,"name":"D. Sabonis","key":"d sabonis","pos":"PF,C","team":"SAC","avg":45.2,"adp":31.8,"draftRank":34},{"rank":26,"name":"A. Thompson","key":"a thompson","pos":"PG,SG","team":"HOU","avg":45.2,"adp":26.2,"draftRank":31},{"rank":27,"name":"P. Banchero","key":"p banchero","pos":"PF","team":"ORL","avg":45.0,"adp":36.9,"draftRank":54},{"rank":28,"name":"A. Reaves","key":"a reaves","pos":"PG,SG,SF","team":"LAL","avg":45.0,"adp":20.6,"draftRank":24},{"rank":29,"name":"D. Avdija","key":"d avdija","pos":"SG,SF,PF","team":"POR","avg":44.8,"adp":32.7,"draftRank":41},{"rank":30,"name":"D. Booker","key":"d booker","pos":"PG,SG","team":"PHX","avg":44.7,"adp":30.3,"draftRank":33},{"rank":31,"name":"T. Young","key":"t young","pos":"PG","team":"WAS","avg":44.6,"adp":23.3,"draftRank":22},{"rank":32,"name":"Z. Williamson","key":"z williamson","pos":"PF,C","team":"NOP","avg":44.6,"adp":70.4,"draftRank":72},{"rank":33,"name":"J. Duren","key":"j duren","pos":"C","team":"DET","avg":44.5,"adp":29.5,"draftRank":29},{"rank":34,"name":"J. Williams","key":"j williams","pos":"SF,PF","team":"OKC","avg":44.5,"adp":42.5,"draftRank":43},{"rank":35,"name":"J. Giddey","key":"j giddey","pos":"PG,SG","team":"CHI","avg":44.5,"adp":27.8,"draftRank":27},{"rank":36,"name":"F. Wagner","key":"f wagner","pos":"SF,PF","team":"ORL","avg":44.2,"adp":51.5,"draftRank":51},{"rank":37,"name":"C. Holmgren","key":"c holmgren","pos":"PF,C","team":"OKC","avg":43.5,"adp":19.1,"draftRank":19},{"rank":38,"name":"D. Clingan","key":"d clingan","pos":"C","team":"POR","avg":43.4,"adp":38.1,"draftRank":38},{"rank":39,"name":"M. Buzelis","key":"m buzelis","pos":"SF,PF","team":"CHI","avg":43.3,"adp":58.5,"draftRank":83},{"rank":40,"name":"B. Adebayo","key":"b adebayo","pos":"PF,C","team":"MIA","avg":43.3,"adp":31.4,"draftRank":36},{"rank":41,"name":"K. Durant","key":"k durant","pos":"SG,SF,PF","team":"HOU","avg":43.2,"adp":13.3,"draftRank":14},{"rank":42,"name":"S. Curry","key":"s curry","pos":"PG","team":"GSW","avg":43.0,"adp":22.5,"draftRank":25},{"rank":43,"name":"T. Murphy III","key":"t murphy iii","pos":"SG,SF","team":"NOP","avg":42.6,"adp":33.5,"draftRank":30},{"rank":44,"name":"L. Markkanen","key":"l markkanen","pos":"SF,PF","team":"UTA","avg":42.6,"adp":41.7,"draftRank":44},{"rank":45,"name":"B. Miller","key":"b miller","pos":"SF,PF","team":"CHA","avg":42.6,"adp":46.5,"draftRank":46},{"rank":46,"name":"T. Herro","key":"t herro","pos":"PG,SG","team":"MIL","avg":42.3,"adp":61.6,"draftRank":58},{"rank":47,"name":"D. Garland","key":"d garland","pos":"PG","team":"LAC","avg":42.1,"adp":57.0,"draftRank":53},{"rank":48,"name":"J. Brown","key":"j brown","pos":"SG,SF,PF","team":"PHI","avg":42.0,"adp":30.2,"draftRank":40},{"rank":49,"name":"P. Siakam","key":"p siakam","pos":"PF,C","team":"IND","avg":41.5,"adp":46.7,"draftRank":52},{"rank":50,"name":"Z. Edey","key":"z edey","pos":"C","team":"MEM","avg":41.4,"adp":67.5,"draftRank":62},{"rank":51,"name":"R. Rollins","key":"r rollins","pos":"PG,SG","team":"MIL","avg":41.2,"adp":71.5,"draftRank":69},{"rank":52,"name":"D. Daniels","key":"d daniels","pos":"SG,SF","team":"ATL","avg":40.8,"adp":60.6,"draftRank":63},{"rank":53,"name":"S. Castle","key":"s castle","pos":"PG,SG","team":"SAS","avg":40.6,"adp":55.6,"draftRank":70},{"rank":54,"name":"K. Irving","key":"k irving","pos":"PG","team":"DAL","avg":40.3,"adp":46.0,"draftRank":45},{"rank":55,"name":"M. Porter Jr.","key":"m porter jr","pos":"SF,PF","team":"BKN","avg":40.3,"adp":67.3,"draftRank":67},{"rank":56,"name":"L. James","key":"l james","pos":"SF,PF","team":"PHI","avg":40.3,"adp":39.5,"draftRank":42},{"rank":57,"name":"B. Ingram","key":"b ingram","pos":"SG,SF,PF","team":"TOR","avg":39.9,"adp":70.7,"draftRank":77},{"rank":58,"name":"J. Jackson Jr.","key":"j jackson jr","pos":"PF,C","team":"UTA","avg":39.7,"adp":51.8,"draftRank":50},{"rank":59,"name":"J. Harden","key":"j harden","pos":"PG,SG","team":"CLE","avg":39.6,"adp":35.5,"draftRank":35},{"rank":60,"name":"K. Knueppel","key":"k knueppel","pos":"SG,SF","team":"CHA","avg":39.4,"adp":34.6,"draftRank":37},{"rank":61,"name":"O. Okongwu","key":"o okongwu","pos":"C","team":"ATL","avg":39.4,"adp":54.7,"draftRank":57},{"rank":62,"name":"D. White","key":"d white","pos":"PG,SG","team":"BOS","avg":39.3,"adp":43.1,"draftRank":39},{"rank":63,"name":"D. Bane","key":"d bane","pos":"SG,SF","team":"ORL","avg":38.3,"adp":53.3,"draftRank":49},{"rank":64,"name":"T. Jerome","key":"t jerome","pos":"PG,SG","team":"MEM","avg":38.3,"adp":94.5,"draftRank":87},{"rank":65,"name":"J. Randle","key":"j randle","pos":"PF","team":"BKN","avg":38.2,"adp":63.0,"draftRank":64},{"rank":66,"name":"C. Coward","key":"c coward","pos":"SG,SF","team":"MEM","avg":38.0,"adp":100.4,"draftRank":108},{"rank":67,"name":"D. Lillard","key":"d lillard","pos":"PG","team":"POR","avg":37.9,"adp":71.5,"draftRank":66},{"rank":68,"name":"J. Jaquez Jr.","key":"j jaquez jr","pos":"SG,SF,PF","team":"MIL","avg":37.9,"adp":100.3,"draftRank":117},{"rank":69,"name":"D. Queen","key":"d queen","pos":"PF,C","team":"NOP","avg":37.8,"adp":81.5,"draftRank":94},{"rank":70,"name":"D. Fox","key":"d fox","pos":"PG","team":"SAS","avg":37.6,"adp":79.9,"draftRank":84},{"rank":71,"name":"I. Zubac","key":"i zubac","pos":"C","team":"IND","avg":37.5,"adp":67.8,"draftRank":68},{"rank":72,"name":"P. Pritchard","key":"p pritchard","pos":"PG","team":"BOS","avg":37.5,"adp":76.8,"draftRank":80},{"rank":73,"name":"K. Ware","key":"k ware","pos":"C","team":"MIL","avg":37.5,"adp":74.0,"draftRank":82},{"rank":74,"name":"D. Murray","key":"d murray","pos":"PG","team":"NOP","avg":37.3,"adp":64.6,"draftRank":59},{"rank":75,"name":"V. Edgecombe","key":"v edgecombe","pos":"PG,SG","team":"PHI","avg":37.3,"adp":63.0,"draftRank":71},{"rank":76,"name":"C. Boozer","key":"c boozer","pos":"PF","team":"MEM","avg":37.3,"adp":61.6,"draftRank":65},{"rank":77,"name":"J. Allen","key":"j allen","pos":"C","team":"CLE","avg":36.9,"adp":77.5,"draftRank":76},{"rank":78,"name":"N. Claxton","key":"n claxton","pos":"C","team":"CHI","avg":36.6,"adp":93.6,"draftRank":98},{"rank":79,"name":"D. Harper","key":"d harper","pos":"PG,SG","team":"SAS","avg":36.0,"adp":78.8,"draftRank":79},{"rank":80,"name":"R. Gobert","key":"r gobert","pos":"C","team":"MIN","avg":35.9,"adp":76.3,"draftRank":78},{"rank":81,"name":"A. Sarr","key":"a sarr","pos":"C","team":"WAS","avg":35.7,"adp":59.7,"draftRank":56},{"rank":82,"name":"N. Alexander-Walker","key":"n alexander walker","pos":"PG,SG","team":"ATL","avg":35.7,"adp":57.0,"draftRank":55},{"rank":83,"name":"C. White","key":"c white","pos":"PG,SG","team":"CHA","avg":35.6,"adp":86.4,"draftRank":85},{"rank":84,"name":"J. McDaniels","key":"j mcdaniels","pos":"SF","team":"MIN","avg":35.5,"adp":77.5,"draftRank":74},{"rank":85,"name":"A. Thompson","key":"a thompson","pos":"SG,SF,PF","team":"DET","avg":35.2,"adp":91.4,"draftRank":92},{"rank":86,"name":"C. Wilson","key":"c wilson","pos":"PF","team":"CHI","avg":35.2,"adp":79.8,"draftRank":81},{"rank":87,"name":"M. Bridges","key":"m bridges","pos":"PF","team":"PHX","avg":35.1,"adp":98.0,"draftRank":104},{"rank":88,"name":"J. Nurkić","key":"j nurkic","pos":"C","team":"UTA","avg":35.0,"adp":114.9,"draftRank":114},{"rank":89,"name":"M. Williams","key":"m williams","pos":"C","team":"PHX","avg":34.9,"adp":104.1,"draftRank":96},{"rank":90,"name":"O. Anunoby","key":"o anunoby","pos":"SF,PF","team":"NYK","avg":34.7,"adp":60.3,"draftRank":60},{"rank":91,"name":"K. George","key":"k george","pos":"PG,SG","team":"UTA","avg":34.7,"adp":50.1,"draftRank":47},{"rank":92,"name":"K. Porziņģis","key":"k porzingis","pos":"C","team":"GSW","avg":34.7,"adp":104.8,"draftRank":105},{"rank":93,"name":"N. Reid","key":"n reid","pos":"PF,C","team":"CHA","avg":34.5,"adp":66.3,"draftRank":61},{"rank":94,"name":"I. Quickley","key":"i quickley","pos":"PG,SG","team":"TOR","avg":34.2,"adp":96.7,"draftRank":90},{"rank":95,"name":"J. Suggs","key":"j suggs","pos":"PG,SG","team":"ORL","avg":34.0,"adp":107.7,"draftRank":102},{"rank":96,"name":"K. Porter Jr.","key":"k porter jr","pos":"PG,SG","team":"MIL","avg":33.4,"adp":116.7,"draftRank":110},{"rank":97,"name":"D. Peterson","key":"d peterson","pos":"SG","team":"UTA","avg":33.2,"adp":91.0,"draftRank":93},{"rank":98,"name":"J. Smith Jr.","key":"j smith jr","pos":"PF,C","team":"HOU","avg":33.2,"adp":95.9,"draftRank":111},{"rank":99,"name":"J. Green","key":"j green","pos":"SG,SF","team":"PHX","avg":33.2,"adp":110.5,"draftRank":124},{"rank":100,"name":"J. Hart","key":"j hart","pos":"SG,SF","team":"NYK","avg":33.1,"adp":96.6,"draftRank":97},{"rank":101,"name":"J. Butler III","key":"j butler iii","pos":"SF,PF","team":"GSW","avg":33.1,"adp":118.4,"draftRank":129},{"rank":102,"name":"D. Sharpe","key":"d sharpe","pos":"C","team":"BKN","avg":33.0,"adp":91.6,"draftRank":88},{"rank":103,"name":"J. Collins","key":"j collins","pos":"PF,C","team":"DET","avg":32.7,"adp":116.8,"draftRank":121},{"rank":104,"name":"A. Gordon","key":"a gordon","pos":"PF,C","team":"DEN","avg":32.4,"adp":117.1,"draftRank":156},{"rank":105,"name":"A. Wiggins","key":"a wiggins","pos":"SG,SF,PF","team":"MIA","avg":32.4,"adp":110.3,"draftRank":109},{"rank":106,"name":"M. Bridges","key":"m bridges","pos":"SF,PF","team":"NYK","avg":32.3,"adp":75.7,"draftRank":73},{"rank":107,"name":"I. Hartenstein","key":"i hartenstein","pos":"C","team":"OKC","avg":32.2,"adp":104.7,"draftRank":99},{"rank":108,"name":"P. George","key":"p george","pos":"SF,PF","team":"BOS","avg":32.2,"adp":78.4,"draftRank":75},{"rank":109,"name":"C. McCollum","key":"c mccollum","pos":"PG,SG","team":"ATL","avg":32.1,"adp":110.6,"draftRank":115},{"rank":110,"name":"N. Powell","key":"n powell","pos":"SG,SF","team":"CHI","avg":31.9,"adp":94.9,"draftRank":91},{"rank":111,"name":"R. Barrett","key":"r barrett","pos":"SG,SF,PF","team":"TOR","avg":31.6,"adp":108.4,"draftRank":123},{"rank":112,"name":"A. Black","key":"a black","pos":"PG,SG,SF","team":"ORL","avg":31.3,"adp":119.5,"draftRank":143},{"rank":113,"name":"A. Dybantsa","key":"a dybantsa","pos":"SF","team":"WAS","avg":31.3,"adp":75.7,"draftRank":86},{"rank":114,"name":"K. Murray","key":"k murray","pos":"SF,PF","team":"SAC","avg":31.3,"adp":120.3,"draftRank":118},{"rank":115,"name":"C. Sexton","key":"c sexton","pos":"PG,SG","team":"LAL","avg":31.2,"adp":118.3,"draftRank":187},{"rank":116,"name":"J. Morant","key":"j morant","pos":"PG","team":"POR","avg":31.1,"adp":89.8,"draftRank":89},{"rank":117,"name":"D. Acuff Jr.","key":"d acuff jr","pos":"PG","team":"SAC","avg":31.0,"adp":110.7,"draftRank":116},{"rank":118,"name":"A. Dosunmu","key":"a dosunmu","pos":"PG,SG","team":"MIN","avg":31.0,"adp":106.4,"draftRank":101},{"rank":119,"name":"F. VanVleet","key":"f vanvleet","pos":"PG","team":"HOU","avg":30.8,"adp":119.9,"draftRank":119},{"rank":120,"name":"D. Mitchell","key":"d mitchell","pos":"PG","team":"MIA","avg":30.8,"adp":118.0,"draftRank":137},{"rank":121,"name":"M. Turner","key":"m turner","pos":"C","team":"MIL","avg":30.8,"adp":94.9,"draftRank":95},{"rank":122,"name":"N. Queta","key":"n queta","pos":"C","team":"BOS","avg":30.7,"adp":103.7,"draftRank":100},{"rank":123,"name":"P. Washington","key":"p washington","pos":"PF,C","team":"DAL","avg":30.6,"adp":124.3,"draftRank":144},{"rank":124,"name":"K. George","key":"k george","pos":"SG,SF,PF","team":"WAS","avg":30.5,"adp":112.9,"draftRank":106},{"rank":125,"name":"A. Mitchell","key":"a mitchell","pos":"PG,SG","team":"OKC","avg":30.3,"adp":123.3,"draftRank":142},{"rank":126,"name":"C. Braun","key":"c braun","pos":"SG,SF,PF","team":"DEN","avg":30.2,"adp":118.3,"draftRank":167},{"rank":127,"name":"B. Podziemski","key":"b podziemski","pos":"PG,SG","team":"GSW","avg":30.2,"adp":115.2,"draftRank":107},{"rank":128,"name":"R. Sheppard","key":"r sheppard","pos":"PG,SG","team":"HOU","avg":30.1,"adp":116.3,"draftRank":138},{"rank":129,"name":"S. Pippen Jr.","key":"s pippen jr","pos":"PG","team":"MEM","avg":30.1,"adp":0.0,"draftRank":176},{"rank":130,"name":"C. Murray-Boyles","key":"c murray boyles","pos":"PF,C","team":"TOR","avg":30.0,"adp":122.7,"draftRank":128},{"rank":131,"name":"A. Nembhard","key":"a nembhard","pos":"PG,SG","team":"IND","avg":30.0,"adp":126.8,"draftRank":130},{"rank":132,"name":"S. Bey","key":"s bey","pos":"SF,PF","team":"NOP","avg":30.0,"adp":122.0,"draftRank":126},{"rank":133,"name":"D. Lively II","key":"d lively ii","pos":"C","team":"DAL","avg":29.9,"adp":0.0,"draftRank":211},{"rank":134,"name":"T. Jones","key":"t jones","pos":"PG,SG","team":"CHI","avg":29.8,"adp":0.0,"draftRank":173},{"rank":135,"name":"S. Henderson","key":"s henderson","pos":"PG","team":"POR","avg":29.8,"adp":0.0,"draftRank":202},{"rank":136,"name":"K. Kuzma","key":"k kuzma","pos":"SF,PF","team":"MIL","avg":29.8,"adp":122.0,"draftRank":212},{"rank":137,"name":"Q. Grimes","key":"q grimes","pos":"SG,SF","team":"LAL","avg":29.5,"adp":118.4,"draftRank":140},{"rank":138,"name":"I. Stewart","key":"i stewart","pos":"PF,C","team":"MEM","avg":29.5,"adp":115.0,"draftRank":157},{"rank":139,"name":"S. Sharpe","key":"s sharpe","pos":"PG,SG","team":"POR","avg":29.5,"adp":112.7,"draftRank":146},{"rank":140,"name":"J. Fears","key":"j fears","pos":"PG,SG","team":"NOP","avg":29.4,"adp":117.0,"draftRank":159},{"rank":141,"name":"T. Eason","key":"t eason","pos":"SG,SF,PF","team":"HOU","avg":29.4,"adp":0.0,"draftRank":158},{"rank":142,"name":"P. Watson","key":"p watson","pos":"SF,PF","team":"CLE","avg":29.4,"adp":111.1,"draftRank":113},{"rank":143,"name":"B. Portis","key":"b portis","pos":"PF,C","team":"MIA","avg":29.2,"adp":119.3,"draftRank":150},{"rank":144,"name":"C. Gillespie","key":"c gillespie","pos":"PG,SG","team":"PHX","avg":29.1,"adp":127.8,"draftRank":131},{"rank":145,"name":"Y. Lendeborg","key":"y lendeborg","pos":"PF","team":"GSW","avg":29.0,"adp":113.6,"draftRank":132},{"rank":146,"name":"K. Wagler","key":"k wagler","pos":"SG","team":"LAC","avg":28.7,"adp":122.7,"draftRank":149},{"rank":147,"name":"J. Holiday","key":"j holiday","pos":"PG,SG","team":"POR","avg":28.5,"adp":115.4,"draftRank":133},{"rank":148,"name":"J. Grant","key":"j grant","pos":"SF,PF","team":"MEM","avg":28.4,"adp":0.0,"draftRank":172},{"rank":149,"name":"D. Green","key":"d green","pos":"PF,C","team":"GSW","avg":28.3,"adp":112.7,"draftRank":147},{"rank":150,"name":"D. Vassell","key":"d vassell","pos":"SG,SF","team":"SAS","avg":28.3,"adp":117.0,"draftRank":161},{"rank":151,"name":"Z. LaVine","key":"z lavine","pos":"PG,SG,SF","team":"SAC","avg":28.2,"adp":119.6,"draftRank":125},{"rank":152,"name":"A. Wiggins","key":"a wiggins","pos":"SG,SF","team":"ATL","avg":28.2,"adp":0.0,"draftRank":271},{"rank":153,"name":"G. Allen","key":"g allen","pos":"SG,SF","team":"CHA","avg":28.1,"adp":0.0,"draftRank":171},{"rank":154,"name":"W. Carter Jr.","key":"w carter jr","pos":"C","team":"ORL","avg":28.1,"adp":108.7,"draftRank":103},{"rank":155,"name":"T. Camara","key":"t camara","pos":"SF,PF","team":"POR","avg":28.1,"adp":118.0,"draftRank":120},{"rank":156,"name":"D. Gafford","key":"d gafford","pos":"C","team":"DAL","avg":28.0,"adp":122.6,"draftRank":134},{"rank":157,"name":"D. Melton","key":"d melton","pos":"PG,SG","team":"GSW","avg":27.9,"adp":0.0,"draftRank":204},{"rank":158,"name":"C. Johnson","key":"c johnson","pos":"SF,PF","team":"DEN","avg":27.9,"adp":115.0,"draftRank":148},{"rank":159,"name":"J. LaRavia","key":"j laravia","pos":"SF,PF","team":"LAL","avg":27.8,"adp":0.0,"draftRank":249},{"rank":160,"name":"A. Bailey","key":"a bailey","pos":"SF,PF","team":"UTA","avg":27.7,"adp":119.9,"draftRank":152},{"rank":161,"name":"E. Dëmin","key":"e demin","pos":"PG,SG","team":"BKN","avg":27.7,"adp":121.0,"draftRank":135},{"rank":162,"name":"A. Drummond","key":"a drummond","pos":"C","team":"NYK","avg":27.4,"adp":0.0,"draftRank":241},{"rank":163,"name":"M. Raynaud","key":"m raynaud","pos":"C","team":"SAC","avg":27.1,"adp":121.3,"draftRank":127},{"rank":164,"name":"S. Mamukelashvili","key":"s mamukelashvili","pos":"PF,C","team":"LAL","avg":27.1,"adp":113.3,"draftRank":112},{"rank":165,"name":"M. Brown Jr.","key":"m brown jr","pos":"PG","team":"BKN","avg":26.9,"adp":126.3,"draftRank":162},{"rank":166,"name":"B. Mathurin","key":"b mathurin","pos":"SG,SF","team":"LAC","avg":26.9,"adp":118.8,"draftRank":175},{"rank":167,"name":"T. Johnson","key":"t johnson","pos":"PG,SG,SF","team":"WAS","avg":26.8,"adp":0.0,"draftRank":242},{"rank":168,"name":"J. Wells","key":"j wells","pos":"SG,SF","team":"MEM","avg":26.7,"adp":0.0,"draftRank":227},{"rank":169,"name":"D. DeRozan","key":"d derozan","pos":"SF,PF","team":"DEN","avg":26.5,"adp":115.7,"draftRank":122},{"rank":170,"name":"T. Hardaway Jr.","key":"t hardaway jr","pos":"SG,SF","team":"MIA","avg":26.3,"adp":0.0,"draftRank":184},{"rank":171,"name":"P. Reed","key":"p reed","pos":"PF,C","team":"DET","avg":26.3,"adp":130.0,"draftRank":141},{"rank":172,"name":"D. Brooks","key":"d brooks","pos":"SF,PF","team":"PHX","avg":26.1,"adp":120.1,"draftRank":155},{"rank":173,"name":"J. Poeltl","key":"j poeltl","pos":"C","team":"TOR","avg":26.1,"adp":119.8,"draftRank":136},{"rank":174,"name":"S. Aldama","key":"s aldama","pos":"PF","team":"DAL","avg":26.1,"adp":0.0,"draftRank":190},{"rank":175,"name":"B. Coulibaly","key":"b coulibaly","pos":"SG,SF","team":"WAS","avg":25.8,"adp":0.0,"draftRank":185},{"rank":176,"name":"T. Harris","key":"t harris","pos":"PF","team":"SAS","avg":25.7,"adp":121.5,"draftRank":183},{"rank":177,"name":"C. Spencer","key":"c spencer","pos":"PG,SG","team":"MEM","avg":25.7,"adp":0.0,"draftRank":208},{"rank":178,"name":"K. Jakučionis","key":"k jakucionis","pos":"PG,SG","team":"MIL","avg":25.6,"adp":0.0,"draftRank":345},{"rank":179,"name":"B. Burries","key":"b burries","pos":"SG","team":"MIL","avg":25.6,"adp":0.0,"draftRank":180},{"rank":180,"name":"K. Filipowski","key":"k filipowski","pos":"PF,C","team":"UTA","avg":25.6,"adp":121.3,"draftRank":166},{"rank":181,"name":"H. Jones","key":"h jones","pos":"SG,SF","team":"NOP","avg":25.4,"adp":0.0,"draftRank":179},{"rank":182,"name":"K. Johnson","key":"k johnson","pos":"SF,PF","team":"SAS","avg":25.3,"adp":0.0,"draftRank":196},{"rank":183,"name":"M. Strus","key":"m strus","pos":"SF,PF","team":"LAC","avg":25.3,"adp":0.0,"draftRank":235},{"rank":184,"name":"C. Wallace","key":"c wallace","pos":"PG,SG,SF","team":"OKC","avg":25.3,"adp":113.4,"draftRank":154},{"rank":185,"name":"D. Robinson","key":"d robinson","pos":"SG,SF","team":"DET","avg":25.3,"adp":0.0,"draftRank":205},{"rank":186,"name":"M. Robinson","key":"m robinson","pos":"C","team":"BOS","avg":25.2,"adp":122.7,"draftRank":188},{"rank":187,"name":"R. Williams III","key":"r williams iii","pos":"C","team":"POR","avg":25.0,"adp":0.0,"draftRank":170},{"rank":188,"name":"A. Nesmith","key":"a nesmith","pos":"SG,SF","team":"IND","avg":24.9,"adp":0.0,"draftRank":199},{"rank":189,"name":"K. Oubre Jr.","key":"k oubre jr","pos":"SF,PF","team":"IND","avg":24.8,"adp":122.8,"draftRank":145},{"rank":190,"name":"M. Diabaté","key":"m diabate","pos":"C","team":"CHA","avg":24.8,"adp":120.5,"draftRank":177},{"rank":191,"name":"P. Larsson","key":"p larsson","pos":"SG,SF","team":"MIA","avg":24.8,"adp":0.0,"draftRank":201},{"rank":192,"name":"N. Marshall","key":"n marshall","pos":"SG,SF,PF","team":"DAL","avg":24.5,"adp":0.0,"draftRank":203},{"rank":193,"name":"R. Westbrook","key":"r westbrook","pos":"PG,SG","team":"SAC","avg":24.2,"adp":0.0,"draftRank":262},{"rank":194,"name":"P. Achiuwa","key":"p achiuwa","pos":"PF,C","team":"SAC","avg":24.1,"adp":0.0,"draftRank":198},{"rank":195,"name":"D. Ayton","key":"d ayton","pos":"C","team":"WAS","avg":23.8,"adp":121.7,"draftRank":160},{"rank":196,"name":"S. Hauser","key":"s hauser","pos":"SF,PF","team":"BOS","avg":23.7,"adp":0.0,"draftRank":246},{"rank":197,"name":"A. Simons","key":"a simons","pos":"PG,SG","team":"PHI","avg":23.7,"adp":0.0,"draftRank":181},{"rank":198,"name":"M. McBride","key":"m mcbride","pos":"PG,SG","team":"NYK","avg":23.5,"adp":0.0,"draftRank":294},{"rank":199,"name":"M. Johnson Jr.","key":"m johnson jr","pos":"PF","team":"DAL","avg":23.5,"adp":120.4,"draftRank":153},{"rank":200,"name":"D. Jenkins","key":"d jenkins","pos":"PG,SG","team":"DET","avg":23.5,"adp":0.0,"draftRank":224},{"rank":201,"name":"J. Smith","key":"j smith","pos":"PF,C","team":"CHI","avg":23.4,"adp":0.0,"draftRank":217},{"rank":202,"name":"K. Flemings","key":"k flemings","pos":"PG","team":"ATL","avg":23.3,"adp":0.0,"draftRank":191},{"rank":203,"name":"J. Shead","key":"j shead","pos":"PG","team":"TOR","avg":23.3,"adp":0.0,"draftRank":234},{"rank":204,"name":"K. Thompson","key":"k thompson","pos":"SG,SF","team":"MIA","avg":23.0,"adp":112.5,"draftRank":273},{"rank":205,"name":"M. Monk","key":"m monk","pos":"PG,SG","team":"SAC","avg":23.0,"adp":0.0,"draftRank":197},{"rank":206,"name":"K. Middleton","key":"k middleton","pos":"SF,PF","team":"WAS","avg":22.9,"adp":0.0,"draftRank":302},{"rank":207,"name":"K. Huerter","key":"k huerter","pos":"SG,SF","team":"DET","avg":22.9,"adp":0.0,"draftRank":257},{"rank":208,"name":"J. Champagnie","key":"j champagnie","pos":"SF,PF","team":"SAS","avg":22.7,"adp":0.0,"draftRank":151},{"rank":209,"name":"T. McConnell","key":"t mcconnell","pos":"PG","team":"IND","avg":22.7,"adp":0.0,"draftRank":247},{"rank":210,"name":"R. O'Neale","key":"r o neale","pos":"SF,PF","team":"CHA","avg":22.7,"adp":0.0,"draftRank":243},{"rank":211,"name":"L. Kornet","key":"l kornet","pos":"C","team":"SAS","avg":22.6,"adp":0.0,"draftRank":220},{"rank":212,"name":"D. DiVincenzo","key":"d divincenzo","pos":"SG,SF","team":"MIN","avg":22.5,"adp":0.0,"draftRank":251},{"rank":213,"name":"J. Champagnie","key":"j champagnie","pos":"SF,PF","team":"WAS","avg":22.2,"adp":0.0,"draftRank":253},{"rank":214,"name":"A. Bona","key":"a bona","pos":"C","team":"PHI","avg":22.2,"adp":0.0,"draftRank":189},{"rank":215,"name":"J. Hayes","key":"j hayes","pos":"C","team":"UTA","avg":22.2,"adp":0.0,"draftRank":283},{"rank":216,"name":"R. Hachimura","key":"r hachimura","pos":"SF,PF","team":"LAC","avg":22.2,"adp":0.0,"draftRank":195},{"rank":217,"name":"J. Walker","key":"j walker","pos":"SF,PF","team":"IND","avg":22.1,"adp":0.0,"draftRank":267},{"rank":218,"name":"A. Caruso","key":"a caruso","pos":"SG,SF","team":"OKC","avg":22.1,"adp":0.0,"draftRank":282},{"rank":219,"name":"D. Jones Jr.","key":"d jones jr","pos":"SF,PF","team":"LAC","avg":22.0,"adp":0.0,"draftRank":268},{"rank":220,"name":"I. Jackson","key":"i jackson","pos":"C","team":"LAC","avg":21.9,"adp":0.0,"draftRank":228},{"rank":221,"name":"N. Clifford","key":"n clifford","pos":"SG,SF","team":"SAC","avg":21.6,"adp":0.0,"draftRank":214},{"rank":222,"name":"O. Toppin","key":"o toppin","pos":"SF,PF","team":"IND","avg":21.6,"adp":0.0,"draftRank":333},{"rank":223,"name":"D. Cardwell","key":"d cardwell","pos":"PF,C","team":"SAC","avg":21.6,"adp":0.0,"draftRank":206},{"rank":224,"name":"J. Kuminga","key":"j kuminga","pos":"SF,PF","team":"ATL","avg":21.6,"adp":115.5,"draftRank":207},{"rank":225,"name":"N. Clowney","key":"n clowney","pos":"PF,C","team":"BKN","avg":21.5,"adp":0.0,"draftRank":279},{"rank":226,"name":"L. Dort","key":"l dort","pos":"SG,SF","team":"ATL","avg":21.5,"adp":0.0,"draftRank":264},{"rank":227,"name":"J. Goodwin","key":"j goodwin","pos":"PG,SG","team":"PHX","avg":21.3,"adp":0.0,"draftRank":261},{"rank":228,"name":"J. Tyson","key":"j tyson","pos":"SG,SF,PF","team":"CLE","avg":21.3,"adp":0.0,"draftRank":192},{"rank":229,"name":"R. Holland II","key":"r holland ii","pos":"SF,PF","team":"DET","avg":21.3,"adp":0.0,"draftRank":226},{"rank":230,"name":"K. Dunn","key":"k dunn","pos":"PG,SG","team":"LAC","avg":21.2,"adp":0.0,"draftRank":252},{"rank":231,"name":"T. Hendricks","key":"t hendricks","pos":"PF,C","team":"MEM","avg":21.2,"adp":0.0,"draftRank":238},{"rank":232,"name":"Y. Missi","key":"y missi","pos":"C","team":"NOP","avg":21.1,"adp":0.0,"draftRank":186},{"rank":233,"name":"M. Christie","key":"m christie","pos":"SG,SF","team":"DAL","avg":21.1,"adp":0.0,"draftRank":219},{"rank":234,"name":"T. da Silva","key":"t da silva","pos":"SF,PF","team":"ORL","avg":21.0,"adp":0.0,"draftRank":225},{"rank":235,"name":"D. Hunter","key":"d hunter","pos":"SF,PF","team":"SAC","avg":21.0,"adp":0.0,"draftRank":236},{"rank":236,"name":"J. McCain","key":"j mccain","pos":"PG,SG","team":"OKC","avg":21.0,"adp":0.0,"draftRank":223},{"rank":237,"name":"T. Shannon Jr.","key":"t shannon jr","pos":"SG,SF","team":"MIN","avg":21.0,"adp":0.0,"draftRank":231},{"rank":238,"name":"I. Collier","key":"i collier","pos":"PG,SG","team":"UTA","avg":20.9,"adp":120.0,"draftRank":164},{"rank":239,"name":"I. Joe","key":"i joe","pos":"SG,SF","team":"DET","avg":20.8,"adp":0.0,"draftRank":213},{"rank":240,"name":"A. Green","key":"a green","pos":"PG,SG,SF","team":"MIL","avg":20.6,"adp":0.0,"draftRank":260},{"rank":241,"name":"R. Kalkbrenner","key":"r kalkbrenner","pos":"C","team":"CHA","avg":20.6,"adp":0.0,"draftRank":194},{"rank":242,"name":"N. Ament","key":"n ament","pos":"SF","team":"MIL","avg":20.6,"adp":0.0,"draftRank":216},{"rank":243,"name":"N. Vučević","key":"n vucevic","pos":"C","team":"ORL","avg":20.3,"adp":109.3,"draftRank":174},{"rank":244,"name":"S. Merrill","key":"s merrill","pos":"SG,SF","team":"CLE","avg":20.2,"adp":0.0,"draftRank":222},{"rank":245,"name":"B. Lopez","key":"b lopez","pos":"C","team":"LAC","avg":20.2,"adp":0.0,"draftRank":139},{"rank":246,"name":"L. Kennard","key":"l kennard","pos":"SG,SF","team":"PHX","avg":20.2,"adp":104.5,"draftRank":255},{"rank":247,"name":"M. Thybulle","key":"m thybulle","pos":"SG,SF","team":"LAL","avg":20.0,"adp":0.0,"draftRank":346},{"rank":248,"name":"D. Wade","key":"d wade","pos":"SF,PF","team":"PHI","avg":20.0,"adp":0.0,"draftRank":285},{"rank":249,"name":"T. Vukcevic","key":"t vukcevic","pos":"C","team":"WAS","avg":19.9,"adp":0.0,"draftRank":342},{"rank":250,"name":"H. Steinbach","key":"h steinbach","pos":"PF","team":"CHA","avg":19.8,"adp":0.0,"draftRank":163},{"rank":251,"name":"J. Beringer","key":"j beringer","pos":"PF,C","team":"MIN","avg":19.8,"adp":0.0,"draftRank":169},{"rank":252,"name":"B. Sensabaugh","key":"b sensabaugh","pos":"SG,SF,PF","team":"UTA","avg":19.5,"adp":0.0,"draftRank":258},{"rank":253,"name":"G. Bitadze","key":"g bitadze","pos":"C","team":"ORL","avg":19.2,"adp":0.0,"draftRank":263},{"rank":254,"name":"D. Schröder","key":"d schroder","pos":"PG,SG","team":"CHA","avg":19.2,"adp":0.0,"draftRank":269},{"rank":255,"name":"D. Barlow","key":"d barlow","pos":"PF,C","team":"PHI","avg":19.1,"adp":0.0,"draftRank":274},{"rank":256,"name":"J. Williams","key":"j williams","pos":"PF,C","team":"OKC","avg":18.9,"adp":0.0,"draftRank":193},{"rank":257,"name":"G. Jackson","key":"g jackson","pos":"SF,PF,C","team":"MEM","avg":18.8,"adp":0.0,"draftRank":233},{"rank":258,"name":"G. Santos","key":"g santos","pos":"SF,PF","team":"GSW","avg":18.7,"adp":0.0,"draftRank":200},{"rank":259,"name":"J. Poole","key":"j poole","pos":"PG,SG","team":"NOP","avg":18.6,"adp":0.0,"draftRank":237},{"rank":260,"name":"J. Walter","key":"j walter","pos":"PG,SG","team":"TOR","avg":18.5,"adp":0.0,"draftRank":272},{"rank":261,"name":"J. Miller","key":"j miller","pos":"SG,SF","team":"LAC","avg":18.4,"adp":0.0,"draftRank":314},{"rank":262,"name":"M. Bagley III","key":"m bagley iii","pos":"PF,C","team":"DEN","avg":18.4,"adp":0.0,"draftRank":221},{"rank":263,"name":"J. Huff","key":"j huff","pos":"C","team":"IND","avg":18.3,"adp":0.0,"draftRank":165},{"rank":264,"name":"B. Scheierman","key":"b scheierman","pos":"SG,SF","team":"BOS","avg":18.3,"adp":0.0,"draftRank":210},{"rank":265,"name":"O. Dieng","key":"o dieng","pos":"SF,PF","team":"MIL","avg":18.2,"adp":0.0,"draftRank":182},{"rank":266,"name":"R. Dunn","key":"r dunn","pos":"SF,PF","team":"PHX","avg":18.2,"adp":0.0,"draftRank":287},{"rank":267,"name":"K. Matković","key":"k matkovic","pos":"PF,C","team":"NOP","avg":18.1,"adp":0.0,"draftRank":284},{"rank":268,"name":"A. Mara","key":"a mara","pos":"C","team":"OKC","avg":18.1,"adp":124.0,"draftRank":209},{"rank":269,"name":"T. Mann","key":"t mann","pos":"SG,SF","team":"BKN","avg":18.1,"adp":0.0,"draftRank":295},{"rank":270,"name":"I. Okoro","key":"i okoro","pos":"SG,SF","team":"CHI","avg":18.0,"adp":0.0,"draftRank":286},{"rank":271,"name":"Q. Post","key":"q post","pos":"C","team":"MEM","avg":17.9,"adp":0.0,"draftRank":293},{"rank":272,"name":"J. Landale","key":"j landale","pos":"C","team":"ATL","avg":17.8,"adp":0.0,"draftRank":229},{"rank":273,"name":"J. Valančiūnas","key":"j valanciunas","pos":"C","team":"DEN","avg":17.8,"adp":0.0,"draftRank":277},{"rank":274,"name":"S. James","key":"s james","pos":"SG,SF","team":"CHA","avg":17.8,"adp":0.0,"draftRank":304},{"rank":275,"name":"K. Caldwell-Pope","key":"k caldwell pope","pos":"SG,SF","team":"PHI","avg":17.6,"adp":0.0,"draftRank":292},{"rank":276,"name":"A. Horford","key":"a horford","pos":"PF,C","team":"GSW","avg":17.5,"adp":0.0,"draftRank":248},{"rank":277,"name":"B. Williams","key":"b williams","pos":"PG","team":"GSW","avg":17.5,"adp":0.0,"draftRank":288},{"rank":278,"name":"K. Sanders","key":"k sanders","pos":"SG,SF","team":"LAC","avg":17.5,"adp":0.0,"draftRank":332},{"rank":279,"name":"C. Bryant","key":"c bryant","pos":"SF,PF","team":"SAS","avg":17.5,"adp":0.0,"draftRank":245},{"rank":280,"name":"Z. Risacher","key":"z risacher","pos":"SF,PF","team":"DAL","avg":17.5,"adp":0.0,"draftRank":215},{"rank":281,"name":"J. Walker","key":"j walker","pos":"PF","team":"PHI","avg":17.4,"adp":0.0,"draftRank":354},{"rank":282,"name":"O. Prosper","key":"o prosper","pos":"SF,PF,C","team":"MEM","avg":17.3,"adp":0.0,"draftRank":318},{"rank":283,"name":"O. Ighodaro","key":"o ighodaro","pos":"C","team":"PHX","avg":17.2,"adp":0.0,"draftRank":239},{"rank":284,"name":"D. Wolf","key":"d wolf","pos":"PF,C","team":"BKN","avg":17.2,"adp":0.0,"draftRank":334},{"rank":285,"name":"B. Carrington","key":"b carrington","pos":"PG,SG","team":"WAS","avg":17.2,"adp":0.0,"draftRank":240},{"rank":286,"name":"B. Hyland","key":"b hyland","pos":"PG,SG","team":"MIN","avg":17.1,"adp":0.0,"draftRank":300},{"rank":287,"name":"W. Clayton Jr.","key":"w clayton jr","pos":"PG,SG","team":"MEM","avg":17.0,"adp":0.0,"draftRank":323},{"rank":288,"name":"M. Cisse","key":"m cisse","pos":"C","team":"DAL","avg":16.8,"adp":0.0,"draftRank":218},{"rank":289,"name":"C. LeVert","key":"c levert","pos":"SG,SF","team":"MIL","avg":16.7,"adp":0.0,"draftRank":303},{"rank":290,"name":"K. Ellis","key":"k ellis","pos":"SG,SF","team":"BKN","avg":16.5,"adp":0.0,"draftRank":230},{"rank":291,"name":"M. Smart","key":"m smart","pos":"PG,SG","team":"HOU","avg":16.5,"adp":0.0,"draftRank":278},{"rank":292,"name":"M. Moody","key":"m moody","pos":"SG,SF,PF","team":"GSW","avg":16.5,"adp":0.0,"draftRank":259},{"rank":293,"name":"B. Brown","key":"b brown","pos":"PG,SG","team":"DEN","avg":16.3,"adp":0.0,"draftRank":266},{"rank":294,"name":"G. Williams","key":"g williams","pos":"PF,C","team":"CHA","avg":16.0,"adp":0.0,"draftRank":357},{"rank":295,"name":"G. Trent Jr.","key":"g trent jr","pos":"SG,SF","team":"MIL","avg":15.8,"adp":0.0,"draftRank":315},{"rank":296,"name":"K. Maluach","key":"k maluach","pos":"C","team":"PHX","avg":15.7,"adp":0.0,"draftRank":168},{"rank":297,"name":"B. Sheppard","key":"b sheppard","pos":"SG,SF","team":"IND","avg":15.6,"adp":0.0,"draftRank":306},{"rank":298,"name":"G. Dick","key":"g dick","pos":"SG,SF","team":"TOR","avg":15.4,"adp":0.0,"draftRank":313},{"rank":299,"name":"K. Williams","key":"k williams","pos":"PF,C","team":"OKC","avg":15.4,"adp":0.0,"draftRank":339},{"rank":300,"name":"J. Watkins","key":"j watkins","pos":"SG,SF","team":"WAS","avg":15.3,"adp":0.0,"draftRank":338}];
+
+
+function getPlayerProjectionTokens(name) {
+    return String(name || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, ' ')
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
+}
+
+function makePlayerProjectionKey(name) {
+    const tokens = getPlayerProjectionTokens(name);
+    if (!tokens.length)
+        return '';
+    const suffixes = [];
+    const core = [...tokens];
+    while (core.length > 1 && ['jr', 'sr', 'ii', 'iii', 'iv', 'v'].includes(core[core.length - 1]))
+        suffixes.unshift(core.pop());
+    if (core.length >= 3 && core[0].length === 1 && core[1].length === 1)
+        return [core[0], ...core.slice(2), ...suffixes].join(' ');
+    if (core[0].length === 1)
+        return [core[0], ...core.slice(1), ...suffixes].join(' ');
+    return [core[0].charAt(0), ...core.slice(1), ...suffixes].join(' ');
+}
+
+function getPlayerProjectionKeyCandidates(name) {
+    const tokens = getPlayerProjectionTokens(name);
+    const primary = makePlayerProjectionKey(name);
+    if (!tokens.length)
+        return [];
+    const suffixes = [];
+    const core = [...tokens];
+    while (core.length > 1 && ['jr', 'sr', 'ii', 'iii', 'iv', 'v'].includes(core[core.length - 1]))
+        suffixes.unshift(core.pop());
+    const firstInitial = core[0] ? core[0].charAt(0) : '';
+    const candidates = [primary];
+    if (firstInitial && core.length >= 2)
+        candidates.push([firstInitial, core[core.length - 1], ...suffixes].join(' '));
+    if (firstInitial && core.length >= 3)
+        candidates.push([firstInitial, ...core.slice(-2), ...suffixes].join(' '));
+    return [...new Set(candidates.filter(Boolean))];
+}
+
 function LiveDraftPage() {
     const e = React.createElement;
     const { keeperRanking, status: keeperStatus } = useDraftPriorityData();
@@ -12835,13 +13870,33 @@ function LiveDraftPage() {
     const [playerStatus, setPlayerStatus] = useState('Carregando board de jogadores...');
     const [livePicks, setLivePicks] = useState([]);
     const [picksStatus, setPicksStatus] = useState('Aguardando início do draft');
+    const [workerClock, setWorkerClock] = useState(null);
+    const MANUAL_PICKS_STORAGE_KEY = 'airball-live-manual-picks-v1';
+    const [manualDraftPicks, setManualDraftPicks] = useState(() => {
+        try {
+            const saved = window.localStorage ? window.localStorage.getItem(MANUAL_PICKS_STORAGE_KEY) : null;
+            const parsed = saved ? JSON.parse(saved) : [];
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (e) {
+            return [];
+        }
+    });
     const [expandedTeams, setExpandedTeams] = useState({});
     const [boardPositionFilter, setBoardPositionFilter] = useState('TODOS');
+    const [boardMode, setBoardMode] = useState('yahoo');
+    const [rankingMode, setRankingMode] = useState('yahoo');
 
     useEffect(() => {
         const timer = setInterval(() => setNow(new Date()), 60000);
         return () => clearInterval(timer);
     }, []);
+
+    useEffect(() => {
+        try {
+            if (window.localStorage)
+                window.localStorage.setItem(MANUAL_PICKS_STORAGE_KEY, JSON.stringify(manualDraftPicks));
+        } catch (e) {}
+    }, [manualDraftPicks]);
 
     useEffect(() => {
         let cancelled = false;
@@ -12858,11 +13913,10 @@ function LiveDraftPage() {
                 const normalized = list
                     .map(normalizeDraftPriorityPlayer)
                     .filter(player => player.name && Number(player.avg) > 0);
-                const available = normalized
-                    .filter(player => isDraftFreeFantasyTeam(player.fantasyTeam))
+                const sorted = normalized
                     .sort((a, b) => Number(b.avg || 0) - Number(a.avg || 0));
-                setPlayers(available);
-                setPlayerStatus(`${available.length} jogadores disponíveis na base atual`);
+                setPlayers(sorted);
+                setPlayerStatus(`${sorted.length} jogadores na base atual`);
             })
             .catch(() => {
                 if (!cancelled) {
@@ -12880,7 +13934,7 @@ function LiveDraftPage() {
         const loadPicks = () => {
             if (!LIVE_DRAFT_USE_CLOUDFLARE) {
                 setLivePicks(LIVE_DRAFT_PICKS_MANUAL);
-                setPicksStatus('Aguardando início do draft');
+                setPicksStatus('Modo manual ativo');
                 return;
             }
             fetch(LIVE_DRAFT_PICKS_API_URL)
@@ -12892,9 +13946,16 @@ function LiveDraftPage() {
                 .then(data => {
                     if (cancelled)
                         return;
-                    const picks = Array.isArray(data) ? data : (data.picks || data.items || []);
+                    const pickBuckets = Array.isArray(data)
+                        ? data
+                        : [data?.picks, data?.items, data?.selections, data?.draftPicks, data?.draft?.picks, data?.draft?.selections, data?.data?.picks, data?.data?.items];
+                    const picks = Array.isArray(pickBuckets) && Array.isArray(data)
+                        ? pickBuckets
+                        : (pickBuckets.find(bucket => Array.isArray(bucket)) || []);
+                    const clock = Array.isArray(data) ? null : (data?.clock || data?.timer || data?.draftClock || data?.currentPick || data?.current || data?.draft?.clock || data?.data?.clock || null);
                     setLivePicks(picks);
-                    setPicksStatus(`${picks.length} escolhas carregadas`);
+                    setWorkerClock(clock);
+                    setPicksStatus(`${picks.length} registros ESPN carregados`);
                 })
                 .catch(() => {
                     if (!cancelled) {
@@ -12925,75 +13986,367 @@ function LiveDraftPage() {
         return acc;
     }, {});
 
-    const getTeamKeepers = (teamName) => {
-        const key = normalizeTeamKey(teamName);
-        const dynamic = keeperByTeam[key];
-        if (dynamic && Array.isArray(dynamic.topPlayers) && dynamic.topPlayers.length) {
-            return {
-                total: Number(dynamic.totalAvg || 0),
-                players: dynamic.topPlayers.map(player => ({
-                    name: player.name,
-                    avg: Number(player.avg || 0),
-                    position: player.position || '—',
-                    team: player.team || 'NBA',
-                    photoUrl: player.photoUrl || ''
-                }))
-            };
-        }
-        const fallback = LIVE_KEEPERS_FALLBACK[normalizeTeamName(teamName)] || LIVE_KEEPERS_FALLBACK[teamName];
-        if (fallback) {
-            return {
-                total: Number(fallback.total || 0),
-                players: fallback.players.map(name => ({
-                    name,
-                    avg: null,
-                    position: 'KEEPER',
-                    team: 'NBA',
-                    photoUrl: (playerByName[normalizeTeamKey(name)] || {}).photoUrl || ''
-                }))
-            };
-        }
-        return { total: 0, players: [] };
+    const parseKeeperAvgValue = (value) => {
+        if (value === null || value === undefined || value === '')
+            return null;
+        if (typeof value === 'number')
+            return Number.isFinite(value) ? value : null;
+        const number = Number(String(value).replace(/\./g, '').replace(',', '.').replace(/[^\d.-]/g, ''));
+        return Number.isFinite(number) ? number : null;
     };
 
-    const normalizePick = (rawPick, index) => {
-        const overall = Number(rawPick.overall || rawPick.overallPick || rawPick.pickOverall || rawPick.pick || (index + 1));
+    const buildLiveKeeperPlayer = (source) => {
+        const raw = source && typeof source === 'object' ? source : { name: source };
+        const name = String(raw.name || raw.playerName || raw.fullName || raw.displayName || source || '').trim();
+        const matched = playerByName[normalizeTeamKey(name)] || {};
+        const baseAvg = parseKeeperAvgValue(raw.avg ?? raw.fp ?? raw.fantasyPoints ?? raw.average ?? matched.avg);
+        const player = {
+            id: raw.id || matched.id || `keeper-${normalizeTeamKey(name)}`,
+            name,
+            avg: baseAvg,
+            position: raw.position || raw.pos || matched.position || 'KEEPER',
+            team: raw.team || raw.proTeam || raw.proTeamAbbrev || matched.team || 'NBA',
+            photoUrl: raw.photoUrl || raw.headshotUrl || matched.photoUrl || ''
+        };
+        const projection = getYahooProjectionForPlayer(player);
+        if (projection) {
+            player.yahooProjection = projection;
+            player.yahooAvg = Number(projection.avg || 0);
+            player.yahooDraftRank = projection.draftRank || null;
+            player.position = player.position === 'KEEPER' ? (projection.pos || player.position) : player.position;
+            player.team = player.team === 'NBA' ? (projection.team || player.team) : player.team;
+        }
+        return player;
+    };
+
+    const getTeamKeepers = (teamName) => {
+        const key = normalizeTeamKey(teamName);
+        const fallback = LIVE_KEEPERS_FALLBACK[normalizeTeamName(teamName)] || LIVE_KEEPERS_FALLBACK[teamName];
+        if (fallback && Array.isArray(fallback.players) && fallback.players.length) {
+            const players = fallback.players.map(buildLiveKeeperPlayer);
+            const yahooTotal = players.reduce((sum, player) => sum + Number(player.yahooAvg || 0), 0);
+            return {
+                total: Number(fallback.total || 0),
+                yahooTotal,
+                players
+            };
+        }
+        const dynamic = keeperByTeam[key];
+        if (dynamic && Array.isArray(dynamic.topPlayers) && dynamic.topPlayers.length) {
+            const players = dynamic.topPlayers.map(buildLiveKeeperPlayer);
+            const total = players.reduce((sum, player) => sum + Number(player.avg || 0), 0);
+            const yahooTotal = players.reduce((sum, player) => sum + Number(player.yahooAvg || 0), 0);
+            return {
+                total: Number(dynamic.totalAvg || total || 0),
+                yahooTotal,
+                players
+            };
+        }
+        return { total: 0, yahooTotal: 0, players: [] };
+    };
+
+    const pickNumberFrom = (...values) => {
+        for (const value of values) {
+            const parsed = Number(String(value ?? '').replace(/[^\d.-]/g, ''));
+            if (Number.isFinite(parsed) && parsed > 0)
+                return parsed;
+        }
+        return 0;
+    };
+
+    const normalizePick = (rawPickInput, index) => {
+        const rawPick = rawPickInput && typeof rawPickInput === 'object' ? rawPickInput : {};
+        const rawPlayer = rawPick.player && typeof rawPick.player === 'object' ? rawPick.player : {};
+        const rawPlayerText = typeof rawPick.player === 'string' ? rawPick.player : '';
+        const explicitAirballOverall = pickNumberFrom(rawPick.airballOverall, rawPick.realOverall, rawPick.actualOverall, rawPick.airballPickOverall);
+        const explicitAirballRound = pickNumberFrom(rawPick.airballRound, rawPick.realRound, rawPick.actualRound);
+        const explicitAirballRoundPick = pickNumberFrom(rawPick.airballRoundPick, rawPick.realRoundPick, rawPick.actualRoundPick);
+        const espnRound = pickNumberFrom(rawPick.espnRound, rawPick.originalRound, rawPick.draftRound, rawPick.round, rawPick.roundId);
+        const espnRoundPick = pickNumberFrom(rawPick.espnRoundPick, rawPick.roundPick, rawPick.pickInRound, rawPick.slot, rawPick.pickNumber, rawPick.roundSelection);
+        const espnOverall = pickNumberFrom(rawPick.espnOverall, rawPick.originalOverall, rawPick.overall, rawPick.overallPick, rawPick.pickOverall, rawPick.pick, rawPick.selection, rawPick.selectionNumber);
+        const hasExplicitAirball = !!(explicitAirballOverall || explicitAirballRound || explicitAirballRoundPick || rawPick.airballMapped || rawPick.isAirballMapped);
+        const keeperPickLimit = LIVE_DRAFT_ESPN_KEEPER_ROUNDS * LIVE_DRAFT_TEAMS_PER_ROUND;
+        const isKeeperRound = !hasExplicitAirball && (
+            rawPick.isKeeper ||
+            rawPick.keeper ||
+            rawPick.isKeeperPick ||
+            (espnRound > 0 && espnRound <= LIVE_DRAFT_ESPN_KEEPER_ROUNDS) ||
+            (!espnRound && espnOverall > 0 && espnOverall <= keeperPickLimit)
+        );
+        const playerId = rawPick.playerId || rawPick.espnId || rawPick.id || rawPlayer.id || rawPlayer.playerId || rawPlayer.espnId || '';
+        const playerName = rawPick.playerName || rawPick.name || rawPick.fullName || rawPick.displayName || rawPlayer.fullName || rawPlayer.displayName || rawPlayer.name || rawPlayerText || '';
+        const playerNameText = String(playerName || '').trim();
+        const matched = playerId ? playerById[String(playerId)] : (playerNameText ? playerByName[normalizeTeamKey(playerNameText)] : null);
+        if (isKeeperRound) {
+            return {
+                isKeeperDraftPick: true,
+                rawRound: espnRound,
+                rawOverall: espnOverall,
+                player: {
+                    id: playerId || (matched ? matched.id : `${playerNameText || 'keeper'}-${espnOverall || index}`),
+                    name: playerNameText || (matched ? matched.name : 'Keeper ESPN')
+                }
+            };
+        }
+        let overall = explicitAirballOverall;
+        if (!overall && explicitAirballRound) {
+            const pick = explicitAirballRoundPick || espnRoundPick || (((espnOverall || 1) - 1) % LIVE_DRAFT_TEAMS_PER_ROUND) + 1;
+            overall = ((explicitAirballRound - 1) * LIVE_DRAFT_TEAMS_PER_ROUND) + pick;
+        }
+        if (!overall && espnRound > LIVE_DRAFT_ESPN_KEEPER_ROUNDS) {
+            const realRound = espnRound - LIVE_DRAFT_ESPN_KEEPER_ROUNDS;
+            const realPick = espnRoundPick || (((espnOverall || 1) - 1) % LIVE_DRAFT_TEAMS_PER_ROUND) + 1;
+            overall = ((realRound - 1) * LIVE_DRAFT_TEAMS_PER_ROUND) + realPick;
+        }
+        if (!overall && espnOverall > keeperPickLimit)
+            overall = espnOverall - keeperPickLimit;
+        if (!overall)
+            overall = index + 1;
         const info = getDraftPickInfoForOverall(overall);
-        const playerId = rawPick.playerId || rawPick.espnId || rawPick.id || '';
-        const playerName = rawPick.player || rawPick.playerName || rawPick.name || rawPick.fullName || '';
-        const matched = playerId ? playerById[String(playerId)] : (playerName ? playerByName[normalizeTeamKey(playerName)] : null);
-        const avg = Number(rawPick.avg || rawPick.fantasyPoints || rawPick.average || (matched ? matched.avg : 0)) || 0;
+        const avg = Number(rawPick.avg || rawPick.fantasyPoints || rawPick.average || rawPick.projectedAvg || rawPlayer.avg || rawPlayer.fantasyPoints || rawPlayer.average || (matched ? matched.avg : 0)) || 0;
         return {
             overall,
-            round: Number(rawPick.round || info.round),
-            pick: Number(rawPick.roundPick || rawPick.pickInRound || info.pick),
-            ownerName: normalizeTeamName(rawPick.team || rawPick.owner || info.ownerName),
+            espnRound,
+            espnOverall,
+            round: Number(info.round),
+            pick: Number(info.pick),
+            ownerName: normalizeTeamName(rawPick.airballTeam || rawPick.airballOwner || rawPick.ownerName || rawPick.teamName || rawPick.owner || info.ownerName),
             originalTeam: info.originalTeam,
             player: {
-                id: playerId || (matched ? matched.id : `${playerName}-${overall}`),
-                name: playerName || (matched ? matched.name : 'Escolha sem jogador'),
+                id: playerId || (matched ? matched.id : `${playerNameText || 'player'}-${overall}`),
+                name: playerNameText || (matched ? matched.name : 'Escolha sem jogador'),
                 avg,
-                position: rawPick.position || (matched ? matched.position : '—'),
-                team: rawPick.nbaTeam || rawPick.proTeam || (matched ? matched.team : 'NBA'),
-                photoUrl: rawPick.photoUrl || (matched ? matched.photoUrl : '')
+                position: rawPick.position || rawPick.pos || rawPlayer.position || rawPlayer.defaultPosition || (matched ? matched.position : '—'),
+                team: rawPick.nbaTeam || rawPick.proTeam || rawPick.proTeamAbbrev || rawPlayer.proTeamAbbrev || rawPlayer.nbaTeam || (matched ? matched.team : 'NBA'),
+                photoUrl: rawPick.photoUrl || rawPick.headshotUrl || rawPick.playerPhoto || rawPlayer.photoUrl || rawPlayer.headshotUrl || (matched ? matched.photoUrl : '')
             }
         };
     };
 
-    const completedPicks = [...livePicks]
-        .map(normalizePick)
-        .filter(pick => pick.overall && pick.player.name && pick.player.name !== 'Escolha sem jogador')
+    const livePickSource = Array.isArray(livePicks) ? livePicks : [];
+    const manualPickSource = Array.isArray(manualDraftPicks) ? manualDraftPicks : [];
+    const normalizedLivePicks = [...livePickSource, ...manualPickSource].map(normalizePick);
+    const ignoredKeeperPicksCount = normalizedLivePicks.filter(pick => pick && pick.isKeeperDraftPick).length;
+    const completedPicks = normalizedLivePicks
+        .filter(pick => pick && !pick.isKeeperDraftPick && pick.overall && pick.player.name && pick.player.name !== 'Escolha sem jogador')
         .sort((a, b) => Number(a.overall || 0) - Number(b.overall || 0));
 
     const pickedNames = new Set(completedPicks.map(pick => normalizeTeamKey(pick.player.name)));
-    const allAvailablePlayers = players
+    const officialKeeperNames = new Set();
+    Object.values(KEEPERS_DATA || {}).forEach(row => {
+        (row.players || []).forEach(player => officialKeeperNames.add(normalizeTeamKey(player.name || player)));
+    });
+    Object.values(LIVE_KEEPERS_FALLBACK || {}).forEach(row => {
+        (row.players || []).forEach(player => officialKeeperNames.add(normalizeTeamKey(player.name || player)));
+    });
+    keeperRanking.forEach(row => {
+        (row.topPlayers || row.players || []).forEach(player => officialKeeperNames.add(normalizeTeamKey(player.name || player)));
+    });
+    officialKeeperNames.add(normalizeTeamKey('Chet Holmgren'));
+    const isOfficialKeeperPlayer = (player) => officialKeeperNames.has(normalizeTeamKey(player.name));
+    const yahooProjectionByKeyTeam = {};
+    const yahooProjectionByKey = {};
+    const yahooProjectionKeyCounts = {};
+    YAHOO_AVG_PROJECTIONS_2026_27.forEach(row => {
+        const key = row.key || makePlayerProjectionKey(row.name);
+        const team = String(row.team || '').toUpperCase();
+        if (!key)
+            return;
+        yahooProjectionByKeyTeam[`${key}|${team}`] = row;
+        yahooProjectionByKey[key] = yahooProjectionByKey[key] || row;
+        yahooProjectionKeyCounts[key] = (yahooProjectionKeyCounts[key] || 0) + 1;
+    });
+    const getYahooProjectionByRule = (rule) => {
+        if (!rule || !rule.key)
+            return null;
+        let candidates = YAHOO_AVG_PROJECTIONS_2026_27.filter(row => row.key === rule.key);
+        if (rule.team)
+            candidates = candidates.filter(row => String(row.team || '').toUpperCase() === String(rule.team || '').toUpperCase());
+        if (Number.isFinite(Number(rule.minAvg)))
+            candidates = candidates.filter(row => Number(row.avg || 0) >= Number(rule.minAvg));
+        if (Number.isFinite(Number(rule.maxAvg)))
+            candidates = candidates.filter(row => Number(row.avg || 0) < Number(rule.maxAvg));
+        if (Number.isFinite(Number(rule.rank)))
+            candidates = candidates.filter(row => Number(row.rank || 0) === Number(rule.rank));
+        return candidates.sort((a, b) => Number(b.avg || 0) - Number(a.avg || 0))[0] || null;
+    };
+    const getYahooProjectionForPlayer = (player) => {
+        const fullNameKey = normalizeTeamKey(player.name);
+        const exactOverrides = {
+            'lamelo ball': { key: 'l ball' },
+            'stephen curry': { key: 's curry' },
+            'tyrese haliburton': { key: 't haliburton' },
+            'karl anthony towns': { key: 'k towns' },
+            'karl towns': { key: 'k towns' },
+            'de aaron fox': { key: 'd fox' },
+            'deaaron fox': { key: 'd fox' },
+            'de anthony melton': { key: 'd melton' },
+            'deanthony melton': { key: 'd melton' },
+            'de andre hunter': { key: 'd hunter' },
+            'deandre hunter': { key: 'd hunter' },
+            'cj mccollum': { key: 'c mccollum' },
+            'c j mccollum': { key: 'c mccollum' },
+            'pj washington': { key: 'p washington' },
+            'p j washington': { key: 'p washington' },
+            'tj mcconnell': { key: 't mcconnell' },
+            't j mcconnell': { key: 't mcconnell' },
+            'rj barrett': { key: 'r barrett' },
+            'r j barrett': { key: 'r barrett' },
+            'og anunoby': { key: 'o anunoby' },
+            'o g anunoby': { key: 'o anunoby' },
+            'donovan mitchell': { key: 'd mitchell', team: 'CLE' },
+            'davion mitchell': { key: 'd mitchell', team: 'MIA' },
+            'anthony edwards': { key: 'a edwards' },
+            'amen thompson': { key: 'a thompson', minAvg: 40 },
+            'ausar thompson': { key: 'a thompson', maxAvg: 40 },
+            'miles bridges': { key: 'm bridges', team: 'PHX' },
+            'mikal bridges': { key: 'm bridges', team: 'NYK' },
+            'jaylen brown': { key: 'j brown' },
+            'jalen brunson': { key: 'j brunson' },
+            'jalen green': { key: 'j green' },
+            'jalen johnson': { key: 'j johnson' },
+            'jalen suggs': { key: 'j suggs' },
+            'jalen duren': { key: 'j duren' },
+            'jalen williams': { key: 'j williams', minAvg: 40 },
+            'jaylen williams': { key: 'j williams', minAvg: 40 },
+            'jaylin williams': { key: 'j williams', maxAvg: 40 },
+            'kyshawn george': { key: 'k george', team: 'WAS' },
+            'keyonte george': { key: 'k george', team: 'UTA' },
+            'andrew wiggins': { key: 'a wiggins', team: 'MIA' },
+            'aaron wiggins': { key: 'a wiggins', team: 'ATL' },
+            'julian champagnie': { key: 'j champagnie', team: 'SAS' },
+            'justin champagnie': { key: 'j champagnie', team: 'WAS' },
+            'jarace walker': { key: 'j walker', team: 'IND' },
+            'jabari walker': { key: 'j walker', team: 'PHI' },
+            'cam johnson': { key: 'c johnson', team: 'DEN' },
+            'cameron johnson': { key: 'c johnson', team: 'DEN' }
+        };
+        const blockedAmbiguousNames = new Set(['lonzo ball', 'seth curry']);
+        if (blockedAmbiguousNames.has(fullNameKey))
+            return null;
+        if (exactOverrides[fullNameKey])
+            return getYahooProjectionByRule(exactOverrides[fullNameKey]);
+        const team = String(player.team || player.proTeam || '').toUpperCase();
+        const candidates = getPlayerProjectionKeyCandidates(player.name);
+        for (const key of candidates) {
+            if (yahooProjectionByKeyTeam[`${key}|${team}`])
+                return yahooProjectionByKeyTeam[`${key}|${team}`];
+        }
+        for (const key of candidates) {
+            if (yahooProjectionKeyCounts[key] === 1)
+                return yahooProjectionByKey[key] || null;
+        }
+        return null;
+    };
+    const getPlayerAvgForMode = (player, mode, fallbackAvg = null) => {
+        if (mode === 'yahoo') {
+            const projection = player?.yahooProjection || getYahooProjectionForPlayer(player);
+            if (projection)
+                return Number(projection.avg || 0);
+            if (Number.isFinite(Number(player?.yahooAvg)))
+                return Number(player.yahooAvg);
+            return null;
+        }
+        return Number(fallbackAvg ?? player?.avg ?? player?.boardAvg ?? 0);
+    };
+    const getPlayerAvgForModeNumber = (player, mode, fallbackAvg = null) => {
+        const value = getPlayerAvgForMode(player, mode, fallbackAvg);
+        return Number(value || 0);
+    };
+    const workerOriginForYahooPhotos = (() => {
+        try {
+            return new URL(LEAGUE_PLAYERS_API_URL).origin;
+        } catch (e) {
+            return '';
+        }
+    })();
+    const yahooOnlyPlayerOverrides = {
+        't haliburton': { name: 'Tyrese Haliburton', espnId: '4396993' }
+    };
+    const createYahooOnlyPlayer = (projection) => {
+        const override = yahooOnlyPlayerOverrides[projection.key] || {};
+        const photoUrl = override.espnId && workerOriginForYahooPhotos ? `${workerOriginForYahooPhotos}/player-photo/${override.espnId}` : '';
+        return {
+            id: `yahoo-only-${projection.key}`,
+            name: override.name || projection.name,
+            avg: 0,
+            totalPoints: 0,
+            position: projection.pos || '—',
+            team: projection.team || 'NBA',
+            fantasyTeam: 'Livre',
+            photoUrl,
+            yahooProjection: projection,
+            boardAvg: Number(projection.avg || 0),
+            boardRank: projection.rank,
+            boardLabel: 'AVG Yahoo',
+            boardMeta: `RANK DRAFT ${projection.draftRank ? `#${projection.draftRank}` : '—'}`,
+            boardMode: 'yahoo',
+            isYahooOnly: true
+        };
+    };
+    const baseAvailablePlayers = players
+        .filter(player => isDraftFreeFantasyTeam(player.fantasyTeam))
+        .filter(player => !isOfficialKeeperPlayer(player))
         .filter(player => !pickedNames.has(normalizeTeamKey(player.name)))
-        .filter(player => boardPositionFilter === 'TODOS' || String(player.position || '').split('/').includes(boardPositionFilter))
-        .sort((a, b) => Number(b.avg || 0) - Number(a.avg || 0));
-    const availablePlayers = allAvailablePlayers.slice(0, 30);
-    const boardStatusText = boardPositionFilter === 'TODOS'
-        ? `${availablePlayers.length} de ${players.length} nomes da base atual`
-        : `${availablePlayers.length} melhores filtrados por ${boardPositionFilter}`;
+        .filter(player => boardPositionFilter === 'TODOS' || String(player.position || '').split('/').includes(boardPositionFilter));
+    const espnAvailablePlayers = [...baseAvailablePlayers]
+        .sort((a, b) => Number(b.avg || 0) - Number(a.avg || 0))
+        .map((player, index) => ({
+            ...player,
+            boardAvg: Number(player.avg || 0),
+            boardRank: index + 1,
+            boardLabel: 'AVG ESPN',
+            boardMeta: `POS #${index + 1}`,
+            boardMode: 'espn'
+        }));
+    const pickedYahooProjectionKeys = new Set(completedPicks
+        .map(pick => {
+            const projection = getYahooProjectionForPlayer(pick.player);
+            return projection ? projection.key : makePlayerProjectionKey(pick.player.name);
+        })
+        .filter(Boolean));
+    const baseAvailableYahooKeys = new Set(baseAvailablePlayers
+        .map(player => {
+            const projection = getYahooProjectionForPlayer(player);
+            return projection ? projection.key : null;
+        })
+        .filter(Boolean));
+    const yahooMappedPlayers = baseAvailablePlayers
+        .map(player => {
+            const projection = getYahooProjectionForPlayer(player);
+            if (!projection || !Number.isFinite(Number(projection.avg)))
+                return null;
+            return {
+                ...player,
+                yahooProjection: projection,
+                boardAvg: Number(projection.avg || 0),
+                boardRank: projection.rank,
+                boardLabel: 'AVG Yahoo',
+                boardMeta: `RANK DRAFT ${projection.draftRank ? `#${projection.draftRank}` : '—'}`,
+                boardMode: 'yahoo'
+            };
+        })
+        .filter(Boolean);
+    const yahooOnlyPlayers = YAHOO_AVG_PROJECTIONS_2026_27
+        .filter(projection => !!yahooOnlyPlayerOverrides[projection.key])
+        .filter(projection => !baseAvailableYahooKeys.has(projection.key))
+        .filter(projection => !pickedYahooProjectionKeys.has(projection.key))
+        .map(createYahooOnlyPlayer)
+        .filter(player => !isOfficialKeeperPlayer(player))
+        .filter(player => boardPositionFilter === 'TODOS' || String(player.position || '').split(/[\/,\s]+/).includes(boardPositionFilter));
+    const yahooAvailablePlayers = [...yahooMappedPlayers, ...yahooOnlyPlayers]
+        .sort((a, b) => {
+            const avgDiff = Number(b.boardAvg || 0) - Number(a.boardAvg || 0);
+            if (avgDiff !== 0)
+                return avgDiff;
+            return Number(a.yahooProjection?.adp || 999) - Number(b.yahooProjection?.adp || 999);
+        });
+    const availablePlayers = (boardMode === 'yahoo' ? yahooAvailablePlayers : espnAvailablePlayers).slice(0, 300);
+    const cardPlayers = availablePlayers.slice(0, 30);
+    const listPlayers = availablePlayers.slice(30);
+    const boardStatusText = boardMode === 'yahoo'
+        ? `${availablePlayers.length} jogadores com AVG Yahoo 2026-2027 • ordenado por AVG Yahoo`
+        : `${availablePlayers.length} jogadores com AVG ESPN 2025-2026 • ordenado por AVG ESPN`;
 
     const completedCount = completedPicks.length;
     const maxPicks = LIVE_DRAFT_ROUNDS * 16;
@@ -13002,8 +14355,11 @@ function LiveDraftPage() {
     const currentTeam = currentInfo ? getTeam(currentInfo.ownerName) : null;
     const draftStart = new Date(LIVE_DRAFT_START_AT);
     const pickDeadline = currentInfo ? new Date(draftStart.getTime() + currentOverall * LIVE_DRAFT_PICK_HOURS * 60 * 60 * 1000) : null;
+    const workerDeadlineRaw = workerClock && (workerClock.deadlineAt || workerClock.expiresAt || workerClock.pickDeadline || workerClock.deadline || workerClock.endsAt || workerClock.dueAt);
+    const workerDeadline = workerDeadlineRaw ? new Date(workerDeadlineRaw) : null;
+    const hasWorkerDeadline = workerDeadline && !Number.isNaN(workerDeadline.getTime());
     const isPreDraft = now.getTime() < draftStart.getTime() && completedCount === 0;
-    const countdownTarget = isPreDraft ? draftStart : pickDeadline;
+    const countdownTarget = hasWorkerDeadline ? workerDeadline : (isPreDraft ? draftStart : pickDeadline);
     const countdownMs = countdownTarget ? countdownTarget.getTime() - now.getTime() : 0;
     const lastPick = completedPicks.length ? completedPicks[completedPicks.length - 1] : null;
 
@@ -13054,8 +14410,11 @@ function LiveDraftPage() {
     const teamRows = TEAMS_DATA.map(team => {
         const keepers = getTeamKeepers(team.name);
         const picks = picksByTeam[normalizeTeamKey(team.name)] || [];
-        const pickTotal = picks.reduce((sum, pick) => sum + Number(pick.player.avg || 0), 0);
-        const total = Number(keepers.total || 0) + pickTotal;
+        const keeperTotal = rankingMode === 'yahoo'
+            ? (Number(keepers.yahooTotal || 0) || keepers.players.reduce((sum, player) => sum + getPlayerAvgForModeNumber(player, rankingMode, player.avg), 0))
+            : Number(keepers.total || 0);
+        const pickTotal = picks.reduce((sum, pick) => sum + getPlayerAvgForModeNumber(pick.player, rankingMode, pick.player.avg), 0);
+        const total = keeperTotal + pickTotal;
         const teamPicks = getDraftPicksForTeam(team.name, LIVE_DRAFT_ROUNDS);
         const futurePicks = teamPicks.filter(info => !completedByOverall[Number(info.overall)]);
         return {
@@ -13064,6 +14423,9 @@ function LiveDraftPage() {
             picks,
             futurePicks,
             total,
+            keeperTotal,
+            pickTotal,
+            scoreMode: rankingMode,
             playerCount: keepers.players.length + picks.length
         };
     }).sort((a, b) => {
@@ -13086,17 +14448,52 @@ function LiveDraftPage() {
     const tiers = ["D", "C", "B", "A", "S", "ELITE"];
     const getLeaderRelativePercent = (total) => Math.max(1, Math.round((Number(total || 0) / leaderAvgTotal) * 100));
 
+    const getBoardValue = (player) => Number(player.boardAvg ?? player.avg ?? 0);
+    const getBoardLabel = (player) => player.boardLabel || (boardMode === 'yahoo' ? 'AVG Yahoo' : 'AVG ESPN');
+    const getBoardMeta = (player) => player.boardMeta || (boardMode === 'yahoo' ? 'RANK DRAFT —' : `POS #${player.boardRank || '—'}`);
+    const selectedCurrentPlayerId = pickedNames.has(normalizeTeamKey((completedByOverall[currentOverall] || {}).player?.name || '')) ? String((completedByOverall[currentOverall] || {}).player?.id || '') : '';
+    const selectPlayerForCurrentPick = (player) => {
+        if (!currentInfo || !currentTeam || !player)
+            return;
+        setManualDraftPicks(prev => {
+            const cleanPrev = (Array.isArray(prev) ? prev : []).filter(pick => Number(pick.airballOverall || pick.realOverall || pick.overall) !== Number(currentInfo.overall));
+            const nextPick = {
+                manual: true,
+                airballMapped: true,
+                airballOverall: currentInfo.overall,
+                airballRound: currentInfo.round,
+                airballRoundPick: currentInfo.pick,
+                airballTeam: currentTeam.name,
+                airballOwner: currentTeam.name,
+                playerId: player.id || '',
+                playerName: player.name || 'Jogador sem nome',
+                avg: Number(player.avg || 0) || getBoardValue(player),
+                selectedAvg: getBoardValue(player),
+                selectedAvgLabel: getBoardLabel(player),
+                position: player.position || '—',
+                nbaTeam: player.team || 'NBA',
+                photoUrl: player.photoUrl || '',
+                boardMode,
+                selectedAt: new Date().toISOString()
+            };
+            return [...cleanPrev, nextPick].sort((a, b) => Number(a.airballOverall || a.overall || 0) - Number(b.airballOverall || b.overall || 0));
+        });
+    };
+    const undoLastManualPick = () => setManualDraftPicks(prev => (Array.isArray(prev) ? prev.slice(0, -1) : []));
+    const clearManualPicks = () => setManualDraftPicks([]);
+
     const renderPlayerRow = (player, index) => e("div", { className: "live-draft-player-row", key: player.id || `${player.name}-${index}` },
         e("div", { className: "live-draft-rank-num" }, index + 1),
         e(PlayerPhoto, { player, size: 66 }),
         e("div", { className: "live-draft-player-main" },
             e("div", { className: "live-draft-player-name" }, player.name),
-            e("div", { className: "live-draft-player-meta" }, `${player.team || 'NBA'} • ${player.position || '—'}`)
+            e("div", { className: "live-draft-player-meta" }, `${player.team || 'NBA'} • ${player.position || '—'} • ${getBoardMeta(player)}`)
         ),
         e("div", { className: "live-draft-avg" },
-            formatDraftScore(player.avg, 1),
-            e("span", null, "AVG")
-        )
+            formatDraftScore(getBoardValue(player), 1),
+            e("span", null, getBoardLabel(player))
+        ),
+        e("button", { className: "live-draft-manual-pick-btn compact", type: "button", disabled: !currentInfo, onClick: () => selectPlayerForCurrentPick(player) }, "Escolher")
     );
 
     const renderFeaturedCard = (player, index) => e("div", { className: "live-draft-featured-card", key: player.id || `feat-${player.name}-${index}` },
@@ -13105,9 +14502,11 @@ function LiveDraftPage() {
         e("div", { className: "live-draft-featured-name" }, player.name),
         e("div", { className: "live-draft-featured-meta" }, `${player.team || 'NBA'} • ${player.position || '—'}`),
         e("div", { className: "live-draft-featured-avg" },
-            formatDraftScore(player.avg, 1),
-            e("span", null, "AVG")
-        )
+            formatDraftScore(getBoardValue(player), 1),
+            e("span", null, getBoardLabel(player))
+        ),
+        e("div", { className: "live-draft-featured-meta live-draft-featured-board-meta" }, getBoardMeta(player)),
+        e("button", { className: "live-draft-manual-pick-btn", type: "button", disabled: !currentInfo, onClick: () => selectPlayerForCurrentPick(player) }, "Escolher para a pick")
     );
 
     const renderHistoryRow = (pick, index) => e("div", { className: `live-draft-history-row ${index === 0 ? 'is-latest' : ''}`, key: `pick-${pick.overall}` },
@@ -13158,7 +14557,7 @@ function LiveDraftPage() {
                         ),
                         e("div", { className: "live-draft-next-player" },
                             e("strong", null, player ? player.name : "Aguardando board"),
-                            e("span", null, player ? `${formatDraftScore(player.avg, 1)} AVG` : "—")
+                            e("span", null, player ? `${formatDraftScore(getBoardValue(player), 1)} ${boardMode === 'yahoo' ? 'Yahoo' : 'ESPN'}` : "—")
                         )
                     ))
                     : e("div", { className: "live-draft-empty" }, "Sem próximos picks disponíveis.")
@@ -13214,13 +14613,13 @@ function LiveDraftPage() {
             e("div", { className: "live-draft-expand-section" },
                 e("div", { className: "live-draft-expand-title" }, "Keepers"),
                 row.keepers.players.length
-                    ? row.keepers.players.map(player => renderExpandItem("Keeper", player.name, player.avg, `${player.team || 'NBA'} • ${player.position || '—'}`))
+                    ? row.keepers.players.map(player => renderExpandItem("Keeper", player.name, getPlayerAvgForMode(player, rankingMode, player.avg), `${player.team || 'NBA'} • ${player.position || '—'}`))
                     : e("div", { className: "live-draft-panel-empty" }, "Keepers ainda não carregados.")
             ),
             e("div", { className: "live-draft-expand-section" },
                 e("div", { className: "live-draft-expand-title" }, "Picks feitas"),
                 row.picks.length
-                    ? row.picks.map(pick => renderExpandItem("Pick feita", pick.player.name, pick.player.avg, `R${pick.round} P${pick.pick} • Overall ${pick.overall}`))
+                    ? row.picks.map(pick => renderExpandItem("Pick feita", pick.player.name, getPlayerAvgForMode(pick.player, rankingMode, pick.player.avg), `R${pick.round} P${pick.pick} • Overall ${pick.overall}`))
                     : e("div", { className: "live-draft-panel-empty" }, "Nenhuma escolha registrada ainda.")
             ),
             e("div", { className: "live-draft-expand-section" },
@@ -13269,40 +14668,35 @@ function LiveDraftPage() {
                     ) : null
                 ),
                 e("div", { className: "live-draft-main-info" },
-                    e("div", { className: "live-draft-kicker" }, "Slow Draft • 1 dia por escolha"),
-                    e("div", { className: "live-draft-title" }, "LIVE DRAFT"),
-                    e("div", { className: "live-draft-sub" }, "Central oficial do Draft AirBall 2026/27, com pick atual, ordem completa, melhores disponíveis, histórico de escolhas e ranking atualizado por AVG."),
-                    e("div", { className: "live-draft-pick-line" },
-                        e("div", { className: "live-draft-pick-box" },
-                            e("span", null, "Overall"),
-                            e("strong", null, currentInfo ? `#${currentInfo.overall}` : "—")
+                    e("div", { className: `live-draft-main-countdown ${urgencyClass}` },
+                        e("div", { className: "live-draft-main-countdown-label" }, isPreDraft ? "Começa em" : "Tempo restante"),
+                        e("div", { className: "live-draft-main-countdown-value live-draft-countdown-scoreboard", "aria-live": "polite" }, formatCountdown(countdownMs)),
+                        e("div", { className: "live-draft-main-countdown-deadline" }, isPreDraft ? `Início previsto: ${formatDeadline(draftStart)}` : `Prazo da escolha atual: ${formatDeadline(pickDeadline)}`)
+                    ),
+                    e("div", { className: "live-draft-pick-announcement" },
+                        e("div", { className: "live-draft-pick-announcement-title" },
+                            currentInfo && currentTeam
+                                ? ["COM A PICK NÚMERO ", e("span", { key: "picknum" }, currentInfo.overall), `, O ${currentTeam.name} SELECIONA:`]
+                                : "DRAFT ENCERRADO"
                         ),
-                        e("div", { className: "live-draft-pick-box" },
-                            e("span", null, "Round"),
-                            e("strong", null, currentInfo ? currentInfo.round : "—")
-                        ),
-                        e("div", { className: "live-draft-pick-box" },
-                            e("span", null, "Pick"),
-                            e("strong", null, currentInfo ? currentInfo.pick : "—")
-                        ),
-                        e("div", { className: "live-draft-pick-box" },
-                            e("span", null, "Feitas"),
-                            e("strong", null, `${completedCount}/${maxPicks}`)
+                        e("div", { className: "live-draft-pick-announcement-sub" }, "Escolha manualmente o jogador para o time no relógio"),
+                        e("div", { className: "live-draft-pick-options" },
+                            availablePlayers.slice(0, 3).map((player, index) => e("div", { className: "live-draft-pick-option", key: player.id || `pick-option-${player.name}` },
+                                e("div", { className: "live-draft-pick-option-rank" }, `Opção ${index + 1}`),
+                                e("div", { className: "live-draft-pick-option-name" }, player.name),
+                                e(PlayerPhoto, { player, size: 124 }),
+                                e("div", { className: "live-draft-pick-option-avg" },
+                                    formatDraftScore(getBoardValue(player), 1),
+                                    e("span", null, getBoardLabel(player))
+                                ),
+                                e("div", { className: "live-draft-pick-option-meta" }, `${player.team || 'NBA'} • ${player.position || '—'}`),
+                                e("button", { className: "live-draft-manual-pick-btn main", type: "button", disabled: !currentInfo, onClick: () => selectPlayerForCurrentPick(player) }, "Escolher agora")
+                            ))
                         )
                     )
                 ),
                 e("div", { className: `live-draft-clock ${urgencyClass}` },
-                    e("div", { className: "live-draft-clock-title" }, isPreDraft ? "Começa em" : "Tempo restante"),
-                    e("div", { className: "live-draft-countdown live-draft-countdown-scoreboard", "aria-live": "polite" }, formatCountdown(countdownMs)),
-                    e("div", { className: "live-draft-deadline" }, isPreDraft ? `Início previsto: ${formatDeadline(draftStart)}` : `Prazo da escolha atual: ${formatDeadline(pickDeadline)}`),
-                    nextTeamInfo ? e("div", { className: "live-draft-small-pick" },
-                        e(TeamLogo, { team: nextTeamInfo.ownerName, size: 46 }),
-                        e("div", null,
-                            e("strong", null, "Próximo"),
-                            e("span", null, getTeam(nextTeamInfo.ownerName).name)
-                        )
-                    ) : null,
-                    e("div", { className: "live-draft-clock-title", style: { marginTop: 4 } }, "Ordem dos picks"),
+                    e("div", { className: "live-draft-clock-title live-draft-order-title" }, "Ordem dos picks"),
                     e("div", { className: "live-draft-small-list live-draft-order-scroll" },
                         nextPicks.map(info => e("div", { className: `live-draft-small-pick ${info.overall === currentOverall ? 'current' : ''}`, key: `next-${info.overall}` },
                             e(TeamLogo, { team: info.ownerName, size: info.overall === currentOverall ? 86 : 72 }),
@@ -13325,10 +14719,14 @@ function LiveDraftPage() {
                 e("div", { className: "live-draft-card" },
                     e("div", { className: "live-draft-card-header dark-controls" },
                         e("div", null,
-                            e("div", { className: "live-draft-card-title" }, "30 melhores disponíveis"),
+                            e("div", { className: "live-draft-card-title" }, "Top 300 disponíveis"),
                             e("div", { className: "live-draft-card-sub" }, boardStatusText)
                         ),
                         e("div", { className: "live-draft-board-tools" },
+                            e("select", { className: "live-draft-select live-draft-mode-select", value: boardMode, onChange: ev => setBoardMode(ev.target.value), "aria-label": "Selecionar AVG" },
+                                e("option", { value: "espn" }, "AVG ESPN 2025-2026"),
+                                e("option", { value: "yahoo" }, "AVG Yahoo 2026-2027")
+                            ),
                             e("select", { className: "live-draft-select", value: boardPositionFilter, onChange: ev => setBoardPositionFilter(ev.target.value), "aria-label": "Filtrar posição" },
                                 ['TODOS', 'PG', 'SG', 'SF', 'PF', 'C'].map(pos => e("option", { key: pos, value: pos }, pos === 'TODOS' ? 'Todas posições' : pos))
                             )
@@ -13337,19 +14735,25 @@ function LiveDraftPage() {
                     availablePlayers.length
                         ? e("div", { className: "live-draft-board-scroll" },
                             e("div", { className: "live-draft-board-featured" },
-                                availablePlayers.slice(0, 15).map(renderFeaturedCard)
+                                cardPlayers.map(renderFeaturedCard)
                             ),
-                            availablePlayers.length > 15 ? e("div", { className: "live-draft-board-rest-title" }, "Do 16º ao 30º") : null,
-                            e("div", { className: "live-draft-board-list" },
-                                availablePlayers.slice(15).map((player, i) => renderPlayerRow(player, i + 15))
-                            )
+                            listPlayers.length ? e("div", { className: "live-draft-board-rest-title" }, "Do 31º ao 300º") : null,
+                            listPlayers.length ? e("div", { className: "live-draft-board-list" },
+                                listPlayers.map((player, i) => renderPlayerRow(player, i + 30))
+                            ) : null
                         )
-                        : e("div", { className: "live-draft-empty" }, "Board ainda não carregado ou sem jogadores livres na base atual.")
+                        : e("div", { className: "live-draft-empty" }, boardMode === 'yahoo' ? "Nenhum jogador livre encontrado com AVG Yahoo 2026-2027." : "Board ainda não carregado ou sem jogadores livres na base atual.")
                 ),
                 e("div", { className: "live-draft-card" },
                     e("div", { className: "live-draft-card-header" },
-                        e("div", { className: "live-draft-card-title" }, "Últimas escolhas"),
-                        e("div", { className: "live-draft-card-sub" }, picksStatus)
+                        e("div", null,
+                            e("div", { className: "live-draft-card-title" }, "Últimas escolhas"),
+                            e("div", { className: "live-draft-card-sub" }, manualDraftPicks.length ? `${manualDraftPicks.length} picks manuais nesta sessão` : (ignoredKeeperPicksCount ? `${picksStatus} • ${ignoredKeeperPicksCount} keepers ESPN ignorados` : picksStatus))
+                        ),
+                        e("div", { className: "live-draft-manual-actions" },
+                            e("button", { className: "live-draft-manual-mini-btn", type: "button", disabled: !manualDraftPicks.length, onClick: undoLastManualPick }, "Desfazer última"),
+                            e("button", { className: "live-draft-manual-mini-btn danger", type: "button", disabled: !manualDraftPicks.length, onClick: clearManualPicks }, "Limpar")
+                        )
                     ),
                     e("div", { className: "live-draft-history-list" },
                         completedPicks.length
@@ -13362,9 +14766,13 @@ function LiveDraftPage() {
                 e("div", { className: "live-draft-card-header dark-controls" },
                     e("div", null,
                         e("div", { className: "live-draft-card-title" }, "Ranking atualizado por AVG"),
-                        e("div", { className: "live-draft-card-sub" }, "Keepers + picks já registradas")
+                        e("div", { className: "live-draft-card-sub" }, rankingMode === "yahoo" ? "Keepers + picks • AVG Yahoo" : "Keepers + picks • AVG ESPN")
                     ),
                     e("div", { className: "live-draft-ranking-actions" },
+                        e("select", { className: "live-draft-select live-draft-mode-select", value: rankingMode, onChange: ev => setRankingMode(ev.target.value), "aria-label": "Selecionar AVG do ranking" },
+                            e("option", { value: "espn" }, "AVG ESPN 2025-2026"),
+                            e("option", { value: "yahoo" }, "AVG Yahoo 2026-2027")
+                        ),
                         e("button", { type: "button", className: "live-draft-action-btn", onClick: openAllTeams }, "Abrir todos"),
                         e("button", { type: "button", className: "live-draft-action-btn", onClick: closeAllTeams }, "Fechar todos")
                     )
@@ -13375,7 +14783,7 @@ function LiveDraftPage() {
                         const isOpen = !!expandedTeams[key];
                         const tier = getTeamTier(row.rank);
                         const leaderPercent = getLeaderRelativePercent(row.total);
-                        return e("div", { className: `live-draft-team-block ${isOpen ? 'is-open' : ''}`, key: row.team.name },
+                        return e("div", { className: `live-draft-team-block ${isOpen ? 'is-open' : ''}`, key: row.team.name, style: (() => { const teamColor = normalizeTeamName(row.team.name) === 'Instituto Popovich' ? '#D4AF37' : (row.team.color || '#F97316'); return { '--team-color': teamColor, '--team-color-soft': hexToRgba(teamColor, .34), '--team-color-glow': hexToRgba(teamColor, .32), '--team-color-wash': hexToRgba(teamColor, .22), '--team-color-wash-strong': hexToRgba(teamColor, .38) }; })() },
                             e("button", { className: "live-draft-ranking-art", type: "button", onClick: () => toggleExpandedTeam(row.team.name), "aria-expanded": isOpen },
                                 e("div", { className: "live-draft-ranking-bg-rank", "aria-hidden": "true" }, row.rank),
                                 e("div", { className: "live-draft-ranking-art-logo" },
@@ -13386,15 +14794,12 @@ function LiveDraftPage() {
                                     e("div", { className: "live-draft-ranking-art-avg" },
                                         formatDraftScore(row.total, 1),
                                         e("span", null, "Soma AVG")
-                                    ),
-                                    e("div", { className: "live-draft-team-note" },
-                                        e("div", { className: "live-draft-team-note-title" }, "Nota do time"),
-                                        renderTierBar(tier),
-                                        e("div", { className: "live-draft-team-note-summary" },
-                                            e("div", { className: "live-draft-team-note-top" }, `★ ${leaderPercent}% DO LÍDER DA LIGA`),
-                                            e("div", { className: "live-draft-team-note-meta" }, `${formatDraftScore(row.total, 1)} AVG • #${row.rank} DE ${totalTeams}`)
-                                        )
                                     )
+                                ),
+                                e("div", { className: "live-draft-team-note live-draft-team-note-wide" },
+                                    e("div", { className: "live-draft-team-note-top" }, row.rank === 1 ? "★ O LÍDER DA LIGA" : `★ ${leaderPercent}% DO LÍDER DA LIGA`),
+                                    e("div", { className: "live-draft-team-note-title" }, "Nota do time"),
+                                    renderTierBar(tier)
                                 )
                             ),
                             isOpen ? renderInlineTeamPanel(row) : null
@@ -14974,6 +16379,7 @@ function DraftSimulatorPage() {
     const [allPlayers, setAllPlayers] = useState([]);
     const [status, setStatus] = useState('Carregando board ESPN...');
     const [selectedTeam, setSelectedTeam] = useState("Stéfano's SuperSonics");
+    const [avgMode, setAvgMode] = useState('espn');
     const [activeRound, setActiveRound] = useState(1);
     const [pickedByRound, setPickedByRound] = useState({});
     const printRef = useRef(null);
@@ -14982,6 +16388,13 @@ function DraftSimulatorPage() {
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '')
         .toLowerCase()
+        .trim();
+
+    const makeFullNameKey = (value) => String(value || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, ' ')
         .trim();
 
     const cleanLeaguePosition = (position) => {
@@ -15022,6 +16435,135 @@ function DraftSimulatorPage() {
         return !freeLabels.has(team);
     };
 
+    const yahooProjectionByKeyTeam = {};
+    const yahooProjectionByKey = {};
+    const yahooProjectionKeyCounts = {};
+    YAHOO_AVG_PROJECTIONS_2026_27.forEach(row => {
+        const key = row.key || makePlayerProjectionKey(row.name);
+        const team = String(row.team || '').toUpperCase();
+        if (!key)
+            return;
+        yahooProjectionByKeyTeam[`${key}|${team}`] = row;
+        yahooProjectionByKey[key] = yahooProjectionByKey[key] || row;
+        yahooProjectionKeyCounts[key] = (yahooProjectionKeyCounts[key] || 0) + 1;
+    });
+
+    const getYahooProjectionByRule = (rule) => {
+        if (!rule || !rule.key)
+            return null;
+        let candidates = YAHOO_AVG_PROJECTIONS_2026_27.filter(row => row.key === rule.key);
+        if (rule.team)
+            candidates = candidates.filter(row => String(row.team || '').toUpperCase() === String(rule.team || '').toUpperCase());
+        if (Number.isFinite(Number(rule.minAvg)))
+            candidates = candidates.filter(row => Number(row.avg || 0) >= Number(rule.minAvg));
+        if (Number.isFinite(Number(rule.maxAvg)))
+            candidates = candidates.filter(row => Number(row.avg || 0) < Number(rule.maxAvg));
+        if (Number.isFinite(Number(rule.rank)))
+            candidates = candidates.filter(row => Number(row.rank || 0) === Number(rule.rank));
+        return candidates.sort((a, b) => Number(b.avg || 0) - Number(a.avg || 0))[0] || null;
+    };
+
+    const getYahooProjectionForPlayer = (player) => {
+        const fullNameKey = makeFullNameKey(player.name);
+        const exactOverrides = {
+            'lamelo ball': { key: 'l ball' },
+            'stephen curry': { key: 's curry' },
+            'tyrese haliburton': { key: 't haliburton' },
+            'karl anthony towns': { key: 'k towns' },
+            'karl towns': { key: 'k towns' },
+            'de aaron fox': { key: 'd fox' },
+            'deaaron fox': { key: 'd fox' },
+            'de anthony melton': { key: 'd melton' },
+            'deanthony melton': { key: 'd melton' },
+            'de andre hunter': { key: 'd hunter' },
+            'deandre hunter': { key: 'd hunter' },
+            'cj mccollum': { key: 'c mccollum' },
+            'c j mccollum': { key: 'c mccollum' },
+            'pj washington': { key: 'p washington' },
+            'p j washington': { key: 'p washington' },
+            'tj mcconnell': { key: 't mcconnell' },
+            't j mcconnell': { key: 't mcconnell' },
+            'rj barrett': { key: 'r barrett' },
+            'r j barrett': { key: 'r barrett' },
+            'og anunoby': { key: 'o anunoby' },
+            'o g anunoby': { key: 'o anunoby' },
+            'donovan mitchell': { key: 'd mitchell', team: 'CLE' },
+            'davion mitchell': { key: 'd mitchell', team: 'MIA' },
+            'anthony edwards': { key: 'a edwards' },
+            'amen thompson': { key: 'a thompson', minAvg: 40 },
+            'ausar thompson': { key: 'a thompson', maxAvg: 40 },
+            'miles bridges': { key: 'm bridges', team: 'PHX' },
+            'mikal bridges': { key: 'm bridges', team: 'NYK' },
+            'jaylen brown': { key: 'j brown' },
+            'jalen brunson': { key: 'j brunson' },
+            'jalen green': { key: 'j green' },
+            'jalen johnson': { key: 'j johnson' },
+            'jalen suggs': { key: 'j suggs' },
+            'jalen duren': { key: 'j duren' },
+            'jalen williams': { key: 'j williams', minAvg: 40 },
+            'jaylen williams': { key: 'j williams', minAvg: 40 },
+            'jaylin williams': { key: 'j williams', maxAvg: 40 },
+            'kyshawn george': { key: 'k george', team: 'WAS' },
+            'keyonte george': { key: 'k george', team: 'UTA' },
+            'andrew wiggins': { key: 'a wiggins', team: 'MIA' },
+            'aaron wiggins': { key: 'a wiggins', team: 'ATL' },
+            'julian champagnie': { key: 'j champagnie', team: 'SAS' },
+            'justin champagnie': { key: 'j champagnie', team: 'WAS' },
+            'jarace walker': { key: 'j walker', team: 'IND' },
+            'jabari walker': { key: 'j walker', team: 'PHI' },
+            'cam johnson': { key: 'c johnson', team: 'DEN' },
+            'cameron johnson': { key: 'c johnson', team: 'DEN' }
+        };
+        const blockedAmbiguousNames = new Set(['lonzo ball', 'seth curry']);
+        if (blockedAmbiguousNames.has(fullNameKey))
+            return null;
+        if (exactOverrides[fullNameKey])
+            return getYahooProjectionByRule(exactOverrides[fullNameKey]);
+        const team = String(player.team || player.proTeam || '').toUpperCase();
+        const candidates = getPlayerProjectionKeyCandidates(player.name);
+        for (const key of candidates) {
+            if (yahooProjectionByKeyTeam[`${key}|${team}`])
+                return yahooProjectionByKeyTeam[`${key}|${team}`];
+        }
+        for (const key of candidates) {
+            if (yahooProjectionKeyCounts[key] === 1)
+                return yahooProjectionByKey[key] || null;
+        }
+        return null;
+    };
+
+    const workerOriginForYahooPhotos = (() => {
+        try {
+            return new URL(PLAYERS_API_URL).origin;
+        } catch (e) {
+            return '';
+        }
+    })();
+
+    const yahooOnlyPlayerOverrides = {
+        't haliburton': { name: 'Tyrese Haliburton', espnId: '4396993' }
+    };
+
+    const createYahooOnlyPlayer = (projection) => {
+        const override = yahooOnlyPlayerOverrides[projection.key] || {};
+        const photoUrl = override.espnId && workerOriginForYahooPhotos ? `${workerOriginForYahooPhotos}/player-photo/${override.espnId}` : '';
+        return {
+            id: `yahoo-only-${projection.key}`,
+            name: override.name || projection.name,
+            fantasyPoints: 0,
+            totalPoints: 0,
+            position: projection.pos || '—',
+            team: projection.team || 'NBA',
+            fantasyTeam: 'Livre',
+            photoUrl,
+            yahooProjection: projection,
+            boardScore: Number(projection.avg || 0),
+            boardLabel: 'AVG Yahoo',
+            boardMeta: `RANK DRAFT ${projection.draftRank ? `#${projection.draftRank}` : '—'}`,
+            isYahooOnly: true
+        };
+    };
+
     useEffect(() => {
         fetch(PLAYERS_API_URL)
             .then(res => {
@@ -15035,11 +16577,10 @@ function DraftSimulatorPage() {
                     .filter(p => p.name && Number(p.fantasyPoints) > 0);
                 const pool = normalized
                     .filter(p => !isKeeperOrOwned(p))
-                    .sort((a, b) => b.fantasyPoints - a.fantasyPoints)
-                    .slice(0, 220);
+                    .sort((a, b) => b.fantasyPoints - a.fantasyPoints);
                 setAllPlayers(normalized);
                 setPlayers(pool);
-                setStatus(`${pool.length} jogadores disponíveis • keepers puxados da ESPN`);
+                setStatus(`${pool.length} jogadores livres carregados`);
             })
             .catch(() => {
                 setStatus('Erro ao carregar ESPN');
@@ -15069,27 +16610,93 @@ function DraftSimulatorPage() {
         return Math.max(1, info.overall - offset);
     };
 
-    const teamKeepers = allPlayers
-        .filter(player => normalizeTeamName(player.fantasyTeam) === normalizeTeamName(selectedTeam))
-        .sort((a, b) => Number(b.fantasyPoints || 0) - Number(a.fantasyPoints || 0))
-        .slice(0, 2);
-
     const draftSelectedPlayers = Object.keys(pickedByRound)
         .map(key => pickedByRound[key])
         .filter(Boolean);
 
-    const selectedPlayers = [...teamKeepers, ...draftSelectedPlayers];
-
     const selectedIds = new Set(draftSelectedPlayers.map(player => String(player.id)));
-    const totalAvg = selectedPlayers.reduce((sum, player) => sum + Number(player.fantasyPoints || 0), 0);
+    const pickedYahooProjectionKeys = new Set(draftSelectedPlayers
+        .map(player => {
+            const projection = getYahooProjectionForPlayer(player);
+            return projection ? projection.key : makePlayerProjectionKey(player.name);
+        })
+        .filter(Boolean));
+
+    const baseYahooKeys = new Set(players
+        .map(player => {
+            const projection = getYahooProjectionForPlayer(player);
+            return projection ? projection.key : null;
+        })
+        .filter(Boolean));
+
+    const espnBoardPlayers = [...players]
+        .filter(player => Number(player.fantasyPoints || 0) > 0)
+        .sort((a, b) => Number(b.fantasyPoints || 0) - Number(a.fantasyPoints || 0))
+        .map((player, index) => ({
+            ...player,
+            boardScore: Number(player.fantasyPoints || 0),
+            boardRank: index + 1,
+            boardLabel: 'AVG ESPN',
+            boardMeta: `POS #${index + 1}`
+        }))
+        .slice(0, 300);
+
+    const yahooMappedPlayers = players
+        .map(player => {
+            const projection = getYahooProjectionForPlayer(player);
+            if (!projection || !Number.isFinite(Number(projection.avg)))
+                return null;
+            return {
+                ...player,
+                yahooProjection: projection,
+                boardScore: Number(projection.avg || 0),
+                boardRank: projection.rank,
+                boardLabel: 'AVG Yahoo',
+                boardMeta: `RANK DRAFT ${projection.draftRank ? `#${projection.draftRank}` : '—'}`
+            };
+        })
+        .filter(Boolean);
+
+    const yahooOnlyPlayers = YAHOO_AVG_PROJECTIONS_2026_27
+        .filter(projection => !!yahooOnlyPlayerOverrides[projection.key])
+        .filter(projection => !baseYahooKeys.has(projection.key))
+        .filter(projection => !pickedYahooProjectionKeys.has(projection.key))
+        .map(createYahooOnlyPlayer);
+
+    const yahooBoardPlayers = [...yahooMappedPlayers, ...yahooOnlyPlayers]
+        .sort((a, b) => {
+            const avgDiff = Number(b.boardScore || 0) - Number(a.boardScore || 0);
+            if (avgDiff !== 0)
+                return avgDiff;
+            return Number(a.yahooProjection?.draftRank || 999) - Number(b.yahooProjection?.draftRank || 999);
+        })
+        .map((player, index) => ({
+            ...player,
+            boardRank: index + 1
+        }))
+        .slice(0, 300);
+
+    const boardPlayers = avgMode === 'yahoo' ? yahooBoardPlayers : espnBoardPlayers;
+
+    const getPlayerScore = (player) => {
+        if (avgMode === 'yahoo') {
+            const projection = player.yahooProjection || getYahooProjectionForPlayer(player);
+            return projection ? Number(projection.avg || 0) : 0;
+        }
+        return Number(player.fantasyPoints || 0);
+    };
+
+    const getPlayerLabel = () => avgMode === 'yahoo' ? 'AVG Yahoo' : 'AVG ESPN';
+
+    const selectedPlayers = draftSelectedPlayers;
+    const totalAvg = selectedPlayers.reduce((sum, player) => sum + getPlayerScore(player), 0);
     const averageAvg = selectedPlayers.length ? totalAvg / selectedPlayers.length : 0;
 
     const activeInfo = getPickInfo(activeRound);
     const activeStart = getWindowStartRank(activeRound);
-    const activeCandidates = players
-        .map((player, index) => ({ player, boardRank: index + 1 }))
+    const activeCandidates = boardPlayers
         .slice(activeStart - 1, activeStart - 1 + WINDOW_SIZE)
-        .filter(item => !selectedIds.has(String(item.player.id)) || String(pickedByRound[activeRound]?.id) === String(item.player.id));
+        .filter(item => !selectedIds.has(String(item.id)) || String(pickedByRound[activeRound]?.id) === String(item.id));
 
     const choosePlayer = (round, player) => {
         setPickedByRound(prev => ({ ...prev, [round]: player }));
@@ -15128,19 +16735,24 @@ function DraftSimulatorPage() {
     return (React.createElement("div", { className: "main-wrap draft-page" },
         React.createElement("div", { className: "page-hero" },
             React.createElement("div", { className: "page-hero-title" }, "🧪 Simulador de Draft"),
-            React.createElement("div", { className: "page-hero-sub" }, "Escolha uma franquia, simule suas escolhas atualizadas após trocas de picks e monte um board com AVG total e média do time")),
+            React.createElement("div", { className: "page-hero-sub" }, "Escolha uma franquia, simule apenas as picks do draft e alterne entre AVG ESPN e AVG Yahoo")),
         React.createElement("div", { className: "draft-sim-card" },
             React.createElement("div", { className: "draft-sim-header" },
                 React.createElement("div", null,
                     React.createElement("div", { className: "draft-sim-kicker" }, "Draft Snake • 8 rounds"),
                     React.createElement("div", { className: "draft-sim-title" }, "Simulador de Draft"),
-                    React.createElement("div", { className: "draft-sim-sub" }, "A janela de escolha mostra jogadores próximos da sua pick no board por AVG. Conforme você escolhe, o resumo do time é atualizado automaticamente.")),
-                React.createElement("div", { className: "draft-sim-status" }, status)),
+                    React.createElement("div", { className: "draft-sim-sub" }, "Sem keepers: o resumo mostra somente os jogadores escolhidos na simulação. A janela muda conforme o AVG selecionado.")),
+                React.createElement("div", { className: "draft-sim-status" }, `${status} • ${avgMode === 'yahoo' ? 'AVG Yahoo 2026-2027' : 'AVG ESPN 2025-2026'}`)),
             React.createElement("div", { className: "draft-sim-controls" },
                 React.createElement("label", { className: "draft-sim-field" },
                     React.createElement("span", null, "Selecionar franquia"),
                     React.createElement("select", { value: selectedTeam, onChange: (e) => setSelectedTeam(e.target.value) },
                         DRAFT_ORDER.map(row => React.createElement("option", { key: row.name, value: row.name }, `${row.pick}. ${getTeam(row.name).name}`)))),
+                React.createElement("label", { className: "draft-sim-field" },
+                    React.createElement("span", null, "Base de AVG"),
+                    React.createElement("select", { value: avgMode, onChange: (e) => setAvgMode(e.target.value) },
+                        React.createElement("option", { value: "espn" }, "AVG ESPN 2025-2026"),
+                        React.createElement("option", { value: "yahoo" }, "AVG Yahoo 2026-2027"))),
                 React.createElement("button", { className: "draft-sim-btn secondary", type: "button", onClick: resetDraft }, "Limpar simulação"),
                 React.createElement("button", { className: "draft-sim-btn primary", type: "button", onClick: printSimulation }, "Print do time")),
             React.createElement("div", { className: "draft-sim-layout" },
@@ -15151,31 +16763,14 @@ function DraftSimulatorPage() {
                         React.createElement("div", { className: "draft-sim-team-seed" },
                             teamDraftPicks.length,
                             " escolhas de draft • ",
-                            teamKeepers.length,
-                            " keepers oficiais")),
+                            avgMode === 'yahoo' ? "AVG Yahoo" : "AVG ESPN")),
                     React.createElement("div", { className: "draft-sim-totals" },
                         React.createElement("div", { className: "draft-sim-total-box" },
-                            React.createElement("div", { className: "draft-sim-total-label" }, "AVG total"),
+                            React.createElement("div", { className: "draft-sim-total-label" }, `AVG total ${avgMode === 'yahoo' ? 'Yahoo' : 'ESPN'}`),
                             React.createElement("div", { className: "draft-sim-total-value" }, formatScore(totalAvg))),
                         React.createElement("div", { className: "draft-sim-total-box" },
                             React.createElement("div", { className: "draft-sim-total-label" }, "Média AVG"),
                             React.createElement("div", { className: "draft-sim-total-value" }, formatScore(averageAvg)))),
-                    React.createElement("div", { className: "draft-sim-keepers-title" }, "Keepers oficiais já no time"),
-                    React.createElement("div", { className: "draft-sim-keepers-grid" },
-                        teamKeepers.length ? teamKeepers.map((keeper, keeperIndex) => React.createElement("div", { className: "draft-sim-keeper-card", key: `keeper-${keeper.id || keeperIndex}` },
-                            React.createElement("div", { className: "draft-sim-keeper-badge" },
-                                "Keeper ",
-                                keeperIndex + 1),
-                            React.createElement("div", { className: "draft-sim-picked-player" },
-                                React.createElement(PlayerPhoto, { player: keeper, size: 46 }),
-                                React.createElement("div", null,
-                                    React.createElement("div", { className: "draft-sim-picked-name" }, keeper.name),
-                                    React.createElement("div", { className: "draft-sim-picked-meta" },
-                                        keeper.team,
-                                        " • ",
-                                        keeper.position,
-                                        " • AVG ",
-                                        formatScore(keeper.fantasyPoints)))))) : React.createElement("div", { className: "draft-sim-empty-pick" }, "Keepers ainda não carregados para este time.")),
                     React.createElement("div", { className: "draft-sim-keepers-title" }, "Escolhas do draft"),
                     React.createElement("div", { className: "draft-sim-picked-list" },
                         Array.from({ length: teamPickSlots }, (_, index) => {
@@ -15200,8 +16795,10 @@ function DraftSimulatorPage() {
                                             picked.team,
                                             " • ",
                                             picked.position,
-                                            " • AVG ",
-                                            formatScore(picked.fantasyPoints)))) : React.createElement("div", { className: "draft-sim-empty-pick" }, "Clique para escolher esta pick"));
+                                            " • ",
+                                            getPlayerLabel(),
+                                            " ",
+                                            formatScore(getPlayerScore(picked))))) : React.createElement("div", { className: "draft-sim-empty-pick" }, "Clique para escolher esta pick"));
                         }))),
                 React.createElement("div", { className: "draft-sim-board" },
                     React.createElement("div", { className: "draft-sim-round-head" },
@@ -15214,10 +16811,12 @@ function DraftSimulatorPage() {
                                 " • Overall ",
                                 activeInfo.overall),
                             React.createElement("div", { className: "draft-sim-round-sub" },
-                                "Mostrando jogadores do board a partir da posição #",
+                                "Mostrando jogadores do board ",
+                                avgMode === 'yahoo' ? "Yahoo" : "ESPN",
+                                " a partir da posição #",
                                 activeStart,
                                 " até #",
-                                Math.min(activeStart + WINDOW_SIZE - 1, players.length),
+                                Math.min(activeStart + WINDOW_SIZE - 1, boardPlayers.length),
                                 ". Escolha 1 jogador para esta pick."))),
                     React.createElement("div", { className: "draft-sim-round-tabs" },
                         Array.from({ length: teamPickSlots }, (_, index) => {
@@ -15232,18 +16831,20 @@ function DraftSimulatorPage() {
                                 picked ? ' ✓' : '');
                         })),
                     React.createElement("div", { className: "draft-sim-candidates" },
-                        activeCandidates.length ? activeCandidates.map(({ player, boardRank }) => React.createElement("div", { className: "draft-sim-candidate", key: `${activeRound}-${player.id}` },
+                        activeCandidates.length ? activeCandidates.map((player) => React.createElement("div", { className: "draft-sim-candidate", key: `${activeRound}-${player.id}` },
                             React.createElement("div", { className: "draft-sim-rank" },
                                 "#",
-                                boardRank),
+                                player.boardRank || "—"),
                             React.createElement(PlayerPhoto, { player: player, size: 48 }),
                             React.createElement("div", null,
                                 React.createElement("div", { className: "draft-sim-player-name" }, player.name),
                                 React.createElement("div", { className: "draft-sim-player-meta" },
                                     player.team,
                                     " • ",
-                                    player.position)),
-                            React.createElement("div", { className: "draft-sim-avg" }, formatScore(player.fantasyPoints)),
+                                    player.position,
+                                    " • ",
+                                    player.boardMeta || "")),
+                            React.createElement("div", { className: "draft-sim-avg" }, formatScore(getPlayerScore(player))),
                             React.createElement("button", { className: "draft-sim-candidate-btn", type: "button", onClick: () => choosePlayer(activeRound, player) }, String(pickedByRound[activeRound]?.id) === String(player.id) ? 'Escolhido' : 'Escolher'))) : React.createElement("div", { className: "draft-sim-no-player" }, "Nenhum jogador disponível nesta janela do board.")))))));
 }
 

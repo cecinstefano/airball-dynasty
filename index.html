@@ -14116,6 +14116,9 @@ function LiveDraftPage() {
                 id: playerId || (matched ? matched.id : `${playerNameText || 'player'}-${overall}`),
                 name: playerNameText || (matched ? matched.name : 'Escolha sem jogador'),
                 avg,
+                selectedAvg: Number(rawPick.selectedAvg || rawPlayer.selectedAvg || 0) || null,
+                selectedAvgLabel: rawPick.selectedAvgLabel || rawPlayer.selectedAvgLabel || '',
+                boardMode: rawPick.boardMode || rawPlayer.boardMode || '',
                 position: rawPick.position || rawPick.pos || rawPlayer.position || rawPlayer.defaultPosition || (matched ? matched.position : '—'),
                 team: rawPick.nbaTeam || rawPick.proTeam || rawPick.proTeamAbbrev || rawPlayer.proTeamAbbrev || rawPlayer.nbaTeam || (matched ? matched.team : 'NBA'),
                 photoUrl: rawPick.photoUrl || rawPick.headshotUrl || rawPick.playerPhoto || rawPlayer.photoUrl || rawPlayer.headshotUrl || (matched ? matched.photoUrl : '')
@@ -14509,18 +14512,33 @@ function LiveDraftPage() {
         e("button", { className: "live-draft-manual-pick-btn", type: "button", disabled: !currentInfo, onClick: () => selectPlayerForCurrentPick(player) }, "Escolher para a pick")
     );
 
-    const renderHistoryRow = (pick, index) => e("div", { className: `live-draft-history-row ${index === 0 ? 'is-latest' : ''}`, key: `pick-${pick.overall}` },
-        e("div", { className: "live-draft-rank-num" }, `#${pick.overall}`),
-        e(TeamLogo, { team: pick.ownerName, size: 46 }),
-        e("div", null,
-            e("div", { className: "live-draft-player-name" }, pick.player.name),
-            e("div", { className: "live-draft-player-meta" }, `${getTeam(pick.ownerName).name} • R${pick.round} P${pick.pick}`)
-        ),
-        e("div", { className: "live-draft-avg" },
-            pick.player.avg ? formatDraftScore(pick.player.avg, 1) : '—',
-            e("span", null, "AVG")
-        )
-    );
+    const getHistoryYahooAvg = (pick) => {
+        const player = pick?.player || {};
+        const yahooAvg = getPlayerAvgForMode(player, 'yahoo', null);
+        if (Number.isFinite(Number(yahooAvg)) && Number(yahooAvg) > 0)
+            return Number(yahooAvg);
+        const selectedLabel = String(player.selectedAvgLabel || '').toLowerCase();
+        const selectedMode = String(player.boardMode || '').toLowerCase();
+        if ((selectedLabel.includes('yahoo') || selectedMode === 'yahoo') && Number.isFinite(Number(player.selectedAvg)) && Number(player.selectedAvg) > 0)
+            return Number(player.selectedAvg);
+        return null;
+    };
+
+    const renderHistoryRow = (pick, index) => {
+        const historyYahooAvg = getHistoryYahooAvg(pick);
+        return e("div", { className: `live-draft-history-row ${index === 0 ? 'is-latest' : ''}`, key: `pick-${pick.overall}` },
+            e("div", { className: "live-draft-rank-num" }, `#${pick.overall}`),
+            e(TeamLogo, { team: pick.ownerName, size: 46 }),
+            e("div", null,
+                e("div", { className: "live-draft-player-name" }, pick.player.name),
+                e("div", { className: "live-draft-player-meta" }, `${getTeam(pick.ownerName).name} • R${pick.round} P${pick.pick}`)
+            ),
+            e("div", { className: "live-draft-avg" },
+                historyYahooAvg ? formatDraftScore(historyYahooAvg, 1) : '—',
+                e("span", null, "AVG Yahoo")
+            )
+        );
+    };
 
     const renderStatusCard = (kind, teamName, title, sub, player, stateClass) => e("div", { className: `live-draft-status-card ${stateClass || ''}` },
         teamName ? e(TeamLogo, { team: teamName, size: 88 }) : e("div", { className: "live-draft-rank-num" }, "—"),
