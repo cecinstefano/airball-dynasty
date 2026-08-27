@@ -14435,7 +14435,6 @@ function LiveDraftPage() {
             'deanthony melton': { key: 'd melton' },
             'de andre hunter': { key: 'd hunter' },
             'deandre hunter': { key: 'd hunter' },
-            'darryn peterson': { key: 'd peterson' },
             'cj mccollum': { key: 'c mccollum' },
             'c j mccollum': { key: 'c mccollum' },
             'pj washington': { key: 'p washington' },
@@ -14473,7 +14472,7 @@ function LiveDraftPage() {
             'cam johnson': { key: 'c johnson', team: 'DEN' },
             'cameron johnson': { key: 'c johnson', team: 'DEN' }
         };
-        const blockedAmbiguousNames = new Set(['lonzo ball', 'seth curry', 'drew peterson', 'josh green', 'javonte green', 'jeff green']);
+        const blockedAmbiguousNames = new Set(['lonzo ball', 'seth curry']);
         if (blockedAmbiguousNames.has(fullNameKey))
             return null;
         if (exactOverrides[fullNameKey])
@@ -14513,9 +14512,7 @@ function LiveDraftPage() {
         }
     })();
     const yahooOnlyPlayerOverrides = {
-        't haliburton': { name: 'Tyrese Haliburton', espnId: '4396993' },
-        'd peterson': { name: 'Darryn Peterson' },
-        'j green': { name: 'Jalen Green' }
+        't haliburton': { name: 'Tyrese Haliburton', espnId: '4396993' }
     };
     const createYahooOnlyPlayer = (projection) => {
         const override = yahooOnlyPlayerOverrides[projection.key] || {};
@@ -16755,7 +16752,6 @@ function DraftSimulatorPage() {
             'deanthony melton': { key: 'd melton' },
             'de andre hunter': { key: 'd hunter' },
             'deandre hunter': { key: 'd hunter' },
-            'darryn peterson': { key: 'd peterson' },
             'cj mccollum': { key: 'c mccollum' },
             'c j mccollum': { key: 'c mccollum' },
             'pj washington': { key: 'p washington' },
@@ -16793,7 +16789,7 @@ function DraftSimulatorPage() {
             'cam johnson': { key: 'c johnson', team: 'DEN' },
             'cameron johnson': { key: 'c johnson', team: 'DEN' }
         };
-        const blockedAmbiguousNames = new Set(['lonzo ball', 'seth curry', 'drew peterson', 'josh green', 'javonte green', 'jeff green']);
+        const blockedAmbiguousNames = new Set(['lonzo ball', 'seth curry']);
         if (blockedAmbiguousNames.has(fullNameKey))
             return null;
         if (exactOverrides[fullNameKey])
@@ -16820,9 +16816,7 @@ function DraftSimulatorPage() {
     })();
 
     const yahooOnlyPlayerOverrides = {
-        't haliburton': { name: 'Tyrese Haliburton', espnId: '4396993' },
-        'd peterson': { name: 'Darryn Peterson' },
-        'j green': { name: 'Jalen Green' }
+        't haliburton': { name: 'Tyrese Haliburton', espnId: '4396993' }
     };
 
     const createYahooOnlyPlayer = (projection) => {
