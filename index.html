@@ -15043,7 +15043,7 @@ function LiveDraftPage() {
     }, {});
 
     const renderHistoryRoundGroup = (round) => {
-        const picks = completedPicksByRound[round] || [];
+        const picks = (completedPicksByRound[round] || []).slice().sort((a, b) => Number(b.overall || 0) - Number(a.overall || 0));
         return e("div", { className: "live-draft-history-round-group", key: `history-round-${round}` },
             e("div", { className: "live-draft-history-round-title" }, `ROUND ${round}`),
             picks.map((pick, i) => renderHistoryRow(pick, i))
@@ -15285,7 +15285,7 @@ function LiveDraftPage() {
                     ),
                     e("div", { className: "live-draft-history-list" },
                         completedPicks.length
-                            ? Object.keys(completedPicksByRound).map(Number).sort((a, b) => a - b).map(renderHistoryRoundGroup)
+                            ? Object.keys(completedPicksByRound).map(Number).sort((a, b) => b - a).map(renderHistoryRoundGroup)
                             : e("div", { className: "live-draft-empty" }, "Nenhuma escolha registrada ainda. Quando o draft começar, esta área mostrará o histórico das picks feitas.")
                     )
                 )
