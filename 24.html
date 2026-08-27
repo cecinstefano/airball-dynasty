@@ -10310,43 +10310,6 @@
     margin-top: 0 !important;
   }
 
-
-  /* LIVE DRAFT - histórico completo separado por rounds */
-  .live-draft-history-list {
-    max-height: 640px;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-  }
-  .live-draft-history-list::-webkit-scrollbar {
-    width: 8px;
-  }
-  .live-draft-history-list::-webkit-scrollbar-thumb {
-    background: rgba(124,58,237,.28);
-    border-radius: 999px;
-  }
-  .live-draft-history-round-group {
-    display: flex;
-    flex-direction: column;
-  }
-  .live-draft-history-round-title {
-    position: sticky;
-    top: 0;
-    z-index: 2;
-    padding: 8px 18px;
-    background: linear-gradient(90deg, rgba(249,115,22,.13), rgba(124,58,237,.10));
-    border-top: 1px solid rgba(124,58,237,.10);
-    border-bottom: 1px solid rgba(124,58,237,.10);
-    color: var(--purple-deep);
-    font-size: 11px;
-    font-weight: 1000;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .live-draft-history-overall {
-    opacity: .78;
-    font-size: 10px;
-  }
-
 </style>
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20128%20128%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id=%22g%22%20x1=%220%22%20y1=%220%22%20x2=%221%22%20y2=%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%220%%22%20stop-color=%22#2d0a4e%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%2255%%22%20stop-color=%22#5b21b6%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%22100%%22%20stop-color=%22#f97316%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Ccircle%20cx=%2264%22%20cy=%2264%22%20r=%2258%22%20fill=%22url(#g)%22/%3E%0A%20%20%3Ccircle%20cx=%2264%22%20cy=%2264%22%20r=%2248%22%20fill=%22none%22%20stroke=%22#f97316%22%20stroke-width=%228%22/%3E%0A%20%20%3Cpath%20d=%22M22%2064h84M64%2016c18%2017%2027%2033%2027%2048s-9%2031-27%2048M64%2016C46%2033%2037%2049%2037%2064s9%2031%2027%2048%22%0A%20%20%20%20%20%20%20%20fill=%22none%22%20stroke=%22#ffffff%22%20stroke-width=%225%22%20opacity=%22.92%22%20stroke-linecap=%22round%22/%3E%0A%20%20%3Ctext%20x=%2264%22%20y=%2278%22%20text-anchor=%22middle%22%20font-family=%22Arial%20Black,%20Impact,%20sans-serif%22%0A%20%20%20%20%20%20%20%20font-size=%2239%22%20font-weight=%22900%22%20fill=%22#fff%22%20stroke=%22#2d0a4e%22%20stroke-width=%223%22%20paint-order=%22stroke%22%3EA%3C/text%3E%0A%3C/svg%3E">
@@ -12039,21 +12002,17 @@ const DRAFT_PICK_OWNER_OVERRIDES = {
     5: 'Instituto Popovich',
     6: "Pato's Team",
     12: 'Pistons de Pira',
-    22: 'Instituto Popovich',
     27: "Pato's Team",
-    28: 'Fi du Jequisom',
+    28: 'Instituto Popovich',
     39: "Stéfano's SuperSonics",
     44: 'Pistons de Pira',
     53: 'Pistons de Pira',
     58: "Stéfano's SuperSonics",
     59: "Pato's Team",
-    60: 'Fi du Jequisom',
+    60: 'Instituto Popovich',
     76: 'Pistons de Pira',
-    86: 'Instituto Popovich',
     90: "Stéfano's SuperSonics",
-    91: 'Fi du Jequisom',
-    103: "Stéfano's SuperSonics",
-    107: 'Instituto Popovich'
+    103: "Stéfano's SuperSonics"
 };
 function getDraftPickInfoForOverall(overallPick) {
     const overall = Number(overallPick) || 1;
@@ -13862,7 +13821,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "PG",
         "nbaTeam": "OKC",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
+        "selectedAt": "2026-08-26T23:36:00.000-03:00"
     },
     {
         "manual": true,
@@ -13879,7 +13838,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "SF/PF",
         "nbaTeam": "BOS",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
+        "selectedAt": "2026-08-26T23:36:00.000-03:00"
     },
     {
         "manual": true,
@@ -13896,7 +13855,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "PG",
         "nbaTeam": "PHI",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
+        "selectedAt": "2026-08-26T23:36:00.000-03:00"
     },
     {
         "manual": true,
@@ -13913,7 +13872,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "PG/SG",
         "nbaTeam": "IND",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
+        "selectedAt": "2026-08-26T23:36:00.000-03:00"
     },
     {
         "manual": true,
@@ -13930,7 +13889,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "PF/C",
         "nbaTeam": "NYK",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
+        "selectedAt": "2026-08-26T23:36:00.000-03:00"
     },
     {
         "manual": true,
@@ -13947,7 +13906,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "PG/SG",
         "nbaTeam": "PHX",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
+        "selectedAt": "2026-08-26T23:36:00.000-03:00"
     },
     {
         "manual": true,
@@ -13964,7 +13923,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "PF/C",
         "nbaTeam": "WAS",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
+        "selectedAt": "2026-08-26T23:36:00.000-03:00"
     },
     {
         "manual": true,
@@ -13981,7 +13940,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "PF/C",
         "nbaTeam": "SAC",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
+        "selectedAt": "2026-08-26T23:36:00.000-03:00"
     },
     {
         "manual": true,
@@ -13998,7 +13957,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "C",
         "nbaTeam": "DET",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
+        "selectedAt": "2026-08-26T23:36:00.000-03:00"
     },
     {
         "manual": true,
@@ -14015,7 +13974,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "PF",
         "nbaTeam": "BKN",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
+        "selectedAt": "2026-08-26T23:36:00.000-03:00"
     },
     {
         "manual": true,
@@ -14032,7 +13991,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "PG",
         "nbaTeam": "GSW",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
+        "selectedAt": "2026-08-26T23:36:00.000-03:00"
     },
     {
         "manual": true,
@@ -14049,7 +14008,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "C",
         "nbaTeam": "IND",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
+        "selectedAt": "2026-08-26T23:36:00.000-03:00"
     },
     {
         "manual": true,
@@ -14066,7 +14025,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "PG",
         "nbaTeam": "MIN",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
+        "selectedAt": "2026-08-26T23:36:00.000-03:00"
     },
     {
         "manual": true,
@@ -14083,194 +14042,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "PG/SG",
         "nbaTeam": "BOS",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
-    },
-    {
-        "manual": true,
-        "airballMapped": true,
-        "airballOverall": 15,
-        "airballRound": 1,
-        "airballRoundPick": 15,
-        "airballTeam": "Nortz",
-        "airballOwner": "Nortz",
-        "playerName": "Deni Avdija",
-        "avg": 44.8,
-        "selectedAvg": 44.8,
-        "selectedAvgLabel": "AVG Yahoo",
-        "position": "SG/SF/PF",
-        "nbaTeam": "POR",
-        "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
-    },
-    {
-        "manual": true,
-        "airballMapped": true,
-        "airballOverall": 16,
-        "airballRound": 1,
-        "airballRoundPick": 16,
-        "airballTeam": "Canalhas do Bem",
-        "airballOwner": "Canalhas do Bem",
-        "playerName": "Kon Knueppel",
-        "avg": 39.4,
-        "selectedAvg": 39.4,
-        "selectedAvgLabel": "AVG Yahoo",
-        "position": "SG/SF",
-        "nbaTeam": "CHA",
-        "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
-    },
-    {
-        "manual": true,
-        "airballMapped": true,
-        "airballOverall": 17,
-        "airballRound": 2,
-        "airballRoundPick": 1,
-        "airballTeam": "Canalhas do Bem",
-        "airballOwner": "Canalhas do Bem",
-        "playerName": "Donovan Clingan",
-        "avg": 43.4,
-        "selectedAvg": 43.4,
-        "selectedAvgLabel": "AVG Yahoo",
-        "position": "C",
-        "nbaTeam": "POR",
-        "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
-    },
-    {
-        "manual": true,
-        "airballMapped": true,
-        "airballOverall": 18,
-        "airballRound": 2,
-        "airballRoundPick": 2,
-        "airballTeam": "Nortz",
-        "airballOwner": "Nortz",
-        "playerName": "Walker Kessler",
-        "avg": 45.3,
-        "selectedAvg": 45.3,
-        "selectedAvgLabel": "AVG Yahoo",
-        "position": "C",
-        "nbaTeam": "LAL",
-        "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
-    },
-    {
-        "manual": true,
-        "airballMapped": true,
-        "airballOverall": 19,
-        "airballRound": 2,
-        "airballRoundPick": 3,
-        "airballTeam": "Chugabum Ironclads",
-        "airballOwner": "Chugabum Ironclads",
-        "playerName": "Tyler Herro",
-        "avg": 42.3,
-        "selectedAvg": 42.3,
-        "selectedAvgLabel": "AVG Yahoo",
-        "position": "PG/SG",
-        "nbaTeam": "MIL",
-        "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
-    },
-    {
-        "manual": true,
-        "airballMapped": true,
-        "airballOverall": 20,
-        "airballRound": 2,
-        "airballRoundPick": 4,
-        "airballTeam": "Red Hot Blazer Peppers",
-        "airballOwner": "Red Hot Blazer Peppers",
-        "playerName": "Trey Murphy III",
-        "avg": 42.6,
-        "selectedAvg": 42.6,
-        "selectedAvgLabel": "AVG Yahoo",
-        "position": "SG/SF",
-        "nbaTeam": "NOP",
-        "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
-    },
-    {
-        "manual": true,
-        "airballMapped": true,
-        "airballOverall": 21,
-        "airballRound": 2,
-        "airballRoundPick": 5,
-        "airballTeam": "Stéfano's SuperSonics",
-        "airballOwner": "Stéfano's SuperSonics",
-        "playerName": "Jaren Jackson Jr",
-        "avg": 39.7,
-        "selectedAvg": 39.7,
-        "selectedAvgLabel": "AVG Yahoo",
-        "position": "PF/C",
-        "nbaTeam": "UTA",
-        "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
-    },
-    {
-        "manual": true,
-        "airballMapped": true,
-        "airballOverall": 22,
-        "airballRound": 2,
-        "airballRoundPick": 6,
-        "airballTeam": "Instituto Popovich",
-        "airballOwner": "Instituto Popovich",
-        "playerName": "Franz Wagner",
-        "avg": 44.2,
-        "selectedAvg": 44.2,
-        "selectedAvgLabel": "AVG Yahoo",
-        "position": "SF/PF",
-        "nbaTeam": "ORL",
-        "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
-    },
-    {
-        "manual": true,
-        "airballMapped": true,
-        "airballOverall": 23,
-        "airballRound": 2,
-        "airballRoundPick": 7,
-        "airballTeam": "Team Djalma Jr",
-        "airballOwner": "Team Djalma Jr",
-        "playerName": "Joel Embiid",
-        "avg": 46.5,
-        "selectedAvg": 46.5,
-        "selectedAvgLabel": "AVG Yahoo",
-        "position": "C",
-        "nbaTeam": "PHI",
-        "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
-    },
-    {
-        "manual": true,
-        "airballMapped": true,
-        "airballOverall": 24,
-        "airballRound": 2,
-        "airballRoundPick": 8,
-        "airballTeam": "Acre Dinosaurs",
-        "airballOwner": "Acre Dinosaurs",
-        "playerName": "Brandon Miller",
-        "avg": 42.6,
-        "selectedAvg": 42.6,
-        "selectedAvgLabel": "AVG Yahoo",
-        "position": "SF/PF",
-        "nbaTeam": "CHA",
-        "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
-    },
-    {
-        "manual": true,
-        "airballMapped": true,
-        "airballOverall": 25,
-        "airballRound": 2,
-        "airballRoundPick": 9,
-        "airballTeam": "Revolution francaise",
-        "airballOwner": "Revolution francaise",
-        "playerName": "Kyrie Irving",
-        "avg": 40.3,
-        "selectedAvg": 40.3,
-        "selectedAvgLabel": "AVG Yahoo",
-        "position": "PG",
-        "nbaTeam": "DAL",
-        "boardMode": "yahoo",
-        "selectedAt": "2026-08-27T18:13:00.000-03:00"
+        "selectedAt": "2026-08-26T23:36:00.000-03:00"
     }
 ];
 
@@ -14349,7 +14121,7 @@ function LiveDraftPage() {
     const [livePicks, setLivePicks] = useState([]);
     const [picksStatus, setPicksStatus] = useState('Aguardando início do draft');
     const [workerClock, setWorkerClock] = useState(null);
-    const MANUAL_PICKS_STORAGE_KEY = 'airball-live-manual-picks-v4-after-pick25';
+    const MANUAL_PICKS_STORAGE_KEY = 'airball-live-manual-picks-v3-after-pick14';
     const [manualDraftPicks, setManualDraftPicks] = useState(() => {
         try {
             const saved = window.localStorage ? window.localStorage.getItem(MANUAL_PICKS_STORAGE_KEY) : null;
@@ -14725,10 +14497,6 @@ function LiveDraftPage() {
                 return Number(projection.avg || 0);
             if (Number.isFinite(Number(player?.yahooAvg)))
                 return Number(player.yahooAvg);
-            const selectedLabel = String(player?.selectedAvgLabel || '').toLowerCase();
-            const selectedMode = String(player?.boardMode || '').toLowerCase();
-            if ((selectedLabel.includes('yahoo') || selectedMode === 'yahoo') && Number.isFinite(Number(player?.selectedAvg)))
-                return Number(player.selectedAvg);
             return null;
         }
         return Number(fallbackAvg ?? player?.avg ?? player?.boardAvg ?? 0);
@@ -15007,46 +14775,19 @@ function LiveDraftPage() {
         return null;
     };
 
-    const getHistoryViaText = (pick) => {
-        const originalName = pick?.originalTeam?.name || '';
-        const ownerName = pick?.ownerName || '';
-        if (!originalName || normalizeTeamName(originalName) === normalizeTeamName(ownerName))
-            return '';
-        return ` (VIA ${getTeam(originalName).name.toUpperCase()})`;
-    };
-
     const renderHistoryRow = (pick, index) => {
         const historyYahooAvg = getHistoryYahooAvg(pick);
-        const ownerDisplay = getTeam(pick.ownerName).name.toUpperCase();
-        const viaText = getHistoryViaText(pick);
         return e("div", { className: `live-draft-history-row ${index === 0 ? 'is-latest' : ''}`, key: `pick-${pick.overall}` },
             e("div", { className: "live-draft-rank-num" }, `#${pick.overall}`),
             e(TeamLogo, { team: pick.ownerName, size: 46 }),
             e("div", null,
                 e("div", { className: "live-draft-player-name" }, pick.player.name),
-                e("div", { className: "live-draft-player-meta" }, `PICK ${pick.pick} • ${ownerDisplay}${viaText}`),
-                e("div", { className: "live-draft-player-meta live-draft-history-overall" }, `R${pick.round} P${pick.pick} • Overall #${pick.overall}`)
+                e("div", { className: "live-draft-player-meta" }, `${getTeam(pick.ownerName).name} • R${pick.round} P${pick.pick}`)
             ),
             e("div", { className: "live-draft-avg" },
                 historyYahooAvg ? formatDraftScore(historyYahooAvg, 1) : '—',
                 e("span", null, "AVG Yahoo")
             )
-        );
-    };
-
-    const completedPicksByRound = completedPicks.reduce((acc, pick) => {
-        const round = Number(pick.round || 0) || 1;
-        if (!acc[round])
-            acc[round] = [];
-        acc[round].push(pick);
-        return acc;
-    }, {});
-
-    const renderHistoryRoundGroup = (round) => {
-        const picks = completedPicksByRound[round] || [];
-        return e("div", { className: "live-draft-history-round-group", key: `history-round-${round}` },
-            e("div", { className: "live-draft-history-round-title" }, `ROUND ${round}`),
-            picks.map((pick, i) => renderHistoryRow(pick, i))
         );
     };
 
@@ -15285,7 +15026,7 @@ function LiveDraftPage() {
                     ),
                     e("div", { className: "live-draft-history-list" },
                         completedPicks.length
-                            ? Object.keys(completedPicksByRound).map(Number).sort((a, b) => a - b).map(renderHistoryRoundGroup)
+                            ? completedPicks.slice(-8).reverse().map((pick, i) => renderHistoryRow(pick, i))
                             : e("div", { className: "live-draft-empty" }, "Nenhuma escolha registrada ainda. Quando o draft começar, esta área mostrará o histórico das picks feitas.")
                     )
                 )
