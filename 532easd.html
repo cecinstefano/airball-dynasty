@@ -12139,52 +12139,30 @@ const DRAFT_PICK_OWNER_OVERRIDES = {
     107: 'Instituto Popovich'
 };
 
-const DRAFT_PICK_VIA_OVERRIDES = {
-    5: "Pato's Team",
-    6: 'Instituto Popovich',
-    12: "Stéfano's SuperSonics",
-    22: 'Fi du Jequisom',
-    27: 'Instituto Popovich',
-    28: 'Instituto Popovich',
-    39: 'Pistons de Pira',
-    44: "Stéfano's SuperSonics",
-    53: "Stéfano's SuperSonics",
-    58: 'Pistons de Pira',
-    59: 'Instituto Popovich',
-    60: 'Instituto Popovich',
-    76: "Stéfano's SuperSonics",
-    86: 'Fi du Jequisom',
-    90: 'Pistons de Pira',
-    91: 'Instituto Popovich',
-    103: 'Pistons de Pira',
-    107: 'Fi du Jequisom'
-};
-
 const LIVE_DRAFT_PICK_TRADES = [
     {
-        title: "1) Pistons de Pira ↔ Supersonics",
+        title: "Supersonics ↔ Pistons de Pira",
         rows: [
-            { label: "Pistons recebe", team: "Pistons de Pira", picks: [12, 44, 53, 76] },
-            { label: "Supersonics recebe", team: "Stéfano's SuperSonics", picks: [39, 58, 90, 103] }
+            { team: "Pistons de Pira", picks: [12, 44, 53, 76] },
+            { team: "Stéfano's SuperSonics", picks: [39, 58, 90, 103] }
         ]
     },
     {
-        title: "2) Pato's Team ↔ Instituto Popovich",
+        title: "Instituto Popovich ↔ Pato's Team",
         rows: [
-            { label: "Instituto recebe", team: "Instituto Popovich", picks: [5, 28, 60] },
-            { label: "Pato recebe", team: "Pato's Team", picks: [6, 27, 59] }
+            { team: "Instituto Popovich", picks: [5] },
+            { team: "Pato's Team", picks: [6, 27, 59] }
         ],
-        note: "Depois, Instituto repassou as picks #28 e #60 ao Fi du Jequisom."
+        note: "As picks #28 e #60 foram repassadas depois ao Fi du Jequisom."
     },
     {
-        title: "3) Instituto Popovich ↔ Fi du Jequisom",
+        title: "Fi du Jequisom ↔ Instituto Popovich",
         rows: [
-            { label: "Fi recebe", team: "Fi du Jequisom", picks: [28, 60, 91] },
-            { label: "Instituto recebe", team: "Instituto Popovich", picks: [22, 86, 107] }
+            { team: "Fi du Jequisom", picks: [28, 60, 91] },
+            { team: "Instituto Popovich", picks: [22, 86, 107] }
         ]
     }
 ];
-
 
 function getDraftPickInfoForOverall(overallPick) {
     const overall = Number(overallPick) || 1;
@@ -12194,8 +12172,6 @@ function getDraftPickInfoForOverall(overallPick) {
     const originalTeam = DRAFT_ORDER.find(row => Number(row.pick) === Number(seedPick)) || DRAFT_ORDER[0];
     const ownerName = DRAFT_PICK_OWNER_OVERRIDES[overall] || originalTeam.name;
     const ownerTeam = getTeam(ownerName);
-    const viaTeamName = DRAFT_PICK_VIA_OVERRIDES[overall] || (normalizeTeamName(ownerName) !== normalizeTeamName(originalTeam.name) ? originalTeam.name : '');
-    const viaTeam = viaTeamName ? getTeam(viaTeamName) : null;
     return {
         overall,
         overallPick: overall,
@@ -12205,8 +12181,6 @@ function getDraftPickInfoForOverall(overallPick) {
         originalTeam,
         ownerName,
         ownerTeam,
-        viaTeamName,
-        viaTeam,
         team: ownerTeam
     };
 }
@@ -14065,8 +14039,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "PF/C",
         "nbaTeam": "NYK",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-29T14:27:00.000-03:00",
-        "viaTeamName": "Pato's Team"
+        "selectedAt": "2026-08-29T14:27:00.000-03:00"
     },
     {
         "manual": true,
@@ -14083,8 +14056,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "PG/SG",
         "nbaTeam": "PHX",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-29T14:27:00.000-03:00",
-        "viaTeamName": "Instituto Popovich"
+        "selectedAt": "2026-08-29T14:27:00.000-03:00"
     },
     {
         "manual": true,
@@ -14186,8 +14158,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "C",
         "nbaTeam": "IND",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-29T14:27:00.000-03:00",
-        "viaTeamName": "Stéfano's SuperSonics"
+        "selectedAt": "2026-08-29T14:27:00.000-03:00"
     },
     {
         "manual": true,
@@ -14357,8 +14328,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "SF/PF",
         "nbaTeam": "ORL",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-29T14:27:00.000-03:00",
-        "viaTeamName": "Fi du Jequisom"
+        "selectedAt": "2026-08-29T14:27:00.000-03:00"
     },
     {
         "manual": true,
@@ -14443,8 +14413,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "SF/PF",
         "nbaTeam": "BKN",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-29T14:27:00.000-03:00",
-        "viaTeamName": "Instituto Popovich"
+        "selectedAt": "2026-08-29T14:27:00.000-03:00"
     },
     {
         "manual": true,
@@ -14461,8 +14430,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "PF",
         "nbaTeam": "MEM",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-29T14:27:00.000-03:00",
-        "viaTeamName": "Instituto Popovich"
+        "selectedAt": "2026-08-29T14:27:00.000-03:00"
     },
     {
         "manual": true,
@@ -14649,8 +14617,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "PG",
         "nbaTeam": "NOP",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-29T14:27:00.000-03:00",
-        "viaTeamName": "Pistons de Pira"
+        "selectedAt": "2026-08-29T14:27:00.000-03:00"
     },
     {
         "manual": true,
@@ -14735,8 +14702,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "SF/PF",
         "nbaTeam": "NYK",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-29T14:27:00.000-03:00",
-        "viaTeamName": "Stéfano's SuperSonics"
+        "selectedAt": "2026-08-29T14:27:00.000-03:00"
     },
     {
         "manual": true,
@@ -14889,8 +14855,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "PG/SG",
         "nbaTeam": "MIL",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-29T14:27:00.000-03:00",
-        "viaTeamName": "Stéfano's SuperSonics"
+        "selectedAt": "2026-08-29T14:27:00.000-03:00"
     },
     {
         "manual": true,
@@ -14975,8 +14940,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "PG/SG",
         "nbaTeam": "TOR",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-29T14:27:00.000-03:00",
-        "viaTeamName": "Pistons de Pira"
+        "selectedAt": "2026-08-29T14:27:00.000-03:00"
     },
     {
         "manual": true,
@@ -14993,8 +14957,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "SG/SF",
         "nbaTeam": "CHI",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-29T14:27:00.000-03:00",
-        "viaTeamName": "Instituto Popovich"
+        "selectedAt": "2026-08-29T14:27:00.000-03:00"
     },
     {
         "manual": true,
@@ -15011,8 +14974,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "PF/C",
         "nbaTeam": "HOU",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-29T14:27:00.000-03:00",
-        "viaTeamName": "Instituto Popovich"
+        "selectedAt": "2026-08-29T14:27:00.000-03:00"
     },
     {
         "manual": true,
@@ -15188,7 +15150,6 @@ const LIVE_DRAFT_PICKS_MANUAL = [
 
 
 
-
 const LIVE_KEEPERS_FALLBACK = {
     "Chugabum Ironclads": { total: 112.0, players: ["Nikola Jokic", "Jalen Williams"] },
     "Stéfano's SuperSonics": { total: 106.0, players: ["Giannis Antetokounmpo", "Austin Reaves"] },
@@ -15264,7 +15225,7 @@ function LiveDraftPage() {
     const [livePicks, setLivePicks] = useState([]);
     const [picksStatus, setPicksStatus] = useState('Aguardando início do draft');
     const [workerClock, setWorkerClock] = useState(null);
-    const MANUAL_PICKS_STORAGE_KEY = 'airball-live-manual-picks-v11-after-pick70-chainfix';
+    const MANUAL_PICKS_STORAGE_KEY = 'airball-live-manual-picks-v10-after-pick70-tradepanel';
     const [manualDraftPicks, setManualDraftPicks] = useState(() => {
         try {
             const saved = window.localStorage ? window.localStorage.getItem(MANUAL_PICKS_STORAGE_KEY) : null;
@@ -15505,8 +15466,6 @@ function LiveDraftPage() {
             pick: Number(info.pick),
             ownerName: normalizeTeamName(rawPick.airballTeam || rawPick.airballOwner || rawPick.ownerName || rawPick.teamName || rawPick.owner || info.ownerName),
             originalTeam: info.originalTeam,
-            viaTeamName: info.viaTeamName,
-            viaTeam: info.viaTeam,
             player: {
                 id: playerId || (matched ? matched.id : `${playerNameText || 'player'}-${overall}`),
                 name: playerNameText || (matched ? matched.name : 'Escolha sem jogador'),
@@ -15927,9 +15886,6 @@ function LiveDraftPage() {
     };
 
     const getPickViaName = (info) => {
-        const explicitViaName = info?.viaTeamName || info?.viaTeam?.name || '';
-        if (explicitViaName)
-            return getTeam(explicitViaName).name;
         const originalName = info?.originalTeam?.name || '';
         const ownerName = info?.ownerName || info?.airballOwner || info?.airballTeam || '';
         if (!originalName || !ownerName || normalizeTeamName(originalName) === normalizeTeamName(ownerName))
@@ -15999,7 +15955,7 @@ function LiveDraftPage() {
             LIVE_DRAFT_PICK_TRADES.map((trade, index) => e("div", { className: "live-draft-pick-trade-row", key: `pick-trade-${index}` },
                 e("div", { className: "live-draft-pick-trade-title" }, trade.title),
                 trade.rows.map(row => e("div", { className: "live-draft-pick-trade-line", key: `${trade.title}-${row.team}` },
-                    e("b", null, row.label || getTeam(row.team).name),
+                    e("b", null, getTeam(row.team).name),
                     e("span", null, row.picks.map(formatTradePickLabel).join(" • "))
                 )),
                 trade.note ? e("div", { className: "live-draft-pick-trade-note" }, trade.note) : null
@@ -17165,13 +17121,11 @@ function HonestometroPage() {
             return null;
         const pickInfo = getDraftPickInfoForOverall(overall);
         const ownerName = getTeam(pickInfo.ownerName).name;
-        const viaName = pickInfo.viaTeamName ? getTeam(pickInfo.viaTeamName).name : '';
-        const ownerDisplayName = viaName ? `${ownerName} (via ${viaName})` : ownerName;
         return {
             ...projected,
             id: `draft-pick-${overall}-${normalizeTeamName(ownerName)}`,
             assetType: 'PICK',
-            name: `PICK ${overall} — ROUND ${round} PICK ${pickNumber} — ${ownerDisplayName}`,
+            name: `PICK ${overall} — ROUND ${round} PICK ${pickNumber} — ${ownerName}`,
             fantasyPoints: Number(projected.fantasyPoints || 0),
             totalPoints: Number(projected.totalPoints || 0),
             team: projected.team || 'NBA',
@@ -17179,7 +17133,6 @@ function HonestometroPage() {
             fantasyTeam: ownerName,
             status: 'PICK',
             pickOwner: ownerName,
-            pickVia: viaName,
             pickRound: round,
             pickNumber,
             pickOverall: overall,
