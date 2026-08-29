@@ -14788,8 +14788,8 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "airballOverall": 56,
         "airballRound": 4,
         "airballRoundPick": 8,
-        "airballTeam": "Acre Dinosaurs",
-        "airballOwner": "Acre Dinosaurs",
+        "airballTeam": "Fi du Jequisom",
+        "airballOwner": "Fi du Jequisom",
         "playerName": "Josh Hart",
         "avg": 33.1,
         "selectedAvg": 33.1,
@@ -14805,8 +14805,8 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "airballOverall": 57,
         "airballRound": 4,
         "airballRoundPick": 9,
-        "airballTeam": "Revolution francaise",
-        "airballOwner": "Revolution francaise",
+        "airballTeam": "Paysandu Lobo's",
+        "airballOwner": "Paysandu Lobo's",
         "playerName": "Kel'el Ware",
         "avg": 37.5,
         "selectedAvg": 37.5,
@@ -14834,7 +14834,6 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "selectedAt": "2026-08-29T00:20:00.000-03:00"
     }
 ];
-
 
 
 const LIVE_KEEPERS_FALLBACK = {
@@ -14912,7 +14911,7 @@ function LiveDraftPage() {
     const [livePicks, setLivePicks] = useState([]);
     const [picksStatus, setPicksStatus] = useState('Aguardando início do draft');
     const [workerClock, setWorkerClock] = useState(null);
-    const MANUAL_PICKS_STORAGE_KEY = 'airball-live-manual-picks-v9-after-pick58-ownerfix';
+    const MANUAL_PICKS_STORAGE_KEY = 'airball-live-manual-picks-v8-after-pick58-keeganfix';
     const [manualDraftPicks, setManualDraftPicks] = useState(() => {
         try {
             const saved = window.localStorage ? window.localStorage.getItem(MANUAL_PICKS_STORAGE_KEY) : null;
