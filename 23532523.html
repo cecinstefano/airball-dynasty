@@ -14329,8 +14329,8 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "airballOverall": 29,
         "airballRound": 2,
         "airballRoundPick": 13,
-        "airballTeam": "Ghost of goat",
-        "airballOwner": "Ghost of goat",
+        "airballTeam": "Team Djalma Jr",
+        "airballOwner": "Team Djalma Jr",
         "playerName": "Onyeka Okongwu",
         "avg": 39.4,
         "selectedAvg": 39.4,
@@ -14784,7 +14784,6 @@ const LIVE_DRAFT_PICKS_MANUAL = [
     }
 ];
 
-
 const LIVE_KEEPERS_FALLBACK = {
     "Chugabum Ironclads": { total: 112.0, players: ["Nikola Jokic", "Jalen Williams"] },
     "Stéfano's SuperSonics": { total: 106.0, players: ["Giannis Antetokounmpo", "Austin Reaves"] },
@@ -14860,7 +14859,7 @@ function LiveDraftPage() {
     const [livePicks, setLivePicks] = useState([]);
     const [picksStatus, setPicksStatus] = useState('Aguardando início do draft');
     const [workerClock, setWorkerClock] = useState(null);
-    const MANUAL_PICKS_STORAGE_KEY = 'airball-live-manual-picks-v7-after-pick55-ownerfix';
+    const MANUAL_PICKS_STORAGE_KEY = 'airball-live-manual-picks-v6-after-pick55';
     const [manualDraftPicks, setManualDraftPicks] = useState(() => {
         try {
             const saved = window.localStorage ? window.localStorage.getItem(MANUAL_PICKS_STORAGE_KEY) : null;
