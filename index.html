@@ -15439,8 +15439,96 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "nbaTeam": "BKN",
         "boardMode": "yahoo",
         "selectedAt": "2026-08-29T20:38:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 86,
+        "airballRound": 6,
+        "airballRoundPick": 6,
+        "airballTeam": "Instituto Popovich",
+        "airballOwner": "Instituto Popovich",
+        "playerName": "Aaron Gordon",
+        "avg": 32.4,
+        "selectedAvg": 32.4,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "PF/C",
+        "nbaTeam": "DEN",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-08-29T23:10:00.000-03:00",
+        "viaTeamName": "Fi du Jequisom"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 87,
+        "airballRound": 6,
+        "airballRoundPick": 7,
+        "airballTeam": "Team Djalma Jr",
+        "airballOwner": "Team Djalma Jr",
+        "playerName": "Brandin Podziemski",
+        "avg": 30.2,
+        "selectedAvg": 30.2,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "PG/SG",
+        "nbaTeam": "GSW",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-08-29T23:10:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 88,
+        "airballRound": 6,
+        "airballRoundPick": 8,
+        "airballTeam": "Acre Dinosaurs",
+        "airballOwner": "Acre Dinosaurs",
+        "playerName": "Fred VanVleet",
+        "avg": 30.8,
+        "selectedAvg": 30.8,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "PG",
+        "nbaTeam": "HOU",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-08-29T23:10:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 89,
+        "airballRound": 6,
+        "airballRoundPick": 9,
+        "airballTeam": "Revolution francaise",
+        "airballOwner": "Revolution francaise",
+        "playerName": "Jalen Suggs",
+        "avg": 34.0,
+        "selectedAvg": 34.0,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "PG/SG",
+        "nbaTeam": "ORL",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-08-29T23:10:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 90,
+        "airballRound": 6,
+        "airballRoundPick": 10,
+        "airballTeam": "Stéfano's SuperSonics",
+        "airballOwner": "Stéfano's SuperSonics",
+        "playerName": "Mark Williams",
+        "avg": 34.9,
+        "selectedAvg": 34.9,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "C",
+        "nbaTeam": "PHX",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-08-29T23:10:00.000-03:00",
+        "viaTeamName": "Pistons de Pira"
     }
 ];
+
 
 
 
@@ -15521,7 +15609,7 @@ function LiveDraftPage() {
     const [livePicks, setLivePicks] = useState([]);
     const [picksStatus, setPicksStatus] = useState('Aguardando início do draft');
     const [workerClock, setWorkerClock] = useState(null);
-    const MANUAL_PICKS_STORAGE_KEY = 'airball-live-manual-picks-v12-after-pick85';
+    const MANUAL_PICKS_STORAGE_KEY = 'airball-live-manual-picks-v13-after-pick90';
     const [manualDraftPicks, setManualDraftPicks] = useState(() => {
         try {
             const saved = window.localStorage ? window.localStorage.getItem(MANUAL_PICKS_STORAGE_KEY) : null;
