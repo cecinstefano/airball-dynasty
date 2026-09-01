@@ -12135,8 +12135,10 @@ const DRAFT_PICK_OWNER_OVERRIDES = {
     86: 'Instituto Popovich',
     90: "Stéfano's SuperSonics",
     91: 'Fi du Jequisom',
+    101: 'Acre Dinosaurs',
     103: "Stéfano's SuperSonics",
-    107: 'Instituto Popovich'
+    107: 'Instituto Popovich',
+    137: "Pato's Team"
 };
 
 const DRAFT_PICK_VIA_OVERRIDES = {
@@ -12156,9 +12158,13 @@ const DRAFT_PICK_VIA_OVERRIDES = {
     86: 'Fi du Jequisom',
     90: 'Pistons de Pira',
     91: 'Instituto Popovich',
+    101: "Pato's Team",
     103: 'Pistons de Pira',
-    107: 'Fi du Jequisom'
+    107: 'Fi du Jequisom',
+    137: 'Acre Dinosaurs'
 };
+
+
 
 const LIVE_DRAFT_PICK_TRADES = [
     {
@@ -12182,8 +12188,18 @@ const LIVE_DRAFT_PICK_TRADES = [
             { label: "Fi recebe", team: "Fi du Jequisom", picks: [28, 60, 91] },
             { label: "Instituto recebe", team: "Instituto Popovich", picks: [22, 86, 107] }
         ]
+    },
+    {
+        title: "4) Pato's Team ↔ Acre Dinosaurs",
+        rows: [
+            { label: "Acre recebe", team: "Acre Dinosaurs", picks: [101] },
+            { label: "Pato recebe", team: "Pato's Team", picks: [137] }
+        ],
+        note: "Pick #101 usada em Darius Acuff Jr.; pick #137 usada em Aday Mara."
     }
 ];
+
+
 
 
 function getDraftPickInfoForOverall(overallPick) {
@@ -15704,8 +15720,8 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "airballOverall": 101,
         "airballRound": 7,
         "airballRoundPick": 5,
-        "airballTeam": "Pato's Team",
-        "airballOwner": "Pato's Team",
+        "airballTeam": "Acre Dinosaurs",
+        "airballOwner": "Acre Dinosaurs",
         "playerName": "Darius Acuff Jr.",
         "avg": 31.0,
         "selectedAvg": 31.0,
@@ -15713,7 +15729,8 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "position": "PG",
         "nbaTeam": "SAC",
         "boardMode": "yahoo",
-        "selectedAt": "2026-08-30T18:15:00.000-03:00"
+        "selectedAt": "2026-08-30T18:15:00.000-03:00",
+        "viaTeamName": "Pato's Team"
     },
     {
         "manual": true,
@@ -16226,8 +16243,113 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "nbaTeam": "SAS",
         "boardMode": "yahoo",
         "selectedAt": "2026-08-31T18:46:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 132,
+        "airballRound": 9,
+        "airballRoundPick": 4,
+        "airballTeam": "Ghost of goat",
+        "airballOwner": "Ghost of goat",
+        "playerName": "Tre Jones",
+        "avg": 29.8,
+        "selectedAvg": 29.8,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "PG/SG",
+        "nbaTeam": "CHI",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-08-31T21:02:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 133,
+        "airballRound": 9,
+        "airballRoundPick": 5,
+        "airballTeam": "Pato's Team",
+        "airballOwner": "Pato's Team",
+        "playerName": "Santi Aldama",
+        "avg": 26.1,
+        "selectedAvg": 26.1,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "PF",
+        "nbaTeam": "DAL",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-08-31T21:02:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 134,
+        "airballRound": 9,
+        "airballRoundPick": 6,
+        "airballTeam": "Instituto Popovich",
+        "airballOwner": "Instituto Popovich",
+        "playerName": "Scoot Henderson",
+        "avg": 29.8,
+        "selectedAvg": 29.8,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "PG",
+        "nbaTeam": "POR",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-08-31T21:02:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 135,
+        "airballRound": 9,
+        "airballRoundPick": 7,
+        "airballTeam": "Pistons de Pira",
+        "airballOwner": "Pistons de Pira",
+        "playerName": "Julian Champagnie",
+        "avg": 22.7,
+        "selectedAvg": 22.7,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "SF/PF",
+        "nbaTeam": "SAS",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-08-31T21:02:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 136,
+        "airballRound": 9,
+        "airballRoundPick": 8,
+        "airballTeam": "Revolution francaise",
+        "airballOwner": "Revolution francaise",
+        "playerName": "Kyle Filipowski",
+        "avg": 25.6,
+        "selectedAvg": 25.6,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "PF/C",
+        "nbaTeam": "UTA",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-08-31T21:02:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 137,
+        "airballRound": 9,
+        "airballRoundPick": 9,
+        "airballTeam": "Pato's Team",
+        "airballOwner": "Pato's Team",
+        "playerName": "Aday Mara",
+        "avg": 18.1,
+        "selectedAvg": 18.1,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "C",
+        "nbaTeam": "OKC",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-08-31T21:02:00.000-03:00",
+        "viaTeamName": "Acre Dinosaurs"
     }
 ];
+
+
 
 
 
@@ -16312,7 +16434,7 @@ function LiveDraftPage() {
     const [livePicks, setLivePicks] = useState([]);
     const [picksStatus, setPicksStatus] = useState('Aguardando início do draft');
     const [workerClock, setWorkerClock] = useState(null);
-    const MANUAL_PICKS_STORAGE_KEY = 'airball-live-manual-picks-v16-after-pick131';
+    const MANUAL_PICKS_STORAGE_KEY = 'airball-live-manual-picks-v18-after-pick137-picktradefix';
     const [manualDraftPicks, setManualDraftPicks] = useState(() => {
         try {
             const saved = window.localStorage ? window.localStorage.getItem(MANUAL_PICKS_STORAGE_KEY) : null;
@@ -17048,7 +17170,7 @@ function LiveDraftPage() {
                 e("div", { className: "live-draft-pick-trade-title" }, trade.title),
                 trade.rows.map(row => e("div", { className: "live-draft-pick-trade-line", key: `${trade.title}-${row.team}` },
                     e("b", null, row.label || getTeam(row.team).name),
-                    e("span", null, row.picks.map(formatTradePickLabel).join(" • "))
+                    e("span", null, row.text || (row.picks || []).map(formatTradePickLabel).join(" • "))
                 )),
                 trade.note ? e("div", { className: "live-draft-pick-trade-note" }, trade.note) : null
             ))
