@@ -12226,9 +12226,9 @@ function getDraftPickInfoForOverall(overallPick) {
         team: ownerTeam
     };
 }
-function getDraftPicksForTeam(teamName, rounds = 11) {
+function getDraftPicksForTeam(teamName, rounds = 8) {
     const normalized = normalizeTeamName(teamName);
-    const maxOverall = Number(rounds || 11) * 16;
+    const maxOverall = Number(rounds || 8) * 16;
     const picks = [];
     for (let overall = 1; overall <= maxOverall; overall += 1) {
         const info = getDraftPickInfoForOverall(overall);
@@ -13992,7 +13992,7 @@ function GmPhoto({ team }) {
 
 const LIVE_DRAFT_START_AT = '2026-08-25T20:15:00-03:00';
 const LIVE_DRAFT_PICK_HOURS = 24;
-const LIVE_DRAFT_ROUNDS = 11;
+const LIVE_DRAFT_ROUNDS = 9;
 const LIVE_DRAFT_ESPN_KEEPER_ROUNDS = 2;
 const LIVE_DRAFT_TEAMS_PER_ROUND = 16;
 const LIVE_DRAFT_USE_CLOUDFLARE = false;
@@ -16434,7 +16434,7 @@ function LiveDraftPage() {
     const [livePicks, setLivePicks] = useState([]);
     const [picksStatus, setPicksStatus] = useState('Aguardando início do draft');
     const [workerClock, setWorkerClock] = useState(null);
-    const MANUAL_PICKS_STORAGE_KEY = 'airball-live-manual-picks-v19-after-pick137-11rounds';
+    const MANUAL_PICKS_STORAGE_KEY = 'airball-live-manual-picks-v18-after-pick137-picktradefix';
     const [manualDraftPicks, setManualDraftPicks] = useState(() => {
         try {
             const saved = window.localStorage ? window.localStorage.getItem(MANUAL_PICKS_STORAGE_KEY) : null;
@@ -18325,8 +18325,8 @@ function HonestometroPage() {
         .filter(player => isFreeDraftPlayer(player))
         .filter(player => !isHonestometroKeeperProjection(player))
         .sort((a, b) => Number(b.fantasyPoints || 0) - Number(a.fantasyPoints || 0))
-        .slice(0, 176);
-    const draftPickAssets = DRAFT_ORDER.flatMap(orderRow => Array.from({ length: 11 }, (_, index) => {
+        .slice(0, 160);
+    const draftPickAssets = DRAFT_ORDER.flatMap(orderRow => Array.from({ length: 10 }, (_, index) => {
         const round = index + 1;
         const pickNumber = getSnakePickForTeam(round, orderRow.pick);
         const overall = (round - 1) * 16 + pickNumber;
