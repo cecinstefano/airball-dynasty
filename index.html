@@ -10430,6 +10430,834 @@
     font-weight: 800;
   }
 
+
+/* ==================== DRAFTED BOARD ==================== */
+.drafted-page {
+  max-width: 100%;
+  padding: 26px 0 42px;
+  color: #f8fafc;
+  background:
+    radial-gradient(circle at top left, rgba(249, 115, 22, 0.16), transparent 34%),
+    radial-gradient(circle at top right, rgba(80, 46, 160, 0.16), transparent 38%),
+    linear-gradient(180deg, #070710 0%, #0d0d16 50%, #050509 100%);
+}
+.drafted-inner {
+  width: min(1560px, calc(100vw - 34px));
+  margin: 0 auto;
+}
+.drafted-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-end;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(135deg, rgba(17,24,39,0.94), rgba(8,8,14,0.96));
+  box-shadow: 0 20px 60px rgba(0,0,0,0.28);
+}
+.drafted-kicker {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  font-size: 12px;
+  color: #fb923c;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.drafted-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(34px, 5vw, 72px);
+  line-height: 0.92;
+  letter-spacing: -1.4px;
+  margin: 0;
+  text-transform: uppercase;
+}
+.drafted-subtitle {
+  margin-top: 12px;
+  color: rgba(248,250,252,0.72);
+  font-size: 14px;
+  max-width: 680px;
+}
+.drafted-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(126px, 1fr));
+  gap: 10px;
+  min-width: min(560px, 100%);
+}
+.drafted-stat {
+  border-radius: 18px;
+  padding: 14px;
+  background: rgba(255,255,255,0.055);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.drafted-stat-label {
+  color: rgba(248,250,252,0.56);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.drafted-stat-value {
+  display: block;
+  margin-top: 7px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+}
+.drafted-section {
+  margin-top: 24px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(10,10,16,0.82);
+  box-shadow: 0 18px 48px rgba(0,0,0,0.24);
+  overflow: hidden;
+}
+.drafted-section-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 20px 22px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.drafted-section-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  text-transform: uppercase;
+}
+.drafted-section-note {
+  color: rgba(248,250,252,0.58);
+  font-size: 12px;
+}
+.drafted-rounds {
+  padding: 16px;
+}
+.drafted-round-block {
+  margin-bottom: 18px;
+}
+.drafted-round-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 10px 4px;
+}
+.drafted-round-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.drafted-round-count {
+  color: rgba(248,250,252,0.52);
+  font-size: 12px;
+  font-weight: 700;
+}
+.drafted-round-scroll {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 2px 2px 12px;
+  scroll-behavior: smooth;
+}
+.drafted-pick-card {
+  flex: 0 0 178px;
+  min-height: 190px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(31,41,55,0.94), rgba(12,12,18,0.98));
+  border: 1px solid rgba(255,255,255,0.09);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.drafted-pick-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgba(248,250,252,0.78);
+  font-size: 11px;
+  font-weight: 800;
+}
+.drafted-pick-number {
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  color: #fff;
+}
+.drafted-pick-team {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+  color: rgba(248,250,252,0.78);
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.drafted-pick-team span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.drafted-via {
+  color: rgba(251,146,60,0.84);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  margin-top: -6px;
+  min-height: 12px;
+}
+.drafted-player-line {
+  display: grid;
+  grid-template-columns: 34px 54px 1fr;
+  gap: 8px;
+  align-items: center;
+}
+.drafted-pos-badge {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: rgba(249,115,22,0.26);
+  border: 1px solid rgba(249,115,22,0.34);
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+}
+.drafted-pos-badge.pos-pg { background: rgba(37,99,235,0.30); border-color: rgba(96,165,250,0.38); }
+.drafted-pos-badge.pos-sg { background: rgba(249,115,22,0.30); border-color: rgba(251,146,60,0.42); }
+.drafted-pos-badge.pos-sf { background: rgba(22,163,74,0.30); border-color: rgba(74,222,128,0.38); }
+.drafted-pos-badge.pos-pf { background: rgba(202,138,4,0.30); border-color: rgba(250,204,21,0.38); }
+.drafted-pos-badge.pos-c { background: rgba(124,58,237,0.30); border-color: rgba(168,85,247,0.40); }
+.drafted-player-name {
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 1.05;
+  color: #fff;
+}
+.drafted-player-meta {
+  margin-top: 4px;
+  color: rgba(248,250,252,0.52);
+  font-size: 10px;
+  font-weight: 800;
+}
+.drafted-pick-avg {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 10px;
+}
+.drafted-pick-avg small {
+  font-size: 9px;
+  color: rgba(248,250,252,0.48);
+  font-weight: 900;
+  letter-spacing: .8px;
+}
+.drafted-pick-avg strong {
+  font-family: 'Oswald', sans-serif;
+  font-size: 27px;
+  line-height: .9;
+}
+.drafted-board-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.drafted-board-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.07);
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+.drafted-pr-scroll {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding: 18px;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+}
+.drafted-team-column {
+  position: relative;
+  flex: 0 0 205px;
+  width: 205px;
+  min-width: 205px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(31,41,55,0.98), rgba(10,10,18,0.98));
+  border: 1px solid rgba(255,255,255,0.09);
+  overflow: hidden;
+}
+.drafted-team-column.rank-1 {
+  border-color: rgba(250,204,21,0.55);
+  box-shadow: 0 0 34px rgba(250,204,21,0.12);
+}
+.drafted-team-column.rank-2 { border-color: rgba(203,213,225,0.42); }
+.drafted-team-column.rank-3 { border-color: rgba(194,120,60,0.44); }
+.drafted-team-column.rank-bottom {
+  background: linear-gradient(180deg, rgba(49,22,29,0.95), rgba(12,8,13,0.98));
+}
+.drafted-team-head {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  min-height: 132px;
+  padding: 14px;
+  background: linear-gradient(180deg, rgba(15,23,42,0.98), rgba(15,23,42,0.88));
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.drafted-team-rank-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.drafted-team-rank {
+  font-family: 'Oswald', sans-serif;
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 900;
+}
+.drafted-team-medal {
+  font-size: 20px;
+}
+.drafted-team-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+.drafted-team-name {
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+.drafted-team-gm {
+  color: rgba(248,250,252,0.52);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .7px;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+.drafted-roster-list {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.drafted-roster-card {
+  display: grid;
+  grid-template-columns: 26px 48px 1fr;
+  align-items: center;
+  gap: 7px;
+  min-height: 64px;
+  border-radius: 15px;
+  padding: 8px 7px;
+  background: rgba(255,255,255,0.052);
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.drafted-roster-card.avg-elite { background: rgba(21,128,61,0.16); border-color: rgba(74,222,128,0.22); }
+.drafted-roster-card.avg-strong { background: rgba(30,64,175,0.14); }
+.drafted-roster-card.avg-low { opacity: .72; }
+.drafted-roster-pos {
+  width: 24px;
+  height: 24px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-family: 'Oswald', sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+}
+.drafted-roster-main {
+  min-width: 0;
+}
+.drafted-roster-avg {
+  font-family: 'Oswald', sans-serif;
+  font-size: 23px;
+  line-height: 1;
+  font-weight: 900;
+  text-align: right;
+}
+.drafted-roster-name {
+  margin-top: 4px;
+  font-size: 10px;
+  color: rgba(248,250,252,0.68);
+  font-weight: 900;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.drafted-roster-source {
+  color: rgba(248,250,252,0.42);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .6px;
+  margin-top: 3px;
+}
+.drafted-team-footer {
+  margin: 6px 10px 10px;
+  min-height: 98px;
+  border-radius: 18px;
+  padding: 14px;
+  background: linear-gradient(135deg, rgba(21,128,61,0.24), rgba(15,23,42,0.92));
+  border: 1px solid rgba(74,222,128,0.18);
+}
+.drafted-team-footer.mid {
+  background: linear-gradient(135deg, rgba(146,64,14,0.20), rgba(15,23,42,0.92));
+  border-color: rgba(251,146,60,0.16);
+}
+.drafted-team-footer.low {
+  background: linear-gradient(135deg, rgba(127,29,29,0.25), rgba(15,23,42,0.92));
+  border-color: rgba(248,113,113,0.16);
+}
+.drafted-team-footer small {
+  display: block;
+  color: rgba(248,250,252,0.54);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+.drafted-team-footer strong {
+  display: block;
+  margin-top: 6px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 42px;
+  line-height: .95;
+}
+.drafted-team-footer span {
+  color: rgba(248,250,252,0.55);
+  font-size: 10px;
+  font-weight: 800;
+}
+@media (max-width: 800px) {
+  .drafted-inner { width: min(100%, calc(100vw - 18px)); }
+  .drafted-hero { flex-direction: column; align-items: stretch; }
+  .drafted-stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .drafted-team-column { flex-basis: 84vw; width: 84vw; min-width: 84vw; }
+  .drafted-section-head { align-items: flex-start; flex-direction: column; }
+  .drafted-board-actions { display: none; }
+}
+
+
+/* ==================== DRAFTED MODS V2 ==================== */
+.drafted-page {
+  padding-top: 18px;
+}
+.drafted-section:first-child {
+  margin-top: 0;
+}
+.drafted-section-head {
+  align-items: center;
+}
+.drafted-section-note {
+  max-width: 520px;
+  text-align: right;
+}
+.drafted-rounds {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.drafted-round-block {
+  margin-bottom: 0;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.032);
+  border: 1px solid rgba(255,255,255,0.07);
+  overflow: hidden;
+}
+.drafted-round-header {
+  margin: 0;
+}
+.drafted-round-accordion-button {
+  width: 100%;
+  min-height: 58px;
+  border: 0;
+  background: linear-gradient(90deg, rgba(249,115,22,0.11), rgba(255,255,255,0.025));
+  color: #fff;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  text-align: left;
+}
+.drafted-round-arrow {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,0.08);
+  color: #fb923c;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1;
+}
+.drafted-round-name {
+  font-size: 25px;
+  letter-spacing: .4px;
+}
+.drafted-round-drawer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.drafted-pick-drawer {
+  min-height: 86px;
+  border-radius: 17px;
+  background: linear-gradient(90deg, rgba(31,41,55,0.98), rgba(15,23,42,0.91));
+  border: 1px solid rgba(255,255,255,0.085);
+  padding: 10px 12px;
+  display: grid;
+  grid-template-columns: 92px minmax(170px, 230px) 1fr 120px;
+  align-items: center;
+  gap: 14px;
+}
+.drafted-pick-drawer-index {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.drafted-pick-drawer-index strong {
+  font-family: 'Oswald', sans-serif;
+  font-size: 32px;
+  line-height: 1;
+}
+.drafted-pick-drawer-index span {
+  color: rgba(248,250,252,0.52);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .8px;
+}
+.drafted-pick-drawer-team {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.drafted-pick-drawer-team-name {
+  font-size: 12px;
+  color: rgba(248,250,252,0.88);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+.drafted-pick-drawer-via {
+  color: rgba(251,146,60,0.82);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .45px;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+.drafted-pick-drawer-player {
+  display: grid;
+  grid-template-columns: 36px 58px 1fr;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.drafted-pick-drawer-player-name {
+  color: #fff;
+  font-size: 17px;
+  line-height: 1.05;
+  font-weight: 900;
+}
+.drafted-pick-drawer-player-meta {
+  margin-top: 5px;
+  color: rgba(248,250,252,0.52);
+  font-size: 11px;
+  font-weight: 800;
+}
+.drafted-pick-drawer-avg {
+  text-align: right;
+}
+.drafted-pick-drawer-avg small {
+  display: block;
+  color: rgba(248,250,252,0.50);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .8px;
+}
+.drafted-pick-drawer-avg strong {
+  display: block;
+  margin-top: 5px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 34px;
+  line-height: .9;
+}
+.drafted-team-column {
+  flex: 0 0 268px;
+  width: 268px;
+  min-width: 268px;
+}
+.drafted-roster-card {
+  grid-template-columns: 28px 52px 1fr;
+  min-height: 78px;
+  padding: 9px 8px;
+}
+.drafted-roster-name {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  font-size: 11px;
+  line-height: 1.08;
+}
+.drafted-roster-source {
+  margin-top: 5px;
+}
+.drafted-roster-round {
+  color: rgba(248,250,252,0.39);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .55px;
+  margin-top: 2px;
+}
+@media (max-width: 900px) {
+  .drafted-pick-drawer {
+    grid-template-columns: 70px 1fr;
+    gap: 10px;
+  }
+  .drafted-pick-drawer-team,
+  .drafted-pick-drawer-player,
+  .drafted-pick-drawer-avg {
+    grid-column: 1 / -1;
+  }
+  .drafted-pick-drawer-avg {
+    text-align: left;
+  }
+  .drafted-section-note {
+    text-align: left;
+  }
+}
+@media (max-width: 800px) {
+  .drafted-team-column {
+    flex-basis: 88vw;
+    width: 88vw;
+    min-width: 88vw;
+  }
+}
+
+
+/* ==================== DRAFTED ROUND STRIPE V3 ==================== */
+.drafted-round-accordion-button {
+  min-height: 78px;
+  justify-content: space-between;
+  gap: 18px;
+  background:
+    linear-gradient(90deg, rgba(249,115,22,0.15), rgba(124,58,237,0.08) 42%, rgba(255,255,255,0.025)),
+    linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.012));
+}
+.drafted-round-mainline {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 190px;
+}
+.drafted-round-toggle {
+  width: 76px;
+  height: 38px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  flex: 0 0 auto;
+  background: rgba(15,23,42,0.86);
+  border: 1px solid rgba(251,146,60,0.34);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04), 0 10px 24px rgba(0,0,0,0.20);
+}
+.drafted-round-toggle-icon {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+.drafted-round-toggle-icon::before,
+.drafted-round-toggle-icon::after {
+  content: "";
+  position: absolute;
+  background: #fb923c;
+  border-radius: 999px;
+  transition: transform .22s ease, opacity .22s ease;
+}
+.drafted-round-toggle-icon::before {
+  width: 16px;
+  height: 3px;
+  left: 0;
+  top: 6.5px;
+}
+.drafted-round-toggle-icon::after {
+  width: 3px;
+  height: 16px;
+  left: 6.5px;
+  top: 0;
+}
+.drafted-round-toggle.is-open .drafted-round-toggle-icon::after {
+  transform: rotate(90deg);
+  opacity: 0;
+}
+.drafted-round-toggle-label {
+  color: rgba(248,250,252,0.72);
+  font-size: 9px;
+  font-weight: 950;
+  letter-spacing: .75px;
+}
+.drafted-round-summary {
+  margin-left: auto;
+  display: grid;
+  grid-template-columns: minmax(170px, 1fr) minmax(170px, 1fr) 104px;
+  gap: 9px;
+  align-items: stretch;
+  width: min(760px, 100%);
+}
+.drafted-round-summary-item {
+  border-radius: 14px;
+  padding: 8px 10px;
+  min-width: 0;
+  background: rgba(255,255,255,0.055);
+  border: 1px solid rgba(255,255,255,0.075);
+}
+.drafted-round-summary-item.best {
+  border-color: rgba(74,222,128,0.20);
+  background: rgba(21,128,61,0.13);
+}
+.drafted-round-summary-item.worst {
+  border-color: rgba(248,113,113,0.18);
+  background: rgba(127,29,29,0.13);
+}
+.drafted-round-summary-item.avg {
+  text-align: right;
+  border-color: rgba(251,146,60,0.18);
+  background: rgba(146,64,14,0.12);
+}
+.drafted-round-summary-label {
+  display: block;
+  color: rgba(248,250,252,0.48);
+  font-size: 8px;
+  font-weight: 950;
+  letter-spacing: .85px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.drafted-round-summary-value {
+  display: block;
+  color: #fff;
+  font-size: 11px;
+  line-height: 1.05;
+  font-weight: 950;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.drafted-round-summary-score {
+  margin-left: 5px;
+  color: #fb923c;
+  font-family: 'Oswald', sans-serif;
+  font-size: 15px;
+  font-weight: 900;
+}
+.drafted-round-summary-item.avg .drafted-round-summary-value {
+  font-family: 'Oswald', sans-serif;
+  font-size: 23px;
+  line-height: .85;
+}
+@media (max-width: 1050px) {
+  .drafted-round-accordion-button {
+    min-height: 104px;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .drafted-round-summary {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+  .drafted-round-summary-item.avg {
+    text-align: left;
+  }
+}
+
+
+/* ==================== DRAFTED REFINES V4 ==================== */
+.drafted-round-summary-item {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.drafted-round-summary-label,
+.drafted-round-summary-value {
+  position: relative;
+  z-index: 2;
+  padding-right: 54px;
+}
+.drafted-round-summary-logo {
+  position: absolute;
+  right: -9px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
+  opacity: .70;
+  filter: saturate(1.08) contrast(1.05);
+  z-index: 1;
+  pointer-events: none;
+}
+.drafted-round-summary-item.avg .drafted-round-summary-label,
+.drafted-round-summary-item.avg .drafted-round-summary-value {
+  padding-right: 0;
+}
+.drafted-team-footer {
+  min-height: 138px;
+}
+.drafted-best8-line {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.105);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px;
+}
+.drafted-best8-label {
+  display: block;
+  color: rgba(248,250,252,0.64);
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+}
+.drafted-team-footer .drafted-best8-value {
+  display: block;
+  margin-top: 0;
+  font-family: 'Oswald', sans-serif;
+  font-size: 28px;
+  line-height: .95;
+  color: #fff;
+}
+
 </style>
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20128%20128%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id=%22g%22%20x1=%220%22%20y1=%220%22%20x2=%221%22%20y2=%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%220%%22%20stop-color=%22#2d0a4e%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%2255%%22%20stop-color=%22#5b21b6%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%22100%%22%20stop-color=%22#f97316%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Ccircle%20cx=%2264%22%20cy=%2264%22%20r=%2258%22%20fill=%22url(#g)%22/%3E%0A%20%20%3Ccircle%20cx=%2264%22%20cy=%2264%22%20r=%2248%22%20fill=%22none%22%20stroke=%22#f97316%22%20stroke-width=%228%22/%3E%0A%20%20%3Cpath%20d=%22M22%2064h84M64%2016c18%2017%2027%2033%2027%2048s-9%2031-27%2048M64%2016C46%2033%2037%2049%2037%2064s9%2031%2027%2048%22%0A%20%20%20%20%20%20%20%20fill=%22none%22%20stroke=%22#ffffff%22%20stroke-width=%225%22%20opacity=%22.92%22%20stroke-linecap=%22round%22/%3E%0A%20%20%3Ctext%20x=%2264%22%20y=%2278%22%20text-anchor=%22middle%22%20font-family=%22Arial%20Black,%20Impact,%20sans-serif%22%0A%20%20%20%20%20%20%20%20font-size=%2239%22%20font-weight=%22900%22%20fill=%22#fff%22%20stroke=%22#2d0a4e%22%20stroke-width=%223%22%20paint-order=%22stroke%22%3EA%3C/text%3E%0A%3C/svg%3E">
@@ -12950,7 +13778,7 @@ function useDraftPriorityData() {
 }
 // ==================== COMPONENTS ====================
 function TopBar({ activePage, setPage }) {
-    const links = ['INÍCIO', 'JOGADORES', 'DRAFT', 'LIVE DRAFT', 'SIMULADOR DE DRAFT', 'FRANQUIAS', 'REGRAS', 'HONESTÔMETRO', 'CALENDÁRIO', 'HALL DA FAMA', 'TRADES'];
+    const links = ['INÍCIO', 'JOGADORES', 'DRAFTED', 'FRANQUIAS', 'REGRAS', 'HONESTÔMETRO', 'CALENDÁRIO', 'HALL DA FAMA', 'TRADES'];
     const pageForLink = (l) => l === 'INÍCIO' ? 'HOME' : l === 'FRANQUIAS' ? 'TIMES' : l;
     return (React.createElement("div", { className: "topbar" },
         React.createElement("div", { className: "topbar-links" }, links.map(l => {
@@ -21153,6 +21981,404 @@ function DraftPage() {
                     React.createElement("span", { className: "sidebar-card-title" }, "Observa\u00E7\u00F5es")),
                 React.createElement("div", { style: { padding: 18, fontSize: 13, color: '#6B6B7B', lineHeight: 1.6 } }, "Ordem final do sorteio j\u00E1 atualizada conforme o resultado oficial. O draft \u00E9 snake: nos rounds pares, a ordem inverte automaticamente.")))));
 }
+
+function DraftedPage() {
+    const e = React.createElement;
+    const boardRef = useRef(null);
+    const [expandedRounds, setExpandedRounds] = useState({});
+
+    const playerPhotoIdMap = {
+        'jimmy butler iii': '6430',
+        'ajay mitchell': '4900671',
+        'mitchell robinson': '4351852',
+        'jakob poeltl': '3134908',
+        'reed sheppard': '4711272',
+        'jonathan kuminga': '4433247',
+        'egor demin': '5175643',
+        'draymond green': '6589',
+        'ace bailey': '4873138',
+        'keldon johnson': '4395723',
+        'darius acuff jr': '5142620',
+        'peyton watson': '4576087',
+        'kyshawn george': '5174563',
+        'bennedict mathurin': '4683634',
+        'yaxel lendeborg': '5175737',
+        'brice sensabaugh': '5105839',
+        'collin sexton': '4277811',
+        'jusuf nurkic': '3102530',
+        'sandro mamukelashvili': '4278580',
+        'p j washington': '4278078',
+        'cameron johnson': '3138196',
+        'christian braun': '4431767',
+        'davion mitchell': '4278053',
+        'gui santos': '4997536',
+        'tari eason': '4433192',
+        'toumani camara': '4431736',
+        'saddiq bey': '4397136',
+        'jrue holiday': '3995',
+        'jerami grant': '2991070',
+        'cason wallace': '4683692',
+        'ayo dosunmu': '4397002',
+        'jeremiah fears': '5144091',
+        'tobias harris': '6440',
+        'nique clifford': '4702384',
+        'bobby portis': '3064482',
+        'scotty pippen jr': '4431785',
+        'quentin grimes': '4397014',
+        'dillon brooks': '3155526',
+        'robert williams iii': '4066211',
+        'jock landale': '3146557',
+        'tristan da silva': '4702382',
+        'aaron nesmith': '4396909',
+        'moussa diabate': '4433249',
+        'brayden burries': '5082206',
+        'khaman maluach': '5203685',
+        'wendell carter jr': '4277847',
+        'jared mccain': '4683778',
+        'isaiah joe': '4395702',
+        'kelly oubre jr': '3133603',
+        'rui hachimura': '4066648',
+        'herbert jones': '4277813',
+        'maxime raynaud': '4898371',
+        'paul reed': '4278562',
+        'keaton wagler': '5254165',
+        'de andre hunter': '4065732',
+        'deandre hunter': '4065732',
+        'collin gillespie': '4278585',
+        'cam spencer': '4433083',
+        'kyle kuzma': '3134907',
+        'daniel gafford': '4278049',
+        'grayson allen': '3135045',
+        'aaron wiggins': '4397183',
+        'deandre ayton': '4278129',
+        'jake laravia': '4592691',
+        'bilal coulibaly': '5104155',
+        'zaccharie risacher': '5211175',
+        'anthony black': '4712849',
+        'devin vassell': '4395630'
+    };
+
+    const projectionRules = {
+        'lamelo ball': { key: 'l ball' },
+        'stephen curry': { key: 's curry' },
+        'tyrese haliburton': { key: 't haliburton' },
+        'karl anthony towns': { key: 'k towns' },
+        'karl towns': { key: 'k towns' },
+        'de aaron fox': { key: 'd fox' },
+        'deaaron fox': { key: 'd fox' },
+        'de andre hunter': { key: 'd hunter' },
+        'deandre hunter': { key: 'd hunter' },
+        'darryn peterson': { key: 'd peterson' },
+        'keegan murray': { key: 'k murray' },
+        'cj mccollum': { key: 'c mccollum' },
+        'c j mccollum': { key: 'c mccollum' },
+        'pj washington': { key: 'p washington' },
+        'p j washington': { key: 'p washington' },
+        'rj barrett': { key: 'r barrett' },
+        'r j barrett': { key: 'r barrett' },
+        'og anunoby': { key: 'o anunoby' },
+        'o g anunoby': { key: 'o anunoby' },
+        'donovan mitchell': { key: 'd mitchell', team: 'CLE' },
+        'davion mitchell': { key: 'd mitchell', team: 'MIA' },
+        'anthony edwards': { key: 'a edwards' },
+        'amen thompson': { key: 'a thompson', minAvg: 40 },
+        'ausar thompson': { key: 'a thompson', maxAvg: 40 },
+        'miles bridges': { key: 'm bridges', team: 'PHX' },
+        'mikal bridges': { key: 'm bridges', team: 'NYK' },
+        'jaylen brown': { key: 'j brown' },
+        'jalen brunson': { key: 'j brunson' },
+        'jalen green': { key: 'j green' },
+        'jalen johnson': { key: 'j johnson' },
+        'jalen suggs': { key: 'j suggs' },
+        'jalen duren': { key: 'j duren' },
+        'jalen williams': { key: 'j williams', minAvg: 40 },
+        'jaylen williams': { key: 'j williams', minAvg: 40 },
+        'jaylin williams': { key: 'j williams', maxAvg: 40 },
+        'kyshawn george': { key: 'k george', team: 'WAS' },
+        'keyonte george': { key: 'k george', team: 'UTA' },
+        'andrew wiggins': { key: 'a wiggins', team: 'MIA' },
+        'aaron wiggins': { key: 'a wiggins', team: 'ATL' },
+        'julian champagnie': { key: 'j champagnie', team: 'SAS' },
+        'justin champagnie': { key: 'j champagnie', team: 'WAS' },
+        'cam johnson': { key: 'c johnson', team: 'DEN' },
+        'cameron johnson': { key: 'c johnson', team: 'DEN' }
+    };
+
+    const byRule = (rule) => {
+        if (!rule || !rule.key)
+            return null;
+        let candidates = YAHOO_AVG_PROJECTIONS_2026_27.filter(row => row.key === rule.key);
+        if (rule.team)
+            candidates = candidates.filter(row => String(row.team || '').toUpperCase() === String(rule.team || '').toUpperCase());
+        if (Number.isFinite(Number(rule.minAvg)))
+            candidates = candidates.filter(row => Number(row.avg || 0) >= Number(rule.minAvg));
+        if (Number.isFinite(Number(rule.maxAvg)))
+            candidates = candidates.filter(row => Number(row.avg || 0) < Number(rule.maxAvg));
+        return candidates.sort((a, b) => Number(b.avg || 0) - Number(a.avg || 0))[0] || null;
+    };
+
+    const getProjection = (name, nbaTeam = '') => {
+        const normalized = normalizeTeamKey(name);
+        const directRule = projectionRules[normalized];
+        const direct = directRule ? byRule(directRule) : null;
+        if (direct)
+            return direct;
+        const candidates = getPlayerProjectionKeyCandidates(name);
+        for (const key of candidates) {
+            const exactTeam = YAHOO_AVG_PROJECTIONS_2026_27.find(row => row.key === key && (!nbaTeam || String(row.team || '').toUpperCase() === String(nbaTeam || '').toUpperCase()));
+            if (exactTeam)
+                return exactTeam;
+            const any = YAHOO_AVG_PROJECTIONS_2026_27.find(row => row.key === key);
+            if (any)
+                return any;
+        }
+        return null;
+    };
+
+    const getPhotoUrl = (name) => {
+        const id = playerPhotoIdMap[normalizeTeamKey(name)];
+        return id ? `https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/${id}.png&w=96&h=70&cb=1` : '';
+    };
+    const fmtAvg = (value) => Number(value || 0).toFixed(1).replace('.', ',');
+    const firstPosition = (pos) => String(pos || '—').split(/[\/,\s]+/).filter(Boolean)[0] || '—';
+    const posClass = (pos) => `pos-${firstPosition(pos).toLowerCase()}`;
+    const shortName = (name) => {
+        const clean = String(name || '').replace(/\s+Jr\.?$/i, ' Jr.').trim();
+        const parts = clean.split(/\s+/).filter(Boolean);
+        if (parts.length <= 2)
+            return clean;
+        const suffix = /^(jr\.?|sr\.?|ii|iii|iv|v)$/i.test(parts[parts.length - 1]) ? ` ${parts.pop()}` : '';
+        return `${parts[0]} ${parts[parts.length - 1]}${suffix}`;
+    };
+    const shortTeam = (teamName) => {
+        const team = getTeam(teamName);
+        if (/supersonics/i.test(team.name)) return 'SUPERSONICS';
+        if (/paysandu/i.test(team.name)) return 'PAYSANDU';
+        if (/warlock/i.test(team.name)) return 'WARLOCK';
+        if (/ghost/i.test(team.name)) return 'GHOST';
+        if (/pato/i.test(team.name)) return "PATO'S";
+        if (/instituto/i.test(team.name)) return 'POPOVICH';
+        if (/pistons/i.test(team.name)) return 'PISTONS';
+        if (/revolution/i.test(team.name)) return 'REVOLUTION';
+        if (/acre/i.test(team.name)) return 'ACRE';
+        if (/djalma/i.test(team.name)) return 'DJALMA';
+        if (/fi du/i.test(team.name)) return 'JEQUISOM';
+        if (/red hot/i.test(team.name)) return 'BLAZERS';
+        if (/chugabum/i.test(team.name)) return 'CHUGABUM';
+        if (/nortz/i.test(team.name)) return 'NORTZ';
+        if (/canalhas/i.test(team.name)) return 'CANALHAS';
+        if (/charlotte/i.test(team.name)) return 'CHARLOTTE';
+        return team.name.toUpperCase();
+    };
+    const viaText = (item) => {
+        const via = item?.viaTeamName ? getTeam(item.viaTeamName).name : '';
+        return via ? `VIA ${via.toUpperCase()}` : '';
+    };
+
+    const draftPicks = LIVE_DRAFT_PICKS_MANUAL
+        .map(raw => {
+            const info = getDraftPickInfoForOverall(raw.airballOverall);
+            const owner = raw.airballOwner || raw.airballTeam || info.ownerName;
+            const via = raw.viaTeamName || info.viaTeamName || '';
+            const projection = getProjection(raw.playerName, raw.nbaTeam);
+            const player = {
+                name: raw.playerName,
+                avg: Number(raw.selectedAvg || raw.avg || (projection ? projection.avg : 0)),
+                position: raw.position || (projection ? projection.pos : '—'),
+                team: raw.nbaTeam || (projection ? projection.team : 'NBA'),
+                photoUrl: getPhotoUrl(raw.playerName)
+            };
+            return {
+                ...raw,
+                overall: Number(raw.airballOverall),
+                round: Number(raw.airballRound || info.round),
+                pick: Number(raw.airballRoundPick || info.pick),
+                ownerName: normalizeTeamName(owner),
+                viaTeamName: via ? normalizeTeamName(via) : '',
+                player
+            };
+        })
+        .filter(item => item.overall && item.player.name)
+        .sort((a, b) => a.overall - b.overall);
+
+    const roundGroups = draftPicks.reduce((acc, item) => {
+        if (!acc[item.round]) acc[item.round] = [];
+        acc[item.round].push(item);
+        return acc;
+    }, {});
+    const roundNumbers = Object.keys(roundGroups).map(Number).sort((a, b) => a - b);
+
+    const buildKeeper = (teamName, name, index, fallbackTotal) => {
+        const projection = getProjection(name);
+        const fallbackAvg = Number(fallbackTotal || 0) / 2;
+        return {
+            name,
+            avg: Number((projection ? projection.avg : fallbackAvg) || 0),
+            position: projection ? projection.pos : 'KEEPER',
+            team: projection ? projection.team : 'NBA',
+            photoUrl: getPhotoUrl(name),
+            source: 'KEEPER',
+            sortValue: 1000 - index
+        };
+    };
+
+    const baseTeamRows = TEAMS_DATA.map(team => {
+        const keeperData = LIVE_KEEPERS_FALLBACK[normalizeTeamName(team.name)] || LIVE_KEEPERS_FALLBACK[team.name] || { total: 0, players: [] };
+        const keepers = (keeperData.players || [])
+            .map((name, index) => buildKeeper(team.name, name, index, keeperData.total))
+            .sort((a, b) => Number(b.avg || 0) - Number(a.avg || 0));
+        const picks = draftPicks
+            .filter(pick => normalizeTeamName(pick.ownerName) === normalizeTeamName(team.name))
+            .sort((a, b) => Number(a.overall || 0) - Number(b.overall || 0))
+            .map(pick => ({
+                ...pick.player,
+                source: `#${pick.overall}`,
+                sortValue: pick.overall,
+                draftMeta: `ROUND ${pick.round} - PICK ${pick.pick}`
+            }));
+        const displayRoster = [...keepers, ...picks];
+        const best8Players = [...displayRoster].sort((a, b) => Number(b.avg || 0) - Number(a.avg || 0)).slice(0, 8);
+        const keeperTotal = keepers.reduce((sum, p) => sum + Number(p.avg || 0), 0);
+        const pickTotal = picks.reduce((sum, p) => sum + Number(p.avg || 0), 0);
+        const best8Total = best8Players.reduce((sum, p) => sum + Number(p.avg || 0), 0);
+        const total = keeperTotal + pickTotal;
+        return {
+            team: getTeam(team.name),
+            keepers,
+            picks,
+            roster: displayRoster,
+            total,
+            keeperTotal,
+            pickTotal,
+            best8Total,
+            rosterCount: displayRoster.length
+        };
+    });
+    const best8RankByTeam = [...baseTeamRows]
+        .sort((a, b) => Number(b.best8Total || 0) - Number(a.best8Total || 0))
+        .reduce((acc, row, index) => {
+            acc[normalizeTeamKey(row.team.name)] = index + 1;
+            return acc;
+        }, {});
+    const teamRows = [...baseTeamRows]
+        .sort((a, b) => Number(b.total || 0) - Number(a.total || 0))
+        .map((row, index) => ({ ...row, rank: index + 1, best8Rank: best8RankByTeam[normalizeTeamKey(row.team.name)] || index + 1 }));
+
+    const leader = teamRows[0] || null;
+    const knownRounds = roundNumbers.length;
+    const avgKnown = draftPicks.length ? draftPicks.reduce((sum, p) => sum + Number(p.player.avg || 0), 0) / draftPicks.length : 0;
+    const scrollBoard = (direction) => {
+        if (boardRef.current)
+            boardRef.current.scrollBy({ left: direction * 660, behavior: 'smooth' });
+    };
+    const avgLevel = (avg) => Number(avg || 0) >= 45 ? 'avg-elite' : Number(avg || 0) >= 38 ? 'avg-strong' : Number(avg || 0) < 30 ? 'avg-low' : '';
+    const footerLevel = (rank) => rank <= 5 ? '' : rank <= 11 ? 'mid' : 'low';
+    const medal = (rank) => rank === 1 ? '👑' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : '';
+    const getRoundSummary = (items = []) => {
+        const valid = (items || []).filter(item => Number.isFinite(Number(item?.player?.avg)));
+        const sorted = [...valid].sort((a, b) => Number(b.player.avg || 0) - Number(a.player.avg || 0));
+        const avg = valid.length ? valid.reduce((sum, item) => sum + Number(item.player.avg || 0), 0) / valid.length : 0;
+        return {
+            best: sorted[0] || null,
+            worst: sorted[sorted.length - 1] || null,
+            avg
+        };
+    };
+    const roundSummaryText = (item) => item ? `${shortName(item.player.name)} ${fmtAvg(item.player.avg)}` : '—';
+
+    const renderPickCard = (item) => e("article", { className: "drafted-pick-drawer", key: `drafted-pick-${item.overall}` },
+        e("div", { className: "drafted-pick-drawer-index" },
+            e("strong", null, `#${item.overall}`),
+            e("span", null, `ROUND ${item.round}`),
+            e("span", null, `PICK ${item.pick}`)),
+        e("div", { className: "drafted-pick-drawer-team" },
+            e(TeamLogo, { team: item.ownerName, size: 38 }),
+            e("div", null,
+                e("div", { className: "drafted-pick-drawer-team-name" }, getTeam(item.ownerName).name),
+                e("div", { className: "drafted-pick-drawer-via" }, viaText(item)))),
+        e("div", { className: "drafted-pick-drawer-player" },
+            e("span", { className: `drafted-pos-badge ${posClass(item.player.position)}` }, firstPosition(item.player.position)),
+            e(PlayerPhoto, { player: item.player, size: 58 }),
+            e("div", null,
+                e("div", { className: "drafted-pick-drawer-player-name" }, item.player.name),
+                e("div", { className: "drafted-pick-drawer-player-meta" }, `${item.player.team} • ${String(item.player.position || '—').replaceAll(',', '/')}`))),
+        e("div", { className: "drafted-pick-drawer-avg" },
+            e("small", null, "AVG YAHOO"),
+            e("strong", null, fmtAvg(item.player.avg))));
+
+    const renderRosterCard = (player, index) => e("div", { className: `drafted-roster-card ${avgLevel(player.avg)}`, key: `${player.name}-${player.source}-${index}` },
+        e("span", { className: `drafted-roster-pos ${posClass(player.position)}` }, firstPosition(player.position)),
+        e(PlayerPhoto, { player, size: 52 }),
+        e("div", { className: "drafted-roster-main" },
+            e("div", { className: "drafted-roster-avg" }, fmtAvg(player.avg)),
+            e("div", { className: "drafted-roster-name" }, player.name),
+            e("div", { className: "drafted-roster-source" }, player.source),
+            player.draftMeta ? e("div", { className: "drafted-roster-round" }, player.draftMeta) : null));
+
+    return e("main", { className: "drafted-page" },
+        e("div", { className: "drafted-inner" },
+            e("section", { className: "drafted-section" },
+                e("div", { className: "drafted-section-head" },
+                    e("div", null,
+                        e("div", { className: "drafted-kicker" }, "HISTÓRICO DO DRAFT"),
+                        e("div", { className: "drafted-section-title" }, "Picks por round")),
+                    null),
+                e("div", { className: "drafted-rounds" },
+                    roundNumbers.map(round => {
+                        const isOpen = !!expandedRounds[round];
+                        const summary = getRoundSummary(roundGroups[round]);
+                        return e("div", { className: "drafted-round-block", key: `round-${round}` },
+                            e("div", { className: "drafted-round-header" },
+                                e("button", { className: "drafted-round-accordion-button", type: "button", onClick: () => setExpandedRounds(prev => ({ ...prev, [round]: !prev[round] })) },
+                                    e("div", { className: "drafted-round-mainline" },
+                                        e("span", { className: `drafted-round-toggle ${isOpen ? 'is-open' : ''}` },
+                                            e("span", { className: "drafted-round-toggle-icon" }),
+                                            e("span", { className: "drafted-round-toggle-label" }, isOpen ? "FECHAR" : "ABRIR")),
+                                        e("div", { className: "drafted-round-name" }, `Round ${round}`)),
+                                    e("div", { className: "drafted-round-summary" },
+                                        e("div", { className: "drafted-round-summary-item best" },
+                                            summary.best ? e("img", { className: "drafted-round-summary-logo", src: getTeam(summary.best.ownerName).logo, alt: "", onError: (ev) => { ev.currentTarget.style.display = 'none'; } }) : null,
+                                            e("span", { className: "drafted-round-summary-label" }, "Melhor pick"),
+                                            e("span", { className: "drafted-round-summary-value" }, roundSummaryText(summary.best))),
+                                        e("div", { className: "drafted-round-summary-item worst" },
+                                            summary.worst ? e("img", { className: "drafted-round-summary-logo", src: getTeam(summary.worst.ownerName).logo, alt: "", onError: (ev) => { ev.currentTarget.style.display = 'none'; } }) : null,
+                                            e("span", { className: "drafted-round-summary-label" }, "Pior pick"),
+                                            e("span", { className: "drafted-round-summary-value" }, roundSummaryText(summary.worst))),
+                                        e("div", { className: "drafted-round-summary-item avg" },
+                                            e("span", { className: "drafted-round-summary-label" }, "AVG médio"),
+                                            e("span", { className: "drafted-round-summary-value" }, fmtAvg(summary.avg)))))),
+                            isOpen ? e("div", { className: "drafted-round-drawer-list" }, roundGroups[round].map(renderPickCard)) : null);
+                    }))),
+            e("section", { className: "drafted-section" },
+                e("div", { className: "drafted-section-head" },
+                    e("div", null,
+                        e("div", { className: "drafted-kicker" }, "POWER RANKING"),
+                        e("div", { className: "drafted-section-title" }, "Força dos times")),
+                    e("div", { className: "drafted-board-actions" },
+                        e("button", { className: "drafted-board-btn", type: "button", onClick: () => scrollBoard(-1), "aria-label": "Voltar times" }, "‹"),
+                        e("button", { className: "drafted-board-btn", type: "button", onClick: () => scrollBoard(1), "aria-label": "Avançar times" }, "›"))),
+                e("div", { className: "drafted-pr-scroll", ref: boardRef },
+                    teamRows.map(row => e("article", { className: `drafted-team-column rank-${row.rank <= 3 ? row.rank : 'mid'} ${row.rank >= 13 ? 'rank-bottom' : ''}`, key: row.team.name },
+                        e("header", { className: "drafted-team-head" },
+                            e("div", { className: "drafted-team-rank-line" },
+                                e("div", { className: "drafted-team-rank" }, `#${row.rank}`),
+                                e("div", { className: "drafted-team-medal" }, medal(row.rank))),
+                            e("div", { className: "drafted-team-logo-row" },
+                                e(TeamLogo, { team: row.team.name, size: 50 }),
+                                e("div", null,
+                                    e("div", { className: "drafted-team-name" }, shortTeam(row.team.name)),
+                                    e("div", { className: "drafted-team-gm" }, `GM ${row.team.gm || '—'}`)))),
+                        e("div", { className: "drafted-roster-list" }, row.roster.map(renderRosterCard)),
+                        e("footer", { className: `drafted-team-footer ${footerLevel(row.rank)}` },
+                            e("small", null, "TEAM AVG"),
+                            e("strong", null, fmtAvg(row.total)),
+                            e("div", { className: "drafted-best8-line" },
+                                e("span", { className: "drafted-best8-label" }, `BEST 8 #${row.best8Rank}`),
+                                e("strong", { className: "drafted-best8-value" }, fmtAvg(row.best8Total))))))))));
+
+}
+
+
 // ==================== ROUTING + SEO ====================
 const AIRBALL_BASE_URL = 'https://cecinstefano.github.io/airball-dynasty/';
 const AIRBALL_SHARE_IMAGE = 'https://cecinstefano.github.io/airball-dynasty/assets/airball-share.jpg';
@@ -21161,6 +22387,7 @@ const PAGE_ROUTE_MAP = {
     JOGADORES: 'jogadores',
     DRAFT: 'draft',
     'LIVE DRAFT': 'live-draft',
+    'DRAFTED': 'drafted',
     'SIMULADOR DE DRAFT': 'simulador-de-draft',
     TIMES: 'franquias',
     REGRAS: 'regras',
@@ -21264,6 +22491,7 @@ function getSeoForPage(page, teamSlug = '') {
         JOGADORES: 'Jogadores | AirBall Dynasty League',
         DRAFT: 'Draft 2026/27 | AirBall Dynasty League',
         'LIVE DRAFT': 'Live Draft | AirBall Dynasty League',
+        'DRAFTED': 'Drafted Board | AirBall Dynasty League',
         'SIMULADOR DE DRAFT': 'Simulador de Draft | AirBall Dynasty League',
         TIMES: teamName ? `${teamName} | Franquias AirBall` : 'Franquias | AirBall Dynasty League',
         REGRAS: 'Regras | AirBall Dynasty League',
@@ -21281,6 +22509,7 @@ function getSeoForPage(page, teamSlug = '') {
         JOGADORES: 'Board de jogadores da AirBall com filtros por posição, franquia, keeper, média fantasy e projeções.',
         DRAFT: 'Ordem, board, contagem regressiva e informações do Draft AirBall Dynasty League 2026/27.',
         'LIVE DRAFT': 'Central do slow draft da AirBall com time no relógio, contador, melhores disponíveis, escolhas realizadas e ranking atualizado por AVG.',
+        'DRAFTED': 'Tabela de todos os jogadores draftados pela AirBall e Power Ranking atualizado das franquias por AVG.',
         'SIMULADOR DE DRAFT': 'Simule as escolhas do draft da AirBall respeitando ordem snake, picks trocadas e keepers oficiais.',
         TIMES: teamName ? `Dossiê completo da franquia ${teamName}: GM, keepers, draft projetado, calendário, trades, jogos esperados e análise da I.A.` : 'Central das franquias da AirBall com logos, GMs, keepers, draft projetado, calendário, trades e análise da I.A.',
         REGRAS: 'Regulamento oficial da AirBall Dynasty League, sistema de pontuação, rosters, waivers, playoffs e punições.',
@@ -21375,6 +22604,7 @@ function App() {
             case 'TRADES': return React.createElement(TradesPage, null);
             case 'DRAFT': return React.createElement(DraftPage, null);
             case 'LIVE DRAFT': return React.createElement(LiveDraftPage, null);
+            case 'DRAFTED': return React.createElement(DraftedPage, null);
             case 'SIMULADOR DE DRAFT': return React.createElement(DraftSimulatorPage, null);
             case 'SORTEIO DRAFT': return React.createElement(DraftDrawPage, null);
             case 'JOGADORES': return React.createElement(PlayersPage, null);
