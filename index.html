@@ -11474,6 +11474,25 @@
   align-self: center;
 }
 
+
+/* ==================== TRADE CENTER PICKS UPDATED ==================== */
+.trade-dynamic-player-pick {
+  background: linear-gradient(90deg, rgba(249,115,22,0.10), rgba(91,33,182,0.06));
+  margin: 5px 0;
+  padding: 10px 8px;
+  border-radius: 13px;
+  border: 1px solid rgba(249,115,22,0.16);
+}
+.trade-dynamic-player-note {
+  margin-top: 3px;
+  color: #8b5cf6;
+  font-size: 9px;
+  line-height: 1.25;
+  font-weight: 900;
+  letter-spacing: .35px;
+  text-transform: uppercase;
+}
+
 </style>
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20128%20128%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id=%22g%22%20x1=%220%22%20y1=%220%22%20x2=%221%22%20y2=%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%220%%22%20stop-color=%22#2d0a4e%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%2255%%22%20stop-color=%22#5b21b6%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%22100%%22%20stop-color=%22#f97316%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Ccircle%20cx=%2264%22%20cy=%2264%22%20r=%2258%22%20fill=%22url(#g)%22/%3E%0A%20%20%3Ccircle%20cx=%2264%22%20cy=%2264%22%20r=%2248%22%20fill=%22none%22%20stroke=%22#f97316%22%20stroke-width=%228%22/%3E%0A%20%20%3Cpath%20d=%22M22%2064h84M64%2016c18%2017%2027%2033%2027%2048s-9%2031-27%2048M64%2016C46%2033%2037%2049%2037%2064s9%2031%2027%2048%22%0A%20%20%20%20%20%20%20%20fill=%22none%22%20stroke=%22#ffffff%22%20stroke-width=%225%22%20opacity=%22.92%22%20stroke-linecap=%22round%22/%3E%0A%20%20%3Ctext%20x=%2264%22%20y=%2278%22%20text-anchor=%22middle%22%20font-family=%22Arial%20Black,%20Impact,%20sans-serif%22%0A%20%20%20%20%20%20%20%20font-size=%2239%22%20font-weight=%22900%22%20fill=%22#fff%22%20stroke=%22#2d0a4e%22%20stroke-width=%223%22%20paint-order=%22stroke%22%3EA%3C/text%3E%0A%3C/svg%3E">
@@ -12977,7 +12996,97 @@ const HOF_DATA = [
     { year: '2025-26', icon: '🔥', title: 'MVP dos Playoffs', name: 'Jalen Duren', sub: "Stéfano's Supersonics", team: "Stéfano's SuperSonics" },
     { year: '2025-26', icon: '🎯', title: 'Rookie do Ano', name: 'Keyonte George', sub: 'Melhor novato da temporada', team: 'Charlotte DunkLipe' },
 ];
+
+function makeTradePickAsset(overall, round, pick, playerName, avg, position, nbaTeam, note = '') {
+    return {
+        id: `trade-pick-${overall}`,
+        name: `Pick #${overall} — ${playerName}`,
+        draftPlayerName: playerName,
+        pickOverall: overall,
+        avg,
+        position: `ROUND ${round} • PICK ${pick}`,
+        proTeam: nbaTeam || 'NBA',
+        note,
+        isDraftPick: true
+    };
+}
 const TRADES_DATA = [
+    {
+        week: '01/09 • TROCA DE PICKS',
+        status: 'OFICIAL',
+        cls: 'trade-approved',
+        teamA: "Pato's Team",
+        teamB: 'Acre Dinosaurs',
+        teamADisplay: "Pato's Team",
+        teamBDisplay: 'Acre Dinosaurs',
+        givesA: [
+            makeTradePickAsset(101, 7, 5, 'Darius Acuff Jr.', 31.0, 'PG', 'SAC', 'Usada pelo Acre Dinosaurs')
+        ],
+        givesB: [
+            makeTradePickAsset(137, 9, 9, 'Aday Mara', 18.1, 'C', 'OKC', "Usada pelo Pato's Team")
+        ],
+        analysis: "Pato's Team envia a pick #101, que virou Darius Acuff Jr. para o Acre Dinosaurs. Acre envia a pick #137, que virou Aday Mara para o Pato's Team."
+    },
+    {
+        week: '31/08 • TROCA DE PICKS',
+        status: 'OFICIAL',
+        cls: 'trade-approved',
+        teamA: 'Instituto Popovich',
+        teamB: 'Fi du Jequisom',
+        teamADisplay: 'Instituto Popovich',
+        teamBDisplay: 'Fi du Jequisom',
+        givesA: [
+            makeTradePickAsset(28, 2, 12, 'Cameron Boozer', 37.3, 'PF', 'MEM', 'Pick recebida anteriormente do Pato e repassada ao Fi'),
+            makeTradePickAsset(60, 4, 12, 'Jabari Smith Jr', 33.2, 'PF/C', 'HOU', 'Pick recebida anteriormente do Pato e repassada ao Fi'),
+            makeTradePickAsset(91, 6, 11, 'Jimmy Butler III', 33.1, 'SF/PF', 'GSW', 'Usada pelo Fi du Jequisom')
+        ],
+        givesB: [
+            makeTradePickAsset(22, 2, 6, 'Franz Wagner', 44.2, 'SF/PF', 'ORL', 'Usada pelo Instituto Popovich'),
+            makeTradePickAsset(86, 6, 6, 'Aaron Gordon', 32.4, 'PF/C', 'DEN', 'Usada pelo Instituto Popovich'),
+            makeTradePickAsset(107, 7, 11, 'Collin Sexton', 31.2, 'PG/SG', 'LAL', 'Usada pelo Instituto Popovich')
+        ],
+        analysis: 'Instituto Popovich envia as picks #28, #60 e #91, que viraram Cameron Boozer, Jabari Smith Jr e Jimmy Butler III para o Fi du Jequisom. Fi envia as picks #22, #86 e #107, que viraram Franz Wagner, Aaron Gordon e Collin Sexton para o Instituto.'
+    },
+    {
+        week: '30/08 • TROCA DE PICKS',
+        status: 'OFICIAL',
+        cls: 'trade-approved',
+        teamA: "Pato's Team",
+        teamB: 'Instituto Popovich',
+        teamADisplay: "Pato's Team",
+        teamBDisplay: 'Instituto Popovich',
+        givesA: [
+            makeTradePickAsset(5, 1, 5, 'Karl-Anthony Towns', 45.5, 'PF/C', 'NYK', 'Usada pelo Instituto Popovich'),
+            makeTradePickAsset(28, 2, 12, 'Cameron Boozer', 37.3, 'PF', 'MEM', 'Direitos da pick depois repassados ao Fi du Jequisom'),
+            makeTradePickAsset(60, 4, 12, 'Jabari Smith Jr', 33.2, 'PF/C', 'HOU', 'Direitos da pick depois repassados ao Fi du Jequisom')
+        ],
+        givesB: [
+            makeTradePickAsset(6, 1, 6, 'Devin Booker', 44.7, 'PG/SG', 'PHX', "Usada pelo Pato's Team"),
+            makeTradePickAsset(27, 2, 11, 'Michael Porter Jr', 40.3, 'SF/PF', 'BKN', "Usada pelo Pato's Team"),
+            makeTradePickAsset(59, 4, 11, 'Norman Powell', 31.9, 'SG/SF', 'CHI', "Usada pelo Pato's Team")
+        ],
+        analysis: "Pato's Team envia as picks #5, #28 e #60. A #5 virou Karl-Anthony Towns para o Instituto, enquanto #28 e #60 foram posteriormente repassadas ao Fi. Instituto envia #6, #27 e #59, que viraram Devin Booker, Michael Porter Jr e Norman Powell para o Pato."
+    },
+    {
+        week: '26/08 • TROCA DE PICKS',
+        status: 'OFICIAL',
+        cls: 'trade-approved',
+        teamA: "Stéfano's SuperSonics",
+        teamB: 'Pistons de Pira',
+        teamADisplay: "Stéfano's SuperSonics",
+        teamBDisplay: 'Pistons de Pira',
+        givesA: [
+            makeTradePickAsset(44, 3, 12, 'Mikal Bridges', 32.3, 'SF/PF', 'NYK', 'Usada pelo Pistons de Pira'),
+            makeTradePickAsset(53, 4, 5, 'Ryan Rollins', 41.2, 'PG/SG', 'MIL', 'Usada pelo Pistons de Pira'),
+            makeTradePickAsset(76, 5, 12, 'Andrew Wiggins', 32.4, 'SG/SF/PF', 'MIA', 'Usada pelo Pistons de Pira')
+        ],
+        givesB: [
+            makeTradePickAsset(39, 3, 7, 'Dejounte Murray', 37.3, 'PG', 'NOP', "Usada pelo Stéfano's SuperSonics"),
+            makeTradePickAsset(58, 4, 10, 'Immanuel Quickley', 34.2, 'PG/SG', 'TOR', "Usada pelo Stéfano's SuperSonics"),
+            makeTradePickAsset(90, 6, 10, 'Mark Williams', 34.9, 'C', 'PHX', "Usada pelo Stéfano's SuperSonics")
+        ],
+        analysis: "Stéfano's SuperSonics envia as picks #44, #53 e #76, que viraram Mikal Bridges, Ryan Rollins e Andrew Wiggins para o Pistons de Pira. Pistons envia #39, #58 e #90, que viraram Dejounte Murray, Immanuel Quickley e Mark Williams para os Supersonics."
+    },
     {
         week: 'OFFSEASON • PRIMEIRA TROCA COM PICKS',
         status: 'OFICIAL',
@@ -12986,9 +13095,15 @@ const TRADES_DATA = [
         teamB: 'Pistons de Pira',
         teamADisplay: "Stéfano's SuperSonics",
         teamBDisplay: 'Pistons de Pira',
-        givesA: ['Chet Holmgren', 'Pick 12'],
-        givesB: ['Giannis Antetokounmpo', 'Pick 103'],
-        analysis: "Primeira troca com picks da história da AirBall: Stéfano's SuperSonics envia Chet Holmgren + pick 12 e recebe Giannis Antetokounmpo + pick 103 do Pistons de Pira."
+        givesA: [
+            'Chet Holmgren',
+            makeTradePickAsset(12, 1, 12, 'Ivica Zubac', 37.5, 'C', 'IND', 'Usada pelo Pistons de Pira')
+        ],
+        givesB: [
+            'Giannis Antetokounmpo',
+            makeTradePickAsset(103, 7, 7, 'Kyshawn George', 30.5, 'SG/SF/PF', 'WAS', "Usada pelo Stéfano's SuperSonics")
+        ],
+        analysis: "Primeira troca com picks da história da AirBall: Stéfano's SuperSonics envia Chet Holmgren + pick #12, que virou Ivica Zubac, e recebe Giannis Antetokounmpo + pick #103, que virou Kyshawn George, do Pistons de Pira."
     },
     {
         week: '14/07 • TRADE PROCESSADA',
@@ -12996,11 +13111,11 @@ const TRADES_DATA = [
         cls: 'trade-approved',
         teamA: 'Acre Dinosaurs',
         teamB: 'Fi du Jequisom',
-        teamADisplay: 'Acre Dinossaurs',
+        teamADisplay: 'Acre Dinosaurs',
         teamBDisplay: 'Fi du Jequisom',
         givesA: ['LeBron James'],
         givesB: ['Jaylen Brown'],
-        analysis: 'Acre Dinossaurs envia LeBron James para o Fi du Jequisom e recebe Jaylen Brown.'
+        analysis: 'Acre Dinosaurs envia LeBron James para o Fi du Jequisom e recebe Jaylen Brown.'
     },
     {
         week: '27/06 • PRÉ-SEASON 2026/27',
@@ -13013,8 +13128,9 @@ const TRADES_DATA = [
         givesA: ['Jalen Duren'],
         givesB: ['Chet Holmgren'],
         analysis: "Stéfano's SuperSonics recebe Chet Holmgren, enquanto o Revolution Française recebe Jalen Duren."
-    },
+    }
 ];
+
 const DRAFT_ORDER = [
     {
         "pick": 1,
@@ -14709,21 +14825,26 @@ function normalizeTradePlayerForUi(player) {
     if (typeof player === 'string') {
         const pickMatch = player.match(/^\s*pick\s*(\d+)\s*$/i);
         if (pickMatch) {
-            return { id: `trade-pick-${pickMatch[1]}`, name: `Pick ${pickMatch[1]}`, avg: 0, total: 0, position: 'PICK', proTeam: 'DRAFT', photoUrl: '', isDraftPick: true };
+            return { id: `trade-pick-${pickMatch[1]}`, name: `Pick ${pickMatch[1]}`, avg: 0, total: 0, position: 'PICK', proTeam: 'DRAFT', photoUrl: '', isDraftPick: true, note: '', pickOverall: Number(pickMatch[1]) };
         }
-        return { id: '', name: player, avg: 0, total: 0, position: '—', proTeam: 'NBA', photoUrl: '' };
+        return { id: '', name: player, avg: 0, total: 0, position: '—', proTeam: 'NBA', photoUrl: '', isDraftPick: false, note: '' };
     }
     const id = String((player === null || player === void 0 ? void 0 : player.id) || (player === null || player === void 0 ? void 0 : player.playerId) || (player === null || player === void 0 ? void 0 : player.espnId) || '');
     const workerOrigin = getTradeWorkerOrigin();
     const workerPhotoUrl = workerOrigin && /^\d+$/.test(id) ? `${workerOrigin}/player-photo/${id}` : '';
+    const isDraftPick = Boolean(player === null || player === void 0 ? void 0 : player.isDraftPick);
     return {
         id,
         name: (player === null || player === void 0 ? void 0 : player.name) || (player === null || player === void 0 ? void 0 : player.fullName) || (player === null || player === void 0 ? void 0 : player.playerName) || 'Jogador',
         avg: Number((_d = (_c = (_b = (_a = player === null || player === void 0 ? void 0 : player.avg) !== null && _a !== void 0 ? _a : player === null || player === void 0 ? void 0 : player.fantasyPoints) !== null && _b !== void 0 ? _b : player === null || player === void 0 ? void 0 : player.average) !== null && _c !== void 0 ? _c : player === null || player === void 0 ? void 0 : player.avgFantasyPoints) !== null && _d !== void 0 ? _d : 0) || 0,
         total: Number((_h = (_g = (_f = (_e = player === null || player === void 0 ? void 0 : player.total) !== null && _e !== void 0 ? _e : player === null || player === void 0 ? void 0 : player.totalPoints) !== null && _f !== void 0 ? _f : player === null || player === void 0 ? void 0 : player.totalFantasyPoints) !== null && _g !== void 0 ? _g : player === null || player === void 0 ? void 0 : player.appliedTotal) !== null && _h !== void 0 ? _h : 0) || 0,
-        position: (player === null || player === void 0 ? void 0 : player.position) || '—',
-        proTeam: (player === null || player === void 0 ? void 0 : player.proTeam) || (player === null || player === void 0 ? void 0 : player.team) || (player === null || player === void 0 ? void 0 : player.proTeamAbbrev) || 'NBA',
-        photoUrl: (player === null || player === void 0 ? void 0 : player.photoUrl) || (player === null || player === void 0 ? void 0 : player.headshotUrl) || (player === null || player === void 0 ? void 0 : player.headshot) || (player === null || player === void 0 ? void 0 : player.playerPhoto) || workerPhotoUrl
+        position: (player === null || player === void 0 ? void 0 : player.position) || (isDraftPick ? 'PICK' : '—'),
+        proTeam: (player === null || player === void 0 ? void 0 : player.proTeam) || (player === null || player === void 0 ? void 0 : player.team) || (player === null || player === void 0 ? void 0 : player.proTeamAbbrev) || (isDraftPick ? 'DRAFT' : 'NBA'),
+        photoUrl: (player === null || player === void 0 ? void 0 : player.photoUrl) || (player === null || player === void 0 ? void 0 : player.headshotUrl) || (player === null || player === void 0 ? void 0 : player.headshot) || (player === null || player === void 0 ? void 0 : player.playerPhoto) || workerPhotoUrl,
+        isDraftPick,
+        note: (player === null || player === void 0 ? void 0 : player.note) || '',
+        draftPlayerName: (player === null || player === void 0 ? void 0 : player.draftPlayerName) || '',
+        pickOverall: (player === null || player === void 0 ? void 0 : player.pickOverall) || null
     };
 }
 function buildTradePlayerLookup(players) {
@@ -14737,8 +14858,22 @@ function buildTradePlayerLookup(players) {
     return lookup;
 }
 function resolveTradePlayer(player, lookup) {
-    if (typeof player !== 'string')
+    if (typeof player !== 'string') {
+        if (player && player.isDraftPick && player.draftPlayerName) {
+            const resolved = resolveTradePlayer(player.draftPlayerName, lookup);
+            return normalizeTradePlayerForUi({
+                ...resolved,
+                ...player,
+                id: player.id || resolved.id,
+                photoUrl: player.photoUrl || resolved.photoUrl,
+                avg: Number(player.avg || 0) || resolved.avg,
+                proTeam: player.proTeam || resolved.proTeam,
+                position: player.position || resolved.position,
+                name: player.name || `Pick #${player.pickOverall} — ${player.draftPlayerName}`
+            });
+        }
         return normalizeTradePlayerForUi(player);
+    }
     const key = normalizeTradeName(player);
     const exact = lookup && lookup.get(key);
     if (exact)
@@ -14832,16 +14967,15 @@ function TradePlayersList({ players }) {
     }
     return (React.createElement(React.Fragment, null, list.map((player, index) => {
         const p = normalizeTradePlayerForUi(player);
-        return (React.createElement("div", { className: "trade-dynamic-player", key: `${p.id || p.name}-${index}` },
-            React.createElement(PlayerPhoto, { player: p, size: 38 }),
+        const meta = p.isDraftPick
+            ? `DRAFT • ${p.position || 'PICK'} • ${p.proTeam || 'NBA'} • AVG ${formatTradeScore(p.avg)}`
+            : `${p.proTeam || 'NBA'} • ${p.position || '—'} • AVG ${formatTradeScore(p.avg)}`;
+        return (React.createElement("div", { className: `trade-dynamic-player ${p.isDraftPick ? 'trade-dynamic-player-pick' : ''}`, key: `${p.id || p.name}-${index}` },
+            React.createElement(PlayerPhoto, { player: p, size: p.isDraftPick ? 42 : 38 }),
             React.createElement("div", null,
                 React.createElement("div", { className: "trade-dynamic-player-name" }, p.name),
-                React.createElement("div", { className: "trade-dynamic-player-meta" },
-                    p.isDraftPick ? 'DRAFT' : (p.proTeam || 'NBA'),
-                    " \u2022 ",
-                    p.position || '—',
-                    p.isDraftPick ? "" : " \u2022 AVG ",
-                    p.isDraftPick ? "" : formatTradeScore(p.avg)))));
+                React.createElement("div", { className: "trade-dynamic-player-meta" }, meta),
+                p.note ? React.createElement("div", { className: "trade-dynamic-player-note" }, p.note) : null)));
     })));
 }
 function TradeNewsCard({ trade }) {
@@ -17832,6 +17966,227 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "nbaTeam": "ORL",
         "boardMode": "yahoo",
         "selectedAt": "2026-09-01T18:52:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 164,
+        "airballRound": 11,
+        "airballRoundPick": 4,
+        "airballTeam": "Ghost of goat",
+        "airballOwner": "Ghost of goat",
+        "playerName": "Jaylen Wells",
+        "avg": 26.7,
+        "selectedAvg": 26.7,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "SF",
+        "nbaTeam": "MEM",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-09-02T15:52:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 165,
+        "airballRound": 11,
+        "airballRoundPick": 5,
+        "airballTeam": "Pato's Team",
+        "airballOwner": "Pato's Team",
+        "playerName": "Mikel Brown Jr.",
+        "avg": 26.9,
+        "selectedAvg": 26.9,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "PG",
+        "nbaTeam": "BKN",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-09-02T15:52:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 166,
+        "airballRound": 11,
+        "airballRoundPick": 6,
+        "airballTeam": "Instituto Popovich",
+        "airballOwner": "Instituto Popovich",
+        "playerName": "Kingston Flemings",
+        "avg": 23.3,
+        "selectedAvg": 23.3,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "SG",
+        "nbaTeam": "ATL",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-09-02T15:52:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 167,
+        "airballRound": 11,
+        "airballRoundPick": 7,
+        "airballTeam": "Pistons de Pira",
+        "airballOwner": "Pistons de Pira",
+        "playerName": "De'Anthony Melton",
+        "avg": 27.9,
+        "selectedAvg": 27.9,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "PG",
+        "nbaTeam": "GSW",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-09-02T15:52:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 168,
+        "airballRound": 11,
+        "airballRoundPick": 8,
+        "airballTeam": "Revolution francaise",
+        "airballOwner": "Revolution francaise",
+        "playerName": "Naji Marshall",
+        "avg": 24.5,
+        "selectedAvg": 24.5,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "SF",
+        "nbaTeam": "DAL",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-09-02T15:52:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 169,
+        "airballRound": 11,
+        "airballRoundPick": 9,
+        "airballTeam": "Acre Dinosaurs",
+        "airballOwner": "Acre Dinosaurs",
+        "playerName": "Isaiah Stewart",
+        "avg": 29.5,
+        "selectedAvg": 29.5,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "C",
+        "nbaTeam": "MEM",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-09-02T15:52:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 170,
+        "airballRound": 11,
+        "airballRoundPick": 10,
+        "airballTeam": "Team Djalma Jr",
+        "airballOwner": "Team Djalma Jr",
+        "playerName": "Bub Carrington",
+        "avg": 17.2,
+        "selectedAvg": 17.2,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "PG",
+        "nbaTeam": "WSH",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-09-02T15:52:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 171,
+        "airballRound": 11,
+        "airballRoundPick": 11,
+        "airballTeam": "Fi du Jequisom",
+        "airballOwner": "Fi du Jequisom",
+        "playerName": "Klay Thompson",
+        "avg": 23.0,
+        "selectedAvg": 23.0,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "SG",
+        "nbaTeam": "MIA",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-09-02T15:52:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 172,
+        "airballRound": 11,
+        "airballRoundPick": 12,
+        "airballTeam": "Stéfano's SuperSonics",
+        "airballOwner": "Stéfano's SuperSonics",
+        "playerName": "Adem Bona",
+        "avg": 22.2,
+        "selectedAvg": 22.2,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "C",
+        "nbaTeam": "PHI",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-09-02T15:52:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 173,
+        "airballRound": 11,
+        "airballRoundPick": 13,
+        "airballTeam": "Red Hot Blazer Peppers",
+        "airballOwner": "Red Hot Blazer Peppers",
+        "playerName": "Pelle Larsson",
+        "avg": 24.8,
+        "selectedAvg": 24.8,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "SG",
+        "nbaTeam": "MIA",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-09-02T15:52:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 174,
+        "airballRound": 11,
+        "airballRoundPick": 14,
+        "airballTeam": "Chugabum Ironclads",
+        "airballOwner": "Chugabum Ironclads",
+        "playerName": "T.J. McConnell",
+        "avg": 22.7,
+        "selectedAvg": 22.7,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "PG",
+        "nbaTeam": "IND",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-09-02T15:52:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 175,
+        "airballRound": 11,
+        "airballRoundPick": 15,
+        "airballTeam": "Nortz",
+        "airballOwner": "Nortz",
+        "playerName": "Max Christie",
+        "avg": 21.1,
+        "selectedAvg": 21.1,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "SG",
+        "nbaTeam": "DAL",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-09-02T15:52:00.000-03:00"
+    },
+    {
+        "manual": true,
+        "airballMapped": true,
+        "airballOverall": 176,
+        "airballRound": 11,
+        "airballRoundPick": 16,
+        "airballTeam": "Canalhas do Bem",
+        "airballOwner": "Canalhas do Bem",
+        "playerName": "Walter Clayton Jr.",
+        "avg": 17.0,
+        "selectedAvg": 17.0,
+        "selectedAvgLabel": "AVG Yahoo",
+        "position": "PG/SG",
+        "nbaTeam": "MEM",
+        "boardMode": "yahoo",
+        "selectedAt": "2026-09-02T15:52:00.000-03:00"
     }
 ];
 
@@ -17921,7 +18276,7 @@ function LiveDraftPage() {
     const [livePicks, setLivePicks] = useState([]);
     const [picksStatus, setPicksStatus] = useState('Aguardando início do draft');
     const [workerClock, setWorkerClock] = useState(null);
-    const MANUAL_PICKS_STORAGE_KEY = 'airball-live-manual-picks-v20-after-pick163';
+    const MANUAL_PICKS_STORAGE_KEY = 'airball-live-manual-picks-v22-after-pick176-drafted';
     const [manualDraftPicks, setManualDraftPicks] = useState(() => {
         try {
             const saved = window.localStorage ? window.localStorage.getItem(MANUAL_PICKS_STORAGE_KEY) : null;
