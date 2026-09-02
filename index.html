@@ -11435,6 +11435,45 @@
   overflow: hidden !important;
 }
 
+
+/* ==================== PLAYER PHOTO API + BETTER CROP V8 ==================== */
+.drafted-roster-card {
+  grid-template-columns: 28px 74px 1fr;
+  min-height: 86px;
+  overflow: hidden;
+}
+.drafted-roster-card .trade-player-photo {
+  width: 74px !important;
+  height: 76px !important;
+  max-width: 74px !important;
+  max-height: 76px !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  align-self: center;
+}
+.drafted-roster-card .trade-player-photo img {
+  width: 102px !important;
+  height: 104px !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  transform: translate(-14px, 1px) scale(1.12);
+  filter: drop-shadow(0 10px 11px rgba(0,0,0,0.42));
+}
+.drafted-roster-card .trade-player-photo-fallback {
+  width: 58px !important;
+  height: 58px !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+  background: rgba(249,115,22,0.24) !important;
+  border: 1px solid rgba(249,115,22,0.30) !important;
+  align-self: center;
+}
+
 </style>
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20128%20128%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id=%22g%22%20x1=%220%22%20y1=%220%22%20x2=%221%22%20y2=%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%220%%22%20stop-color=%22#2d0a4e%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%2255%%22%20stop-color=%22#5b21b6%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset=%22100%%22%20stop-color=%22#f97316%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Ccircle%20cx=%2264%22%20cy=%2264%22%20r=%2258%22%20fill=%22url(#g)%22/%3E%0A%20%20%3Ccircle%20cx=%2264%22%20cy=%2264%22%20r=%2248%22%20fill=%22none%22%20stroke=%22#f97316%22%20stroke-width=%228%22/%3E%0A%20%20%3Cpath%20d=%22M22%2064h84M64%2016c18%2017%2027%2033%2027%2048s-9%2031-27%2048M64%2016C46%2033%2037%2049%2037%2064s9%2031%2027%2048%22%0A%20%20%20%20%20%20%20%20fill=%22none%22%20stroke=%22#ffffff%22%20stroke-width=%225%22%20opacity=%22.92%22%20stroke-linecap=%22round%22/%3E%0A%20%20%3Ctext%20x=%2264%22%20y=%2278%22%20text-anchor=%22middle%22%20font-family=%22Arial%20Black,%20Impact,%20sans-serif%22%0A%20%20%20%20%20%20%20%20font-size=%2239%22%20font-weight=%22900%22%20fill=%22#fff%22%20stroke=%22#2d0a4e%22%20stroke-width=%223%22%20paint-order=%22stroke%22%3EA%3C/text%3E%0A%3C/svg%3E">
@@ -22163,6 +22202,51 @@ function DraftedPage() {
     const e = React.createElement;
     const boardRef = useRef(null);
     const [expandedRounds, setExpandedRounds] = useState({});
+    const [espnPhotoByName, setEspnPhotoByName] = useState({});
+
+    useEffect(() => {
+        let cancelled = false;
+        const extractPlayerName = (raw = {}) => {
+            const nested = raw.player && typeof raw.player === 'object' ? raw.player : {};
+            return raw.fullName || raw.displayName || raw.name || raw.playerName || nested.fullName || nested.displayName || nested.name || '';
+        };
+        const extractPlayerId = (raw = {}) => {
+            const nested = raw.player && typeof raw.player === 'object' ? raw.player : {};
+            return raw.id || raw.playerId || raw.espnId || nested.id || nested.playerId || nested.espnId || '';
+        };
+        const extractPlayerPhoto = (raw = {}, id = '') => {
+            const nested = raw.player && typeof raw.player === 'object' ? raw.player : {};
+            const direct = raw.photoUrl || raw.headshotUrl || raw.playerPhoto || raw.photo || raw.image || nested.photoUrl || nested.headshotUrl || nested.playerPhoto || nested.photo || nested.image || '';
+            if (direct)
+                return direct;
+            try {
+                const origin = new URL(DRAFT_PLAYERS_API_URL).origin;
+                return id ? `${origin}/player-photo/${id}` : '';
+            } catch (err) {
+                return '';
+            }
+        };
+        fetch(DRAFT_PLAYERS_API_URL)
+            .then(res => res.ok ? res.json() : Promise.reject(new Error('players api')))
+            .then(payload => {
+                const list = Array.isArray(payload) ? payload : (payload.players || payload.items || payload.athletes || []);
+                const next = {};
+                list.forEach(raw => {
+                    const name = extractPlayerName(raw);
+                    const id = extractPlayerId(raw);
+                    const photo = extractPlayerPhoto(raw, id);
+                    if (name && photo)
+                        next[normalizeTeamKey(name)] = photo;
+                });
+                if (!cancelled)
+                    setEspnPhotoByName(next);
+            })
+            .catch(() => {
+                if (!cancelled)
+                    setEspnPhotoByName({});
+            });
+        return () => { cancelled = true; };
+    }, []);
 
     const playerPhotoIdMap = {
         'jimmy butler iii': '6430',
@@ -22313,8 +22397,11 @@ function DraftedPage() {
     };
 
     const getPhotoUrl = (name) => {
-        const id = playerPhotoIdMap[normalizeTeamKey(name)];
-        return id ? `https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/${id}.png&w=96&h=70&cb=1` : '';
+        const normalized = normalizeTeamKey(name);
+        const id = playerPhotoIdMap[normalized];
+        if (id)
+            return `https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/${id}.png&w=96&h=70&cb=1`;
+        return espnPhotoByName[normalized] || '';
     };
     const fmtAvg = (value) => Number(value || 0).toFixed(1).replace('.', ',');
     const firstPosition = (pos) => String(pos || '—').split(/[\/,\s]+/).filter(Boolean)[0] || '—';
