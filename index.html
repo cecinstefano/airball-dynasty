@@ -17095,6 +17095,7 @@ const LIVE_DRAFT_PICKS_MANUAL = [
         "manual": true,
         "airballMapped": true,
         "airballOverall": 165,
+        "draftedByTeam": "Acre Dinosaurs",
         "airballRound": 11,
         "airballRoundPick": 5,
         "airballTeam": "Pato's Team",
@@ -22505,7 +22506,7 @@ const DA = (() => {
         const choices=ledger.map(p=>{
             const player=(p.playerId?players.find(x=>String(x.id)===String(p.playerId)):null)||choiceNames.get(key(p.playerName));
             return {player:player||{name:p.playerName,central:null,avg2025:null,floor:null,ceiling:null,photo:fallbackPhoto},
-                owner:teamFor(p.airballTeam || p.airballOwner),round:number(p.airballRound),pick:number(p.airballOverall),position:p.position};
+                owner:teamFor(p.draftedByTeam || p.airballTeam || p.airballOwner),round:number(p.airballRound),pick:number(p.airballOverall),position:p.position};
         }).filter(p=>p.round>0&&p.pick>0);
         const choicesById=new Map(choices.filter(c=>c.player.id).map(c=>[String(c.player.id),c]));
         players.forEach(p=>{p.choice=choicesById.get(String(p.id));p.position=p.position||p.choice?.position||'N/D';});
