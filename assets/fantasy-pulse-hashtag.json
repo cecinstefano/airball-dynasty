@@ -1,0 +1,1506 @@
+{
+  "source": "Hashtag — arquivo fornecido pelo usuário",
+  "importedOn": "2026-09-05",
+  "players": [
+    {
+      "id": "3112335",
+      "name": "Nikola Jokic",
+      "avg": 72.3
+    },
+    {
+      "id": "3945274",
+      "name": "Luka Doncic",
+      "avg": 65.5
+    },
+    {
+      "id": "3032977",
+      "name": "Giannis Antetokounmpo",
+      "avg": 65.1
+    },
+    {
+      "id": "4278073",
+      "name": "Shai Gilgeous-Alexander",
+      "avg": 62.2
+    },
+    {
+      "id": "5104157",
+      "name": "Victor Wembanyama",
+      "avg": 61.5
+    },
+    {
+      "id": "4432166",
+      "name": "Cade Cunningham",
+      "avg": 53.7
+    },
+    {
+      "id": "4065648",
+      "name": "Jayson Tatum",
+      "avg": 52.3
+    },
+    {
+      "id": "6583",
+      "name": "Anthony Davis",
+      "avg": 51.7
+    },
+    {
+      "id": "4701230",
+      "name": "Jalen Johnson",
+      "avg": 49.8
+    },
+    {
+      "id": "4594268",
+      "name": "Anthony Edwards",
+      "avg": 48.8
+    },
+    {
+      "id": "3908809",
+      "name": "Donovan Mitchell",
+      "avg": 48.5
+    },
+    {
+      "id": "5041939",
+      "name": "Cooper Flagg",
+      "avg": 48.3
+    },
+    {
+      "id": "4871144",
+      "name": "Alperen Sengün",
+      "avg": 48.1
+    },
+    {
+      "id": "4433134",
+      "name": "Scottie Barnes",
+      "avg": 47.4
+    },
+    {
+      "id": "4431678",
+      "name": "Tyrese Maxey",
+      "avg": 47.4
+    },
+    {
+      "id": "4277905",
+      "name": "Trae Young",
+      "avg": 47.3
+    },
+    {
+      "id": "4432158",
+      "name": "Evan Mobley",
+      "avg": 46.9
+    },
+    {
+      "id": "4396993",
+      "name": "Tyrese Haliburton",
+      "avg": 46.9
+    },
+    {
+      "id": "3136195",
+      "name": "Karl-Anthony Towns",
+      "avg": 46.5
+    },
+    {
+      "id": "3936299",
+      "name": "Jamal Murray",
+      "avg": 46.1
+    },
+    {
+      "id": "3934672",
+      "name": "Jalen Brunson",
+      "avg": 45.2
+    },
+    {
+      "id": "3202",
+      "name": "Kevin Durant",
+      "avg": 45.1
+    },
+    {
+      "id": "4432573",
+      "name": "Paolo Banchero",
+      "avg": 44.7
+    },
+    {
+      "id": "1966",
+      "name": "LeBron James",
+      "avg": 44.6
+    },
+    {
+      "id": "4871145",
+      "name": "Josh Giddey",
+      "avg": 44.5
+    },
+    {
+      "id": "3975",
+      "name": "Stephen Curry",
+      "avg": 44.4
+    },
+    {
+      "id": "4684740",
+      "name": "Amen Thompson",
+      "avg": 44.2
+    },
+    {
+      "id": "3149673",
+      "name": "Pascal Siakam",
+      "avg": 44.2
+    },
+    {
+      "id": "3992",
+      "name": "James Harden",
+      "avg": 43.8
+    },
+    {
+      "id": "3155942",
+      "name": "Domantas Sabonis",
+      "avg": 43.6
+    },
+    {
+      "id": "6450",
+      "name": "Kawhi Leonard",
+      "avg": 43.5
+    },
+    {
+      "id": "4066261",
+      "name": "Bam Adebayo",
+      "avg": 43.4
+    },
+    {
+      "id": "4395628",
+      "name": "Zion Williamson",
+      "avg": 43.3
+    },
+    {
+      "id": "4433621",
+      "name": "Jalen Duren",
+      "avg": 43.2
+    },
+    {
+      "id": "3136193",
+      "name": "Devin Booker",
+      "avg": 43
+    },
+    {
+      "id": "4593803",
+      "name": "Jalen Williams",
+      "avg": 42.8
+    },
+    {
+      "id": "4433255",
+      "name": "Chet Holmgren",
+      "avg": 42.3
+    },
+    {
+      "id": "4066457",
+      "name": "Austin Reaves",
+      "avg": 42.2
+    },
+    {
+      "id": "4566434",
+      "name": "Franz Wagner",
+      "avg": 42.1
+    },
+    {
+      "id": "4397688",
+      "name": "Trey Murphy III",
+      "avg": 42
+    },
+    {
+      "id": "4277961",
+      "name": "Jaren Jackson Jr.",
+      "avg": 41.8
+    },
+    {
+      "id": "3907497",
+      "name": "Dejounte Murray",
+      "avg": 41.2
+    },
+    {
+      "id": "4396907",
+      "name": "Darius Garland",
+      "avg": 40.8
+    },
+    {
+      "id": "4066336",
+      "name": "Lauri Markkanen",
+      "avg": 40.8
+    },
+    {
+      "id": "6442",
+      "name": "Kyrie Irving",
+      "avg": 40.7
+    },
+    {
+      "id": "4432816",
+      "name": "LaMelo Ball",
+      "avg": 40.6
+    },
+    {
+      "id": "3917376",
+      "name": "Jaylen Brown",
+      "avg": 39.9
+    },
+    {
+      "id": "3059318",
+      "name": "Joel Embiid",
+      "avg": 39.5
+    },
+    {
+      "id": "3913176",
+      "name": "Brandon Ingram",
+      "avg": 39.4
+    },
+    {
+      "id": "4683021",
+      "name": "Deni Avdija",
+      "avg": 39.3
+    },
+    {
+      "id": "4433136",
+      "name": "Walker Kessler",
+      "avg": 39.3
+    },
+    {
+      "id": "4395725",
+      "name": "Tyler Herro",
+      "avg": 39.2
+    },
+    {
+      "id": "4017837",
+      "name": "Ivica Zubac",
+      "avg": 39.2
+    },
+    {
+      "id": "4066320",
+      "name": "Desmond Bane",
+      "avg": 38.8
+    },
+    {
+      "id": "3078576",
+      "name": "Derrick White",
+      "avg": 38.8
+    },
+    {
+      "id": "3064514",
+      "name": "Julius Randle",
+      "avg": 38.5
+    },
+    {
+      "id": "4066259",
+      "name": "De'Aaron Fox",
+      "avg": 38.5
+    },
+    {
+      "id": "5041935",
+      "name": "Cameron Boozer",
+      "avg": 38.3
+    },
+    {
+      "id": "4395724",
+      "name": "Immanuel Quickley",
+      "avg": 38.3
+    },
+    {
+      "id": "6430",
+      "name": "Jimmy Butler III",
+      "avg": 37.9
+    },
+    {
+      "id": "5105565",
+      "name": "Donovan Clingan",
+      "avg": 37.8
+    },
+    {
+      "id": "4600663",
+      "name": "Zach Edey",
+      "avg": 37.7
+    },
+    {
+      "id": "4395625",
+      "name": "RJ Barrett",
+      "avg": 37.6
+    },
+    {
+      "id": "4431680",
+      "name": "Onyeka Okongwu",
+      "avg": 37.5
+    },
+    {
+      "id": "3102531",
+      "name": "Kristaps Porzingis",
+      "avg": 37.3
+    },
+    {
+      "id": "4278039",
+      "name": "Nickeil Alexander-Walker",
+      "avg": 37.1
+    },
+    {
+      "id": "4251",
+      "name": "Paul George",
+      "avg": 37.1
+    },
+    {
+      "id": "4279888",
+      "name": "Ja Morant",
+      "avg": 37.1
+    },
+    {
+      "id": "3032976",
+      "name": "Rudy Gobert",
+      "avg": 36.9
+    },
+    {
+      "id": "4845367",
+      "name": "Stephon Castle",
+      "avg": 36.9
+    },
+    {
+      "id": "4433287",
+      "name": "Brandon Miller",
+      "avg": 36.8
+    },
+    {
+      "id": "4433627",
+      "name": "Keyonte George",
+      "avg": 36.7
+    },
+    {
+      "id": "4869342",
+      "name": "Dyson Daniels",
+      "avg": 36.7
+    },
+    {
+      "id": "4278104",
+      "name": "Michael Porter Jr.",
+      "avg": 36.7
+    },
+    {
+      "id": "5105623",
+      "name": "Kel'el Ware",
+      "avg": 36.4
+    },
+    {
+      "id": "4711294",
+      "name": "Matas Buzelis",
+      "avg": 36.3
+    },
+    {
+      "id": "6606",
+      "name": "Damian Lillard",
+      "avg": 36.2
+    },
+    {
+      "id": "5160992",
+      "name": "Alexandre Sarr",
+      "avg": 36.1
+    },
+    {
+      "id": "4432194",
+      "name": "Day'Ron Sharpe",
+      "avg": 36
+    },
+    {
+      "id": "5061575",
+      "name": "Kon Knueppel",
+      "avg": 35.9
+    },
+    {
+      "id": "4066328",
+      "name": "Jarrett Allen",
+      "avg": 35.9
+    },
+    {
+      "id": "4222252",
+      "name": "Isaiah Hartenstein",
+      "avg": 35.7
+    },
+    {
+      "id": "4396971",
+      "name": "Naz Reid",
+      "avg": 35.7
+    },
+    {
+      "id": "4684742",
+      "name": "Ausar Thompson",
+      "avg": 35.7
+    },
+    {
+      "id": "4065733",
+      "name": "Ty Jerome",
+      "avg": 35.6
+    },
+    {
+      "id": "5095151",
+      "name": "Caleb Wilson",
+      "avg": 35.6
+    },
+    {
+      "id": "3059319",
+      "name": "Andrew Wiggins",
+      "avg": 35.5
+    },
+    {
+      "id": "5124612",
+      "name": "VJ Edgecombe",
+      "avg": 35.4
+    },
+    {
+      "id": "3062679",
+      "name": "Josh Hart",
+      "avg": 35.1
+    },
+    {
+      "id": "4432165",
+      "name": "Jalen Suggs",
+      "avg": 35
+    },
+    {
+      "id": "4591725",
+      "name": "Ryan Rollins",
+      "avg": 34.9
+    },
+    {
+      "id": "3934719",
+      "name": "OG Anunoby",
+      "avg": 34.9
+    },
+    {
+      "id": "3064440",
+      "name": "Zach LaVine",
+      "avg": 34.8
+    },
+    {
+      "id": "5037871",
+      "name": "Dylan Harper",
+      "avg": 34.8
+    },
+    {
+      "id": "4066383",
+      "name": "Miles Bridges",
+      "avg": 34.6
+    },
+    {
+      "id": "3134908",
+      "name": "Jakob Poeltl",
+      "avg": 34.4
+    },
+    {
+      "id": "4395651",
+      "name": "Coby White",
+      "avg": 34.4
+    },
+    {
+      "id": "4431671",
+      "name": "Jaden McDaniels",
+      "avg": 34.4
+    },
+    {
+      "id": "4701232",
+      "name": "Mark Williams",
+      "avg": 34.3
+    },
+    {
+      "id": "4066354",
+      "name": "Payton Pritchard",
+      "avg": 34.3
+    },
+    {
+      "id": "2490149",
+      "name": "CJ McCollum",
+      "avg": 34.1
+    },
+    {
+      "id": "2595516",
+      "name": "Norman Powell",
+      "avg": 33.8
+    },
+    {
+      "id": "4278067",
+      "name": "Nicolas Claxton",
+      "avg": 33.8
+    },
+    {
+      "id": "4869780",
+      "name": "Derik Queen",
+      "avg": 33.7
+    },
+    {
+      "id": "3102530",
+      "name": "Jusuf Nurkic",
+      "avg": 33.6
+    },
+    {
+      "id": "4594327",
+      "name": "Keegan Murray",
+      "avg": 33.6
+    },
+    {
+      "id": "4709138",
+      "name": "Brandin Podziemski",
+      "avg": 33.1
+    },
+    {
+      "id": "3908845",
+      "name": "John Collins",
+      "avg": 33
+    },
+    {
+      "id": "4437244",
+      "name": "Jalen Green",
+      "avg": 33
+    },
+    {
+      "id": "4900671",
+      "name": "Ajay Mitchell",
+      "avg": 32.6
+    },
+    {
+      "id": "5093267",
+      "name": "Collin Murray-Boyles",
+      "avg": 32.6
+    },
+    {
+      "id": "4903027",
+      "name": "Cedric Coward",
+      "avg": 32.5
+    },
+    {
+      "id": "4432639",
+      "name": "Jabari Smith Jr.",
+      "avg": 32.2
+    },
+    {
+      "id": "4278580",
+      "name": "Sandro Mamukelashvili",
+      "avg": 32
+    },
+    {
+      "id": "3147657",
+      "name": "Mikal Bridges",
+      "avg": 32
+    },
+    {
+      "id": "4432848",
+      "name": "Jaime Jaquez Jr.",
+      "avg": 31.9
+    },
+    {
+      "id": "4395712",
+      "name": "Andrew Nembhard",
+      "avg": 31.8
+    },
+    {
+      "id": "4397136",
+      "name": "Saddiq Bey",
+      "avg": 31.7
+    },
+    {
+      "id": "4397424",
+      "name": "Neemias Queta",
+      "avg": 31.7
+    },
+    {
+      "id": "4395626",
+      "name": "Tre Jones",
+      "avg": 31.6
+    },
+    {
+      "id": "3133628",
+      "name": "Myles Turner",
+      "avg": 31.6
+    },
+    {
+      "id": "3138196",
+      "name": "Cameron Johnson",
+      "avg": 31.5
+    },
+    {
+      "id": "4278078",
+      "name": "P.J. Washington",
+      "avg": 31.4
+    },
+    {
+      "id": "4065732",
+      "name": "De'Andre Hunter",
+      "avg": 31.3
+    },
+    {
+      "id": "4351852",
+      "name": "Mitchell Robinson",
+      "avg": 31
+    },
+    {
+      "id": "4397014",
+      "name": "Quentin Grimes",
+      "avg": 30.9
+    },
+    {
+      "id": "3064290",
+      "name": "Aaron Gordon",
+      "avg": 30.9
+    },
+    {
+      "id": "2991230",
+      "name": "Fred VanVleet",
+      "avg": 30.8
+    },
+    {
+      "id": "4712849",
+      "name": "Anthony Black",
+      "avg": 30.7
+    },
+    {
+      "id": "4397140",
+      "name": "Kevin Porter Jr.",
+      "avg": 30.7
+    },
+    {
+      "id": "4431767",
+      "name": "Christian Braun",
+      "avg": 30.6
+    },
+    {
+      "id": "4997536",
+      "name": "Gui Santos",
+      "avg": 30.4
+    },
+    {
+      "id": "4433247",
+      "name": "Jonathan Kuminga",
+      "avg": 30.3
+    },
+    {
+      "id": "6589",
+      "name": "Draymond Green",
+      "avg": 30.2
+    },
+    {
+      "id": "4395630",
+      "name": "Devin Vassell",
+      "avg": 30.1
+    },
+    {
+      "id": "4593125",
+      "name": "Santi Aldama",
+      "avg": 29.7
+    },
+    {
+      "id": "3995",
+      "name": "Jrue Holiday",
+      "avg": 29.7
+    },
+    {
+      "id": "4431736",
+      "name": "Toumani Camara",
+      "avg": 29.6
+    },
+    {
+      "id": "3064482",
+      "name": "Bobby Portis",
+      "avg": 29.5
+    },
+    {
+      "id": "4576087",
+      "name": "Peyton Watson",
+      "avg": 29.5
+    },
+    {
+      "id": "3978",
+      "name": "DeMar DeRozan",
+      "avg": 29.4
+    },
+    {
+      "id": "4277847",
+      "name": "Wendell Carter Jr.",
+      "avg": 29.3
+    },
+    {
+      "id": "4278585",
+      "name": "Collin Gillespie",
+      "avg": 29.1
+    },
+    {
+      "id": "4278594",
+      "name": "Naji Marshall",
+      "avg": 28.8
+    },
+    {
+      "id": "4683692",
+      "name": "Cason Wallace",
+      "avg": 28.8
+    },
+    {
+      "id": "3155526",
+      "name": "Dillon Brooks",
+      "avg": 28.8
+    },
+    {
+      "id": "5142620",
+      "name": "Darius Acuff Jr.",
+      "avg": 28.7
+    },
+    {
+      "id": "4278562",
+      "name": "Paul Reed",
+      "avg": 28.7
+    },
+    {
+      "id": "4711272",
+      "name": "Reed Sheppard",
+      "avg": 28.6
+    },
+    {
+      "id": "4066262",
+      "name": "Malik Monk",
+      "avg": 28.5
+    },
+    {
+      "id": "5174563",
+      "name": "Kyshawn George",
+      "avg": 28.4
+    },
+    {
+      "id": "4433249",
+      "name": "Moussa Diabaté",
+      "avg": 28.3
+    },
+    {
+      "id": "5175643",
+      "name": "Egor Demin",
+      "avg": 28.1
+    },
+    {
+      "id": "4433083",
+      "name": "Cam Spencer",
+      "avg": 28
+    },
+    {
+      "id": "5041955",
+      "name": "Darryn Peterson",
+      "avg": 28
+    },
+    {
+      "id": "4396909",
+      "name": "Aaron Nesmith",
+      "avg": 27.8
+    },
+    {
+      "id": "4397002",
+      "name": "Ayo Dosunmu",
+      "avg": 27.6
+    },
+    {
+      "id": "5107199",
+      "name": "Daniss Jenkins",
+      "avg": 27.4
+    },
+    {
+      "id": "4278053",
+      "name": "Davion Mitchell",
+      "avg": 27.3
+    },
+    {
+      "id": "4433192",
+      "name": "Tari Eason",
+      "avg": 27.2
+    },
+    {
+      "id": "4914336",
+      "name": "Shaedon Sharpe",
+      "avg": 27.1
+    },
+    {
+      "id": "4278049",
+      "name": "Daniel Gafford",
+      "avg": 26.8
+    },
+    {
+      "id": "4873138",
+      "name": "Ace Bailey",
+      "avg": 26.7
+    },
+    {
+      "id": "6580",
+      "name": "Bradley Beal",
+      "avg": 26.7
+    },
+    {
+      "id": "4683688",
+      "name": "Dereck Lively II",
+      "avg": 26.6
+    },
+    {
+      "id": "6440",
+      "name": "Tobias Harris",
+      "avg": 26.5
+    },
+    {
+      "id": "3133603",
+      "name": "Kelly Oubre Jr.",
+      "avg": 26.5
+    },
+    {
+      "id": "4683678",
+      "name": "Scoot Henderson",
+      "avg": 26.4
+    },
+    {
+      "id": "5279133",
+      "name": "Joan Beringer",
+      "avg": 26.3
+    },
+    {
+      "id": "4431785",
+      "name": "Scotty Pippen Jr.",
+      "avg": 26.1
+    },
+    {
+      "id": "5142718",
+      "name": "AJ Dybantsa",
+      "avg": 26
+    },
+    {
+      "id": "5144091",
+      "name": "Jeremiah Fears",
+      "avg": 26
+    },
+    {
+      "id": "4432823",
+      "name": "Jaylin Williams",
+      "avg": 26
+    },
+    {
+      "id": "6478",
+      "name": "Nikola Vucevic",
+      "avg": 25.9
+    },
+    {
+      "id": "4351851",
+      "name": "Anfernee Simons",
+      "avg": 25.7
+    },
+    {
+      "id": "2991070",
+      "name": "Jerami Grant",
+      "avg": 25.5
+    },
+    {
+      "id": "4432810",
+      "name": "Isaiah Stewart",
+      "avg": 25.5
+    },
+    {
+      "id": "4277811",
+      "name": "Collin Sexton",
+      "avg": 25.5
+    },
+    {
+      "id": "4066211",
+      "name": "Robert Williams III",
+      "avg": 25.2
+    },
+    {
+      "id": "4065778",
+      "name": "Max Strus",
+      "avg": 25.1
+    },
+    {
+      "id": "4278355",
+      "name": "Obi Toppin",
+      "avg": 25
+    },
+    {
+      "id": "4066436",
+      "name": "De'Anthony Melton",
+      "avg": 25
+    },
+    {
+      "id": "3135045",
+      "name": "Grayson Allen",
+      "avg": 24.9
+    },
+    {
+      "id": "4683778",
+      "name": "Jared McCain",
+      "avg": 24.9
+    },
+    {
+      "id": "5104155",
+      "name": "Bilal Coulibaly",
+      "avg": 24.9
+    },
+    {
+      "id": "4395702",
+      "name": "Isaiah Joe",
+      "avg": 24.8
+    },
+    {
+      "id": "4395723",
+      "name": "Keldon Johnson",
+      "avg": 24.7
+    },
+    {
+      "id": "4277813",
+      "name": "Herbert Jones",
+      "avg": 24.5
+    },
+    {
+      "id": "4066648",
+      "name": "Rui Hachimura",
+      "avg": 24.4
+    },
+    {
+      "id": "4592479",
+      "name": "Julian Champagnie",
+      "avg": 24.4
+    },
+    {
+      "id": "3157465",
+      "name": "Duncan Robinson",
+      "avg": 24.3
+    },
+    {
+      "id": "4898371",
+      "name": "Maxime Raynaud",
+      "avg": 24.3
+    },
+    {
+      "id": "5108024",
+      "name": "Yanic Konan Niederhauser",
+      "avg": 24.2
+    },
+    {
+      "id": "3032979",
+      "name": "Dennis Schröder",
+      "avg": 24.1
+    },
+    {
+      "id": "5175737",
+      "name": "Yaxel Lendeborg",
+      "avg": 24.1
+    },
+    {
+      "id": "5101761",
+      "name": "Mikel Brown Jr.",
+      "avg": 24.1
+    },
+    {
+      "id": "5149115",
+      "name": "Allen Graves",
+      "avg": 24
+    },
+    {
+      "id": "5061589",
+      "name": "Yves Missi",
+      "avg": 23.9
+    },
+    {
+      "id": "3064560",
+      "name": "Luke Kornet",
+      "avg": 23.7
+    },
+    {
+      "id": "4683634",
+      "name": "Bennedict Mathurin",
+      "avg": 23.7
+    },
+    {
+      "id": "6585",
+      "name": "Andre Drummond",
+      "avg": 23.7
+    },
+    {
+      "id": "4432582",
+      "name": "Max Christie",
+      "avg": 23.7
+    },
+    {
+      "id": "3936099",
+      "name": "Derrick Jones Jr.",
+      "avg": 23.3
+    },
+    {
+      "id": "4431823",
+      "name": "Miles McBride",
+      "avg": 23.2
+    },
+    {
+      "id": "5112087",
+      "name": "Jaylen Wells",
+      "avg": 23.1
+    },
+    {
+      "id": "4278129",
+      "name": "Deandre Ayton",
+      "avg": 23
+    },
+    {
+      "id": "5107173",
+      "name": "Danny Wolf",
+      "avg": 22.9
+    },
+    {
+      "id": "2583632",
+      "name": "Royce O'Neale",
+      "avg": 22.8
+    },
+    {
+      "id": "4397183",
+      "name": "Aaron Wiggins",
+      "avg": 22.7
+    },
+    {
+      "id": "4066757",
+      "name": "Sam Merrill",
+      "avg": 22.6
+    },
+    {
+      "id": "4432241",
+      "name": "Jamal Shead",
+      "avg": 22.6
+    },
+    {
+      "id": "2528210",
+      "name": "Tim Hardaway Jr.",
+      "avg": 22.6
+    },
+    {
+      "id": "5211175",
+      "name": "Zaccharie Risacher",
+      "avg": 22.5
+    },
+    {
+      "id": "2990992",
+      "name": "Marcus Smart",
+      "avg": 22.5
+    },
+    {
+      "id": "4431679",
+      "name": "Precious Achiuwa",
+      "avg": 22.3
+    },
+    {
+      "id": "2991139",
+      "name": "Kris Dunn",
+      "avg": 22.1
+    },
+    {
+      "id": "4278402",
+      "name": "Jordan Goodwin",
+      "avg": 22.1
+    },
+    {
+      "id": "5105839",
+      "name": "Brice Sensabaugh",
+      "avg": 22
+    },
+    {
+      "id": "4397189",
+      "name": "Jalen Smith",
+      "avg": 22
+    },
+    {
+      "id": "4576060",
+      "name": "Ryan Kalkbrenner",
+      "avg": 21.9
+    },
+    {
+      "id": "2530530",
+      "name": "T.J. McConnell",
+      "avg": 21.8
+    },
+    {
+      "id": "4065731",
+      "name": "Jay Huff",
+      "avg": 21.8
+    },
+    {
+      "id": "2991350",
+      "name": "Alex Caruso",
+      "avg": 21.8
+    },
+    {
+      "id": "4592492",
+      "name": "Bones Hyland",
+      "avg": 21.8
+    },
+    {
+      "id": "4601025",
+      "name": "Pelle Larsson",
+      "avg": 21.6
+    },
+    {
+      "id": "5254165",
+      "name": "Keaton Wagler",
+      "avg": 21.3
+    },
+    {
+      "id": "5106060",
+      "name": "Jarace Walker",
+      "avg": 21.2
+    },
+    {
+      "id": "4683747",
+      "name": "Jaylon Tyson",
+      "avg": 21.2
+    },
+    {
+      "id": "2991235",
+      "name": "Steven Adams",
+      "avg": 21.1
+    },
+    {
+      "id": "4684272",
+      "name": "Ja'Kobe Walter",
+      "avg": 21
+    },
+    {
+      "id": "4066993",
+      "name": "Dru Smith",
+      "avg": 20.9
+    },
+    {
+      "id": "2993874",
+      "name": "Kyle Anderson",
+      "avg": 20.9
+    },
+    {
+      "id": "4432171",
+      "name": "Moses Moody",
+      "avg": 20.8
+    },
+    {
+      "id": "3150844",
+      "name": "Moritz Wagner",
+      "avg": 20.7
+    },
+    {
+      "id": "3448",
+      "name": "Brook Lopez",
+      "avg": 20.7
+    },
+    {
+      "id": "4397886",
+      "name": "Charles Bassey",
+      "avg": 20.7
+    },
+    {
+      "id": "4277848",
+      "name": "Marvin Bagley III",
+      "avg": 20.5
+    },
+    {
+      "id": "4348700",
+      "name": "Goga Bitadze",
+      "avg": 20.5
+    },
+    {
+      "id": "4712896",
+      "name": "Noah Clowney",
+      "avg": 20.4
+    },
+    {
+      "id": "4702384",
+      "name": "Nique Clifford",
+      "avg": 20.4
+    },
+    {
+      "id": "3134907",
+      "name": "Kyle Kuzma",
+      "avg": 20.1
+    },
+    {
+      "id": "3134903",
+      "name": "Gary Payton II",
+      "avg": 20
+    },
+    {
+      "id": "4432822",
+      "name": "Isaac Okoro",
+      "avg": 19.8
+    },
+    {
+      "id": "4684793",
+      "name": "Kyle Filipowski",
+      "avg": 19.7
+    },
+    {
+      "id": "4433174",
+      "name": "Dylan Cardwell",
+      "avg": 19.7
+    },
+    {
+      "id": "3213",
+      "name": "Al Horford",
+      "avg": 19.6
+    },
+    {
+      "id": "4683771",
+      "name": "Ron Holland II",
+      "avg": 19.6
+    },
+    {
+      "id": "4277956",
+      "name": "Jordan Poole",
+      "avg": 19.5
+    },
+    {
+      "id": "4397020",
+      "name": "Luguentz Dort",
+      "avg": 19.5
+    },
+    {
+      "id": "5082206",
+      "name": "Brayden Burries",
+      "avg": 19.4
+    },
+    {
+      "id": "5105637",
+      "name": "Adem Bona",
+      "avg": 19.3
+    },
+    {
+      "id": "4065804",
+      "name": "Sam Hauser",
+      "avg": 19.2
+    },
+    {
+      "id": "5238230",
+      "name": "Tre Johnson",
+      "avg": 19
+    },
+    {
+      "id": "4066372",
+      "name": "Kevin Huerter",
+      "avg": 18.9
+    },
+    {
+      "id": "4683766",
+      "name": "Isaiah Collier",
+      "avg": 18.8
+    },
+    {
+      "id": "4432170",
+      "name": "Isaiah Jackson",
+      "avg": 18.8
+    },
+    {
+      "id": "3907498",
+      "name": "Matisse Thybulle",
+      "avg": 18.8
+    },
+    {
+      "id": "4066650",
+      "name": "Zach Collins",
+      "avg": 18.7
+    },
+    {
+      "id": "4897262",
+      "name": "Will Richard",
+      "avg": 18.7
+    },
+    {
+      "id": "3913174",
+      "name": "Luke Kennard",
+      "avg": 18.6
+    },
+    {
+      "id": "4592691",
+      "name": "Jake LaRavia",
+      "avg": 18.6
+    },
+    {
+      "id": "6475",
+      "name": "Klay Thompson",
+      "avg": 18.5
+    },
+    {
+      "id": "5044385",
+      "name": "Leonard Miller",
+      "avg": 18.2
+    },
+    {
+      "id": "4278077",
+      "name": "Jarred Vanderbilt",
+      "avg": 18
+    },
+    {
+      "id": "4702177",
+      "name": "Keon Ellis",
+      "avg": 18
+    },
+    {
+      "id": "4888725",
+      "name": "Ryan Dunn",
+      "avg": 17.9
+    },
+    {
+      "id": "4781746",
+      "name": "Javon Small",
+      "avg": 17.8
+    },
+    {
+      "id": "4702382",
+      "name": "Tristan da Silva",
+      "avg": 17.8
+    },
+    {
+      "id": "4432907",
+      "name": "Justin Champagnie",
+      "avg": 17.7
+    },
+    {
+      "id": "4277951",
+      "name": "Luka Garza",
+      "avg": 17.6
+    },
+    {
+      "id": "4870562",
+      "name": "Dominick Barlow",
+      "avg": 17.6
+    },
+    {
+      "id": "4397077",
+      "name": "Jaxson Hayes",
+      "avg": 17.5
+    },
+    {
+      "id": "4593016",
+      "name": "Quinten Post",
+      "avg": 17.3
+    },
+    {
+      "id": "5214640",
+      "name": "Kasparas Jakucionis",
+      "avg": 17.3
+    },
+    {
+      "id": "4896372",
+      "name": "Walter Clayton Jr.",
+      "avg": 17.3
+    },
+    {
+      "id": "4433137",
+      "name": "Ziaire Williams",
+      "avg": 17.2
+    },
+    {
+      "id": "6578",
+      "name": "Harrison Barnes",
+      "avg": 17.1
+    },
+    {
+      "id": "3133626",
+      "name": "Kenrich Williams",
+      "avg": 17.1
+    },
+    {
+      "id": "4997528",
+      "name": "Nikola Jovic",
+      "avg": 17.1
+    },
+    {
+      "id": "3146557",
+      "name": "Jock Landale",
+      "avg": 16.8
+    },
+    {
+      "id": "4396818",
+      "name": "Jordan Miller",
+      "avg": 16.8
+    },
+    {
+      "id": "4845374",
+      "name": "Bub Carrington",
+      "avg": 16.7
+    },
+    {
+      "id": "3907823",
+      "name": "Terance Mann",
+      "avg": 16.7
+    },
+    {
+      "id": "3914044",
+      "name": "Landry Shamet",
+      "avg": 16.6
+    },
+    {
+      "id": "4712863",
+      "name": "Mouhamed Gueye",
+      "avg": 16.6
+    },
+    {
+      "id": "4873153",
+      "name": "Morez Johnson Jr.",
+      "avg": 16.5
+    },
+    {
+      "id": "6609",
+      "name": "Khris Middleton",
+      "avg": 16.5
+    },
+    {
+      "id": "3912848",
+      "name": "Dean Wade",
+      "avg": 16.3
+    },
+    {
+      "id": "5105550",
+      "name": "GG Jackson II",
+      "avg": 16.2
+    },
+    {
+      "id": "4702352",
+      "name": "Kobe Sanders",
+      "avg": 16.1
+    },
+    {
+      "id": "3899664",
+      "name": "Simone Fontecchio",
+      "avg": 15.9
+    },
+    {
+      "id": "4066218",
+      "name": "Grant Williams",
+      "avg": 15.9
+    },
+    {
+      "id": "4997538",
+      "name": "Karlo Matkovic",
+      "avg": 15.9
+    },
+    {
+      "id": "3934723",
+      "name": "Thomas Bryant",
+      "avg": 15.8
+    },
+    {
+      "id": "5279130",
+      "name": "Nolan Traoré",
+      "avg": 15.7
+    },
+    {
+      "id": "2528426",
+      "name": "Jordan Clarkson",
+      "avg": 15.7
+    },
+    {
+      "id": "4701233",
+      "name": "Craig Porter Jr.",
+      "avg": 15.6
+    },
+    {
+      "id": "4683689",
+      "name": "Jordan Walsh",
+      "avg": 15.6
+    },
+    {
+      "id": "3102529",
+      "name": "Clint Capela",
+      "avg": 15.6
+    },
+    {
+      "id": "5105977",
+      "name": "Rasheer Fleming",
+      "avg": 15.5
+    }
+  ]
+}
