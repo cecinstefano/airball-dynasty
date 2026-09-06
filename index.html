@@ -10136,6 +10136,16 @@ button,a,input,select,textarea { -webkit-tap-highlight-color:transparent; }
 .news-grid.featured-only .mm-link{display:block;margin-top:12px;font-size:14px}
 @media(max-width:760px){.news-grid.featured-only .mm-teaser-copy{padding:16px 18px}}
 
+
+/* Wide feature with full subjects and softly extended arena background. */
+.news-grid.featured-only .mm-teaser{max-width:none;width:100%;isolation:isolate}
+.news-grid.featured-only .mm-teaser::before{content:'';position:absolute;inset:0 0 auto;height:430px;background:linear-gradient(#17102055,#17102055),url('./assets/news/marino-mondek/capa.jpg') center/cover;filter:blur(14px);transform:scale(1.04);z-index:-1}
+.news-grid.featured-only .mm-teaser>img{position:relative;height:430px;width:100%;object-fit:contain;background:transparent}
+.news-grid.featured-only .mm-teaser-copy{position:relative;background:#101018}
+body:has(.mm-article){background:#292037!important;background-image:linear-gradient(135deg,#342442,#221c32)!important}
+body:has(.mm-article) #root{background:transparent}
+@media(max-width:760px){.news-grid.featured-only .mm-teaser>img{height:auto}.news-grid.featured-only .mm-teaser::before{display:none}}
+
 </style>
 
   
