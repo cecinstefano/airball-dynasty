@@ -10107,6 +10107,10 @@ body:has(.da){background:#101014}body:has(.da) .topbar{overflow-x:auto}body:has(
 @media(max-width:1200px){.fp-sidebar .fp-team-shortcuts{grid-template-columns:1fr}.fp-sidebar .fp-super-brand{min-height:72px}.fp-sidebar .fp-super-brand img{width:60px;height:72px}.fp-sidebar .fp-team-shortcuts span{display:block}.fp-sidebar .fp-team-shortcuts span[hidden]{display:none}}
 @media(max-width:650px){.fp-sidebar{overflow:visible}.fp-sidebar>.fp-team-shortcuts,.fp-sidebar>.fp-super-brand,.fp-sidebar>.fp-collapse-button{display:none!important}.fp-sidebar>button{display:inline-flex!important}.fp-shortcuts-mobile{display:flex;overflow-x:auto;gap:7px;margin:12px 0 0;padding:9px 0}.fp-shortcuts-mobile button{flex:0 0 45px}.fp-trade-dialog{width:100%;height:100%;max-height:100%;border:0;border-radius:0;padding:16px}.fp-trade-sides{grid-template-columns:1fr}.fp-trade-roster{max-height:260px}.fp-trade-destination{align-items:flex-start;flex-direction:column;gap:6px}.fp-trade-destination select{max-width:100%;width:100%}.fp-header h1{font-size:21px}}
 </style>
+<style id="all-draft-choices-styles">
+.da-all-choices .da-controls{margin-bottom:12px}.da-all-choices select{display:block;background:#232029;color:#f3f0f8;border:1px solid #494052;border-radius:6px;padding:11px 14px;width:100%;margin-top:5px;font:14px Inter,Arial,sans-serif}.da-all-choices .da-controls>label:nth-child(2){flex:0 1 190px;min-width:160px}.da-choices-scroll{max-height:690px}.da-all-choices table{min-width:1100px}.da-all-choices thead th{position:sticky;top:0;z-index:2}.da-all-choices thead button{font-size:11px;font-weight:700;background:none;border:0;padding:5px}.da-all-choices th,.da-all-choices td{text-align:right}.da-all-choices th:nth-child(3),.da-all-choices th:nth-child(4),.da-all-choices .da-choice-owner{text-align:left}.da-choice-player{display:flex;gap:12px;align-items:center;white-space:nowrap}.da-all-choices .da-photo{width:68px;height:60px;object-fit:contain;background:transparent}.da-all-choices tbody tr:hover{background:#2b2136}@media(max-width:650px){.da-all-choices .da-controls>label:nth-child(2){flex:1}.da-choices-scroll{max-height:65vh}}
+</style>
+<style>.da .da-all-choices table th,.da .da-all-choices table td{text-align:center}.da .da-all-choices table th:nth-child(3),.da .da-all-choices table th:nth-child(4),.da .da-all-choices table td:nth-child(4){text-align:left}</style>
 </head>
 <body>
 <div id="root"></div>
@@ -22540,7 +22544,7 @@ const DA = (() => {
         const rounds=[...new Set(choices.map(p=>p.round))].sort((a,b)=>a-b).map(round=>{
             const all=choices.filter(p=>p.round===round), average=mean(all.map(p=>p.player.central));
             const evaluated=all.filter(p=>number(p.player.central)!==null).map(p=>({...p,delta:p.player.central-average.value,roundMean:average}));
-            return {round,average,total:all.length,evaluated,steals:evaluated.filter(p=>p.delta>0).sort((a,b)=>b.delta-a.delta||a.pick-b.pick).slice(0,2),busts:evaluated.filter(p=>p.delta<0).sort((a,b)=>a.delta-b.delta||a.pick-b.pick).slice(0,2)};
+            return {round,average,total:all.length,choices:all,evaluated,steals:evaluated.filter(p=>p.delta>0).sort((a,b)=>b.delta-a.delta||a.pick-b.pick).slice(0,2),busts:evaluated.filter(p=>p.delta<0).sort((a,b)=>a.delta-b.delta||a.pick-b.pick).slice(0,2)};
         });
         const balances=teams.map(t=>{
             const evaluated=rounds.flatMap(r=>r.evaluated).filter(p=>p.owner===t.name);
@@ -22555,6 +22559,33 @@ const DA = (() => {
     });}
     return {number,mean,key,fmt,signed,desc,build,sorted,fallbackPhoto};
 })();
+
+function DraftChoicesTable({rounds}){
+    const e=React.createElement;
+    const [search,setSearch]=useState(''),[round,setRound]=useState('all'),[sort,setSort]=useState({key:'pick',dir:'asc'});
+    const all=rounds.flatMap(r=>r.choices.map(c=>({...c,projection:DA.number(c.player.central),average:r.average.value,valid:r.average.count,delta:DA.number(c.player.central)!==null&&r.average.value!==null?c.player.central-r.average.value:null,name:c.player.name,team:c.owner||'N/D'})));
+    const q=DA.key(search);
+    const visible=all.filter(c=>(round==='all'||c.round===Number(round))&&(!q||DA.key(c.name).includes(q)||DA.key(c.team).includes(q))).sort((a,b)=>{
+        const x=a[sort.key],y=b[sort.key];
+        if(x===null||y===null)return x===null?(y===null?a.pick-b.pick:1):-1;
+        return (typeof x==='string'?x.localeCompare(y,'pt-BR'):x-y)*(sort.dir==='asc'?1:-1)||a.pick-b.pick;
+    });
+    const columns=[['round','ROUND'],['pick','PICK GERAL'],['name','JOGADOR'],['team','TIME DA ESCOLHA'],['projection','PROJEÇÃO DA I.A.'],['average','MÉDIA DO ROUND'],['delta','SALDO DO JOGADOR']];
+    return e('section',{className:'da-panel da-all-choices','aria-label':'Todas as escolhas do draft'},
+        e('div',{className:'da-heading'},e('h2',null,'TODAS AS ESCOLHAS DO DRAFT'),e('span',{className:'da-tag'},`${visible.length} DE ${all.length} ESCOLHAS`)),
+        e('p',{className:'da-muted'},'Saldo = Projeção da I.A. − média do round da escolha. As médias consideram todos os jogadores válidos de cada round e não mudam com os filtros. Keepers não participam desta tabela.'),
+        e('div',{className:'da-controls'},e('label',null,'BUSCAR ESCOLHA',e('input',{type:'search',value:search,placeholder:'Jogador ou time da escolha…',onChange:ev=>setSearch(ev.target.value)})),
+            e('label',null,'ROUND',e('select',{value:round,onChange:ev=>setRound(ev.target.value)},e('option',{value:'all'},'Todos os rounds'),rounds.map(r=>e('option',{key:r.round,value:String(r.round)},`Round ${r.round}`)))),
+            e('button',{type:'button',onClick:()=>{setSearch('');setRound('all');setSort({key:'pick',dir:'asc'});}},'Restaurar tabela')),
+        e('p',{className:'da-muted',role:'status'},`${visible.length} escolhas exibidas · ${visible.filter(c=>c.delta!==null).length} com saldo calculado · Ordenação: ${columns.find(c=>c[0]===sort.key)[1]} ${sort.dir==='asc'?'crescente ↑':'decrescente ↓'}`),
+        e('div',{className:'da-scroll da-choices-scroll',tabIndex:0,'aria-label':'Tabela de todos os jogadores draftados'},e('table',null,
+            e('thead',null,e('tr',null,columns.map(([key,label])=>e('th',{key,scope:'col','aria-sort':sort.key===key?(sort.dir==='asc'?'ascending':'descending'):'none'},e('button',{type:'button',onClick:()=>setSort({key,dir:sort.key===key&&sort.dir==='desc'?'asc':'desc'})},label,sort.key===key?(sort.dir==='asc'?' ↑':' ↓'):''))))),
+            e('tbody',null,visible.length?visible.map(c=>e('tr',{key:c.pick},e('td',null,`R${c.round}`),e('td',null,`#${c.pick}`),
+                e('th',{scope:'row'},e('div',{className:'da-choice-player'},e('img',{className:'da-photo',src:c.player.photo||DA.fallbackPhoto,alt:'',loading:'lazy',onError:ev=>{ev.currentTarget.onerror=null;ev.currentTarget.src=DA.fallbackPhoto;}}),c.name)),
+                e('td',{className:'da-choice-owner'},c.team),e('td',{className:'da-positive'},DA.fmt(c.projection)),e('td',null,DA.fmt(c.average),e('small',null,`${c.valid} jogadores válidos`)),
+                e('td',{className:c.delta>0?'da-positive':c.delta<0?'da-negative':''},e('strong',null,DA.signed(c.delta)),e('small',null,c.delta===null?'Sem projeção válida':c.delta>0?'Acima do round':c.delta<0?'Abaixo do round':'Na média do round')))):
+                e('tr',null,e('td',{colSpan:7},'Nenhuma escolha encontrada.'))))));
+}
 
 function DraftAnalysisPage(){
     const e=React.createElement;
@@ -22604,6 +22635,7 @@ function DraftAnalysisPage(){
             rows.length?rows.map(t=>{const open=expanded.includes(t.name)||!!(q&&t.roster.some(p=>DA.key(p.name).includes(q)));return e(React.Fragment,{key:t.slug},e('tr',{className:open?'da-selected':''},e('td',null,String(t.rank).padStart(2,'0')),e('th',{scope:'row'},e('div',{className:'da-team da-team-tile'},teamBackdrop(t.name),button(`${open?'−':'+'} ${t.name}`,()=>toggle(t.name),{'aria-expanded':open,'aria-controls':`da-roster-${t.slug}`}))),metrics.map(([k])=>valueCell(t[k],k))),open?e('tr',null,e('td',{colSpan:6,className:'da-detail-cell'},roster(t))):null);}):e('tr',null,e('td',{colSpan:6},'Nenhum time ou jogador encontrado.'))))),
         e('details',{className:'da-method'},e('summary',null,'Como ler as médias'),e('p',null,'AVG 2025 e AVG são médias dos valores válidos do elenco atual. No AVG 2025 do time, valores individuais iguais a zero são substituídos pela Projeção da I.A.; se ela também estiver ausente, o jogador é excluído dessa média. Valores de 2025 ausentes continuam excluídos. A tabela de jogadores preserva o AVG 2025 original. BEST 8 e BEST 11 são médias dos 8 e 11 maiores projeções da I.A.; com menos jogadores válidos, usamos os disponíveis. Empates: BEST 8, BEST 11 e nome. Cada célula informa sua amostra. AVG representa a Projeção da I.A.'),e('p',null,'O cenário muda o destaque e a ordenação, sem alterar BEST 8, BEST 11 ou a avaliação do draft. Projeções: análise consolidada fornecida. As escolhas são atribuídas ao time registrado no draft do site, independentemente do elenco atual.'))),
         e('section',{'aria-label':'Avaliação das escolhas'},e('div',{className:'da-heading'},e('h2',null,'VALOR POR ROUND'),e('span',{className:'da-muted'},'Projeção da I.A. − média do round')),e('div',{className:'da-rounds',role:'group','aria-label':'Filtrar round'},button('Todos',()=>setRound('all'),{'aria-pressed':round==='all'}),model.rounds.map(r=>button(`R${r.round}`,()=>setRound(r.round),{key:r.round,'aria-pressed':round===r.round}))),e('p',{className:'da-muted'},'Cada round usa todas as escolhas com projeção válida. Destacamos até 2 diferenças positivas e até 2 negativas; empates usam o menor pick. Esta avaliação não considera isoladamente necessidades posicionais ou estratégia do elenco.'),e('div',{className:'da-highlights'},highlights(true),highlights(false))),
+        e(DraftChoicesTable,{rounds:model.rounds}),
         e('section',{className:'da-panel'},e('div',{className:'da-heading'},e('h2',null,'SALDO GERAL DO DRAFT'),e('span',{className:'da-tag'},'TODOS OS ROUNDS')),e('p',{className:'da-muted'},'Soma das diferenças de todas as escolhas válidas do time responsável pela escolha. STEALS e CAGADAS contam apenas aparições nos destaques. Este painel independe dos filtros e do cenário.'),e('div',{className:'da-scroll',tabIndex:0,'aria-label':'Saldo geral do draft'},e('table',{className:'da-balance'},e('thead',null,e('tr',null,['POSIÇÃO','TIME','ESCOLHAS AVALIADAS','STEALS','CAGADAS','SALDO DO DRAFT'].map(h=>e('th',{key:h,scope:'col'},h)))),e('tbody',null,model.balances.map((t,i)=>e('tr',{key:t.name},e('td',null,i+1),e('th',{scope:'row'},e('div',{className:'da-team-tile'},teamBackdrop(t.name),e('span',{className:'da-team-title'},t.name))),e('td',null,t.count),e('td',null,t.steals),e('td',null,t.busts),e('td',null,e('strong',{className:t.value>0?'da-positive':t.value<0?'da-negative':''},DA.signed(t.value)),e('div',{className:'da-diverging','aria-hidden':true},e('i',{className:t.value<0?'negative':'',style:{left:`${t.value<0?50-Math.abs(t.value)/maxBalance*50:50}%`,width:`${Math.abs(t.value||0)/maxBalance*50}%`}})),e('small',null,'0 = referência')))))))),
         e('aside',{className:'da-note'},e('h3',null,'TRANSPARÊNCIA DOS DADOS'),e('p',null,`${model.players.filter(p=>p.avg2025!==null).length} jogadores com AVG 2025 identificado. AVG 2025 usa a média fornecida pela ESPN, substituindo zeros pela Projeção da I.A. apenas no cálculo da média do time. AVG usa a Projeção da I.A. consolidada.`),e('p',null,`Ausências são excluídas das médias; nunca viram zero. ${model.unknownOwners?`${model.unknownOwners} escolhas sem autor identificado não entram no saldo por time.`:''}`))));
 }
