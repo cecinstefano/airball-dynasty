@@ -10126,6 +10126,16 @@ button,a,input,select,textarea { -webkit-tap-highlight-color:transparent; }
  .news-grid.featured-only .mm-link{margin-top:6px;font-size:13px}
 }
 
+
+/* Reference layout: image above headline, bounded width, no image clipping. */
+.news-grid.featured-only .mm-teaser{display:block;width:100%;max-width:760px;height:auto;min-height:0;margin:0 auto 24px}
+.news-grid.featured-only .mm-teaser>img{position:static;display:block;width:100%;height:auto;min-height:0;object-fit:contain;object-position:center;opacity:1;transform:none}
+.news-grid.featured-only .mm-teaser-copy{padding:20px 24px;min-height:0;display:block}
+.news-grid.featured-only .mm-teaser h2{font-size:clamp(23px,2.2vw,30px);line-height:1.15;margin:12px 0}
+.news-grid.featured-only .mm-teaser p{display:block;font-size:14px;line-height:1.5}
+.news-grid.featured-only .mm-link{display:block;margin-top:12px;font-size:14px}
+@media(max-width:760px){.news-grid.featured-only .mm-teaser-copy{padding:16px 18px}}
+
 </style>
 
   
