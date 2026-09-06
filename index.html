@@ -18226,13 +18226,24 @@ function HonestometroPage() {
         const filtered = raw.filter(pos => allowed.includes(pos));
         return [...new Set(filtered)].join('/') || '—';
     };
+    const honestYahooAvg = (name, team) => {
+        const keys = getPlayerProjectionKeyCandidates(name);
+        for (const key of keys) {
+            const candidates = YAHOO_AVG_PROJECTIONS_2026_27.filter(row => row.key === key && Number.isFinite(Number(row.avg)) && Number(row.avg) > 0);
+            const exact = candidates.filter(row => row.team === team);
+            if (exact.length === 1) return Number(exact[0].avg);
+            if (candidates.length === 1) return Number(candidates[0].avg);
+        }
+        return null;
+    };
     const normalizePlayer = (p, index) => {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r;
         const nested = p.player || {};
         const name = p.name || p.fullName || p.playerName || p.displayName || nested.fullName || 'Jogador sem nome';
         const rawAvg = (_g = (_f = (_e = (_d = (_c = (_b = (_a = p.fantasyPoints) !== null && _a !== void 0 ? _a : p.avgFantasyPoints) !== null && _b !== void 0 ? _b : p.averageFantasyPoints) !== null && _c !== void 0 ? _c : p.avg) !== null && _d !== void 0 ? _d : p.appliedAverage) !== null && _e !== void 0 ? _e : p.value) !== null && _f !== void 0 ? _f : nested.appliedAverage) !== null && _g !== void 0 ? _g : 0;
         const rawTotal = (_m = (_l = (_k = (_j = (_h = p.totalPoints) !== null && _h !== void 0 ? _h : p.totalFantasyPoints) !== null && _j !== void 0 ? _j : p.total) !== null && _k !== void 0 ? _k : p.appliedTotal) !== null && _l !== void 0 ? _l : nested.appliedTotal) !== null && _m !== void 0 ? _m : 0;
-        const fantasyPoints = Number(rawAvg) || 0;
+        const workerAvg = Number(p.avg ?? rawAvg);
+        const fantasyPoints = Number.isFinite(workerAvg) && workerAvg > 0 ? workerAvg : honestYahooAvg(name, p.proTeam || p.team) || 0;
         const totalPoints = Number(rawTotal) || 0;
         const position = cleanLeaguePosition(p.position || p.defaultPosition || p.eligibleSlotsText || (Array.isArray(p.positions) ? p.positions.join('/') : '') || '—');
         const team = p.team || p.proTeam || p.proTeamAbbrev || p.nbaTeam || p.proTeamId || 'NBA';
@@ -18291,7 +18302,7 @@ function HonestometroPage() {
             if (normalized.length) {
                 setPlayers(normalized);
                 setDataLive(true);
-                setDataStatus(`${normalized.length} jogadores ESPN carregados • draft final aplicado no Honestômetro`);
+                setDataStatus(`${normalized.length} jogadores carregados • AVG Worker ESPN; sem AVG: projeção Yahoo`);
             }
             else {
                 setDataStatus('API conectada, mas sem jogadores válidos');
@@ -18333,7 +18344,7 @@ function HonestometroPage() {
     const buildHonestometroDraftedPlayer = (pick) => {
         const matched = getPlayerFromPoolByName(pick.playerName) || {};
         const ownerName = getTeam(pick.airballOwner || pick.airballTeam || getDraftPickInfoForOverall(pick.airballOverall).ownerName).name;
-        const rawAvg = Number(pick.selectedAvg ?? pick.avg ?? matched.fantasyPoints ?? 0) || FLOOR_AVG;
+        const rawAvg = Number(matched.fantasyPoints) > 0 ? Number(matched.fantasyPoints) : honestYahooAvg(pick.playerName, pick.nbaTeam) || 0;
         const rawTotal = Number(matched.totalPoints ?? 0) || 0;
         return {
             ...matched,
@@ -18354,7 +18365,8 @@ function HonestometroPage() {
     };
     const draftedPlayerAssets = LIVE_DRAFT_PICKS_MANUAL
         .filter(pick => pick && pick.playerName && Number(pick.airballOverall) > 0)
-        .map(buildHonestometroDraftedPlayer);
+        .map(buildHonestometroDraftedPlayer)
+        .filter(player => player.fantasyPoints > 0);
     const tradeAssetMap = new Map();
     players
         .filter(player => player && player.assetType !== 'PICK')
