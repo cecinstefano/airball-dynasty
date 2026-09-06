@@ -22937,7 +22937,7 @@ function MarinoArticlePage(){
    React.createElement('nav',{className:'mm-topics','aria-label':'Tópicos da entrevista'},MARINO_NEWS.topics.map((t,i)=>React.createElement('a',{key:i,href:'#marino-topico-'+(i+1),onClick:e=>{e.preventDefault();const el=document.getElementById('marino-topico-'+(i+1));el?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});el?.focus({preventScroll:true});},'aria-label':t.title},'Tópico '+(i+1)))),
    MARINO_NEWS.topics.map((t,i)=>React.createElement('section',{className:'mm-section',key:i,id:'marino-topico-'+(i+1),tabIndex:-1},
     React.createElement('h2',null,t.title),React.createElement('div',{className:'mm-audios'},React.createElement(MarinoAudio,{number:i+1,answer:false}),React.createElement(MarinoAudio,{number:i+1,answer:true})),
-    t.paragraphs.map((p,j)=>React.createElement(React.Fragment,{key:j},React.createElement('p',null,p),j===0&&scenes[i]?React.createElement('figure',{className:'mm-figure'},React.createElement('img',{src:MARINO_ASSETS+scenes[i].file,alt:scenes[i].caption+' Recriação ilustrativa por IA.',loading:'lazy'}),React.createElement('figcaption',null,'Recriação ilustrativa por IA — '+scenes[i].caption+' A cena não é um registro real.')):null))))));
+    t.paragraphs.map((p,j)=>React.createElement(React.Fragment,{key:j},React.createElement('p',null,p),j===0&&scenes[i]?React.createElement('figure',{className:'mm-figure'},React.createElement('img',{src:MARINO_ASSETS+scenes[i].file,alt:scenes[i].caption+' Recriação ilustrativa por IA.',loading:'lazy'}),React.createElement('figcaption',null,scenes[i].caption)):null))))));
 }
 
 // ==================== APP ====================
