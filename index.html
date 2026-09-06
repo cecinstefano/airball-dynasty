@@ -10094,6 +10094,22 @@ button,a,input,select,textarea { -webkit-tap-highlight-color:transparent; }
 @media(max-width:600px){.mm-article{padding:24px 16px 50px}.mm-audios{grid-template-columns:1fr}.mm-audio-speaker{min-height:0}.mm-body p{font-size:17px}.mm-teaser-copy{padding:100px 22px 24px}.mm-cover{max-height:380px}}
 @media(prefers-reduced-motion:reduce){.mm-teaser>img{transition:none}}
 
+
+/* Full uncropped Marino cover and secondary draft headline on home. */
+.news-grid.featured-only .mm-teaser{min-height:0;margin-bottom:24px}
+.news-grid.featured-only .mm-teaser>img{position:static;display:block;width:100%;height:auto;object-fit:contain;opacity:1;transform:none}
+.news-grid.featured-only .mm-teaser-copy{min-height:0;padding:24px 30px 28px;background:#101018}
+.news-grid.featured-only .mm-teaser h2{max-width:100%;font-size:clamp(28px,3vw,42px)}
+.news-grid.featured-only .featured-card{min-height:250px!important;height:auto!important}
+.news-grid.featured-only .featured-content{max-width:100%;padding:24px!important}
+.news-grid.featured-only .featured-title{font-size:clamp(24px,2.3vw,34px)!important;line-height:1.15!important;max-width:760px}
+@media(max-width:760px){
+ .news-grid.featured-only .mm-teaser-copy{padding:20px}
+ .news-grid.featured-only .featured-card{min-height:220px!important}
+ .news-grid.featured-only .featured-content{padding:20px!important}
+ .news-grid.featured-only .featured-title{font-size:24px!important}
+}
+
 </style>
 
   
