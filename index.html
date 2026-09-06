@@ -10064,6 +10064,36 @@ button,a,input,select,textarea { -webkit-tap-highlight-color:transparent; }
 
 .drafted-board-actions { display:flex !important; gap:8px; }
 @media(max-width:800px) { .drafted-round-summary { flex:0 0 auto; width:100%; } }
+
+/* Marino interview — isolated editorial layout */
+.mm-teaser{display:block;position:relative;overflow:hidden;border:1px solid #544032;border-radius:18px;margin-bottom:24px;color:#fff;background:#15151d;text-decoration:none;min-height:370px}
+.mm-teaser>img{position:absolute;width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:.62;transition:transform .3s}
+.mm-teaser:hover>img{transform:scale(1.025)}
+.mm-teaser-copy{position:relative;padding:clamp(24px,4vw,44px);padding-top:110px;background:linear-gradient(0deg,#101018 0%,#101018b0 55%,transparent);min-height:370px;display:flex;flex-direction:column;justify-content:flex-end}
+.mm-kicker{font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#ffc183}
+.mm-teaser h2{font-size:clamp(27px,3vw,42px);line-height:1.12;max-width:770px;margin:14px 0}
+.mm-teaser p{font-size:16px;line-height:1.6;color:#ddd6d0;max-width:620px}
+.mm-link{margin-top:16px;color:#ffbd79;font-weight:700}
+.mm-article{background:#101018;border-radius:18px;max-width:1160px;margin:auto;padding:32px 24px 80px;color:#eceaf1}
+.mm-back{display:inline-block;color:#c8c2d8;margin-bottom:24px}.mm-article a:focus-visible,.mm-teaser:focus-visible{outline:3px solid #ffc183;outline-offset:4px}
+.mm-article h1{font-size:clamp(32px,4.6vw,62px);line-height:1.08;letter-spacing:-.035em;margin:18px 0 24px;max-width:1050px}
+.mm-deck{font-size:clamp(18px,2vw,22px);line-height:1.65;color:#bbb8c9;max-width:930px}
+.mm-byline{display:flex;flex-wrap:wrap;gap:12px 28px;margin:26px 0;font-size:13px;color:#b5aec6}
+.mm-cover{width:100%;max-height:560px;object-fit:cover;object-position:center 30%;border-radius:16px;display:block;background:#191923}
+.mm-body{max-width:860px;margin:36px auto 0}.mm-body p{font-size:19px;line-height:1.85;color:#d1cedb;margin:22px 0}
+.mm-topics{display:flex;gap:9px;flex-wrap:wrap;padding:22px 0;border-block:1px solid #31303e;margin:32px 0}.mm-topics a{border:1px solid #454050;border-radius:8px;padding:9px 13px;color:#e1d7ef;text-decoration:none;font-size:14px}.mm-topics a:hover{background:#39293e}
+.mm-section{padding:28px 0;scroll-margin-top:100px;border-bottom:1px solid #302d3b}.mm-section h2{font-size:clamp(25px,3vw,34px);line-height:1.3;margin:10px 0 24px}
+.mm-audios{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0 30px}
+.mm-audio{background:linear-gradient(135deg,#242033,#171822);border:1px solid #40374e;border-radius:14px;padding:20px;min-width:0}
+.mm-audio.mm-answer{background:linear-gradient(135deg,#30241e,#18181f);border-color:#4e3b31}
+.mm-audio-label{font-size:12px;letter-spacing:.12em;font-weight:800;color:#cba3ff;text-transform:uppercase}.mm-answer .mm-audio-label{color:#ffbc80}
+.mm-audio-speaker{font-size:14px;line-height:1.5;min-height:64px;margin:10px 0;color:#e0d9e9}
+.mm-audio audio{width:100%;height:42px;color-scheme:dark;display:block;border-radius:24px}
+.mm-audio-status{font-size:12px;color:#bab3c6;margin-top:10px;min-height:18px}
+.mm-figure{margin:30px 0}.mm-figure img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;border-radius:12px}.mm-figure figcaption{color:#a9a2b8;font-size:12px;line-height:1.6;margin-top:10px}
+@media(max-width:600px){.mm-article{padding:24px 16px 50px}.mm-audios{grid-template-columns:1fr}.mm-audio-speaker{min-height:0}.mm-body p{font-size:17px}.mm-teaser-copy{padding:100px 22px 24px}.mm-cover{max-height:380px}}
+@media(prefers-reduced-motion:reduce){.mm-teaser>img{transition:none}}
+
 </style>
 
   
@@ -14283,6 +14313,7 @@ function HomePage({ setPage }) {
             React.createElement("div", { className: "content-grid" },
                 React.createElement("div", null,
                     React.createElement("div", { className: "news-grid featured-only" },
+                        React.createElement(MarinoNewsTeaser, null),
                         React.createElement(FeaturedNews, { setPage: setPage })),
                     React.createElement(DraftLiveEmbed, null),
                     React.createElement(NewsFeed, { setPage: setPage })),
@@ -21075,6 +21106,7 @@ function DraftedPage() {
 const AIRBALL_BASE_URL = 'https://cecinstefano.github.io/airball-dynasty/';
 const AIRBALL_SHARE_IMAGE = 'https://cecinstefano.github.io/airball-dynasty/assets/airball-share.jpg';
 const PAGE_ROUTE_MAP = {
+    MARINO_ARTICLE: 'noticias/marino-mondek-pistons',
     FANTASY_PULSE: 'ABA-INVISIBILITY',
     HOME: 'inicio',
     JOGADORES: 'jogadores',
@@ -21199,6 +21231,7 @@ function getSeoForPage(page, teamSlug = '') {
         KEEPERS_ARTICLE: 'I.A. projeta os keepers 2026/27 | AirBall',
         DRAFT_IDEAL_ARTICLE: 'ChatGPT simula o draft ideal da AirBall | AirBall',
         DRAFT_REVIEW_ARTICLE: 'AirBall Draft Review 2026/27 | AirBall',
+        MARINO_ARTICLE: 'Marino banca Zubac e crava: Esse ano é meu | AirBall',
         TRADE_PICKS_ARTICLE: 'Primeira troca com picks da AirBall | AirBall'
     };
     const descriptions = {
@@ -21217,6 +21250,7 @@ function getSeoForPage(page, teamSlug = '') {
         KEEPERS_ARTICLE: 'Análise da I.A. sobre os keepers da temporada 2026/27 da AirBall Dynasty League.',
         DRAFT_IDEAL_ARTICLE: 'Simulação do draft ideal da AirBall somada aos keepers projetados, com ranking completo das franquias.',
         DRAFT_REVIEW_ARTICLE: '176 picks depois: quem realmente saiu melhor do Draft? Análise completa da I.A. pós-draft da AirBall Dynasty League.',
+        MARINO_ARTICLE: 'Marino Mondek defende Zubac, coloca Barba no mercado e promete o título. Leia e ouça a entrevista.',
         TRADE_PICKS_ARTICLE: 'Análise da primeira troca com picks da história da AirBall: Giannis, Chet e movimentação no draft.'
     };
     return {
@@ -22828,6 +22862,32 @@ function FantasyPulsePage(){
 
 
 
+
+const MARINO_NEWS={"title":"Marino Mondek banca Zubac, coloca Barba no mercado e crava: “Esse ano é meu”","deck":"Na estreia da série de entrevistas com os GMs do AirBall, o comandante do Pistons de Pira defende as escolhas mais contestadas do draft, rebate as projeções e se coloca como favorito ao título.","intro":["Marino Mondek não precisou esperar a temporada começar para elevar o tom no AirBall. Primeiro entrevistado da série com os general managers da liga, o responsável pelo Pistons de Pira sustentou a aposta em Ivica Zubac, explicou suas trocas com o Supersonics e deixou um recado aos adversários: “Tô com a mão no caneco”.","Entre confiança, provocações e uma oferta pública pelo Barba, confira os principais pontos da entrevista.",""],"topics":[{"title":"1. Quem é o GM que promete levar o Pistons de Pira ao título?","paragraphs":["Antes das provocações, a apresentação. Marino nasceu em Curitiba, se considera manezinho da ilha de Florianópolis e vive em Piracicaba — cidade que inspira o nome da equipe.","Aos 37 anos, é pedagogo de formação, trabalha com comunicação e faz mestrado em educação matemática. Vive com a companheira há 11 anos e tem dois filhos, Ernesto e Rosa. No AirBall, porém, é como um GM disposto a bancar suas convicções que pretende ser reconhecido."]},{"title":"2. Contra as projeções: Kuzma, Bridges e Jalen Green vão surpreender?","paragraphs":["Questionado sobre as projeções baixas atribuídas pela IA ao trio, Marino defendeu suas escolhas. A expectativa é de uma boa temporada de Kyle Kuzma e de maior protagonismo para Mikal Bridges no Knicks, com destaque para sua disponibilidade em quadra.","Jalen Green representa uma aposta mais circunstancial: estava disponível e já havia rendido para o GM em outra temporada de fantasy. Marino admite uma relação de “amor e ódio” com o jogador e reconhece que Kuzma é a escolha que lhe traz menos segurança. Ainda assim, mantém a confiança: “Tô botando fé”."]},{"title":"3. Troca com o Supersonics: equilíbrio ou vantagem para Marino?","paragraphs":["Na negociação que levou Andrew Wiggins, Mikal Bridges e Ryan Rollins ao Pistons de Pira, em troca de Mark Williams, Immanuel Quickley e Dejounte Murray, Marino começa falando em equilíbrio — mas termina apontando vantagem para si.","Bridges inspira confiança, Rollins surpreende e Wiggins desperta entusiasmo pelo encaixe em Miami. Do outro lado, o GM elogia Mark Williams, mas coloca Murray sob suspeita pelo histórico de lesões e pelo desempenho recente.","A conclusão é direta: “Eu acho que eu saio ganhando com essa troca, porque eu não confio no Dejounte Murray”."]},{"title":"4. Zubac na escolha 12: aposta de campeão ou escolha antecipada?","paragraphs":["Confrontado sobre selecionar Zubac no primeiro round, enquanto outros nomes ainda estavam disponíveis, Marino não recuou. Para ele, a combinação de consistência, rebotes e proteção de aro justifica o investimento.","O principal argumento é a expectativa de rendimento ao lado de Haliburton. Marino projeta uma parceria forte no pick and roll e acredita que o pivô terá espaço para produzir grandes números.","Se a pergunta era sobre ter escolhido cedo demais, a resposta foi uma reafirmação da aposta: o GM espera uma “excelente temporada”."]},{"title":"5. Abrir mão de Giannis: arrependimento passou longe","paragraphs":["A negociação envolvendo Giannis e Kyshawn George por Zubac e Chet Holmgren colocou Marino diante da pergunta mais incômoda da entrevista: depois das escolhas do draft, ele ainda prefere o próprio lado?","A defesa se concentrou em Zubac. Marino projetou médias de 20 pontos, 13 rebotes e um toco e meio, além de jogos com pelo menos 20 rebotes. Também colocou o pivô na conversa pelo prêmio de melhor defensor e aproveitou para provocar Rudy Gobert, afirmando preferir Zubac.","Holmgren e o custo de abrir mão de Giannis ficaram em segundo plano. A mensagem central, porém, foi inequívoca: Marino continua convencido de que saiu ganhando."]},{"title":"6. Anthony Davis foi a sobra dos sonhos — e o Barba está disponível","paragraphs":["Nem todos os planos do draft deram certo. Marino queria Stephen Curry e também mirava Damian Lillard, mas viu os dois escaparem.","A compensação foi Anthony Davis, descrito como a grande sobra do draft e um jogador de nível top 10. A confiança vem acompanhada de uma ressalva que o próprio GM reconhece: “Se ele jogar, essa é a dúvida”.","Satisfeito com seu trio de pivôs, Marino ainda transformou a entrevista em balcão de negócios: “O Barba tá pra rolo. Quem quiser, já vem”."]},{"title":"7. Favorito ao título? Marino aponta para o próprio time","paragraphs":["Na hora de escolher o elenco mais forte e o provável campeão, Marino não ficou em cima do muro: apostou no Pistons de Pira.","“Esse ano é meu”, declarou. A confiança veio acompanhada de uma comparação bem-humorada: ele se diz tão certo do título quanto estava de que o Knicks seria campeão.","Sobre negociações, o elogio foi para o GM do Supersonics, pela disposição de responder propostas e construir contrapropostas. Isso não significa facilidade para arrancar vantagens: “Não tem mais menino bobo nesse jogo”.","O Pistons de Pira já tem suas apostas, suas polêmicas e uma promessa pública de título. Agora, Marino terá uma temporada inteira para sustentar o discurso."]}]};
+const MARINO_ASSETS='./assets/news/marino-mondek/';
+function MarinoCover(props){return React.createElement('img',Object.assign({src:MARINO_ASSETS+'capa.jpg',alt:'Marino Mondek, GM do Pistons de Pira',onError:e=>{if(!e.currentTarget.dataset.fallback){e.currentTarget.dataset.fallback='1';e.currentTarget.src='./assets/gms/pistons-de-pira.jpg';}else{e.currentTarget.style.visibility='hidden';}}},props));}
+function MarinoNewsTeaser(){return React.createElement('a',{className:'mm-teaser',href:'#/noticias/marino-mondek-pistons'},React.createElement(MarinoCover,null),React.createElement('div',{className:'mm-teaser-copy'},React.createElement('span',{className:'mm-kicker'},'Entrevista 01 · Pistons de Pira'),React.createElement('h2',null,'Giannis fora, Barba à venda e Zubac no R1: Marino já se declara campeão'),React.createElement('p',null,'“Esse ano é meu.” O GM banca suas apostas, provoca os rivais e abre o balcão de negócios.'),React.createElement('span',{className:'mm-link'},'Leia e ouça a entrevista →')));}
+function MarinoAudio({number,answer}){
+ const [status,setStatus]=React.useState('Carregando áudio…');
+ const label=(answer?'Resposta':'Pergunta')+' '+number;
+ return React.createElement('div',{className:'mm-audio'+(answer?' mm-answer':'')},
+  React.createElement('div',{className:'mm-audio-label'},label),
+  React.createElement('div',{className:'mm-audio-speaker'},answer?'Marino Mondek · GM do Pistons de Pira':'Presidente de Comunicações da AirBall League Stéfano Cecin'),
+  React.createElement('audio',{controls:true,preload:'metadata','aria-label':label,src:MARINO_ASSETS+'audio/'+String(number).padStart(2,'0')+'-'+(answer?'resposta':'pergunta')+'.mp3',onLoadedMetadata:()=>setStatus('Pronto para ouvir'),onError:()=>setStatus('Áudio em breve · gravação ainda não disponível'),onPlay:e=>{document.querySelectorAll('.mm-audio audio').forEach(a=>{if(a!==e.currentTarget)a.pause();});setStatus('Reproduzindo');},onPause:()=>setStatus('Pausado'),onEnded:()=>setStatus('Áudio concluído')}),
+  React.createElement('div',{className:'mm-audio-status',role:'status'},status));
+}
+function MarinoArticlePage(){
+ const scenes={0:{file:'01-arena.png',caption:'Marino em sua arena imaginada em Piracicaba.'},2:{file:'02-zubac.png',caption:'Encontro imaginado de Marino com Ivica Zubac.'},3:{file:'03-pivos.png',caption:'Marino com Anthony Davis e Chet Holmgren em uma apresentação imaginada.'},5:{file:'04-coletiva.png',caption:'Uma coletiva imaginada para o GM do Pistons de Pira.'}};
+ return React.createElement('article',{className:'mm-article'},
+  React.createElement('a',{className:'mm-back',href:'#/inicio'},'← Voltar para o início'),
+  React.createElement('header',null,React.createElement('span',{className:'mm-kicker'},'AirBall Entrevista · Episódio 01'),React.createElement('h1',null,MARINO_NEWS.title),React.createElement('p',{className:'mm-deck'},MARINO_NEWS.deck),React.createElement('div',{className:'mm-byline'},React.createElement('span',null,'Entrevistado: Marino Mondek · Pistons de Pira'),React.createElement('span',null,'Entrevista: Stéfano Cecin · Comunicações AirBall')),React.createElement(MarinoCover,{className:'mm-cover'})),
+  React.createElement('div',{className:'mm-body'},MARINO_NEWS.intro.map((p,i)=>React.createElement('p',{key:'intro'+i},p)),
+   React.createElement('nav',{className:'mm-topics','aria-label':'Tópicos da entrevista'},MARINO_NEWS.topics.map((t,i)=>React.createElement('a',{key:i,href:'#marino-topico-'+(i+1),onClick:e=>{e.preventDefault();const el=document.getElementById('marino-topico-'+(i+1));el?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});el?.focus({preventScroll:true});},'aria-label':t.title},'Tópico '+(i+1)))),
+   MARINO_NEWS.topics.map((t,i)=>React.createElement('section',{className:'mm-section',key:i,id:'marino-topico-'+(i+1),tabIndex:-1},
+    React.createElement('h2',null,t.title),React.createElement('div',{className:'mm-audios'},React.createElement(MarinoAudio,{number:i+1,answer:false}),React.createElement(MarinoAudio,{number:i+1,answer:true})),
+    t.paragraphs.map((p,j)=>React.createElement(React.Fragment,{key:j},React.createElement('p',null,p),j===0&&scenes[i]?React.createElement('figure',{className:'mm-figure'},React.createElement('img',{src:MARINO_ASSETS+scenes[i].file,alt:scenes[i].caption+' Recriação ilustrativa por IA.',loading:'lazy'}),React.createElement('figcaption',null,'Recriação ilustrativa por IA — '+scenes[i].caption+' A cena não é um registro real.')):null))))));
+}
+
 // ==================== APP ====================
 function App() {
     const [routeState, setRouteState] = useState(() => parseHashRoute());
@@ -22890,6 +22950,7 @@ function App() {
             case 'KEEPERS_ARTICLE': return React.createElement(KeeperArticlePage, { setPage: setPage });
             case 'DRAFT_IDEAL_ARTICLE': return React.createElement(DraftIdealArticlePage, { setPage: setPage });
             case 'DRAFT_REVIEW_ARTICLE': return React.createElement(DraftReviewArticlePage, { setPage: setPage });
+            case 'MARINO_ARTICLE': return React.createElement(MarinoArticlePage);
             case 'TRADE_PICKS_ARTICLE': return React.createElement(TradePicksArticlePage, { setPage: setPage });
             default: return React.createElement(HomePage, { setPage: setPage });
         }
