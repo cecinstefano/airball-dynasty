@@ -1782,5 +1782,231 @@
       "scoreRecordEligible": false
     }
   ],
-  "excludedNonCompetitivePlayoffs": 15
+  "excludedNonCompetitivePlayoffs": 15,
+  "streakOnlyResults": [
+    {
+      "name": "Warlock Jamaicans",
+      "result": "l",
+      "phase": "regular",
+      "round": 1,
+      "period": "Oct 21 - 26"
+    },
+    {
+      "name": "Pato's Team",
+      "result": "l",
+      "phase": "regular",
+      "round": 1,
+      "period": "Oct 21 - 26"
+    },
+    {
+      "name": "Chugabum Ironclads",
+      "result": "l",
+      "phase": "regular",
+      "round": 2,
+      "period": "Oct 27 - Nov 2"
+    },
+    {
+      "name": "Acre Dinosaurs",
+      "result": "w",
+      "phase": "regular",
+      "round": 2,
+      "period": "Oct 27 - Nov 2"
+    },
+    {
+      "name": "Stéfano's SuperSonics",
+      "result": "w",
+      "phase": "regular",
+      "round": 3,
+      "period": "Nov 3 - 9"
+    },
+    {
+      "name": "Charlotte DunkLipe",
+      "result": "l",
+      "phase": "regular",
+      "round": 3,
+      "period": "Nov 3 - 9"
+    },
+    {
+      "name": "Paysandu Lobo's",
+      "result": "w",
+      "phase": "regular",
+      "round": 4,
+      "period": "Nov 10 - 16"
+    },
+    {
+      "name": "Ghost of goat",
+      "result": "w",
+      "phase": "regular",
+      "round": 4,
+      "period": "Nov 10 - 16"
+    },
+    {
+      "name": "Revolution francaise",
+      "result": "l",
+      "phase": "regular",
+      "round": 5,
+      "period": "Nov 17 - 23"
+    },
+    {
+      "name": "Fi du Jequisom",
+      "result": "w",
+      "phase": "regular",
+      "round": 5,
+      "period": "Nov 17 - 23"
+    },
+    {
+      "name": "Team Djalma Jr",
+      "result": "w",
+      "phase": "regular",
+      "round": 6,
+      "period": "Nov 24 - 30"
+    },
+    {
+      "name": "Pistons de Pira",
+      "result": "w",
+      "phase": "regular",
+      "round": 6,
+      "period": "Nov 24 - 30"
+    },
+    {
+      "name": "Nortz",
+      "result": "w",
+      "phase": "regular",
+      "round": 7,
+      "period": "Dec 1 - 7"
+    },
+    {
+      "name": "Canalhas do Bem",
+      "result": "w",
+      "phase": "regular",
+      "round": 7,
+      "period": "Dec 1 - 7"
+    },
+    {
+      "name": "Red Hot Blazer Peppers",
+      "result": "w",
+      "phase": "regular",
+      "round": 8,
+      "period": "Dec 8 - 14"
+    },
+    {
+      "name": "Instituto Popovich",
+      "result": "l",
+      "phase": "regular",
+      "round": 8,
+      "period": "Dec 8 - 14"
+    },
+    {
+      "name": "Nortz",
+      "result": "w",
+      "phase": "regular",
+      "round": 9,
+      "period": "Dec 15 - 21"
+    },
+    {
+      "name": "Chugabum Ironclads",
+      "result": "w",
+      "phase": "regular",
+      "round": 9,
+      "period": "Dec 15 - 21"
+    },
+    {
+      "name": "Ghost of goat",
+      "result": "l",
+      "phase": "regular",
+      "round": 10,
+      "period": "Dec 22 - 28"
+    },
+    {
+      "name": "Fi du Jequisom",
+      "result": "w",
+      "phase": "regular",
+      "round": 10,
+      "period": "Dec 22 - 28"
+    },
+    {
+      "name": "Warlock Jamaicans",
+      "result": "w",
+      "phase": "regular",
+      "round": 11,
+      "period": "Dec 29 - Jan 4"
+    },
+    {
+      "name": "Red Hot Blazer Peppers",
+      "result": "w",
+      "phase": "regular",
+      "round": 11,
+      "period": "Dec 29 - Jan 4"
+    },
+    {
+      "name": "Pistons de Pira",
+      "result": "l",
+      "phase": "regular",
+      "round": 12,
+      "period": "Jan 5 - 11"
+    },
+    {
+      "name": "Charlotte DunkLipe",
+      "result": "l",
+      "phase": "regular",
+      "round": 12,
+      "period": "Jan 5 - 11"
+    },
+    {
+      "name": "Acre Dinosaurs",
+      "result": "w",
+      "phase": "regular",
+      "round": 14,
+      "period": "Jan 19 - 25"
+    },
+    {
+      "name": "Canalhas do Bem",
+      "result": "w",
+      "phase": "regular",
+      "round": 14,
+      "period": "Jan 19 - 25"
+    },
+    {
+      "name": "Team Djalma Jr",
+      "result": "w",
+      "phase": "regular",
+      "round": 15,
+      "period": "Jan 26 - Feb 1"
+    },
+    {
+      "name": "Stéfano's SuperSonics",
+      "result": "w",
+      "phase": "regular",
+      "round": 15,
+      "period": "Jan 26 - Feb 1"
+    },
+    {
+      "name": "Pato's Team",
+      "result": "w",
+      "phase": "regular",
+      "round": 16,
+      "period": "Feb 2 - 8"
+    },
+    {
+      "name": "Instituto Popovich",
+      "result": "w",
+      "phase": "regular",
+      "round": 16,
+      "period": "Feb 2 - 8"
+    },
+    {
+      "name": "Paysandu Lobo's",
+      "result": "l",
+      "phase": "regular",
+      "round": 17,
+      "period": "Feb 9 - 22"
+    },
+    {
+      "name": "Charlotte DunkLipe",
+      "result": "l",
+      "phase": "regular",
+      "round": 17,
+      "period": "Feb 9 - 22"
+    }
+  ]
 }
