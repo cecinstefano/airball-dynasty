@@ -23034,6 +23034,30 @@ const MP = (() => {
 })();
 
 
+function MatchupProjectedStandings({model,data}){
+ const e=React.createElement;
+ const ranking=React.useMemo(()=>{
+  const canonical=n=>TEAMS_MASTER.find(t=>DA.key(t.name)===DA.key(n))?.name||n;
+  const rows=model.rows.map(t=>({name:t.name,wins:0,losses:0,ties:0,for:0,against:0,history:[],roster:t.roster.map(p=>({...p,nba:MP.nba(p.raw?.proTeam||p.raw?.team),position:p.raw?.position||p.position}))}));
+  const byName=new Map(rows.map(t=>[t.name,t]));
+  for(const week of data.weeks){
+   const days=MP.dates(week.start,week.end),games=data.games.filter(g=>g.date>=week.start&&g.date<=week.end);
+   const totals=new Map(rows.map(t=>[t.name,days.reduce((sum,date)=>sum+MP.project(t.roster,games,date).total,0)]));
+   for(const [rawA,rawB] of week.pairs){const a=byName.get(canonical(rawA)),b=byName.get(canonical(rawB));if(!a||!b)continue;const x=totals.get(a.name),y=totals.get(b.name),tie=Math.abs(x-y)<1e-8;
+    for(const [own,other,pf,pa] of [[a,b,x,y],[b,a,y,x]]){const result=tie?'E':pf>pa?'V':'D';own[tie?'ties':pf>pa?'wins':'losses']++;own.for+=pf;own.against+=pa;own.history.push({week:week.number,opponent:other.name,pf,pa,result});}
+   }
+  }
+  return rows.sort((a,b)=>b.wins-a.wins||b.ties-a.ties||(b.for-b.against)-(a.for-a.against)||b.for-a.for||a.name.localeCompare(b.name,'pt-BR'));
+ },[model,data]);
+ return e('section',{className:'mf-panel mf-standings'},e('h2',null,'RANKING PROJETADO · TODAS AS SEMANAS'),
+ e('p',null,`Vitórias e derrotas estimadas nos ${data.weeks.length} confrontos de cada time, somando as melhores escalações de cada dia. Este ranking não muda com os filtros acima e não representa resultados reais.`),
+ e('p',null,'Ordem: vitórias, empates, saldo de pontos, pontos a favor e nome. Empates são mantidos; projeções e jogos ainda indefinidos podem alterar a classificação. O elenco atual é usado em todas as semanas.'),
+ e('div',{className:'mf-scroll',tabIndex:0,'aria-label':'Classificação projetada de todos os times'},e('table',null,
+ e('thead',null,e('tr',null,['POS','TIME','V','D','E','J','PONTOS A FAVOR','PONTOS CONTRA','SALDO'].map(t=>e('th',{key:t,scope:'col'},t)))),
+ e('tbody',null,ranking.map((t,i)=>e('tr',{key:t.name},e('td',null,i+1),e('th',{scope:'row'},e('div',{className:'mf-player'},e('img',{className:'mf-logo',src:TEAMS_MASTER.find(x=>x.name===t.name)?.logo,alt:'',loading:'lazy'}),t.name)),e('td',null,t.wins),e('td',null,t.losses),e('td',null,t.ties),e('td',null,t.history.length),e('td',null,DA.fmt(t.for)),e('td',null,DA.fmt(t.against)),e('td',null,DA.signed(t.for-t.against))))))),
+ e('details',null,e('summary',null,'Conferir resultados projetados por time e semana'),ranking.map(t=>e('details',{key:t.name},e('summary',null,`${t.name} · ${t.wins}V / ${t.losses}D / ${t.ties}E`),e('div',{className:'mf-scroll'},e('table',null,e('thead',null,e('tr',null,['SEMANA','ADVERSÁRIO','PROJEÇÃO DO TIME','PROJEÇÃO RIVAL','RESULTADO'].map(label=>e('th',{key:label},label)))),e('tbody',null,t.history.map(h=>e('tr',{key:h.week},e('td',null,h.week),e('th',null,h.opponent),e('td',null,DA.fmt(h.pf)),e('td',null,DA.fmt(h.pa)),e('td',null,{V:'Vitória',D:'Derrota',E:'Empate'}[h.result]))))))))));
+}
+
 function MatchupForecastPage(){
  const e=React.createElement;
  const [data,setData]=useState(null),[payload,setPayload]=useState(null),[status,setStatus]=useState('loading'),[error,setError]=useState(''),[reload,setReload]=useState(0),[weekNo,setWeekNo]=useState(1),[team,setTeam]=useState('all'),[chosen,setChosen]=useState(''),[date,setDate]=useState(''),[refreshing,setRefreshing]=useState(false);
@@ -23065,7 +23089,7 @@ function MatchupForecastPage(){
  status==='ready'?e(React.Fragment,null,error?e('p',{role:'alert'},error):null,pending?e('p',{className:'mf-panel'},`${pending} jogos nesta semana têm participantes ainda indefinidos. Projeções parciais: esses jogos não foram atribuídos aos jogadores.`):null,
  e('div',{className:'mf-matchups'},pairs.map(([a,b])=>e('button',{className:'mf-matchup',key:a,'aria-pressed':pair?.[0]===a,onClick:()=>setChosen(a)},e('span',null,logo(a),a,e('strong',null,DA.fmt(results[a]?.total))),e('b',null,'×'),e('span',null,logo(b),b,e('strong',null,DA.fmt(results[b]?.total)))))),
  pair?e(React.Fragment,null,e('section',{className:'mf-panel'},e('h2',null,'PROJEÇÃO DIÁRIA E TOTAL DA SEMANA'),e('p',null,'Selecione um dia para ver os jogadores escalados dos dois times.'),e('div',{className:'mf-days'},days.map(d=>e('button',{key:d,'aria-pressed':d===activeDate,onClick:()=>setDate(d)},e('strong',null,fmtDate(d)),e('small',null,new Date(d+'T12:00Z').toLocaleDateString('pt-BR',{weekday:'short',timeZone:'UTC'})),e('span',null,DA.fmt(results[pair[0]]?.daily.find(x=>x.date===d)?.total)),e('span',null,DA.fmt(results[pair[1]]?.daily.find(x=>x.date===d)?.total))))),e('p',null,`${pair[0]}: ${DA.fmt(results[pair[0]]?.total)} · ${pair[1]}: ${DA.fmt(results[pair[1]]?.total)} · Diferença: ${DA.signed((results[pair[0]]?.total||0)-(results[pair[1]]?.total||0))}`)),e('h2',null,'ESCALAÇÕES · '+fmtDate(activeDate)),e('div',{className:'mf-lineups'},pair.map(n=>e(React.Fragment,{key:n},lineup(n)))),
- e('section',{className:'mf-panel'},e('h2',null,'CONTRIBUIÇÃO DOS JOGADORES NA SEMANA'),e('p',null,'Total = projeção da IA × dias em que o jogador entra na escalação ótima. Jogos no banco não pontuam.'),pair.map(name=>{const r=results[name];return e('div',{key:name},e('h3',null,name),r.missing.length?e('p',null,`${r.missing.length} jogadores sem projeção ou time NBA identificado. Totais consideram apenas os dados válidos.`):null,e('div',{className:'mf-scroll'},e('table',null,e('thead',null,e('tr',null,['JOGADOR','NBA','AVG IA','JOGOS NBA','ESCALADO','TOTAL'].map(x=>e('th',{key:x},x)))),e('tbody',null,r.roster.map(p=>{const count=r.daily.filter(d=>d.lineup.some(x=>x?.id===p.id)).length,games=r.daily.filter(d=>d.active.some(x=>x.id===p.id)).length;return e('tr',{key:p.id},e('th',null,e('div',{className:'mf-player'},photo(p),p.name)),e('td',null,p.nba||'N/D'),e('td',null,DA.fmt(p.central)),e('td',null,games),e('td',null,count),e('td',null,p.central===null?'N/D':DA.fmt(count*p.central)));})))));}))) :null):null);
+ e('section',{className:'mf-panel'},e('h2',null,'CONTRIBUIÇÃO DOS JOGADORES NA SEMANA'),e('p',null,'Total = projeção da IA × dias em que o jogador entra na escalação ótima. Jogos no banco não pontuam.'),pair.map(name=>{const r=results[name];return e('div',{key:name},e('h3',null,name),r.missing.length?e('p',null,`${r.missing.length} jogadores sem projeção ou time NBA identificado. Totais consideram apenas os dados válidos.`):null,e('div',{className:'mf-scroll'},e('table',null,e('thead',null,e('tr',null,['JOGADOR','NBA','AVG IA','JOGOS NBA','ESCALADO','TOTAL'].map(x=>e('th',{key:x},x)))),e('tbody',null,r.roster.map(p=>{const count=r.daily.filter(d=>d.lineup.some(x=>x?.id===p.id)).length,games=r.daily.filter(d=>d.active.some(x=>x.id===p.id)).length;return e('tr',{key:p.id},e('th',null,e('div',{className:'mf-player'},photo(p),p.name)),e('td',null,p.nba||'N/D'),e('td',null,DA.fmt(p.central)),e('td',null,games),e('td',null,count),e('td',null,p.central===null?'N/D':DA.fmt(count*p.central)));})))));}))) :null):null,status==='ready'?e(MatchupProjectedStandings,{model,data}):null);
 }
 
 // ==================== APP ====================
