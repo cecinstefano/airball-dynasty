@@ -12862,7 +12862,7 @@ function useDraftPriorityData() {
 }
 // ==================== COMPONENTS ====================
 function TopBar({ activePage, setPage }) {
-    const links = ['INÍCIO', 'JOGADORES', 'DRAFTED', 'HISTÓRICO', 'PREVISÕES DA GALERA', 'ANÁLISE DE DRAFT', 'FRANQUIAS', 'REGRAS', 'HONESTÔMETRO', 'CALENDÁRIO', 'HALL DA FAMA', 'TRADES'];
+    const links = ['INÍCIO', 'JOGADORES', 'DRAFTED', 'ANAIS DO AIRBALL', 'PREVISÕES DA GALERA', 'ANÁLISE DE DRAFT', 'FRANQUIAS', 'REGRAS', 'HONESTÔMETRO', 'CALENDÁRIO', 'HALL DA FAMA', 'TRADES'];
     const pageForLink = (l) => l === 'INÍCIO' ? 'HOME' : l === 'FRANQUIAS' ? 'TIMES' : l;
     return (React.createElement("div", { className: "topbar" },
         React.createElement("div", { className: "topbar-links" }, links.map(l => {
@@ -21183,7 +21183,7 @@ function DraftedPage() {
 const AIRBALL_BASE_URL = 'https://cecinstefano.github.io/airball-dynasty/';
 const AIRBALL_SHARE_IMAGE = 'https://cecinstefano.github.io/airball-dynasty/assets/airball-share.jpg';
 const PAGE_ROUTE_MAP = {
-    'HISTÓRICO': 'historico',
+    'ANAIS DO AIRBALL': 'historico',
  MATCHUP_FORECAST:'INVISBILITY-2',
     TRIBUNAL_ARTICLE: 'noticias/tribunal-do-draft',
     'PREVISÕES DA GALERA': 'previsoes-da-galera',
@@ -23168,7 +23168,7 @@ function HistoryPage(){
  const matchCard=(title,m)=>e('article',{className:'hi-card'},e('h3',null,title),m?e(React.Fragment,null,teamLabel(m.scoreA>m.scoreB?m.a:m.b),e('strong',{className:'hi-value'},DA.fmt(Math.abs(m.scoreA-m.scoreB))+' pts'),e('p',null,`${m.a} ${DA.fmt(m.scoreA)} × ${DA.fmt(m.scoreB)} ${m.b}`),e('small',null,label(m))):e('p',null,'Sem registro neste recorte.'));
  const sorted=[...filtered].sort((a,b)=>sort==='margin'?Math.abs(b.scoreA-b.scoreB)-Math.abs(a.scoreA-a.scoreB):sort==='points'?Math.max(b.scoreA,b.scoreB)-Math.max(a.scoreA,a.scoreB):all.indexOf(a)-all.indexOf(b));
  const scoreTable=(title,rows)=>e('section',{className:'hi-panel'},e('h2',null,title),e('div',{className:'hi-scroll'},e('table',null,e('thead',null,e('tr',null,['TIME','PONTUAÇÃO','ADVERSÁRIO','RODADA'].map(t=>e('th',{key:t},t)))),e('tbody',null,rows.slice(0,10).map((r,i)=>e('tr',{key:i},e('th',null,teamLabel(r.name)),e('td',null,DA.fmt(r.value)),e('td',null,r.opponent),e('td',null,label(r.match))))))));
- return e('main',{className:'hi-page'},e('header',{className:'hi-panel'},e('span',{className:'hi-kicker'},'AIRBALL · O ARQUIVO NÃO ESQUECE'),e('h1',null,'HISTÓRICO'),e('p',null,'O placar passa. A corneta fica. Confrontos reais, freguesias documentadas e semanas que alguns GMs preferiam esquecer.'),e('small',null,'Acervo disponível: temporada 2025–26. Bears contabilizado como Warlock Jamaicans. Jogos de Wictor’s Team e Imprudente HotShots removidos.'),e('small',null,'Playoffs válidos: 4 quartas de final, 2 semifinais e 1 final. Os demais jogos de playoffs foram excluídos de todas as estatísticas. A final vale no retrospecto, mas não nos recordes semanais de pontuação e margem. Semana 8 vale no retrospecto, mas não nas maiores e menores pontuações. Demais períodos mantidos como registrados, inclusive a semana 17 (9–22/02).'),
+ return e('main',{className:'hi-page'},e('header',{className:'hi-panel'},e('span',{className:'hi-kicker'},'AIRBALL · O ARQUIVO NÃO ESQUECE'),e('h1',null,'ANAIS DO AIRBALL'),e('p',null,'O placar passa. A corneta fica. Confrontos reais, freguesias documentadas e semanas que alguns GMs preferiam esquecer.'),e('small',null,'Acervo disponível: temporada 2025–26. Bears contabilizado como Warlock Jamaicans. Jogos de Wictor’s Team e Imprudente HotShots removidos.'),e('small',null,'Playoffs válidos: 4 quartas de final, 2 semifinais e 1 final. Os demais jogos de playoffs foram excluídos de todas as estatísticas. A final vale no retrospecto, mas não nos recordes semanais de pontuação e margem. Semana 8 vale no retrospecto, mas não nas maiores e menores pontuações. Demais períodos mantidos como registrados, inclusive a semana 17 (9–22/02).'),
  e('div',{className:'hi-controls'},e('label',null,'Time',e('select',{'aria-label':'Time histórico',value:team,onChange:ev=>setTeam(ev.target.value)},e('option',{value:'all'},'Todos'),names.map(n=>e('option',{key:n,value:n},n)))),e('label',null,'Adversário',e('select',{'aria-label':'Adversário histórico',value:opponent,onChange:ev=>setOpponent(ev.target.value)},e('option',{value:'all'},'Todos'),names.map(n=>e('option',{key:n,value:n},n)))),e('label',null,'Fase',e('select',{'aria-label':'Fase histórica',value:phase,onChange:ev=>setPhase(ev.target.value)},e('option',{value:'all'},'Todas'),e('option',{value:'regular'},'Temporada regular'),e('option',{value:'playoffs'},'Playoffs'))),e('label',null,'Rodada',e('select',{'aria-label':'Rodada histórica',value:round,onChange:ev=>setRound(ev.target.value)},e('option',{value:'all'},'Todas'),[...new Map(all.map(m=>[m.phase+'-'+m.round,m])).entries()].map(([key,m])=>e('option',{key,value:key},label(m)+' · '+m.period)))),e('button',{onClick:()=>{setTeam('all');setOpponent('all');setPhase('all');setRound('all');setSort('date');}},'Limpar filtros')),
  e('p',{role:'status'},`${filtered.length} de ${all.length} confrontos · estatísticas seguem os filtros; recordes de sequência, campanha e curiosidades usam o acervo completo`)),
  error?e('div',{className:'hi-panel',role:'alert'},'Não foi possível carregar o histórico.',e('button',{onClick:()=>setRetry(v=>v+1)},'Tentar novamente')):!data?e('p',{role:'status'},'Abrindo os arquivos da liga…'):!filtered.length?e('p',{className:'hi-panel'},'Nenhum confronto neste recorte.'):e(React.Fragment,null,
@@ -23246,7 +23246,7 @@ function App() {
             case 'DRAFT': return React.createElement(DraftPage, null);
             case 'PREVISÕES DA GALERA': return React.createElement(CommunityPredictionsPage);
             case 'MATCHUP_FORECAST': return React.createElement(MatchupForecastPage);
- case 'HISTÓRICO': return React.createElement(HistoryPage);
+ case 'ANAIS DO AIRBALL': return React.createElement(HistoryPage);
             case 'DRAFTED': return React.createElement(DraftedPage, null);
             case 'ANÁLISE DE DRAFT': return React.createElement(DraftAnalysisPage, null);
             case 'SIMULADOR DE DRAFT': return React.createElement(DraftSimulatorPage, null);
