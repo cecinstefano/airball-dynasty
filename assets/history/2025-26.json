@@ -14,7 +14,8 @@
       "managerB": "Marino Mondek",
       "scoreA": 840.5,
       "scoreB": 960,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS1-2",
@@ -27,7 +28,8 @@
       "managerB": "Aleison Götz",
       "scoreA": 847.5,
       "scoreB": 605,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS1-3",
@@ -40,7 +42,8 @@
       "managerB": "Darlan Machado Pinto",
       "scoreA": 981,
       "scoreB": 887.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS1-4",
@@ -53,7 +56,8 @@
       "managerB": "Felipe C",
       "scoreA": 1055.5,
       "scoreB": 680,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS1-5",
@@ -66,7 +70,8 @@
       "managerB": "Caio Rogério Amaro Almeida",
       "scoreA": 914,
       "scoreB": 778.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS1-7",
@@ -79,7 +84,8 @@
       "managerB": "Geraldo Oliveira Jr",
       "scoreA": 797,
       "scoreB": 896.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS1-8",
@@ -92,7 +98,8 @@
       "managerB": "Sidney Assunção",
       "scoreA": 619,
       "scoreB": 1102.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS2-1",
@@ -105,7 +112,8 @@
       "managerB": "Paulo Vitor Campodonio",
       "scoreA": 1280.5,
       "scoreB": 1292.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS2-2",
@@ -118,7 +126,8 @@
       "managerB": "Filipe Xavier",
       "scoreA": 1003.5,
       "scoreB": 1215.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS2-3",
@@ -131,7 +140,8 @@
       "managerB": "Stéfano Cecin",
       "scoreA": 1202.5,
       "scoreB": 1552,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS2-4",
@@ -144,7 +154,8 @@
       "managerB": "Mateus Pato",
       "scoreA": 905.5,
       "scoreB": 1180.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS2-5",
@@ -157,7 +168,8 @@
       "managerB": "Andre Caetano",
       "scoreA": 1273.5,
       "scoreB": 975.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS2-6",
@@ -170,7 +182,8 @@
       "managerB": "Djalma Júnior",
       "scoreA": 938.5,
       "scoreB": 1094,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS2-7",
@@ -183,7 +196,8 @@
       "managerB": "Geraldo Oliveira Jr",
       "scoreA": 1011,
       "scoreB": 1182.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS3-0",
@@ -196,7 +210,8 @@
       "managerB": "Paulo Vitor Campodonio",
       "scoreA": 1163,
       "scoreB": 1156.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS3-2",
@@ -209,7 +224,8 @@
       "managerB": "Hiago Valverde",
       "scoreA": 1348,
       "scoreB": 1475.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS3-3",
@@ -222,7 +238,8 @@
       "managerB": "Marino Mondek",
       "scoreA": 1135.5,
       "scoreB": 1069.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS3-4",
@@ -235,7 +252,8 @@
       "managerB": "GABRIEL Silva",
       "scoreA": 1051.5,
       "scoreB": 943,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS3-5",
@@ -248,7 +266,8 @@
       "managerB": "Ruan Bastos",
       "scoreA": 961.5,
       "scoreB": 1184.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS3-6",
@@ -261,7 +280,8 @@
       "managerB": "Aleison Götz",
       "scoreA": 1049,
       "scoreB": 990,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS3-7",
@@ -274,7 +294,8 @@
       "managerB": "Darlan Machado Pinto",
       "scoreA": 1094,
       "scoreB": 1025,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS4-0",
@@ -287,7 +308,8 @@
       "managerB": "Stéfano Cecin",
       "scoreA": 876,
       "scoreB": 1382,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS4-1",
@@ -300,7 +322,8 @@
       "managerB": "Andre Caetano",
       "scoreA": 1369.5,
       "scoreB": 1239,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS4-2",
@@ -313,7 +336,8 @@
       "managerB": "Djalma Júnior",
       "scoreA": 1063,
       "scoreB": 1331,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS4-4",
@@ -326,7 +350,8 @@
       "managerB": "Sidney Assunção",
       "scoreA": 1341.5,
       "scoreB": 915.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS4-5",
@@ -339,7 +364,8 @@
       "managerB": "Caio Rogério Amaro Almeida",
       "scoreA": 933,
       "scoreB": 904,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS4-7",
@@ -352,7 +378,8 @@
       "managerB": "Darlan Machado Pinto",
       "scoreA": 1259,
       "scoreB": 1106,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS4-8",
@@ -365,7 +392,8 @@
       "managerB": "Felipe C",
       "scoreA": 1210,
       "scoreB": 1133.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS5-0",
@@ -378,7 +406,8 @@
       "managerB": "Andre Caetano",
       "scoreA": 1143.5,
       "scoreB": 1271.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS5-1",
@@ -391,7 +420,8 @@
       "managerB": "Stéfano Cecin",
       "scoreA": 1075.5,
       "scoreB": 1207.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS5-2",
@@ -404,7 +434,8 @@
       "managerB": "Mateus Pato",
       "scoreA": 982.5,
       "scoreB": 1160.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS5-3",
@@ -417,7 +448,8 @@
       "managerB": "Paulo Vitor Campodonio",
       "scoreA": 1297.5,
       "scoreB": 1076.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS5-6",
@@ -430,7 +462,8 @@
       "managerB": "Hiago Valverde",
       "scoreA": 998.5,
       "scoreB": 1123,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS5-7",
@@ -443,7 +476,8 @@
       "managerB": "Marino Mondek",
       "scoreA": 1100,
       "scoreB": 1098.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS5-8",
@@ -456,7 +490,8 @@
       "managerB": "GABRIEL Silva",
       "scoreA": 1242.5,
       "scoreB": 967.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS6-0",
@@ -469,7 +504,8 @@
       "managerB": "Geraldo Oliveira Jr",
       "scoreA": 1102.5,
       "scoreB": 1132,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS6-1",
@@ -482,7 +518,8 @@
       "managerB": "Caio Rogério Amaro Almeida",
       "scoreA": 1122,
       "scoreB": 1147,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS6-3",
@@ -495,7 +532,8 @@
       "managerB": "Darlan Machado Pinto",
       "scoreA": 1368,
       "scoreB": 974.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS6-4",
@@ -508,7 +546,8 @@
       "managerB": "Felipe C",
       "scoreA": 929.5,
       "scoreB": 940.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS6-5",
@@ -521,7 +560,8 @@
       "managerB": "Ruan Bastos",
       "scoreA": 1099.5,
       "scoreB": 1085.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS6-6",
@@ -534,7 +574,8 @@
       "managerB": "Aleison Götz",
       "scoreA": 516,
       "scoreB": 956.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS6-8",
@@ -547,7 +588,8 @@
       "managerB": "GABRIEL Silva",
       "scoreA": 1082,
       "scoreB": 833.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS7-1",
@@ -560,7 +602,8 @@
       "managerB": "Geraldo Oliveira Jr",
       "scoreA": 1110.5,
       "scoreB": 1062.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS7-2",
@@ -573,7 +616,8 @@
       "managerB": "Sidney Assunção",
       "scoreA": 1001,
       "scoreB": 1481,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS7-3",
@@ -586,7 +630,8 @@
       "managerB": "Andre Caetano",
       "scoreA": 943.5,
       "scoreB": 1223,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS7-4",
@@ -599,7 +644,8 @@
       "managerB": "Djalma Júnior",
       "scoreA": 1059,
       "scoreB": 887.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS7-5",
@@ -612,7 +658,8 @@
       "managerB": "Stéfano Cecin",
       "scoreA": 925.5,
       "scoreB": 1434,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS7-6",
@@ -625,7 +672,8 @@
       "managerB": "Mateus Pato",
       "scoreA": 959.5,
       "scoreB": 1192,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS7-8",
@@ -638,7 +686,8 @@
       "managerB": "Filipe Xavier",
       "scoreA": 1216,
       "scoreB": 424.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS8-0",
@@ -651,7 +700,8 @@
       "managerB": "Darlan Machado Pinto",
       "scoreA": 533,
       "scoreB": 728.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": false
     },
     {
       "id": "RS8-1",
@@ -664,7 +714,8 @@
       "managerB": "Ruan Bastos",
       "scoreA": 719.5,
       "scoreB": 710,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": false
     },
     {
       "id": "RS8-3",
@@ -677,7 +728,8 @@
       "managerB": "Marino Mondek",
       "scoreA": 676,
       "scoreB": 735,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": false
     },
     {
       "id": "RS8-4",
@@ -690,7 +742,8 @@
       "managerB": "GABRIEL Silva",
       "scoreA": 760,
       "scoreB": 569.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": false
     },
     {
       "id": "RS8-6",
@@ -703,7 +756,8 @@
       "managerB": "Hiago Valverde",
       "scoreA": 622,
       "scoreB": 559,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": false
     },
     {
       "id": "RS8-7",
@@ -716,7 +770,8 @@
       "managerB": "Paulo Vitor Campodonio",
       "scoreA": 778.5,
       "scoreB": 639.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": false
     },
     {
       "id": "RS8-8",
@@ -729,7 +784,8 @@
       "managerB": "Filipe Xavier",
       "scoreA": 639.5,
       "scoreB": 655.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": false
     },
     {
       "id": "RS9-0",
@@ -742,7 +798,8 @@
       "managerB": "Ruan Bastos",
       "scoreA": 1067,
       "scoreB": 923,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS9-1",
@@ -755,7 +812,8 @@
       "managerB": "Darlan Machado Pinto",
       "scoreA": 694.5,
       "scoreB": 818,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS9-2",
@@ -768,7 +826,8 @@
       "managerB": "Felipe C",
       "scoreA": 643.5,
       "scoreB": 1019,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS9-5",
@@ -781,7 +840,8 @@
       "managerB": "Geraldo Oliveira Jr",
       "scoreA": 785,
       "scoreB": 679,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS9-6",
@@ -794,7 +854,8 @@
       "managerB": "Sidney Assunção",
       "scoreA": 829.5,
       "scoreB": 925,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS9-7",
@@ -807,7 +868,8 @@
       "managerB": "Andre Caetano",
       "scoreA": 982,
       "scoreB": 833,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS9-8",
@@ -820,7 +882,8 @@
       "managerB": "Djalma Júnior",
       "scoreA": 742,
       "scoreB": 996,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS10-1",
@@ -833,7 +896,8 @@
       "managerB": "Hiago Valverde",
       "scoreA": 1160.5,
       "scoreB": 1071.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS10-2",
@@ -846,7 +910,8 @@
       "managerB": "Filipe Xavier",
       "scoreA": 1249,
       "scoreB": 939,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS10-3",
@@ -859,7 +924,8 @@
       "managerB": "Mateus Pato",
       "scoreA": 1197,
       "scoreB": 973.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS10-4",
@@ -872,7 +938,8 @@
       "managerB": "Djalma Júnior",
       "scoreA": 993.5,
       "scoreB": 943,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS10-5",
@@ -885,7 +952,8 @@
       "managerB": "Sidney Assunção",
       "scoreA": 1116.5,
       "scoreB": 1179.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS10-7",
@@ -898,7 +966,8 @@
       "managerB": "Felipe C",
       "scoreA": 901.5,
       "scoreB": 714,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS10-8",
@@ -911,7 +980,8 @@
       "managerB": "Aleison Götz",
       "scoreA": 916,
       "scoreB": 1144,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS11-0",
@@ -924,7 +994,8 @@
       "managerB": "Paulo Vitor Campodonio",
       "scoreA": 969,
       "scoreB": 1112.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS11-1",
@@ -937,7 +1008,8 @@
       "managerB": "Stéfano Cecin",
       "scoreA": 1021.5,
       "scoreB": 1591,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS11-2",
@@ -950,7 +1022,8 @@
       "managerB": "Andre Caetano",
       "scoreA": 1359.5,
       "scoreB": 1228.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS11-3",
@@ -963,7 +1036,8 @@
       "managerB": "Geraldo Oliveira Jr",
       "scoreA": 1155,
       "scoreB": 1022,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS11-4",
@@ -976,7 +1050,8 @@
       "managerB": "Caio Rogério Amaro Almeida",
       "scoreA": 1240,
       "scoreB": 1457.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS11-5",
@@ -989,7 +1064,8 @@
       "managerB": "Darlan Machado Pinto",
       "scoreA": 1343.5,
       "scoreB": 1252,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS11-7",
@@ -1002,7 +1078,8 @@
       "managerB": "Marino Mondek",
       "scoreA": 1009,
       "scoreB": 982,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS12-0",
@@ -1015,7 +1092,8 @@
       "managerB": "GABRIEL Silva",
       "scoreA": 1249,
       "scoreB": 1049.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS12-1",
@@ -1028,7 +1106,8 @@
       "managerB": "Hiago Valverde",
       "scoreA": 946,
       "scoreB": 955.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS12-2",
@@ -1041,7 +1120,8 @@
       "managerB": "Filipe Xavier",
       "scoreA": 991,
       "scoreB": 1142,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS12-3",
@@ -1054,7 +1134,8 @@
       "managerB": "Mateus Pato",
       "scoreA": 1272,
       "scoreB": 1161,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS12-4",
@@ -1067,7 +1148,8 @@
       "managerB": "Djalma Júnior",
       "scoreA": 1411.5,
       "scoreB": 1138,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS12-5",
@@ -1080,7 +1162,8 @@
       "managerB": "Sidney Assunção",
       "scoreA": 1073,
       "scoreB": 1049,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS12-8",
@@ -1093,7 +1176,8 @@
       "managerB": "Aleison Götz",
       "scoreA": 1248.5,
       "scoreB": 1287.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS13-0",
@@ -1106,7 +1190,8 @@
       "managerB": "Andre Caetano",
       "scoreA": 850,
       "scoreB": 1115.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS13-1",
@@ -1119,7 +1204,8 @@
       "managerB": "Geraldo Oliveira Jr",
       "scoreA": 867,
       "scoreB": 752.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS13-2",
@@ -1132,7 +1218,8 @@
       "managerB": "Caio Rogério Amaro Almeida",
       "scoreA": 1232.5,
       "scoreB": 1242.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS13-3",
@@ -1145,7 +1232,8 @@
       "managerB": "Darlan Machado Pinto",
       "scoreA": 949,
       "scoreB": 1179.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS13-4",
@@ -1158,7 +1246,8 @@
       "managerB": "Ruan Bastos",
       "scoreA": 1314,
       "scoreB": 1144.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS13-5",
@@ -1171,7 +1260,8 @@
       "managerB": "Marino Mondek",
       "scoreA": 1119,
       "scoreB": 1034,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS13-7",
@@ -1184,7 +1274,8 @@
       "managerB": "Paulo Vitor Campodonio",
       "scoreA": 1102,
       "scoreB": 1118.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS13-8",
@@ -1197,7 +1288,8 @@
       "managerB": "Stéfano Cecin",
       "scoreA": 1151,
       "scoreB": 1112,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS14-0",
@@ -1210,7 +1302,8 @@
       "managerB": "GABRIEL Silva",
       "scoreA": 826.5,
       "scoreB": 911,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS14-1",
@@ -1223,7 +1316,8 @@
       "managerB": "Hiago Valverde",
       "scoreA": 1100,
       "scoreB": 850.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS14-2",
@@ -1236,7 +1330,8 @@
       "managerB": "Filipe Xavier",
       "scoreA": 1052,
       "scoreB": 1270.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS14-3",
@@ -1249,7 +1344,8 @@
       "managerB": "Mateus Pato",
       "scoreA": 1168,
       "scoreB": 1108.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS14-4",
@@ -1262,7 +1358,8 @@
       "managerB": "Djalma Júnior",
       "scoreA": 1326.5,
       "scoreB": 1392.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS14-7",
@@ -1275,7 +1372,8 @@
       "managerB": "Felipe C",
       "scoreA": 1119.5,
       "scoreB": 839,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS14-8",
@@ -1288,7 +1386,8 @@
       "managerB": "Aleison Götz",
       "scoreA": 1411,
       "scoreB": 1228,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS15-0",
@@ -1301,7 +1400,8 @@
       "managerB": "Caio Rogério Amaro Almeida",
       "scoreA": 1130,
       "scoreB": 1563.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS15-1",
@@ -1314,7 +1414,8 @@
       "managerB": "Darlan Machado Pinto",
       "scoreA": 627.5,
       "scoreB": 1198.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS15-2",
@@ -1327,7 +1428,8 @@
       "managerB": "Ruan Bastos",
       "scoreA": 1407,
       "scoreB": 1035.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS15-3",
@@ -1340,7 +1442,8 @@
       "managerB": "Marino Mondek",
       "scoreA": 1081,
       "scoreB": 1003,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS15-5",
@@ -1353,7 +1456,8 @@
       "managerB": "Paulo Vitor Campodonio",
       "scoreA": 1124.5,
       "scoreB": 1478.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS15-7",
@@ -1366,7 +1470,8 @@
       "managerB": "Andre Caetano",
       "scoreA": 970,
       "scoreB": 1165,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS15-8",
@@ -1379,7 +1484,8 @@
       "managerB": "Geraldo Oliveira Jr",
       "scoreA": 1307,
       "scoreB": 1079,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS16-0",
@@ -1392,7 +1498,8 @@
       "managerB": "GABRIEL Silva",
       "scoreA": 1090.5,
       "scoreB": 891.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS16-1",
@@ -1405,7 +1512,8 @@
       "managerB": "Hiago Valverde",
       "scoreA": 754.5,
       "scoreB": 874.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS16-2",
@@ -1418,7 +1526,8 @@
       "managerB": "Filipe Xavier",
       "scoreA": 846.5,
       "scoreB": 1077.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS16-4",
@@ -1431,7 +1540,8 @@
       "managerB": "Djalma Júnior",
       "scoreA": 907.5,
       "scoreB": 993,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS16-5",
@@ -1444,7 +1554,8 @@
       "managerB": "Sidney Assunção",
       "scoreA": 860.5,
       "scoreB": 1279,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS16-7",
@@ -1457,7 +1568,8 @@
       "managerB": "Felipe C",
       "scoreA": 1050,
       "scoreB": 886,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS16-8",
@@ -1470,7 +1582,8 @@
       "managerB": "Aleison Götz",
       "scoreA": 1116,
       "scoreB": 1130.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS17-0",
@@ -1483,7 +1596,8 @@
       "managerB": "Darlan Machado Pinto",
       "scoreA": 1310.5,
       "scoreB": 1468.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS17-1",
@@ -1496,7 +1610,8 @@
       "managerB": "Paulo Vitor Campodonio",
       "scoreA": 1353.5,
       "scoreB": 1251,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS17-3",
@@ -1509,7 +1624,8 @@
       "managerB": "Marino Mondek",
       "scoreA": 698,
       "scoreB": 1122,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS17-4",
@@ -1522,7 +1638,8 @@
       "managerB": "GABRIEL Silva",
       "scoreA": 1324,
       "scoreB": 1103,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS17-5",
@@ -1535,7 +1652,8 @@
       "managerB": "Mateus Pato",
       "scoreA": 1520,
       "scoreB": 1124,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS17-7",
@@ -1548,7 +1666,8 @@
       "managerB": "Hiago Valverde",
       "scoreA": 1299,
       "scoreB": 1160.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "RS17-8",
@@ -1561,7 +1680,8 @@
       "managerB": "Djalma Júnior",
       "scoreA": 1482.5,
       "scoreB": 1200,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "PO1-0",
@@ -1574,7 +1694,8 @@
       "managerB": "Stéfano Cecin",
       "scoreA": 980,
       "scoreB": 1343.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "PO1-1",
@@ -1587,7 +1708,8 @@
       "managerB": "Caio Rogério Amaro Almeida",
       "scoreA": 1250,
       "scoreB": 1025.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "PO1-2",
@@ -1600,7 +1722,8 @@
       "managerB": "Sidney Assunção",
       "scoreA": 1174,
       "scoreB": 1317.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "PO1-3",
@@ -1613,46 +1736,8 @@
       "managerB": "Aleison Götz",
       "scoreA": 892,
       "scoreB": 870.5,
-      "weeklyEligible": true
-    },
-    {
-      "id": "PO1-4",
-      "phase": "playoffs",
-      "round": 1,
-      "period": "Feb 23 - Mar 1",
-      "a": "Instituto Popovich",
-      "b": "Revolution francaise",
-      "managerA": "Andre Caetano",
-      "managerB": "Filipe Xavier",
-      "scoreA": 889,
-      "scoreB": 751,
-      "weeklyEligible": true
-    },
-    {
-      "id": "PO1-6",
-      "phase": "playoffs",
-      "round": 1,
-      "period": "Feb 23 - Mar 1",
-      "a": "Paysandu Lobo's",
-      "b": "Pato's Team",
-      "managerA": "Geraldo Oliveira Jr",
-      "managerB": "Mateus Pato",
-      "scoreA": 624.5,
-      "scoreB": 967.5,
-      "weeklyEligible": true
-    },
-    {
-      "id": "PO1-8",
-      "phase": "playoffs",
-      "round": 1,
-      "period": "Feb 23 - Mar 1",
-      "a": "Ghost of goat",
-      "b": "Charlotte DunkLipe",
-      "managerA": "GABRIEL Silva",
-      "managerB": "Felipe C",
-      "scoreA": 604,
-      "scoreB": 929.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "PO2-0",
@@ -1665,7 +1750,8 @@
       "managerB": "Stéfano Cecin",
       "scoreA": 1143.5,
       "scoreB": 1351.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "PO2-1",
@@ -1678,85 +1764,8 @@
       "managerB": "Sidney Assunção",
       "scoreA": 1077.5,
       "scoreB": 1363.5,
-      "weeklyEligible": true
-    },
-    {
-      "id": "PO2-2",
-      "phase": "playoffs",
-      "round": 2,
-      "period": "Mar 2 - 8",
-      "a": "Nortz",
-      "b": "Red Hot Blazer Peppers",
-      "managerA": "Caio Rogério Amaro Almeida",
-      "managerB": "Aleison Götz",
-      "scoreA": 1001,
-      "scoreB": 1266.5,
-      "weeklyEligible": true
-    },
-    {
-      "id": "PO2-3",
-      "phase": "playoffs",
-      "round": 2,
-      "period": "Mar 2 - 8",
-      "a": "Chugabum Ironclads",
-      "b": "Fi du Jequisom",
-      "managerA": "Hiago Valverde",
-      "managerB": "Darlan Machado Pinto",
-      "scoreA": 863,
-      "scoreB": 995,
-      "weeklyEligible": true
-    },
-    {
-      "id": "PO2-4",
-      "phase": "playoffs",
-      "round": 2,
-      "period": "Mar 2 - 8",
-      "a": "Warlock Jamaicans",
-      "b": "Instituto Popovich",
-      "managerA": "Ruan Bastos",
-      "managerB": "Andre Caetano",
-      "scoreA": 393.5,
-      "scoreB": 865,
-      "weeklyEligible": true
-    },
-    {
-      "id": "PO2-5",
-      "phase": "playoffs",
-      "round": 2,
-      "period": "Mar 2 - 8",
-      "a": "Pato's Team",
-      "b": "Revolution francaise",
-      "managerA": "Mateus Pato",
-      "managerB": "Filipe Xavier",
-      "scoreA": 785,
-      "scoreB": 939.5,
-      "weeklyEligible": true
-    },
-    {
-      "id": "PO2-7",
-      "phase": "playoffs",
-      "round": 2,
-      "period": "Mar 2 - 8",
-      "a": "Charlotte DunkLipe",
-      "b": "Paysandu Lobo's",
-      "managerA": "Felipe C",
-      "managerB": "Geraldo Oliveira Jr",
-      "scoreA": 882.5,
-      "scoreB": 716,
-      "weeklyEligible": true
-    },
-    {
-      "id": "PO2-8",
-      "phase": "playoffs",
-      "round": 2,
-      "period": "Mar 2 - 8",
-      "a": "Ghost of goat",
-      "b": "Pistons de Pira",
-      "managerA": "GABRIEL Silva",
-      "managerB": "Marino Mondek",
-      "scoreA": 534,
-      "scoreB": 665.5,
-      "weeklyEligible": true
+      "weeklyEligible": true,
+      "scoreRecordEligible": true
     },
     {
       "id": "PO3-0",
@@ -1769,85 +1778,9 @@
       "managerB": "Stéfano Cecin",
       "scoreA": 2789,
       "scoreB": 3035.5,
-      "weeklyEligible": false
-    },
-    {
-      "id": "PO3-1",
-      "phase": "playoffs",
-      "round": 3,
-      "period": "Mar 9 - 22",
-      "a": "Team Djalma Jr",
-      "b": "Canalhas do Bem",
-      "managerA": "Djalma Júnior",
-      "managerB": "Paulo Vitor Campodonio",
-      "scoreA": 2249.5,
-      "scoreB": 2363,
-      "weeklyEligible": false
-    },
-    {
-      "id": "PO3-2",
-      "phase": "playoffs",
-      "round": 3,
-      "period": "Mar 9 - 22",
-      "a": "Fi du Jequisom",
-      "b": "Red Hot Blazer Peppers",
-      "managerA": "Darlan Machado Pinto",
-      "managerB": "Aleison Götz",
-      "scoreA": 2373,
-      "scoreB": 2400.5,
-      "weeklyEligible": false
-    },
-    {
-      "id": "PO3-3",
-      "phase": "playoffs",
-      "round": 3,
-      "period": "Mar 9 - 22",
-      "a": "Chugabum Ironclads",
-      "b": "Nortz",
-      "managerA": "Hiago Valverde",
-      "managerB": "Caio Rogério Amaro Almeida",
-      "scoreA": 1169.5,
-      "scoreB": 1260.5,
-      "weeklyEligible": false
-    },
-    {
-      "id": "PO3-4",
-      "phase": "playoffs",
-      "round": 3,
-      "period": "Mar 9 - 22",
-      "a": "Instituto Popovich",
-      "b": "Revolution francaise",
-      "managerA": "Andre Caetano",
-      "managerB": "Filipe Xavier",
-      "scoreA": 1973,
-      "scoreB": 1393.5,
-      "weeklyEligible": false
-    },
-    {
-      "id": "PO3-6",
-      "phase": "playoffs",
-      "round": 3,
-      "period": "Mar 9 - 22",
-      "a": "Charlotte DunkLipe",
-      "b": "Pato's Team",
-      "managerA": "Felipe C",
-      "managerB": "Mateus Pato",
-      "scoreA": 1987,
-      "scoreB": 1533.5,
-      "weeklyEligible": false
-    },
-    {
-      "id": "PO3-8",
-      "phase": "playoffs",
-      "round": 3,
-      "period": "Mar 9 - 22",
-      "a": "Ghost of goat",
-      "b": "Paysandu Lobo's",
-      "managerA": "GABRIEL Silva",
-      "managerB": "Geraldo Oliveira Jr",
-      "scoreA": 974.5,
-      "scoreB": 1388.5,
-      "weeklyEligible": false
+      "weeklyEligible": false,
+      "scoreRecordEligible": false
     }
-  ]
+  ],
+  "excludedNonCompetitivePlayoffs": 15
 }
