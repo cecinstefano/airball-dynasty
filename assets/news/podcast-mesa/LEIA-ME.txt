@@ -1,0 +1,11 @@
+Imagens criadas com a ferramenta integrada de geração de imagens.
+Referências: fotos fornecidas de Paulo, Cecin e Hiago. Cecin à esquerda nas quatro cenas.
+
+Prompts utilizados (resumo do conjunto):
+- capa.png: foto editorial humorística em estúdio de podcast lilás; os três debatem, Hiago ergue uma bola e um pequeno robô derrotado representa a I.A.
+- canalhas.png: Paulo sobe degraus com bandeira roxa; Cecin e Hiago aplaudem, simbolizando a subida do Canalhas.
+- sharpe.png: debate no estúdio com pranchetas 35 e 41, simbolizando as avaliações de Sharpe, preservando os rostos.
+- disputa.png: os três analisam quatro bolas quase empatadas numa linha de chegada, simbolizando a margem de quatro pontos no topo.
+Formato paisagem 16:9, aparência fotográfica, rostos naturais e iluminação lilás/âmbar.
+
+Números: tabela fornecida pelo usuário, 176 jogadores (11 por time); comparação I.A. congelada a partir da base local em 15/09/2026. Fotos dos jogadores consultadas pelo ID no worker. Os elencos da reportagem preservam os participantes do episódio.
