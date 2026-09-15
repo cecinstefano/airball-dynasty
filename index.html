@@ -10161,6 +10161,7 @@ body:has(.mm-article) #root{background:transparent}
 
 .hi-score-grid,.hi-curiosity-grid{align-items:stretch}.hi-curiosity-grid{grid-auto-rows:1fr}@media(max-width:600px){.hi-curiosity-grid{grid-auto-rows:auto}}
 .franchise-live-photo{object-fit:contain;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;flex-shrink:0}.franchise-live-row{display:grid;grid-template-columns:86px minmax(0,1fr) auto;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid #66477a}.franchise-live-row small{display:block;font-size:11px;margin-top:5px}.franchise-live-row .franchise-score-chip{text-align:right}@media(max-width:600px){.franchise-live-row{grid-template-columns:66px minmax(0,1fr);gap:10px}.franchise-live-row img{width:66px}.franchise-live-row>.franchise-score-chip{grid-column:2;text-align:left}}
+ .franchise-logo-card{position:relative;isolation:isolate;overflow:hidden;min-height:290px;padding:26px 22px!important;background:linear-gradient(145deg,#311741,#120c1e)!important;border:1px solid #73528b!important;border-radius:20px!important;box-shadow:0 12px 30px #13091e35;transition:transform .18s ease,border-color .18s ease}.franchise-logo-card::before{content:'';position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 50% 5%,var(--team-color),transparent 72%);opacity:.22}.franchise-logo-card:hover{transform:translateY(-4px);border-color:#c4a0e4!important}.franchise-logo-card-logo{filter:drop-shadow(0 10px 15px #0007);margin-bottom:12px}.franchise-logo-card-name{color:#fff!important;font-size:21px!important}.franchise-logo-card-gm{color:#cdbddd!important}.franchise-card-power{display:flex;justify-content:center;align-items:center;gap:10px;margin:18px 0 10px;padding-top:14px;border-top:1px solid #ffffff20;color:#c8f37f}.franchise-card-power strong{font-size:30px}.franchise-card-power span{font-size:10px;letter-spacing:.1em}.franchise-logo-card-position{color:#cdbddd!important;background:transparent!important}.franchise-hub-intro{grid-template-columns:1fr!important}@media(prefers-reduced-motion:reduce){.franchise-logo-card{transition:none}.franchise-logo-card:hover{transform:none}}
 .hi-scroll{overflow:auto}.hi-page table{width:100%;border-collapse:collapse;font:14px Arial;font-variant-numeric:tabular-nums}.hi-page th,.hi-page td{text-align:left;padding:12px;white-space:nowrap;border-bottom:1px solid #543664}.hi-page thead{font-size:11px;color:#d6b7f0;background:#351a46}.hi-columns{display:grid;grid-template-columns:1fr 1fr;gap:20px;min-width:0}.hi-columns>*{min-width:0}@media(max-width:1000px){.hi-columns{grid-template-columns:1fr}}@media(max-width:600px){.hi-page{padding:12px}.hi-panel{padding:14px}.hi-controls label{width:100%}.hi-records{grid-template-columns:1fr}}
 
 </style>
@@ -17512,9 +17513,12 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
     const [rosterPayload,setRosterPayload]=useState(null);
     const liveModel=React.useMemo(()=>DA.build(rosterPayload,DRAFT_ANALYSIS_PROJECTIONS,TEAMS_MASTER,LIVE_DRAFT_PICKS_MANUAL),[rosterPayload]);
     const liveRow=name=>rosterPayload?liveModel.rows.find(r=>DA.key(r.name)===DA.key(name)):null;
+    const coreRanking=liveModel.rows.map(r=>({...r,core:r.roster.filter(p=>p.central!==null).slice(0,11)})).map(r=>({...r,total11:r.core.length?r.core.reduce((n,p)=>n+p.central,0):null})).sort((a,b)=>DA.desc(a.total11,b.total11)||a.name.localeCompare(b.name,'pt-BR'));
+    const coreFor=name=>rosterPayload?coreRanking.find(r=>DA.key(r.name)===DA.key(name)):null;
+    const positionFor=name=>coreFor(name)?.total11!==null&&coreFor(name)?(coreRanking.findIndex(r=>DA.key(r.name)===DA.key(name))+1)+'º':'N/D';
     const asPlayer=p=>({...p,avg:p.central,fantasyPoints:p.central,photoUrl:p.photo,team:p.raw?.team||p.raw?.proTeam||'NBA'});
     const PlayerPhoto=({player,size=74})=>e('img',{className:'franchise-live-photo',src:player.photoUrl||player.photo||DA.fallbackPhoto,alt:player.name,width:size,height:size,loading:'lazy',onError:ev=>{ev.currentTarget.onerror=null;ev.currentTarget.src=DA.fallbackPhoto;}});
-    const [draftStatus, setDraftStatus] = useState('Carregando board atual...');
+    const [draftStatus, setDraftStatus] = useState('Carregando elencos…');
     const [playerLookup, setPlayerLookup] = useState(new Map());
     const officialKeepersByTeam = keeperRanking.reduce((acc, row) => {
         acc[normalizeTeamName(row.team)] = row;
@@ -17681,12 +17685,11 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
     };
     const getBestPlayer = (keepers,roster) => roster.map(r=>r.player).filter(p=>p.central!==null).sort((a,b)=>b.central-a.central)[0]||null;
     const getOutlook=name=>{const roster=liveRow(name)?.roster||[],paired=roster.filter(p=>p.central!==null&&p.avg2025>0).map(p=>({...p,delta:p.central-p.avg2025}));const growth=[...paired].sort((a,b)=>b.delta-a.delta||b.central-a.central),decline=[...paired].sort((a,b)=>a.delta-b.delta||b.central-a.central);return {bet:growth.find(p=>p.delta>0)||null,risk:decline.find(p=>p.delta<0)||growth.find(p=>p.delta>0)||roster.find(p=>p.central!==null)||null};};
-    const getAiAnalysis = team => {const row=liveRow(team.name);if(!row?.roster.length)return 'Aguardando elenco atual do worker.';const rank=DA.sorted(liveModel.rows,{key:'central',dir:'desc'}).findIndex(r=>r.name===row.name)+1;const valid=row.roster.filter(p=>p.central!==null),leaders=valid.slice(0,3),outlook=getOutlook(team.name);return e(React.Fragment,null,
-      e('p',null,team.name+' tem '+row.roster.length+' jogadores no elenco atual, com projeção disponível para '+valid.length+'. Ocupa o '+rank+'º lugar por média projetada do elenco: '+DA.fmt(row.central.value)+' FP.'),
-      e('p',null,'A produção é liderada por '+leaders.map(p=>p.name+' ('+DA.fmt(p.central)+' FP)').join(', ')+'. BEST 8: '+DA.fmt(row.best8.value)+' FP; BEST 11: '+DA.fmt(row.best11.value)+' FP. São médias por jogador, não previsões de pontuação semanal.'),
-      e('p',null,row.best8.value!==null&&row.central.value!==null?'A diferença de '+DA.fmt(row.best8.value-row.central.value)+' FP entre o BEST 8 e a média total mostra quanto a produção se concentra no núcleo principal. O banco deve ser avaliado conforme as posições e o calendário.':'Faltam projeções para avaliar a profundidade.'),
-      e('p',null,outlook.bet?'A maior aposta de crescimento é '+outlook.bet.name+', com '+DA.signed(outlook.bet.delta)+' FP frente ao AVG anterior. Esse ganho é projetado, não garantido.':'Não há crescimento positivo com base anterior válida para destacar uma aposta.'),
-      e('small',null,'Leitura automática das projeções da I.A. e do elenco atual. Dados ausentes não entram nas médias; não infere lesões ou disponibilidade.'));
+    const getAiAnalysis = team => {const row=coreFor(team.name);if(!row?.core.length)return 'A análise estará disponível quando o elenco carregar.';const stars=row.core.slice(0,3),outlook=getOutlook(team.name),rank=parseInt(positionFor(team.name)),bench=row.roster.filter(p=>p.central!==null).slice(3,6);return e(React.Fragment,null,
+      e('p',null,team.name+(rank<=4?' chega à temporada no pelotão de frente, com ambição de disputar o título. ':rank<=8?' entra na disputa com força para brigar por uma vaga nos playoffs. ':' começa a temporada em busca de espaço entre os protagonistas. ')+stars[0].name+' lidera um núcleo que coloca a franquia na '+positionFor(team.name).replace('º','ª')+' posição projetada da AirBall.'),
+      e('p',null,stars.slice(1).map(p=>p.name).join(' e ')+(stars.length>1?' dividem os holofotes com o principal nome do elenco. ':'')+(bench.length?'Na segunda linha, '+bench.map(p=>p.name).join(', ')+' completam as principais opções de '+team.gm+'. ': '')+'Os melhores 11 somam '+DA.fmt(row.total11)+' pontos projetados.'),
+      outlook.bet?e('p',null,outlook.bet.name+' é a aposta para ganhar destaque. A projeção de '+DA.fmt(outlook.bet.central)+' pontos abre espaço para uma temporada de afirmação e dá à franquia mais um nome para acompanhar de perto.'):null,
+      outlook.risk?e('p',null,outlook.risk.name+(outlook.risk.delta<0?' concentra o sinal de atenção: a expectativa é de uma produção abaixo da temporada passada. A reação do jogador pode mudar o tom da campanha.':' carrega uma das expectativas mais importantes do elenco. Confirmar a produção esperada será um dos capítulos centrais da temporada da franquia.')):null);
     };
     const outlook=selectedTeam?getOutlook(selectedTeam.name):{};
     const outlookCard=(p,risk=false)=>p?e('div',null,e('div',{className:'franchise-keeper-row'},e(PlayerPhoto,{player:asPlayer(p)}),e('div',null,e('div',{className:'franchise-row-title'},p.name),e('div',{className:'franchise-row-meta'},p.position)),e('div',{className:'franchise-score-chip'},DA.fmt(p.central))),e('p',null,'AVG anterior: '+DA.fmt(p.avg2025)+' · Projeção I.A.: '+DA.fmt(p.central)),e('p',null,!risk?'Maior aumento projetado frente à temporada passada: '+DA.signed(p.delta)+' FP.':p.delta<0?'Maior queda projetada frente à temporada passada: '+DA.signed(p.delta)+' FP.':p.delta>0?'Sem queda projetada entre os dados comparáveis. O principal risco é depender da confirmação do salto de '+DA.signed(p.delta)+' FP.':'Principal dependência de produção: maior projeção do elenco, sem base comparável para medir queda.')):e('div',{className:'franchise-placeholder-card'},'Sem dados comparáveis suficientes para este destaque.');
@@ -17759,11 +17762,7 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
             e("div", { className: "franchise-hub-panel" },
                 e("div", { className: "franchise-hub-kicker" }, "Franchise Hub"),
                 e("div", { className: "franchise-hub-title" }, "Clique no escudo para abrir o dossiê do time"),
-                e("div", { className: "franchise-hub-text" }, "Cada franquia agora tem uma página estilo popup com logo grande, foto do GM, keepers, elenco atual, calendário, jogos-chave, trades e análise da I.A.")
-            ),
-            e("div", { className: "franchise-hub-note" },
-                e("div", { className: "franchise-hub-note-title" }, "Status"),
-                e("div", { className: "franchise-hub-note-text" }, draftStatus)
+                e("div", { className: "franchise-hub-text" }, "Os protagonistas, as apostas e as histórias de cada franquia. Escolha um time e abra seu dossiê.")
             )
         ),
         e("div", { className: "franchise-logo-grid" }, orderedFranchises.map(t => {
@@ -17772,6 +17771,7 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
                 e("div", { className: "franchise-logo-card-logo" }, e(TeamLogo, { team: t.name, size: 126 })),
                 e("div", { className: "franchise-logo-card-name" }, t.name),
                 e("div", { className: "franchise-logo-card-gm" }, `GM: ${t.gm}`),
+                e('div',{className:'franchise-card-power'},e('strong',null,positionFor(t.name)),e('span',null,'POSIÇÃO PROJETADA')),
                 e("div", { className: "franchise-logo-card-position" }, `25-26: ${formatFinalPosition(finalStanding === null || finalStanding === void 0 ? void 0 : finalStanding.rank)}`)
             );
         })),
@@ -17818,8 +17818,8 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
                         ),
                         e("div", { className: "franchise-modal-badges" },
                             e("span", { className: "franchise-modal-badge" }, `Keepers ${DA.fmt(selectedKeepers.total)} FP`),
-                            e("span", { className: "franchise-modal-badge" }, `Draft atual ${DA.fmt(selectedDraftTotal)} FP`),
-                            e("span", { className: "franchise-modal-badge" }, `Total ${DA.fmt(selectedTotalProjection)} FP`)
+                            e("span", { className: "franchise-modal-badge" }, `Melhores 11 jogadores ${DA.fmt(coreFor(selectedTeam.name)?.total11)} FP`),
+                            e("span", { className: "franchise-modal-badge" }, `Posição projetada ${positionFor(selectedTeam.name)}`)
                         )
                     ),
                     e("div", { className: "franchise-modal-gm" },
@@ -17831,15 +17831,14 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
                     e("div", { className: "franchise-overview-grid" },
                         e(StatCard, { label: "Temporada anterior", value: formatFinalPosition(selectedFinalStanding === null || selectedFinalStanding === void 0 ? void 0 : selectedFinalStanding.rank) }),
                         e(StatCard, { label: "Keepers", value: DA.fmt(selectedKeepers.total) }),
-                        e(StatCard, { label: "Draft atual", value: DA.fmt(selectedDraftTotal) }),
-                        e(StatCard, { label: "Total projetado", value: DA.fmt(selectedTotalProjection) })
+                        e(StatCard, { label: "Melhores 11 jogadores", value: DA.fmt(coreFor(selectedTeam.name)?.total11) }),
+                        e(StatCard, { label: "Posição projetada", value: positionFor(selectedTeam.name) })
                     ),
                     e("div", { className: "franchise-detail-grid" },
                         e("div", null,
                             e("div", { className: "franchise-section-card" },
                                 e("div", { className: "franchise-section-title" },
-                                    e("span", null, "Keepers"),
-                                    e("span", { className: "franchise-section-note" }, selectedKeepers.source)
+                                    e("span", null, "Keepers")
                                 ),
                                 selectedKeepers.players.length ? selectedKeepers.players.map(kp => e("div", { className: "franchise-keeper-row", key: kp.id || kp.name },
                                     e(PlayerPhoto, { player: kp, size: 54 }),
@@ -17852,8 +17851,7 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
                             ),
                             e("div", { className: "franchise-section-card" },
                                 e("div", { className: "franchise-section-title" },
-                                    e("span", null, "Elenco completo · projeção I.A."),
-                                    e("span", { className: "franchise-section-note" }, draftStatus)
+                                    e("span", null, "Elenco completo · projeção I.A.")
                                 ),
                                 selectedRoster.length ? selectedRoster.map(item => e('div',{className:'franchise-live-row',key:item.player.id},
                                     e(PlayerPhoto,{player:item.player,size:86}),e('div',null,e('div',{className:'franchise-row-title'},item.player.name),e('div',{className:'franchise-row-meta'},item.player.team+' • '+item.player.position),e('small',null,item.round?'Round '+item.round+' · Pick #'+item.overall:'Keepers')),
@@ -17900,14 +17898,6 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
                             e("div", { className: "franchise-section-card" },
                                 e("div", { className: "franchise-section-title" }, e("span", null, "Maior risco")),
                                 outlookCard(outlook.risk,true)
-                            ),
-                            e("div", { className: "franchise-section-card" },
-                                e("div", { className: "franchise-section-title" }, e("span", null, "Jogos mais difíceis")),
-                                e("div", { className: "franchise-mini-list" }, selectedHardest.length ? selectedHardest.map(item => e(MiniGame, { item, key: `hard-${item.week}` })) : e("div", { className: "franchise-placeholder-card" }, "Aguardando calendário."))
-                            ),
-                            e("div", { className: "franchise-section-card" },
-                                e("div", { className: "franchise-section-title" }, e("span", null, "Jogos mais esperados")),
-                                e("div", { className: "franchise-mini-list" }, selectedExpected.length ? selectedExpected.map(item => e(MiniGame, { item, key: `exp-${item.week}` })) : e("div", { className: "franchise-placeholder-card" }, "Sem rivalidade ou jogo de topo destacado ainda."))
                             ),
                             e("div", { className: "franchise-section-card" },
                                 e("div", { className: "franchise-section-title" }, e("span", null, "Evolução de posições")),
