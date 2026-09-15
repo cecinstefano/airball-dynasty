@@ -10160,6 +10160,7 @@ body:has(.mm-article) #root{background:transparent}
 .hi-records{align-items:start}.hi-card{min-width:0}.hi-streak-grid,.hi-campaign-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hi-streak-entry{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;padding:16px 0;border-bottom:1px solid #543664}.hi-streak-rank{grid-column:1/-1}.hi-streak-entry .hi-value{font-size:28px;align-self:center;margin:0;white-space:nowrap}.hi-streak-entry>small:last-child{grid-column:1/-1}.hi-streak-entry .hi-team{min-width:0;overflow-wrap:anywhere}.hi-streak-entry .hi-logo{flex-shrink:0}@media(max-width:800px){.hi-streak-grid,.hi-campaign-grid{grid-template-columns:1fr}}@media(max-width:400px){.hi-streak-entry{grid-template-columns:1fr}.hi-streak-entry .hi-value{margin:8px 0 0}}
 
 .hi-score-grid,.hi-curiosity-grid{align-items:stretch}.hi-curiosity-grid{grid-auto-rows:1fr}@media(max-width:600px){.hi-curiosity-grid{grid-auto-rows:auto}}
+.franchise-live-photo{object-fit:contain;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;flex-shrink:0}.franchise-live-row{display:grid;grid-template-columns:86px minmax(0,1fr) auto;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid #66477a}.franchise-live-row small{display:block;font-size:11px;margin-top:5px}.franchise-live-row .franchise-score-chip{text-align:right}@media(max-width:600px){.franchise-live-row{grid-template-columns:66px minmax(0,1fr);gap:10px}.franchise-live-row img{width:66px}.franchise-live-row>.franchise-score-chip{grid-column:2;text-align:left}}
 .hi-scroll{overflow:auto}.hi-page table{width:100%;border-collapse:collapse;font:14px Arial;font-variant-numeric:tabular-nums}.hi-page th,.hi-page td{text-align:left;padding:12px;white-space:nowrap;border-bottom:1px solid #543664}.hi-page thead{font-size:11px;color:#d6b7f0;background:#351a46}.hi-columns{display:grid;grid-template-columns:1fr 1fr;gap:20px;min-width:0}.hi-columns>*{min-width:0}@media(max-width:1000px){.hi-columns{grid-template-columns:1fr}}@media(max-width:600px){.hi-page{padding:12px}.hi-panel{padding:14px}.hi-controls label{width:100%}.hi-records{grid-template-columns:1fr}}
 
 </style>
@@ -17508,6 +17509,11 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
             onTeamRouteChange('');
     };
     const [draftBoard, setDraftBoard] = useState([]);
+    const [rosterPayload,setRosterPayload]=useState(null);
+    const liveModel=React.useMemo(()=>DA.build(rosterPayload,DRAFT_ANALYSIS_PROJECTIONS,TEAMS_MASTER,LIVE_DRAFT_PICKS_MANUAL),[rosterPayload]);
+    const liveRow=name=>rosterPayload?liveModel.rows.find(r=>DA.key(r.name)===DA.key(name)):null;
+    const asPlayer=p=>({...p,avg:p.central,fantasyPoints:p.central,photoUrl:p.photo,team:p.raw?.team||p.raw?.proTeam||'NBA'});
+    const PlayerPhoto=({player,size=74})=>e('img',{className:'franchise-live-photo',src:player.photoUrl||player.photo||DA.fallbackPhoto,alt:player.name,width:size,height:size,loading:'lazy',onError:ev=>{ev.currentTarget.onerror=null;ev.currentTarget.src=DA.fallbackPhoto;}});
     const [draftStatus, setDraftStatus] = useState('Carregando board atual...');
     const [playerLookup, setPlayerLookup] = useState(new Map());
     const officialKeepersByTeam = keeperRanking.reduce((acc, row) => {
@@ -17584,73 +17590,27 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
                     .sort((a, b) => b.fantasyPoints - a.fantasyPoints)
                     .slice(0, 200);
                 if (mounted) {
+                    setRosterPayload(data);
                     setPlayerLookup(lookup);
                     setDraftBoard(pool);
-                    setDraftStatus(`${pool.length} jogadores disponíveis no board atual`);
+                    setDraftStatus('Elencos atuais sincronizados com o worker • Projeções da I.A.'+(data.updatedAt?' • Atualizado em '+new Date(data.updatedAt).toLocaleString('pt-BR'):''));
                 }
             })
             .catch(() => {
                 if (mounted) {
                     setPlayerLookup(new Map());
                     setDraftBoard([]);
-                    setDraftStatus('Board ainda não carregado');
+                    setRosterPayload(null);setDraftStatus('Não foi possível carregar os elencos. Recarregue a página para tentar novamente.');
                 }
             });
         return () => { mounted = false; };
     }, []);
 
     const selectedTeam = selectedTeamName ? getTeam(selectedTeamName) : null;
-    const getOfficialKeepers = (teamName) => {
-        const official = officialKeepersByTeam[normalizeTeamName(teamName)];
-        const topPlayers = Array.isArray(official === null || official === void 0 ? void 0 : official.topPlayers) ? official.topPlayers : [];
-        if (topPlayers.length) {
-            return {
-                source: isDynamic ? 'Oficiais pela ESPN' : 'Carregando ESPN',
-                total: Number((official === null || official === void 0 ? void 0 : official.totalAvg) || 0),
-                players: topPlayers.map((kp, idx) => ({
-                    ...kp,
-                    id: kp.id || `${teamName}-${idx}`,
-                    avg: Number(kp.avg || kp.fantasyPoints || 0),
-                    fantasyPoints: Number(kp.avg || kp.fantasyPoints || 0),
-                    team: kp.team || kp.proTeam || kp.proTeamAbbrev || 'NBA',
-                    position: kp.position || '—'
-                }))
-            };
-        }
-        const fallback = getKeepersForTeam(teamName);
-        if (fallback && Array.isArray(fallback.players)) {
-            return {
-                source: 'Projeção salva',
-                total: parseCommaNumber(fallback.sum),
-                players: fallback.players.map((kp, idx) => ({
-                    id: `${teamName}-fallback-${idx}`,
-                    name: kp.name,
-                    avg: parseCommaNumber(kp.fp),
-                    fantasyPoints: parseCommaNumber(kp.fp),
-                    position: '—',
-                    team: 'NBA',
-                    health: kp.health
-                }))
-            };
-        }
-        return { source: keepersStatus || 'Aguardando dados', total: 0, players: [] };
-    };
-    const getProjectedRoster = (teamName) => {
-        const picks = getDraftPicksForTeam(teamName, 8);
-        return picks.map(info => ({
-            ...info,
-            player: draftBoard[Number(info.overall) - 1] || null
-        }));
-    };
-    const getDraftTotal = (teamName) => {
-        const row = DRAFT_IDEAL_RANKING.find(r => normalizeTeamName(r.team) === normalizeTeamName(teamName));
-        if (row) return Number(row.draft || 0);
-        return getProjectedRoster(teamName).reduce((sum, item) => sum + Number((item.player && item.player.fantasyPoints) || 0), 0);
-    };
-    const getTotalProjection = (teamName, keepersTotal) => {
-        const row = DRAFT_IDEAL_RANKING.find(r => normalizeTeamName(r.team) === normalizeTeamName(teamName));
-        return row ? Number(row.total || 0) : Number(keepersTotal || 0) + getDraftTotal(teamName);
-    };
+    const getOfficialKeepers = name => {const players=(liveRow(name)?.roster||[]).filter(p=>!p.choice).map(asPlayer);return {players,total:players.some(p=>p.avg!==null)?players.reduce((s,p)=>s+(p.avg??0),0):null,source:'Jogadores sem round/pick · projeção I.A.'};};
+    const getProjectedRoster = name => (liveRow(name)?.roster||[]).map(p=>({player:asPlayer(p),round:p.choice?.round,pick:p.choice?.pick,overall:p.choice?.pick,ownerName:name}));
+    const getDraftTotal = name => {const valid=(liveRow(name)?.roster||[]).filter(p=>p.choice&&p.central!==null);return valid.length?valid.reduce((s,p)=>s+p.central,0):null;};
+    const getTotalProjection = name => {const valid=(liveRow(name)?.roster||[]).filter(p=>p.central!==null);return valid.length?valid.reduce((s,p)=>s+p.central,0):null;};
     const getCalendarForTeam = (teamName) => SCHEDULE_WEEKS.map(w => {
         const game = w.games.find(g => normalizeTeamName(g.home) === normalizeTeamName(teamName) || normalizeTeamName(g.away) === normalizeTeamName(teamName));
         if (!game) return null;
@@ -17658,10 +17618,7 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
         const opponent = isHome ? game.away : game.home;
         return { week: w.week, date: w.date, repeat: !!w.repeat, opponent, isHome, game };
     }).filter(Boolean);
-    const getStrengthForTeam = (teamName) => {
-        const row = DRAFT_IDEAL_RANKING.find(r => normalizeTeamName(r.team) === normalizeTeamName(teamName));
-        return row ? Number(row.total || 0) : 0;
-    };
+    const getStrengthForTeam = name => getTotalProjection(name) ?? 0;
     const getHardestGames = (teamName) => getCalendarForTeam(teamName)
         .map(item => ({ ...item, strength: getStrengthForTeam(item.opponent) }))
         .sort((a, b) => b.strength - a.strength)
@@ -17683,9 +17640,10 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
                 const strength = getStrengthForTeam(item.opponent);
                 const finalStanding = getFinalStandingForTeam(item.opponent);
                 const isTradeStory = tradeOpponents.has(oppNorm);
-                const isElite = strength >= 383;
-                const isContender = strength >= 375;
-                const isPlayoffRange = strength >= 368;
+                const power=liveModel.rows.filter(r=>r.roster.length).sort((a,b)=>(getStrengthForTeam(b.name)-getStrengthForTeam(a.name))).findIndex(r=>DA.key(r.name)===DA.key(item.opponent))+1;
+                const isElite = power>0&&power<=3;
+                const isContender = power>0&&power<=6;
+                const isPlayoffRange = power>0&&power<=8;
                 const hype = (isTradeStory ? 60 : 0) + (isElite ? 48 : isContender ? 38 : isPlayoffRange ? 24 : 0) + (finalStanding && finalStanding.rank <= 4 ? 18 : 0) + (item.repeat ? 8 : 0);
                 let headline = `${teamLabel} x ${opponentLabel}`;
                 let reason = `Duelo importante no calendário, com impacto direto na leitura de força da franquia.`;
@@ -17721,53 +17679,17 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
         const norm = normalizeTeamName(teamName);
         return TRADES_DATA.filter(trade => normalizeTeamName(trade.teamA) === norm || normalizeTeamName(trade.teamB) === norm);
     };
-    const getBestPlayer = (keepers, roster) => {
-        const draftPlayers = roster.map(r => r.player).filter(Boolean).map(p => ({
-            name: p.name,
-            avg: Number(p.fantasyPoints || p.avg || 0),
-            position: p.position || '—',
-            team: p.team || 'NBA',
-            photoUrl: p.photoUrl
-        }));
-        const keeperPlayers = keepers.players.map(p => ({
-            name: p.name,
-            avg: Number(p.avg || p.fantasyPoints || 0),
-            position: p.position || '—',
-            team: p.team || 'NBA',
-            photoUrl: p.photoUrl
-        }));
-        return [...keeperPlayers, ...draftPlayers].sort((a, b) => b.avg - a.avg)[0] || null;
+    const getBestPlayer = (keepers,roster) => roster.map(r=>r.player).filter(p=>p.central!==null).sort((a,b)=>b.central-a.central)[0]||null;
+    const getOutlook=name=>{const roster=liveRow(name)?.roster||[],paired=roster.filter(p=>p.central!==null&&p.avg2025>0).map(p=>({...p,delta:p.central-p.avg2025}));const growth=[...paired].sort((a,b)=>b.delta-a.delta||b.central-a.central),decline=[...paired].sort((a,b)=>a.delta-b.delta||b.central-a.central);return {bet:growth.find(p=>p.delta>0)||null,risk:decline.find(p=>p.delta<0)||growth.find(p=>p.delta>0)||roster.find(p=>p.central!==null)||null};};
+    const getAiAnalysis = team => {const row=liveRow(team.name);if(!row?.roster.length)return 'Aguardando elenco atual do worker.';const rank=DA.sorted(liveModel.rows,{key:'central',dir:'desc'}).findIndex(r=>r.name===row.name)+1;const valid=row.roster.filter(p=>p.central!==null),leaders=valid.slice(0,3),outlook=getOutlook(team.name);return e(React.Fragment,null,
+      e('p',null,team.name+' tem '+row.roster.length+' jogadores no elenco atual, com projeção disponível para '+valid.length+'. Ocupa o '+rank+'º lugar por média projetada do elenco: '+DA.fmt(row.central.value)+' FP.'),
+      e('p',null,'A produção é liderada por '+leaders.map(p=>p.name+' ('+DA.fmt(p.central)+' FP)').join(', ')+'. BEST 8: '+DA.fmt(row.best8.value)+' FP; BEST 11: '+DA.fmt(row.best11.value)+' FP. São médias por jogador, não previsões de pontuação semanal.'),
+      e('p',null,row.best8.value!==null&&row.central.value!==null?'A diferença de '+DA.fmt(row.best8.value-row.central.value)+' FP entre o BEST 8 e a média total mostra quanto a produção se concentra no núcleo principal. O banco deve ser avaliado conforme as posições e o calendário.':'Faltam projeções para avaliar a profundidade.'),
+      e('p',null,outlook.bet?'A maior aposta de crescimento é '+outlook.bet.name+', com '+DA.signed(outlook.bet.delta)+' FP frente ao AVG anterior. Esse ganho é projetado, não garantido.':'Não há crescimento positivo com base anterior válida para destacar uma aposta.'),
+      e('small',null,'Leitura automática das projeções da I.A. e do elenco atual. Dados ausentes não entram nas médias; não infere lesões ou disponibilidade.'));
     };
-    const getAiAnalysis = (team, keepers, roster) => {
-        const row = DRAFT_IDEAL_RANKING.find(r => normalizeTeamName(r.team) === normalizeTeamName(team.name));
-        const finalStanding = getFinalStandingForTeam(team.name);
-        const draftTotal = getDraftTotal(team.name);
-        const total = getTotalProjection(team.name, keepers.total);
-        const startsAt = roster[0] ? `começa o draft no R${roster[0].round} P${roster[0].pick}` : 'ainda não tem picks carregadas';
-        const predicted = row ? `${row.pos}º lugar` : 'a definir';
-        const previous = finalStanding ? `${formatFinalPosition(finalStanding.rank)} em 25-26` : 'sem posição anterior registrada';
-        const base = `POSIÇÃO PREVISTA: ${predicted}. Total projetado: ${formatDraftScore(total, 1)} FP — keepers ${formatDraftScore(keepers.total, 1)} FP + draft ideal ${formatDraftScore(draftTotal, 1)} FP. Em 25-26: ${previous}.`;
-        const analyses = {
-            "paysandu lobo's": "O Paysandu entra na pré-temporada como o time mais completo da simulação. A força da franquia está no equilíbrio: Cade Cunningham e Anthony Edwards dão uma base jovem, produtiva e relativamente segura, enquanto o draft ideal adiciona Tyrese Maxey logo no topo e ainda entrega profundidade com nomes de alto volume. Não é um elenco que depende de um único superastro para sobreviver; é uma construção de pontuação espalhada, com várias fontes de criação e potencial de manter regularidade semana após semana. Hoje, é o favorito matemático do ranking combinado.",
-            "chugabum ironclads": "O Chugabum continua sendo o time que todo mundo precisa olhar pelo retrovisor. Nikola Jokić é o maior motor individual da liga e Jalen Williams dá uma segunda peça confiável, moderna e eficiente. A diferença para o topo é pequena, mas a leitura muda: a dupla de keepers é a melhor da AirBall, enquanto o draft ideal não foi tão dominante quanto o de alguns rivais diretos. Mesmo assim, com Jokić puxando a média, o Chugabum larga como candidato real ao título e com margem para seguir no topo se acertar os complementos.",
-            "charlotte dunklipe": "Charlotte virou uma das grandes ameaças da temporada por causa da combinação entre bons keepers e a força da primeira escolha do draft. Trae Young e Alperen Şengün já oferecem criação, assistências e produção ofensiva de elite; com Shai Gilgeous-Alexander projetado no board ideal, a franquia ganha um teto altíssimo. O ponto de atenção é o encaixe de tantas peças que concentram uso e bola, mas em fantasy isso também pode ser virtude. Se o draft confirmar algo perto desse cenário, Charlotte entra imediatamente na briga pelo topo.",
-            "canalhas do bem": "O Canalhas aparece como um candidato forte porque parte de um luxo raro: Luka Dončić como eixo absoluto. A presença de Lauri Markkanen dá pontuação e espaçamento, enquanto o draft ideal adiciona nomes que mantêm o time competitivo sem depender apenas de Luka. A franquia talvez não tenha o draft mais explosivo da simulação, mas tem uma base extremamente alta e pouco comum. Em uma liga de pontos, começar com Luka significa ter uma vantagem semanal quase estrutural.",
-            "pistons de pira": "O Pistons é o grande vencedor estratégico da simulação de draft. A troca que levou Chet Holmgren e a pick 12 para Pira mudou completamente o desenho da franquia: o time passou a ter duas escolhas de primeiro round e, no cenário ideal, monta o melhor draft da liga. Harden e Chet formam uma dupla de keepers com teto alto, e a chegada de mais talento cedo no board reduz o risco de profundidade. O Pistons não parte com a melhor soma de keepers, mas compensa isso com capital de draft — e é exatamente por isso que salta para o grupo dos candidatos.",
-            "revolution francaise": "A Revolution tem talvez o maior teto individual da liga por causa de Victor Wembanyama. Mesmo com Stephon Castle ainda carregando incerteza de volume e papel, Wemby muda qualquer projeção: ele pontua, reboteia, bloqueia e pode vencer semanas praticamente sozinho. O draft ideal acrescenta peças que reforçam defesa, eficiência e profundidade. A questão não é se a Revolution pode ser perigosa — pode. A questão é se o elenco ao redor de Wembanyama será estável o suficiente para transformar teto em campanha de elite.",
-            "pato's team": "O Pato's Team aparece no meio alto da tabela com uma leitura clara: talento existe, mas o risco físico também. Kawhi Leonard e Evan Mobley formam uma dupla forte, com eficiência e impacto defensivo, mas a saúde de Kawhi segue sendo o ponto que separa uma projeção boa de uma candidatura real ao título. O draft ideal entrega bons nomes e mantém o time dentro do bloco de playoff. É uma franquia que pode parecer discreta no papel, mas que fica muito perigosa se os principais jogadores entregarem minutos constantes.",
-            "warlock jamaicans": "O Warlock é uma das franquias mais interessantes do ranking porque mistura segurança de produção com volatilidade de estrela. Josh Giddey e Scottie Barnes oferecem múltiplas categorias, rebotes, assistências e versatilidade; no draft ideal, Joel Embiid aparece como peça capaz de mudar completamente o patamar do time. A projeção é forte, mas vem com alertas: Embiid tem teto de MVP fantasy e risco físico proporcional. Se as peças principais jogarem volume, o Warlock pode terminar acima da posição prevista.",
-            "red hot blazer peppers": "O Red Hot Blazer Peppers tem uma identidade bem definida: atleticismo, juventude e produção defensiva. Amen Thompson e Jalen Johnson são dois keepers com perfil de crescimento e muito encaixe na pontuação AirBall, especialmente pelo impacto em rebotes, assistências, roubos e tocos. O draft ideal adiciona Devin Booker e Alex Sarr, equilibrando pontuação imediata com aposta de teto. É um time com cara de evolução; talvez não seja o mais seguro da elite, mas pode ser um dos que mais sobem se os jovens confirmarem minutos e protagonismo.",
-            "stéfano's supersonics": "O atual campeão entra em uma temporada de defesa de título com uma mudança agressiva de filosofia. A troca por Giannis Antetokounmpo dá ao SuperSonics uma âncora de elite e mantém Austin Reaves como segunda peça produtiva, mas o custo foi alto: Chet Holmgren e a pick 12 saíram, empurrando o draft do time para uma zona mais tardia. A projeção mostra exatamente esse contraste — keepers fortíssimos, draft mais curto e menos margem de erro. O SuperSonics não larga como favorito matemático, mas tem estrela suficiente para assustar qualquer adversário em confronto direto.",
-            "nortz": "O Nortz aparece como uma franquia de alta variância. Jamal Murray e Paolo Banchero dão talento ofensivo, criação e potencial de noites grandes, mas o draft ideal também carrega nomes de risco físico e oscilação. A leitura jornalística é simples: se as peças de maior teto jogarem em volume, o Nortz pode virar um time muito mais perigoso do que a posição prevista sugere. Se houver instabilidade, tende a ficar preso no bloco intermediário da tabela.",
-            "ghost of goat": "O Ghost of Goat tem uma construção mais veterana, sólida e competitiva do que chamativa. Pascal Siakam e Jalen Brunson formam uma dupla confiável, com alta responsabilidade ofensiva e pouca necessidade de aposta cega. O draft ideal adiciona Anthony Davis e Dejounte Murray, o que eleva o teto, mas também traz uma dose de preocupação física. É o tipo de elenco que pode não vencer a manchete da pré-temporada, mas que tem perfil para incomodar favoritos se os principais nomes estiverem saudáveis.",
-            "instituto popovich": "O Instituto Popovich parte de uma base liderada por Donovan Mitchell, um dos jogadores mais seguros em volume ofensivo. Keyonte George é a peça que define o tamanho do salto: se ganhar eficiência e minutos, a dupla de keepers fica muito mais interessante. O draft ideal traz Stephen Curry, Desmond Bane e Jarrett Allen como nomes fortes para sustentar a pontuação. A posição prevista é modesta, mas o roteiro de crescimento existe — especialmente se Keyonte deixar de ser apenas aposta e virar produção real.",
-            "fi du jequisom": "O Fi du Jequisom tem uma das narrativas mais curiosas da temporada: mistura LeBron James, ainda capaz de produzir em alto nível, com Cooper Flagg, uma aposta de futuro e enorme expectativa. O draft ideal acrescenta nomes seguros e produtivos, como Karl-Anthony Towns e Darius Garland, mas o time depende de duas perguntas centrais: quanto LeBron ainda entrega em volume e quão rápido Flagg vira produção fantasy confiável. É uma franquia com muito nome, muito apelo e uma margem de erro menor do que os favoritos.",
-            "team djalma jr": "O Team Djalma Jr chega com nomes fortes, mas precisa transformar reputação em produção semanal. Kevin Durant e De'Aaron Fox ainda dão uma base respeitável, enquanto o draft ideal adiciona Jimmy Butler, Donovan Clingan e VJ Edgecombe. O problema é que parte importante do elenco projetado vem acompanhada de idade, risco físico ou adaptação. A posição prevista não elimina o potencial competitivo, mas deixa claro que o time precisará acertar o draft real melhor do que a projeção automática para brigar mais alto.",
-            "acre dinosaurs": "O Acre Dinosaurs aparece em último na soma combinada, mas não como um time sem caminho. Bam Adebayo e Jaylen Brown oferecem uma base atlética, segura e de bom volume, e o draft ideal traz nomes capazes de elevar o teto, como Domantas Sabonis e Brandon Miller. O desafio é que a soma inicial de keepers fica abaixo da concorrência direta, obrigando a franquia a ganhar valor no draft e na gestão de elenco. O Acre começa como azarão, mas tem peças suficientes para incomodar se transformar potencial em consistência."
-        };
-        const custom = analyses[normalizeTeamName(team.name)] || "A análise definitiva desta franquia será atualizada depois do draft real, quando as escolhas oficiais, projeções ESPN e movimentações de elenco estiverem fechadas.";
-        return `${base} ${custom}`;
-    };
+    const outlook=selectedTeam?getOutlook(selectedTeam.name):{};
+    const outlookCard=(p,risk=false)=>p?e('div',null,e('div',{className:'franchise-keeper-row'},e(PlayerPhoto,{player:asPlayer(p)}),e('div',null,e('div',{className:'franchise-row-title'},p.name),e('div',{className:'franchise-row-meta'},p.position)),e('div',{className:'franchise-score-chip'},DA.fmt(p.central))),e('p',null,'AVG anterior: '+DA.fmt(p.avg2025)+' · Projeção I.A.: '+DA.fmt(p.central)),e('p',null,!risk?'Maior aumento projetado frente à temporada passada: '+DA.signed(p.delta)+' FP.':p.delta<0?'Maior queda projetada frente à temporada passada: '+DA.signed(p.delta)+' FP.':p.delta>0?'Sem queda projetada entre os dados comparáveis. O principal risco é depender da confirmação do salto de '+DA.signed(p.delta)+' FP.':'Principal dependência de produção: maior projeção do elenco, sem base comparável para medir queda.')):e('div',{className:'franchise-placeholder-card'},'Sem dados comparáveis suficientes para este destaque.');
     const selectedKeepers = selectedTeam ? getOfficialKeepers(selectedTeam.name) : null;
     const selectedRoster = selectedTeam ? getProjectedRoster(selectedTeam.name) : [];
     const selectedFinalStanding = selectedTeam ? getFinalStandingForTeam(selectedTeam.name) : null;
@@ -17793,29 +17715,7 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
             item.reason && e("div", { className: "franchise-expected-reason" }, item.reason)
         )
     );
-    const EvolutionChart = () => e("div", { className: "franchise-evolution-chart" },
-        e("svg", { className: "franchise-evolution-svg", viewBox: "0 0 520 230", preserveAspectRatio: "none" },
-            [1, 4, 8, 12, 16].map((pos, idx) => {
-                const y = 26 + idx * 42;
-                return e("g", { key: `y-${pos}` },
-                    e("line", { className: "franchise-evolution-gridline", x1: 44, y1: y, x2: 500, y2: y }),
-                    e("text", { className: "franchise-evolution-label", x: 10, y: y + 4 }, `${pos}º`)
-                );
-            }),
-            e("line", { className: "franchise-evolution-axis", x1: 44, y1: 26, x2: 44, y2: 194 }),
-            e("line", { className: "franchise-evolution-axis", x1: 44, y1: 194, x2: 500, y2: 194 }),
-            [1, 6, 12, 18].map((week, idx) => {
-                const x = 44 + idx * 152;
-                return e("text", { className: "franchise-evolution-label", x: x - 16, y: 218, key: `x-${week}` }, `S${week}`);
-            }),
-            e("path", { className: "franchise-evolution-dash", d: "M44 188 C150 150 230 156 318 118 C390 86 444 92 500 62" })
-        ),
-        e("div", { className: "franchise-evolution-empty" },
-            "DRAFT AINDA NÃO OCORRIDO",
-            e("br", null),
-            "O gráfico de posições semanais será preenchido durante a temporada."
-        )
-    );
+    const EvolutionChart = () => e('div',{className:'franchise-placeholder-card'},'Aguardando resultados da temporada para exibir a evolução real das posições.');
     const renderTradeAsset = (asset) => {
         const player = resolveTradePlayer(asset, playerLookup);
         const isPick = player.isDraftPick || String(player.name || asset).toLowerCase().includes('pick');
@@ -17859,11 +17759,11 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
             e("div", { className: "franchise-hub-panel" },
                 e("div", { className: "franchise-hub-kicker" }, "Franchise Hub"),
                 e("div", { className: "franchise-hub-title" }, "Clique no escudo para abrir o dossiê do time"),
-                e("div", { className: "franchise-hub-text" }, "Cada franquia agora tem uma página estilo popup com logo grande, foto do GM, keepers, draft projetado, calendário, jogos-chave, trades e análise da I.A.")
+                e("div", { className: "franchise-hub-text" }, "Cada franquia agora tem uma página estilo popup com logo grande, foto do GM, keepers, elenco atual, calendário, jogos-chave, trades e análise da I.A.")
             ),
             e("div", { className: "franchise-hub-note" },
                 e("div", { className: "franchise-hub-note-title" }, "Status"),
-                e("div", { className: "franchise-hub-note-text" }, draftStatus, " • Partes dependentes do draft real aparecem como DRAFT AINDA NÃO OCORRIDO até as escolhas oficiais começarem.")
+                e("div", { className: "franchise-hub-note-text" }, draftStatus)
             )
         ),
         e("div", { className: "franchise-logo-grid" }, orderedFranchises.map(t => {
@@ -17917,9 +17817,9 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
                             )
                         ),
                         e("div", { className: "franchise-modal-badges" },
-                            e("span", { className: "franchise-modal-badge" }, `Keepers ${formatDraftScore(selectedKeepers.total, 1)} FP`),
-                            e("span", { className: "franchise-modal-badge" }, `Draft ideal ${formatDraftScore(selectedDraftTotal, 1)} FP`),
-                            e("span", { className: "franchise-modal-badge" }, `Total ${formatDraftScore(selectedTotalProjection, 1)} FP`)
+                            e("span", { className: "franchise-modal-badge" }, `Keepers ${DA.fmt(selectedKeepers.total)} FP`),
+                            e("span", { className: "franchise-modal-badge" }, `Draft atual ${DA.fmt(selectedDraftTotal)} FP`),
+                            e("span", { className: "franchise-modal-badge" }, `Total ${DA.fmt(selectedTotalProjection)} FP`)
                         )
                     ),
                     e("div", { className: "franchise-modal-gm" },
@@ -17930,9 +17830,9 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
                 e("div", { className: "franchise-modal-body" },
                     e("div", { className: "franchise-overview-grid" },
                         e(StatCard, { label: "Temporada anterior", value: formatFinalPosition(selectedFinalStanding === null || selectedFinalStanding === void 0 ? void 0 : selectedFinalStanding.rank) }),
-                        e(StatCard, { label: "Keepers", value: formatDraftScore(selectedKeepers.total, 1) }),
-                        e(StatCard, { label: "Draft ideal", value: formatDraftScore(selectedDraftTotal, 1) }),
-                        e(StatCard, { label: "Total projetado", value: formatDraftScore(selectedTotalProjection, 1) })
+                        e(StatCard, { label: "Keepers", value: DA.fmt(selectedKeepers.total) }),
+                        e(StatCard, { label: "Draft atual", value: DA.fmt(selectedDraftTotal) }),
+                        e(StatCard, { label: "Total projetado", value: DA.fmt(selectedTotalProjection) })
                     ),
                     e("div", { className: "franchise-detail-grid" },
                         e("div", null,
@@ -17947,23 +17847,18 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
                                         e("div", { className: "franchise-row-title" }, kp.name),
                                         e("div", { className: "franchise-row-meta" }, `${kp.team || 'NBA'} • ${kp.position || '—'}${kp.health ? ` • Saúde ${kp.health}` : ''}`)
                                     ),
-                                    e("div", { className: "franchise-score-chip" }, formatDraftScore(kp.avg || kp.fantasyPoints, 1))
+                                    e("div", { className: "franchise-score-chip" }, DA.fmt(kp.avg))
                                 )) : e("div", { className: "franchise-placeholder-card" }, keepersStatus || "Keepers ainda não carregados.")
                             ),
                             e("div", { className: "franchise-section-card" },
                                 e("div", { className: "franchise-section-title" },
-                                    e("span", null, "Elenco projetado pelo board"),
+                                    e("span", null, "Elenco completo · projeção I.A."),
                                     e("span", { className: "franchise-section-note" }, draftStatus)
                                 ),
-                                selectedRoster.length ? selectedRoster.map(item => e("div", { className: "franchise-roster-row", key: `${item.overall}-${item.ownerName}` },
-                                    e("div", { className: "franchise-pick-chip" }, `R${item.round} P${item.pick}`),
-                                    e("div", { className: "franchise-pick-chip" }, `#${item.overall}`),
-                                    e("div", null,
-                                        e("div", { className: "franchise-row-title" }, item.player ? item.player.name : "DRAFT AINDA NÃO OCORRIDO"),
-                                        e("div", { className: "franchise-row-meta" }, item.player ? `${item.player.team} • ${item.player.position}` : "Jogador projetado aparece quando o board carregar")
-                                    ),
-                                    e("div", { className: "franchise-score-chip" }, item.player ? formatDraftScore(item.player.fantasyPoints, 1) : "—")
-                                )) : e("div", { className: "franchise-placeholder-card" }, "DRAFT AINDA NÃO OCORRIDO")
+                                selectedRoster.length ? selectedRoster.map(item => e('div',{className:'franchise-live-row',key:item.player.id},
+                                    e(PlayerPhoto,{player:item.player,size:86}),e('div',null,e('div',{className:'franchise-row-title'},item.player.name),e('div',{className:'franchise-row-meta'},item.player.team+' • '+item.player.position),e('small',null,item.round?'Round '+item.round+' · Pick #'+item.overall:'Keepers')),
+                                    e('div',{className:'franchise-score-chip'},DA.fmt(item.player.central),e('small',null,'Projeção I.A.'),e('small',null,'AVG anterior '+DA.fmt(item.player.avg2025))))) : e('div',{className:'franchise-placeholder-card'},draftStatus)
+
                             ),
                             e("div", { className: "franchise-section-card" },
                                 e("div", { className: "franchise-section-title" }, e("span", null, "Análise da I.A.")),
@@ -17995,22 +17890,16 @@ function TeamsPage({ initialTeamSlug = "", onTeamRouteChange = null } = {}) {
                                         e("div", { className: "franchise-row-title" }, selectedBestPlayer.name),
                                         e("div", { className: "franchise-row-meta" }, `${selectedBestPlayer.team || 'NBA'} • ${selectedBestPlayer.position || '—'}`)
                                     ),
-                                    e("div", { className: "franchise-score-chip" }, formatDraftScore(selectedBestPlayer.avg, 1))
+                                    e("div", { className: "franchise-score-chip" }, DA.fmt(selectedBestPlayer.avg))
                                 ) : e("div", { className: "franchise-placeholder-card" }, "Aguardando dados.")
                             ),
                             e("div", { className: "franchise-section-card" },
                                 e("div", { className: "franchise-section-title" }, e("span", null, "Maior aposta")),
-                                e("div", { className: "franchise-placeholder-card" },
-                                    e("span", { className: "franchise-draft-pending" }, "DRAFT AINDA NÃO OCORRIDO"),
-                                    e("div", { style: { marginTop: 10 } }, "A maior aposta será definida após as escolhas oficiais do draft, considerando diferença entre board, posição escolhida e projeção ESPN.")
-                                )
+                                outlookCard(outlook.bet)
                             ),
                             e("div", { className: "franchise-section-card" },
                                 e("div", { className: "franchise-section-title" }, e("span", null, "Maior risco")),
-                                e("div", { className: "franchise-placeholder-card" },
-                                    e("span", { className: "franchise-draft-pending" }, "DRAFT AINDA NÃO OCORRIDO"),
-                                    e("div", { style: { marginTop: 10 } }, "O maior risco será calculado depois do draft, combinando idade, saúde, queda de projeção e alcance acima do board.")
-                                )
+                                outlookCard(outlook.risk,true)
                             ),
                             e("div", { className: "franchise-section-card" },
                                 e("div", { className: "franchise-section-title" }, e("span", null, "Jogos mais difíceis")),
@@ -21230,7 +21119,7 @@ function getTeamRouteSlug(teamName) {
 }
 function getTeamNameFromRouteSlug(slug) {
     const normalized = makeRouteSlug(slug);
-    const found = TEAMS_DATA.find(t => makeRouteSlug(t.slug || t.name) === normalized || makeRouteSlug(t.name) === normalized);
+    const found = TEAMS_DATA.find(t => makeRouteSlug(getTeamRouteSlug(t.name)) === normalized || makeRouteSlug(t.slug || t.name) === normalized || makeRouteSlug(t.name) === normalized);
     return found ? found.name : null;
 }
 function parseHashRoute() {
