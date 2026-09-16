@@ -1,0 +1,14 @@
+ATUALIZAÇÃO DO WORKER — AVG 25 / PROJ 2027
+
+1. No Cloudflare, abra o worker airball-espn-proxy e escolha Edit code.
+2. Substitua o código inteiro pelo conteúdo de airball-espn-worker.mjs e clique em Deploy.
+3. Mantenha os secrets ESPN_SWID e ESPN_S2 atuais; não os coloque no arquivo.
+4. Mantenha ESPN_SEASON_ID=2027. AVG 25 corresponde aqui a 2025–26 (ESPN seasonId=2026). Opcional: ESPN_AVG_SEASON_ID=2026.
+5. Abra /health: a versão deve ser player-table-v9-avg25-proj2027.
+6. Abra /players: confira projectionCount, avgSeasonId=2026 e projectionSeasonId=2027. Cada jogador terá avg2025 e espnProjection separados.
+7. Publique o index pelo Push origin do GitHub Desktop.
+
+Ausências são null. O worker não usa a média de outra temporada como projeção. O cache tem uma nova chave, portanto a resposta antiga não precisa ser apagada manualmente.
+As rotas /trades e /player-photo continuam presentes.
+
+Validação: testes locais de seleção por temporada/tipo de estatística, valores ausentes, zero e filtros das três páginas. A confirmação dos valores reais exige publicar no Cloudflare, pois a liga é privada e seus secrets estão lá.
