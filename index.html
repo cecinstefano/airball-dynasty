@@ -19433,7 +19433,7 @@ function DraftSimulatorPage() {
 }
 
 function espnProjectedAverage(p={}){const nested=p.player||{};for(const value of [p.espnProjection,p.projection,p.projectedAvg,p.projectedAverage,p.projectedFantasyPoints,p.appliedProjectedAverage,nested.espnProjection,nested.projection,nested.projectedAvg,nested.projectedAverage]){if((typeof value==='number'||typeof value==='string'&&value.trim()!=='')&&Number.isFinite(Number(value)))return Number(value);}return null;}
-function ESPNSourceControl({value,onChange,legacy=false}){const e=React.createElement;return e('label',{className:'espn-source-control'},'Fonte dos valores ',e('select',{'aria-label':'Fonte dos valores',value,onChange:ev=>onChange(ev.target.value)},legacy?e('option',{value:'draft'},'Base do draft'):null,e('option',{value:'avg25'},'AVG 25'),e('option',{value:'proj2027'},'PROJ 2027')));}
+function ESPNSourceControl({value,onChange,legacy=false}){const e=React.createElement;return e('label',{className:'espn-source-control'},'Fonte dos valores ',e('select',{'aria-label':'Fonte dos valores',value,onChange:ev=>onChange(ev.target.value)},legacy?e('option',{value:'draft'},'Base do draft'):null,e('option',{value:'avg25'},'Season 2026'),e('option',{value:'proj2027'},'Projeção ESPN')));}
 
 function PlayersPage() {
     const PLAYERS_API_URL = 'https://airball-espn-proxy.stefanocecin.workers.dev/players';
@@ -19627,7 +19627,7 @@ function PlayersPage() {
                 React.createElement("div", null,
                     React.createElement("div", { className: "players-page-kicker" }, "Base ESPN AirBall"),
                     React.createElement("div", { className: "players-page-title" }, "Jogadores da Liga"),
-                    React.createElement("div", { className: "players-page-sub" }, "Escolha AVG 25 ou PROJ 2027 para ordenar os jogadores.")),
+                    React.createElement("div", { className: "players-page-sub" }, "Escolha Season 2026 ou Projeção ESPN para ordenar os jogadores.")),
                 React.createElement("div", { className: "players-page-status" }, status)),
             React.createElement(ESPNSourceControl,{value:source,onChange:v=>{setSource(v);setSort({key:v==='avg25'?'avg':'espnProjection',dir:'desc'});setPage(1);}}),
             source==='proj2027'&&!players.some(p=>p.espnProjection!==null)?React.createElement('p',{role:'status'},'Projeções 2027 ainda não disponíveis na integração.'):null,
@@ -19661,8 +19661,8 @@ function PlayersPage() {
                             React.createElement("th", { className: "sortable", onClick: () => handleSort('position') }, sortLabel('position', 'Posição')),
                             React.createElement("th", { className: "sortable", onClick: () => handleSort('fantasyTeam') }, sortLabel('fantasyTeam', 'Time Fantasy')),
                             React.createElement("th", { className: "sortable", onClick: () => handleSort('keeper') }, sortLabel('keeper', 'Keeper')),
-                            React.createElement("th", { className: "sortable", onClick: () => handleSort('espnProjection') }, sortLabel('espnProjection', 'PROJ 2027')),
-                            React.createElement("th", { className: "sortable", onClick: () => handleSort('avg') }, sortLabel('avg', 'AVG 25')))),
+                            React.createElement("th", { className: "sortable", onClick: () => handleSort('espnProjection') }, sortLabel('espnProjection', 'Projeção ESPN')),
+                            React.createElement("th", { className: "sortable", onClick: () => handleSort('avg') }, sortLabel('avg', 'Season 2026')))),
                     React.createElement("tbody", null, visiblePlayers.length ? visiblePlayers.map((player, index) => (React.createElement("tr", { key: player.id || `${player.name}-${index}` },
                         React.createElement("td", null,
                             React.createElement("span", { className: "players-rank" }, (safePage - 1) * PAGE_SIZE + index + 1)),
@@ -21011,7 +21011,7 @@ function DraftedPage() {
         e(PlayerPhoto, { player, size: 112 }),
         e("div", { className: "drafted-roster-main" },
             e("div", { className: "drafted-roster-name" }, player.name),
-            e("div", { className: "drafted-roster-avg" }, fmtAvg(player.avg), e("span", null, source==='draft'?'AVG Yahoo':source==='avg25'?'AVG 25':'PROJ 2027')),
+            e("div", { className: "drafted-roster-avg" }, fmtAvg(player.avg), e("span", null, source==='draft'?'AVG Yahoo':source==='avg25'?'Season 2026':'Projeção ESPN')),
             e("div", { className: "drafted-roster-source" }, player.source),
             player.draftMeta ? e("div", { className: "drafted-roster-round" }, player.draftMeta) : null));
 
@@ -22623,7 +22623,7 @@ function DraftAnalysisPage(){
     const model=React.useMemo(()=>DA.build(payload,DRAFT_ANALYSIS_PROJECTIONS,TEAMS_MASTER,LIVE_DRAFT_PICKS_MANUAL),[payload]);
     const q=DA.key(query), sorted=DA.sorted(model.rows,sort);
     const rows=sorted.map((t,i)=>({...t,rank:i+1})).filter(t=>!q||DA.key(t.name).includes(q)||t.roster.some(p=>DA.key(p.name).includes(q)));
-    const metrics=[['avg2025','AVG 25'],['espn2027','PROJ 2027'],['best8','BEST 8'],['best11','BEST 11'],['central','AVG']];
+    const metrics=[['avg2025','Season 2026'],['espn2027','Projeção ESPN'],['best8','BEST 8'],['best11','BEST 11'],['central','AVG']];
     const reset=()=>{setQuery('');setScenario('central');setSort({key:'central',dir:'desc'});setExpanded([]);setRound('all');};
     const toggle=name=>setExpanded(old=>old.includes(name)?old.filter(n=>n!==name):[...old,name]);
     const button=(label,onClick,props={})=>e('button',{type:'button',onClick,...props},label);
@@ -22634,7 +22634,7 @@ function DraftAnalysisPage(){
     };
     const valueCell=(m,k)=>e('td',{key:k,className:k==='central'?'da-positive':''},e('strong',null,DA.fmt(m.value)),e('small',null,`${m.count} válidos${k==='best8'&&m.count<8?' / 8':k==='best11'&&m.count<11?' / 11':''}${k==='avg2025'&&m.projectedCount?` · ${m.projectedCount} com projeção`:''}`));
     const roster=t=>e('div',{className:'da-roster',id:`da-roster-${t.slug}`},e('h3',null,`Elenco · ${t.name}`),e('p',{className:'da-muted'},'★ BEST 8 · ◆ Completa BEST 11 · Ordenado pela Projeção da I.A.'),e('div',{className:'da-scroll',tabIndex:0,'aria-label':`Tabela de jogadores de ${t.name}`},e('table',null,
-        e('thead',null,e('tr',null,['FOTO','JOGADOR','POSIÇÃO','ROUND','PICK GERAL','AVG 25','PROJ 2027','AVG','EVOLUÇÃO'].map(h=>e('th',{key:h,scope:'col'},h)))),
+        e('thead',null,e('tr',null,['FOTO','JOGADOR','POSIÇÃO','ROUND','PICK GERAL','Season 2026','Projeção ESPN','AVG','EVOLUÇÃO'].map(h=>e('th',{key:h,scope:'col'},h)))),
         e('tbody',null,t.roster.length?t.roster.map((p,i)=>e('tr',{key:p.id||p.name,className:`${p.central!==null&&i<8?'da-best8':p.central!==null&&i<11?'da-best11':''} ${q&&DA.key(p.name).includes(q)?'da-match':''}`},e('td',null,photo(p)),e('th',{scope:'row'},`${p.central!==null&&i<8?'★ ':p.central!==null&&i<11?'◆ ':''}${p.name}`,q&&DA.key(p.name).includes(q)?e('small',null,'Encontrado na busca'):null),e('td',null,p.position),e('td',null,p.choice?p.choice.round:'Keepers'),e('td',null,p.choice?`#${p.choice.pick}`:'Keepers'),e('td',null,DA.fmt(p.avg2025)),e('td',null,DA.fmt(p.espn2027)),e('td',{className:'da-positive'},DA.fmt(p.central)),e('td',null,DA.signed(p.central!==null&&p.avg2025!==null?p.central-p.avg2025:null)))):e('tr',null,e('td',{colSpan:9},'Nenhum jogador disponível.'))))),
         e('p',{className:'da-muted'},'Evolução = Projeção da I.A. − AVG 2025: mudança projetada em relação a 2025. Keepers identifica os jogadores mantidos, sem round ou pick de draft.'));
     const choiceCard=(c,positive)=>e('article',{key:c.pick,className:'da-choice'},teamBackdrop(c.owner),e('div',{className:'da-choice-head'},photo(c.player),e('div',null,e('h4',null,c.player.name),e('small',null,c.owner||'Time da escolha: N/D'),e('small',null,`Round ${c.round} · Pick #${c.pick}`)),e('strong',{className:positive?'da-positive':'da-negative'},`${DA.signed(c.delta)} pts`)),e('dl',null,
@@ -22646,9 +22646,9 @@ function DraftAnalysisPage(){
         e('header',{className:'da-hero'},e('span',{className:'da-eyebrow'},'AIRBALL · TEMPORADA 2026/27'),e('h1',null,'ANÁLISE DE ',e('span',null,'DRAFT')),e('p',null,'A força dos elencos. O valor de cada escolha.'),e('span',{className:'da-tag'},'Projeção da I.A.')),
         e('div',{className:'da-status',role:'status','aria-live':'polite'},status==='loading'?'Carregando dados ESPN… As projeções consolidadas já estão disponíveis.':status==='error'?'Falha ao consultar a ESPN. Exibindo a última base disponível; sem consulta bem-sucedida, os elencos são os do anexo.':status==='empty'?'A integração retornou uma lista vazia. Exibindo os elencos consolidados do anexo.':`ESPN conectada · ${model.liveRoster?'Elencos atuais da integração':'Elencos consolidados do anexo'}`,
             payload?.updatedAt?e('small',null,`Atualização informada pela integração: ${Number.isNaN(new Date(payload.updatedAt).getTime())?String(payload.updatedAt):new Date(payload.updatedAt).toLocaleString('pt-BR')}`):e('small',null,'Última atualização da integração: N/D'),status==='error'||status==='empty'?button('Tentar novamente',()=>setReload(v=>v+1)):null),
-        e('div',{className:'da-controls'},e('label',null,'BUSCA',e('input',{type:'search',placeholder:'Time ou jogador…',value:query,onChange:ev=>setQuery(ev.target.value)})),e('fieldset',null,e('legend',null,'CENÁRIO'),[['central','Projeção da I.A.'],['avg2025','AVG 25'],['espn2027','PROJ 2027']].map(([k,label])=>button(label,()=>{setScenario(k);setSort({key:k,dir:'desc'});},{key:k,'aria-pressed':scenario===k}))),button('Restaurar padrão',reset)),
+        e('div',{className:'da-controls'},e('label',null,'BUSCA',e('input',{type:'search',placeholder:'Time ou jogador…',value:query,onChange:ev=>setQuery(ev.target.value)})),e('fieldset',null,e('legend',null,'CENÁRIO'),[['central','Projeção da I.A.'],['avg2025','Season 2026'],['espn2027','Projeção ESPN']].map(([k,label])=>button(label,()=>{setScenario(k);setSort({key:k,dir:'desc'});},{key:k,'aria-pressed':scenario===k}))),button('Restaurar padrão',reset)),
         scenario==='espn2027'&&!model.players.some(p=>p.espn2027!==null)?e('p',{role:'status'},'Projeções 2027 ainda não disponíveis na integração.'):null,
-        e('section',{className:'da-panel'},e('div',{className:'da-heading'},e('div',null,e('h2',null,'RANKING DOS TIMES'),e('p',{className:'da-muted'},`${rows.length} de ${model.rows.length} times · Ordenação: ${metrics.find(m=>m[0]===sort.key)[1]} ${sort.dir==='desc'?'↓ decrescente':'↑ crescente'} · Cenário ${scenario==='central'?'Projeção da I.A.':scenario==='espn2027'?'PROJ 2027':'AVG 25'}`)),e('span',{className:'da-tag'},'MÉDIAS POR JOGADOR')),
+        e('section',{className:'da-panel'},e('div',{className:'da-heading'},e('div',null,e('h2',null,'RANKING DOS TIMES'),e('p',{className:'da-muted'},`${rows.length} de ${model.rows.length} times · Ordenação: ${metrics.find(m=>m[0]===sort.key)[1]} ${sort.dir==='desc'?'↓ decrescente':'↑ crescente'} · Cenário ${scenario==='central'?'Projeção da I.A.':scenario==='espn2027'?'Projeção ESPN':'Season 2026'}`)),e('span',{className:'da-tag'},'MÉDIAS POR JOGADOR')),
         e('p',{className:'da-muted'},'Clique no time para abrir ou fechar o elenco. As posições preservam o ranking completo durante a busca.'),
         e('div',{className:'da-scroll',tabIndex:0,'aria-label':'Ranking dos times, tabela com rolagem horizontal'},e('table',{className:`da-ranking da-scenario-${scenario}`},e('thead',null,e('tr',null,e('th',{scope:'col'},'POSIÇÃO'),e('th',{scope:'col'},'NOME DO TIME'),metrics.map(([k,label])=>e('th',{key:k,scope:'col','aria-sort':sort.key===k?(sort.dir==='desc'?'descending':'ascending'):'none'},button(`${label}${sort.key===k?(sort.dir==='desc'?' ↓':' ↑'):''}`,()=>setSort({key:k,dir:sort.key===k&&sort.dir==='desc'?'asc':'desc'})))))),e('tbody',null,
             rows.length?rows.map(t=>{const open=expanded.includes(t.name)||!!(q&&t.roster.some(p=>DA.key(p.name).includes(q)));return e(React.Fragment,{key:t.slug},e('tr',{className:open?'da-selected':''},e('td',null,String(t.rank).padStart(2,'0')),e('th',{scope:'row'},e('div',{className:'da-team da-team-tile'},teamBackdrop(t.name),button(`${open?'−':'+'} ${t.name}`,()=>toggle(t.name),{'aria-expanded':open,'aria-controls':`da-roster-${t.slug}`}))),metrics.map(([k])=>valueCell(t[k],k))),open?e('tr',null,e('td',{colSpan:7,className:'da-detail-cell'},roster(t))):null);}):e('tr',null,e('td',{colSpan:7},'Nenhum time ou jogador encontrado.'))))),
