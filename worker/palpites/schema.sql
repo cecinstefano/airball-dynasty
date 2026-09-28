@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS gm_picks (
+ team_id TEXT PRIMARY KEY,
+ gm_name TEXT NOT NULL,
+ token_hash TEXT NOT NULL UNIQUE,
+ answers TEXT NOT NULL DEFAULT '{}',
+ revision INTEGER NOT NULL DEFAULT 0,
+ confirmed INTEGER NOT NULL DEFAULT 0,
+ updated_at TEXT
+);
