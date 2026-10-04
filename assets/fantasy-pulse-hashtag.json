@@ -1,6 +1,6 @@
 {
   "source": "Hashtag — arquivo fornecido pelo usuário",
-  "importedOn": "2026-09-05",
+  "importedOn": "2026-10-04",
   "players": [
     {
       "id": "3112335",
@@ -36,11 +36,6 @@
       "id": "4065648",
       "name": "Jayson Tatum",
       "avg": 52.3
-    },
-    {
-      "id": "6583",
-      "name": "Anthony Davis",
-      "avg": 51.7
     },
     {
       "id": "4701230",
@@ -103,6 +98,11 @@
       "avg": 46.1
     },
     {
+      "id": "6583",
+      "name": "Anthony Davis",
+      "avg": 45.8
+    },
+    {
       "id": "3934672",
       "name": "Jalen Brunson",
       "avg": 45.2
@@ -111,6 +111,11 @@
       "id": "3202",
       "name": "Kevin Durant",
       "avg": 45.1
+    },
+    {
+      "id": "4066457",
+      "name": "Austin Reaves",
+      "avg": 44.7
     },
     {
       "id": "4432573",
@@ -188,11 +193,6 @@
       "avg": 42.3
     },
     {
-      "id": "4066457",
-      "name": "Austin Reaves",
-      "avg": 42.2
-    },
-    {
       "id": "4566434",
       "name": "Franz Wagner",
       "avg": 42.1
@@ -238,14 +238,14 @@
       "avg": 39.9
     },
     {
+      "id": "4395725",
+      "name": "Tyler Herro",
+      "avg": 39.8
+    },
+    {
       "id": "3059318",
       "name": "Joel Embiid",
       "avg": 39.5
-    },
-    {
-      "id": "3913176",
-      "name": "Brandon Ingram",
-      "avg": 39.4
     },
     {
       "id": "4683021",
@@ -256,11 +256,6 @@
       "id": "4433136",
       "name": "Walker Kessler",
       "avg": 39.3
-    },
-    {
-      "id": "4395725",
-      "name": "Tyler Herro",
-      "avg": 39.2
     },
     {
       "id": "4017837",
@@ -298,6 +293,11 @@
       "avg": 38.3
     },
     {
+      "id": "3913176",
+      "name": "Brandon Ingram",
+      "avg": 38.1
+    },
+    {
       "id": "6430",
       "name": "Jimmy Butler III",
       "avg": 37.9
@@ -323,9 +323,9 @@
       "avg": 37.5
     },
     {
-      "id": "3102531",
-      "name": "Kristaps Porzingis",
-      "avg": 37.3
+      "id": "4711294",
+      "name": "Matas Buzelis",
+      "avg": 37.4
     },
     {
       "id": "4278039",
@@ -378,11 +378,6 @@
       "avg": 36.4
     },
     {
-      "id": "4711294",
-      "name": "Matas Buzelis",
-      "avg": 36.3
-    },
-    {
       "id": "6606",
       "name": "Damian Lillard",
       "avg": 36.2
@@ -396,11 +391,6 @@
       "id": "4432194",
       "name": "Day'Ron Sharpe",
       "avg": 36
-    },
-    {
-      "id": "5061575",
-      "name": "Kon Knueppel",
-      "avg": 35.9
     },
     {
       "id": "4066328",
@@ -425,6 +415,11 @@
     {
       "id": "4065733",
       "name": "Ty Jerome",
+      "avg": 35.6
+    },
+    {
+      "id": "5061575",
+      "name": "Kon Knueppel",
       "avg": 35.6
     },
     {
@@ -478,6 +473,11 @@
       "avg": 34.6
     },
     {
+      "id": "3102531",
+      "name": "Kristaps Porzingis",
+      "avg": 34.5
+    },
+    {
       "id": "3134908",
       "name": "Jakob Poeltl",
       "avg": 34.4
@@ -491,11 +491,6 @@
       "id": "4431671",
       "name": "Jaden McDaniels",
       "avg": 34.4
-    },
-    {
-      "id": "4701232",
-      "name": "Mark Williams",
-      "avg": 34.3
     },
     {
       "id": "4066354",
@@ -658,6 +653,11 @@
       "avg": 30.6
     },
     {
+      "id": "5203685",
+      "name": "Khaman Maluach",
+      "avg": 30.4
+    },
+    {
       "id": "4997536",
       "name": "Gui Santos",
       "avg": 30.4
@@ -743,6 +743,11 @@
       "avg": 28.7
     },
     {
+      "id": "5175737",
+      "name": "Yaxel Lendeborg",
+      "avg": 28.6
+    },
+    {
       "id": "4711272",
       "name": "Reed Sheppard",
       "avg": 28.6
@@ -776,6 +781,11 @@
       "id": "5041955",
       "name": "Darryn Peterson",
       "avg": 28
+    },
+    {
+      "id": "4432170",
+      "name": "Isaiah Jackson",
+      "avg": 27.9
     },
     {
       "id": "4396909",
@@ -853,6 +863,11 @@
       "avg": 26.1
     },
     {
+      "id": "3135045",
+      "name": "Grayson Allen",
+      "avg": 26.1
+    },
+    {
       "id": "5142718",
       "name": "AJ Dybantsa",
       "avg": 26
@@ -913,11 +928,6 @@
       "avg": 25
     },
     {
-      "id": "3135045",
-      "name": "Grayson Allen",
-      "avg": 24.9
-    },
-    {
       "id": "4683778",
       "name": "Jared McCain",
       "avg": 24.9
@@ -931,6 +941,11 @@
       "id": "4395702",
       "name": "Isaiah Joe",
       "avg": 24.8
+    },
+    {
+      "id": "4601023",
+      "name": "Oso Ighodaro",
+      "avg": 24.7
     },
     {
       "id": "4395723",
@@ -970,11 +985,6 @@
     {
       "id": "3032979",
       "name": "Dennis Schröder",
-      "avg": 24.1
-    },
-    {
-      "id": "5175737",
-      "name": "Yaxel Lendeborg",
       "avg": 24.1
     },
     {
@@ -1278,11 +1288,6 @@
       "avg": 18.8
     },
     {
-      "id": "4432170",
-      "name": "Isaiah Jackson",
-      "avg": 18.8
-    },
-    {
       "id": "3907498",
       "name": "Matisse Thybulle",
       "avg": 18.8
@@ -1403,11 +1408,6 @@
       "avg": 16.8
     },
     {
-      "id": "4396818",
-      "name": "Jordan Miller",
-      "avg": 16.8
-    },
-    {
       "id": "4845374",
       "name": "Bub Carrington",
       "avg": 16.7
@@ -1512,12 +1512,6 @@
       "id": "5149077",
       "name": "Kingston Flemings",
       "avg": 11.4,
-      "source": "Valor informado pelo usuário em 2026-09-08"
-    },
-    {
-      "id": "5203685",
-      "name": "Khaman Maluach",
-      "avg": 14.8,
       "source": "Valor informado pelo usuário em 2026-09-08"
     }
   ]
