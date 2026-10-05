@@ -22549,7 +22549,7 @@ const DA = (() => {
         const liveRoster = raw.length>0 && matched.some(p=>teamFor(p.raw?.fantasyTeam));
         function hydrate(p, r) {
             const current = r ? teamFor(r.fantasyTeam || r.fantasyOwner || r.owner) : null;
-            return {...p,central:number(p.central),team:liveRoster?current:p.team,
+            return {...p,raw:r||null,central:number(p.central),team:liveRoster?current:p.team,
                 espn2027:r?espnProjectedAverage(r):null,avg2025:r?historical(r):null,position:r?.position || null,
                 photo:r?.photoUrl || r?.headshotUrl || fallbackPhoto};
         }
