@@ -10226,6 +10226,8 @@ body:has(.da){background:#101014}body:has(.da) .topbar{overflow-x:auto}body:has(
 <style>.da .da-all-choices table th,.da .da-all-choices table td{text-align:center}.da .da-all-choices table th:nth-child(3),.da .da-all-choices table th:nth-child(4),.da .da-all-choices table td:nth-child(4){text-align:left}</style>
 <style id="draft-choices-large">
 .da .da-all-choices table{font-size:14px;min-width:1280px}.da .da-all-choices thead button{font-size:13px}.da .da-all-choices .da-photo{width:122px;height:92px;object-fit:contain;object-position:center bottom;border-radius:0;background:transparent;flex-shrink:0}.da .da-all-choices .da-choice-player{gap:14px;font-size:14px;min-height:92px}.da .da-all-choices tbody th{padding:0 12px 0 0}.da .da-all-choices td{padding:10px 12px}.da .da-all-choices small{font-size:11px}.da .da-all-choices .da-choice-owner{padding:8px}.da .da-all-choices .da-team-tile{min-height:92px;min-width:250px}.da .da-all-choices .da-team-title{font-size:14px}.da .da-all-choices .da-controls label{font-size:12px}.da .da-all-choices>.da-muted{font-size:13px}
+.fp .fp-teams-layout{grid-template-columns:minmax(0,1fr) minmax(350px,440px)}.fp .fp-team-ranking{padding:16px}.fp .fp-team-ranking h2{font-size:19px}.fp .fp-team-ranking table{table-layout:auto;min-width:330px}.fp .fp-team-ranking th,.fp .fp-team-ranking td{padding:10px 5px}.fp .fp-team-ranking th:first-child{width:30px}.fp .fp-team-ranking td:nth-last-child(-n+2){white-space:nowrap}.fp .fp-team-ranking tbody th{min-width:0}.fp .fp-team-ranking a{font-size:14px;gap:7px}.fp .fp-team-ranking .fp-team-roster-logo{width:34px;height:34px}.fp .fp-team-ranking thead button{font-size:11px;padding:2px 0;white-space:nowrap}.fp .fp-team-list-heading,.fp .fp-team-roster li{display:grid;grid-template-columns:minmax(0,1fr) 50px 30px 70px;gap:10px;align-items:center}.fp .fp-team-list-heading span:not(:first-child),.fp .fp-team-roster li>:not(:first-child){text-align:right;white-space:nowrap}.fp .fp-team-roster li{font-size:15px}.fp .fp-team-gp{color:var(--fp-muted);font-size:13px}@media(max-width:1150px){.fp .fp-teams-layout{grid-template-columns:1fr}.fp .fp-team-ranking{position:static;grid-row:1;width:min(100%,520px)}}@media(max-width:650px){.fp .fp-team-ranking{width:100%}.fp .fp-team-ranking table{font-size:12px;min-width:320px}.fp .fp-team-ranking a{font-size:12px}.fp .fp-team-list-heading,.fp .fp-team-roster li{grid-template-columns:minmax(0,1fr) 40px 24px 60px;gap:7px}.fp .fp-team-roster li{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -22690,6 +22692,8 @@ const PulseData = (()=>{
         if(!Array.isArray(list))throw Error('O Worker não retornou uma lista de jogadores reconhecida.');
         const projId=new Map((hashtag?.players||[]).filter(p=>p.id).map(p=>[String(p.id),p.avg]));
         const projName=new Map((hashtag?.players||[]).map(p=>[key(p.name),p.avg]));
+        const gpId=new Map((hashtag?.players||[]).filter(p=>p.id).map(p=>[String(p.id),p.gp]));
+        const gpName=new Map((hashtag?.players||[]).map(p=>[key(p.name),p.gp]));
         const teams=Array.isArray(payload?.fantasy_teams)?payload.fantasy_teams:Array.isArray(payload?.teams)?payload.teams:[];
         const seasonOf=p=>String(p.season_id||p.seasonId||payload?.seasonId||payload?.season_id||'atual');
         const liveSeasons=new Set(list.filter(p=>first(p.current_season_average,p.currentSeasonAverage,p.currentAvg)!==null).map(seasonOf));
@@ -22706,6 +22710,7 @@ const PulseData = (()=>{
             // The existing generic AVG is 2025, never an invented current-season value.
             const current=first(p.current_season_average,p.currentSeasonAverage,p.currentAvg);
             const projection=first(projId.get(id),projName.get(key(name)),p.hashtag_projection,p.hashtagProjection);
+            const projectionGP=first(gpId.get(id),gpName.get(key(name)));
             
             
             const preseason=!(payload?.season_started===true||payload?.seasonStarted===true||liveSeasons.has(seasonOf(p)));
@@ -22716,7 +22721,7 @@ const PulseData = (()=>{
             const recent=games.length===4&&valid.length===4?valid.reduce((s,g)=>s+g.points,0)/4:null;
             const comparison=preseason?projection:current;
             const deviation=percent(comparison,espnProjection),absolute=comparison!==null&&espnProjection!==null?comparison-espnProjection:null,momentum=percent(recent,current);
-            return {id,name,team,isFree,logo,photo:safeUrl(p.photoUrl||p.headshotUrl||p.playerPhoto||nested.photoUrl||''),espnProjection,preseason,current,projection,deviation,absolute,games,recent,momentum,devLevel:level(deviation),momentLevel:level(momentum),season:String(p.season_id||p.seasonId||payload?.seasonId||payload?.season_id||'atual')};
+            return {id,name,team,isFree,logo,photo:safeUrl(p.photoUrl||p.headshotUrl||p.playerPhoto||nested.photoUrl||''),espnProjection,preseason,current,projection,projectionGP,deviation,absolute,games,recent,momentum,devLevel:level(deviation),momentLevel:level(momentum),season:String(p.season_id||p.seasonId||payload?.seasonId||payload?.season_id||'atual')};
         });
     }
     const compare=(a,b,k,dir)=>{const x=a[k],y=b[k];if(x===null||y===null)return x===null?(y===null?0:1):-1;return (typeof x==='string'?x.localeCompare(y,'pt-BR'):x-y)*(dir==='asc'?1:-1)||a.name.localeCompare(b.name,'pt-BR');};
@@ -22821,33 +22826,37 @@ function PulseDetails({player:p,close}){
     useEffect(()=>{const previous=document.activeElement;panel.current?.querySelector('button')?.focus();const esc=ev=>{if(ev.key==='Escape')close();if(ev.key==='Tab'&&matchMedia('(max-width: 1200px)').matches){const items=[...panel.current.querySelectorAll('button,[tabindex="0"]')];const first=items[0],last=items[items.length-1];if(ev.shiftKey&&document.activeElement===first){ev.preventDefault();last.focus();}else if(!ev.shiftKey&&document.activeElement===last){ev.preventDefault();first.focus();}}};document.addEventListener('keydown',esc);return()=>{document.removeEventListener('keydown',esc);previous?.focus?.();};},[]);
     return pe('aside',{className:'fp-details',ref:panel,'aria-label':`Detalhes de ${p.name}`},pe('div',{className:'fp-detail-top'},pe('span',null,'PERFIL DO JOGADOR'),pe('button',{type:'button',onClick:close,'aria-label':'Fechar detalhes'},pe(PulseIcon,{name:'close'}))),pe(PulsePhoto,{player:p}),pe('h2',null,p.name),pe(PulseTeam,{player:p}),pe('dl',{className:'fp-detail-values'},[['PROJEÇÃO DA ESPN',pe(PulseESPN,{player:p})],['Temporada atual',PulseData.fmt(p.current)],['Projeção Hashtag',PulseData.fmt(p.projection)],['Diferença em FP',PulseData.signed(p.absolute)]].map(([k,v])=>pe('div',{key:k},pe('dt',null,k),pe('dd',null,v)))),pe('h3',null,p.preseason?'DESVIO · HASHTAG − ESPN':'DESVIO · ATUAL − ESPN'),pe(PulseDeviation,{player:p}),pe('p',{className:'fp-muted'},p.devLevel!==null?PulseData.levels[p.devLevel]:'Sem uma base positiva para calcular o desvio percentual.'),pe('h3',null,'ÚLTIMOS QUATRO JOGOS'),pe(PulseGameBars,{games:p.games}),pe('p',null,`Média: ${PulseData.fmt(p.recent)} FP`),p.recent===null?pe('p',{className:'fp-muted'},`${p.games.filter(g=>g.points!==null).length}/4 partidas válidas. A média e o momento exigem quatro jogos.`):null,pe(PulseBadge,{value:p.momentum,moment:true}),pe('p',{className:'fp-conclusion'},p.deviation===null?'Ainda não há dados suficientes para calcular o desvio.':p.preseason?`Pré-temporada: Hashtag ${PulseData.fmt(Math.abs(p.deviation))}% ${p.deviation>=0?'acima':'abaixo'} da Projeção ESPN (${PulseData.signed(p.absolute)} FP).`:`Média atual ${PulseData.fmt(Math.abs(p.deviation))}% ${p.deviation>=0?'acima':'abaixo'} da Projeção ESPN.${p.momentLevel!==null?` Nos últimos quatro jogos, momento ${PulseData.levels[p.momentLevel].toLowerCase()}, com média de ${PulseData.fmt(p.recent)} FP.`:' Aguardando dados suficientes para avaliar o momento recente.'}`));
 }
-function pulseTeamsRankings(players,teams,limit){
+function pulseTeamsRankings(players,teams,limit,sort={key:'total',dir:'desc'}){
     const count=limit==='all'?Infinity:Number(limit);
     const names=new Map(teams.map(t=>[PulseData.key(t.name),{name:t.name,logo:t.logo}]));
     players.filter(p=>!p.isFree).forEach(p=>{if(!names.has(PulseData.key(p.team)))names.set(PulseData.key(p.team),{name:p.team,logo:p.logo});});
     return [...names.values()].map(team=>{
         const roster=players.filter(p=>!p.isFree&&PulseData.key(p.team)===PulseData.key(team.name)).sort((a,b)=>PulseData.compare(a,b,'projection','desc'));
         const selected=roster.slice(0,count),valid=selected.filter(p=>PulseData.num(p.projection)!==null);
-        const total=valid.length?valid.reduce((s,p)=>s+p.projection,0):null;
-        return {...team,logo:roster.find(p=>p.logo)?.logo||team.logo,roster,selected,valid:valid.length,total,average:total===null?null:total/valid.length};
-    }).sort((a,b)=>a.total===null?(b.total===null?a.name.localeCompare(b.name,'pt-BR'):1):b.total===null?-1:b.total-a.total||b.average-a.average||a.name.localeCompare(b.name,'pt-BR'));
+        const projected=valid.filter(p=>PulseData.num(p.projectionGP)!==null&&p.projectionGP>=0);
+        const total=projected.length?projected.reduce((s,p)=>s+p.projection*p.projectionGP,0):null;
+        const average=valid.length?valid.reduce((s,p)=>s+p.projection,0)/valid.length:null;
+        return {...team,logo:roster.find(p=>p.logo)?.logo||team.logo,roster,selected,valid:valid.length,totalValid:projected.length,total,average};
+    }).sort((a,b)=>{const x=a[sort.key],y=b[sort.key];return x===null?(y===null?a.name.localeCompare(b.name,'pt-BR'):1):y===null?-1:(x-y)*(sort.dir==='asc'?1:-1)||a.name.localeCompare(b.name,'pt-BR');});
 }
 function PulseTeamsPage({players,status}){
-    const [limit,setLimit]=useState('all');
-    const rows=React.useMemo(()=>pulseTeamsRankings(players,TEAMS_MASTER,limit),[players,limit]);
+    const [limit,setLimit]=useState('all'),[sort,setSort]=useState({key:'total',dir:'desc'});
+    const rows=React.useMemo(()=>pulseTeamsRankings(players,TEAMS_MASTER,limit,sort),[players,limit,sort]);
+    const order=key=>setSort(s=>({key,dir:s.key===key&&s.dir==='desc'?'asc':'desc'}));
+    const totalFor=p=>PulseData.num(p.projection)!==null&&PulseData.num(p.projectionGP)!==null?p.projection*p.projectionGP:null;
     const badge=(t)=>t.logo?pe('img',{className:'fp-team-roster-logo',src:t.logo,alt:'',loading:'lazy',onError:ev=>{ev.currentTarget.style.display='none';}}):null;
     const title=limit==='all'?'Todos os jogadores':limit==='2'?'Keepers · os 2 melhores':limit+' melhores jogadores';
     return pe('section',{className:'fp-teams-view','aria-label':'Times e classificação Hashtag'},
-        pe('header',{className:'fp-teams-controls'},pe('div',null,pe('h2',null,'TIMES · PROJEÇÃO HASHTAG'),pe('p',null,'Total = soma das médias Hashtag dos jogadores selecionados.')),pe('label',null,'Quantidade de jogadores',pe('select',{'aria-label':'Quantidade de jogadores',value:limit,onChange:ev=>setLimit(ev.target.value)},[['all','Todos'],['13','13 melhores'],['10','10 melhores'],['7','7 melhores'],['2','Keepers (os 2 melhores)']].map(([value,label])=>pe('option',{key:value,value},label))))),
+        pe('header',{className:'fp-teams-controls'},pe('div',null,pe('h2',null,'TIMES · PROJEÇÃO HASHTAG'),pe('p',null,'Total = AVG Hashtag × GP projetados. Os melhores jogadores são selecionados pelo AVG.')),pe('label',null,'Quantidade de jogadores',pe('select',{'aria-label':'Quantidade de jogadores',value:limit,onChange:ev=>setLimit(ev.target.value)},[['all','Todos'],['13','13 melhores'],['10','10 melhores'],['7','7 melhores'],['2','Keepers (os 2 melhores)']].map(([value,label])=>pe('option',{key:value,value},label))))),
         !players.length?pe('p',{className:'fp-empty',role:'status'},status==='loading'?'Carregando elencos…':status==='error'?'Não foi possível carregar os elencos.':'Nenhum elenco disponível.'):
         pe('div',{className:'fp-teams-layout'},pe('div',{className:'fp-team-rosters'},rows.map((t,i)=>pe('article',{key:t.name,className:'fp-team-roster',id:'fp-roster-'+PulseData.key(t.name)},
             pe('header',null,pe('span',{className:'fp-team-roster-rank'},'#'+(i+1)),badge(t),pe('div',null,pe('h3',null,t.name),pe('small',null,t.selected.length+' jogadores · '+title))),
-            pe('div',{className:'fp-team-list-heading'},pe('span',null,'JOGADOR'),pe('span',null,'AVG HASHTAG')),
-            pe('ol',null,t.selected.map(p=>pe('li',{key:p.id},pe('span',null,p.name),pe('strong',null,PulseData.fmt(p.projection))))),
+            pe('div',{className:'fp-team-list-heading'},['JOGADOR','AVG','GP','TOTAL'].map(label=>pe('span',{key:label},label))),
+            pe('ol',null,t.selected.map(p=>pe('li',{key:p.id},pe('span',null,p.name),pe('strong',null,PulseData.fmt(p.projection)),pe('span',{className:'fp-team-gp'},p.projectionGP??'—'),pe('strong',null,PulseData.fmt(totalFor(p)))))),
             !t.selected.length?pe('p',{className:'fp-muted'},'Nenhum jogador no elenco.'):null,
             pe('footer',null,pe('div',null,pe('span',null,'PONTOS TOTAIS'),pe('strong',null,PulseData.fmt(t.total))),pe('div',null,pe('span',null,'MÉDIA DOS JOGADORES'),pe('strong',null,PulseData.fmt(t.average)))),
-            t.valid<t.selected.length?pe('p',{className:'fp-team-missing'},(t.selected.length-t.valid)+' sem projeção · '+t.valid+' considerados na soma e média.'):null))),
-            pe('aside',{className:'fp-team-ranking','aria-label':'Classificação geral dos times'},pe('h2',null,'CLASSIFICAÇÃO GERAL'),pe('p',null,title),pe('div',{className:'fp-team-ranking-scroll',tabIndex:0},pe('table',null,pe('thead',null,pe('tr',null,['POS.','TIME','TOTAL','MÉDIA'].map(label=>pe('th',{scope:'col',key:label},label)))),pe('tbody',null,rows.map((t,i)=>pe('tr',{key:t.name},pe('td',null,i+1),pe('th',{scope:'row'},pe('a',{href:'#fp-roster-'+PulseData.key(t.name),onClick:ev=>{ev.preventDefault();document.getElementById('fp-roster-'+PulseData.key(t.name))?.scrollIntoView({behavior:'auto',block:'start'});}},badge(t),pe('span',null,t.name))),pe('td',null,pe('strong',null,PulseData.fmt(t.total))),pe('td',null,PulseData.fmt(t.average))))))),pe('small',null,'Ordenado pela soma. Médias ausentes ficam fora dos cálculos.'))));
+            t.totalValid<t.selected.length?pe('p',{className:'fp-team-missing'},t.totalValid+' com AVG e GP válidos para o total · '+t.valid+' com AVG válido para a média.'):null))),
+            pe('aside',{className:'fp-team-ranking','aria-label':'Classificação geral dos times'},pe('h2',null,'CLASSIFICAÇÃO GERAL'),pe('p',null,title),pe('div',{className:'fp-team-ranking-scroll',tabIndex:0},pe('table',null,pe('thead',null,pe('tr',null,[['position','POS.'],['name','TIME'],['total','TOTAL'],['average','MÉDIA']].map(([key,label])=>pe('th',{scope:'col',key,'aria-sort':sort.key===key?(sort.dir==='desc'?'descending':'ascending'):'none'},['total','average'].includes(key)?pe('button',{type:'button',onClick:()=>order(key)},label,sort.key===key?(sort.dir==='desc'?' ↓':' ↑'):''):label)))),pe('tbody',null,rows.map((t,i)=>pe('tr',{key:t.name},pe('td',null,i+1),pe('th',{scope:'row'},pe('a',{href:'#fp-roster-'+PulseData.key(t.name),onClick:ev=>{ev.preventDefault();document.getElementById('fp-roster-'+PulseData.key(t.name))?.scrollIntoView({behavior:'auto',block:'start'});}},badge(t),pe('span',null,t.name))),pe('td',null,pe('strong',null,PulseData.fmt(t.total))),pe('td',null,PulseData.fmt(t.average))))))),pe('small',null,'Ordenado por '+(sort.key==='total'?'total projetado':'média dos jogadores')+' '+(sort.dir==='desc'?'↓':'↑')+'.'))));
 }
 
 function FantasyPulsePage(){
