@@ -10228,6 +10228,8 @@ body:has(.da){background:#101014}body:has(.da) .topbar{overflow-x:auto}body:has(
 .da .da-all-choices table{font-size:14px;min-width:1280px}.da .da-all-choices thead button{font-size:13px}.da .da-all-choices .da-photo{width:122px;height:92px;object-fit:contain;object-position:center bottom;border-radius:0;background:transparent;flex-shrink:0}.da .da-all-choices .da-choice-player{gap:14px;font-size:14px;min-height:92px}.da .da-all-choices tbody th{padding:0 12px 0 0}.da .da-all-choices td{padding:10px 12px}.da .da-all-choices small{font-size:11px}.da .da-all-choices .da-choice-owner{padding:8px}.da .da-all-choices .da-team-tile{min-height:92px;min-width:250px}.da .da-all-choices .da-team-title{font-size:14px}.da .da-all-choices .da-controls label{font-size:12px}.da .da-all-choices>.da-muted{font-size:13px}
 .fp .fp-teams-layout{grid-template-columns:minmax(0,1fr) minmax(350px,440px)}.fp .fp-team-ranking{padding:16px}.fp .fp-team-ranking h2{font-size:19px}.fp .fp-team-ranking table{table-layout:auto;min-width:330px}.fp .fp-team-ranking th,.fp .fp-team-ranking td{padding:10px 5px}.fp .fp-team-ranking th:first-child{width:30px}.fp .fp-team-ranking td:nth-last-child(-n+2){white-space:nowrap}.fp .fp-team-ranking tbody th{min-width:0}.fp .fp-team-ranking a{font-size:14px;gap:7px}.fp .fp-team-ranking .fp-team-roster-logo{width:34px;height:34px}.fp .fp-team-ranking thead button{font-size:11px;padding:2px 0;white-space:nowrap}.fp .fp-team-list-heading,.fp .fp-team-roster li{display:grid;grid-template-columns:minmax(0,1fr) 50px 30px 70px;gap:10px;align-items:center}.fp .fp-team-list-heading span:not(:first-child),.fp .fp-team-roster li>:not(:first-child){text-align:right;white-space:nowrap}.fp .fp-team-roster li{font-size:15px}.fp .fp-team-gp{color:var(--fp-muted);font-size:13px}@media(max-width:1150px){.fp .fp-teams-layout{grid-template-columns:1fr}.fp .fp-team-ranking{position:static;grid-row:1;width:min(100%,520px)}}@media(max-width:650px){.fp .fp-team-ranking{width:100%}.fp .fp-team-ranking table{font-size:12px;min-width:320px}.fp .fp-team-ranking a{font-size:12px}.fp .fp-team-list-heading,.fp .fp-team-roster li{grid-template-columns:minmax(0,1fr) 40px 24px 60px;gap:7px}.fp .fp-team-roster li{font-size:13px}}
 
+
+.matchups-feed-status{font:10px/1.4 Arial,sans-serif;color:#bab8cd;max-width:150px;display:block;margin:8px 0}.matchups-copy{display:flex;flex-shrink:0}.matchups-marquee:focus-within .matchups-track{animation-play-state:paused}.score-display{font-variant-numeric:tabular-nums;white-space:nowrap}@media(prefers-reduced-motion:reduce){.matchups-track{animation:none!important}.matchups-marquee{overflow-x:auto}}
 </style>
 </head>
 <body>
@@ -12932,23 +12934,51 @@ function MatchupCard({ m }) {
                 React.createElement("div", { className: "team-mini-name" }, home.name)),
             React.createElement("div", { className: "vs-score" },
                 React.createElement("div", { className: "score-display" },
-                    m.scoreH,
+                    m.scoreH===null?'—':Number(m.scoreH).toLocaleString('pt-BR',{maximumFractionDigits:2}),
                     " \u2014 ",
-                    m.scoreA),
+                    m.scoreA===null?'—':Number(m.scoreA).toLocaleString('pt-BR',{maximumFractionDigits:2})),
                 React.createElement("div", { className: "score-period" }, m.period)),
             React.createElement("div", { className: "team-mini" },
                 React.createElement(MatchupTeamLogo, { team: m.away, size: 82 }),
                 React.createElement("div", { className: "team-mini-name" }, away.name)))));
 }
-function MatchupsStrip({ setPage }) {
-    const marqueeMatchups = [...MATCHUPS, ...MATCHUPS];
-    return (React.createElement("div", { className: "matchups-strip" },
-        React.createElement("div", { className: "week-card" },
-            React.createElement("div", { className: "week-label" }, "SEM 1"),
-            React.createElement("button", { className: "week-btn", onClick: () => setPage && setPage('CALENDÁRIO') }, "VER CALEND\u00C1RIO")),
-        React.createElement("div", { className: "matchups-marquee" },
-            React.createElement("div", { className: "matchups-track" }, marqueeMatchups.map((m, i) => React.createElement(MatchupCard, { key: i, m: m }))))));
+function liveCarouselRows(payload,calendar){
+    if(!payload||!Array.isArray(payload.matchups)||!Number.isInteger(payload.matchupPeriodId)||payload.matchupPeriodId<1)throw Error('Formato de placares inválido.');
+    const week=calendar?.weeks?.find(w=>w.number===payload.matchupPeriodId),date=d=>new Date(d+'T12:00:00Z').toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',timeZone:'UTC'});
+    return payload.matchups.map(m=>{
+        if(!m.home?.name||!m.away?.name)throw Error('Confronto sem identificação dos times.');
+        const score=v=>(typeof v==='number'||typeof v==='string'&&v.trim()!=='')&&Number.isFinite(Number(v))?Number(v):null;
+        return {id:m.id,home:m.home.name,away:m.away.name,scoreH:score(m.home.score),scoreA:score(m.away.score),status:m.status==='FINAL'?'ENCERRADO':m.status==='IN_PROGRESS'?'AO VIVO':'AGENDADO',period:'Semana '+payload.matchupPeriodId,dateRange:week?date(week.start)+' – '+date(week.end):'Semana '+payload.matchupPeriodId};
+    });
 }
+function useCarouselScores(){
+    const [feed,setFeed]=useState({payload:null,calendar:null,loading:true,error:false});
+    useEffect(()=>{
+        let alive=true,busy=false,controller=null;const matchupsUrl=new URL('/matchups',LEAGUE_PLAYERS_API_URL).href;
+        fetch('./assets/matchup-projections/schedule-2026-27.json').then(r=>{if(!r.ok)throw Error();return r.json();}).then(calendar=>{if(alive)setFeed(f=>({...f,calendar}));}).catch(()=>{});
+        const refresh=async()=>{if(!alive||busy||document.hidden)return;busy=true;controller=new AbortController();const timer=setTimeout(()=>controller.abort(),15000);
+            try{const r=await fetch(matchupsUrl,{signal:controller.signal,cache:'no-store'});if(!r.ok)throw Error();const payload=await r.json();liveCarouselRows(payload,null);if(alive)setFeed(f=>({...f,payload,loading:false,error:false}));}
+            catch{if(alive)setFeed(f=>({...f,loading:false,error:true}));}finally{clearTimeout(timer);busy=false;}
+        };
+        refresh();const interval=setInterval(refresh,30000);document.addEventListener('visibilitychange',refresh);
+        return()=>{alive=false;controller?.abort();clearInterval(interval);document.removeEventListener('visibilitychange',refresh);};
+    },[]);
+    return feed;
+}
+function MatchupsStrip({setPage}){
+    const feed=useCarouselScores(),payload=feed.payload;
+    const today=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+    const week=payload?.matchupPeriodId||feed.calendar?.weeks?.find(w=>w.start<=today&&w.end>=today)?.number;
+    const fallbackWeek=feed.calendar?.weeks?.find(w=>w.number===week);
+    const fallback=(fallbackWeek?.pairs||[]).map(([home,away],i)=>({id:'scheduled-'+i,home,away,scoreH:null,scoreA:null,status:'SEM PLACAR',period:'Semana '+week,dateRange:''}));
+    const matchups=payload?liveCarouselRows(payload,feed.calendar):fallback;
+    const date=payload?.updatedAt?new Date(payload.updatedAt):null,time=date&&!Number.isNaN(date.getTime())?date.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',second:'2-digit',timeZone:'America/Sao_Paulo'}):null;
+    const message=feed.loading?'Carregando placares…':feed.error?(payload?'Atualização indisponível · último placar às '+(time||'—'):'Placares indisponíveis'):matchups.length?'Atualizado às '+(time||'—')+' · Brasília':'Sem confrontos nesta rodada';
+    return React.createElement('div',{className:'matchups-strip','aria-label':'Placares dos confrontos AirBall'},
+        React.createElement('div',{className:'week-card'},React.createElement('div',{className:'week-label'},week?'SEM '+week:'AIRBALL'),React.createElement('small',{className:'matchups-feed-status',role:'status'},message),React.createElement('button',{className:'week-btn',onClick:()=>setPage&&setPage('CALENDÁRIO')},'VER CALENDÁRIO')),
+        React.createElement('div',{className:'matchups-marquee',tabIndex:0,'aria-label':'Confrontos da rodada'},React.createElement('div',{className:'matchups-track'},[0,1].map(copy=>React.createElement('div',{className:'matchups-copy',key:copy,'aria-hidden':copy===1?true:undefined},matchups.map(m=>React.createElement(MatchupCard,{key:m.id,m:feed.error?{...m,status:payload?'ÚLTIMO PLACAR':'SEM PLACAR'}:m})))))));
+}
+
 function FeatureArticleImage({ src, className = 'article-inline-image' }) {
     return React.createElement("div", { className: className, style: { backgroundImage: `url(${src})` } });
 }

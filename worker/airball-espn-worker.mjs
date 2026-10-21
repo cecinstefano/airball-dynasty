@@ -1,6 +1,7 @@
 // Cloudflare Worker para a integração AirBall Honestômetro x ESPN Fantasy Basketball
 // Rotas:
 //   GET /players  -> retorna jogadores tratados para o front-end, aba Jogadores e Honestômetro
+//   GET /matchups -> confrontos da rodada atual e placares ESPN (cache de 15 s)
 //   GET /trades   -> retorna últimas trades/transações processadas pela ESPN
 //   GET /health   -> teste simples
 //
@@ -829,6 +830,38 @@ async function handlePlayerPhoto(request, env) {
   return imageResponse;
 }
 
+// Only league matchup scores are exposed; ESPN cookies remain in Worker secrets.
+function normalizeLiveMatchups(leagueData,env={}) {
+  const current=statNumber(leagueData.status?.currentMatchupPeriod);
+  if(current===null||current<1||!Array.isArray(leagueData.schedule))throw Error('ESPN não informou a rodada ou os confrontos atuais.');
+  const names=getFantasyTeamIdMap(leagueData);
+  const score=side=>{for(const value of [side.totalPointsLive,side.totalPoints]){const n=statNumber(value);if(n!==null)return rounded(n);}return null;};
+  const matchups=leagueData.schedule.filter(m=>Number(m.matchupPeriodId)===current&&m.home&&m.away).map(m=>{
+    const side=s=>({teamId:String(s.teamId),name:names.get(Number(s.teamId))||`Time ${s.teamId}`,score:score(s)});
+    const periods=leagueData.settings?.scheduleSettings?.matchupPeriods?.[current];
+    const final=['HOME','AWAY','TIE'].includes(m.winner),firstPeriod=Array.isArray(periods)&&periods.length?Math.min(...periods):Infinity;
+    const scheduled=Number.isFinite(firstPeriod)&&statNumber(leagueData.scoringPeriodId)!==null&&Number(leagueData.scoringPeriodId)<firstPeriod;
+    return {id:String(m.id??`${current}-${m.home.teamId}-${m.away.teamId}`),matchupPeriodId:current,home:side(m.home),away:side(m.away),status:final?'FINAL':scheduled?'SCHEDULED':'IN_PROGRESS'};
+  });
+  return {leagueId:String(env.ESPN_LEAGUE_ID||'1245069102'),seasonId:Number(env.ESPN_SEASON_ID||2027),matchupPeriodId:current,scoringPeriodId:statNumber(leagueData.scoringPeriodId),updatedAt:new Date().toISOString(),matchups};
+}
+async function handleLiveMatchups(request,env,ctx){
+  const cache=caches.default;
+  const key=new Request(new URL(request.url).origin+'/matchups-cache-v1-'+(env.ESPN_LEAGUE_ID||'1245069102')+'-'+(env.ESPN_SEASON_ID||'2027'));
+  const cached=await cache.match(key);if(cached)return cached;
+  const url=new URL(`https://lm-api-reads.fantasy.espn.com/apis/v3/games/fba/seasons/${env.ESPN_SEASON_ID||2027}/segments/0/leagues/${env.ESPN_LEAGUE_ID||'1245069102'}`);
+  for(const view of ['mMatchup','mMatchupScore','mTeam','mSettings','mStatus'])url.searchParams.append('view',view);
+  const headers={Accept:'application/json','User-Agent':'Mozilla/5.0 AirBall-Live/1.0'};
+  if(env.ESPN_SWID&&env.ESPN_S2)headers.Cookie=`SWID=${env.ESPN_SWID}; espn_s2=${env.ESPN_S2}`;
+  try{
+    const r=await fetch(url,{headers,signal:AbortSignal.timeout(15000),cache:'no-store'});
+    if(!r.ok)throw Error(`ESPN respondeu ${r.status}. Confira a temporada e os secrets ESPN do Worker.`);
+    const payload=normalizeLiveMatchups(await r.json(),env),response=jsonResponse(payload,200,env);
+    response.headers.set('Cache-Control','public, max-age=15, s-maxage=15');
+    ctx.waitUntil(cache.put(key,response.clone()));return response;
+  }catch(error){const response=jsonResponse({error:error.name==='TimeoutError'?'ESPN demorou a responder.':error.message||'Placares indisponíveis.'},502,env);response.headers.set('Cache-Control','no-store');return response;}
+}
+
 export default {
   async fetch(request, env, ctx) {
     if (request.method === 'OPTIONS') {
@@ -840,12 +873,14 @@ export default {
     try {
       if (url.pathname === '/health') {
         return jsonResponse({ ok: true, service: 'airball-espn-worker',
-            version: 'player-table-v9-avg25-proj2027', leagueId: env.ESPN_LEAGUE_ID || '1245069102', seasonId: env.ESPN_SEASON_ID || '2027' }, 200, env);
+            version: 'player-table-v10-live-matchups', leagueId: env.ESPN_LEAGUE_ID || '1245069102', seasonId: env.ESPN_SEASON_ID || '2027' }, 200, env);
       }
 
       if (url.pathname === '/' || url.pathname === '/players') {
         return await handlePlayers(request, env, ctx);
       }
+
+      if (url.pathname === '/matchups') return await handleLiveMatchups(request, env, ctx);
 
       if (url.pathname === '/trades') {
         return await handleTrades(request, env, ctx);
@@ -855,7 +890,7 @@ export default {
         return await handlePlayerPhoto(request, env);
       }
 
-      return jsonResponse({ error: 'Rota não encontrada. Use /players, /trades ou /player-photo/ID.' }, 404, env);
+      return jsonResponse({ error: 'Rota não encontrada. Use /players, /matchups, /trades ou /player-photo/ID.' }, 404, env);
     } catch (error) {
       return jsonResponse({ error: error.message || 'Erro desconhecido ao buscar ESPN.' }, 500, env);
     }
