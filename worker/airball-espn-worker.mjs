@@ -594,6 +594,10 @@ function normalizePlayers(leagueData,env={}) {
 
       const avg = extractFantasyAverage(player,previousSeason);
       const projection = extractFantasyProjection(player,projectionSeason);
+      const currentStat=seasonStat(player,projectionSeason,0);
+      const currentGames=statNumber(currentStat?.gamesPlayed??currentStat?.stats?.['42']);
+      const currentValue=averageFromStat(currentStat);
+      const currentAvg=currentGames===0||(currentGames===null&&currentValue===0)?null:currentValue;
       const total = extractFantasyTotal(player,previousSeason);
       const last30 = extractRecentAverage(player, 30, avg);
       const last15 = extractRecentAverage(player, 15, avg);
@@ -614,6 +618,10 @@ function normalizePlayers(leagueData,env={}) {
         birthDate: player.birthDate || player.dateOfBirth || null,
         avg2025: rounded(avg),
         avgSeasonId: previousSeason,
+        currentSeasonAverage: rounded(currentAvg),
+        currentAvg: rounded(currentAvg),
+        currentSeasonGames: currentGames,
+        currentAvgSeasonId: projectionSeason,
         espnProjection: rounded(projection),
         projectedAvg: rounded(projection),
         projectionSeasonId: projectionSeason,
@@ -642,7 +650,7 @@ async function fetchEspnLeague(env) {
 
   const fantasyFilter = {
     players: {
-      filterStatsForTopScoringPeriodIds: {value: 1, additionalValue: ['00'+String(Number(env.ESPN_AVG_SEASON_ID||Number(seasonId)-1)),'10'+seasonId]},
+      filterStatsForTopScoringPeriodIds: {value: 1, additionalValue: ['00'+String(Number(env.ESPN_AVG_SEASON_ID||Number(seasonId)-1)),'10'+seasonId,'00'+seasonId]},
       limit: 2000,
       offset: 0,
       sortAppliedStatTotal: {
@@ -675,7 +683,7 @@ async function fetchEspnLeague(env) {
 
 async function getFullPlayersPayload(request, env, ctx) {
   const cache = caches.default;
-  const cacheKey = new Request(new URL(request.url).origin + '/players-cache-v9-separate-projections-'+(env.ESPN_LEAGUE_ID||'1245069102')+'-'+(env.ESPN_SEASON_ID||'2027')+'-'+(env.ESPN_AVG_SEASON_ID||Number(env.ESPN_SEASON_ID||2027)-1));
+  const cacheKey = new Request(new URL(request.url).origin + '/players-cache-v11-current-averages-'+(env.ESPN_LEAGUE_ID||'1245069102')+'-'+(env.ESPN_SEASON_ID||'2027')+'-'+(env.ESPN_AVG_SEASON_ID||Number(env.ESPN_SEASON_ID||2027)-1));
   const cached = await cache.match(cacheKey);
   if (cached) return cached.json();
 
@@ -689,6 +697,7 @@ async function getFullPlayersPayload(request, env, ctx) {
     avgSeasonId: Number(env.ESPN_AVG_SEASON_ID||Number(env.ESPN_SEASON_ID||2027)-1),
     projectionSeasonId: Number(env.ESPN_SEASON_ID||2027),
     projectionCount: players.filter(p=>p.espnProjection!==null).length,
+    currentAverageCount: players.filter(p=>p.currentAvg!==null).length,
     count: players.length,
     players
   };
@@ -705,7 +714,7 @@ async function fetchEspnLeagueWithTrades(env) {
 
   const fantasyFilter = {
     players: {
-      filterStatsForTopScoringPeriodIds: {value: 1, additionalValue: ['00'+String(Number(env.ESPN_AVG_SEASON_ID||Number(seasonId)-1)),'10'+seasonId]},
+      filterStatsForTopScoringPeriodIds: {value: 1, additionalValue: ['00'+String(Number(env.ESPN_AVG_SEASON_ID||Number(seasonId)-1)),'10'+seasonId,'00'+seasonId]},
       limit: 2000,
       offset: 0,
       sortAppliedStatTotal: {
@@ -873,7 +882,7 @@ export default {
     try {
       if (url.pathname === '/health') {
         return jsonResponse({ ok: true, service: 'airball-espn-worker',
-            version: 'player-table-v10-live-matchups', leagueId: env.ESPN_LEAGUE_ID || '1245069102', seasonId: env.ESPN_SEASON_ID || '2027' }, 200, env);
+            version: 'player-table-v11-current-averages', leagueId: env.ESPN_LEAGUE_ID || '1245069102', seasonId: env.ESPN_SEASON_ID || '2027' }, 200, env);
       }
 
       if (url.pathname === '/' || url.pathname === '/players') {
