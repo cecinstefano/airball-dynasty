@@ -10254,6 +10254,8 @@ body:has(.da){background:#101014}body:has(.da) .topbar{overflow-x:auto}body:has(
 .hn-feature-crest{width:49%;height:110%;top:-5%;left:0;opacity:.3;z-index:0;filter:brightness(.75) drop-shadow(0 10px 18px #0009);pointer-events:none}
 .hn-feature-photo>img:not(.hn-feature-crest),.hn-feature-photo figcaption{position:relative;z-index:1}
 @media(max-width:700px){.hn-feature-crest{width:100%;height:290px;top:0;left:0}.hn-team-watermark{height:100%;width:110%;left:-5%}}
+
+.weekly-scores-header{gap:10px;align-items:center}.weekly-scores-header h2{margin:0;line-height:1.35;font-size:15px;flex:1;min-width:0}.weekly-scores-header .sidebar-card-season{flex-shrink:0;font-size:10px}.weekly-scores-status{margin:0;padding:11px 14px;color:#74657f;font-size:11px;line-height:1.5;border-bottom:1px solid #ede5f3}.weekly-scores-scroll{max-height:420px;overflow:auto;scrollbar-width:thin;scrollbar-color:#b99bce #f7f2fa}.weekly-scores-table{width:100%;border-collapse:collapse;table-layout:auto;color:#20122c}.weekly-scores-table thead{position:sticky;top:0;z-index:1;background:#f8f4fb}.weekly-scores-table th,.weekly-scores-table td{padding:12px 10px;border-bottom:1px solid #eee7f4;text-align:left}.weekly-scores-table thead th{font-size:10px;letter-spacing:.07em;color:#766583}.weekly-scores-table th[scope=row]{font-size:12px;font-weight:650;line-height:1.4}.weekly-scores-table th:last-child,.weekly-scores-table td:last-child{text-align:right;white-space:nowrap}.weekly-scores-team{display:flex;align-items:center;gap:9px}.weekly-scores-team>span:last-child{min-width:0;overflow-wrap:anywhere}.weekly-scores-team>img,.weekly-scores-team>.team-logo{flex-shrink:0}.weekly-scores-rank{font:700 15px Oswald,Arial,sans-serif;color:#9c7eb1;width:24px}.weekly-scores-value{font-size:15px;font-weight:800;font-variant-numeric:tabular-nums;color:#642990}.weekly-scores-table tbody tr:first-child{background:#f3e9ff}.weekly-scores-table tbody tr:hover{background:#f8f3fc}.weekly-scores-scroll:focus-visible{outline:3px solid #9c65c4;outline-offset:-3px}@media(max-width:430px){.weekly-scores-table th,.weekly-scores-table td{padding:10px 8px}.weekly-scores-header h2{font-size:14px}}
 </style>
 </head>
 <body>
@@ -12991,8 +12993,8 @@ function useCarouselScores(){
     },[]);
     return feed;
 }
-function MatchupsStrip({setPage}){
-    const feed=useCarouselScores(),payload=feed.payload;
+function MatchupsStrip({setPage,feed}){
+    const payload=feed.payload;
     const today=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
     const week=payload?.matchupPeriodId||feed.calendar?.weeks?.find(w=>w.start<=today&&w.end>=today)?.number;
     const fallbackWeek=feed.calendar?.weeks?.find(w=>w.number===week);
@@ -14035,20 +14037,22 @@ function StandingsCard() {
                     React.createElement("td", null,
                         React.createElement("span", { className: "pf" }, t.pf.toLocaleString()))))))))));
 }
-function PowerRankingsCard() {
-    return (React.createElement("div", { className: "sidebar-card" },
-        React.createElement("div", { className: "sidebar-card-header" },
-            React.createElement("span", { className: "sidebar-card-title" }, "\u26A1 Power Rankings"),
-            React.createElement("span", { className: "sidebar-card-season" }, "PR\u00C9-TEMP.")),
-        React.createElement("div", { className: "sidebar-card-body" },
-            React.createElement("div", { className: "power-list scroll-card-body" }, POWER_RANKINGS.map(t => (React.createElement("div", { className: "power-item", key: t.rank },
-                React.createElement("span", { className: "power-rank" }, t.rank),
-                React.createElement(TeamLogo, { team: t.name, size: 64 }),
-                React.createElement("div", { className: "power-info" },
-                    React.createElement("div", { className: "power-name" }, t.name),
-                    React.createElement("div", { className: `power-trend trend-${t.type}` }, "Pr\u00E9-temporada")))))),
-            React.createElement("div", { className: "sidebar-link-row" },
-                React.createElement("a", { className: "sidebar-link", href: "#" }, "Ranking completo \u2192")))));
+function weeklyScoreRows(payload){
+    if(!payload)return [];
+    const matchups=liveCarouselRows(payload,null),teams=new Map();
+    matchups.forEach((m,i)=>[['home','scoreH'],['away','scoreA']].forEach(([side,score])=>{
+        const raw=payload.matchups[i][side],team=getTeam(m[side]),key=String(raw.teamId||team.slug||normalizeTradeName(m[side]));
+        if(!teams.has(key))teams.set(key,{key,name:team.name,team:m[side],score:m[score]});
+    }));
+    return [...teams.values()].sort((a,b)=>a.score===null?(b.score===null?a.name.localeCompare(b.name,'pt-BR'):1):b.score===null?-1:b.score-a.score||a.name.localeCompare(b.name,'pt-BR'));
+}
+function WeeklyScoresCard({feed}){
+    const e=React.createElement,rows=weeklyScoreRows(feed.payload),date=feed.payload?.updatedAt?new Date(feed.payload.updatedAt):null,time=date&&!Number.isNaN(date.getTime())?date.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',second:'2-digit',timeZone:'America/Sao_Paulo'}):null;
+    const message=feed.loading?'Carregando pontuações…':feed.error?(feed.payload?'Atualização indisponível · exibindo os últimos placares':'Pontuações indisponíveis no momento.'):rows.length?(time?'Atualizado às '+time+' · Brasília':'Placares da rodada'):'Sem confrontos nesta rodada.';
+    return e('section',{className:'sidebar-card weekly-scores-card','aria-labelledby':'weekly-scores-title'},
+        e('div',{className:'sidebar-card-header weekly-scores-header'},e('h2',{className:'sidebar-card-title',id:'weekly-scores-title'},'AS MAIORES PONTUAÇÕES DA SEMANA'),e('span',{className:'sidebar-card-season'},feed.payload?'SEMANA '+feed.payload.matchupPeriodId:'AO VIVO')),
+        e('p',{className:'weekly-scores-status',role:'status'},message),
+        rows.length?e('div',{className:'weekly-scores-scroll',tabIndex:0,'aria-label':'Pontuação de todos os times da semana'},e('table',{className:'weekly-scores-table'},e('thead',null,e('tr',null,e('th',{scope:'col'},'#'),e('th',{scope:'col'},'TIME'),e('th',{scope:'col'},'PONTOS'))),e('tbody',null,rows.map((row,i)=>e('tr',{key:row.key},e('td',{className:'weekly-scores-rank'},i+1),e('th',{scope:'row'},e('span',{className:'weekly-scores-team'},e(TeamLogo,{team:row.team,size:48}),e('span',null,row.name))),e('td',{className:'weekly-scores-value'},row.score===null?'N/D':row.score.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}))))))):null);
 }
 const SIDEBAR_TRADES = [
     {
@@ -14450,8 +14454,9 @@ function DraftLiveEmbed() {
 }
 
 function HomePage({ setPage }) {
+    const liveScores=useCarouselScores();
     return (React.createElement(React.Fragment, null,
-        React.createElement(MatchupsStrip, { setPage: setPage }),
+        React.createElement(MatchupsStrip, { setPage: setPage, feed: liveScores }),
         React.createElement("div", { className: "main-wrap" },
             React.createElement("div", { className: "content-grid" },
                 React.createElement("div", null,
@@ -14466,9 +14471,8 @@ function HomePage({ setPage }) {
                     React.createElement(DraftLiveEmbed, null),
                     React.createElement(NewsFeed, { setPage: setPage })),
                 React.createElement("div", { className: "sidebar" },
-                    React.createElement(HomeDraftCountdown, null),
+                    React.createElement(WeeklyScoresCard, {feed:liveScores}),
                     React.createElement(StandingsCard, null),
-                    React.createElement(PowerRankingsCard, null),
                     React.createElement(LatestTradesCard, null))))));
 }
 function GmPhoto({ team }) {
