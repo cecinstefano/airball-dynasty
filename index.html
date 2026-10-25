@@ -10255,7 +10255,18 @@ body:has(.da){background:#101014}body:has(.da) .topbar{overflow-x:auto}body:has(
 .hn-feature-photo>img:not(.hn-feature-crest),.hn-feature-photo figcaption{position:relative;z-index:1}
 @media(max-width:700px){.hn-feature-crest{width:100%;height:290px;top:0;left:0}.hn-team-watermark{height:100%;width:110%;left:-5%}}
 
-.weekly-scores-header{gap:10px;align-items:center}.weekly-scores-header h2{margin:0;line-height:1.35;font-size:15px;flex:1;min-width:0}.weekly-scores-header .sidebar-card-season{flex-shrink:0;font-size:10px}.weekly-scores-status{margin:0;padding:11px 14px;color:#74657f;font-size:11px;line-height:1.5;border-bottom:1px solid #ede5f3}.weekly-scores-scroll{max-height:420px;overflow:auto;scrollbar-width:thin;scrollbar-color:#b99bce #f7f2fa}.weekly-scores-table{width:100%;border-collapse:collapse;table-layout:auto;color:#20122c}.weekly-scores-table thead{position:sticky;top:0;z-index:1;background:#f8f4fb}.weekly-scores-table th,.weekly-scores-table td{padding:12px 10px;border-bottom:1px solid #eee7f4;text-align:left}.weekly-scores-table thead th{font-size:10px;letter-spacing:.07em;color:#766583}.weekly-scores-table th[scope=row]{font-size:12px;font-weight:650;line-height:1.4}.weekly-scores-table th:last-child,.weekly-scores-table td:last-child{text-align:right;white-space:nowrap}.weekly-scores-team{display:flex;align-items:center;gap:9px}.weekly-scores-team>span:last-child{min-width:0;overflow-wrap:anywhere}.weekly-scores-team>img,.weekly-scores-team>.team-logo{flex-shrink:0}.weekly-scores-rank{font:700 15px Oswald,Arial,sans-serif;color:#9c7eb1;width:24px}.weekly-scores-value{font-size:15px;font-weight:800;font-variant-numeric:tabular-nums;color:#642990}.weekly-scores-table tbody tr:first-child{background:#f3e9ff}.weekly-scores-table tbody tr:hover{background:#f8f3fc}.weekly-scores-scroll:focus-visible{outline:3px solid #9c65c4;outline-offset:-3px}@media(max-width:430px){.weekly-scores-table th,.weekly-scores-table td{padding:10px 8px}.weekly-scores-header h2{font-size:14px}}
+.weekly-scores-header{gap:10px;align-items:center}.weekly-scores-header h2{margin:0;line-height:1.35;font-size:15px;flex:1;min-width:0}.weekly-scores-header .sidebar-card-season{flex-shrink:0;font-size:10px}.weekly-scores-status{margin:0;padding:11px 14px;color:#74657f;font-size:11px;line-height:1.5;border-bottom:1px solid #ede5f3}.weekly-scores-scroll{max-height:none;overflow:visible}.weekly-scores-table{width:100%;border-collapse:collapse;table-layout:auto;color:#20122c}.weekly-scores-table thead{position:sticky;top:0;z-index:1;background:#f8f4fb}.weekly-scores-table th,.weekly-scores-table td{padding:12px 10px;border-bottom:1px solid #eee7f4;text-align:left}.weekly-scores-table thead th{font-size:10px;letter-spacing:.07em;color:#766583}.weekly-scores-table th[scope=row]{font-size:12px;font-weight:650;line-height:1.4}.weekly-scores-table th:last-child,.weekly-scores-table td:last-child{text-align:right;white-space:nowrap}.weekly-scores-team{display:flex;align-items:center;gap:9px}.weekly-scores-team>span:last-child{min-width:0;overflow-wrap:anywhere}.weekly-scores-team>img,.weekly-scores-team>.team-logo{flex-shrink:0}.weekly-scores-rank{font:700 15px Oswald,Arial,sans-serif;color:#9c7eb1;width:24px}.weekly-scores-value{font-size:15px;font-weight:800;font-variant-numeric:tabular-nums;color:#642990}.weekly-scores-table tbody tr:first-child{background:#f3e9ff}.weekly-scores-table tbody tr:hover{background:#f8f3fc}.weekly-scores-scroll:focus-visible{outline:3px solid #9c65c4;outline-offset:-3px}@media(max-width:430px){.weekly-scores-table th,.weekly-scores-table td{padding:10px 8px}.weekly-scores-header h2{font-size:14px}}
+
+.compact-standings-strip{height:36px;background:linear-gradient(90deg,#20132d,#321849,#20132d);border-bottom:1px solid #6c467f;color:#e6d1f5;padding:0 120px 0 20px;display:flex;align-items:center}
+.compact-standings-list{display:grid;grid-template-columns:repeat(16,minmax(0,1fr));width:100%;max-width:1600px;margin:0 auto;padding:0;list-style:none;gap:4px}
+.compact-standings-list li{min-width:0;display:flex;justify-content:center}
+.compact-standings-list a{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-width:0;padding:2px 4px;border-radius:4px;color:inherit;text-decoration:none;transition:background .15s}
+.compact-standings-position{font-size:10px;font-weight:750;font-variant-numeric:tabular-nums;line-height:1}
+.compact-standings-list img{width:22px;height:22px;object-fit:contain;filter:drop-shadow(0 2px 3px #0006)}
+.compact-standings-list a:hover{background:#79509b66}.compact-standings-list a:focus-visible{outline:2px solid #e6bdff;outline-offset:1px}
+@media(max-width:700px){.compact-standings-strip{height:32px;padding:0 6px}.compact-standings-list{gap:0}.compact-standings-list a{gap:2px;padding:3px 0}.compact-standings-position{font-size:8px}.compact-standings-list img{width:16px;height:16px}}
+@media(max-width:380px){.compact-standings-list img{width:14px;height:14px}.compact-standings-position{font-size:7px}.compact-standings-list a{gap:1px}}
+@media(prefers-reduced-motion:reduce){.compact-standings-list a{transition:none}}
 </style>
 </head>
 <body>
@@ -14052,7 +14063,7 @@ function WeeklyScoresCard({feed}){
     return e('section',{className:'sidebar-card weekly-scores-card','aria-labelledby':'weekly-scores-title'},
         e('div',{className:'sidebar-card-header weekly-scores-header'},e('h2',{className:'sidebar-card-title',id:'weekly-scores-title'},'AS MAIORES PONTUAÇÕES DA SEMANA'),e('span',{className:'sidebar-card-season'},feed.payload?'SEMANA '+feed.payload.matchupPeriodId:'AO VIVO')),
         e('p',{className:'weekly-scores-status',role:'status'},message),
-        rows.length?e('div',{className:'weekly-scores-scroll',tabIndex:0,'aria-label':'Pontuação de todos os times da semana'},e('table',{className:'weekly-scores-table'},e('thead',null,e('tr',null,e('th',{scope:'col'},'#'),e('th',{scope:'col'},'TIME'),e('th',{scope:'col'},'PONTOS'))),e('tbody',null,rows.map((row,i)=>e('tr',{key:row.key},e('td',{className:'weekly-scores-rank'},i+1),e('th',{scope:'row'},e('span',{className:'weekly-scores-team'},e(TeamLogo,{team:row.team,size:48}),e('span',null,row.name))),e('td',{className:'weekly-scores-value'},row.score===null?'N/D':row.score.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}))))))):null);
+        rows.length?e('div',{className:'weekly-scores-scroll','aria-label':'Pontuação de todos os times da semana'},e('table',{className:'weekly-scores-table'},e('thead',null,e('tr',null,e('th',{scope:'col'},'#'),e('th',{scope:'col'},'TIME'),e('th',{scope:'col'},'PONTOS'))),e('tbody',null,rows.map((row,i)=>e('tr',{key:row.key},e('td',{className:'weekly-scores-rank'},i+1),e('th',{scope:'row'},e('span',{className:'weekly-scores-team'},e(TeamLogo,{team:row.team,size:48}),e('span',null,row.name))),e('td',{className:'weekly-scores-value'},row.score===null?'N/D':row.score.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}))))))):null);
 }
 const SIDEBAR_TRADES = [
     {
@@ -14453,9 +14464,15 @@ function DraftLiveEmbed() {
             }))));
 }
 
+function CompactStandingsStrip(){
+    const e=React.createElement;
+    return e('nav',{className:'compact-standings-strip','aria-label':'Classificação AirBall'},e('ol',{className:'compact-standings-list'},[...STANDINGS].sort((a,b)=>a.pos-b.pos).map(row=>{const team=getTeam(row.name);return e('li',{key:row.pos},e('a',{href:'#/franquias/'+team.slug,title:row.pos+'º · '+team.name,'aria-label':row.pos+'º lugar: '+team.name},e('span',{className:'compact-standings-position','aria-hidden':true},row.pos),e('img',{src:team.logo,alt:'',width:22,height:22,onError:ev=>{ev.currentTarget.onerror=null;ev.currentTarget.style.visibility='hidden';}})));})));
+}
+
 function HomePage({ setPage }) {
     const liveScores=useCarouselScores();
     return (React.createElement(React.Fragment, null,
+        React.createElement(CompactStandingsStrip, null),
         React.createElement(MatchupsStrip, { setPage: setPage, feed: liveScores }),
         React.createElement("div", { className: "main-wrap" },
             React.createElement("div", { className: "content-grid" },
