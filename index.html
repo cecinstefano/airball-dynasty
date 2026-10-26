@@ -18348,7 +18348,7 @@ function HonestometroPage() {
     useEffect(() => {
         if (!HONESTOMETRO_CONFIG.playersApiUrl)
             return;
-        fetch(HONESTOMETRO_CONFIG.playersApiUrl)
+        fetch(HONESTOMETRO_CONFIG.playersApiUrl, { cache: 'no-store' })
             .then(res => {
             if (!res.ok)
                 throw new Error('Erro HTTP ' + res.status);
@@ -18419,11 +18419,14 @@ function HonestometroPage() {
         .filter(pick => pick && pick.playerName && Number(pick.airballOverall) > 0)
         .map(buildHonestometroDraftedPlayer)
         .filter(player => player.fantasyPoints > 0);
-    const tradeAssetMap = new Map();
+    // Draft records only fill missing players; current Worker ownership takes priority.
+    const tradeAssetMap = new Map(draftedPlayerAssets.map(player => [normalizeTeamKey(player.name), player]));
     players
         .filter(player => player && player.assetType !== 'PICK')
-        .forEach(player => tradeAssetMap.set(normalizeTeamKey(player.name), { ...player, assetType: 'PLAYER' }));
-    draftedPlayerAssets.forEach(player => tradeAssetMap.set(normalizeTeamKey(player.name), player));
+        .forEach(player => {
+            const key = normalizeTeamKey(player.name);
+            tradeAssetMap.set(key, { ...tradeAssetMap.get(key), ...player, assetType: 'PLAYER' });
+        });
     const tradeAssetPool = Array.from(tradeAssetMap.values()).filter(player => player && player.assetType !== 'PICK');
     const isPickAsset = (asset) => asset?.assetType === 'PICK';
     const countAssetTypes = (side) => ({
