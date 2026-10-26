@@ -883,12 +883,18 @@ function normalizeWeeklyPlayers(leagueData,periods,season){
   }
   return [...players.values()].sort((a,b)=>b.total-a.total||a.name.localeCompare(b.name,'pt-BR'));
 }
+function normalizeMatchupPlayerTotals(leagueData,week){
+  const names=getFantasyTeamIdMap(leagueData),players=new Map();
+  for(const match of leagueData.schedule||[]){if(Number(match.matchupPeriodId)!==week)continue;for(const side of [match.home,match.away]){if(!side)continue;for(const entry of side.rosterForMatchupPeriod?.entries||[]){const pool=entry.playerPoolEntry||{},p=pool.player||entry.player||{};const total=statNumber(entry.appliedStatTotal??pool.appliedStatTotal);if(!p.id||!p.fullName||total===null)continue;const row={id:String(p.id),name:p.fullName,position:getPosition(p),nbaTeam:NBA_TEAMS[p.proTeamId]||'NBA',fantasyTeam:names.get(Number(side.teamId))||'Time '+side.teamId,ownership:'matchup',photoUrl:extractPlayerPhoto(p),total:rounded(total),gamesPlayed:null,average:null,source:'matchup-roster-total'};if(!players.has(row.id)||players.get(row.id).total<row.total)players.set(row.id,row);}}}
+  return [...players.values()].sort((a,b)=>b.total-a.total||a.name.localeCompare(b.name,'pt-BR'));
+}
+
 async function handleWeekRecap(request,env,ctx){
   let week;try{week=weekQuery(request);}catch(error){return jsonResponse({error:error.message},400,env);}if(week===null)return jsonResponse({error:'Informe a rodada: ?week=1.'},400,env);
-  const key=new Request(new URL(request.url).origin+'/week-recap-v12-'+(env.ESPN_LEAGUE_ID||'1245069102')+'-'+(env.ESPN_SEASON_ID||2027)+'-'+week),cache=caches.default,cached=await cache.match(key);if(cached)return cached;
-  try{const league=await fetchScoreboardLeague(env,{players:true}),periods=league.settings?.scheduleSettings?.matchupPeriods?.[week];if(!Array.isArray(periods)||!periods.length)return jsonResponse({error:'Rodada não encontrada na ESPN.'},404,env);
-    const payload=normalizeLiveMatchups(league,env,week),players=normalizeWeeklyPlayers(league,periods,env.ESPN_SEASON_ID||2027);
-    const result={...payload,scoringPeriods:periods,players,playerStatsStatus:players.length?'available':'unavailable',playerStatsBasis:'actual-scoring-period-totals',playerStatsNote:'Fantasy points reais por jogador nos dias da rodada, incluindo jogos no banco. A franquia exibida é o elenco atual, não uma atribuição histórica de pontos ao time.'};
+  const key=new Request(new URL(request.url).origin+'/week-recap-v12b-'+(env.ESPN_LEAGUE_ID||'1245069102')+'-'+(env.ESPN_SEASON_ID||2027)+'-'+week),cache=caches.default,cached=await cache.match(key);if(cached)return cached;
+  try{let league=await fetchScoreboardLeague(env);const periods=league.settings?.scheduleSettings?.matchupPeriods?.[week];if(!Array.isArray(periods)||!periods.length)return jsonResponse({error:'Rodada não encontrada na ESPN.'},404,env);
+    league=await fetchScoreboardLeague(env,{scoringPeriod:Math.max(...periods)});const payload=normalizeLiveMatchups(league,env,week),players=normalizeMatchupPlayerTotals(league,week);
+    const result={...payload,scoringPeriods:periods,players,playerStatsStatus:players.length?'available':'unavailable',playerStatsBasis:'matchup-roster-totals',playerStatsNote:'Fantasy points reais do elenco registrado pela ESPN para a rodada. A franquia é a do confronto, não o elenco atual.'};
     const response=jsonResponse(result,200,env);response.headers.set('Cache-Control','public, max-age=60, s-maxage=60');ctx.waitUntil(cache.put(key,response.clone()));return response;
   }catch(error){const response=jsonResponse({error:error.message||'Resumo indisponível.'},502,env);response.headers.set('Cache-Control','no-store');return response;}
 }

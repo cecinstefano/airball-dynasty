@@ -2,7 +2,7 @@
   "week": 1,
   "dates": "20–25 de outubro de 2026",
   "published": "26 OUT 2026",
-  "source": "ESPN Fantasy — placar final e Top Performers da rodada 1; nomes e fotos relacionados por ID no Worker",
+  "source": "ESPN Fantasy via Worker AirBall: /matchups?week=1 e /week-recap?week=1",
   "sourceUrl": "https://fantasy.espn.com/basketball/league/scoreboard?leagueId=1245069102&matchupPeriodId=1",
   "matches": [
     {
@@ -874,5 +874,7 @@
       "win": false
     }
   ],
-  "total": 14847
+  "total": 14847,
+  "workerSourceUrl": "https://airball-espn-proxy.stefanocecin.workers.dev/week-recap?week=1",
+  "workerVerifiedAt": "2026-10-26T15:02:40.563Z"
 }
