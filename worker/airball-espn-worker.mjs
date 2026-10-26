@@ -1,7 +1,9 @@
 // Cloudflare Worker para a integração AirBall Honestômetro x ESPN Fantasy Basketball
 // Rotas:
 //   GET /players  -> retorna jogadores tratados para o front-end, aba Jogadores e Honestômetro
-//   GET /matchups -> confrontos da rodada atual e placares ESPN (cache de 15 s)
+//   GET /matchups -> confrontos e classificação; ?week=1 consulta uma rodada anterior
+//   GET /standings -> mesmos dados de classificação do placar
+//   GET /week-recap?week=1 -> resultados e estatísticas reais da rodada
 //   GET /trades   -> retorna últimas trades/transações processadas pela ESPN
 //   GET /health   -> teste simples
 //
@@ -840,35 +842,63 @@ async function handlePlayerPhoto(request, env) {
 }
 
 // Only league matchup scores are exposed; ESPN cookies remain in Worker secrets.
-function normalizeLiveMatchups(leagueData,env={}) {
-  const current=statNumber(leagueData.status?.currentMatchupPeriod);
+function normalizeLiveMatchups(leagueData,env={},requestedWeek=null) {
+  const current=requestedWeek??statNumber(leagueData.status?.currentMatchupPeriod);
   if(current===null||current<1||!Array.isArray(leagueData.schedule))throw Error('ESPN não informou a rodada ou os confrontos atuais.');
   const names=getFantasyTeamIdMap(leagueData);
-  const score=side=>{for(const value of [side.totalPointsLive,side.totalPoints]){const n=statNumber(value);if(n!==null)return rounded(n);}return null;};
+  const score=(side,final=false)=>{for(const value of (final?[side.totalPoints,side.totalPointsLive]:[side.totalPointsLive,side.totalPoints])){const n=statNumber(value);if(n!==null)return rounded(n);}return null;};
   const matchups=leagueData.schedule.filter(m=>Number(m.matchupPeriodId)===current&&m.home&&m.away).map(m=>{
-    const side=s=>({teamId:String(s.teamId),name:names.get(Number(s.teamId))||`Time ${s.teamId}`,score:score(s)});
+    const side=s=>({teamId:String(s.teamId),name:names.get(Number(s.teamId))||`Time ${s.teamId}`,score:score(s,['HOME','AWAY','TIE'].includes(m.winner))});
     const periods=leagueData.settings?.scheduleSettings?.matchupPeriods?.[current];
     const final=['HOME','AWAY','TIE'].includes(m.winner),firstPeriod=Array.isArray(periods)&&periods.length?Math.min(...periods):Infinity;
     const scheduled=Number.isFinite(firstPeriod)&&statNumber(leagueData.scoringPeriodId)!==null&&Number(leagueData.scoringPeriodId)<firstPeriod;
     return {id:String(m.id??`${current}-${m.home.teamId}-${m.away.teamId}`),matchupPeriodId:current,home:side(m.home),away:side(m.away),status:final?'FINAL':scheduled?'SCHEDULED':'IN_PROGRESS'};
   });
-  return {leagueId:String(env.ESPN_LEAGUE_ID||'1245069102'),seasonId:Number(env.ESPN_SEASON_ID||2027),matchupPeriodId:current,scoringPeriodId:statNumber(leagueData.scoringPeriodId),updatedAt:new Date().toISOString(),matchups};
+  return {leagueId:String(env.ESPN_LEAGUE_ID||'1245069102'),seasonId:Number(env.ESPN_SEASON_ID||2027),matchupPeriodId:current,scoringPeriodId:statNumber(leagueData.scoringPeriodId),updatedAt:new Date().toISOString(),matchups,standings:normalizeLeagueStandings(leagueData)};
 }
-async function handleLiveMatchups(request,env,ctx){
-  const cache=caches.default;
-  const key=new Request(new URL(request.url).origin+'/matchups-cache-v1-'+(env.ESPN_LEAGUE_ID||'1245069102')+'-'+(env.ESPN_SEASON_ID||'2027'));
-  const cached=await cache.match(key);if(cached)return cached;
-  const url=new URL(`https://lm-api-reads.fantasy.espn.com/apis/v3/games/fba/seasons/${env.ESPN_SEASON_ID||2027}/segments/0/leagues/${env.ESPN_LEAGUE_ID||'1245069102'}`);
-  for(const view of ['mMatchup','mMatchupScore','mTeam','mSettings','mStatus'])url.searchParams.append('view',view);
-  const headers={Accept:'application/json','User-Agent':'Mozilla/5.0 AirBall-Live/1.0'};
+function normalizeLeagueStandings(leagueData){
+  const names=getFantasyTeamIdMap(leagueData);
+  const count=v=>{const n=statNumber(v);return n!==null&&Number.isInteger(n)&&n>=0?n:null;};
+  const rows=(leagueData.teams||[]).map(t=>{const r=t.record?.overall||{};const wins=count(r.wins),losses=count(r.losses),ties=count(r.ties);return {teamId:String(t.id),name:names.get(Number(t.id))||`Time ${t.id}`,wins,losses,ties,pointsFor:rounded(statNumber(r.pointsFor)),pointsAgainst:rounded(statNumber(r.pointsAgainst)),espnSeed:count(t.playoffSeed),winPercentage:wins!==null&&losses!==null&&ties!==null?(wins+losses+ties>0?(wins+ties*.5)/(wins+losses+ties):0):null};});
+  const official=rows.length>0&&rows.every(r=>r.espnSeed>0)&&new Set(rows.map(r=>r.espnSeed)).size===rows.length;
+  rows.sort((a,b)=>official?a.espnSeed-b.espnSeed:(b.winPercentage??-1)-(a.winPercentage??-1)||(b.pointsFor??-Infinity)-(a.pointsFor??-Infinity)||a.name.localeCompare(b.name,'pt-BR'));
+  return rows.map((r,i)=>({...r,position:i+1,rankSource:official?'espn-playoff-seed':'record-and-points'}));
+}
+function weekQuery(request){const raw=new URL(request.url).searchParams.get('week');if(raw===null)return null;if(!/^\d+$/.test(raw)||Number(raw)<1||Number(raw)>99)throw Error('Use week entre 1 e 99.');return Number(raw);}
+async function fetchScoreboardLeague(env,{players=false,scoringPeriod=null,statPeriods=30}={}){
+  const season=Number(env.ESPN_SEASON_ID||2027),url=new URL(`https://lm-api-reads.fantasy.espn.com/apis/v3/games/fba/seasons/${season}/segments/0/leagues/${env.ESPN_LEAGUE_ID||'1245069102'}`);
+  for(const view of ['mMatchup','mMatchupScore','mTeam','mSettings','mStatus',...(players?['mRoster','kona_player_info']:[])])url.searchParams.append('view',view);
+  if(scoringPeriod!==null)url.searchParams.set('scoringPeriodId',String(scoringPeriod));
+  const headers={Accept:'application/json','User-Agent':'Mozilla/5.0 AirBall-Recap/1.0'};
+  if(players)headers['x-fantasy-filter']=JSON.stringify({players:{limit:2000,offset:0,filterStatsForTopScoringPeriodIds:{value:statPeriods,additionalValue:['00'+season]}}});
   if(env.ESPN_SWID&&env.ESPN_S2)headers.Cookie=`SWID=${env.ESPN_SWID}; espn_s2=${env.ESPN_S2}`;
-  try{
-    const r=await fetch(url,{headers,signal:AbortSignal.timeout(15000),cache:'no-store'});
-    if(!r.ok)throw Error(`ESPN respondeu ${r.status}. Confira a temporada e os secrets ESPN do Worker.`);
-    const payload=normalizeLiveMatchups(await r.json(),env),response=jsonResponse(payload,200,env);
-    response.headers.set('Cache-Control','public, max-age=15, s-maxage=15');
-    ctx.waitUntil(cache.put(key,response.clone()));return response;
-  }catch(error){const response=jsonResponse({error:error.name==='TimeoutError'?'ESPN demorou a responder.':error.message||'Placares indisponíveis.'},502,env);response.headers.set('Cache-Control','no-store');return response;}
+  const response=await fetch(url,{headers,signal:AbortSignal.timeout(20000),cache:'no-store'});if(!response.ok)throw Error(`ESPN respondeu ${response.status}.`);return response.json();
+}
+function normalizeWeeklyPlayers(leagueData,periods,season){
+  const ownership=getFantasyTeamMap(leagueData),entries=[...(leagueData.players||[]),...(leagueData.teams||[]).flatMap(t=>t.roster?.entries||[])],players=new Map();
+  for(const entry of entries){const p=entry.player||entry.playerPoolEntry?.player||entry;if(!p.id||!p.fullName)continue;const byDay=new Map();for(const stat of p.stats||[]){const day=statNumber(stat.scoringPeriodId),total=statNumber(stat.appliedTotal);if(Number(stat.seasonId)!==Number(season)||Number(stat.statSourceId)!==0||!periods.includes(day)||total===null)continue;const existing=byDay.get(day);if(!existing||Number(stat.statSplitTypeId)===5)byDay.set(day,{total,games:statNumber(stat.gamesPlayed??stat.stats?.['42'])});}
+    if(!byDay.size)continue;const values=[...byDay.values()],total=values.reduce((n,v)=>n+v.total,0),games=values.every(v=>v.games!==null)?values.reduce((n,v)=>n+v.games,0):null;
+    const row={id:String(p.id),name:p.fullName,position:getPosition(p),nbaTeam:NBA_TEAMS[p.proTeamId]||'NBA',fantasyTeam:ownership.get(Number(p.id))||'Livre',ownership:'current',photoUrl:extractPlayerPhoto(p),total:rounded(total),gamesPlayed:games,average:games>0?rounded(total/games):null,scoringPeriods:[...byDay.keys()].sort((a,b)=>a-b)};
+    if(!players.has(row.id)||players.get(row.id).scoringPeriods.length<row.scoringPeriods.length)players.set(row.id,row);
+  }
+  return [...players.values()].sort((a,b)=>b.total-a.total||a.name.localeCompare(b.name,'pt-BR'));
+}
+async function handleWeekRecap(request,env,ctx){
+  let week;try{week=weekQuery(request);}catch(error){return jsonResponse({error:error.message},400,env);}if(week===null)return jsonResponse({error:'Informe a rodada: ?week=1.'},400,env);
+  const key=new Request(new URL(request.url).origin+'/week-recap-v12-'+(env.ESPN_LEAGUE_ID||'1245069102')+'-'+(env.ESPN_SEASON_ID||2027)+'-'+week),cache=caches.default,cached=await cache.match(key);if(cached)return cached;
+  try{const league=await fetchScoreboardLeague(env,{players:true}),periods=league.settings?.scheduleSettings?.matchupPeriods?.[week];if(!Array.isArray(periods)||!periods.length)return jsonResponse({error:'Rodada não encontrada na ESPN.'},404,env);
+    const payload=normalizeLiveMatchups(league,env,week),players=normalizeWeeklyPlayers(league,periods,env.ESPN_SEASON_ID||2027);
+    const result={...payload,scoringPeriods:periods,players,playerStatsStatus:players.length?'available':'unavailable',playerStatsBasis:'actual-scoring-period-totals',playerStatsNote:'Fantasy points reais por jogador nos dias da rodada, incluindo jogos no banco. A franquia exibida é o elenco atual, não uma atribuição histórica de pontos ao time.'};
+    const response=jsonResponse(result,200,env);response.headers.set('Cache-Control','public, max-age=60, s-maxage=60');ctx.waitUntil(cache.put(key,response.clone()));return response;
+  }catch(error){const response=jsonResponse({error:error.message||'Resumo indisponível.'},502,env);response.headers.set('Cache-Control','no-store');return response;}
+}
+
+async function handleLiveMatchups(request,env,ctx){
+  let week;try{week=weekQuery(request);}catch(error){return jsonResponse({error:error.message},400,env);}
+  const cache=caches.default,key=new Request(new URL(request.url).origin+'/matchups-cache-v12-'+(env.ESPN_LEAGUE_ID||'1245069102')+'-'+(env.ESPN_SEASON_ID||2027)+'-'+(week||'current')),cached=await cache.match(key);if(cached)return cached;
+  try{const league=await fetchScoreboardLeague(env);if(week!==null&&!league.settings?.scheduleSettings?.matchupPeriods?.[week])return jsonResponse({error:'Rodada não encontrada.'},404,env);
+    const payload=normalizeLiveMatchups(league,env,week),response=jsonResponse(payload,200,env);response.headers.set('Cache-Control','public, max-age=15, s-maxage=15');ctx.waitUntil(cache.put(key,response.clone()));return response;
+  }catch(error){const response=jsonResponse({error:error.message||'Placares indisponíveis.'},502,env);response.headers.set('Cache-Control','no-store');return response;}
 }
 
 export default {
@@ -882,14 +912,15 @@ export default {
     try {
       if (url.pathname === '/health') {
         return jsonResponse({ ok: true, service: 'airball-espn-worker',
-            version: 'player-table-v11-current-averages', leagueId: env.ESPN_LEAGUE_ID || '1245069102', seasonId: env.ESPN_SEASON_ID || '2027' }, 200, env);
+            version: 'league-v12-standings-week-recap', leagueId: env.ESPN_LEAGUE_ID || '1245069102', seasonId: env.ESPN_SEASON_ID || '2027' }, 200, env);
       }
 
       if (url.pathname === '/' || url.pathname === '/players') {
         return await handlePlayers(request, env, ctx);
       }
 
-      if (url.pathname === '/matchups') return await handleLiveMatchups(request, env, ctx);
+      if (url.pathname === '/matchups' || url.pathname === '/standings') return await handleLiveMatchups(request, env, ctx);
+      if (url.pathname === '/week-recap') return await handleWeekRecap(request, env, ctx);
 
       if (url.pathname === '/trades') {
         return await handleTrades(request, env, ctx);
@@ -899,7 +930,7 @@ export default {
         return await handlePlayerPhoto(request, env);
       }
 
-      return jsonResponse({ error: 'Rota não encontrada. Use /players, /matchups, /trades ou /player-photo/ID.' }, 404, env);
+      return jsonResponse({ error: 'Rota não encontrada. Use /players, /matchups, /standings, /week-recap?week=1, /trades ou /player-photo/ID.' }, 404, env);
     } catch (error) {
       return jsonResponse({ error: error.message || 'Erro desconhecido ao buscar ESPN.' }, 500, env);
     }
