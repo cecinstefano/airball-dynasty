@@ -399,7 +399,7 @@
     },
     {
       "id": 8,
-      "a": "Pato's Team",
+      "a": "PATOLA BASKA",
       "scoreA": 1049,
       "b": "Nortz",
       "scoreB": 993.5,
@@ -407,21 +407,21 @@
         {
           "id": "5175737",
           "name": "Yaxel Lendeborg",
-          "team": "Pato's Team",
+          "team": "PATOLA BASKA",
           "total": 122,
           "photo": "https://a.espncdn.com/i/headshots/nba/players/full/5175737.png"
         },
         {
           "id": "4278104",
           "name": "Michael Porter Jr.",
-          "team": "Pato's Team",
+          "team": "PATOLA BASKA",
           "total": 117,
           "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4278104.png"
         },
         {
           "id": "3136193",
           "name": "Devin Booker",
-          "team": "Pato's Team",
+          "team": "PATOLA BASKA",
           "total": 114.5,
           "photo": "https://a.espncdn.com/i/headshots/nba/players/full/3136193.png"
         }
@@ -451,7 +451,7 @@
       ],
       "margin": 55.5,
       "combined": 2042.5,
-      "winner": "Pato's Team"
+      "winner": "PATOLA BASKA"
     }
   ],
   "players": [
@@ -633,7 +633,7 @@
     {
       "id": "5175737",
       "name": "Yaxel Lendeborg",
-      "team": "Pato's Team",
+      "team": "PATOLA BASKA",
       "total": 122,
       "photo": "https://a.espncdn.com/i/headshots/nba/players/full/5175737.png"
     },
@@ -668,7 +668,7 @@
     {
       "id": "4278104",
       "name": "Michael Porter Jr.",
-      "team": "Pato's Team",
+      "team": "PATOLA BASKA",
       "total": 117,
       "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4278104.png"
     },
@@ -703,7 +703,7 @@
     {
       "id": "3136193",
       "name": "Devin Booker",
-      "team": "Pato's Team",
+      "team": "PATOLA BASKA",
       "total": 114.5,
       "photo": "https://a.espncdn.com/i/headshots/nba/players/full/3136193.png"
     },
@@ -794,7 +794,7 @@
   ],
   "rankings": [
     {
-      "name": "Pato's Team",
+      "name": "PATOLA BASKA",
       "total": 1049,
       "win": true
     },
