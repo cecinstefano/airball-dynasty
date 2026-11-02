@@ -1,0 +1,829 @@
+{
+  "week": 2,
+  "dates": "26 de outubro a 1º de novembro de 2026",
+  "published": "02 NOV 2026",
+  "source": "Placares e classificação: Worker ESPN AirBall. Destaques: box scores ESPN, visualização Total, rodada 2.",
+  "sourceUrl": "https://fantasy.espn.com/basketball/league/scoreboard?leagueId=1245069102&matchupPeriodId=2",
+  "matches": [
+    {
+      "id": 1,
+      "workerId": "9",
+      "a": "Fi du Jequisom",
+      "b": "Paysandu Lobo's",
+      "scoreA": 1447,
+      "scoreB": 1143,
+      "margin": 304,
+      "combined": 2590,
+      "topA": [
+        {
+          "id": "4433287",
+          "name": "Brandon Miller",
+          "total": 204,
+          "team": "Fi du Jequisom",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4433287.png"
+        },
+        {
+          "id": "5041939",
+          "name": "Cooper Flagg",
+          "total": 201,
+          "team": "Fi du Jequisom",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/5041939.png"
+        },
+        {
+          "id": "3975",
+          "name": "Stephen Curry",
+          "total": 184.5,
+          "team": "Fi du Jequisom",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/3975.png"
+        }
+      ],
+      "topB": [
+        {
+          "id": "4065648",
+          "name": "Jayson Tatum",
+          "total": 209.5,
+          "team": "Paysandu Lobo's",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4065648.png"
+        },
+        {
+          "id": "4395628",
+          "name": "Zion Williamson",
+          "total": 150.5,
+          "team": "Paysandu Lobo's",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4395628.png"
+        },
+        {
+          "id": "4432166",
+          "name": "Cade Cunningham",
+          "total": 131,
+          "team": "Paysandu Lobo's",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4432166.png"
+        }
+      ],
+      "winner": "Fi du Jequisom"
+    },
+    {
+      "id": 2,
+      "workerId": "10",
+      "a": "Team Djalma Jr",
+      "b": "Red Hot Blazer Peppers",
+      "scoreA": 1019.5,
+      "scoreB": 968.5,
+      "margin": 51,
+      "combined": 1988,
+      "topA": [
+        {
+          "id": "3202",
+          "name": "Kevin Durant",
+          "total": 168,
+          "team": "Team Djalma Jr",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/3202.png"
+        },
+        {
+          "id": "4709138",
+          "name": "Brandin Podziemski",
+          "total": 139.5,
+          "team": "Team Djalma Jr",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4709138.png"
+        },
+        {
+          "id": "4066259",
+          "name": "De'Aaron Fox",
+          "total": 109,
+          "team": "Team Djalma Jr",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4066259.png"
+        }
+      ],
+      "topB": [
+        {
+          "id": "4701230",
+          "name": "Jalen Johnson",
+          "total": 138,
+          "team": "Red Hot Blazer Peppers",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4701230.png"
+        },
+        {
+          "id": "4684740",
+          "name": "Amen Thompson",
+          "total": 122,
+          "team": "Red Hot Blazer Peppers",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4684740.png"
+        },
+        {
+          "id": "4432816",
+          "name": "LaMelo Ball",
+          "total": 106,
+          "team": "Red Hot Blazer Peppers",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4432816.png"
+        }
+      ],
+      "winner": "Team Djalma Jr"
+    },
+    {
+      "id": 3,
+      "workerId": "11",
+      "a": "PATOLA BASKA",
+      "b": "Revolution francaise",
+      "scoreA": 1132,
+      "scoreB": 1181,
+      "margin": 49,
+      "combined": 2313,
+      "topA": [
+        {
+          "id": "4432158",
+          "name": "Evan Mobley",
+          "total": 174,
+          "team": "PATOLA BASKA",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4432158.png"
+        },
+        {
+          "id": "5175737",
+          "name": "Yaxel Lendeborg",
+          "total": 164.5,
+          "team": "PATOLA BASKA",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/5175737.png"
+        },
+        {
+          "id": "4900671",
+          "name": "Ajay Mitchell",
+          "total": 126,
+          "team": "PATOLA BASKA",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4900671.png"
+        }
+      ],
+      "topB": [
+        {
+          "id": "5104157",
+          "name": "Victor Wembanyama",
+          "total": 256,
+          "team": "Revolution francaise",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/5104157.png"
+        },
+        {
+          "id": "6442",
+          "name": "Kyrie Irving",
+          "total": 148,
+          "team": "Revolution francaise",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/6442.png"
+        },
+        {
+          "id": "3155942",
+          "name": "Domantas Sabonis",
+          "total": 137.5,
+          "team": "Revolution francaise",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/3155942.png"
+        }
+      ],
+      "winner": "Revolution francaise"
+    },
+    {
+      "id": 4,
+      "workerId": "12",
+      "a": "Ghost of goat",
+      "b": "Canalhas do Bem",
+      "scoreA": 1123.5,
+      "scoreB": 1251.5,
+      "margin": 128,
+      "combined": 2375,
+      "topA": [
+        {
+          "id": "3934672",
+          "name": "Jalen Brunson",
+          "total": 144.5,
+          "team": "Ghost of goat",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/3934672.png"
+        },
+        {
+          "id": "3149673",
+          "name": "Pascal Siakam",
+          "total": 142,
+          "team": "Ghost of goat",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/3149673.png"
+        },
+        {
+          "id": "4431680",
+          "name": "Onyeka Okongwu",
+          "total": 142,
+          "team": "Ghost of goat",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4431680.png"
+        }
+      ],
+      "topB": [
+        {
+          "id": "3945274",
+          "name": "Luka Doncic",
+          "total": 239.5,
+          "team": "Canalhas do Bem",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/3945274.png"
+        },
+        {
+          "id": "4066354",
+          "name": "Payton Pritchard",
+          "total": 141,
+          "team": "Canalhas do Bem",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4066354.png"
+        },
+        {
+          "id": "4431767",
+          "name": "Christian Braun",
+          "total": 121,
+          "team": "Canalhas do Bem",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4431767.png"
+        }
+      ],
+      "winner": "Canalhas do Bem"
+    },
+    {
+      "id": 5,
+      "workerId": "13",
+      "a": "Charlotte DunkLipe",
+      "b": "Warlock Jamaicans",
+      "scoreA": 955.5,
+      "scoreB": 1158.5,
+      "margin": 203,
+      "combined": 2114,
+      "topA": [
+        {
+          "id": "4277905",
+          "name": "Trae Young",
+          "total": 129.5,
+          "team": "Charlotte DunkLipe",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4277905.png"
+        },
+        {
+          "id": "4871144",
+          "name": "Alperen Sengun",
+          "total": 125.5,
+          "team": "Charlotte DunkLipe",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4871144.png"
+        },
+        {
+          "id": "4433247",
+          "name": "Jonathan Kuminga",
+          "total": 116,
+          "team": "Charlotte DunkLipe",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4433247.png"
+        }
+      ],
+      "topB": [
+        {
+          "id": "4433134",
+          "name": "Scottie Barnes",
+          "total": 176,
+          "team": "Warlock Jamaicans",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4433134.png"
+        },
+        {
+          "id": "4066328",
+          "name": "Jarrett Allen",
+          "total": 167,
+          "team": "Warlock Jamaicans",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4066328.png"
+        },
+        {
+          "id": "4431678",
+          "name": "Tyrese Maxey",
+          "total": 152.5,
+          "team": "Warlock Jamaicans",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4431678.png"
+        }
+      ],
+      "winner": "Warlock Jamaicans"
+    },
+    {
+      "id": 6,
+      "workerId": "14",
+      "a": "Chugabum Ironclads",
+      "b": "Nortz",
+      "scoreA": 920,
+      "scoreB": 1063.5,
+      "margin": 143.5,
+      "combined": 1983.5,
+      "topA": [
+        {
+          "id": "3112335",
+          "name": "Nikola Jokic",
+          "total": 165.5,
+          "team": "Chugabum Ironclads",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/3112335.png"
+        },
+        {
+          "id": "4395725",
+          "name": "Tyler Herro",
+          "total": 110.5,
+          "team": "Chugabum Ironclads",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4395725.png"
+        },
+        {
+          "id": "3078576",
+          "name": "Derrick White",
+          "total": 109.5,
+          "team": "Chugabum Ironclads",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/3078576.png"
+        }
+      ],
+      "topB": [
+        {
+          "id": "4433136",
+          "name": "Walker Kessler",
+          "total": 169,
+          "team": "Nortz",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4433136.png"
+        },
+        {
+          "id": "3936299",
+          "name": "Jamal Murray",
+          "total": 168.5,
+          "team": "Nortz",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/3936299.png"
+        },
+        {
+          "id": "4683021",
+          "name": "Deni Avdija",
+          "total": 138.5,
+          "team": "Nortz",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4683021.png"
+        }
+      ],
+      "winner": "Nortz"
+    },
+    {
+      "id": 7,
+      "workerId": "15",
+      "a": "Pistons de Pira",
+      "b": "Stéfano's SuperSonics",
+      "scoreA": 923,
+      "scoreB": 888.5,
+      "margin": 34.5,
+      "combined": 1811.5,
+      "topA": [
+        {
+          "id": "6583",
+          "name": "Anthony Davis",
+          "total": 140,
+          "team": "Pistons de Pira",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/6583.png"
+        },
+        {
+          "id": "4066320",
+          "name": "Desmond Bane",
+          "total": 114.5,
+          "team": "Pistons de Pira",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4066320.png"
+        },
+        {
+          "id": "4395724",
+          "name": "Immanuel Quickley",
+          "total": 112.5,
+          "team": "Pistons de Pira",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4395724.png"
+        }
+      ],
+      "topB": [
+        {
+          "id": "3032977",
+          "name": "Giannis Antetokounmpo",
+          "total": 204.5,
+          "team": "Stéfano's SuperSonics",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/3032977.png"
+        },
+        {
+          "id": "4066457",
+          "name": "Austin Reaves",
+          "total": 118,
+          "team": "Stéfano's SuperSonics",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4066457.png"
+        },
+        {
+          "id": "4278562",
+          "name": "Paul Reed",
+          "total": 112,
+          "team": "Stéfano's SuperSonics",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4278562.png"
+        }
+      ],
+      "winner": "Pistons de Pira"
+    },
+    {
+      "id": 8,
+      "workerId": "16",
+      "a": "Acre Dinosaurs",
+      "b": "Instituto Popovich",
+      "scoreA": 1221.5,
+      "scoreB": 1013.5,
+      "margin": 208,
+      "combined": 2235,
+      "topA": [
+        {
+          "id": "4066261",
+          "name": "Bam Adebayo",
+          "total": 146.5,
+          "team": "Acre Dinosaurs",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4066261.png"
+        },
+        {
+          "id": "5142620",
+          "name": "Darius Acuff Jr.",
+          "total": 144.5,
+          "team": "Acre Dinosaurs",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/5142620.png"
+        },
+        {
+          "id": "5041935",
+          "name": "Cameron Boozer",
+          "total": 129.5,
+          "team": "Acre Dinosaurs",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/5041935.png"
+        }
+      ],
+      "topB": [
+        {
+          "id": "3908809",
+          "name": "Donovan Mitchell",
+          "total": 158,
+          "team": "Instituto Popovich",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/3908809.png"
+        },
+        {
+          "id": "3136195",
+          "name": "Karl-Anthony Towns",
+          "total": 137,
+          "team": "Instituto Popovich",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/3136195.png"
+        },
+        {
+          "id": "4576087",
+          "name": "Peyton Watson",
+          "total": 127,
+          "team": "Instituto Popovich",
+          "photo": "https://a.espncdn.com/i/headshots/nba/players/full/4576087.png"
+        }
+      ],
+      "winner": "Acre Dinosaurs"
+    }
+  ],
+  "players": [
+    {
+      "id": "5104157",
+      "name": "Victor Wembanyama",
+      "total": 256,
+      "team": "Revolution francaise",
+      "photo": "./assets/news/segunda-rodada/5104157.png"
+    },
+    {
+      "id": "3945274",
+      "name": "Luka Doncic",
+      "total": 239.5,
+      "team": "Canalhas do Bem",
+      "photo": "./assets/news/segunda-rodada/3945274.png"
+    },
+    {
+      "id": "4065648",
+      "name": "Jayson Tatum",
+      "total": 209.5,
+      "team": "Paysandu Lobo's",
+      "photo": "./assets/news/segunda-rodada/4065648.png"
+    },
+    {
+      "id": "3032977",
+      "name": "Giannis Antetokounmpo",
+      "total": 204.5,
+      "team": "Stéfano's SuperSonics",
+      "photo": "./assets/news/segunda-rodada/3032977.png"
+    },
+    {
+      "id": "4433287",
+      "name": "Brandon Miller",
+      "total": 204,
+      "team": "Fi du Jequisom",
+      "photo": "./assets/news/segunda-rodada/4433287.png"
+    },
+    {
+      "id": "5041939",
+      "name": "Cooper Flagg",
+      "total": 201,
+      "team": "Fi du Jequisom",
+      "photo": "./assets/news/segunda-rodada/5041939.png"
+    },
+    {
+      "id": "3975",
+      "name": "Stephen Curry",
+      "total": 184.5,
+      "team": "Fi du Jequisom",
+      "photo": "./assets/news/segunda-rodada/3975.png"
+    },
+    {
+      "id": "4433134",
+      "name": "Scottie Barnes",
+      "total": 176,
+      "team": "Warlock Jamaicans",
+      "photo": "./assets/news/segunda-rodada/4433134.png"
+    },
+    {
+      "id": "4432158",
+      "name": "Evan Mobley",
+      "total": 174,
+      "team": "PATOLA BASKA",
+      "photo": "./assets/news/segunda-rodada/4432158.png"
+    },
+    {
+      "id": "4433136",
+      "name": "Walker Kessler",
+      "total": 169,
+      "team": "Nortz",
+      "photo": "./assets/news/segunda-rodada/4433136.png"
+    }
+  ],
+  "rankings": [
+    {
+      "name": "Fi du Jequisom",
+      "total": 1447,
+      "win": true
+    },
+    {
+      "name": "Canalhas do Bem",
+      "total": 1251.5,
+      "win": true
+    },
+    {
+      "name": "Acre Dinosaurs",
+      "total": 1221.5,
+      "win": true
+    },
+    {
+      "name": "Revolution francaise",
+      "total": 1181,
+      "win": true
+    },
+    {
+      "name": "Warlock Jamaicans",
+      "total": 1158.5,
+      "win": true
+    },
+    {
+      "name": "Paysandu Lobo's",
+      "total": 1143,
+      "win": false
+    },
+    {
+      "name": "PATOLA BASKA",
+      "total": 1132,
+      "win": false
+    },
+    {
+      "name": "Ghost of goat",
+      "total": 1123.5,
+      "win": false
+    },
+    {
+      "name": "Nortz",
+      "total": 1063.5,
+      "win": true
+    },
+    {
+      "name": "Team Djalma Jr",
+      "total": 1019.5,
+      "win": true
+    },
+    {
+      "name": "Instituto Popovich",
+      "total": 1013.5,
+      "win": false
+    },
+    {
+      "name": "Red Hot Blazer Peppers",
+      "total": 968.5,
+      "win": false
+    },
+    {
+      "name": "Charlotte DunkLipe",
+      "total": 955.5,
+      "win": false
+    },
+    {
+      "name": "Pistons de Pira",
+      "total": 923,
+      "win": true
+    },
+    {
+      "name": "Chugabum Ironclads",
+      "total": 920,
+      "win": false
+    },
+    {
+      "name": "Stéfano's SuperSonics",
+      "total": 888.5,
+      "win": false
+    }
+  ],
+  "standings": [
+    {
+      "teamId": "3",
+      "name": "Fi du Jequisom",
+      "wins": 2,
+      "losses": 0,
+      "ties": 0,
+      "pointsFor": 2425,
+      "pointsAgainst": 1994,
+      "espnSeed": 1,
+      "winPercentage": 1,
+      "position": 1,
+      "rankSource": "espn-playoff-seed"
+    },
+    {
+      "teamId": "4",
+      "name": "Acre Dinosaurs",
+      "wins": 2,
+      "losses": 0,
+      "ties": 0,
+      "pointsFor": 2222.5,
+      "pointsAgainst": 1970,
+      "espnSeed": 2,
+      "winPercentage": 1,
+      "position": 2,
+      "rankSource": "espn-playoff-seed"
+    },
+    {
+      "teamId": "16",
+      "name": "Revolution francaise",
+      "wins": 2,
+      "losses": 0,
+      "ties": 0,
+      "pointsFor": 2199.5,
+      "pointsAgainst": 2084,
+      "espnSeed": 3,
+      "winPercentage": 1,
+      "position": 3,
+      "rankSource": "espn-playoff-seed"
+    },
+    {
+      "teamId": "18",
+      "name": "Team Djalma Jr",
+      "wins": 2,
+      "losses": 0,
+      "ties": 0,
+      "pointsFor": 1994,
+      "pointsAgainst": 1839.5,
+      "espnSeed": 4,
+      "winPercentage": 1,
+      "position": 4,
+      "rankSource": "espn-playoff-seed"
+    },
+    {
+      "teamId": "7",
+      "name": "Canalhas do Bem",
+      "wins": 1,
+      "losses": 1,
+      "ties": 0,
+      "pointsFor": 2203.5,
+      "pointsAgainst": 2142,
+      "espnSeed": 5,
+      "winPercentage": 0.5,
+      "position": 5,
+      "rankSource": "espn-playoff-seed"
+    },
+    {
+      "teamId": "6",
+      "name": "PATOLA BASKA",
+      "wins": 1,
+      "losses": 1,
+      "ties": 0,
+      "pointsFor": 2177,
+      "pointsAgainst": 2176.5,
+      "espnSeed": 6,
+      "winPercentage": 0.5,
+      "position": 6,
+      "rankSource": "espn-playoff-seed"
+    },
+    {
+      "teamId": "2",
+      "name": "Ghost of goat",
+      "wins": 1,
+      "losses": 1,
+      "ties": 0,
+      "pointsFor": 2066,
+      "pointsAgainst": 2084.5,
+      "espnSeed": 7,
+      "winPercentage": 0.5,
+      "position": 7,
+      "rankSource": "espn-playoff-seed"
+    },
+    {
+      "teamId": "17",
+      "name": "Nortz",
+      "wins": 1,
+      "losses": 1,
+      "ties": 0,
+      "pointsFor": 2059,
+      "pointsAgainst": 1965,
+      "espnSeed": 8,
+      "winPercentage": 0.5,
+      "position": 8,
+      "rankSource": "espn-playoff-seed"
+    },
+    {
+      "teamId": "13",
+      "name": "Warlock Jamaicans",
+      "wins": 1,
+      "losses": 1,
+      "ties": 0,
+      "pointsFor": 2029.5,
+      "pointsAgainst": 1930,
+      "espnSeed": 9,
+      "winPercentage": 0.5,
+      "position": 9,
+      "rankSource": "espn-playoff-seed"
+    },
+    {
+      "teamId": "10",
+      "name": "Charlotte DunkLipe",
+      "wins": 1,
+      "losses": 1,
+      "ties": 0,
+      "pointsFor": 1931.5,
+      "pointsAgainst": 2089,
+      "espnSeed": 10,
+      "winPercentage": 0.5,
+      "position": 10,
+      "rankSource": "espn-playoff-seed"
+    },
+    {
+      "teamId": "14",
+      "name": "Chugabum Ironclads",
+      "wins": 1,
+      "losses": 1,
+      "ties": 0,
+      "pointsFor": 1717.5,
+      "pointsAgainst": 1781,
+      "espnSeed": 11,
+      "winPercentage": 0.5,
+      "position": 11,
+      "rankSource": "espn-playoff-seed"
+    },
+    {
+      "teamId": "15",
+      "name": "Pistons de Pira",
+      "wins": 1,
+      "losses": 1,
+      "ties": 0,
+      "pointsFor": 1640.5,
+      "pointsAgainst": 1686,
+      "espnSeed": 12,
+      "winPercentage": 0.5,
+      "position": 12,
+      "rankSource": "espn-playoff-seed"
+    },
+    {
+      "teamId": "9",
+      "name": "Paysandu Lobo's",
+      "wins": 0,
+      "losses": 2,
+      "ties": 0,
+      "pointsFor": 2073.5,
+      "pointsAgainst": 2423,
+      "espnSeed": 13,
+      "winPercentage": 0,
+      "position": 13,
+      "rankSource": "espn-playoff-seed"
+    },
+    {
+      "teamId": "5",
+      "name": "Instituto Popovich",
+      "wins": 0,
+      "losses": 2,
+      "ties": 0,
+      "pointsFor": 1864.5,
+      "pointsAgainst": 2199.5,
+      "espnSeed": 14,
+      "winPercentage": 0,
+      "position": 14,
+      "rankSource": "espn-playoff-seed"
+    },
+    {
+      "teamId": "1",
+      "name": "Stéfano's SuperSonics",
+      "wins": 0,
+      "losses": 2,
+      "ties": 0,
+      "pointsFor": 1845,
+      "pointsAgainst": 1924,
+      "espnSeed": 15,
+      "winPercentage": 0,
+      "position": 15,
+      "rankSource": "espn-playoff-seed"
+    },
+    {
+      "teamId": "12",
+      "name": "Red Hot Blazer Peppers",
+      "wins": 0,
+      "losses": 2,
+      "ties": 0,
+      "pointsFor": 1801.5,
+      "pointsAgainst": 1962,
+      "espnSeed": 16,
+      "winPercentage": 0,
+      "position": 16,
+      "rankSource": "espn-playoff-seed"
+    }
+  ]
+}
