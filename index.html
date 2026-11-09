@@ -18203,13 +18203,17 @@ const AirBallTradeRules=(()=>{
     const round=v=>Number(v.toFixed(1));
     function baseAverage(p={}){
         const nested=p.player||{},name=p.name||p.fullName||p.playerName||p.displayName||nested.fullName||'',team=p.proTeam||p.team;
-        const raw=Number(p.avg??p.fantasyPoints??p.avgFantasyPoints??p.averageFantasyPoints??p.appliedAverage??p.value??nested.appliedAverage??0);
-        if(Number.isFinite(raw)&&raw>0)return {value:round(raw),source:'AVG Worker ESPN'};
+        // Legacy avg/fantasyPoints refer to the previous season, never the live average.
+        const number=v=>v===null||v===undefined||v===''||typeof v==='boolean'?null:Number.isFinite(Number(v))?Number(v):null;
+        const raw=[p.currentSeasonAverage,p.current_season_average,p.currentAvg].map(number).find(v=>v!==null);
+        const games=number(p.currentSeasonGames??p.current_season_games);
+        const season=number(p.currentAvgSeasonId);
+        if(raw!==undefined&&games!==0&&(season===null||season===2027))return {value:round(raw),source:'Média atual ESPN · 2026–27'};
         for(const key of getPlayerProjectionKeyCandidates(name)){
             const rows=YAHOO_AVG_PROJECTIONS_2026_27.filter(r=>r.key===key&&Number.isFinite(Number(r.avg))&&Number(r.avg)>0),exact=rows.filter(r=>r.team===team),match=exact.length===1?exact[0]:rows.length===1?rows[0]:null;
-            if(match)return {value:round(Number(match.avg)),source:'Yahoo · sem AVG Worker'};
+            if(match)return {value:round(Number(match.avg)),source:'Projeção Yahoo · sem média atual'};
         }
-        return {value:null,source:'Sem AVG para o Honestômetro'};
+        return {value:null,source:'Sem média atual ou projeção Yahoo'};
     }
     function player(p){const rawAvg=Number(p.fantasyPoints)||0,effectiveAvg=Math.max(rawAvg,floor),row=multipliers.find(r=>effectiveAvg<=r.max)||multipliers.at(-1);return {rawAvg:round(rawAvg),effectiveAvg:round(effectiveAvg),multiplier:row.mult,multiplierLabel:row.mult.toFixed(2)+'x',value:round(effectiveAvg*row.mult)};}
     const sum=side=>round(side.reduce((s,p)=>s+player(p).value,0));
@@ -18311,10 +18315,9 @@ function HonestometroPage() {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r;
         const nested = p.player || {};
         const name = p.name || p.fullName || p.playerName || p.displayName || nested.fullName || 'Jogador sem nome';
-        const rawAvg = (_g = (_f = (_e = (_d = (_c = (_b = (_a = p.fantasyPoints) !== null && _a !== void 0 ? _a : p.avgFantasyPoints) !== null && _b !== void 0 ? _b : p.averageFantasyPoints) !== null && _c !== void 0 ? _c : p.avg) !== null && _d !== void 0 ? _d : p.appliedAverage) !== null && _e !== void 0 ? _e : p.value) !== null && _f !== void 0 ? _f : nested.appliedAverage) !== null && _g !== void 0 ? _g : 0;
         const rawTotal = (_m = (_l = (_k = (_j = (_h = p.totalPoints) !== null && _h !== void 0 ? _h : p.totalFantasyPoints) !== null && _j !== void 0 ? _j : p.total) !== null && _k !== void 0 ? _k : p.appliedTotal) !== null && _l !== void 0 ? _l : nested.appliedTotal) !== null && _m !== void 0 ? _m : 0;
-        const workerAvg = Number(p.avg ?? rawAvg);
-        const fantasyPoints = AirBallTradeRules.baseAverage(p).value ?? 0;
+        const average = AirBallTradeRules.baseAverage(p);
+        const fantasyPoints = average.value;
         const totalPoints = Number(rawTotal) || 0;
         const position = cleanLeaguePosition(p.position || p.defaultPosition || p.eligibleSlotsText || (Array.isArray(p.positions) ? p.positions.join('/') : '') || '—');
         const team = p.team || p.proTeam || p.proTeamAbbrev || p.nbaTeam || p.proTeamId || 'NBA';
@@ -18333,7 +18336,9 @@ function HonestometroPage() {
         return {
             id,
             name,
-            fantasyPoints: Number(fantasyPoints.toFixed ? fantasyPoints.toFixed(1) : fantasyPoints),
+            fantasyPoints,
+            averageSource: average.source,
+            currentSeasonGames: p.currentSeasonGames ?? p.current_season_games ?? null,
             totalPoints: Number(totalPoints.toFixed ? totalPoints.toFixed(1) : totalPoints),
             position,
             team,
@@ -18369,11 +18374,11 @@ function HonestometroPage() {
         })
             .then(data => {
             const list = Array.isArray(data) ? data : (data.players || data.items || []);
-            const normalized = list.map(normalizePlayer).filter(p => p.name && Number(p.fantasyPoints) > 0);
+            const normalized = list.map(normalizePlayer).filter(p => p.name && Number.isFinite(p.fantasyPoints));
             if (normalized.length) {
                 setPlayers(normalized);
                 setDataLive(true);
-                setDataStatus(`${normalized.length} jogadores carregados • AVG Worker ESPN; sem AVG: projeção Yahoo`);
+                setDataStatus(`${normalized.length} jogadores carregados • Média atual ESPN 2026–27; sem média atual: projeção Yahoo`);
             }
             else {
                 setDataStatus('API conectada, mas sem jogadores válidos');
@@ -18409,14 +18414,15 @@ function HonestometroPage() {
     const buildHonestometroDraftedPlayer = (pick) => {
         const matched = getPlayerFromPoolByName(pick.playerName) || {};
         const ownerName = getTeam(pick.airballOwner || pick.airballTeam || getDraftPickInfoForOverall(pick.airballOverall).ownerName).name;
-        const rawAvg = Number(matched.fantasyPoints) > 0 ? Number(matched.fantasyPoints) : honestYahooAvg(pick.playerName, pick.nbaTeam) || 0;
+        const rawAvg = Number.isFinite(matched.fantasyPoints) ? matched.fantasyPoints : honestYahooAvg(pick.playerName, pick.nbaTeam);
         const rawTotal = Number(matched.totalPoints ?? 0) || 0;
         return {
             ...matched,
             id: matched.id || `drafted-player-${pick.airballOverall}-${normalizeTeamKey(pick.playerName)}`,
             assetType: 'PLAYER',
             name: pick.playerName,
-            fantasyPoints: Number(rawAvg.toFixed(1)),
+            fantasyPoints: rawAvg === null ? null : Number(rawAvg.toFixed(1)),
+            averageSource: matched.averageSource || 'Projeção Yahoo · sem média atual',
             totalPoints: Number(rawTotal.toFixed(1)),
             team: pick.nbaTeam || matched.team || 'NBA',
             position: pick.position || matched.position || '—',
@@ -18431,7 +18437,7 @@ function HonestometroPage() {
     const draftedPlayerAssets = LIVE_DRAFT_PICKS_MANUAL
         .filter(pick => pick && pick.playerName && Number(pick.airballOverall) > 0)
         .map(buildHonestometroDraftedPlayer)
-        .filter(player => player.fantasyPoints > 0);
+        .filter(player => Number.isFinite(player.fantasyPoints));
     // Draft records only fill missing players; current Worker ownership takes priority.
     const tradeAssetMap = new Map(draftedPlayerAssets.map(player => [normalizeTeamKey(player.name), player]));
     players
@@ -18546,7 +18552,7 @@ function HonestometroPage() {
         if (!selected && !query.trim())
             return;
         const player = selected || { id: `manual-${Date.now()}-${Math.random()}`, name: query.trim(), fantasyPoints: FLOOR_AVG, totalPoints: 0, team: 'Manual/FA', position: '—', fantasyTeam: 'Livre', status: 'PISO' };
-        const avgToUse = Number(player.fantasyPoints) || FLOOR_AVG;
+        const avgToUse = Number.isFinite(player.fantasyPoints) ? player.fantasyPoints : FLOOR_AVG;
         const totalToUse = Number(player.totalPoints) || 0;
         const playerWithValue = { ...player, fantasyPoints: Number(avgToUse.toFixed(1)), totalPoints: Number(totalToUse.toFixed(1)) };
         if (isA) {
@@ -18648,7 +18654,7 @@ function HonestometroPage() {
             const pickInfo = isPickAsset(p) ? ` | equivale a ${p.projectedPlayerName}` : '';
             return `• ${p.name} — AVG ${c.rawAvg}${totalInfo}${floorNote}${pickInfo} × ${c.multiplierLabel} = ${c.value}`;
         }).join('\n') : '• Nenhum ativo';
-        return `⚖️ HONESTÔMETRO AIRBALL\n\nRegras: piso ${FLOOR_AVG} pts, multiplicadores por AVG, compensação de ${SLOT_COMPENSATION} pts por slot de diferença, aprovação se diferença < ${APPROVAL_LIMIT}% e regra especial 1x1: se a diferença de AVG for menor que 3 fantasy points, a troca é aceita. Picks R1-R10 valem o jogador projetado na posição do board e só são válidas com a mesma quantidade de picks e jogadores dos dois lados.\n\n${teamA}\n${getTradeGmLabel(teamA)}\nenvia:\n${list(sideA)}\nSubtotal jogadores: ${playerSubtotalA}\nCompensação de slot: +${slotCompA}\nTotal: ${totalA}\n\n${teamB}\n${getTradeGmLabel(teamB)}\nenvia:\n${list(sideB)}\nSubtotal jogadores: ${playerSubtotalB}\nCompensação de slot: +${slotCompB}\nTotal: ${totalB}\n\nDiferença: ${diffPct}%${oneForOneAvgDiff !== null ? `\nDiferença de AVG 1x1: ${oneForOneAvgDiff}` : ''}\nResultado: ${verdict.label}\nParecer: ${verdict.note}\n\nApós postagem, começa a janela de 12 horas para atravessamento.`;
+        return `⚖️ HONESTÔMETRO AIRBALL\n\nBase: média atual ESPN 2026–27; sem média atual, projeção Yahoo.\n\nRegras: piso ${FLOOR_AVG} pts, multiplicadores por AVG, compensação de ${SLOT_COMPENSATION} pts por slot de diferença, aprovação se diferença < ${APPROVAL_LIMIT}% e regra especial 1x1: se a diferença de AVG for menor que 3 fantasy points, a troca é aceita. Picks R1-R10 valem o jogador projetado na posição do board e só são válidas com a mesma quantidade de picks e jogadores dos dois lados.\n\n${teamA}\n${getTradeGmLabel(teamA)}\nenvia:\n${list(sideA)}\nSubtotal jogadores: ${playerSubtotalA}\nCompensação de slot: +${slotCompA}\nTotal: ${totalA}\n\n${teamB}\n${getTradeGmLabel(teamB)}\nenvia:\n${list(sideB)}\nSubtotal jogadores: ${playerSubtotalB}\nCompensação de slot: +${slotCompB}\nTotal: ${totalB}\n\nDiferença: ${diffPct}%${oneForOneAvgDiff !== null ? `\nDiferença de AVG 1x1: ${oneForOneAvgDiff}` : ''}\nResultado: ${verdict.label}\nParecer: ${verdict.note}\n\nApós postagem, começa a janela de 12 horas para atravessamento.`;
     };
     const copyResult = async () => {
         const text = exportText();
@@ -18734,8 +18740,7 @@ function HonestometroPage() {
                                 "AVG ",
                                 Number(p.fantasyPoints).toFixed(1)),
                             React.createElement("small", null,
-                                "TOTAL ",
-                                formatNumber(p.totalPoints))))))))),
+                                p.averageSource || 'Valor manual')))))))),
                 React.createElement("button", { className: "trade-add-btn", onClick: () => addPlayer(sideName), disabled: !query.trim() }, "+")),
             selected && selected.name === query && (React.createElement(React.Fragment, null,
                 React.createElement("div", { className: "trade-selected-preview" },
@@ -18754,13 +18759,13 @@ function HonestometroPage() {
                             selected.fantasyTeam || selected.status))),
                 React.createElement("div", { className: "trade-selected-stats" },
                     React.createElement("div", null,
-                        React.createElement("span", null, "AVG ESPN"),
+                        React.createElement("span", null, "MÉDIA USADA"),
                         React.createElement("strong", null, Number(selected.fantasyPoints).toFixed(1))),
                     React.createElement("div", null,
-                        React.createElement("span", null, "TOTAL ESPN"),
-                        React.createElement("strong", null, formatNumber(selected.totalPoints)))))),
+                        React.createElement("span", null, "BASE DO CÁLCULO"),
+                        React.createElement("strong", null, selected.averageSource || 'Valor manual'))))),
             React.createElement("div", { className: "trade-search-hint" },
-                "Ao selecionar um jogador da lista, o AVG, o TOTAL e o time fantasy da ESPN entram automaticamente. Se o jogador tiver dono, o lado da troca ser\u00E1 renomeado com esse time; se digitar manual/FA, ser\u00E1 usado o piso de ",
+                "Ao selecionar um jogador da lista, a média atual e o time fantasy entram automaticamente. Sem média atual, usamos a projeção Yahoo identificada no jogador. Se o jogador tiver dono, o lado da troca ser\u00E1 renomeado com esse time; se digitar manual/FA, ser\u00E1 usado o piso de ",
                 FLOOR_AVG,
                 " no c\u00E1lculo."),
             React.createElement("div", { className: "trade-player-list" },
@@ -18784,8 +18789,7 @@ function HonestometroPage() {
                                     React.createElement("span", null, p.fantasyTeam || p.status),
                                     React.createElement("span", null, "\u2022"),
                                     React.createElement("span", null,
-                                        "TOTAL ",
-                                        formatNumber(p.totalPoints))))),
+                                        p.averageSource || 'Valor manual')))),
                         React.createElement("div", { className: "trade-player-avg-new" },
                             React.createElement("div", { className: "trade-player-avg-label" }, "AVG"),
                             React.createElement("div", { className: "trade-player-avg-value" }, c.rawAvg.toFixed(1))),
@@ -18826,7 +18830,7 @@ function HonestometroPage() {
                     React.createElement("div", null,
                         React.createElement("div", { className: "trade-lab-title" }, "AirBall Trade Lab"),
                         React.createElement("div", { className: "trade-lab-subtitle" },
-                            "Base ESPN Fantasy \u2022 Temporada ",
+                            "Médias atuais ESPN • Temporada ",
                             HONESTOMETRO_CONFIG.seasonId),
                         React.createElement("div", { className: "trade-api-status" },
                             React.createElement("span", { style: { display: 'flex', alignItems: 'center', gap: 8 } },
@@ -23049,7 +23053,7 @@ function PulseCalculatorPage({players,status,toggle,favorites}){
         const c=new AbortController();setResult(null);setVisible(12);setError('');
         if(!anchor||!ownTeam){setBusy(false);return;}
         if(secondId&&(!secondTarget||secondTarget.fantasyPoints===null||!receiving||PulseData.key(secondTarget.team)!==PulseData.key(anchor.team))){setBusy(false);setError('Escolha dois jogadores válidos do mesmo time adversário.');return;}
-        if(anchor.fantasyPoints===null){setBusy(false);setError('O jogador não tem AVG nem projeção Yahoo disponível para avaliação no Honestômetro.');return;}
+        if(anchor.fantasyPoints===null){setBusy(false);setError('O jogador não tem média atual nem projeção Yahoo disponível para avaliação no Honestômetro.');return;}
         setBusy(true);setProgress('Analisando combinações…');
         PulseCalculator.suggestions(players,anchor.id,ownTeam,format,c.signal,p=>{if(!c.signal.aborted)setProgress(p.teams+'/'+p.totalTeams+' times · '+p.evaluated.toLocaleString('pt-BR')+' combinações avaliadas');},secondId||null).then(r=>{if(!c.signal.aborted)setResult(r);}).catch(err=>{if(!c.signal.aborted)setError('Não foi possível gerar as sugestões. Selecione novamente o jogador.');}).finally(()=>{if(!c.signal.aborted)setBusy(false);});
         return()=>c.abort();
@@ -23065,7 +23069,7 @@ function PulseCalculatorPage({players,status,toggle,favorites}){
             (!anchor||search)?pe('div',{className:'pc-search-results',role:'group','aria-label':'Jogadores para buscar trocas'},matches.map(p=>pe('button',{type:'button',key:p.id,onClick:()=>choose(p)},photo(p),pe('span',null,pe('strong',null,p.name),pe('small',null,p.team)),pe('span',null,'HT '+PulseData.fmt(p.projection)))),!matches.length?pe('p',null,status==='loading'?'Carregando jogadores…':'Nenhum jogador encontrado.'):null):null,
             anchor?pe('div',{className:'pc-anchor'},photo(anchor),pe('div',null,pe('strong',null,anchor.name),pe(PulseTeam,{player:anchor}),pe('p',null,PulseData.key(anchor.team)===PulseData.key(ownTeam)?'Você oferece este jogador. As sugestões incluem parceiros de outras franquias.':'Você recebe este jogador. No 3x2, entra também um companheiro do elenco dele.')),pe('dl',null,[['AVG Honestômetro',anchor.fantasyPoints],['Atual',anchor.current],['Hashtag',anchor.projection]].map(([label,v])=>pe('div',{key:label},pe('dt',null,label),pe('dd',null,PulseData.fmt(v))))),pe('button',{type:'button',onClick:()=>{setSelected('');setSecondId('');setSecondQuery('');setSearch('');}},'Trocar jogador')):null,
             receiving?pe('div',{className:'pc-second-target'},pe('h4',null,'SEGUNDO ALVO · OPCIONAL'),pe('p',null,'Selecione outro jogador de '+anchor.team+' para receber os dois juntos em uma troca 2x2 ou 3x2.'),secondTarget?pe('div',{className:'pc-anchor'},photo(secondTarget),pe('div',null,pe('strong',null,secondTarget.name),pe('small',null,'Honestômetro '+PulseData.fmt(secondTarget.fantasyPoints)+' · Hashtag '+PulseData.fmt(secondTarget.projection))),pe('button',{type:'button',onClick:()=>{setSecondId('');setSecondQuery('');},'aria-label':'Remover segundo alvo '+secondTarget.name},'Remover segundo alvo')):pe(React.Fragment,null,pe('label',{className:'pc-search-label'},'Buscar segundo alvo',pe('input',{type:'search',value:secondQuery,onChange:ev=>setSecondQuery(ev.target.value),'aria-label':'Buscar segundo alvo',placeholder:'Outro jogador do mesmo time…'})),pe('div',{className:'pc-search-results',role:'group','aria-label':'Segundo alvo do mesmo time'},secondOptions.map(p=>pe('button',{type:'button',key:p.id,onClick:()=>{setSecondId(p.id);setSecondQuery('');setFormat(f=>['2x2','3x2'].includes(f)?f:'all');},'aria-label':'Adicionar segundo alvo '+p.name},photo(p),pe('span',null,pe('strong',null,p.name),pe('small',null,p.team)),pe('span',null,'HT '+PulseData.fmt(p.projection)))),!secondOptions.length?pe('p',null,'Nenhum companheiro encontrado.'):null))):null,
-            pe('details',{className:'pc-rules'} ,pe('summary',null,'Critérios do Honestômetro'),pe('p',null,'Mesma base da aba Honestômetro: AVG do Worker ESPN; sem AVG positivo, projeção Yahoo. Piso 20, multiplicadores por faixa e compensação de 20 por slot de diferença. Aprovação abaixo de 10% ou, no 1x1, diferença de AVG menor que 3. Hashtag mede o potencial do pacote, sem substituir a regra de aprovação.'))),
+            pe('details',{className:'pc-rules'} ,pe('summary',null,'Critérios do Honestômetro'),pe('p',null,'Mesma base da aba Honestômetro: média atual da temporada 2026–27 do Worker ESPN; sem média atual, projeção Yahoo. Piso 20, multiplicadores por faixa e compensação de 20 por slot de diferença. Aprovação abaixo de 10% ou, no 1x1, diferença de AVG menor que 3. Hashtag mede o potencial do pacote, sem substituir a regra de aprovação.'))),
         busy?pe('p',{className:'pc-panel',role:'status','aria-live':'polite'},progress):null,error?pe('p',{className:'pc-panel',role:'alert'},error):null,
         !busy&&result?pe('section',{className:'pc-results','aria-label':'Sugestões de trocas válidas'},pe('div',{className:'pc-results-heading'},pe('h3',null,'SUGESTÕES APROVADAS'),pe('p',null,result.validCount.toLocaleString('pt-BR')+' pacotes válidos · '+result.evaluated.toLocaleString('pt-BR')+' combinações avaliadas · exibindo '+Math.min(visible,result.rows.length)+' de até 100 melhores')),!result.rows.length?pe('p',{className:'pc-panel'},'Nenhuma troca aprovada para este jogador e formato com os dados disponíveis.'):null,
             result.rows.slice(0,visible).map((r,i)=>pe('article',{className:'pc-proposal',key:r.key},pe('header',null,pe('span',{className:'pc-format'},r.format),pe('h4',null,r.partner),pe('span',{className:'pc-approved'},'✓ Aprovada · '+PulseData.fmt(r.check.diffPct)+'%')),pe('div',{className:'pc-package-grid'},pe('section',null,pe('h5',null,'VOCÊ ENVIA'),r.sent.map(member)),pe('section',null,pe('h5',null,'VOCÊ RECEBE'),r.received.map(member))),pe('div',{className:'pc-gains'},metric('Saldo Hashtag · recebido − enviado',r.hashtagGain,true),metric('Potencial líquido até o Hashtag',r.potential,true)),pe('details',null,pe('summary',null,'Conferir cálculo'),pe('div',{className:'pc-detail-grid'},pe('p',null,'Enviado: '+PulseData.fmt(r.check.subtotalSent)+' + '+PulseData.fmt(r.check.slotSent)+' de slots = '+PulseData.fmt(r.check.totalSent)),pe('p',null,'Recebido: '+PulseData.fmt(r.check.subtotalReceived)+' + '+PulseData.fmt(r.check.slotReceived)+' de slots = '+PulseData.fmt(r.check.totalReceived)),pe('p',null,'Hashtag enviado / recebido: '+PulseData.fmt(r.hashtagSent)+' / '+PulseData.fmt(r.hashtagReceived)),pe('p',null,'Atual enviado / recebido: '+PulseData.fmt(r.currentSent)+' / '+PulseData.fmt(r.currentReceived))),r.check.oneForOneException?pe('p',null,'Exceção 1x1: diferença de AVG '+PulseData.fmt(r.check.oneForOneAvgDiff)+' (< 3).'):null,pe('small',null,'Potencial líquido = (Hashtag − atual) recebido − (Hashtag − atual) enviado. Saldo Hashtag é a diferença bruta; a compensação de slots vale apenas no Honestômetro.')))),
